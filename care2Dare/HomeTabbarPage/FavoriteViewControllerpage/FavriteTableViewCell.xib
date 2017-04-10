@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SanFranciscoDisplay-Bold.otf">
+            <string>SanFranciscoDisplay-Bold</string>
+        </array>
+        <array key="SanFranciscoDisplay-Medium.otf">
+            <string>SanFranciscoDisplay-Medium</string>
+        </array>
+        <array key="SanFranciscoDisplay-Semibold.otf">
+            <string>SanFranciscoDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellF" rowHeight="100" id="KGk-i7-Jjw" customClass="FavriteTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="375" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Abd Challenges Tina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTA-XE-Som">
+                        <frame key="frameInset" minX="105" minY="10" width="215" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="14"/>
+                        <color key="textColor" red="0.72941176470000002" green="0.73725490199999999" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-ON-Euv">
+                        <frame key="frameInset" minX="322" minY="10" width="52" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="16"/>
+                        <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gkG-BO-FaC">
+                        <frame key="frameInset" minX="12" minY="10" width="80" height="80"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Eat as many bananas as you can in 10 min" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vND-pL-BAM">
+                        <frame key="frameInset" minX="105" minY="32" width="256" height="58"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="cjs-My-GAU">
+                        <frame key="frameInset" minX="59" minY="57" width="26" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </subviews>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="Image_PalyBuutton" destination="cjs-My-GAU" id="ubV-LK-vng"/>
+                <outlet property="Image_Profile" destination="gkG-BO-FaC" id="B7s-yA-mdn"/>
+                <outlet property="Label_Changename" destination="wTA-XE-Som" id="zBe-Qv-JkF"/>
+                <outlet property="Label_Time" destination="gyU-ON-Euv" id="vqh-tI-be3"/>
+                <outlet property="Label_Titile" destination="vND-pL-BAM" id="elo-It-Dpq"/>
+            </connections>
+            <point key="canvasLocation" x="49.5" y="-79.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="10154143609282724.jpg" width="1936" height="1936"/>
+        <image name="playbutton.png" width="84" height="84"/>
+    </resources>
+</document>

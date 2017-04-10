@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>loginsignup</key>
+	<string>http://www.care2dareapp.com/app/loginsignup.php</string>
+	<key>createchallenge_addfriends</key>
+	<string>http://www.care2dareapp.com/app/createchallenge_addfriends.php</string>
+	<key>createchallenge</key>
+	<string>http://www.care2dareapp.com/app/createchallenge.php</string>
+	<key>explore_world</key>
+	<string>http://www.care2dareapp.com/app/explore_world.php</string>
+	<key>profile_explore</key>
+	<string>http://www.care2dareapp.com/app/profile_explore.php</string>
+	<key>contribute</key>
+	<string>http://www.care2dareapp.com/app/contribute.php</string>
+	<key>favourite-add</key>
+	<string>http://www.care2dareapp.com/app/favourite-add.php</string>
+	<key>favourite-show</key>
+	<string>http://www.care2dareapp.com/app/favourite-show.php</string>
+	<key>pledges</key>
+	<string>http://www.care2dareapp.com/app/pledges.php</string>
+	<key>addchat</key>
+	<string>http://www.care2dareapp.com/app/addchat.php</string>
+	<key>chat</key>
+	<string>http://www.care2dareapp.com/app/chat.php</string>
+	<key>raised</key>
+	<string>http://www.care2dareapp.com/app/raised.php</string>
+	<key>profile</key>
+	<string>http://www.care2dareapp.com/app/profile.php</string>
+	<key>addfriend</key>
+	<string>http://www.care2dareapp.com/app/addfriend.php</string>
+	<key>profile_friends</key>
+	<string>http://www.care2dareapp.com/app/profile_friends.php</string>
+	<key>challengeaccept</key>
+	<string>http://www.care2dareapp.com/app/challengeaccept.php</string>
+	<key>recordvideo</key>
+	<string>http://www.care2dareapp.com/app/recordvideo.php</string>
+	<key>showvideos</key>
+	<string>http://www.care2dareapp.com/app/showvideos.php</string>
+	<key>playvideo</key>
+	<string>http://www.care2dareapp.com/app/playvideo.php</string>
+	<key>watch</key>
+	<string>http://www.care2dareapp.com/app/watch.php</string>
+	<key>watchedvideo</key>
+	<string>http://www.care2dareapp.com/app/watchedvideo.php</string>
+</dict>
+</plist>
