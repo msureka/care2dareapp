@@ -765,7 +765,7 @@ static const CGFloat kButtonSpaceHided = 24.0f;
             if(Array_Comment1.count>=1)
             {
 
-                [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 //
 
             }
@@ -1025,7 +1025,7 @@ static const CGFloat kButtonSpaceHided = 24.0f;
 [Tableview_ContriBute reloadData];
         if(Array_Comment.count>=1)
         {
- [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment.count-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+ [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment.count-1 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
                                                              
                                                          }
                                                          
@@ -2567,7 +2567,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     {
         
         
-[Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+[Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         
     }
     
@@ -2710,7 +2710,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     {
         
         
-    [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         
         
         

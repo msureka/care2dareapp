@@ -13,7 +13,11 @@
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_watch;
 
 @property(nonatomic,strong)WatchViewTableViewCell * cell_one;
-
-
-
+@property(nonatomic,weak)IBOutlet UIView * view_Topheader;
+@property(nonatomic,weak)IBOutlet UIButton * Button_Back;
+@property(nonatomic,weak)IBOutlet UIButton * Button_Search;
+@property(nonatomic,weak)IBOutlet UILabel * Lable_TitleFriends;
+@property(nonatomic,weak)IBOutlet UITextField *Textfield_Search;
+-(IBAction)SearchEditing_Action:(id)sender;
+- (IBAction)ButtonBack_Action:(id)sender;
 @end

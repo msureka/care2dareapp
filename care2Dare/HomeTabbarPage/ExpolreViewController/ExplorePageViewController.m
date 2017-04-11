@@ -169,10 +169,11 @@
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
         
+        NSString *exploretype= @"exploretype";
+        NSString *exploretypeval =@"FRIENDS";
         
         
-        
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid,useridVal,exploretype,exploretypeval];
         
         
         

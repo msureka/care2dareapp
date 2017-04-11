@@ -15,6 +15,9 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "UIImageView+WebCache.h"
+#define FONT_SIZE 16.0f
+#define CELL_CONTENT_WIDTH self.view.frame.size.width-138
+#define CELL_CONTENT_MARGIN 0.0f
 @interface WatchVediosViewController ()
 {
     UIButton *Button_PlayPause;
@@ -174,6 +177,9 @@ else
                 }
                     
              }
+                   
+                    
+                    [self PlayVediosAuto];
                     [Tableview_Explore reloadData];
        }
        else
@@ -282,46 +288,51 @@ else
             }
             else
             {
-            cell_one.image_Thumbnail.hidden=YES;
-           // cell_one.indicator_loading.hidden=YES;
-            cell_one.progressslider.hidden=NO;
-    
-   
-            
-            playerViewController = [[AVPlayerViewController alloc] init];
-            NSURL *url = [NSURL URLWithString:Str_urlVedio];
-            
-            AVURLAsset *asset = [AVURLAsset assetWithURL: url];
-            item = [AVPlayerItem playerItemWithAsset: asset];
-            
-            player = [[AVPlayer alloc] initWithPlayerItem: item];
-            playerViewController.player = player;
-        [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,cell_one.PlayerView.frame.size.width)];
-            
-            playerViewController.showsPlaybackControls = NO;
-            
-            [cell_one.PlayerView addSubview:playerViewController.view];
-            timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
-        playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
-            [player play];
-            
-            Flag_watch=@"no";
-            item= player.currentItem;
-            
-            
-            CMTime duration = item.duration;
-            CMTime currentTime = item.currentTime;
-            
-            dur = CMTimeGetSeconds(player.currentItem.asset.duration);
-            CurrentTimes=CMTimeGetSeconds(currentTime);
-            NSLog(@"duration: %.2f", dur);
-            Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
-            [Button_PlayPause setTitle:@"" forState:UIControlStateNormal];
-            [Button_PlayPause addTarget:self action:@selector(Play_Action:) forControlEvents:UIControlEventTouchUpInside];
-            Button_PlayPause.backgroundColor=[UIColor clearColor];
-            [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            Button_PlayPause.center=cell_one.PlayerView.center;
-            [cell_one.PlayerView addSubview:Button_PlayPause];
+//            cell_one.image_Thumbnail.hidden=YES;
+//           // cell_one.indicator_loading.hidden=YES;
+//            cell_one.progressslider.hidden=NO;
+//    
+//   
+//            
+//            playerViewController = [[AVPlayerViewController alloc] init];
+//            NSURL *url = [NSURL URLWithString:Str_urlVedio];
+//            
+//            AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+//            item = [AVPlayerItem playerItemWithAsset: asset];
+//            
+//            player = [[AVPlayer alloc] initWithPlayerItem: item];
+//            playerViewController.player = player;
+//        [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,cell_one.PlayerView.frame.size.width)];
+//            
+//            playerViewController.showsPlaybackControls = NO;
+//            
+//            [cell_one.PlayerView addSubview:playerViewController.view];
+//            timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
+//        playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
+//            [player play];
+//            
+//            Flag_watch=@"no";
+//            item= player.currentItem;
+//            
+//            
+//            CMTime duration = item.duration;
+//            CMTime currentTime = item.currentTime;
+//            
+//            dur = CMTimeGetSeconds(player.currentItem.asset.duration);
+//            CurrentTimes=CMTimeGetSeconds(currentTime);
+//            NSLog(@"duration: %.2f", dur);
+//            Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
+//            [Button_PlayPause setTitle:@"" forState:UIControlStateNormal];
+//            [Button_PlayPause addTarget:self action:@selector(Play_Action:) forControlEvents:UIControlEventTouchUpInside];
+//                
+//                 [cell_one.Button_VolumeMute addTarget:self action:@selector(MutePlay_Action:) forControlEvents:UIControlEventTouchUpInside];
+//                
+//                
+//                
+//            Button_PlayPause.backgroundColor=[UIColor clearColor];
+//            [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            Button_PlayPause.center=cell_one.PlayerView.center;
+//            [cell_one.PlayerView addSubview:Button_PlayPause];
             
             }
             
@@ -344,7 +355,7 @@ else
                 }
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"]])
                 {
-                    
+                    cell_two.Button_SetValues.enabled=YES;
                 }
                 else
                 {
@@ -374,6 +385,47 @@ else
                 
             cell_two.Label_DaysAgo.text=str_days;
                 cell_two.Label_DescTitle.text=str_challengeTitle;
+                
+                
+             
+                
+                
+                CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+                
+                CGSize size = [str_challengeTitle sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+                
+                CGFloat height = MAX(size.height, 30.0f);
+                NSLog(@"Dynamic label height====%f",height);
+                cell_two.Label_DescTitle.numberOfLines=0;
+               cell_two.Label_DescTitle.lineBreakMode=UILineBreakModeWordWrap;
+                
+                
+                NSInteger rHeight = size.height/FONT_SIZE;
+                NSLog(@"No of lines: %ld",(long)rHeight);
+                if(height<=30 )
+                {
+                    [cell_two.Label_DescTitle setFrame:CGRectMake(cell_two.Label_DescTitle.frame.origin.x,cell_two.Label_DescTitle.frame.origin.y, cell_two.Label_DescTitle.frame.size.width,size.height)];
+                }
+
+                else if(height>=30  && height <=40)
+                {
+                  [cell_two.Label_DescTitle setFrame:CGRectMake(cell_two.Label_DescTitle.frame.origin.x,cell_two.Label_DescTitle.frame.origin.y-10, cell_two.Label_DescTitle.frame.size.width,cell_two.Label_DescTitle.frame.size.height*2)];
+                }
+                else
+                {
+                   [cell_two.Label_DescTitle setFrame:CGRectMake(cell_two.Label_DescTitle.frame.origin.x,cell_two.Label_DescTitle.frame.origin.y, cell_two.Label_DescTitle.frame.size.width,size.height+70)];
+                }
+    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 NSURL *url=[NSURL URLWithString:str_profileurl];
                 
         [cell_two.ImageLeft_LeftProfile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -569,9 +621,26 @@ else
     {
   return self.view.frame.size.width;
     }
-    if(indexPath.section==1)
+    if (indexPath.section==1)
     {
-        return 101;
+       
+        
+        
+        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+        
+        CGSize size = [str_challengeTitle sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        
+        CGFloat height = MAX(size.height, 30.0f);
+        NSLog(@"Dynamic label height====%f",height);
+        if(height <=40)
+        {
+            return 101+size.height;
+        }
+        else
+        {
+            return 101+size.height;
+        }
+        
     }
     if(indexPath.section==2)
     {
@@ -593,26 +662,32 @@ else
     [timer invalidate];
     timer = nil;
     player = nil;
+    [cell_one.PlayerView removeFromSuperview];
+    [playerViewController.view removeFromSuperview];
     
     
-        for (UIView *view in cell_one.PlayerView.subviews)
-        {
-            [view removeFromSuperview];
-        }
     
-        [cell_one.contentView removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section==3)
     {
+      cell_one.progressslider.hidden=YES;
+        cell_one.Button_VolumeMute.hidden=YES;
+        [playerViewController.view removeFromSuperview];
+        //[cell_one.PlayerView removeFromSuperview];
+       // [cell_one.PlayerView addSubview:playerViewController.view
          Flag_watch=@"yes";
         
-     Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
-        indexVedio=indexPath.row;
+//     Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
+//        indexVedio=indexPath.row;
         
-        [Tableview_Explore reloadData];
+    str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"useridvideo"]];
+        
+       
+        [self CommunicationPlayVedio];
+        
     }
 }
 -(void)targetMethod:(NSTimer *)timer1
@@ -655,14 +730,16 @@ else
     }
     if (CurrentTimes==dur)
     {
-        
+        [playerViewController.view removeFromSuperview];
         [timer invalidate];
         timer = nil;
        // Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videourl" ]];
-        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo" ]];
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+       
         [self CommunicationPlayVedio];
         indexVedio++;
          Flag_watch=@"no";
+     
        // [Tableview_Explore reloadData];
     }
 }
@@ -816,10 +893,84 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     }
     //[player play];
 }
+- (IBAction)MutePlay_Action:(id)sender
+{
+    if (cell_one.Button_VolumeMute.isSelected==YES)
+    {
+        player.muted=NO;
+     
+        [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"volume.png"] forState:UIControlStateNormal];
+      cell_one.Button_VolumeMute.selected=NO;
+    }
+    else
+    {
+        player.muted=YES;
+        cell_one.Button_VolumeMute.selected=YES;
+    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"mute.png"] forState:UIControlStateNormal];
+    }
+    
+}
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y<=0) {
         scrollView.contentOffset = CGPointZero;
     }
+}
+-(void)PlayVediosAuto
+{
+     [playerViewController.view removeFromSuperview];
+    cell_one.image_Thumbnail.hidden=YES;
+    // cell_one.indicator_loading.hidden=YES;
+    cell_one.progressslider.hidden=NO;
+   
+    
+    
+    playerViewController = [[AVPlayerViewController alloc] init];
+    NSURL *url = [NSURL URLWithString:Str_urlVedio];
+    
+    AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+    item = [AVPlayerItem playerItemWithAsset: asset];
+    
+    player = [[AVPlayer alloc] initWithPlayerItem: item];
+    playerViewController.player = player;
+    [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,cell_one.PlayerView.frame.size.width)];
+    
+    playerViewController.showsPlaybackControls = NO;
+    
+    [cell_one.PlayerView addSubview:playerViewController.view];
+    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
+    playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
+    [player play];
+    
+    Flag_watch=@"no";
+    item= player.currentItem;
+    
+    
+    CMTime duration = item.duration;
+    CMTime currentTime = item.currentTime;
+    
+    dur = CMTimeGetSeconds(player.currentItem.asset.duration);
+    CurrentTimes=CMTimeGetSeconds(currentTime);
+    NSLog(@"duration: %.2f", dur);
+    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
+    [Button_PlayPause setTitle:@"" forState:UIControlStateNormal];
+    [Button_PlayPause addTarget:self action:@selector(Play_Action:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell_one.Button_VolumeMute addTarget:self action:@selector(MutePlay_Action:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    Button_PlayPause.backgroundColor=[UIColor clearColor];
+    [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    Button_PlayPause.center=cell_one.PlayerView.center;
+    [cell_one.PlayerView addSubview:Button_PlayPause];
+    
+    cell_one.Button_VolumeMute.hidden=NO;
+    player.muted=NO;
+    
+    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"volume.png"] forState:UIControlStateNormal];
+    cell_one.Button_VolumeMute.selected=NO;
+
+    
 }
 @end

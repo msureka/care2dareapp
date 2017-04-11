@@ -94,7 +94,7 @@
     
     
     
-    
+    _Label_totalAmount.hidden=YES;
     
     
     
@@ -648,6 +648,17 @@
     [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-250)-(_Textfield_Amount.frame.size.height)) animated:YES];
     
     _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.1f",@"total: $ ",[_Textfield_Amount.text floatValue]*Array_Names.count];
+    CGFloat calculate=[_Textfield_Amount.text floatValue]*Array_Names.count;
+    
+    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
+    {
+        _Label_totalAmount.hidden=YES;
+    }
+    else
+    {
+        _Label_totalAmount.hidden=NO;
+   
+    }
     
 }
 - (void)textViewDidChange:(UITextView *)textView

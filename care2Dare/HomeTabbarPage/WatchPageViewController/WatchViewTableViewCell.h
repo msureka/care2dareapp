@@ -29,5 +29,5 @@
 @property(strong,nonatomic)IBOutlet UILabel * Label_days;
 @property(strong,nonatomic)IBOutlet UILabel * Label_mores;
 @property(strong,nonatomic)IBOutlet UILabel * Label_title;
-
+@property(strong,nonatomic)IBOutlet UILabel * Label_moreVedios;
 @end
