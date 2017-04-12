@@ -27,6 +27,9 @@
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 -(IBAction)NotificationButton_Action:(id)sender;
 -(IBAction)SettingButton_Action:(id)sender;
+
+@property(nonatomic,weak)IBOutlet UIView * view_CreateChallenges;
+
 //@property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;
 //@property(nonatomic,strong)FriendExpTableViewCell * cell_FriendExp;
 //@property (nonatomic, retain) UIRefreshControl *refreshControl;

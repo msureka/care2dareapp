@@ -9,10 +9,11 @@
 #import "PublicChallengesTableViewCell.h"
 
 @implementation PublicChallengesTableViewCell
-
+@synthesize image_profile,image_profile2;
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+   
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

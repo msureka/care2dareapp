@@ -19,6 +19,8 @@
     NSString *SeachCondCheck,*searchString,*FlagSearchBar;
     NSArray *SearchCrickArray;
     UIView *transparancyTuchView;
+    CALayer*  borderBottom_topheder;
+    
 }
 @end
 
@@ -33,14 +35,11 @@
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     SearchCrickArray=[[NSArray alloc]init];
-    
+    borderBottom_topheder = [CALayer layer];
     Textfield_Search.hidden=YES;
     SeachCondCheck=@"no";
     Textfield_Search.delegate=self;
-    CALayer*  borderBottom_topheder = [CALayer layer];
-    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
-    borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
-    [view_Topheader.layer addSublayer:borderBottom_topheder];
+  
    
     transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0, view_Topheader.frame.size.height+44, self.view.frame.size.width,self.view.frame.size.height-view_Topheader.frame.size.height-44)];
     transparancyTuchView.backgroundColor=[UIColor whiteColor];
@@ -57,6 +56,14 @@
     
     [self ClienserverComm_watchView];
     
+}
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
+    [view_Topheader.layer addSublayer:borderBottom_topheder];
 }
 -(void)viewWillAppear:(BOOL)animated
 {

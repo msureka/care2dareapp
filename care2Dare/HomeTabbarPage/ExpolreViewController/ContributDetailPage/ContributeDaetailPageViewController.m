@@ -1147,7 +1147,7 @@ static const CGFloat kButtonSpaceHided = 24.0f;
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeLow;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
     
     cameraUI.showsCameraControls = YES;
 //    cameraUI.videoMaximumDuration = 07.0f;
@@ -2253,7 +2253,7 @@ if (section==1)
     
     Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-61,44)];
     
-    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@""])
+    if (![[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"yes"] || ![[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"no"])
     {
         [Button_Contribute setTitle:@"CONTRIBUTE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor clearColor];

@@ -23,7 +23,7 @@
 @end
 
 @implementation FavoritePageViewController
-@synthesize cell_Pledge,cell_Favorite,View_ExpFavorite,view_ExpPledges,Tableview_Favorites,Label_Pledges,Label_Favorite;
+@synthesize cell_Pledge,cell_Favorite,View_ExpFavorite,view_ExpPledges,Tableview_Favorites,Label_Pledges,Label_Favorite,Label_JsonResult;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -33,28 +33,8 @@
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     
-cellChecking=@"Pledges";
-
-
-view_ExpPledges .clipsToBounds=YES;
-
-
 borderBottom_world = [CALayer layer];
-borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
-borderBottom_world.frame = CGRectMake(0, view_ExpPledges.frame.size.height-2.5, view_ExpPledges.frame.size.width, 2.5);
-[view_ExpPledges.layer addSublayer:borderBottom_world];
-
-    Label_Favorite.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
-    Label_Pledges.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
-
-View_ExpFavorite.clipsToBounds=YES;
-
-
 borderBottom_ExpFrnd = [CALayer layer];
-borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
-borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFavorite.frame.size.height-1, View_ExpFavorite.frame.size.width, 1);
-[View_ExpFavorite.layer addSublayer:borderBottom_ExpFrnd];
-
 
 UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                            action:@selector(ViewTapTapped_Expworld:)];
@@ -67,7 +47,7 @@ UITapGestureRecognizer *ViewTap22 =[[UITapGestureRecognizer alloc] initWithTarge
 // [image_ExpFriend addGestureRecognizer:ViewTap22];
 
 
-
+    Label_JsonResult.hidden=YES;
 
 UIColor *bgRefreshColor = [UIColor whiteColor];
 
@@ -92,12 +72,38 @@ self.refreshControl.tintColor = [UIColor blackColor];
                         action:@selector(PulltoRefershtable)
               forControlEvents:UIControlEventValueChanged];
 
-
     [self ClienserverComm_Pledges];
     [self ClienserverComm_Favourite];
-
+    
 
 }
+- (void) viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    
+    cellChecking=@"Pledges";
+    
+    view_ExpPledges .clipsToBounds=YES;
+    View_ExpFavorite.clipsToBounds=YES;
+    
+    
+    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+   // borderBottom_world.frame=view_ExpPledges.bounds;
+    borderBottom_world.frame = CGRectMake(0, view_ExpPledges.frame.size.height-2.5,  view_ExpPledges.frame.size.width, 2.5);
+    [view_ExpPledges.layer addSublayer:borderBottom_world];
+    
+    Label_Favorite.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
+    Label_Pledges.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
+    
+    
+    
+    
+ 
+    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFavorite.frame.size.height-1, View_ExpFavorite.frame.size.width, 1);
+    [View_ExpFavorite.layer addSublayer:borderBottom_ExpFrnd];
+}
+
 -(void)ClienserverComm_Pledges
 {
     [self.view endEditing:YES];
@@ -159,13 +165,14 @@ self.refreshControl.tintColor = [UIColor blackColor];
         
         NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
+                                             
                                              if(data)
                                              {
                                                  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                                  NSInteger statusCode = httpResponse.statusCode;
                                                  if(statusCode == 200)
                                                  {
-                                                     
+                                                    
                                                      Array_Plaeges=[[NSMutableArray alloc]init];
                                                      SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      Array_Plaeges =[objSBJsonParser objectWithData:data];
@@ -205,7 +212,12 @@ self.refreshControl.tintColor = [UIColor blackColor];
                                                      }
                                                      if (Array_Plaeges.count !=0)
                                                      {
+                                                         Label_JsonResult.hidden=YES;
                                                          [Tableview_Favorites reloadData];
+                                                     }
+                                                     else
+                                                     {
+                                                         Label_JsonResult.hidden=NO;
                                                      }
                                                      
                                                      
@@ -391,6 +403,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
     cellChecking=@"Pledges";
+    Label_JsonResult.hidden=YES;
     view_ExpPledges.clipsToBounds=YES;
     view_ExpPledges.clipsToBounds=YES;
    
@@ -410,10 +423,19 @@ self.refreshControl.tintColor = [UIColor blackColor];
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFavorite.frame.size.height-1, View_ExpFavorite.frame.size.width, 1);
     [View_ExpFavorite.layer addSublayer:borderBottom_ExpFrnd];
     [self ClienserverComm_Pledges];
+    if (Array_Plaeges.count==0)
+    {
+        Label_JsonResult.hidden=NO;
+    }
+    else
+    {
+        Label_JsonResult.hidden=YES;
+    }
     [Tableview_Favorites reloadData];
 }
 - (void)ViewTapTapped_Expfriend:(UITapGestureRecognizer *)recognizer
 {
+     Label_JsonResult.hidden=YES;
     cellChecking=@"Favorites";
     view_ExpPledges.clipsToBounds=YES;
    
@@ -434,8 +456,17 @@ self.refreshControl.tintColor = [UIColor blackColor];
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFavorite.frame.size.height-2.5, View_ExpFavorite.frame.size.width, 2.5);
     [View_ExpFavorite.layer addSublayer:borderBottom_ExpFrnd];
     
-    [Tableview_Favorites reloadData];
+    
      [self ClienserverComm_Favourite];
+    [Tableview_Favorites reloadData];
+    if (Array_Faourite.count==0)
+    {
+        Label_JsonResult.hidden=NO;
+    }
+    else
+    {
+        Label_JsonResult.hidden=YES;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

@@ -11,6 +11,7 @@
 #import "FavriteTableViewCell.h"
 @interface FavoritePageViewController : UIViewController
 
+@property(nonatomic,weak)IBOutlet UILabel * Label_JsonResult;
 
 @property(nonatomic,weak)IBOutlet UIView * view_ExpPledges;
 @property(nonatomic,weak)IBOutlet UIView * View_ExpFavorite;

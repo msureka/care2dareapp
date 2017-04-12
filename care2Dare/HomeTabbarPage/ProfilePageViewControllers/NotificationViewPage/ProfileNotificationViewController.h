@@ -18,7 +18,7 @@
 @property(nonatomic,weak)IBOutlet UIButton * Button_Search;
 @property(nonatomic,weak)IBOutlet UILabel * Lable_Titlenotif;
 @property(nonatomic,weak)IBOutlet UITextField *Textfield_Search;
-//
+@property(nonatomic,weak)IBOutlet UILabel * Lable_JsonResult;
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Notif;
 @property(nonatomic,strong)PublicChallengesTableViewCell * cell_PublicNoti;
 @property(nonatomic,strong)PrivateChallengesTableViewCell * cell_PrivateNoti;

@@ -26,7 +26,7 @@
 @end
 
 @implementation ExplorePageViewController
-@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp;
+@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp,Label_JsonResult;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,27 +47,10 @@
     SearchCrickArray_worldExp=[[NSArray alloc]init];
     
     Tableview_Explore.tableHeaderView=searchbar;
-    view_ExpWorld.clipsToBounds=YES;
-     image_ExpWorld.clipsToBounds=YES;
-    image_ExpFriend.clipsToBounds=YES;
-    [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld.png"]];
-    [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
     
-   borderBottom_world = [CALayer layer];
-            borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
-            borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
-            [view_ExpWorld.layer addSublayer:borderBottom_world];
-    
-    
-    
-    View_ExpFriend.clipsToBounds=YES;
-    
-    
-   borderBottom_ExpFrnd = [CALayer layer];
-    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
-    borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
-    [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
-
+     borderBottom_world = [CALayer layer];
+     borderBottom_ExpFrnd = [CALayer layer];
+    Label_JsonResult.hidden=YES;
     
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(ViewTapTapped_Expworld:)];
@@ -118,7 +101,31 @@
     [self ClienserverComm_worldExp];
     [self ClienserverComm_FriendExp];
     
+}
+
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    view_ExpWorld.clipsToBounds=YES;
+    image_ExpWorld.clipsToBounds=YES;
+    image_ExpFriend.clipsToBounds=YES;
+    [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld.png"]];
+    [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
     
+    
+    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
+    [view_ExpWorld.layer addSublayer:borderBottom_world];
+    
+    
+    
+    View_ExpFriend.clipsToBounds=YES;
+    
+    
+   
+    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
+    [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
 }
 -(void)PulltoRefershtable
 {
@@ -378,7 +385,12 @@
                                                      }
                                                      if (Array_WorldExp.count !=0)
                                                      {
+                                                             Label_JsonResult.hidden=YES;
                                                          [Tableview_Explore reloadData];
+                                                     }
+                                                     else
+                                                     {
+                                                         Label_JsonResult.hidden=NO;
                                                      }
                                                      
                                                      
@@ -430,6 +442,7 @@
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
  cellChecking=@"WorldExp";
+     Label_JsonResult.hidden=YES;
     view_ExpWorld.clipsToBounds=YES;
     image_ExpWorld.clipsToBounds=YES;
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld.png"]];
@@ -450,6 +463,14 @@
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
      [self ClienserverComm_worldExp];
+    if (Array_WorldExp.count==0)
+    {
+            Label_JsonResult.hidden=NO;
+    }
+    else
+    {
+        Label_JsonResult.hidden=YES;
+    }
     [Tableview_Explore reloadData];
 }
 - (void)ViewTapTapped_Expfriend:(UITapGestureRecognizer *)recognizer
@@ -457,6 +478,7 @@
     cellChecking=@"FriendExp";
     view_ExpWorld.clipsToBounds=YES;
     image_ExpWorld.clipsToBounds=YES;
+     Label_JsonResult.hidden=YES;
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld1.png"]];
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends.png"]];
 
@@ -474,6 +496,15 @@
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-2.5, View_ExpFriend.frame.size.width, 2.5);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
      [self ClienserverComm_FriendExp];
+    if (Array_FriendExp.count==0)
+    {
+        Label_JsonResult.hidden=NO;
+    }
+    else
+    {
+        Label_JsonResult.hidden=YES;
+    }
+    
     [Tableview_Explore reloadData];
 }
 

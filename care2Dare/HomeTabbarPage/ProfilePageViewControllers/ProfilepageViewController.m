@@ -32,17 +32,31 @@
 @end
 
 @implementation ProfilepageViewController
-@synthesize view_Topheader,cell_Public,cell_Private,cell_Profile;
+@synthesize view_Topheader,cell_Public,cell_Private,cell_Profile,view_CreateChallenges,Button_SetValues;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
       borderBottom_topheder = [CALayer layer];
-    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
-    borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
-    [view_Topheader.layer addSublayer:borderBottom_topheder];
     
      self.tabBarController.tabBar.hidden=NO;
       cellChecking=@"public";
+    
+    
+    
+    if ( [[defaults valueForKey:@"budge"]isEqualToString:@"0"] )
+    {
+        [Button_SetValues setBackgroundImage:[UIImage imageNamed:@"profile_circle.png"] forState:UIControlStateNormal];
+        
+        [Button_SetValues setTitle:@"0" forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        [Button_SetValues setBackgroundImage:[UIImage imageNamed:@"redcircle.png"] forState:UIControlStateNormal];
+        [Button_SetValues setTitle:[defaults valueForKey:@"budge"] forState:UIControlStateNormal];
+    }
+    
+    
     
    str_challenges=[defaults valueForKey:@"challenges"];
     Str_Frends=[defaults valueForKey:@"friends"];
@@ -52,6 +66,13 @@
     
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
+    view_CreateChallenges.hidden=YES;
+    
+    UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                               action:@selector(ViewTapTapped_Challenges:)];
+    [view_CreateChallenges addGestureRecognizer:ViewTap11];
+    
     
     
     
@@ -82,17 +103,40 @@
     
     
     
-  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
     
     [self ClienserverCommAll];
 
     [self ClientserverCommprofile];
     
 }
+- (void)Refresh_UpdatedBudge
+{
+    if ( [[defaults valueForKey:@"budge"]isEqualToString:@"0"] )
+    {
+         [Button_SetValues setBackgroundImage:[UIImage imageNamed:@"profile_circle.png"] forState:UIControlStateNormal];
+        
+       [Button_SetValues setTitle:@"0" forState:UIControlStateNormal];
+        
+    }
+  else
+  {
+    [Button_SetValues setBackgroundImage:[UIImage imageNamed:@"redcircle.png"] forState:UIControlStateNormal];
+    [Button_SetValues setTitle:[defaults valueForKey:@"budge"] forState:UIControlStateNormal];
+  }
+}
+- (void) viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
+    [view_Topheader.layer addSublayer:borderBottom_topheder];
+
+}
 -(void)PulltoRefershtable
 {
     
-        [self ClienserverCommAll];
+[self ClienserverCommAll];
    [self ClientserverCommprofile];
   
     [_Tableview_Profile reloadData];
@@ -194,9 +238,45 @@
                                                      
                                                      
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
+                                                     
+                                                     
+                                                     
+                                                     if (Array_AllData.count !=0)
+                                                     {
+                                                         view_CreateChallenges.hidden=YES;
+                                                         Array_Public=[[NSMutableArray alloc]init];
+                                                         Array_Private=[[NSMutableArray alloc]init];
+                                                         for (int i=0; i<Array_AllData.count; i++)
+                                                         {
+                                                             if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
+                                                             {
+                                                                 [Array_Public addObject:[Array_AllData objectAtIndex:i]];
+                                                             }
+                                                             else
+                                                             {
+                                                                 [Array_Private addObject:[Array_AllData objectAtIndex:i]];
+                                                             }
+                                                         }
+                                            if (Array_Private.count!=0 && Array_Public.count==0)
+                                                {
+                                                [self ViewTapTapped_Private:nil];
+                                                    
+                                                }
+                                                         
+                                                         [_Tableview_Profile reloadData];
+                                                         
+                                                     }
+                                                     else
+                                                     {
+                                                         view_CreateChallenges.hidden=NO;
+                                                     }
+                                                     
+
+                                                     
+                                                     
                                                      if ([ResultString isEqualToString:@"nouserid"])
                                                      {
-                                                         
+                                                         view_CreateChallenges.hidden=YES;
                                                          UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                          
                                                          UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -210,27 +290,6 @@
                                                      
                                                      
                   
-                if (Array_AllData.count !=0)
-                        {
-                            Array_Public=[[NSMutableArray alloc]init];
-                             Array_Private=[[NSMutableArray alloc]init];
-                    for (int i=0; i<Array_AllData.count; i++)
-                    {
-                    if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
-                        {
-                            [Array_Public addObject:[Array_AllData objectAtIndex:i]];
-                    }
-                        else
-                        {
-                            [Array_Private addObject:[Array_AllData objectAtIndex:i]];
-                        }
-                    }
-                           
-                            
-                    [_Tableview_Profile reloadData];
-                            
-                            }
-                                                     
                                                      
                                                  }
                                                  
@@ -828,19 +887,21 @@
 
 - (void)ViewTapTapped_Public:(UITapGestureRecognizer *)recognizer
 {
+    
     Button_Public.tag=100;
     cellChecking=@"public";
     [self ClienserverCommAll];
     [_Tableview_Profile reloadData];
+    
 }
 - (void)ViewTapTapped_Private:(UITapGestureRecognizer *)recognizer
     {
-     
+   
     cellChecking=@"private";
     Button_Private.tag=101;
     [self ClienserverCommAll];
         [_Tableview_Profile reloadData];
-    
+        
 }
 - (void)ViewTapTapped_Label_Friends22:(UITapGestureRecognizer *)recognizer
 {
@@ -1011,5 +1072,7 @@ NSLog(@"error login2.......%@",error.description);
     }
     
 }
-
+- (void)ViewTapTapped_Challenges:(UITapGestureRecognizer *)recognizer
+{
+}
 @end

@@ -7,11 +7,12 @@
 //
 
 #import "HomeTabBarViewController.h"
-
+#import "Reachability.h"
 @interface HomeTabBarViewController ()<UITabBarDelegate,UITabBarControllerDelegate>
 {
      UITabBarItem *item0,*item1,*item2,*item3,*item4;
     NSUserDefaults * defaults;
+    NSDictionary *urlplist;
 }
 @end
 
@@ -19,8 +20,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    
+    
     UITabBar *tabBar = self.tabBar;
     defaults=[[NSUserDefaults alloc]init];
+    
+NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
+urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
+    
     CGRect viewFrame = tabBar.frame;
     viewFrame.size.height = 56;
     self.tabBar.frame = viewFrame;
@@ -69,9 +79,133 @@
     [defaults synchronize];
     
 
+    [self communicationServer];
     
+    NSTimer *HomechatTimer =  [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(communicationServer) userInfo:nil  repeats:YES];
 }
-
+-(void)communicationServer
+{
+    [self.view endEditing:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid= @"userid";
+        NSString *useridVal =[defaults valueForKey:@"userid"];
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"notificationcount"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     
+                                                     
+                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                  
+                                                     
+                                                     
+                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+                                                     
+                                                     
+                if (![ResultString isEqualToString:@""] && ![ResultString isEqualToString:@"0"] )
+                                                    {
+    item4.badgeValue=ResultString;
+                [defaults setObject:ResultString forKey:@"budge"];
+                    [defaults synchronize];
+[[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatedBudge" object:self userInfo:nil];
+                                                        
+               
+                                                        
+                                                }
+                                            else
+                                                         {
+                            [defaults setObject:@"0" forKey:@"budge"];
+                            item4.badgeValue=nil;
+                           
+                                                         }
+                                                     
+                                                     
+                                                     
+                                                     
+                                                 }
+                                                 
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                                 
+                                                 
+                                             }
+                                             else if(error)
+                                             {
+                                                 
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                             
+                                         }];
+        [dataTask resume];
+    }
+ 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

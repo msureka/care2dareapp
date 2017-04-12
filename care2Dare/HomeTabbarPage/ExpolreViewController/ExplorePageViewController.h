@@ -16,6 +16,8 @@
 @property(nonatomic,weak)IBOutlet UIView * view_ExpWorld;
 @property(nonatomic,weak)IBOutlet UIView * View_ExpFriend;
 
+@property(nonatomic,weak)IBOutlet UILabel * Label_JsonResult;
+
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Explore;
 
 @property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;

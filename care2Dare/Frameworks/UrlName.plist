@@ -44,5 +44,11 @@
 	<string>http://www.care2dareapp.com/app/watch.php</string>
 	<key>watchedvideo</key>
 	<string>http://www.care2dareapp.com/app/watchedvideo.php</string>
+	<key>notificationcount</key>
+	<string>http://www.care2dareapp.com/app/notificationcount.php</string>
+	<key>checknotifications</key>
+	<string>http://www.care2dareapp.com/app/checknotifications.php</string>
+	<key>checknotifications2</key>
+	<string>http://www.care2dareapp.com/app/checknotifications2.php</string>
 </dict>
 </plist>
