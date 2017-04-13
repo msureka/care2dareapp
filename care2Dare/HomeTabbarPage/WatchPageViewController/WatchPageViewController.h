@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WatchViewTableViewCell.h"
-@interface WatchPageViewController : UIViewController
+@interface WatchPageViewController : UIViewController<UITextFieldDelegate>
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_watch;
 
@@ -17,7 +17,7 @@
 @property(nonatomic,weak)IBOutlet UIButton * Button_Back;
 @property(nonatomic,weak)IBOutlet UIButton * Button_Search;
 @property(nonatomic,weak)IBOutlet UILabel * Lable_TitleFriends;
-@property(nonatomic,weak)IBOutlet UITextField *Textfield_Search;
+@property(nonatomic,strong)IBOutlet UITextField *Textfield_Search;
 -(IBAction)SearchEditing_Action:(id)sender;
 - (IBAction)ButtonBack_Action:(id)sender;
 @end

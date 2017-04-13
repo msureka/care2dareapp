@@ -16,15 +16,19 @@
     NSString * SeachCondCheck,*CheckedTabbedButtons;
     CALayer*  borderBottom_challenges,*borderBottom_Contribution,*borderBottom_Vedios;
     NSUserDefaults * defaults;
-    NSMutableArray * Array_AllData,*Array_Public,*Array_Private,*Array_IcomingPlg,*Array_OutgoingPlg,* Array_AllData_contribution;
+    NSMutableArray * Array_AllData,*Array_Public,*Array_Private,*Array_IcomingPlg,*Array_OutgoingPlg,* Array_AllData_contribution,*Array_AllData_Videos;
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
+    NSString * ResultString_Challenges,*ResultString_Contribute,*ResultString_video;
+    NSString *FlagSearchBar,*searchString;
+    
+    NSArray *SearchCrickArray_challenge,*SearchCrickArray_Contribute,*SearchCrickArray_vedio,*Array_Public1,*Array_Private1,*Array_IcomingPlg1,*Array_OutgoingPlg1;
 }
 @end
 
 @implementation ProfileNotificationViewController
 
-@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Button_Search,Textfield_Search,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution,Lable_JsonResult;
+@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Button_Search,Textfield_Search,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -36,6 +40,18 @@
     Textfield_Search.delegate=self;
      borderBottom_challenges= [CALayer layer];
      borderBottom_Vedios = [CALayer layer];
+    
+    SearchCrickArray_challenge=[[NSArray alloc]init];
+    SearchCrickArray_Contribute=[[NSArray alloc]init];
+    SearchCrickArray_vedio=[[NSArray alloc]init];
+    Array_Public1=[[NSArray alloc]init];
+    Array_Private1=[[NSArray alloc]init];
+    
+    Array_IcomingPlg1=[[NSArray alloc]init];
+    Array_OutgoingPlg1=[[NSArray alloc]init];
+
+    
+    
     [self ClienserverCommAll];
 }
 - (void) viewDidLayoutSubviews
@@ -46,8 +62,8 @@
     borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
     [view_Topheader.layer addSublayer:borderBottom_topheder];
     
-    Lable_JsonResult.hidden=YES;
     
+    Textfield_Search.delegate=self;
     
     
   
@@ -141,15 +157,15 @@
                 SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                 Array_AllData=[objSBJsonParser objectWithData:data];
                                                      
-                        NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                     ResultString_Challenges=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                         
-                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                        ResultString_Challenges = [ResultString_Challenges stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                        ResultString_Challenges = [ResultString_Challenges stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
                     NSLog(@"Array_AllData %@",Array_AllData);
                                                      
                                                      
-                NSLog(@"Array_AllData ResultString %@",ResultString);
+                NSLog(@"Array_AllData ResultString %@",ResultString_Challenges);
                                                      
                                                      
                                                      
@@ -169,25 +185,28 @@
             [Array_Private addObject:[Array_AllData objectAtIndex:i]];
                     }
                 }
-                                                       
-                       Lable_JsonResult.hidden=YES;
+                   SearchCrickArray_challenge=[Array_AllData mutableCopy];
+                    Array_Public1=[Array_Public mutableCopy];
+                    Array_Private1=[Array_Private mutableCopy];
+                
+                       cell_PublicNoti.Lable_JsonResult.hidden=YES;
                     [Tableview_Notif reloadData];
                                                          
                     }
                 else
                   {
-                      Lable_JsonResult.hidden=NO;
+                      cell_PublicNoti.Lable_JsonResult.hidden=NO;
                     
                 }
                                                     
                                                      
                                                      
                                                      
-               if ([ResultString isEqualToString:@"nonotification"])
+               if ([ResultString_Challenges isEqualToString:@"nonotification"])
                                 {
-                                                        
-                  Lable_JsonResult.hidden=NO;
-                                                         
+                       [Tableview_Notif reloadData];
+                  cell_PublicNoti.Lable_JsonResult.hidden=NO;
+                     
                                                          
                     }
                                                      
@@ -288,16 +307,16 @@
         SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
             Array_AllData_contribution=[objSBJsonParser objectWithData:data];
                                                      
-    NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+ResultString_Contribute=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      
-        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        ResultString_Contribute = [ResultString_Contribute stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      
-        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+        ResultString_Contribute = [ResultString_Contribute stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
      NSLog(@"Array_AllData_contribution %@",Array_AllData_contribution);
                                                      
                                                      
-    NSLog(@"Array_AllData ResultString %@",ResultString);
+    NSLog(@"Array_AllData ResultString %@",ResultString_Contribute);
                                                      
                                                      
                                                      
@@ -327,24 +346,26 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                 }
             }
                                                          
-                Lable_JsonResult.hidden=YES;
-                [Tableview_Notif reloadData];
+        SearchCrickArray_Contribute=[Array_AllData_contribution mutableCopy];
+        Array_IcomingPlg1=[Array_IcomingPlg mutableCopy];
+        Array_OutgoingPlg1=[Array_OutgoingPlg mutableCopy];
+                        
+        [Tableview_Notif reloadData];
                                                          
                                 }
                             else
                             {
-                    Lable_JsonResult.hidden=NO;
+                   
                                                          
                             }
                                                      
                                                      
                                                      
                                                      
-                    if ([ResultString isEqualToString:@"nonotification"])
+                    if ([ResultString_Contribute isEqualToString:@"nonotification"])
                         {
                                                          
-                    Lable_JsonResult.hidden=NO;
-                                                         
+                            [Tableview_Notif reloadData];
                                                          
                             }
                                                      
@@ -373,6 +394,140 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
     }
     
 }
+- (void)ClienserverComm_Vedios
+{
+    [self.view endEditing:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid= @"userid";
+        NSString *useridVal =[defaults valueForKey:@"userid"];
+        
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"checknotifications3"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+    Array_AllData_Videos=[[NSMutableArray alloc]init];
+    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+    Array_AllData_Videos=[objSBJsonParser objectWithData:data];
+                                                     
+         ResultString_video=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+        ResultString_video = [ResultString_video stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+        ResultString_video = [ResultString_video stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+            NSLog(@"Array_AllData_Videos %@",Array_AllData_Videos);
+                                                     
+                                                     
+                    NSLog(@"Array_AllData_Videos ResultString %@",ResultString_video);
+                                                     
+                                                     
+                                                     
+            if (Array_AllData_Videos.count !=0)
+                            {
+                                                         
+             SearchCrickArray_vedio=[Array_AllData_Videos mutableCopy];
+            [Tableview_Notif reloadData];
+                                                         
+                }
+                else
+                {
+            
+                                                         
+            }
+                                                     
+                                                    
+                                                     
+        if ([ResultString_video isEqualToString:@"nonotification"])
+            {
+                                                         
+   [Tableview_Notif reloadData];
+                                                         
+                                                         
+        }
+                                                     
+                                                     
+                                                     
+                                                     
+    }
+                                                 
+            else
+                {
+            NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                }
+                                                 
+                                                 
+                }
+            else if(error)
+                {
+                                                 
+        NSLog(@"error login2.......%@",error.description);
+            }
+                                             
+                                             
+            }];
+        [dataTask resume];
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -380,6 +535,7 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
 
 -(IBAction)ButtonBack_Action:(id)sender
 {
+     Textfield_Search.text=@"";
     if ([SeachCondCheck isEqualToString:@"yes"])
     {
         [Textfield_Search resignFirstResponder];
@@ -387,6 +543,42 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
         Textfield_Search.hidden=YES;
         Button_Search.hidden=NO;
         SeachCondCheck=@"no";
+        
+        if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+        {
+           [Array_Public removeAllObjects];
+            [Array_Private removeAllObjects];
+            [Array_AllData removeAllObjects];
+            [Array_Public addObjectsFromArray:Array_Public1];
+            [Array_Private addObjectsFromArray:Array_Private1];
+            [Array_AllData addObjectsFromArray:SearchCrickArray_challenge];
+                
+                
+            }
+        if([CheckedTabbedButtons isEqualToString:@"Contribution"])
+        {
+                
+        [Array_IcomingPlg removeAllObjects];
+        [Array_OutgoingPlg removeAllObjects];
+        [Array_AllData_contribution removeAllObjects];
+        [Array_IcomingPlg addObjectsFromArray:Array_IcomingPlg1];
+        [Array_OutgoingPlg addObjectsFromArray:Array_OutgoingPlg1];
+        [Array_AllData_contribution addObjectsFromArray:SearchCrickArray_Contribute];
+            
+        }
+        
+        if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
+        {
+            
+            
+        [Array_AllData_Videos removeAllObjects];
+                
+        [Array_AllData_Videos addObjectsFromArray:SearchCrickArray_vedio];
+                
+                
+            }
+        [Tableview_Notif reloadData];
+
     }
     else
     {
@@ -408,45 +600,90 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
 {
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
     {
-        if(section==0)
-        {
-            
-            
-            return Array_Public.count;
-            
-        }
-        if(section==1)
-        {
-            
-            
-            return Array_Private.count;
         
+        if (Array_AllData.count==0)
+        {
+            if(section==0)
+            {
+                
+            return 1;
+
+            }
+            if(section==1)
+            {
+                
+                
+                return 0;
+                
+            }
+          
         }
-  
+        else
+        {
+            if(section==0)
+            {
+                
+                return Array_Public.count;
+                
+                
+            }
+            if(section==1)
+            {
+                
+                
+                return Array_Private.count;
+                
+            }
+        }
     }
     if ([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
-        if(section==0)
-        {
-            
-            
-            return Array_IcomingPlg.count;
-            
-        }
-        if(section==1)
-        {
-            
-            
-            return Array_OutgoingPlg.count;
-            
-        }
         
+        if (Array_AllData_contribution.count==0)
+        {
+            if(section==0)
+            {
+                
+                return 1;
+                
+            }
+            if(section==1)
+            {
+                
+                
+                return 0;
+                
+            }
+        }
+        else
+        {
+            if(section==0)
+            {
+                
+                
+                return Array_IcomingPlg.count;
+                
+                
+            }
+            if(section==1)
+            {
+                
+                
+                return Array_OutgoingPlg.count;
+                
+            }
+        }
     }
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
-        
-    return 4;
-        
+        if (Array_AllData_Videos.count==0)
+        {
+            return 1;
+        }
+        else
+        {
+    return Array_AllData_Videos.count;
+        }
     }
     
     
@@ -493,12 +730,40 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                 [cell_PublicNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
+            if ([ResultString_Challenges isEqualToString:@"nonotification"] || Array_Public.count==0)
+            {
+
+                cell_PublicNoti.Lable_JsonResult.hidden=NO;
+                cell_PublicNoti.Label_Name.hidden=YES;
+                cell_PublicNoti.image_Redmsg.hidden=YES;
+                cell_PublicNoti.image_profile.hidden=YES;
+                cell_PublicNoti.image_profile2.hidden=YES;
+                
+            }
+            else
+            {
+           
+                cell_PublicNoti.Label_Name.hidden=NO;
+                cell_PublicNoti.image_Redmsg.hidden=NO;
+                cell_PublicNoti.image_profile.hidden=NO;
+                cell_PublicNoti.image_profile2.hidden=NO;
+                cell_PublicNoti.Lable_JsonResult.hidden=YES;
             NSDictionary * dic_Values=[Array_Public objectAtIndex:indexPath.row];
             
             
  
             
+            if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
+            {
+                cell_PublicNoti.image_Redmsg.hidden=NO;
+            }
+            else
+            {
+                cell_PublicNoti.image_Redmsg.hidden=YES;
+            }
             
+            
+
             
             
             
@@ -620,7 +885,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             
         }
             
-            
+            }
             
             return cell_PublicNoti;
             
@@ -652,6 +917,17 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             NSDictionary * dic_Values=[Array_Private objectAtIndex:indexPath.row];
             
             
+            if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
+            {
+                cell_PrivateNoti.image_Redmsg.hidden=NO;
+            }
+            else
+            {
+                cell_PrivateNoti.image_Redmsg.hidden=YES;
+            }
+            
+            
+
             
             NSURL *url,*url1;
             url=[NSURL URLWithString:[dic_Values valueForKey:@"challengeurl"]];
@@ -817,9 +1093,39 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 [cell_PlegeIncoNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
+            
+            
+            if ([ResultString_Contribute isEqualToString:@"nonotification"] || Array_IcomingPlg.count==0)
+            {
+                
+                cell_PlegeIncoNoti.Lable_JsonResult.hidden=NO;
+                cell_PlegeIncoNoti.Label_Name.hidden=YES;
+                cell_PlegeIncoNoti.image_Redmsg.hidden=YES;
+                cell_PlegeIncoNoti.image_profile.hidden=YES;
+                cell_PlegeIncoNoti.image_profile2.hidden=YES;
+                
+            }
+            else
+            {
+                
+                cell_PlegeIncoNoti.Label_Name.hidden=NO;
+                cell_PlegeIncoNoti.image_Redmsg.hidden=NO;
+                cell_PlegeIncoNoti.image_profile.hidden=NO;
+                cell_PlegeIncoNoti.image_profile2.hidden=NO;
+                cell_PlegeIncoNoti.Lable_JsonResult.hidden=YES;
+            
+            
             NSDictionary * dic_Values=[Array_IcomingPlg objectAtIndex:indexPath.row];
             
-            
+            if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
+            {
+                cell_PlegeIncoNoti.image_Redmsg.hidden=NO;
+            }
+            else
+            {
+                cell_PlegeIncoNoti.image_Redmsg.hidden=YES;
+            }
+
             
             
             
@@ -849,7 +1155,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             
             UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:18.0];
             NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
-            NSString * str_ConTotal=[NSString stringWithFormat:@"%@%@%@",@"contribution",@" $",[dic_Values valueForKey:@"totalamount"]];
+            NSString * str_ConTotal=[NSString stringWithFormat:@"%@%@%@",@"contributed",@" $",[dic_Values valueForKey:@"totalamount"]];
             
             NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:str_ConTotal attributes:verdanaDict];
             
@@ -877,7 +1183,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             {
                 [cell_PlegeIncoNoti.Label_Name setFrame:CGRectMake(cell_PlegeIncoNoti.Label_Name.frame.origin.x, cell_PlegeIncoNoti.Label_Name.frame.origin.y, cell_PlegeIncoNoti.Label_Name.frame.size.width, cell_PlegeIncoNoti.Label_Name.frame.size.height*2)];
             }
-            
+            }
             
             return cell_PlegeIncoNoti;
             
@@ -917,7 +1223,15 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             
             NSDictionary * dic_Values=[Array_OutgoingPlg objectAtIndex:indexPath.row];
             
-            
+            if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
+            {
+                cell_PlegeOutNoti.image_Redmsg.hidden=NO;
+            }
+            else
+            {
+                cell_PlegeOutNoti.image_Redmsg.hidden=YES;
+            }
+
             
             NSURL *url,*url1;
             url=[NSURL URLWithString:[dic_Values valueForKey:@"challengeurl"]];
@@ -943,7 +1257,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             
             UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:18.0];
             NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
-            NSString * str_ConTotal=[NSString stringWithFormat:@"%@%@%@",@"contribution",@" $",[dic_Values valueForKey:@"totalamount"]];
+            NSString * str_ConTotal=[NSString stringWithFormat:@"%@%@%@",@"contributed",@" $",[dic_Values valueForKey:@"totalamount"]];
             
             NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:str_ConTotal attributes:verdanaDict];
             
@@ -997,11 +1311,118 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     if (cell_VedioNoti == nil)
     {
         
-        cell_VedioNoti = [[VedioNotiTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mycellid55];
+    cell_VedioNoti = [[VedioNotiTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mycellid55];
         
         
     }
-
+//    byname = "Er Sachin Mokashi";
+//    byprofileimageurl = "https://graph.facebook.com/1280357812049167/picture?type=large";
+//    byuserid = 20170307091520wFL3;
+//    challengeid = C201704041224052UE9;
+//    msgread = no;
+//    videothumbnailurl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C201704041224052UE9-thumbnail.jpg";
+//
+    
+    
+    
+    if (Array_AllData_Videos.count-1==indexPath.row)
+    {
+        Bottomborder_Cell2 = [CALayer layer];
+        Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, cell_VedioNoti.frame.size.width, 1);
+        [cell_VedioNoti.layer addSublayer:Bottomborder_Cell2];
+    }
+    else
+    {
+        Bottomborder_Cell2 = [CALayer layer];
+        Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, cell_VedioNoti.frame.size.width, 1);
+        [cell_VedioNoti.layer addSublayer:Bottomborder_Cell2];
+    }
+    if ([ResultString_video isEqualToString:@"nonotification"] || Array_AllData_Videos.count==0)
+    {
+        
+        cell_VedioNoti.Lable_JsonResult.hidden=NO;
+        cell_VedioNoti.Label_Name.hidden=YES;
+        cell_VedioNoti.image_Redmsg.hidden=YES;
+        cell_VedioNoti.image_profile.hidden=YES;
+        cell_VedioNoti.image_profile2.hidden=YES;
+        
+    }
+    else
+    {
+        
+        cell_VedioNoti.Label_Name.hidden=NO;
+        cell_VedioNoti.image_Redmsg.hidden=NO;
+        cell_VedioNoti.image_profile.hidden=NO;
+        cell_VedioNoti.image_profile2.hidden=NO;
+        cell_VedioNoti.Lable_JsonResult.hidden=YES;
+    
+    NSDictionary * dic_Values=[Array_AllData_Videos objectAtIndex:indexPath.row];
+    if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
+    {
+        cell_VedioNoti.image_Redmsg.hidden=NO;
+    }
+    else
+    {
+      cell_VedioNoti.image_Redmsg.hidden=YES;
+    }
+  
+    
+    NSURL *url,*url1;
+    url=[NSURL URLWithString:[dic_Values valueForKey:@"videothumbnailurl"]];
+    url1=[NSURL URLWithString:[dic_Values valueForKey:@"byprofileimageurl"]];
+    
+    cell_VedioNoti.image_profile.clipsToBounds=YES;
+    cell_VedioNoti.image_profile2.clipsToBounds=YES;
+    
+    
+    [cell_VedioNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+    [cell_VedioNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+    
+    cell_VedioNoti.image_profile.layer.cornerRadius=cell_VedioNoti.image_profile.frame.size.height/2;
+    cell_VedioNoti.image_profile2.layer.cornerRadius=9.0f;
+    
+    
+    
+    
+    UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:18.0];
+    NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+    NSString * str_Name=[dic_Values valueForKey:@"byname"];
+    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:str_Name attributes: arialDict];
+    
+    UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:18.0];
+    NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+    NSString * str_ConTotal=@" Recorded a ";
+    
+    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:str_ConTotal attributes:verdanaDict];
+    
+    
+    UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:18.0];
+    NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
+    NSMutableAttributedString *cAttrString = [[NSMutableAttributedString alloc]initWithString:@"new video" attributes:verdanaDict2];
+    
+    [aAttrString appendAttributedString:vAttrString];
+    [aAttrString appendAttributedString:cAttrString];
+    
+    NSString *myString =[NSString stringWithFormat:@"%@%@%@",str_Name,str_ConTotal,@"new video"];
+    
+    NSRange range = [myString rangeOfString:@"new video"];
+    [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+    
+    cell_VedioNoti.Label_Name.attributedText = aAttrString;
+    
+    
+    
+    CGRect textRect = [cell_VedioNoti.Label_Name.text boundingRectWithSize:cell_VedioNoti.Label_Name.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_VedioNoti.Label_Name.font} context:nil];
+    
+    int numberOfLines = textRect.size.height / cell_VedioNoti.Label_Name.font.pointSize;;
+    if (numberOfLines==1)
+    {
+        [cell_VedioNoti.Label_Name setFrame:CGRectMake(cell_VedioNoti.Label_Name.frame.origin.x, cell_VedioNoti.Label_Name.frame.origin.y, cell_VedioNoti.Label_Name.frame.size.width, cell_VedioNoti.Label_Name.frame.size.height*2)];
+    }
+    
+    }
     
       return cell_VedioNoti;
     
@@ -1040,7 +1461,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         Label1.backgroundColor=[UIColor whiteColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"New Vedios";
+        Label1.text=@"New Videos";
         [sectionView addSubview:Label1];
         
         CALayer*  borderBottom_topheder = [CALayer layer];
@@ -1133,8 +1554,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
             }
             else
             {
-                
-              return 44;
+                return 44;
             }
             
         }
@@ -1182,8 +1602,16 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     }
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
-        
-        return 44;
+        if (Array_AllData_Videos.count==0)
+        {
+            return 0;
+        }
+        else
+        {
+            return 44;
+        }
+
+    
         
     }
     return 0;
@@ -1236,10 +1664,10 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 }
 -(IBAction)ButtonChallenges_Action:(id)sender
 {
-      Lable_JsonResult.hidden=YES;
+    
     CheckedTabbedButtons=@"Challenges";
    
-    
+    searchString=@"";
     [Button_Challenges setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1258,15 +1686,15 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-1, Button_Videos.frame.size.width,1);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
+   
     [self ClienserverCommAll];
     [Tableview_Notif reloadData];
 }
 -(IBAction)ButtonContribution_Action:(id)sender
 {
-      Lable_JsonResult.hidden=YES;
-    CheckedTabbedButtons=@"Contribution";
+        CheckedTabbedButtons=@"Contribution";
     
- 
+ searchString=@"";
     [Button_Contribution setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1291,9 +1719,9 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 }
 -(IBAction)ButtonVedio_Action:(id)sender
 {
-      Lable_JsonResult.hidden=YES;
-  CheckedTabbedButtons=@"Vedio";
     
+  CheckedTabbedButtons=@"Vedio";
+    searchString=@"";
     [Button_Videos setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1312,7 +1740,206 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-2.5, Button_Videos.frame.size.width,2.5);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
+    [self ClienserverComm_Vedios];
       [Tableview_Notif reloadData];
     
 }
+
+
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+   FlagSearchBar=@"yes";
+//    transparancyTuchView.hidden=NO;
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+//    transparancyTuchView.hidden=YES;
+}
+
+- (IBAction)SearchEditing_Action:(id)sender
+{
+    if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+    {
+        if (Textfield_Search.text.length==0)
+        {
+                    FlagSearchBar=@"no";
+                    searchString=@"";
+                    //transparancyTuchView.hidden=NO;
+                    [Array_Public removeAllObjects];
+                    [Array_Private removeAllObjects];
+                    [Array_AllData removeAllObjects];
+                    [Array_Public addObjectsFromArray:Array_Public1];
+                   [Array_Private addObjectsFromArray:Array_Private1];
+                [Array_AllData addObjectsFromArray:SearchCrickArray_challenge];
+            
+            
+        }
+        else
+            
+        {
+                    FlagSearchBar=@"yes";
+                    //transparancyTuchView.hidden=YES;
+            
+                    [Array_Public removeAllObjects];
+                    [Array_Private removeAllObjects];
+                    [Array_AllData removeAllObjects];
+            
+                    for (NSDictionary *book in SearchCrickArray_challenge)
+                    {
+                        NSString * string=[book objectForKey:@"byname"];
+            
+                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+            
+                        if (r.location !=NSNotFound )
+                        {
+                            searchString=Textfield_Search.text;
+                            [Array_AllData addObject:book];
+            
+                        }
+            
+                    }
+            
+            
+                        for (int i=0; i<Array_AllData.count; i++)
+                        {
+                            if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
+                            {
+                                [Array_Public addObject:[Array_AllData objectAtIndex:i]];
+                            }
+                            else
+                            {
+                                [Array_Private addObject:[Array_AllData objectAtIndex:i]];
+                            }
+                        }
+            
+            cell_PublicNoti.Lable_JsonResult.hidden=YES;
+            [Tableview_Notif reloadData];
+            
+        }
+
+                    
+                    
+                }
+    
+    if([CheckedTabbedButtons isEqualToString:@"Contribution"])
+    {
+        if (Textfield_Search.text.length==0)
+        {
+                    FlagSearchBar=@"no";
+                    searchString=@"";
+                   // transparancyTuchView.hidden=NO;
+                    [Array_IcomingPlg removeAllObjects];
+                    [Array_OutgoingPlg removeAllObjects];
+                    [Array_AllData_contribution removeAllObjects];
+                    [Array_IcomingPlg addObjectsFromArray:Array_IcomingPlg1];
+                    [Array_OutgoingPlg addObjectsFromArray:Array_OutgoingPlg1];
+                    [Array_AllData_contribution addObjectsFromArray:SearchCrickArray_Contribute];
+            
+            
+        }
+        else
+            
+        {
+                    FlagSearchBar=@"yes";
+                  //  transparancyTuchView.hidden=YES;
+            
+                    [Array_IcomingPlg removeAllObjects];
+                    [Array_OutgoingPlg removeAllObjects];
+                    [Array_AllData_contribution removeAllObjects];
+            
+                    for (NSDictionary *book in SearchCrickArray_Contribute)
+                    {
+                        NSString * string=[book objectForKey:@"byname"];
+            
+                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+            
+                        if (r.location !=NSNotFound )
+                        {
+                            searchString=Textfield_Search.text;
+                            [Array_AllData_contribution addObject:book];
+            
+                        }
+            
+                    }
+            
+            
+            
+            for (int i=0; i<Array_AllData_contribution.count; i++)
+            {
+                if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype"]isEqualToString:@"both"])
+                {
+                    [Array_IcomingPlg addObject:[Array_AllData_contribution objectAtIndex:i]];
+                    [Array_OutgoingPlg addObject:[Array_AllData_contribution objectAtIndex:i]];
+                }
+                else
+                {
+                    if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype"]isEqualToString:@"incoming"])
+                    {
+                        [Array_IcomingPlg addObject:[Array_AllData_contribution objectAtIndex:i]];
+                    }
+                    else
+                    {
+                        
+                        [Array_OutgoingPlg addObject:[Array_AllData_contribution objectAtIndex:i]];
+                    }
+                }
+            }
+            
+                    
+                    
+                }
+            
+        }
+    
+    if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
+    {
+        if (Textfield_Search.text.length==0)
+        {
+                    FlagSearchBar=@"no";
+                    searchString=@"";
+                   // transparancyTuchView.hidden=NO;
+            
+            [Array_AllData_Videos removeAllObjects];
+            
+            [Array_AllData_Videos addObjectsFromArray:SearchCrickArray_vedio];
+            
+            
+        }
+        else
+            
+        {
+                    FlagSearchBar=@"yes";
+                  //  transparancyTuchView.hidden=YES;
+            
+            
+                    [Array_AllData_Videos removeAllObjects];
+            
+                    for (NSDictionary *book in SearchCrickArray_vedio)
+                    {
+                        NSString * string=[book objectForKey:@"byname"];
+            
+                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+            
+                        if (r.location !=NSNotFound )
+                        {
+                            searchString=Textfield_Search.text;
+                            [Array_AllData_Videos addObject:book];
+            
+                        }
+            
+                    }
+            
+            
+    }
+
+    
+
+    }
+    [Tableview_Notif reloadData];
+}
+    
 @end

@@ -2253,23 +2253,24 @@ if (section==1)
     
     Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-61,44)];
     
-    if (![[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"yes"] || ![[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"no"])
+    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"no"])
     {
-        [Button_Contribute setTitle:@"CONTRIBUTE" forState:UIControlStateNormal];
-        Button_Contribute.backgroundColor=[UIColor clearColor];
-        
-        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
-                    forControlEvents:UIControlEventTouchUpInside];
-    }
-    else
-    {
-        
-        
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
         
         [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
                     forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        
+        [Button_Contribute setTitle:@"CONTRIBUTE" forState:UIControlStateNormal];
+        Button_Contribute.backgroundColor=[UIColor clearColor];
+        
+        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
+                    forControlEvents:UIControlEventTouchUpInside];
+        
+       
     
     }
     

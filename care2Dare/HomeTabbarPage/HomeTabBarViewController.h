@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeTabBarViewController : UITabBarController
-
+{
+    NSTimer *HomechatTimer;
+}
 @end

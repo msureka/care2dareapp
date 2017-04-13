@@ -10,16 +10,16 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
-
+#import "WatchVediosViewController.h"
 @interface WatchPageViewController ()
 {
     NSMutableArray *Array_Watch,*Array_Watch1;
     NSUserDefaults *defaults;
     NSDictionary *urlplist;
-    NSString *SeachCondCheck,*searchString,*FlagSearchBar;
+    NSString *SeachCondCheck,*searchString,*FlagSearchBar,*Falg_keyboard;
     NSArray *SearchCrickArray;
     UIView *transparancyTuchView;
-    CALayer*  borderBottom_topheder;
+    CALayer*  borderBottom_topheder,*Bottomborder_Cell2;
     
 }
 @end
@@ -39,9 +39,9 @@
     Textfield_Search.hidden=YES;
     SeachCondCheck=@"no";
     Textfield_Search.delegate=self;
-  
+  Falg_keyboard=@"no";
    
-    transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0, view_Topheader.frame.size.height+44, self.view.frame.size.width,self.view.frame.size.height-view_Topheader.frame.size.height-44)];
+    transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0, view_Topheader.frame.size.height, self.view.frame.size.width,self.view.frame.size.height-view_Topheader.frame.size.height)];
     transparancyTuchView.backgroundColor=[UIColor whiteColor];
     [transparancyTuchView setAlpha:0.5];
     [self.view addSubview:transparancyTuchView];
@@ -223,8 +223,24 @@ if ([ResultString isEqualToString:@"nouserid"])
 
             cell_one = (WatchViewTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdv1 forIndexPath:indexPath];
     
+    
+    if (Array_Watch.count-1==indexPath.row)
+    {
+        Bottomborder_Cell2 = [CALayer layer];
+        Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_one.frame.size.height-1, cell_one.frame.size.width, 1);
+        [cell_one.layer addSublayer:Bottomborder_Cell2];
+    }
+    else
+    {
+        Bottomborder_Cell2 = [CALayer layer];
+        Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_one.frame.size.height-1,cell_one.frame.size.width, 1);
+        [cell_one.layer addSublayer:Bottomborder_Cell2];
+    }
+    
     NSDictionary * dic_value=[Array_Watch objectAtIndex:indexPath.row];
-            
+    
             NSURL *url=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
             
             [cell_one.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -424,6 +440,28 @@ if ([ResultString isEqualToString:@"nouserid"])
 return 328;
     
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+
+
+WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+
+
+
+set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:indexPath.row] valueForKey:@"challengeid"]];
+
+set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:indexPath.row]valueForKey:@"useridvideo1"]];
+
+//   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+
+set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:indexPath.row] valueForKey:@"challengetitle"]];
+set.str_image_Data=cell_one.Image_Thumbnail;
+[self.navigationController pushViewController:set animated:YES];
+
+
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -433,6 +471,7 @@ return 328;
 
 -(IBAction)ButtonBack_Action:(id)sender
 {
+      Falg_keyboard=@"no";
     [Textfield_Search resignFirstResponder];
    
     Lable_TitleFriends.hidden=NO;
@@ -447,6 +486,7 @@ return 328;
 }
 -(IBAction)ButtonSearch_Action:(id)sender
 {
+    Falg_keyboard=@"yes";
     [Textfield_Search becomeFirstResponder];
     Lable_TitleFriends.hidden=YES;
     Textfield_Search.hidden=NO;
@@ -458,6 +498,7 @@ return 328;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    Falg_keyboard=@"no";
     [Textfield_Search resignFirstResponder];
     return YES;
 }
@@ -465,17 +506,39 @@ return 328;
 
 
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    FlagSearchBar=@"yes";
-    transparancyTuchView.hidden=NO;
-    
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    //FlagSearchBar=@"yes";
+//    if ([Falg_keyboard isEqualToString:@"yes"])
+//    {
+//        FlagSearchBar=@"yes";
+//        transparancyTuchView.hidden=NO;
+//         [textField becomeFirstResponder];
+//        
+//    }
+//    else
+//    {
+//        transparancyTuchView.hidden=YES;
+//      [textField resignFirstResponder];
+//    }
+//    
+//    
+//}
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    transparancyTuchView.hidden=YES;
-}
+//- (void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    if ([Falg_keyboard isEqualToString:@"yes"])
+//    {
+//       transparancyTuchView.hidden=NO;
+//         [textField becomeFirstResponder];
+//    }
+//    else
+//    {
+//transparancyTuchView.hidden=YES;
+//       [textField resignFirstResponder];
+//    }
+//    
+//}
 
 - (IBAction)SearchEditing_Action:(id)sender
 {
@@ -489,11 +552,12 @@ return 328;
         [Array_Watch removeAllObjects];
         [Array_Watch addObjectsFromArray:SearchCrickArray];
         Button_Back.hidden=NO;
-        
+       // transparancyTuchView.hidden=YES;
     }
     else
         
     {
+        
         FlagSearchBar=@"yes";
         transparancyTuchView.hidden=YES;
         Button_Back.hidden=NO;
@@ -526,11 +590,11 @@ return 328;
 - (void)ViewTap51Tapped:(UITapGestureRecognizer *)recognizer
 {
     [Textfield_Search resignFirstResponder];
-    
-    Lable_TitleFriends.hidden=NO;
-    Textfield_Search.hidden=YES;
-    Button_Search.hidden=NO;
-    Button_Back.hidden=YES;
+    Falg_keyboard=@"no";
+//    Lable_TitleFriends.hidden=NO;
+   Textfield_Search.hidden=NO;
+//    Button_Search.hidden=NO;
+//    Button_Back.hidden=NO;
     Textfield_Search.text=@"";
     transparancyTuchView.hidden=YES;
     [self.view endEditing:YES];

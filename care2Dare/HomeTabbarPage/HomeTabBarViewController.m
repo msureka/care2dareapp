@@ -85,7 +85,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 }
 -(void)communicationServer
 {
-    [self.view endEditing:YES];
+
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -163,22 +163,22 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                                                      
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
                                                      
-                                                     
-                if (![ResultString isEqualToString:@""] && ![ResultString isEqualToString:@"0"] )
-                                                    {
-    item4.badgeValue=ResultString;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatedBudge" object:self userInfo:nil];
+    if (![ResultString isEqualToString:@""] && ![ResultString isEqualToString:@"0"] )
+                    {
+       
+                item4.badgeValue=ResultString;
                 [defaults setObject:ResultString forKey:@"budge"];
+                [defaults synchronize];
+
+                  }
+                    else
+                {
+        [defaults setObject:@"0" forKey:@"budge"];
                     [defaults synchronize];
-[[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatedBudge" object:self userInfo:nil];
-                                                        
-               
-                                                        
-                                                }
-                                            else
-                                                         {
-                            [defaults setObject:@"0" forKey:@"budge"];
-                            item4.badgeValue=nil;
+        item4.badgeValue=nil;
                            
+                                        
                                                          }
                                                      
                                                      
