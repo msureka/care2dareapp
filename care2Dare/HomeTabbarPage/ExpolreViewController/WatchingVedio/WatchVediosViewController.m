@@ -32,7 +32,7 @@
     NSDictionary *urlplist;
     NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio;
     NSInteger indexVedio;
-    
+    CALayer *Bottomborder_Cell2;
     
 //    challengetitle = Sachin;
 //    friendstatus = no;
@@ -555,7 +555,21 @@ else
         cell_Four = [[WatchVediolistTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdv4];
                 }
                 
-               
+                if (Array_VediosData.count-1==indexPath.row)
+                {
+                    Bottomborder_Cell2 = [CALayer layer];
+                    Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
+                    Bottomborder_Cell2.frame = CGRectMake(0, cell_Four.frame.size.height-1, cell_Four.frame.size.width, 1);
+                    [cell_Four.layer addSublayer:Bottomborder_Cell2];
+                }
+                else
+                {
+                    Bottomborder_Cell2 = [CALayer layer];
+                    Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0].CGColor;
+                    Bottomborder_Cell2.frame = CGRectMake(0, cell_Four.frame.size.height-1, cell_Four.frame.size.width, 1);
+                    [cell_Four.layer addSublayer:Bottomborder_Cell2];
+                }
+
                 
             NSDictionary * dic_value=[Array_VediosData objectAtIndex:indexPath.row];
                 
@@ -648,7 +662,7 @@ else
     }
     if(indexPath.section==3)
     {
-        return 125;
+        return 130;
     }
     
     return 0;
@@ -657,6 +671,8 @@ else
 }
 -(void)Button_Back_Action:(UIButton *)sender
 {
+    [cell_one.PlayerView removeFromSuperview];
+    [playerViewController.view removeFromSuperview];
     [player pause];
     player = nil;
     [timer invalidate];
@@ -664,9 +680,9 @@ else
     player = nil;
     [cell_one.PlayerView removeFromSuperview];
     [playerViewController.view removeFromSuperview];
-    
-    
-    
+    [timer invalidate];
+    timer = nil;
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -899,14 +915,14 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     {
         player.muted=NO;
      
-        [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"volume.png"] forState:UIControlStateNormal];
+        [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"High Volume Filled-100.png"] forState:UIControlStateNormal];
       cell_one.Button_VolumeMute.selected=NO;
     }
     else
     {
         player.muted=YES;
         cell_one.Button_VolumeMute.selected=YES;
-    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"mute.png"] forState:UIControlStateNormal];
+    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"Mute Filled-100.png"] forState:UIControlStateNormal];
     }
     
 }
@@ -968,7 +984,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     cell_one.Button_VolumeMute.hidden=NO;
     player.muted=NO;
     
-    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"volume.png"] forState:UIControlStateNormal];
+    [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"High Volume Filled-100.png"] forState:UIControlStateNormal];
     cell_one.Button_VolumeMute.selected=NO;
 
     

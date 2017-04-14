@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.5f);
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
     _progressslider.transform = transform;
  
 }

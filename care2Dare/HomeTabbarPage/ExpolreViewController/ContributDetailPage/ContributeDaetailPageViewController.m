@@ -52,14 +52,14 @@
     UIScrollView * scrollView;
     CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label;
     CGRect scrollFrame;
+     MPMoviePlayerViewController * movieController;
     
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottomSpace;
 @end
 
-static const CGFloat kButtonSpaceShowed = 90.0f;
-static const CGFloat kButtonSpaceHided = 24.0f;
+
 #define kBackgroundColorShowed [UIColor colorWithRed:0.27f green:0.85f blue:0.46f alpha:1.0f];
 #define kBackgroundColorHided [UIColor colorWithRed:0.18f green:0.67f blue:0.84f alpha:1.0f];
 
@@ -341,6 +341,7 @@ static const CGFloat kButtonSpaceHided = 24.0f;
     
     
 }
+
 -(void)UploadinView_Close:(UIButton *)sender
 {
    Label_confirm1.text=@"0 %";
@@ -1147,7 +1148,7 @@ static const CGFloat kButtonSpaceHided = 24.0f;
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
     cameraUI.showsCameraControls = YES;
 //    cameraUI.videoMaximumDuration = 07.0f;
@@ -1601,11 +1602,16 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
 
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
+                [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
                 cell_OneImageVid.image_playButton.hidden=YES;
             }
             else
             {
+                
              cell_OneImageVid.image_playButton.hidden=NO;
+                cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
+    UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
+                [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
             cell_OneImageVid.Image_Backround.image=ProfileImgeData.image;
             
@@ -2169,7 +2175,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     
     if (indexPath.section==0)
     {
-        return 223;
+        return 233;
     }
     if (indexPath.section==1)
     {
@@ -2773,5 +2779,13 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
       set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"title"]];
     set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
+}
+-(void)ImageTap_playButtonAction:(UIGestureRecognizer *)reconizer
+{
+NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"mediaurl"]]];
+    movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVedio];
+[self presentMoviePlayerViewControllerAnimated:movieController];
+[movieController.moviePlayer prepareToPlay];
+[movieController.moviePlayer play];
 }
 @end

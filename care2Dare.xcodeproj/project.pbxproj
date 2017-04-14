@@ -163,6 +163,8 @@
 		9A5727C01E718994006A5F52 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BD1E718994006A5F52 /* playbutton.png */; };
 		9A5727C11E718994006A5F52 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BE1E718994006A5F52 /* playbutton@2x.png */; };
 		9A5727C21E718994006A5F52 /* playbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BF1E718994006A5F52 /* playbutton@3x.png */; };
+		9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */; };
+		9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */; };
 		9A64C8581E711475008115FF /* UIViewController+KeyboardAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C8571E711475008115FF /* UIViewController+KeyboardAnimation.m */; };
 		9A64C85E1E71333B008115FF /* InviteSprintTagUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C85B1E71333B008115FF /* InviteSprintTagUserViewController.m */; };
 		9A64C85F1E71333B008115FF /* InviteSprintUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C85D1E71333B008115FF /* InviteSprintUserTableViewCell.m */; };
@@ -609,6 +611,8 @@
 		9A5727BD1E718994006A5F52 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		9A5727BE1E718994006A5F52 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		9A5727BF1E718994006A5F52 /* playbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@3x.png"; sourceTree = "<group>"; };
+		9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "High Volume Filled-100.png"; sourceTree = "<group>"; };
+		9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mute Filled-100.png"; sourceTree = "<group>"; };
 		9A64C8561E711475008115FF /* UIViewController+KeyboardAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KeyboardAnimation.h"; sourceTree = "<group>"; };
 		9A64C8571E711475008115FF /* UIViewController+KeyboardAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KeyboardAnimation.m"; sourceTree = "<group>"; };
 		9A64C85A1E71333B008115FF /* InviteSprintTagUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteSprintTagUserViewController.h; sourceTree = "<group>"; };
@@ -1300,6 +1304,15 @@
 			path = playbutton;
 			sourceTree = "<group>";
 		};
+		9A62705C1EA0A0B6003C85E4 /* volumemute */ = {
+			isa = PBXGroup;
+			children = (
+				9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */,
+				9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */,
+			);
+			path = volumemute;
+			sourceTree = "<group>";
+		};
 		9A64C8551E711475008115FF /* KeyBoardAnimatn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1683,6 +1696,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9A62705C1EA0A0B6003C85E4 /* volumemute */,
 				9A698B4C1E9E23DE00FB7FB7 /* redcircle */,
 				9A698B411E9E088800FB7FB7 /* downarrow */,
 				9A38F5941E9666BC00EADE7F /* watchvideoimages */,
@@ -2062,6 +2076,7 @@
 				9AA645E11E7C10C300E49B65 /* mypledge@3x.png in Resources */,
 				9AF84F161E8FCB5D0008408E /* blueworld.png in Resources */,
 				9A45BA271E8E310900BAC5E8 /* addfriend1@2x.png in Resources */,
+				9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */,
 				9AED22901E6AE3300004A8D0 /* UrlName.plist in Resources */,
 				9A6E39F21E7AB64800B4AD5B /* topname.png in Resources */,
 				9AED222A1E6A8C6A0004A8D0 /* watch@2x.png in Resources */,
@@ -2141,6 +2156,7 @@
 				9A0606051E6D87B000FF4229 /* profile_privatetext.png in Resources */,
 				9A0605D71E6D820900FF4229 /* PledgeTableViewCell.xib in Resources */,
 				9AED22161E6A8C6A0004A8D0 /* explore1@2x.png in Resources */,
+				9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */,
 				9AA9B5351E700AC700C6EF37 /* blueprivate.png in Resources */,
 				9AED223C1E6A9D900004A8D0 /* exploreworld.png in Resources */,
 				9A45BA2D1E8E310900BAC5E8 /* friendrequested@3x.png in Resources */,

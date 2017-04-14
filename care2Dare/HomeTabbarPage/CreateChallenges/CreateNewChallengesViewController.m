@@ -749,7 +749,7 @@
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
     cameraUI.showsCameraControls = YES;
    // cameraUI.videoMaximumDuration = 07.0f;
