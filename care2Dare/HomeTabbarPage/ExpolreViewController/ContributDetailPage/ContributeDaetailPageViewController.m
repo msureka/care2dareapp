@@ -1646,6 +1646,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 NSURL *urlFirst=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"usersprofilepic"]];
                 
                 NSURL *urlSec=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersprofilepic"]];
+                cell_TwoDetails.image_FristProfile.tag=indexPath.row;
+                cell_TwoDetails.image_FristProfile.userInteractionEnabled=YES;
+            UITapGestureRecognizer *image_FristProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_FirstProfile_ActionDetails:)];
+                [cell_TwoDetails.image_FristProfile addGestureRecognizer:image_FristProfileTapped];
+                
                 
                 [cell_TwoDetails.image_FristProfile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 
@@ -2021,7 +2026,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     {
                         
                         //            [label1 setFrame:CGRectMake(50,0, size.width+34, MAX(size.height, 30.0f)+4)];
-                        [label setFrame:CGRectMake(50,0, size.width+22, MAX(size.height, 30.0f)+8)];
+                        [label setFrame:CGRectMake(50,0, size.width+32, MAX(size.height, 30.0f)+8)];
                         
                         
                     }
@@ -2029,7 +2034,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     else
                     {
                         //            [label1 setFrame:CGRectMake(50,0, self.view.frame.size.width-132, MAX(size.height, 30.0f)+4)];
-                        [label setFrame:CGRectMake(50,0, self.view.frame.size.width-140,MAX(size.height, 30.0f)+8)];
+                        [label setFrame:CGRectMake(50,0, self.view.frame.size.width-130,MAX(size.height, 30.0f)+8)];
                         
                         
                     }
@@ -2747,8 +2752,12 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
      NSLog(@"Useridd11==%@",[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]);
     
     
-    if(![[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]isEqualToString:@"0"])
+    if([[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]isEqualToString:@"0"] ||[[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]])
   {
+      
+  }
+    else
+    {
       ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
       set.userId_prof=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengersuserid"]];
       
@@ -2761,6 +2770,33 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
   }
     
  
+    
+}
+-(void)image_FirstProfile_ActionDetails:(UIGestureRecognizer *)reconizer
+{
+    NSLog(@"Useridd11==%@",[defaults valueForKey:@"userid"]);
+    
+    NSLog(@"Useridd11==%@",[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]);
+    
+    
+    if([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0] valueForKey:@"userid1"]])
+    {
+       
+    }
+    else
+    {
+        ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+        set.userId_prof=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]];
+        
+        set.user_name=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersname"]];
+        
+        set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersprofilepic"]];
+        
+        set.Images_data=cell_TwoDetails.image_SecProfile;
+        [self.navigationController pushViewController:set animated:YES];
+    }
+    
+    
     
 }
 -(void)ImageTapped_profile:(UIGestureRecognizer *)reconizer

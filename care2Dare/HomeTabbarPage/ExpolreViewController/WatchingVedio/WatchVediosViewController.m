@@ -15,6 +15,9 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "UIImageView+WebCache.h"
+#import "SBJsonParser.h"
+#import "Reachability.h"
+#import "ProfilePageDetailsViewController.h"
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -30,7 +33,7 @@
     NSUserDefaults *defaults;
     NSMutableArray * Array_VediosData;
     NSDictionary *urlplist;
-    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio;
+    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1;
     NSInteger indexVedio;
     CALayer *Bottomborder_Cell2;
     
@@ -62,8 +65,14 @@
     
   [Tableview_Explore reloadData];
     [self CommunicationPlayVedio];
+    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
    
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    //[self CommunicationPlayVedio];
+    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
 }
 -(void)CommunicationPlayVedio
 {
@@ -163,7 +172,7 @@ else
                         
             str_days=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"posttime" ]];
                         
-        
+     userId_Prof1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"useridvideo" ]];
                         
         str_friendstatus=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"friendstatus" ]];
                         
@@ -353,29 +362,30 @@ else
                     
                     cell_two = [[WatchVedioDescTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdv2];
                 }
-                if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"]])
+                if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"]]|| [str_friendstatus isEqualToString:@""])
                 {
-                    cell_two.Button_SetValues.enabled=YES;
+                    cell_two.Button_SetValues.hidden=YES;
                 }
                 else
                 {
                 
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"])
+                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"] ||[str_friendstatus isEqualToString:@"no"])
                 {
-                    cell_two.Button_SetValues.enabled=YES;
+                    cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"addfriend.png"] forState:UIControlStateNormal];
+                    [cell_two.Button_SetValues addTarget:self action:@selector(ButtonAction_friendstatus:) forControlEvents:UIControlEventTouchUpInside];
                 }
                
                 
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"yes"])
+                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"yes"]||[str_friendstatus isEqualToString:@"yes"])
                 {
-                    cell_two.Button_SetValues.enabled=NO;
+                       cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"addfriend1.png"] forState:UIControlStateNormal];
                     
                 }
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"waiting"])
+                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"waiting"]||[str_friendstatus isEqualToString:@"waiting"])
                 {
-                    cell_two.Button_SetValues.enabled=NO;
+                       cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"friendrequested.png"] forState:UIControlStateNormal];
                     
                 }
@@ -420,7 +430,9 @@ else
                 
                 
                 
-                
+                cell_two.ImageLeft_LeftProfile.userInteractionEnabled=YES;
+                UITapGestureRecognizer *image_FristProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_FirstProfile_ActionDetails:)];
+                [cell_two.ImageLeft_LeftProfile addGestureRecognizer:image_FristProfileTapped];
                 
                 
                 
@@ -463,82 +475,11 @@ else
                     cell_three = [[WatchVedioShareTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdv3];
                 }
                 
-//                friendstatus = no;
-//                name = "Mohit Sureka";
-//                newstatus = no;
-//                posttime = "50m ago";
-//                profileimage = "https://graph.facebook.com/10154323404982724/picture?type=large";
-//                recorddate = "2017-04-10 09:15:44";
-//                "registration_status" = ACTIVE;
-//                status = PLAY;
-//                thumbnailurl = "http://www.care2dareapp.com/app/recordedmedia/R20170306070111mGtlC20170410090900Z0FR-thumbnail.jpg";
-//                totalviews = "1 views";
-//                useridvideo = 20170306070111mGtl;
-//                videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170306070111mGtlC20170410090900Z0FR.mp4";
+
                
                 cell_three.Label_Reviews.text=[[Array_VediosData objectAtIndex:0]valueForKey:@"totalviews"];
            
-                //        cell_Favorite.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
-                //        cell_Favorite.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
-                //        NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
-                //
-                //
-                //        CGRect textRect = [text boundingRectWithSize:cell_Favorite.Label_Titile.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_Favorite.Label_Titile.font} context:nil];
-                //
-                //        int numberOfLines = textRect.size.height / cell_Favorite.Label_Titile.font.pointSize;;
-                //        if (numberOfLines==1)
-                //        {
-                //            [cell_Favorite.Label_Titile setFrame:CGRectMake(cell_Favorite.Label_Titile.frame.origin.x, cell_Favorite.Label_Titile.frame.origin.y, cell_Favorite.Label_Titile.frame.size.width, cell_Favorite.Label_Titile.frame.size.height/2)];
-                //        }
-                //
-                //
-                //
-                //        NSLog(@"number of lines=%d",numberOfLines);
-                //
-                //        cell_Favorite.Label_Time.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"createtime"]];
-                
-                
-                
-                //        if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
-                //        {
-                //            cell_Favorite.Image_PalyBuutton.hidden=YES;
-                //
-                //            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
-                //
-                //            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
-                //        }
-                //        else
-                //        {
-                //
-                //            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
-                //
-                //            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
-                //            cell_Favorite.Image_PalyBuutton.hidden=NO;
-                //
-                //
-                //        }
-                
-                
-                
-                //        UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
-                //        NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
-                //        NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:[dic_worldexp valueForKey:@"usersname"] attributes: arialDict];
-                //
-                //        UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-SemiBold" size:14.0];
-                //        NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
-                //        NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @" Challenges " attributes:verdanaDict];
-                //        
-                //        
-                //        UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
-                //        NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
-                //        NSMutableAttributedString *cAttrString = [[NSMutableAttributedString alloc]initWithString:[dic_worldexp valueForKey:@"challengerdetails"] attributes:verdanaDict2];
-                //        
-                //        [aAttrString appendAttributedString:vAttrString];
-                //        [aAttrString appendAttributedString:cAttrString];
-                //        
-                //        
-                //        cell_Favorite.Label_Changename.attributedText = aAttrString;
-                
+            
                 return cell_three;
 
             }
@@ -579,12 +520,24 @@ else
                 cell_Four.ImageLeft_LeftProfile.tag=indexPath.row;
                 
                 
+                
+                
             NSURL *urlLef=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl"]];
                 
             [cell_Four.ImageLeft_LeftProfile sd_setImageWithURL:urlLef placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 
              NSURL *urlRight=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
             [cell_Four.ImageRight_RightProfile sd_setImageWithURL:urlRight placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                
+                
+                
+                
+                cell_Four.ImageRight_RightProfile.tag=indexPath.row;
+                cell_Four.ImageRight_RightProfile.userInteractionEnabled=YES;
+                
+                UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
+                [cell_Four.ImageRight_RightProfile addGestureRecognizer:image_SecProfileTapped];
+                
                 
                 
         UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:14.0];
@@ -669,6 +622,113 @@ else
     
   
 }
+-(void)ButtonAction_friendstatus:(UIButton *)sender
+{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid1";
+        NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        NSString *userid2= @"userid2";
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridval1,userid2,str_ChallengeidVal];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"addfriend"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                    Array_VediosData=[[NSMutableArray alloc]init];
+                    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                   Array_VediosData=[objSBJsonParser objectWithData:data];
+                                                     
+                NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                NSLog(@"Array_VediosDataFriendsreq %@",Array_VediosData);
+                                                     
+                NSLog(@"Array_AllData ResultString %@",ResultString);
+          
+                if ([ResultString isEqualToString:@"requested"])
+                    {
+                                                         
+                [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"friendrequested.png"] forState:UIControlStateNormal];
+                                                         
+                                                         
+                        }
+                                                     
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+
 -(void)Button_Back_Action:(UIButton *)sender
 {
     [cell_one.PlayerView removeFromSuperview];
@@ -684,6 +744,9 @@ else
     timer = nil;
 
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [cell_one.PlayerView removeFromSuperview];
+    [playerViewController.view removeFromSuperview];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -713,9 +776,11 @@ else
         if (item.playbackBufferEmpty)
         {
             cell_one.indicator_loading.hidden=NO;
+            [cell_one.indicator_loading startAnimating];
         }
     else
     {
+        [cell_one.indicator_loading stopAnimating];
      cell_one.indicator_loading.hidden=YES;
     }
     
@@ -935,6 +1000,8 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 -(void)PlayVediosAuto
 {
      [playerViewController.view removeFromSuperview];
+    cell_one.indicator_loading.hidden=NO;
+    [cell_one.indicator_loading startAnimating];
     cell_one.image_Thumbnail.hidden=YES;
     // cell_one.indicator_loading.hidden=YES;
     cell_one.progressslider.hidden=NO;
@@ -954,7 +1021,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     playerViewController.showsPlaybackControls = NO;
     
     [cell_one.PlayerView addSubview:playerViewController.view];
-    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
+    
     playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
     [player play];
     
@@ -989,4 +1056,114 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 
     
 }
+
+-(void)image_FirstProfile_ActionDetails:(UIGestureRecognizer *)reconizer
+{
+    NSLog(@"Useridd11==%@",[defaults valueForKey:@"userid"]);
+    
+    NSLog(@"Useridd11==%@",[[Array_VediosData objectAtIndex:0] valueForKey:@"challengersuserid"]);
+    
+    
+    if([[defaults valueForKey:@"userid"] isEqualToString:userId_Prof1])
+    {
+     
+       
+        
+        
+
+    }
+    else
+    {
+        ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+        set.userId_prof=userId_Prof1;
+        
+        set.user_name=str_name;
+        
+        set.user_imageUrl=str_profileurl;
+        
+        set.Images_data=cell_two.ImageLeft_LeftProfile;
+        
+        
+        
+        [player pause];
+        
+        [timer invalidate];
+        timer = nil;
+        
+        [player pause];
+        
+        
+        
+        [timer invalidate];
+        timer = nil;
+
+        
+        
+        [self.navigationController pushViewController:set animated:YES];
+        
+    }
+    
+    
+    
+}
+
+-(void)image_SecProfile_ActionDetails:(UIGestureRecognizer *)reconizer
+{
+    NSLog(@"Useridd11==%@",[defaults valueForKey:@"userid"]);
+    
+    NSLog(@"Useridd11==%@",[[Array_VediosData objectAtIndex:0] valueForKey:@"challengersuserid"]);
+    UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
+    UIImageView * images=(UIImageView *)rcz.view;
+    
+    if([[[Array_VediosData objectAtIndex:(long)images.tag] valueForKey:@"useridvideo"]isEqualToString:@"0"] ||[[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:(long)images.tag] valueForKey:@"useridvideo"]])
+    {
+        
+        
+        //        friendstatus = "";
+        //        name = "Er Sachin Mokashi";
+        //        newstatus = no;
+        //        posttime = "1d ago";
+        //        profileimage = "https://graph.facebook.com/1280357812049167/picture?type=large";
+        //        recorddate = "2017-04-13 05:04:30";
+        //        "registration_status" = ACTIVE;
+        //        status = LIST;
+        //        thumbnailurl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ-thumbnail.jpg";
+        //        totalviews = "";
+        //        useridvideo = 20170307091520wFL3;
+        //        videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ.mp4";
+    }
+    else
+    {
+        ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+        set.userId_prof=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)images.tag]valueForKey:@"useridvideo"]];
+        
+        set.user_name=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)images.tag]valueForKey:@"name"]];
+        
+        set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)images.tag]valueForKey:@"profileimage"]];
+        
+        set.Images_data=cell_Four.ImageRight_RightProfile;
+        
+        
+     
+        [player pause];
+     
+        [timer invalidate];
+        timer = nil;
+        
+     
+        [timer invalidate];
+        timer = nil;
+       
+           [player pause];
+   
+
+        
+        
+        [self.navigationController pushViewController:set animated:YES];
+    }
+    
+    
+    
+}
+
 @end

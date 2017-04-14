@@ -11,6 +11,7 @@
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
 #import "WatchVediosViewController.h"
+#import "ProfilePageDetailsViewController.h"
 @interface WatchPageViewController ()
 {
     NSMutableArray *Array_Watch,*Array_Watch1;
@@ -246,7 +247,10 @@ if ([ResultString isEqualToString:@"nouserid"])
             
             [cell_one.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
     
-   
+    cell_one.Image_Profile.userInteractionEnabled=YES;
+    cell_one.Image_Profile.tag=indexPath.row;
+    UITapGestureRecognizer * ImageProfile_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageProfileView_Tapped:)];
+    [  cell_one.Image_Profile addGestureRecognizer:ImageProfile_Tapped];
     
     NSURL *url1=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl1"]];
     
@@ -256,6 +260,8 @@ if ([ResultString isEqualToString:@"nouserid"])
     UITapGestureRecognizer * ImageThumbnail_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped:)];
     [cell_one.Image_Thumbnail addGestureRecognizer:ImageThumbnail_Tapped];
     
+    cell_one.Button_playbutton.tag=indexPath.row;
+    [cell_one.Button_playbutton addTarget:self action:@selector(Button_PlayVedioNextPage:) forControlEvents:UIControlEventTouchUpInside];
     cell_one.Label_title.text=[dic_value valueForKey:@"challengetitle"];
     NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
     if (countVedio >=5)
@@ -580,6 +586,27 @@ transparancyTuchView.hidden=YES;
     
     [Tableview_watch reloadData];
 }
+- (void)Button_PlayVedioNextPage:(UIButton *)senderb
+{
+    
+    UIButton *button = (UIButton *)senderb;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+    
+    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+    
+    
+    
+    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
+    
+    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
+    
+    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    
+    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+    set.str_image_Data=cell_one.Image_Thumbnail;
+    [self.navigationController pushViewController:set animated:YES];
+}
 - (void)ImageThumbnailVideo_Tapped:(UITapGestureRecognizer *)sender1
 {
     UIGestureRecognizer *rec = (UIGestureRecognizer*)sender1;
@@ -682,6 +709,8 @@ transparancyTuchView.hidden=YES;
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo5"]];
     
+    
+    
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
@@ -700,5 +729,31 @@ transparancyTuchView.hidden=YES;
     Textfield_Search.text=@"";
     transparancyTuchView.hidden=YES;
     [self.view endEditing:YES];
+}
+-(void)ImageProfileView_Tapped:(UIGestureRecognizer *)reconizer
+{
+    UIGestureRecognizer * rec=(UIGestureRecognizer *)reconizer;
+    UIImageView * imageV=(UIImageView *)rec.view;
+    NSLog(@"Useridd11==%@",[defaults valueForKey:@"userid"]);
+    
+    NSLog(@"Useridd11==%@",[[Array_Watch objectAtIndex:(long)imageV.tag] valueForKey:@"useridvideo1"]);
+    
+    
+    if([[[Array_Watch objectAtIndex:(long)imageV.tag] valueForKey:@"useridvideo1"]isEqualToString:@"0"] || [[[Array_Watch objectAtIndex:(long)imageV.tag] valueForKey:@"useridvideo1"]isEqualToString:[defaults valueForKey:@"userid"]])
+    {
+    }
+    else
+    {
+        ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+        set.userId_prof=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageV.tag]valueForKey:@"useridvideo1"]];
+        
+        set.user_name=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageV.tag]valueForKey:@"name"]];
+        
+        set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageV.tag]valueForKey:@"profileimage"]];
+        
+        set.Images_data=cell_one.Image_Profile;
+        [self.navigationController pushViewController:set animated:YES];
+    }
+  
 }
 @end

@@ -15,6 +15,8 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "CreateChallengesViewController.h"
+#import "ContributeDaetailPageViewController.h"
+#import "AcceptContributeDetailViewController.h"
 
 @interface ProfilePageDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -571,7 +573,7 @@ style:UIAlertActionStyleDefault
                 if (cell_Public == nil)
                 {
                     
-                    cell_Public = [[PublicTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId3];
+                    cell_Public = [[PublicTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId2];
                     
                     
                 }
@@ -586,8 +588,16 @@ style:UIAlertActionStyleDefault
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
                 cell_Public.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+            if ([[dic_worldexp valueForKey:@"accepted"]isEqualToString:@"yes"])
+            {
+                cell_Public.Image_NewFrnd.hidden=YES;
                 
-                
+            }
+            else
+            {
+                cell_Public.Image_NewFrnd.hidden=NO;
+            }
+            
                 CGRect textRect = [text boundingRectWithSize:cell_Public.Label_Titile.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_Public.Label_Titile.font} context:nil];
                 
                 int numberOfLines = textRect.size.height / cell_Public.Label_Titile.font.pointSize;;
@@ -774,7 +784,48 @@ style:UIAlertActionStyleDefault
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section==1)
+    {
+        ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+        
+        AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
+        NSLog(@"Data selected array1=%@",Array_Profile);
+        NSLog(@"Data selected array2=%@",Array_Public);
+        
+        NSDictionary *  didselectDic;
+        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+       
+            didselectDic=[Array_Public  objectAtIndex:indexPath.row];
+            cell_Public = [_Tableview_Profile cellForRowAtIndexPath:indexPath];
+            
+            [Array_new addObject:didselectDic];
+            if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+            {
+                set.ProfileImgeData =cell_Public.Image_Profile;
+                set.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set animated:YES];
+                
+            }
+            else
+            {
+                set2.ProfileImgeData =cell_Public.Image_Profile;
+                set2.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set2 animated:YES];
+            }
+            
+            
+        
+        
+        NSLog(@"Array_new11=%@",Array_new);;
+        
+        
+        
+        
+        NSLog(@"Array_new22=%@",Array_new);;
+        NSLog(@"indexPathrow=%ld",(long)indexPath.row);;
+        
+        
+    }
   
 }
 
