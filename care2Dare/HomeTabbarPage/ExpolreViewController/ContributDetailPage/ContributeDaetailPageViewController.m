@@ -1148,7 +1148,7 @@
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
     
     cameraUI.showsCameraControls = YES;
 //    cameraUI.videoMaximumDuration = 07.0f;
@@ -1159,7 +1159,7 @@
    // cameraUI.view.frame=CGRectMake(5, 5, 310, 280);
   //  [self.view addSubview:cameraUI.view];
     [controller presentModalViewController:cameraUI animated: YES];
-        transperentViewIndicator.hidden=NO;
+    
     return YES;
 }
 
@@ -1242,6 +1242,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         if (encodedImageThumb !=nil)
         {
+             transperentViewIndicator.hidden=NO;
              [self Communication_RecordVid];
         }
         

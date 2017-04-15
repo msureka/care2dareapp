@@ -20,7 +20,7 @@
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
     NSString * ResultString_Challenges,*ResultString_Contribute,*ResultString_video;
-    NSString *FlagSearchBar,*searchString;
+    NSString *FlagSearchBar,*searchString,*flag_challenge,*flag_Contribute,*flag_Vedio;
     
     NSArray *SearchCrickArray_challenge,*SearchCrickArray_Contribute,*SearchCrickArray_vedio,*Array_Public1,*Array_Private1,*Array_IcomingPlg1,*Array_OutgoingPlg1;
 }
@@ -49,7 +49,9 @@
     
     Array_IcomingPlg1=[[NSArray alloc]init];
     Array_OutgoingPlg1=[[NSArray alloc]init];
-
+flag_challenge=@"no";
+    flag_Contribute=@"no";
+    flag_Vedio=@"no";
     
     
     [self ClienserverCommAll];
@@ -190,6 +192,10 @@
                     Array_Private1=[Array_Private mutableCopy];
                 
                        cell_PublicNoti.Lable_JsonResult.hidden=YES;
+                            
+                            flag_challenge=@"yes";
+                          
+                            
                     [Tableview_Notif reloadData];
                                                          
                     }
@@ -202,8 +208,11 @@
                                                      
                                                      
                                                      
-               if ([ResultString_Challenges isEqualToString:@"nonotification"])
+               if ([ResultString_Challenges isEqualToString:@"nonotifications"])
                                 {
+                                    
+                                    flag_challenge=@"yes";
+                                    
                        [Tableview_Notif reloadData];
                   cell_PublicNoti.Lable_JsonResult.hidden=NO;
                      
@@ -350,6 +359,10 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
         Array_IcomingPlg1=[Array_IcomingPlg mutableCopy];
         Array_OutgoingPlg1=[Array_OutgoingPlg mutableCopy];
                         
+                      
+                        flag_Contribute=@"yes";
+                       
+                        
         [Tableview_Notif reloadData];
                                                          
                                 }
@@ -362,10 +375,11 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                                                      
                                                      
                                                      
-                    if ([ResultString_Contribute isEqualToString:@"nonotification"])
+                    if ([ResultString_Contribute isEqualToString:@"nonotifications"])
                         {
-                                                         
+                            flag_Contribute=@"yes";
                             [Tableview_Notif reloadData];
+                            
                                                          
                             }
                                                      
@@ -483,6 +497,9 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                             {
                                                          
              SearchCrickArray_vedio=[Array_AllData_Videos mutableCopy];
+                                
+                          
+                                flag_Vedio=@"yes";
             [Tableview_Notif reloadData];
                                                          
                 }
@@ -494,9 +511,9 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                                                      
                                                     
                                                      
-        if ([ResultString_video isEqualToString:@"nonotification"])
+        if ([ResultString_video isEqualToString:@"nonotifications"])
             {
-                                                         
+         flag_Vedio=@"yes";
    [Tableview_Notif reloadData];
                                                          
                                                          
@@ -603,10 +620,18 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
         
         if (Array_AllData.count==0)
         {
+           
             if(section==0)
             {
-                
-            return 1;
+                if ([flag_challenge isEqualToString:@"no"])
+                {
+                     return 0;
+                }
+                else
+                {
+                     return 1;
+                }
+           
 
             }
             if(section==1)
@@ -644,7 +669,15 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
             if(section==0)
             {
                 
-                return 1;
+                if ([flag_Contribute isEqualToString:@"no"])
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
                 
             }
             if(section==1)
@@ -678,7 +711,15 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
     {
         if (Array_AllData_Videos.count==0)
         {
-            return 1;
+            if ([flag_Vedio isEqualToString:@"no"])
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+
         }
         else
         {
@@ -729,8 +770,8 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                 Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, cell_PublicNoti.frame.size.width, 1);
                 [cell_PublicNoti.layer addSublayer:Bottomborder_Cell2];
             }
-            
-            if ([ResultString_Challenges isEqualToString:@"nonotification"] || Array_Public.count==0)
+           
+            if ([ResultString_Challenges isEqualToString:@"nonotifications"] || Array_Public.count==0)
             {
 
                 cell_PublicNoti.Lable_JsonResult.hidden=NO;
@@ -1093,9 +1134,9 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 [cell_PlegeIncoNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
+          
             
-            
-            if ([ResultString_Contribute isEqualToString:@"nonotification"] || Array_IcomingPlg.count==0)
+            if ([ResultString_Contribute isEqualToString:@"nonotifications"] || Array_IcomingPlg.count==0)
             {
                 
                 cell_PlegeIncoNoti.Lable_JsonResult.hidden=NO;
@@ -1339,7 +1380,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, cell_VedioNoti.frame.size.width, 1);
         [cell_VedioNoti.layer addSublayer:Bottomborder_Cell2];
     }
-    if ([ResultString_video isEqualToString:@"nonotification"] || Array_AllData_Videos.count==0)
+    if ([ResultString_video isEqualToString:@"nonotifications"] || Array_AllData_Videos.count==0)
     {
         
         cell_VedioNoti.Lable_JsonResult.hidden=NO;
@@ -1666,7 +1707,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 {
     
     CheckedTabbedButtons=@"Challenges";
-   
+   Textfield_Search.text=@"";
     searchString=@"";
     [Button_Challenges setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1693,7 +1734,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 -(IBAction)ButtonContribution_Action:(id)sender
 {
         CheckedTabbedButtons=@"Contribution";
-    
+     Textfield_Search.text=@"";
  searchString=@"";
     [Button_Contribution setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1722,6 +1763,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     
   CheckedTabbedButtons=@"Vedio";
     searchString=@"";
+     Textfield_Search.text=@"";
     [Button_Videos setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];

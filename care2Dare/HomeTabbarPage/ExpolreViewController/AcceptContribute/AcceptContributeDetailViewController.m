@@ -15,7 +15,7 @@
 #import "Base64.h"
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
-
+#import "ProfilePageDetailsViewController.h"
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -113,6 +113,7 @@
 
 -(void)Image_TotalLikes_Action:(UIGestureRecognizer *)reconizer
 {
+    
     [self ButtonTotalPoints_Action:nil];
 }
 
@@ -121,12 +122,17 @@
 
 -(IBAction)ButtonTotalPoints_Action:(id)sender
 {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:@"If you choose to accept this challenge, tap on Accept. You will need to record your video before the time expires." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
     
     
-    RaisedContributeViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"RaisedContributeViewController"];
-    set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengeid"]];
-    set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"backamount"]];
-    [self.navigationController pushViewController:set animated:YES];
+//    RaisedContributeViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"RaisedContributeViewController"];
+//    set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengeid"]];
+//    set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"backamount"]];
+  //  [self.navigationController pushViewController:set animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -226,6 +232,12 @@
             cell_TwoDetails.Label_AddmoreChallenges.attributedText=attString;
 
                 [cell_TwoDetails.image_Profile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            
+            
+            cell_TwoDetails.image_Profile.userInteractionEnabled=YES;
+            UITapGestureRecognizer *FlagTapped1 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ProfileTapped_Action:)];
+            [cell_TwoDetails.image_Profile addGestureRecognizer:FlagTapped1];
+
             
             
     cell_TwoDetails.label_DescTitle.text=[[AllArrayData objectAtIndex:0] valueForKey:@"title"];
@@ -591,6 +603,20 @@
 {
 //    transparancyTuchView.hidden=YES;
 //    [self.view endEditing:YES];
+}
+- (void)ProfileTapped_Action:(UITapGestureRecognizer *)recognizer
+{
+    ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+    set.userId_prof=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]];
+    
+    set.user_name=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersname"]];
+    
+    set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersprofilepic"]];
+    
+    set.Images_data=cell_TwoDetails.image_Profile;
+    [self.navigationController pushViewController:set animated:YES];
+  
+    
 }
 
 

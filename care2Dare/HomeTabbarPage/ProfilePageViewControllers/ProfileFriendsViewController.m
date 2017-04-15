@@ -43,12 +43,14 @@
     [view_Topheader.layer addSublayer:borderBottom_topheder];
     Tableview_Friends.hidden=YES;
     
-     Label_result=[[UILabel alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,40)];
+     Label_result=[[UILabel alloc]initWithFrame:CGRectMake(20,0, self.view.frame.size.width-40,60)];
     Label_result.backgroundColor=[UIColor clearColor];
     Label_result.textAlignment=NSTextAlignmentCenter;
     Label_result.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:18.0f];
     Label_result.center=self.view.center;
-    Label_result.text=@"No friends availabel.";
+    Label_result.text=@"Your complete friend list and friend requests will be shown here.";
+    Label_result.numberOfLines=2.0f;
+    Label_result.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     [self.view addSubview:Label_result];
     Label_result.hidden=YES;
     

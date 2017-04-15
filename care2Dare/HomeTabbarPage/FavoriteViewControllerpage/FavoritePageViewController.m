@@ -19,6 +19,7 @@
     NSMutableArray * Array_Plaeges,*Array_Faourite;
     NSDictionary *urlplist;
     NSUserDefaults * defaults;
+    NSURLSessionDataTask *dataTaskPleg,*dataTaskFav;
 }
 @end
 
@@ -73,7 +74,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
               forControlEvents:UIControlEventValueChanged];
 
     [self ClienserverComm_Pledges];
-    [self ClienserverComm_Favourite];
+   // [self ClienserverComm_Favourite];
     
 
 }
@@ -163,7 +164,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
         
         
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        dataTaskPleg =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
                                              
                                              if(data)
@@ -210,14 +211,15 @@ self.refreshControl.tintColor = [UIColor blackColor];
                                                          
                                                          
                                                      }
-                                                     if (Array_Plaeges.count !=0)
-                                                     {
-                                                         Label_JsonResult.hidden=YES;
-                                                         [Tableview_Favorites reloadData];
+                        if (Array_Plaeges.count !=0)
+                            {
+                        Label_JsonResult.hidden=YES;
+                        [Tableview_Favorites reloadData];
                                                      }
                                                      else
                                                      {
-                                                         Label_JsonResult.hidden=NO;
+            Label_JsonResult.text=@"All the challenges in which you have contributed will be shown here.";
+                        Label_JsonResult.hidden=NO;
                                                      }
                                                      
                                                      
@@ -239,7 +241,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
                                              
                                              
                                          }];
-        [dataTask resume];
+        [dataTaskPleg resume];
     }
     
 }
@@ -302,7 +304,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
         
         
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        dataTaskFav =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
                                              if(data)
                                              {
@@ -348,10 +350,17 @@ self.refreshControl.tintColor = [UIColor blackColor];
                                                          
                                                          
                                                      }
-                                                     if (Array_Faourite.count !=0)
-                                                     {
-                                                         [Tableview_Favorites reloadData];
-                                                     }
+                            if (Array_Faourite.count !=0)
+                                    {
+                                        Label_JsonResult.hidden=YES;
+                        [Tableview_Favorites reloadData];
+                        }
+                                    else
+                            {
+        Label_JsonResult.text=@"All the challenges which you tag as favourite will be shown here.";
+                        Label_JsonResult.hidden=NO;
+                    
+                            }
                                                      
                                                      
                                                  }
@@ -372,7 +381,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
                                              
                                              
                                          }];
-        [dataTask resume];
+        [dataTaskFav resume];
     }
     
 }
@@ -402,8 +411,10 @@ self.refreshControl.tintColor = [UIColor blackColor];
 }
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
+     Label_JsonResult.hidden=YES;
+    [dataTaskFav cancel];
     cellChecking=@"Pledges";
-    Label_JsonResult.hidden=YES;
+   
     view_ExpPledges.clipsToBounds=YES;
     view_ExpPledges.clipsToBounds=YES;
    
@@ -435,7 +446,9 @@ self.refreshControl.tintColor = [UIColor blackColor];
 }
 - (void)ViewTapTapped_Expfriend:(UITapGestureRecognizer *)recognizer
 {
+    
      Label_JsonResult.hidden=YES;
+    [dataTaskPleg cancel];
     cellChecking=@"Favorites";
     view_ExpPledges.clipsToBounds=YES;
    

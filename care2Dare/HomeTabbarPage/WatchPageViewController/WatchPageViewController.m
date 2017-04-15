@@ -240,7 +240,7 @@ if ([ResultString isEqualToString:@"nouserid"])
         Bottomborder_Cell2.frame = CGRectMake(0, cell_one.frame.size.height-1,cell_one.frame.size.width, 1);
         [cell_one.layer addSublayer:Bottomborder_Cell2];
     }
-    
+      cell_one.Image_Thumbnail.tag=indexPath.row;
     NSDictionary * dic_value=[Array_Watch objectAtIndex:indexPath.row];
     
             NSURL *url=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
@@ -254,8 +254,9 @@ if ([ResultString isEqualToString:@"nouserid"])
     
     NSURL *url1=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl1"]];
     
+    cell_one.Image_Thumbnail.userInteractionEnabled=YES;
     [cell_one.Image_Thumbnail sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
-    cell_one.Image_Thumbnail.tag=indexPath.row;
+  
     cell_one.Image_Thumbnail.userInteractionEnabled=YES;
     UITapGestureRecognizer * ImageThumbnail_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped:)];
     [cell_one.Image_Thumbnail addGestureRecognizer:ImageThumbnail_Tapped];
@@ -394,6 +395,12 @@ if ([ResultString isEqualToString:@"nouserid"])
         cell_one.Image_NewFrndThumbnail.hidden=NO;
     }
 
+    cell_one.Image_ThumbnailVedio1.hidden=NO;
+    cell_one.Image_ThumbnailVedio2.hidden=NO;
+    cell_one.Image_ThumbnailVedio3.hidden=NO;
+    cell_one.Image_ThumbnailVedio4.hidden=NO;
+
+    
     UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:14.0];
     NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
     NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"Posted by " attributes: arialDict];
@@ -461,8 +468,17 @@ if ([ResultString isEqualToString:@"nouserid"])
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-return 350;
+     NSDictionary * dic_value=[Array_Watch objectAtIndex:indexPath.row];
+      NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
+    if (countVedio==1)
+    {
+        return 350-cell_one.Image_ThumbnailVedio1.frame.size.height;
+    }
+    else
+    {
+        return 350;
+    }
+return 0;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -613,6 +629,9 @@ transparancyTuchView.hidden=YES;
     UIImageView *imageView = (UIImageView *)rec.view;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
+   // cell_one.Image_Thumbnail.tag=(long)imageView.tag;
+    
+
     
     WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
@@ -625,7 +644,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
 
 }
@@ -648,7 +667,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
     
 }
@@ -670,7 +689,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
 }
 - (void)ImageThumbnailVideo_Tapped3:(UITapGestureRecognizer *)sender13
@@ -691,7 +710,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
 }
 - (void)ImageThumbnailVideo_Tapped4:(UITapGestureRecognizer *)sender14
@@ -714,7 +733,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
 }
 
@@ -722,10 +741,10 @@ transparancyTuchView.hidden=YES;
 {
     [Textfield_Search resignFirstResponder];
    
-    //Lable_TitleFriends.hidden=NO;
-   Textfield_Search.hidden=NO;
+    Lable_TitleFriends.hidden=NO;
+   Textfield_Search.hidden=YES;
    Button_Search.hidden=NO;
-   Button_Back.hidden=NO;
+   Button_Back.hidden=YES;
     Textfield_Search.text=@"";
     transparancyTuchView.hidden=YES;
     [self.view endEditing:YES];

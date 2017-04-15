@@ -165,8 +165,7 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action)
+        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                    {
                                        exit(0);
                                    }];
@@ -187,9 +186,6 @@
         
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
-        
-        
-        
         
         NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
         
@@ -222,93 +218,87 @@
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     Array_AllData=[[NSMutableArray alloc]init];
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                                                     Array_AllData=[objSBJsonParser objectWithData:data];
+        Array_AllData=[[NSMutableArray alloc]init];
+        SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+        Array_AllData=[objSBJsonParser objectWithData:data];
                                                      
-                                
+      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      
-                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                     //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+ //Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
                                                      
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      
-                                                     NSLog(@"Array_AllData %@",Array_AllData);
+    ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
-                                                     
-                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+    NSLog(@"Array_AllData %@",Array_AllData);
                                                      
                                                      
+    NSLog(@"Array_AllData ResultString %@",ResultString);
                                                      
-                                                     if (Array_AllData.count !=0)
-                                                     {
-                                                         view_CreateChallenges.hidden=YES;
-                                                         Array_Public=[[NSMutableArray alloc]init];
-                                                         Array_Private=[[NSMutableArray alloc]init];
-                                                         for (int i=0; i<Array_AllData.count; i++)
-                                                         {
-                                                             if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
-                                                             {
-                                                                 [Array_Public addObject:[Array_AllData objectAtIndex:i]];
-                                                             }
-                                                             else
-                                                             {
-                                                                 [Array_Private addObject:[Array_AllData objectAtIndex:i]];
-                                                             }
-                                                         }
-                                            if (Array_Private.count!=0 && Array_Public.count==0)
-                                                {
-                                                [self ViewTapTapped_Private:nil];
+                                                     
+        if (Array_AllData.count !=0)
+         {
+        
+             view_CreateChallenges.hidden=YES;
+             Array_Public=[[NSMutableArray alloc]init];
+             Array_Private=[[NSMutableArray alloc]init];
+             
+         for (int i=0; i<Array_AllData.count; i++)
+             
+         {
+        if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
+            {
+            [Array_Public addObject:[Array_AllData objectAtIndex:i]];
+                
+            }
+            else
+            {
+            [Array_Private addObject:[Array_AllData objectAtIndex:i]];
+                     }
+                    }
+             if (Array_Private.count!=0 && Array_Public.count==0)
+               {
+                  [self ViewTapTapped_Private:nil];
                                                     
                                                 }
+                   [_Tableview_Profile reloadData];
                                                          
-                                                         [_Tableview_Profile reloadData];
-                                                         
-                                                     }
-                                                     else
-                                                     {
-                                                         view_CreateChallenges.hidden=NO;
-                                                     }
+                                    }
+                                   else
+                                   {
+                   view_CreateChallenges.hidden=NO;
+                                       
+                                    }
                                                      
 
-                                                     
-                                                     
-                                                     if ([ResultString isEqualToString:@"nouserid"])
-                                                     {
-                                                         view_CreateChallenges.hidden=YES;
-                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                    if ([ResultString isEqualToString:@"nouserid"])
+                       {
+                 view_CreateChallenges.hidden=YES;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                          
-                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                            style:UIAlertActionStyleDefault
-                                                                                                          handler:nil];
-                                                         [alertController addAction:actionOk];
-                                                         [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                                                         
-                                                     }
-                                                     
-                                                     
-                  
-                                                     
-                                                 }
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+            style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+                           
+                       
+                       }
+                         }
                                                  
-                                                 else
-                                                 {
-                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                      else
+                      {
+                NSLog(@" error login1 ---%ld",(long)statusCode);
                                                      
-                                                 }
+                        }
+                                        
+                        }
+                    else if(error)
+                        {
                                                  
-                                                 
-                                             }
-                                             else if(error)
-                                             {
-                                                 
-                                                 NSLog(@"error login2.......%@",error.description);
-                                             }
-                                             
-                                             
-                                         }];
+            NSLog(@"error login2.......%@",error.description);
+            
+                        }
+                }];
         [dataTask resume];
     }
     

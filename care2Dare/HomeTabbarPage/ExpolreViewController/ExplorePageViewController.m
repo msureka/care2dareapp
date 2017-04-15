@@ -22,6 +22,7 @@
     NSMutableArray * Array_WorldExp,* Array_FriendExp;;
     NSArray *SearchCrickArray_worldExp,*SearchCrickArray_FriendExp;
     CALayer *bootomBorder_Cell;
+    NSURLSessionDataTask *dataTaskExp,*dataTaskWld;
 }
 @end
 
@@ -99,7 +100,7 @@
     [Tableview_Explore addSubview:self.refreshControl];
     
     [self ClienserverComm_worldExp];
-    [self ClienserverComm_FriendExp];
+   // [self ClienserverComm_FriendExp];
     
 }
 
@@ -202,7 +203,7 @@
         
         
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        dataTaskExp =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
                                              if(data)
                                              {
@@ -249,9 +250,14 @@
                                                          
                                                          
                                                      }
-                                                     if (Array_WorldExp.count !=0)
+                                        if (Array_FriendExp.count !=0)
                                                      {
-                                                         [Tableview_Explore reloadData];
+                                Label_JsonResult.hidden=YES;           [Tableview_Explore reloadData];
+                                                     }
+                                                     else
+                                                     {
+                        Label_JsonResult.hidden=NO;
+                                    Label_JsonResult.text=@"All the active challenges of your friends will be shown here.";
                                                      }
                                                      
                                                      
@@ -273,7 +279,7 @@
                                              
                                              
                                          }];
-        [dataTask resume];
+        [dataTaskExp resume];
     }
     
 }
@@ -336,7 +342,7 @@
         
         
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        dataTaskWld =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
                                              if(data)
                                              {
@@ -383,14 +389,16 @@
                                                          
                                                          
                                                      }
-                                                     if (Array_WorldExp.count !=0)
-                                                     {
-                                                             Label_JsonResult.hidden=YES;
-                                                         [Tableview_Explore reloadData];
-                                                     }
-                                                     else
-                                                     {
-                                                         Label_JsonResult.hidden=NO;
+                        if (Array_WorldExp.count !=0)
+                    {
+                Label_JsonResult.hidden=YES;
+                [Tableview_Explore reloadData];
+                            }
+                        else
+                            {
+                                
+            Label_JsonResult.text=@"All the active challenges worldwide will be shown here.";
+                Label_JsonResult.hidden=NO;
                                                      }
                                                      
                                                      
@@ -412,7 +420,7 @@
                                              
                                              
                                          }];
-        [dataTask resume];
+        [dataTaskWld resume];
     }
    
 }
@@ -441,6 +449,7 @@
 
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
+    [dataTaskExp cancel];
  cellChecking=@"WorldExp";
      Label_JsonResult.hidden=YES;
     view_ExpWorld.clipsToBounds=YES;
@@ -476,6 +485,7 @@
 - (void)ViewTapTapped_Expfriend:(UITapGestureRecognizer *)recognizer
 {
     cellChecking=@"FriendExp";
+    [dataTaskWld cancel];
     view_ExpWorld.clipsToBounds=YES;
     image_ExpWorld.clipsToBounds=YES;
      Label_JsonResult.hidden=YES;

@@ -26,7 +26,7 @@
     UIView *Button_Public,*Button_Private;
     UIImageView *Image_ButtinPublic,*Image_ButtonPrivate;
     NSUserDefaults * defaults;
-    NSMutableArray * Array_Public,*Array_Profile;
+    NSMutableArray * Array_Public,*Array_Profile,*Array_Public1;
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
     UIButton *Button_Dareyou;
@@ -313,16 +313,16 @@ style:UIAlertActionStyleDefault
                                                  if(statusCode == 200)
                                                  {
                                                      
-        Array_Public=[[NSMutableArray alloc]init];
+        Array_Public1=[[NSMutableArray alloc]init];
         SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-        Array_Public=[objSBJsonParser objectWithData:data];
+        Array_Public1=[objSBJsonParser objectWithData:data];
                                                      
             NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
   ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
-                NSLog(@"Array_AllData %@",Array_Public);
+                NSLog(@"Array_AllData %@",Array_Public1);
                                                      
                                                      
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
@@ -342,19 +342,19 @@ style:UIAlertActionStyleDefault
                                                      
   if (Array_Public.count !=0)
      {
-//    Array_Public=[[NSMutableArray alloc]init];
-//    Array_Private=[[NSMutableArray alloc]init];
-//    for (int i=0; i<Array_AllData.count; i++)
-//                {
-//            if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
-//                    {
-//    [Array_Public addObject:[Array_AllData objectAtIndex:i]];
-//                        }
+    Array_Public=[[NSMutableArray alloc]init];
+
+for (int i=0; i<Array_Public1.count; i++)
+              {
+if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"no"])
+                    {
+    [Array_Public addObject:[Array_Public1 objectAtIndex:i]];
+                       }
 //                    else
 //                    {
 //        [Array_Private addObject:[Array_AllData objectAtIndex:i]];
 //                    }
-//                }
+                }
          
          [_Tableview_Profile reloadData];
                                                          
@@ -833,16 +833,20 @@ style:UIAlertActionStyleDefault
 
 - (void)ViewTapTapped_Label_Friends22:(UITapGestureRecognizer *)recognizer
 {
-    ProfileFriendsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileFriendsViewController"];
-    [self.navigationController pushViewController:set animated:YES];
+   
+    
+//        ProfileFriendsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileFriendsViewController"];
+//        [self.navigationController pushViewController:set animated:YES];
+    
+    
     
 }
 - (void)ViewTapTapped_Label_Challenges11:(UITapGestureRecognizer *)recognizer
 {
     
-    
-    ProfileChallengesViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileChallengesViewController"];
-    [self.navigationController pushViewController:set animated:YES];
+   
+//    ProfileChallengesViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileChallengesViewController"];
+//    [self.navigationController pushViewController:set animated:YES];
     
 }
 
