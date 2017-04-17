@@ -20,9 +20,10 @@
 
 
 
-#define FONT_SIZE 16.0f
+#define FONT_SIZE 15.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
+
 @interface ContributeDaetailPageViewController ()<NSURLSessionDelegate>
 {
     UIView *sectionView,*transperentViewIndicator,*whiteView1;
@@ -344,7 +345,7 @@
 
 -(void)UploadinView_Close:(UIButton *)sender
 {
-   Label_confirm1.text=@"0 %";
+  
     
     UIAlertController * alert=[UIAlertController
                                
@@ -1916,7 +1917,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [label setLineBreakMode:UILineBreakModeWordWrap];
                 //        [label setMinimumFontSize:FONT_SIZE];
                 [label setNumberOfLines:0];
-                [label setFont:[UIFont fontWithName:@"Helvetica-Light" size:FONT_SIZE]];
+                [label setFont:[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:FONT_SIZE]];
                 [label setTag:5];
                 // [[label layer] setBorderWidth:2.0f];
                 [label setBackgroundColor:[UIColor clearColor]];
@@ -1985,7 +1986,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
                 
-                CGSize size = [text sizeWithFont:[UIFont fontWithName:@"Helvetica-Light" size:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+                CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
                 
                 int lines = size.height/16;
                 
@@ -1993,7 +1994,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 
                 
-                [label setFont:[UIFont fontWithName:@"SanFranciscoDisplay" size:15.0f]];;
+                [label setFont:[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:FONT_SIZE]];;
                 
                 NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
                 style.alignment = NSTextAlignmentLeft;
@@ -2007,11 +2008,12 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 label.attributedText = attrText;
                 
                    [label setText:text];
-                
-                label.clipsToBounds=YES;
-                label.layer.cornerRadius=9.0f;
-                label1.backgroundColor=[UIColor colorWithRed:13/255.0 green:146/255.0 blue:220/255.0 alpha:0.8];
-                
+                 label.textAlignment=NSTextAlignmentLeft;
+//                label.clipsToBounds=YES;
+//                label.layer.cornerRadius=9.0f;
+                //label1.backgroundColor=[UIColor colorWithRed:13/255.0 green:146/255.0 blue:220/255.0 alpha:0.8];
+                label1.clipsToBounds=YES;
+                label1.layer.cornerRadius=9.0f;
                
                 
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"useridsender"]])
@@ -2020,22 +2022,23 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
                     
-                    label.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
-                    //        label.textColor=[UIColor colorWithRed:124/255.0 green:111/255.0 blue:164/255.0 alpha:0.7];
+                 //   label.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
+                    label1.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
+                    label.backgroundColor=[UIColor clearColor];
                     label.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
                     if (size.width <=self.view.frame.size.width-132)
                     {
                         
-                        //            [label1 setFrame:CGRectMake(50,0, size.width+34, MAX(size.height, 30.0f)+4)];
-                        [label setFrame:CGRectMake(50,0, size.width+32, MAX(size.height, 30.0f)+8)];
+                [label1 setFrame:CGRectMake(50,0, size.width+20, MAX(size.height, 30.0f)+8)];
+                        [label setFrame:CGRectMake(60,0, size.width, MAX(size.height, 30.0f)+8)];
                         
                         
                     }
                     
                     else
                     {
-                        //            [label1 setFrame:CGRectMake(50,0, self.view.frame.size.width-132, MAX(size.height, 30.0f)+4)];
-                        [label setFrame:CGRectMake(50,0, self.view.frame.size.width-130,MAX(size.height, 30.0f)+8)];
+            [label1 setFrame:CGRectMake(50,0, self.view.frame.size.width-120, MAX(size.height, 30.0f)+8)];
+            [label setFrame:CGRectMake(55,0, self.view.frame.size.width-140,MAX(size.height, 30.0f)+8)];
                         
                         
                     }
@@ -2054,16 +2057,17 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
                     [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
-                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
-                    
-                    
+//                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
+                    label1.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
+                    label.backgroundColor=[UIColor clearColor];
                     label.textColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
-                    
+                
                     if (size.width <=self.view.frame.size.width-132)
                     {
                         
                         
-                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+83),0, size.width+22, MAX(size.height, 30.0f)+8)];
+                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+68),0, size.width, MAX(size.height, 30.0f)+8)];
+                         [label1 setFrame:CGRectMake(label.frame.origin.x-10,label.frame.origin.y, label.frame.size.width+20,label.frame.size.height)];
                     }
                     
                     else
@@ -2071,8 +2075,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         
                         
                         
-                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+83),0, self.view.frame.size.width-140, MAX(size.height, 30.0f)+8)];
-                        
+                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+68),0, self.view.frame.size.width-140, MAX(size.height, 30.0f)+8)];
+                         [label1 setFrame:CGRectMake(label.frame.origin.x-10,label.frame.origin.y, label.frame.size.width+20,label.frame.size.height)];
                         
                         
                     }

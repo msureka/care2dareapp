@@ -201,7 +201,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withStri
          if ([ResultString isEqualToString:@"done"])
          {
                [self.view hideActivityViewWithAfterDelay:0];
-             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Thank-You!" message:@"You have succeessfully contributed to the challenge! You will be notified when the challenge is complete." preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Thank-You!" message:@"You have successfully contributed to the challenge! You will be notified when the challenge is complete or any videos are recorded." preferredStyle:UIAlertControllerStyleAlert];
              
              UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                     {

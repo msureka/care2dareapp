@@ -362,7 +362,7 @@ else
                     
                     cell_two = [[WatchVedioDescTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdv2];
                 }
-                if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"]]|| [str_friendstatus isEqualToString:@""])
+                if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"useridvideo"]]|| [str_friendstatus isEqualToString:@""])
                 {
                     cell_two.Button_SetValues.hidden=YES;
                 }
@@ -414,7 +414,7 @@ else
                 NSLog(@"No of lines: %ld",(long)rHeight);
                 if(height<=30 )
                 {
-                    [cell_two.Label_DescTitle setFrame:CGRectMake(cell_two.Label_DescTitle.frame.origin.x,cell_two.Label_DescTitle.frame.origin.y, cell_two.Label_DescTitle.frame.size.width,size.height)];
+                    [cell_two.Label_DescTitle setFrame:CGRectMake(cell_two.Label_DescTitle.frame.origin.x,cell_two.Label_DescTitle.frame.origin.y, cell_two.Label_DescTitle.frame.size.width,cell_two.Label_DescTitle.frame.size.height)];
                 }
 
                 else if(height>=30  && height <=40)

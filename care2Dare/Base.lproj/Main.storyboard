@@ -445,7 +445,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All the active challenges worldwide will be shown here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJa-pM-gmO">
-                                <frame key="frameInset" minX="5.33%" minY="44.66%" width="89.33%" height="10.68%"/>
+                                <frame key="frameInset" minX="5.07%" minY="44.66%" width="89.33%" height="10.68%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
                                 <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -503,7 +503,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="tMi-RB-Y1Q">
-                                                    <frame key="frameInset" minX="10" minY="183" width="16" height="26"/>
+                                                    <frame key="frameInset" minX="10" minY="194" width="16" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="1PT-7e-CqT">
@@ -535,8 +535,8 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <progressView opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4QV-Ib-3l6">
-                                                    <frame key="frameInset" minX="43.97%" minY="38.36%" width="93" height="2"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <frame key="frameInset" minX="124" minY="56" width="93" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="progressTintColor" red="0.078431372549019607" green="0.96078431372549022" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 day left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Z6-ra-Ga5">
@@ -1161,29 +1161,155 @@
             <point key="canvasLocation" x="6365.6000000000004" y="-1873.313343328336"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="IrW-TD-9xc">
+        <scene sceneID="UZq-ts-U1X">
             <objects>
-                <viewController id="6wn-Bd-hnV" sceneMemberID="viewController">
+                <viewController id="8PZ-Tx-uQ5" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="15v-VK-2hx"/>
-                        <viewControllerLayoutGuide type="bottom" id="cfL-VL-67J"/>
+                        <viewControllerLayoutGuide type="top" id="XMj-4F-cRL"/>
+                        <viewControllerLayoutGuide type="bottom" id="OZG-FB-lMA"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OC4-fs-Ieh">
+                    <view key="view" contentMode="scaleToFill" id="2He-hY-4E4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRO-Bd-pj0">
-                                <frame key="frameInset" width="375" height="667"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cFN-4e-IwE">
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="100.00%" height="10.50%"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4S-6E-psD">
+                                        <frame key="frameInset" minX="1.87%" minY="42.86%" width="8.53%" height="40.00%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        <state key="normal" image="graybackarrow.png">
+                                            <color key="titleColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.90000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ButtonBack_Action:" destination="3qC-LD-yPb" eventType="touchUpInside" id="3k1-Sy-uvm"/>
+                                            <action selector="ButtonBack_Action:" destination="1pM-DC-LOL" eventType="touchUpInside" id="7J3-6k-Mgn"/>
+                                            <action selector="ButtonBack_Action:" destination="t6S-8J-Oxb" eventType="touchUpInside" id="CF5-fK-o0f"/>
+                                            <action selector="DoneButton:" destination="DiZ-oB-J0v" eventType="touchUpInside" id="AgA-qP-1Vi"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaE-y3-grL">
+                                        <frame key="frameInset" minX="13.87%" minY="40.00%" width="72.00%" height="40.00%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="24"/>
+                                        <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kWm-p9-jRG">
+                                <frame key="frameInset" minY="70" width="375" height="597"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cellone" rowHeight="96" id="iQm-cz-B68" customClass="RaisedoneTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="96"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iQm-cz-B68" id="zHC-va-4nX">
+                                            <frame key="frameInset" width="375" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This Challenge Raised: $20000" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTF-J8-m3p">
+                                                    <frame key="frameInset" minX="23" minY="8" width="328" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="24"/>
+                                                    <color key="textColor" red="0.30980392156862746" green="0.29803921568627451" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cellfour" rowHeight="96" id="Kt4-Bj-PO4" customClass="RaisedFourTableViewCell">
+                                        <rect key="frame" x="0.0" y="124" width="375" height="96"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kt4-Bj-PO4" id="Kxv-UA-ye0">
+                                            <frame key="frameInset" width="375" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="q1X-jI-QE1">
+                                                    <frame key="frameInset" minX="160" minY="8" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNZ-e1-qgb">
+                                                    <frame key="frameInset" minX="160" minY="70" width="181" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="20"/>
+                                                    <color key="textColor" red="0.30980392159999998" green="0.29803921570000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="topname.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Rp-DF-dvO">
+                                                    <frame key="frameInset" minX="142" minY="69" width="18" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="Image_Profile" destination="q1X-jI-QE1" id="uYY-j5-I8a"/>
+                                            <outlet property="Image_likes" destination="4Rp-DF-dvO" id="3aM-9E-hbc"/>
+                                            <outlet property="label_name" destination="UNZ-e1-qgb" id="pah-AA-U9D"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Celltwo" rowHeight="96" id="JJI-x2-wlh" customClass="RaisedTwoTableViewCell">
+                                        <rect key="frame" x="0.0" y="220" width="375" height="96"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JJI-x2-wlh" id="zU4-mv-Sxu">
+                                            <frame key="frameInset" width="375" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wwf-01.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="FJZ-pI-cW8">
+                                                    <frame key="frameInset" minX="149" minY="10" width="76" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="charitylife-01.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-wx-3AM">
+                                                    <frame key="frameInset" minX="260" minY="10" width="76" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unicef-01.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="o27-kM-3Pk">
+                                                    <frame key="frameInset" minX="35" minY="10" width="76" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="mTs-Zd-XpX">
+                                        <rect key="frame" x="0.0" y="316" width="375" height="96"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mTs-Zd-XpX" id="QS4-ds-tKa">
+                                            <frame key="frameInset" width="375" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="raised_hand.png" translatesAutoresizingMaskIntoConstraints="NO" id="qFg-Fe-r0G">
+                                                    <frame key="frameInset" minX="161" minY="19" width="53" height="57"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbq-wc-sAD">
+                                                    <frame key="frameInset" minX="208" minY="31" width="98" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="24"/>
+                                                    <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8PZ-Tx-uQ5" id="xvJ-iJ-rnz"/>
+                                    <outlet property="delegate" destination="8PZ-Tx-uQ5" id="hoJ-P0-dXs"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7lx-QW-fUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uge-FX-PTo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7095" y="-1854"/>
+            <point key="canvasLocation" x="7394.5" y="-1797.5"/>
         </scene>
         <!--Create Challenges Page View Controller-->
         <scene sceneID="DMX-wo-wK5">
@@ -1615,7 +1741,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All the challenges which you tag as favourite will be shown here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lE2-Qs-94B">
-                                <frame key="frameInset" minX="5.33%" minY="44.66%" width="89.33%" height="12.62%"/>
+                                <frame key="frameInset" minX="5.07%" minY="44.66%" width="89.33%" height="12.46%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
                                 <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -2150,7 +2276,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RTG-md-wzo">
-                                <frame key="frameInset" minX="0.0%" minY="16.49%" width="100.00%" height="83.51%"/>
+                                <frame key="frameInset" minX="0.0%" minY="16.34%" width="100.00%" height="83.66%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2762,7 +2888,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UvV-Vn-DCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5582" y="-609"/>
+            <point key="canvasLocation" x="5394" y="-699"/>
         </scene>
         <!--Profile Page Details View Controller-->
         <scene sceneID="QD7-Hc-haH">
