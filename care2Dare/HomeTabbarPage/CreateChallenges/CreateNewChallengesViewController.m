@@ -193,7 +193,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataReceivedId:) name:@"PassDataArrayUserId" object:nil];
     
-    
+ 
     
     
     
@@ -1419,6 +1419,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [BackroundImg setupImageViewer1];
     BackroundImg.clipsToBounds = YES;
 }
-
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return textView.text.length + (text.length - range.length) <= 250;
+}
 
 @end

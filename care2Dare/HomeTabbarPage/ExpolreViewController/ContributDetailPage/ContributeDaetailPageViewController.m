@@ -1662,10 +1662,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                    [cell_TwoDetails.image_SecProfile sd_setImageWithURL:urlSec placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 
                 
-        cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
-                
-        UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
-        [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
+       
                 
                 
                 
@@ -1699,9 +1696,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 CGFloat height = MAX(size.height, 30.0f);
                 NSLog(@"Dynamic label height====%f",height);
                 cell_TwoDetails.label_Desc.numberOfLines=0;
-    cell_TwoDetails.label_Desc.lineBreakMode=UILineBreakModeWordWrap;
+    
            
-                
+              cell_TwoDetails.label_Desc.backgroundColor=[UIColor clearColor];
         NSInteger rHeight = size.height/FONT_SIZE;
                 NSLog(@"No of lines: %ld",(long)rHeight);
                 
@@ -1713,12 +1710,21 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                       }
                       else
                       {
+                          cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
+                          
+                          UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
+                          [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
+                          cell_TwoDetails.label_Desc.lineBreakMode=UILineBreakModeTailTruncation;
                        [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH*2)];
                       }
                   }
                 else
                 {
+                    cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
                     
+                    UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
+                    [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
+                  cell_TwoDetails.label_Desc.lineBreakMode=UILineBreakModeWordWrap;
             [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,size.height+70)];
                     
                 }
@@ -2216,19 +2222,30 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         
         CGFloat height = MAX(size.height, 30.0f);
         NSLog(@"Dynamic label height====%f",height);
-  
+        NSInteger rHeight = size.height/FONT_SIZE;
+       
         if ([str_TappedLabel isEqualToString:@"yes"])
         {
             
             
-    return 148+size.height+40;
+    return 148+size.height;
             
  
         }
         else
         {
+          
+    if ((long)rHeight==1)
+     {
+       return 148;
+        }
+       else
+         {
+        return 188;
+           }
             
-    return 148+40;
+ 
+
             
         }
 //        NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
@@ -2774,6 +2791,10 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         
     }
+    else
+    {
+      [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
     
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image  {
@@ -2808,11 +2829,11 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     
     
     
-  //  [Tableview_ContriBute beginUpdates];
+    [Tableview_ContriBute beginUpdates];
     [Tableview_ContriBute reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-   // [Tableview_ContriBute endUpdates];
+    [Tableview_ContriBute endUpdates];
     
-     
+    
 }
 -(void)image_SecProfile_ActionDetails:(UIGestureRecognizer *)reconizer
 {
@@ -2892,5 +2913,9 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
 [self presentMoviePlayerViewControllerAnimated:movieController];
 [movieController.moviePlayer prepareToPlay];
 [movieController.moviePlayer play];
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return textView.text.length + (text.length - range.length) <= 250;
 }
 @end
