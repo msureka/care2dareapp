@@ -43,7 +43,7 @@
 @end
 
 @implementation WatchVediosViewController
-@synthesize Tableview_Explore,cell_one,cell_two,cell_three,cell_Four,str_Userid2val,str_ChallengeidVal,str_challengeTitle,str_image_Data;
+@synthesize Tableview_Explore,cell_one,cell_two,cell_three,cell_Four,str_Userid2val,str_ChallengeidVal,str_challengeTitle,str_image_Data,videoid1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     indexVedio=1;
@@ -55,7 +55,7 @@
      playerViewController = [[AVPlayerViewController alloc] init];
  // [Tableview_Explore reloadData];
     [self CommunicationPlayVedio];
-    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
+//    timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
    
     UIImageView *attachmentImageNew = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height)];
     attachmentImageNew.image = str_image_Data.image;
@@ -78,6 +78,26 @@
 {
     //[self CommunicationPlayVedio];
     timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if ([UserType isEqualToString:@"Owner"]) {
+//            
+//            
+//            [self.messageTimer invalidate];
+//            self.messageTimer = nil;
+//            
+//        } else {
+//            
+//            
+//            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+//                                                                 target:self
+//                                                               selector:@selector(checkForMessages)
+//                                                               userInfo:nil
+//                                                                repeats:YES];
+//            
+//            
+//        }
+//    });
 }
 -(void)CommunicationPlayVedio
 {
@@ -114,10 +134,10 @@ else
     NSString *userid2= @"userid2";
     
     NSString *challengeid= @"challengeid";
-  
+  NSString *VedioIds= @"videoid";
     
     
-    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val,challengeid,str_ChallengeidVal];
+NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val,challengeid,str_ChallengeidVal,VedioIds,videoid1];
     
     
 #pragma mark - swipe sesion
@@ -793,7 +813,7 @@ else
 //        indexVedio=indexPath.row;
         
     str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"useridvideo"]];
-        
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videoid1"]];
        
         [self CommunicationPlayVedio];
         
@@ -842,10 +862,11 @@ else
     if (CurrentTimes==dur)
     {
         [playerViewController.view removeFromSuperview];
-        [timer invalidate];
-        timer = nil;
+//        [timer invalidate];
+//        timer = nil;
        // Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videourl" ]];
         str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
        
         [self CommunicationPlayVedio];
         indexVedio++;
@@ -893,9 +914,9 @@ else
         
         NSString *challengeid= @"challengeid";
         
+           NSString *vedioids= @"videoid";
         
-        
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val,challengeid,str_ChallengeidVal];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val,challengeid,str_ChallengeidVal,vedioids,videoid1];
         
 
         

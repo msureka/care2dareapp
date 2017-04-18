@@ -20,4 +20,6 @@
 @property(nonatomic,strong)IBOutlet UITextField *Textfield_Search;
 -(IBAction)SearchEditing_Action:(id)sender;
 - (IBAction)ButtonBack_Action:(id)sender;
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * indicator;
+@property(nonatomic,weak)IBOutlet UILabel * Lable_JSONResult;
 @end

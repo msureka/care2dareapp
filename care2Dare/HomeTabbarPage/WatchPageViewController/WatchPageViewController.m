@@ -27,7 +27,7 @@
 
 @implementation WatchPageViewController
 @synthesize Tableview_watch,cell_one;
-@synthesize Lable_TitleFriends,Button_Back,Button_Search,Textfield_Search,view_Topheader;
+@synthesize Lable_TitleFriends,Button_Back,Button_Search,Textfield_Search,view_Topheader,indicator,Lable_JSONResult;
 - (void)viewDidLoad {
     [super viewDidLoad];
    //
@@ -46,8 +46,10 @@
     FlagSearchBar=@"no";
    
     Button_Back.hidden=YES;
-    
-    
+    [Tableview_watch setHidden:YES];
+    indicator.hidden=NO;
+    [indicator startAnimating];
+    Lable_JSONResult.hidden=YES;
     [self ClienserverComm_watchView];
     
 }
@@ -169,21 +171,33 @@ if ([ResultString isEqualToString:@"nouserid"])
                                                          
                                                          
             }
-                                                     
-                                                     
+            if ([ResultString isEqualToString:@"novideos"])
+            {
+                    
+                [Tableview_watch setHidden:YES];
+                indicator.hidden=YES;
+                [indicator stopAnimating];
+                Lable_JSONResult.hidden=NO;
+                    
+            }
+                
             if ([ResultString isEqualToString:@"done"])
-                            {
+                    {
+                                
                                                          
                                                          
                                                          
-                                                         
-                        }
+                }
                                                
                 if (Array_Watch.count !=0)
                 {
+                    [Tableview_watch setHidden:NO];
+                    indicator.hidden=YES;
+                    [indicator stopAnimating];
+                    Lable_JSONResult.hidden=YES;
                     
-                     SearchCrickArray=[Array_Watch mutableCopy];
-                               NSLog(@"arra new watch==%@",Array_Watch1);
+            SearchCrickArray=[Array_Watch mutableCopy];
+            NSLog(@"arra new watch==%@",Array_Watch1);
                     [Tableview_watch reloadData];
                 }
                                                      
@@ -643,6 +657,8 @@ transparancyTuchView.hidden=YES;
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid1"]];
+   
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
@@ -663,7 +679,7 @@ transparancyTuchView.hidden=YES;
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo2"]];
-    
+     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid2"]];
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
@@ -686,6 +702,8 @@ transparancyTuchView.hidden=YES;
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo3"]];
     
+     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid3"]];
+    
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
@@ -706,7 +724,7 @@ transparancyTuchView.hidden=YES;
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo4"]];
-    
+     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid4"]];
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
@@ -728,6 +746,7 @@ transparancyTuchView.hidden=YES;
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo5"]];
     
+     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid5"]];
     
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];

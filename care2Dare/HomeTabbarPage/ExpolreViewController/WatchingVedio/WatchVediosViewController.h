@@ -21,6 +21,7 @@
 @property(nonatomic,strong)NSString * str_Userid2val;
 @property(nonatomic,strong)NSString * str_ChallengeidVal;
 //@property(nonatomic,strong)NSString *Str_urlVedio;
+@property(nonatomic,strong)NSString *videoid1;
 @property(nonatomic,strong)NSString *str_challengeTitle;
 @property(nonatomic,strong)UIImageView *str_image_Data;
 

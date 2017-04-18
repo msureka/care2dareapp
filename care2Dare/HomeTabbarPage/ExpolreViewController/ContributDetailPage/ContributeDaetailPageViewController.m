@@ -1735,9 +1735,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                  cell_TwoDetails.Label_Dayleft.text=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"createtime1"]];
                 
                 NSString * tagreach=[[AllArrayData objectAtIndex:0]valueForKey:@"daysleft"];
+                 NSString * Totaldays=[[AllArrayData objectAtIndex:0]valueForKey:@"totaldays"];
                 
-                
-                CGFloat progrssVal=1-([tagreach floatValue])/30.0;
+                CGFloat progrssVal=1-([tagreach floatValue])/[Totaldays floatValue];
                 NSString *per= [ NSString stringWithFormat:@"%.3f",progrssVal];
                 [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
 
@@ -2328,7 +2328,7 @@ if (section==1)
     
     Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-61,44)];
     
-    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"recorded"] isEqualToString:@"no"])
+    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
     {
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];

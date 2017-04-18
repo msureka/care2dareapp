@@ -2644,7 +2644,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="350" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42d-no-S9z">
-                                <frame key="frameInset" minX="0.0%" minY="11.33%" width="100.00%" height="88.51%"/>
+                                <frame key="frameInset" minX="0.0%" minY="11.33%" width="100.00%" height="87.38%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2788,6 +2788,18 @@
                                     <outlet property="delegate" destination="j6u-sW-3cU" id="Xph-Sq-7U2"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All videos recorded for your challenges will be shown here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-E2-Crm">
+                                <frame key="frameInset" minX="20" minY="276" width="335" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
+                                <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZyX-L7-gy2">
+                                <frame key="frameInset" minX="169" minY="291" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -2797,9 +2809,11 @@
                     <connections>
                         <outlet property="Button_Back" destination="gUB-hy-emO" id="pRf-0v-0UH"/>
                         <outlet property="Button_Search" destination="yxQ-0i-gy6" id="AiQ-Ue-gl0"/>
+                        <outlet property="Lable_JSONResult" destination="xWw-E2-Crm" id="Png-SU-tKL"/>
                         <outlet property="Lable_TitleFriends" destination="AwX-rM-jnC" id="MGG-LW-EOq"/>
                         <outlet property="Tableview_watch" destination="42d-no-S9z" id="pwx-sl-OtI"/>
                         <outlet property="Textfield_Search" destination="IZb-9e-756" id="BPR-ac-gMa"/>
+                        <outlet property="indicator" destination="ZyX-L7-gy2" id="Frx-ad-qYU"/>
                         <outlet property="view_Topheader" destination="JKT-Cv-fN2" id="EXK-z2-nRA"/>
                     </connections>
                 </viewController>
