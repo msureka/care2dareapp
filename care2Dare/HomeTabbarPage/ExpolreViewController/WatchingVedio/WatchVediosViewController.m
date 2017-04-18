@@ -15,9 +15,9 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "UIImageView+WebCache.h"
-#import "SBJsonParser.h"
-#import "Reachability.h"
+#import "ContributeDaetailPageViewController.h"
 #import "ProfilePageDetailsViewController.h"
+#import "StatsViewController.h"
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -26,7 +26,7 @@
     UIButton *Button_PlayPause;
     NSTimer * timer;
     Float64 dur,progrssVal,CurrentTimes;
-    
+    NSURL *urlVediop;
     AVPlayerItem *item;
     AVPlayer * player;
     AVPlayerViewController *playerViewController;
@@ -36,19 +36,9 @@
     NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1;
     NSInteger indexVedio;
     CALayer *Bottomborder_Cell2;
-    
-//    challengetitle = Sachin;
-//    friendstatus = no;
-//    name = "Er Sachin Mokashi";
-//    posttime = "Just now";
-//    profileimage = "https://graph.facebook.com/1280357812049167/picture?type=large";
-//    recorddate = "2017-04-06 05:30:29";
-//    "registration_status" = ACTIVE;
-//    status = PLAY;
-//    thumbnailurl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ-thumbnail.jpg";
-//    useridvideo = 20170307091520wFL3;
-//    videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ.mp4";
-
+    CGSize size;
+    AVURLAsset *asset;
+    float imageHeight;
 }
 @end
 
@@ -62,11 +52,26 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    
-  [Tableview_Explore reloadData];
+     playerViewController = [[AVPlayerViewController alloc] init];
+ // [Tableview_Explore reloadData];
     [self CommunicationPlayVedio];
     timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
    
+    UIImageView *attachmentImageNew = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height)];
+    attachmentImageNew.image = str_image_Data.image;
+    attachmentImageNew.backgroundColor = [UIColor redColor];
+    attachmentImageNew.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    float widthRatio = attachmentImageNew.bounds.size.width / attachmentImageNew.image.size.width;
+    float heightRatio = attachmentImageNew.bounds.size.height / attachmentImageNew.image.size.height;
+    float scale = MIN(widthRatio, heightRatio);
+    float imageWidth = scale * attachmentImageNew.image.size.width;
+     imageHeight = scale * attachmentImageNew.image.size.height;
+    
+    NSLog(@"Size of pic is %f",imageWidth);
+    NSLog(@"Size of pic is %f",imageHeight);
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -179,7 +184,11 @@ else
         str_profileurl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"profileimage" ]];
                         
         Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"videourl" ]];
-                       
+                        urlVediop = [NSURL URLWithString:Str_urlVedio];
+                        
+                        asset = [AVURLAsset assetWithURL: urlVediop];
+             size = [[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
+                        
                     }
                    
        
@@ -187,9 +196,16 @@ else
                     
              }
                    
+                    if (size.height !=0)
+                    {
+                        NSLog(@"heigt vedio===%f",size.height);
+
+                        
+                        [self PlayVediosAuto];
+                        
+                        [Tableview_Explore reloadData];
+                    }
                     
-                    [self PlayVediosAuto];
-                    [Tableview_Explore reloadData];
        }
        else
         {
@@ -478,10 +494,22 @@ else
 
                
                 cell_three.Label_Reviews.text=[[Array_VediosData objectAtIndex:0]valueForKey:@"totalviews"];
-           
+                cell_three.Image_Stats.userInteractionEnabled=YES;
+                UITapGestureRecognizer *Image_StatsTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Stats_Action:)];
+                [cell_three.Image_Stats addGestureRecognizer:Image_StatsTapped];
+
+                cell_three.Image_Comments.userInteractionEnabled=YES;
+                UITapGestureRecognizer *Image_CommentsTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Comments_Action:)];
+                [cell_three.Image_Comments addGestureRecognizer:Image_CommentsTapped];
+                
+                
+                cell_three.Image_Share.userInteractionEnabled=YES;
+                UITapGestureRecognizer *Image_ShareTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Share_Action:)];
+                [cell_three.Image_Share addGestureRecognizer:Image_ShareTapped];
             
                 return cell_three;
-
+                
+               
             }
             break;
         case 3:
@@ -586,7 +614,9 @@ else
 {
     if(indexPath.section==0)
     {
-  return self.view.frame.size.width;
+        NSLog(@"Row Vedio height==%f",size.height);
+        
+        return imageHeight;// self.view.frame.size.width+(self.view.frame.size.width/2);
     }
     if (indexPath.section==1)
     {
@@ -1008,21 +1038,29 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
    
     
     
-    playerViewController = [[AVPlayerViewController alloc] init];
-    NSURL *url = [NSURL URLWithString:Str_urlVedio];
+   
+    ;
     
-    AVURLAsset *asset = [AVURLAsset assetWithURL: url];
+    
+    NSLog(@"size of Vedio=%f",size.height);
+      NSLog(@"size of Vedio=%f",size.height);
+    
+    
     item = [AVPlayerItem playerItemWithAsset: asset];
     
     player = [[AVPlayer alloc] initWithPlayerItem: item];
     playerViewController.player = player;
-    [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,cell_one.PlayerView.frame.size.width)];
+    [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,imageHeight)];
     
     playerViewController.showsPlaybackControls = NO;
     
-    [cell_one.PlayerView addSubview:playerViewController.view];
     
-    playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
+
+    
+    
+  [cell_one.PlayerView addSubview:playerViewController.view];
+    
+    playerViewController.videoGravity=AVLayerVideoGravityResizeAspect;
     [player play];
     
     Flag_watch=@"no";
@@ -1165,5 +1203,59 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     
     
 }
+-(void)Image_Stats_Action:(UIGestureRecognizer *)reconizer
+{
+    [player pause];
+    
+    [timer invalidate];
+    timer = nil;
+    
+    
+    [timer invalidate];
+    timer = nil;
+    
+    [player pause];
+    
+    
+
+    StatsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"StatsViewController"];
+    set.str_ChallengeidVal1=str_ChallengeidVal;;
+    [self.navigationController pushViewController:set animated:YES];
+    
+}
+
+-(void)Image_Comments_Action:(UIGestureRecognizer *)reconizer
+{
+//    UIGestureRecognizer * rec=(UIGestureRecognizer *)reconizer;
+//    UIImageView * img=(UIImageView *)rec.view;
+//    ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+//    NSDictionary *  didselectDic;
+//    didselectDic=[Array_VediosData  objectAtIndex:0];
+//    
+//        set.ProfileImgeData =str_image_Data;
+//    
+//    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+//    [Array_new addObject:didselectDic];
+//    set.AllArrayData =Array_new;
+//    NSLog(@"Array_new11=%@",Array_new);;
+    
+    
+    
+//    
+//    NSLog(@"Array_new22=%@",Array_new);;
+//    NSLog(@"indexPathrow=%ld",(long)indexPath.row);;
+//    
+//    [self.navigationController pushViewController:set animated:YES];
+//    NSLog(@"Array_new33=%@",Array_new);;
+
+    
+}
+
+-(void)Image_Share_Action:(UIGestureRecognizer *)reconizer
+{
+
+}
+
+
 
 @end

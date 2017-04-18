@@ -52,5 +52,7 @@
 	<string>http://www.care2dareapp.com/app/checknotifications2.php</string>
 	<key>checknotifications3</key>
 	<string>http://www.care2dareapp.com/app/checknotifications3.php</string>
+	<key>stats</key>
+	<string>http://www.care2dareapp.com/app/stats.php</string>
 </dict>
 </plist>

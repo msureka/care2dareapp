@@ -163,6 +163,11 @@
 		9A5727C01E718994006A5F52 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BD1E718994006A5F52 /* playbutton.png */; };
 		9A5727C11E718994006A5F52 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BE1E718994006A5F52 /* playbutton@2x.png */; };
 		9A5727C21E718994006A5F52 /* playbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BF1E718994006A5F52 /* playbutton@3x.png */; };
+		9A5D675E1EA4BD6F001176B3 /* StatsOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D675D1EA4BD6F001176B3 /* StatsOneTableViewCell.m */; };
+		9A5D67611EA4BD85001176B3 /* StatsTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67601EA4BD85001176B3 /* StatsTwoTableViewCell.m */; };
+		9A5D67641EA4BD9A001176B3 /* StatsThreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67631EA4BD9A001176B3 /* StatsThreeTableViewCell.m */; };
+		9A5D67671EA4BDB3001176B3 /* StatsFourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67661EA4BDB3001176B3 /* StatsFourTableViewCell.m */; };
+		9A5D676A1EA4BDD1001176B3 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67691EA4BDD1001176B3 /* StatsViewController.m */; };
 		9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */; };
 		9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */; };
 		9A64C8581E711475008115FF /* UIViewController+KeyboardAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C8571E711475008115FF /* UIViewController+KeyboardAnimation.m */; };
@@ -611,6 +616,16 @@
 		9A5727BD1E718994006A5F52 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		9A5727BE1E718994006A5F52 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		9A5727BF1E718994006A5F52 /* playbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@3x.png"; sourceTree = "<group>"; };
+		9A5D675C1EA4BD6F001176B3 /* StatsOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsOneTableViewCell.h; sourceTree = "<group>"; };
+		9A5D675D1EA4BD6F001176B3 /* StatsOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsOneTableViewCell.m; sourceTree = "<group>"; };
+		9A5D675F1EA4BD85001176B3 /* StatsTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsTwoTableViewCell.h; sourceTree = "<group>"; };
+		9A5D67601EA4BD85001176B3 /* StatsTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsTwoTableViewCell.m; sourceTree = "<group>"; };
+		9A5D67621EA4BD9A001176B3 /* StatsThreeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsThreeTableViewCell.h; sourceTree = "<group>"; };
+		9A5D67631EA4BD9A001176B3 /* StatsThreeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsThreeTableViewCell.m; sourceTree = "<group>"; };
+		9A5D67651EA4BDB3001176B3 /* StatsFourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsFourTableViewCell.h; sourceTree = "<group>"; };
+		9A5D67661EA4BDB3001176B3 /* StatsFourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsFourTableViewCell.m; sourceTree = "<group>"; };
+		9A5D67681EA4BDD1001176B3 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
+		9A5D67691EA4BDD1001176B3 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "High Volume Filled-100.png"; sourceTree = "<group>"; };
 		9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mute Filled-100.png"; sourceTree = "<group>"; };
 		9A64C8561E711475008115FF /* UIViewController+KeyboardAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KeyboardAnimation.h"; sourceTree = "<group>"; };
@@ -1304,6 +1319,23 @@
 			path = playbutton;
 			sourceTree = "<group>";
 		};
+		9A5D675B1EA4BD52001176B3 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				9A5D67681EA4BDD1001176B3 /* StatsViewController.h */,
+				9A5D67691EA4BDD1001176B3 /* StatsViewController.m */,
+				9A5D675C1EA4BD6F001176B3 /* StatsOneTableViewCell.h */,
+				9A5D675D1EA4BD6F001176B3 /* StatsOneTableViewCell.m */,
+				9A5D675F1EA4BD85001176B3 /* StatsTwoTableViewCell.h */,
+				9A5D67601EA4BD85001176B3 /* StatsTwoTableViewCell.m */,
+				9A5D67621EA4BD9A001176B3 /* StatsThreeTableViewCell.h */,
+				9A5D67631EA4BD9A001176B3 /* StatsThreeTableViewCell.m */,
+				9A5D67651EA4BDB3001176B3 /* StatsFourTableViewCell.h */,
+				9A5D67661EA4BDB3001176B3 /* StatsFourTableViewCell.m */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		9A62705C1EA0A0B6003C85E4 /* volumemute */ = {
 			isa = PBXGroup;
 			children = (
@@ -1824,6 +1856,7 @@
 		9AED224F1E6AB7680004A8D0 /* ExpolreViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9A5D675B1EA4BD52001176B3 /* Stats */,
 				9A7258E61E9653E600245AF4 /* WatchingVedio */,
 				9AF84EFB1E8FAA4F0008408E /* AcceptContribute */,
 				9AA645C91E7BEC6500E49B65 /* RaisedContriBute */,
@@ -2403,6 +2436,7 @@
 				9AA645D51E7BECD000E49B65 /* RaisedThreeTableViewCell.m in Sources */,
 				9A19B4011E6EC60D00262BC1 /* TabNavigationViewController.m in Sources */,
 				9AED22881E6AE27B0004A8D0 /* SBJsonStreamParserState.m in Sources */,
+				9A5D67641EA4BD9A001176B3 /* StatsThreeTableViewCell.m in Sources */,
 				9A19B3FB1E6EB01900262BC1 /* UIImage+WebP.m in Sources */,
 				9AA9B4FF1E6FCAAE00C6EF37 /* PublicChallengesTableViewCell.m in Sources */,
 				9A64C85E1E71333B008115FF /* InviteSprintTagUserViewController.m in Sources */,
@@ -2414,9 +2448,11 @@
 				9AA645D21E7BECBF00E49B65 /* RaisedTwoTableViewCell.m in Sources */,
 				9AA9B51B1E6FE81400C6EF37 /* CreateChallengesPageViewController.m in Sources */,
 				9A64C87C1E7137E5008115FF /* LCNContactViewStyle.m in Sources */,
+				9A5D676A1EA4BDD1001176B3 /* StatsViewController.m in Sources */,
 				9A64C8691E7133EB008115FF /* CLBackspaceDetectingTextField.m in Sources */,
 				9A64C87B1E7137E5008115FF /* LCNContactModel.m in Sources */,
 				9AED228B1E6AE27B0004A8D0 /* SBJsonStreamWriterState.m in Sources */,
+				9A5D675E1EA4BD6F001176B3 /* StatsOneTableViewCell.m in Sources */,
 				9AA9B50E1E6FDD0900C6EF37 /* PlegeIncomingTableViewCell.m in Sources */,
 				9AED22591E6AB7D80004A8D0 /* WorldExpTableViewCell.m in Sources */,
 				9A19B3FC1E6EB01900262BC1 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -2427,6 +2463,7 @@
 				9A57279E1E7179CF006A5F52 /* UIImageView+MHFacebookImageViewer.m in Sources */,
 				9A7258F61E96545D00245AF4 /* WatchVediosViewController.m in Sources */,
 				9A19B3B21E6E803000262BC1 /* AccTwoTableViewCell.m in Sources */,
+				9A5D67611EA4BD85001176B3 /* StatsTwoTableViewCell.m in Sources */,
 				9ABB5D631E69335600482105 /* main.m in Sources */,
 				9A19B3B11E6E803000262BC1 /* AccThreeTableViewCell.m in Sources */,
 				9A19B3FD1E6EB01900262BC1 /* UIImageView+WebCache.m in Sources */,
@@ -2458,6 +2495,7 @@
 				9AED22871E6AE27B0004A8D0 /* SBJsonStreamParserAdapter.m in Sources */,
 				9A0605DF1E6D824300FF4229 /* FavoritePageViewController.m in Sources */,
 				9A38F5921E96641700EADE7F /* WatchVedioShareTableViewCell.m in Sources */,
+				9A5D67671EA4BDB3001176B3 /* StatsFourTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

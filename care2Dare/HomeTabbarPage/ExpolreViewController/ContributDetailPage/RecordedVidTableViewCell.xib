@@ -37,7 +37,7 @@
                 <outlet property="LAbel_Result" destination="cDE-CL-h5F" id="0py-0X-3U4"/>
                 <outlet property="myscrollView" destination="zE7-ew-zSf" id="eR9-QI-pzB"/>
             </connections>
-            <point key="canvasLocation" x="67.5" y="155"/>
+            <point key="canvasLocation" x="-139" y="-52"/>
         </tableViewCell>
     </objects>
 </document>
