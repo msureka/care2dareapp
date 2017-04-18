@@ -187,8 +187,10 @@ else
                         urlVediop = [NSURL URLWithString:Str_urlVedio];
                         
                         asset = [AVURLAsset assetWithURL: urlVediop];
-             size = [[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
+            
+                        [self PlayVediosAuto];
                         
+                        [Tableview_Explore reloadData];
                     }
                    
        
@@ -201,9 +203,7 @@ else
                         NSLog(@"heigt vedio===%f",size.height);
 
                         
-                        [self PlayVediosAuto];
-                        
-                        [Tableview_Explore reloadData];
+                      
                     }
                     
        }

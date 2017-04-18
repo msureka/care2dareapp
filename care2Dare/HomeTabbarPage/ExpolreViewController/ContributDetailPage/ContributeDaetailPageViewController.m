@@ -39,7 +39,7 @@
     CGFloat lastScale;
     CGFloat hh,ww,xx,yy,th,tw,xt,yt,bty,btw,bth,btx,Bluesch,Bluescw,Bluescy,Bluescx,textBluex,textBluey,textBluew,textBlueh,hhone,wwone,xxone,yyone;
     NSURLSessionDataTask *dataTaskupload;
-       NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist,*strCameraVedio,*mediatypeVal,*ImageNSdataThumb,*encodedImageThumb;
+       NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist,*strCameraVedio,*mediatypeVal,*ImageNSdataThumb,*encodedImageThumb,*str_TappedLabel,*str_LabelCoordinates;
     NSMutableArray * Array_Comment1,*Array_Comment,*Array_RecodVid,*Array_showrecordvid;
     NSData *imageData;
     NSArray *previousArray;
@@ -51,7 +51,7 @@
     
     UIImageView * Imagepro;
     UIScrollView * scrollView;
-    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label;
+    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH;
     CGRect scrollFrame;
      MPMoviePlayerViewController * movieController;
     
@@ -96,11 +96,9 @@
     [Image_TotalLikes addGestureRecognizer:Image_TotalLikes_Tapped];
     
 
-    
-    
-    NSLog(@"BlackViewOne==%f",_BlackViewOne.frame.size.height);
-    NSLog(@"BlackViewOne==%f",_BlackViewOne.frame.size.width);
-    NSLog(@"BlackViewOne==%f",_BlackViewOne.frame.origin.y);
+
+
+
     
     
     textOne.clipsToBounds=YES;
@@ -327,9 +325,8 @@
     Yheight_label=20;
     
     
-    
-    
-    
+        str_TappedLabel=@"no";
+    str_LabelCoordinates=@"no";
     
     [self chatCommunication];
     [self Communication_showrecordVid];
@@ -1233,7 +1230,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         
         
-        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 0.0);
+        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
         
         
         ImageNSdataThumb = [Base64 encode:imageDataThumb];
@@ -1595,7 +1592,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             }
            
        
-            
+      
             UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FavouriteTapped_Action:)];
             [cell_OneImageVid.Image_Favourite addGestureRecognizer:FavouriteTapped];
 
@@ -1665,10 +1662,10 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                    [cell_TwoDetails.image_SecProfile sd_setImageWithURL:urlSec placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 
                 
-        cell_TwoDetails.image_SecProfile.userInteractionEnabled=YES;
+        cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
                 
-        UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
-        [cell_TwoDetails.image_SecProfile addGestureRecognizer:image_SecProfileTapped];
+        UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
+        [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
                 
                 
                 
@@ -1684,7 +1681,14 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
               
                  cell_TwoDetails.label_Desc.text=[[AllArrayData objectAtIndex:0]valueForKey:@"title"];
                 
-                
+                if ([str_LabelCoordinates isEqualToString:@"no"])
+                {
+                    str_LabelCoordinates=@"yes";
+                    Cell_DescLabelX=cell_TwoDetails.label_Desc.frame.origin.x;
+                    Cell_DescLabelY=cell_TwoDetails.label_Desc.frame.origin.y;
+                    Cell_DescLabelW=cell_TwoDetails.label_Desc.frame.size.width;
+                    Cell_DescLabelH=cell_TwoDetails.label_Desc.frame.size.height;
+                }
                 NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
                 
                 
@@ -1701,12 +1705,26 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         NSInteger rHeight = size.height/FONT_SIZE;
                 NSLog(@"No of lines: %ld",(long)rHeight);
                 
-
-            [cell_TwoDetails.label_Desc setFrame:CGRectMake(cell_TwoDetails.label_Desc.frame.origin.x,cell_TwoDetails.label_Desc.frame.origin.y, cell_TwoDetails.label_Desc.frame.size.width,size.height+70)];
+                  if ([str_TappedLabel isEqualToString:@"no"])
+                  {
+                      if ((long)rHeight==1)
+                      {
+                          [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH)];
+                      }
+                      else
+                      {
+                       [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH*2)];
+                      }
+                  }
+                else
+                {
+                    
+            [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,size.height+70)];
+                    
+                }
                 
-
-                
-                
+                  
+                                
                 
                  cell_TwoDetails.Label_Dayleft.text=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"createtime1"]];
                 
@@ -1806,7 +1824,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     
                      Imagepro = [[UIImageView alloc] initWithFrame:CGRectMake(Xpostion, Ypostion, Xwidth, Yheight)];
                     
-                    
+                    Imagepro.contentMode=UIViewContentModeScaleAspectFill;
                     
                     Imagepro.userInteractionEnabled=YES;
                     
@@ -2198,14 +2216,38 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         
         CGFloat height = MAX(size.height, 30.0f);
         NSLog(@"Dynamic label height====%f",height);
-       if(height <=30)
-       {
-        return 148+size.height+10;
-       }
+  
+        if ([str_TappedLabel isEqualToString:@"yes"])
+        {
+            
+            
+    return 148+size.height+40;
+            
+ 
+        }
         else
         {
-          return 148+size.height+40;
+            
+    return 148+40;
+            
         }
+//        NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
+//        
+//        
+//        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+//        
+//        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+//        
+//        CGFloat height = MAX(size.height, 30.0f);
+//        NSLog(@"Dynamic label height====%f",height);
+//       if(height <=30)
+//       {
+//        return 148+size.height+10;
+//       }
+//        else
+//        {
+//          return 148+size.height+40;
+//        }
         
     }
     if (indexPath.section==2)
@@ -2749,6 +2791,28 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+-(void)label_Desc_Tapped_ActionDetails:(UIGestureRecognizer *)reconizer
+{
+   
+    if ([str_TappedLabel isEqualToString:@"yes"])
+    {
+         str_TappedLabel=@"no";
+       
+    }
+    else
+    {
+       str_TappedLabel=@"yes";
+        
+    }
+    
+    
+    
+  //  [Tableview_ContriBute beginUpdates];
+    [Tableview_ContriBute reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+   // [Tableview_ContriBute endUpdates];
+    
+     
 }
 -(void)image_SecProfile_ActionDetails:(UIGestureRecognizer *)reconizer
 {
