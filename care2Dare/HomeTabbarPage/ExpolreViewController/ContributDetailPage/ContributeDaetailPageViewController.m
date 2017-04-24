@@ -51,7 +51,7 @@
     
     UIImageView * Imagepro;
     UIScrollView * scrollView;
-    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH;
+    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH;
     CGRect scrollFrame;
      MPMoviePlayerViewController * movieController;
     
@@ -1681,10 +1681,21 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 if ([str_LabelCoordinates isEqualToString:@"no"])
                 {
                     str_LabelCoordinates=@"yes";
-                    Cell_DescLabelX=cell_TwoDetails.label_Desc.frame.origin.x;
-                    Cell_DescLabelY=cell_TwoDetails.label_Desc.frame.origin.y;
-                    Cell_DescLabelW=cell_TwoDetails.label_Desc.frame.size.width;
-                    Cell_DescLabelH=cell_TwoDetails.label_Desc.frame.size.height;
+                    Cell_DescLabelX=cell_TwoDetails.textview.frame.origin.x;
+                    Cell_DescLabelY=cell_TwoDetails.textview.frame.origin.y;
+                    Cell_DescLabelW=cell_TwoDetails.textview.frame.size.width;
+                    Cell_DescLabelH=cell_TwoDetails.textview.frame.size.height;
+                    
+                    TextView_ViewX=cell_TwoDetails.textview_View.frame.origin.x;
+                    TextView_ViewY=cell_TwoDetails.textview_View.frame.origin.y;
+                    TextView_ViewW=cell_TwoDetails.textview_View.frame.size.width;
+                    TextView_ViewH=cell_TwoDetails.textview_View.frame.size.height;
+                    
+                     NSLog(@"Dynamic label heightc====%f",Cell_DescLabelX);
+                       NSLog(@"Dynamic label heightc====%f",Cell_DescLabelY);
+                       NSLog(@"Dynamic label heightc====%f",Cell_DescLabelW);
+                       NSLog(@"Dynamic label heightc====%f",Cell_DescLabelH);
+                    
                 }
                 NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
                 
@@ -1695,42 +1706,71 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 CGFloat height = MAX(size.height, 30.0f);
                 NSLog(@"Dynamic label height====%f",height);
-                cell_TwoDetails.label_Desc.numberOfLines=0;
+              //  cell_TwoDetails.label_Desc.numberOfLines=0;
     
-           
-              cell_TwoDetails.label_Desc.backgroundColor=[UIColor clearColor];
+                [cell_TwoDetails.textview setText:text];
+                cell_TwoDetails.textview.tag=indexPath.row;
+                cell_TwoDetails.textview_View.tag=indexPath.row;
+                CGFloat fixedWidth = cell_TwoDetails.textview.frame.size.width;
+                CGSize newSize = [cell_TwoDetails.textview sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+            //  cell_TwoDetails.label_Desc.backgroundColor=[UIColor clearColor];
         NSInteger rHeight = size.height/FONT_SIZE;
                 NSLog(@"No of lines: %ld",(long)rHeight);
-                
+                cell_TwoDetails.textview_Dummey.hidden=YES;
                   if ([str_TappedLabel isEqualToString:@"no"])
                   {
                       if ((long)rHeight==1)
                       {
-                          [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH)];
-                      }
-                      else
-                      {
-                          cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
+                        
+                             [cell_TwoDetails.textview_View setFrame:CGRectMake(TextView_ViewX,TextView_ViewY, TextView_ViewW,TextView_ViewH)];
                           
-                          UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
-                          [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
-                          cell_TwoDetails.label_Desc.lineBreakMode=UILineBreakModeTailTruncation;
-                       [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH*2)];
+                          [cell_TwoDetails.textview setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH)];
+                          
+                          
                       }
+                        else if ((long)rHeight==2)
+                      {
+                         
+                         [cell_TwoDetails.textview_View setFrame:CGRectMake(TextView_ViewX,TextView_ViewY, TextView_ViewW,TextView_ViewH*2)];
+                          
+                       [cell_TwoDetails.textview setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH*2)];
+                      }
+                        else if ((long)rHeight>=3)
+                        {
+                            cell_TwoDetails.textview_View.userInteractionEnabled=YES;
+                    cell_TwoDetails.textview.textContainer.maximumNumberOfLines = 0;
+      cell_TwoDetails.textview.textContainer.lineBreakMode = NSLineBreakByTruncatingTail;
+                            UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
+                            [cell_TwoDetails.textview_View addGestureRecognizer:label_Desc_Tapped];
+                            
+                            [cell_TwoDetails.textview_View setFrame:CGRectMake(TextView_ViewX,TextView_ViewY, TextView_ViewW,TextView_ViewH*2)];
+                            
+                            [cell_TwoDetails.textview setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,Cell_DescLabelH*2)];
+                        }
+
                   }
                 else
                 {
-                    cell_TwoDetails.label_Desc.userInteractionEnabled=YES;
+                    
+               
+                    CGRect newFrame = cell_TwoDetails.textview.frame;
+                    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+                    
+                    cell_TwoDetails.textview_View.userInteractionEnabled=YES;
                     
                     UITapGestureRecognizer *label_Desc_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(label_Desc_Tapped_ActionDetails:)];
-                    [cell_TwoDetails.label_Desc addGestureRecognizer:label_Desc_Tapped];
-                  cell_TwoDetails.label_Desc.lineBreakMode=UILineBreakModeWordWrap;
-            [cell_TwoDetails.label_Desc setFrame:CGRectMake(Cell_DescLabelX,Cell_DescLabelY, Cell_DescLabelW,size.height+70)];
+                    [cell_TwoDetails.textview_View addGestureRecognizer:label_Desc_Tapped];
+                  [cell_TwoDetails.textview_View setFrame:CGRectMake(TextView_ViewX,TextView_ViewY, newFrame.size.width,newFrame.size.height)];
+                [cell_TwoDetails.textview setFrame:newFrame];
+          
                     
                 }
                 
-                  
-                                
+                NSLog(@"Dynamic label heightccc====%f",Cell_DescLabelX);
+                NSLog(@"Dynamic label heightccc====%f",Cell_DescLabelY);
+                NSLog(@"Dynamic label heightccc====%f",Cell_DescLabelW);
+                NSLog(@"Dynamic label heightccc====%f",Cell_DescLabelH);
+                
                 
                  cell_TwoDetails.Label_Dayleft.text=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"createtime1"]];
                 
@@ -2223,12 +2263,19 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         CGFloat height = MAX(size.height, 30.0f);
         NSLog(@"Dynamic label height====%f",height);
         NSInteger rHeight = size.height/FONT_SIZE;
-       
+        [cell_TwoDetails.textview_Dummey setText:text];
+        
+        
+        CGFloat fixedWidth = cell_TwoDetails.textview_Dummey.frame.size.width;
+        CGSize newSize = [cell_TwoDetails.textview_Dummey sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell_TwoDetails.textview_Dummey.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        [cell_TwoDetails.textview_Dummey setFrame:(newFrame)];
         if ([str_TappedLabel isEqualToString:@"yes"])
         {
             
             
-    return 148+size.height;
+    return 148+cell_TwoDetails.textview_Dummey.frame.size.height-38;
             
  
         }
@@ -2241,7 +2288,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         }
        else
          {
-        return 188;
+        return 148+26;
            }
             
  
@@ -2793,7 +2840,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     }
     else
     {
-      [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+      [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     
 }

@@ -22,4 +22,9 @@
 
 @property(nonatomic,weak)IBOutlet UILabel * label_ChallengesTxt;
 @property(nonatomic,weak)IBOutlet UILabel * label_Moretxt;
+
+@property(nonatomic,weak)IBOutlet UITextView * textview_Dummey;
+@property(nonatomic,weak)IBOutlet UITextView * textview;
+@property(nonatomic,weak)IBOutlet UIView * textview_View;
+
 @end
