@@ -33,7 +33,7 @@
     NSUserDefaults *defaults;
     NSMutableArray * Array_VediosData;
     NSDictionary *urlplist;
-    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1;
+    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1,*Str_totalViews;
     NSInteger indexVedio;
     CALayer *Bottomborder_Cell2;
     CGSize size;
@@ -188,7 +188,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         if(Array_VediosData.count !=0)
             {
                 
-                cell_one.indicator_loading.hidden=YES;
+                cell_one.indicator_loading.hidden=NO;
                 cell_one.Button_VolumeMute.hidden=YES;
                 cell_one.Image_3Dots.hidden=YES;
                 for(int i=0;i<Array_VediosData.count;i++)
@@ -206,6 +206,9 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         str_profileurl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"profileimage" ]];
                         
         Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"videourl" ]];
+                        
+        Str_totalViews=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"totalviews" ]];
+                       
                          [Tableview_Explore reloadData];
                         urlVediop = [NSURL URLWithString:Str_urlVedio];
                         
@@ -467,7 +470,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                 
 
                
-                cell_three.Label_Reviews.text=[[Array_VediosData objectAtIndex:0]valueForKey:@"totalviews"];
+                cell_three.Label_Reviews.text=Str_totalViews;//[[Array_VediosData objectAtIndex:0]valueForKey:@"totalviews"];
                 cell_three.Image_Stats.userInteractionEnabled=YES;
                 UITapGestureRecognizer *Image_StatsTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Stats_Action:)];
                 [cell_three.Image_Stats addGestureRecognizer:Image_StatsTapped];
@@ -781,8 +784,8 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         if (item.playbackBufferEmpty)
         {
             cell_one.indicator_loading.hidden=NO;
-            cell_one.Button_VolumeMute.hidden=YES;
-            cell_one.Image_3Dots.hidden=YES;
+           // cell_one.Button_VolumeMute.hidden=YES;
+          //  cell_one.Image_3Dots.hidden=YES;
             [cell_one.indicator_loading startAnimating];
         }
     else

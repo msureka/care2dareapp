@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2766"
             endingLineNumber = "2766"
-            landmarkName = "-ImageTapped_profile:"
+            landmarkName = "-textViewDidChange:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
