@@ -490,7 +490,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
-        return 350;
+        return 357;
     }
 return 0;
     

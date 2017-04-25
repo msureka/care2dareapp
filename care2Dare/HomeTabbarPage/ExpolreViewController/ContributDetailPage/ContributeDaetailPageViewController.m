@@ -2946,7 +2946,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"challengeid"]];
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo"]];
-    
+       set.videoid1=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videoid"]];
  //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
       set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"title"]];

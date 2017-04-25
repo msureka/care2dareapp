@@ -781,8 +781,8 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         if (item.playbackBufferEmpty)
         {
             cell_one.indicator_loading.hidden=NO;
-          
-            
+            cell_one.Button_VolumeMute.hidden=YES;
+            cell_one.Image_3Dots.hidden=YES;
             [cell_one.indicator_loading startAnimating];
         }
     else
