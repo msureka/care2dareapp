@@ -758,6 +758,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
     {
       cell_one.progressslider.hidden=YES;
         cell_one.Button_VolumeMute.hidden=YES;
+          cell_one.Image_3Dots.hidden=YES;
         [playerViewController.view removeFromSuperview];
         //[cell_one.PlayerView removeFromSuperview];
        // [cell_one.PlayerView addSubview:playerViewController.view
@@ -780,16 +781,16 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         if (item.playbackBufferEmpty)
         {
             cell_one.indicator_loading.hidden=NO;
-            cell_one.Button_VolumeMute.hidden=YES;
-            cell_one.Image_3Dots.hidden=YES;
+          
+            
             [cell_one.indicator_loading startAnimating];
         }
     else
     {
         [cell_one.indicator_loading stopAnimating];
      cell_one.indicator_loading.hidden=YES;
-        cell_one.Button_VolumeMute.hidden=NO;
-        cell_one.Image_3Dots.hidden=NO;
+        
+        
     }
     
     

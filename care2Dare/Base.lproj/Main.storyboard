@@ -1146,6 +1146,7 @@
                                         <connections>
                                             <outlet property="Button_VolumeMute" destination="cmO-Co-1uK" id="6ig-bk-eLW"/>
                                             <outlet property="Button_back" destination="Qwq-4v-rmJ" id="h0J-aH-8nq"/>
+                                            <outlet property="Image_3Dots" destination="hnE-hj-PZA" id="yOl-e9-xHn"/>
                                             <outlet property="PlayerView" destination="9Da-J9-llV" id="Twe-7C-jya"/>
                                             <outlet property="indicator_loading" destination="2DI-lc-ygS" id="5j1-nQ-7vM"/>
                                             <outlet property="progressslider" destination="daC-Zq-CND" id="Ir4-7C-6QM"/>
