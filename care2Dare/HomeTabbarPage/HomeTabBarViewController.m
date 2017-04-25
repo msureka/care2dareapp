@@ -8,11 +8,13 @@
 
 #import "HomeTabBarViewController.h"
 #import "Reachability.h"
+#import "SBJsonParser.h"
 @interface HomeTabBarViewController ()<UITabBarDelegate,UITabBarControllerDelegate>
 {
      UITabBarItem *item0,*item1,*item2,*item3,*item4;
     NSUserDefaults * defaults;
     NSDictionary *urlplist;
+    NSMutableArray * Array_Notifications;
 }
 @end
 
@@ -150,10 +152,13 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                                                  if(statusCode == 200)
                                                  {
                                                      
+                                                     Array_Notifications=[[NSMutableArray alloc]init];
                                                      
+    NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+            Array_Notifications=[objSBJsonParser objectWithData:data];
                                                      
-                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                     //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+//        Array_Notifications=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                      
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
@@ -164,11 +169,22 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
                                                      
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatedBudge" object:self userInfo:nil];
-    if (![ResultString isEqualToString:@""] && ![ResultString isEqualToString:@"0"] )
+            NSString *Str_budgeCount,*str_challengecount,*str_contributioncount,*str_videocount;
+                                                     
+            Str_budgeCount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"totalcount"]];
+                                                     
+        str_challengecount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"challengecount"]];
+        
+     str_contributioncount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"contributioncount"]];
+                                                     
+     str_videocount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"videocount"]];
+                                                     
+                                                     
+    if (![Str_budgeCount isEqualToString:@""] && ![Str_budgeCount isEqualToString:@"0"] )
                     {
        
-                item4.badgeValue=ResultString;
-                [defaults setObject:ResultString forKey:@"budge"];
+                item4.badgeValue=Str_budgeCount;
+                [defaults setObject:Str_budgeCount forKey:@"budge"];
                 [defaults synchronize];
 
                   }
@@ -179,11 +195,45 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         item4.badgeValue=nil;
                            
                                         
-                                                         }
-                                                     
-                                                     
-                                                     
-                                                     
+                }
+            if (![str_challengecount isEqualToString:@""] && ![str_challengecount isEqualToString:@"0"] )
+                    {
+                                                         
+   
+                [defaults setObject:str_challengecount forKey:@"challengecount"];
+                [defaults synchronize];
+                                                         
+                        }
+                else
+                {
+                [defaults setObject:@"0" forKey:@"challengecount"];
+                [defaults synchronize];
+                  }
+              if (![str_contributioncount isEqualToString:@""] && ![str_contributioncount isEqualToString:@"0"] )
+                  {
+               
+             [defaults setObject:str_contributioncount forKey:@"contributioncount"];
+              [defaults synchronize];
+                                                         
+               }
+               else
+               {
+             [defaults setObject:@"0" forKey:@"contributioncount"];
+              [defaults synchronize];
+              }
+              
+       if (![str_videocount isEqualToString:@""] && ![str_videocount isEqualToString:@"0"] )
+       {
+                                                         
+     [defaults setObject:str_videocount forKey:@"videocount"];
+     [defaults synchronize];
+       }
+       else
+         {
+          [defaults setObject:@"0" forKey:@"videocount"];
+        [defaults synchronize];
+            }
+        
                                                  }
                                                  
                                                  else

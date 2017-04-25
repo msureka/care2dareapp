@@ -2840,7 +2840,14 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     }
     else
     {
-      [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        if (Array_showrecordvid.count==0)
+        {
+             [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:NO];        }
+        else
+        {
+      [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
+        
     }
     
 }

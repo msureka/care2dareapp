@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "SBJsonParser.h"
 #import "Reachability.h"
-
+#import "ContributeMoneyViewController.h"
 @interface RaisedContributeViewController ()
 {
     UIView *sectionView;
@@ -30,7 +30,7 @@
 
 
 @implementation RaisedContributeViewController
-@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount;
+@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -104,6 +104,14 @@
     indicator.color=[UIColor darkGrayColor];
     indicator.center = self.view.center;
     indicator.hidden=NO;
+    Image_PayTopheader.userInteractionEnabled=YES;
+    UITapGestureRecognizer * Image_Pay_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Pay_Action:)];
+    [Image_PayTopheader addGestureRecognizer:Image_Pay_Tapped];
+    
+        Label_PayTopheader.userInteractionEnabled=YES;
+    
+    UITapGestureRecognizer * Label_Pay_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Pay_Action:)];
+    [Label_PayTopheader addGestureRecognizer:Label_Pay_Tapped];
     
     
     [self Communicaion_Raised];
@@ -111,6 +119,14 @@
     
     
     
+}
+-(void)Image_Pay_Action:(UIGestureRecognizer *)reconizer
+{
+    ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
+    set.total_players=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Challengers.count ];
+    
+    set.challengerID=Str_Channel_Id;
+    [self.navigationController pushViewController:set animated:YES];
 }
 -(void)Communicaion_Raised
 {

@@ -394,6 +394,10 @@
 		9AF9DBFB1E9B608A00A652D9 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF01E9B608A00A652D9 /* AFURLConnectionOperation.m */; };
 		9AF9DBFC1E9B608A00A652D9 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF21E9B608A00A652D9 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */; };
+		9AFD240A1EAF5A9A00A9E934 /* Crowdfunding Filled-100 (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24061EAF5A9A00A9E934 /* Crowdfunding Filled-100 (1).png */; };
+		9AFD240B1EAF5A9A00A9E934 /* Donate Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24071EAF5A9A00A9E934 /* Donate Filled-100.png */; };
+		9AFD240C1EAF5A9A00A9E934 /* Initiate Money Transfer Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24081EAF5A9A00A9E934 /* Initiate Money Transfer Filled-100.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -930,6 +934,10 @@
 		9AF9DBF21E9B608A00A652D9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		9AF9DBF31E9B608A00A652D9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cash in Hand Filled-100.png"; sourceTree = "<group>"; };
+		9AFD24061EAF5A9A00A9E934 /* Crowdfunding Filled-100 (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crowdfunding Filled-100 (1).png"; sourceTree = "<group>"; };
+		9AFD24071EAF5A9A00A9E934 /* Donate Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Donate Filled-100.png"; sourceTree = "<group>"; };
+		9AFD24081EAF5A9A00A9E934 /* Initiate Money Transfer Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Initiate Money Transfer Filled-100.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1728,6 +1736,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9AFD24041EAF5A9A00A9E934 /* payicon */,
 				9A62705C1EA0A0B6003C85E4 /* volumemute */,
 				9A698B4C1E9E23DE00FB7FB7 /* redcircle */,
 				9A698B411E9E088800FB7FB7 /* downarrow */,
@@ -1976,6 +1985,17 @@
 			path = WatchPageViewController;
 			sourceTree = "<group>";
 		};
+		9AFD24041EAF5A9A00A9E934 /* payicon */ = {
+			isa = PBXGroup;
+			children = (
+				9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */,
+				9AFD24061EAF5A9A00A9E934 /* Crowdfunding Filled-100 (1).png */,
+				9AFD24071EAF5A9A00A9E934 /* Donate Filled-100.png */,
+				9AFD24081EAF5A9A00A9E934 /* Initiate Money Transfer Filled-100.png */,
+			);
+			path = payicon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2111,6 +2131,7 @@
 				9A45BA271E8E310900BAC5E8 /* addfriend1@2x.png in Resources */,
 				9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */,
 				9AED22901E6AE3300004A8D0 /* UrlName.plist in Resources */,
+				9AFD240C1EAF5A9A00A9E934 /* Initiate Money Transfer Filled-100.png in Resources */,
 				9A6E39F21E7AB64800B4AD5B /* topname.png in Resources */,
 				9AED222A1E6A8C6A0004A8D0 /* watch@2x.png in Resources */,
 				9A45BA2B1E8E310900BAC5E8 /* friendrequested.png in Resources */,
@@ -2162,6 +2183,7 @@
 				9AED22131E6A8C6A0004A8D0 /* create@3x.png in Resources */,
 				9A38F5B11E9666BC00EADE7F /* comments@2x.png in Resources */,
 				9A6E39F31E7AB64800B4AD5B /* topname@2x.png in Resources */,
+				9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */,
 				9AA9B5371E700AC700C6EF37 /* blueprivate@3x.png in Resources */,
 				9A6E39E81E7AB64800B4AD5B /* flag@3x.png in Resources */,
 				9A57279B1E7179CF006A5F52 /* Done@2x.png in Resources */,
@@ -2266,6 +2288,7 @@
 				9A6E39E21E7AB64800B4AD5B /* challenge_favourite1@2x.png in Resources */,
 				9AA9B5501E70279000C6EF37 /* greenslider.png in Resources */,
 				9A6E39E61E7AB64800B4AD5B /* flag.png in Resources */,
+				9AFD240B1EAF5A9A00A9E934 /* Donate Filled-100.png in Resources */,
 				9A7258EE1E96542F00245AF4 /* WatchVedioDescTableViewCell.xib in Resources */,
 				9AED22401E6A9D900004A8D0 /* playbutton@2x.png in Resources */,
 				9A45BA261E8E310900BAC5E8 /* addfriend1.png in Resources */,
@@ -2327,6 +2350,7 @@
 				9AED224C1E6AA61A0004A8D0 /* exploreworld1.png in Resources */,
 				9AA9B5171E6FDD4200C6EF37 /* VedioNotiTableViewCell.xib in Resources */,
 				9A0605B91E6D66D900FF4229 /* settings@2x.png in Resources */,
+				9AFD240A1EAF5A9A00A9E934 /* Crowdfunding Filled-100 (1).png in Resources */,
 				9ABB5DA61E693EA300482105 /* SanFranciscoDisplay-Semibold.otf in Resources */,
 				9A06060C1E6D87B000FF4229 /* profile_publictext@2x.png in Resources */,
 				9A19B41B1E6EDA3100262BC1 /* searchbar.png in Resources */,

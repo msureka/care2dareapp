@@ -18,6 +18,8 @@
 @property(nonatomic,weak)IBOutlet UILabel * Label_RaisedAmt;
 @property(nonatomic,weak)IBOutlet UIView * view_Topheader;
 
+@property(nonatomic,weak)IBOutlet UILabel * Label_PayTopheader;
+@property(nonatomic,weak)IBOutlet UIImageView * Image_PayTopheader;
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Raised;
 

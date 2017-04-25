@@ -799,6 +799,17 @@
                                         <color key="textColor" red="0.30980392159999998" green="0.29803921570000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cash in Hand Filled-100.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ila-o3-a0k">
+                                        <frame key="frameInset" minX="88.00%" minY="31.43%" width="9.87%" height="41.43%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Snz-FG-yic">
+                                        <frame key="frameInset" minX="88.00%" minY="70.00%" width="9.87%" height="30.00%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="14"/>
+                                        <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="0.60367788461538463" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -910,6 +921,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="Image_PayTopheader" destination="Ila-o3-a0k" id="TGI-2E-gtx"/>
+                        <outlet property="Label_PayTopheader" destination="Snz-FG-yic" id="ZAV-Pw-Fht"/>
                         <outlet property="Label_RaisedAmt" destination="PFY-en-prC" id="HeI-XO-oTV"/>
                         <outlet property="Tableview_Raised" destination="Iso-Vr-Puq" id="TqQ-tM-l2o"/>
                         <outlet property="view_Topheader" destination="WeI-e0-fsm" id="or6-x4-yOf"/>
@@ -917,7 +930,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMz-cc-v8w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4695" y="-1681"/>
+            <point key="canvasLocation" x="4693.6000000000004" y="-1681.7091454272866"/>
         </scene>
         <!--Contribute Money View Controller-->
         <scene sceneID="6LP-og-MoU">
@@ -1044,7 +1057,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kzC-CR-0YB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5263" y="-1681"/>
+            <point key="canvasLocation" x="5393" y="-1682"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ir4-eg-1SW">
@@ -2421,6 +2434,11 @@
                                             <action selector="ButtonChallenges_Action:" destination="Dbb-Ep-0bO" eventType="touchUpInside" id="Mjh-lE-PB6"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-Se-d8T">
+                                        <frame key="frameInset" minX="28.80%" minY="43.18%" width="2.13%" height="18.18%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbU-Ez-Sl1">
                                         <frame key="frameInset" minX="66.67%" minY="0.0%" width="33.33%" height="100.00%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -2443,6 +2461,16 @@
                                             <action selector="ButtonContribution_Action:" destination="Dbb-Ep-0bO" eventType="touchUpInside" id="cR3-1L-PJj"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-W9-Q7X">
+                                        <frame key="frameInset" minX="64.27%" minY="43.18%" width="2.13%" height="18.18%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="crY-4h-okH">
+                                        <frame key="frameInset" minX="91.20%" minY="43.18%" width="2.13%" height="18.18%"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -2455,6 +2483,9 @@
                         <outlet property="Button_Contribution" destination="XVq-Hd-klz" id="sUy-s0-tDN"/>
                         <outlet property="Button_Search" destination="gvx-uj-ZTN" id="ZzL-GG-odd"/>
                         <outlet property="Button_Videos" destination="NbU-Ez-Sl1" id="Ax8-dr-wmv"/>
+                        <outlet property="ImageRed_Challenges" destination="p4p-Se-d8T" id="stf-M2-Xf8"/>
+                        <outlet property="ImageRed_Contribution" destination="ocK-W9-Q7X" id="Q5W-NE-VLP"/>
+                        <outlet property="ImageRed_Videos" destination="crY-4h-okH" id="g5E-wq-ucX"/>
                         <outlet property="Lable_Titlenotif" destination="bTz-wc-ucf" id="x6k-jm-npx"/>
                         <outlet property="Tableview_Notif" destination="RTG-md-wzo" id="xB1-BY-NBn"/>
                         <outlet property="Textfield_Search" destination="1Fh-jP-Ed5" id="TC0-Xn-jaJ"/>
@@ -3260,6 +3291,7 @@
     <resources>
         <image name="10154143609282724.jpg" width="1936" height="1936"/>
         <image name="3dots.png" width="12" height="59"/>
+        <image name="Cash in Hand Filled-100.png" width="100" height="100"/>
         <image name="Mute Filled-100.png" width="100" height="100"/>
         <image name="Screenshot Filled-50.png" width="50" height="50"/>
         <image name="addfriend.png" width="61" height="59"/>

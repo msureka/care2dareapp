@@ -33,6 +33,10 @@
 @property(nonatomic,weak)IBOutlet UIButton * Button_Contribution;
 @property(nonatomic,weak)IBOutlet UIButton * Button_Videos;
 
+@property(nonatomic,weak)IBOutlet UIImageView * ImageRed_Challenges;
+@property(nonatomic,weak)IBOutlet UIImageView * ImageRed_Contribution;
+@property(nonatomic,weak)IBOutlet UIImageView * ImageRed_Videos;
+
 -(IBAction)ButtonChallenges_Action:(id)sender;
 -(IBAction)ButtonContribution_Action:(id)sender;
 -(IBAction)ButtonVedio_Action:(id)sender;

@@ -52,7 +52,33 @@
 flag_challenge=@"no";
     flag_Contribute=@"no";
     flag_Vedio=@"no";
+    if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Challenges.hidden=YES;
+    }
+    else
+    {
+     _ImageRed_Challenges.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"contributioncount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Contribution.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Contribution.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"videocount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Videos.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Videos.hidden=NO;
+    }
     
+   
+
     
     [self ClienserverCommAll];
 }
@@ -1727,9 +1753,35 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-1, Button_Videos.frame.size.width,1);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
-   
+    if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Challenges.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Challenges.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"contributioncount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Contribution.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Contribution.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"videocount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Videos.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Videos.hidden=NO;
+    }
+    [defaults setObject:@"0" forKey:@"challengecount"];
+    [defaults synchronize];
     [self ClienserverCommAll];
     [Tableview_Notif reloadData];
+    
 }
 -(IBAction)ButtonContribution_Action:(id)sender
 {
@@ -1755,6 +1807,35 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-1, Button_Videos.frame.size.width,1);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
+    
+    if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Challenges.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Challenges.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"contributioncount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Contribution.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Contribution.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"videocount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Videos.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Videos.hidden=NO;
+    }
+
+    [defaults setObject:@"0" forKey:@"contributioncount"];
+    [defaults synchronize];
+    
     [self ClienserverComm_Contribution];
       [Tableview_Notif reloadData];
 }
@@ -1782,6 +1863,33 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-2.5, Button_Videos.frame.size.width,2.5);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
+    if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Challenges.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Challenges.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"contributioncount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Contribution.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Contribution.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"videocount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Videos.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Videos.hidden=NO;
+    }
+    [defaults setObject:@"0" forKey:@"videocount"];
+    [defaults synchronize];
+    
     [self ClienserverComm_Vedios];
       [Tableview_Notif reloadData];
     
