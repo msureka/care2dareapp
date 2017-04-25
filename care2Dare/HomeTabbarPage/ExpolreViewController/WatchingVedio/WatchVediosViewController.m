@@ -229,14 +229,14 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
        else
         {
         NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                 
+            [self CommunicationPlayVedio];
          }
     }
         else if(error)
             {
                                              
         NSLog(@"error login2.......%@",error.description);
-              
+              [self CommunicationPlayVedio];
             }
                                          
         }];
@@ -355,14 +355,14 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                     
                     cell_two = [[WatchVedioDescTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdv2];
                 }
-                if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_VediosData objectAtIndex:0]valueForKey:@"useridvideo"]]|| [str_friendstatus isEqualToString:@""])
+                if ([[defaults valueForKey:@"userid"] isEqualToString:userId_Prof1]|| [str_friendstatus isEqualToString:@""])
                 {
                     cell_two.Button_SetValues.hidden=YES;
                 }
                 else
                 {
                 
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"] ||[str_friendstatus isEqualToString:@"no"])
+                if ([str_friendstatus isEqualToString:@"no"])
                 {
                     cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"addfriend.png"] forState:UIControlStateNormal];
@@ -370,13 +370,13 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                 }
                
                 
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"yes"]||[str_friendstatus isEqualToString:@"yes"])
+                if ([str_friendstatus isEqualToString:@"yes"])
                 {
                        cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"addfriend1.png"] forState:UIControlStateNormal];
                     
                 }
-                if ([[[Array_VediosData objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"waiting"]||[str_friendstatus isEqualToString:@"waiting"])
+                if ([str_friendstatus isEqualToString:@"waiting"])
                 {
                        cell_two.Button_SetValues.hidden=NO;
                     [cell_two.Button_SetValues setImage:[UIImage imageNamed:@"friendrequested.png"] forState:UIControlStateNormal];

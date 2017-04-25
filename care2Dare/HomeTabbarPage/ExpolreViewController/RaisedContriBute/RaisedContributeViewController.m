@@ -257,6 +257,8 @@
     Ypostion_label=67;
     Xwidth_label=60;
     Yheight_label=20;
+    indicator.hidden=YES;
+     [indicator stopAnimating];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
