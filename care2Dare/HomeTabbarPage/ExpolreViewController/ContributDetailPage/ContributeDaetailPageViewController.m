@@ -1218,7 +1218,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         generateImg.appliesPreferredTrackTransform = YES;
         NSError *error = NULL;
-        CMTime time = CMTimeMake(1, 7);
+        CMTime time = CMTimeMake(0, 1);
         CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
         NSLog(@"error==%@, Refimage==%@", error, refImg);
         
@@ -1284,7 +1284,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     UIImage *image =  [self scaleImage:chosenImage  toSize:CGSizeMake([imageUserWidth floatValue]*2,[imageUserheight floatValue]*2)];
     
     
-    imageData = UIImageJPEGRepresentation(image,0.5);
+    imageData = UIImageJPEGRepresentation(image,1.0);
     
     // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     

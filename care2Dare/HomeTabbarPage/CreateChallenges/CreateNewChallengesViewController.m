@@ -1141,7 +1141,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         
         
-        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 0.5);
+        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
         
         
         ImageNSdataThumb = [Base64 encode:imageDataThumb];
@@ -1183,7 +1183,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
         
-        imageData = UIImageJPEGRepresentation(chosenImage, 0.5);
+        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
         
         // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
