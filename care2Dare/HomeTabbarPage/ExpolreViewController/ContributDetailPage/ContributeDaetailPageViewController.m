@@ -1702,7 +1702,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
                 
-                CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+                CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
                 
                 CGFloat height = MAX(size.height, 30.0f);
                 NSLog(@"Dynamic label height====%f",height);
