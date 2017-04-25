@@ -435,20 +435,20 @@
                 {
                     [self.view hideActivityViewWithAfterDelay:0];
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"challenges"] forKey:@"challenges"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"challenges"]] forKey:@"challenges"];
                     
                     
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"email"] forKey:@"email"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"email"]] forKey:@"email"];
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"friends"] forKey:@"friends"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"friends"]] forKey:@"friends"];
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"name"] forKey:@"name"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"name"]] forKey:@"name"];
                     
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"profileimage"] forKey:@"profileimage"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"profileimage"]] forKey:@"profileimage"];
                     
-                    [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"userid"] forKey:@"userid"];
+                    [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
                     
                     
                     [defaults setObject:@"yes" forKey:@"LoginView"];
@@ -666,20 +666,20 @@
                         {
                         [self.view hideActivityViewWithAfterDelay:0];
                             
-                            [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"challenges"] forKey:@"challenges"];
+                            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"challenges"]] forKey:@"challenges"];
                             
                             
                             
-                            [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"email"] forKey:@"email"];
+                            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"email"]] forKey:@"email"];
                             
-                            [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"friends"] forKey:@"friends"];
+                            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"friends"]] forKey:@"friends"];
                             
                             [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"name"] forKey:@"name"];
                             
                             
                             [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"profileimage"] forKey:@"profileimage"];
                             
-                            [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"userid"] forKey:@"userid"];
+                            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
                             
                             
                             [defaults setObject:@"yes" forKey:@"LoginView"];

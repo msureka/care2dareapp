@@ -16,6 +16,13 @@
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
 #import "ProfilePageDetailsViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AssetsLibrary/ALAsset.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <MobileCoreServices/UTCoreTypes.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
+
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -34,7 +41,7 @@
     NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist;
     NSMutableArray * Array_Comment1,*Array_Comment;
     NSData *imageData;
- 
+  MPMoviePlayerViewController * movieController;
     CALayer *upperBorder;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
@@ -192,12 +199,19 @@
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
                 cell_OneImageVid.image_playButton.hidden=YES;
+                 [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
             }
             else
             {
                 cell_OneImageVid.image_playButton.hidden=NO;
+                cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
+                UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
+                [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
             cell_OneImageVid.Image_Backround.image=ProfileImgeData.image;
+            
+            
+           
             
             return cell_OneImageVid;
             
@@ -618,6 +632,13 @@
   
     
 }
-
+-(void)ImageTap_playButtonAction:(UIGestureRecognizer *)reconizer
+{
+    NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"mediaurl"]]];
+    movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVedio];
+[self presentMoviePlayerViewControllerAnimated:movieController];
+    [movieController.moviePlayer prepareToPlay];
+    [movieController.moviePlayer play];
+}
 
 @end

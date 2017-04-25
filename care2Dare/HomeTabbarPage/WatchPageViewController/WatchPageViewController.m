@@ -789,7 +789,7 @@ transparancyTuchView.hidden=YES;
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageV.tag]valueForKey:@"profileimage"]];
         
-        set.Images_data=cell_one.Image_Profile;
+//        set.Images_data=cell_one.Image_Profile;
         [self.navigationController pushViewController:set animated:YES];
     }
   

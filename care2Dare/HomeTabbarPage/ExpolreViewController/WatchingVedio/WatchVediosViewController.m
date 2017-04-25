@@ -189,6 +189,8 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
             {
                 
                 cell_one.indicator_loading.hidden=YES;
+                cell_one.Button_VolumeMute.hidden=YES;
+                cell_one.Image_3Dots.hidden=YES;
                 for(int i=0;i<Array_VediosData.count;i++)
                 {
                     if ([[[Array_VediosData objectAtIndex:i]valueForKey:@"status"]isEqualToString:@"PLAY"])
@@ -204,13 +206,14 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         str_profileurl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"profileimage" ]];
                         
         Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"videourl" ]];
+                         [Tableview_Explore reloadData];
                         urlVediop = [NSURL URLWithString:Str_urlVedio];
                         
                         asset = [AVURLAsset assetWithURL: urlVediop];
             
                         [self PlayVediosAuto];
                         
-                        [Tableview_Explore reloadData];
+                       
                     }
                    
        
@@ -218,13 +221,6 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                     
              }
                    
-                    if (size.height !=0)
-                    {
-                        NSLog(@"heigt vedio===%f",size.height);
-
-                        
-                      
-                    }
                     
        }
        else
@@ -327,57 +323,15 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
             if (Array_VediosData.count==0)
             {
                  cell_one.image_Thumbnail.hidden=NO;
-                cell_one.image_Thumbnail.image=str_image_Data.image;
+               // cell_one.image_Thumbnail.image=str_image_Data.image;
                 cell_one.indicator_loading.hidden=NO;
                 cell_one.progressslider.hidden=YES;
+                cell_one.Button_VolumeMute.hidden=YES;
+                cell_one.Image_3Dots.hidden=YES;
             }
             else
             {
-//            cell_one.image_Thumbnail.hidden=YES;
-//           // cell_one.indicator_loading.hidden=YES;
-//            cell_one.progressslider.hidden=NO;
-//    
-//   
-//            
-//            playerViewController = [[AVPlayerViewController alloc] init];
-//            NSURL *url = [NSURL URLWithString:Str_urlVedio];
-//            
-//            AVURLAsset *asset = [AVURLAsset assetWithURL: url];
-//            item = [AVPlayerItem playerItemWithAsset: asset];
-//            
-//            player = [[AVPlayer alloc] initWithPlayerItem: item];
-//            playerViewController.player = player;
-//        [playerViewController.view setFrame:CGRectMake(0, 0,cell_one.PlayerView.frame.size.width,cell_one.PlayerView.frame.size.width)];
-//            
-//            playerViewController.showsPlaybackControls = NO;
-//            
-//            [cell_one.PlayerView addSubview:playerViewController.view];
-//            timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
-//        playerViewController.videoGravity=AVLayerVideoGravityResizeAspectFill;
-//            [player play];
-//            
-//            Flag_watch=@"no";
-//            item= player.currentItem;
-//            
-//            
-//            CMTime duration = item.duration;
-//            CMTime currentTime = item.currentTime;
-//            
-//            dur = CMTimeGetSeconds(player.currentItem.asset.duration);
-//            CurrentTimes=CMTimeGetSeconds(currentTime);
-//            NSLog(@"duration: %.2f", dur);
-//            Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
-//            [Button_PlayPause setTitle:@"" forState:UIControlStateNormal];
-//            [Button_PlayPause addTarget:self action:@selector(Play_Action:) forControlEvents:UIControlEventTouchUpInside];
-//                
-//                 [cell_one.Button_VolumeMute addTarget:self action:@selector(MutePlay_Action:) forControlEvents:UIControlEventTouchUpInside];
-//                
-//                
-//                
-//            Button_PlayPause.backgroundColor=[UIColor clearColor];
-//            [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//            Button_PlayPause.center=cell_one.PlayerView.center;
-//            [cell_one.PlayerView addSubview:Button_PlayPause];
+
             
             }
             
@@ -826,12 +780,16 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         if (item.playbackBufferEmpty)
         {
             cell_one.indicator_loading.hidden=NO;
+            cell_one.Button_VolumeMute.hidden=YES;
+            cell_one.Image_3Dots.hidden=YES;
             [cell_one.indicator_loading startAnimating];
         }
     else
     {
         [cell_one.indicator_loading stopAnimating];
      cell_one.indicator_loading.hidden=YES;
+        cell_one.Button_VolumeMute.hidden=NO;
+        cell_one.Image_3Dots.hidden=NO;
     }
     
     
@@ -1052,6 +1010,8 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 {
      [playerViewController.view removeFromSuperview];
     cell_one.indicator_loading.hidden=NO;
+    cell_one.Button_VolumeMute.hidden=NO;
+    cell_one.Image_3Dots.hidden=NO;
     [cell_one.indicator_loading startAnimating];
     cell_one.image_Thumbnail.hidden=YES;
     // cell_one.indicator_loading.hidden=YES;
