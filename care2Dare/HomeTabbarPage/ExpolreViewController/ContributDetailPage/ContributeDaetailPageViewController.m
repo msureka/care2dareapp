@@ -22,6 +22,7 @@
 
 #define FONT_SIZE 15.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
+
 #define CELL_CONTENT_MARGIN 0.0f
 
 @interface ContributeDaetailPageViewController ()<NSURLSessionDelegate>
@@ -1700,12 +1701,16 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
                 
                 
-                CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+                CGSize constraint = CGSizeMake(340 - (CELL_CONTENT_MARGIN * 2), 20000.0f);
                 
                 CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
                 
                 CGFloat height = MAX(size.height, 30.0f);
                 NSLog(@"Dynamic label height====%f",height);
+                
+                
+                float rows = (cell_TwoDetails.textview.contentSize.height - cell_TwoDetails.textview.textContainerInset.top - cell_TwoDetails.textview.textContainerInset.bottom) / cell_TwoDetails.textview.font.lineHeight;
+                 NSLog(@"Dynamic label rowsline====%f",rows);
               //  cell_TwoDetails.label_Desc.numberOfLines=0;
     
                 [cell_TwoDetails.textview setText:text];
@@ -1714,7 +1719,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 CGFloat fixedWidth = cell_TwoDetails.textview.frame.size.width;
                 CGSize newSize = [cell_TwoDetails.textview sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
             //  cell_TwoDetails.label_Desc.backgroundColor=[UIColor clearColor];
-        NSInteger rHeight = size.height/FONT_SIZE;
+        NSInteger rHeight = size.height/24;
                 NSLog(@"No of lines: %ld",(long)rHeight);
                 cell_TwoDetails.textview_Dummey.hidden=YES;
                   if ([str_TappedLabel isEqualToString:@"no"])
@@ -2256,13 +2261,13 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
         
         
-        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+        CGSize constraint = CGSizeMake(345 - (CELL_CONTENT_MARGIN * 2), 20000.0f);
         
-        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
         
         CGFloat height = MAX(size.height, 30.0f);
         NSLog(@"Dynamic label height====%f",height);
-        NSInteger rHeight = size.height/FONT_SIZE;
+        NSInteger rHeight = size.height/24;
         [cell_TwoDetails.textview_Dummey setText:text];
         
         

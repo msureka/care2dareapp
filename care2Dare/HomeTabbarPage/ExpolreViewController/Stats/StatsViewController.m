@@ -186,19 +186,19 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 {
     if (indexPath.section==0)
     {
-        return 84;
+        return 100;
     }
     if (indexPath.section==1)
     {
-            return 130;
+            return 160;
     }
     if (indexPath.section==2)
     {
-        return 74;
+        return 100;
     }
     if (indexPath.section==3)
     {
-        return 96;
+        return 100;
     }
     
         return 0;

@@ -73,6 +73,13 @@
 }
 -(IBAction)Button_Help_Action:(id)sender
 {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:@"Enter the amount ($) you wish to contribute to each challenger. This will be paid out once the challenger completes the challenge successfully." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 -(IBAction)Button_Contribute_Send_Action:(id)sender
