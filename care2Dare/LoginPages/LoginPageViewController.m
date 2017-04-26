@@ -24,6 +24,8 @@
     NSDictionary *urlplist;
     NSMutableArray *array_login;
     NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt;
+    
+    NSMutableArray *fb_friend_Name,*fb_friend_id;
 }
 @end
 
@@ -145,7 +147,7 @@
         
         
         
-        [login logInWithReadPermissions: @[@"public_profile", @"email"]
+        [login logInWithReadPermissions: @[@"public_profile", @"email",@"user_friends"]
                      fromViewController:self
                                 handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
          {
@@ -165,11 +167,19 @@
              }
              else
              {
-                 
-                 
+//                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+//                                               initWithGraphPath:@"/{user-id}/friendlists"
+//                                               parameters:params
+//                                               HTTPMethod:@"GET"];
+//                 [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+//                                                       id result,
+//                                                       NSError *error) {
+//                     // Handle the result
+//                 }];
+//                 
                  NSLog(@"Logged in");
                  NSLog(@"Process result123123=%@",result);
-                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,first_name,last_name,gender,email,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,friends,name,first_name,last_name,gender,email,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                      if (!error) {
                          if ([result isKindOfClass:[NSDictionary class]])
                          {
@@ -181,8 +191,21 @@
                              genderfb=[result objectForKey:@"gender"];
                              
                              
+                             NSArray * allKeys = [[result valueForKey:@"friends"]objectForKey:@"data"];
                              
+                             fb_friend_Name = [[NSMutableArray alloc]init];
+                             fb_friend_id  =  [[NSMutableArray alloc]init];
                              
+                             for (int i=0; i<[allKeys count]; i++)
+                             {
+                        [fb_friend_Name addObject:[[[[result valueForKey:@"friends"]objectForKey:@"data"] objectAtIndex:i] valueForKey:@"name"]];
+                                 
+                        [fb_friend_id addObject:[[[[result valueForKey:@"friends"]objectForKey:@"data"] objectAtIndex:i] valueForKey:@"id"]];
+                                 
+                             }
+                             
+                             NSLog(@"Friends ID : %@",fb_friend_id);
+                             NSLog(@"Friends Name : %@",fb_friend_Name);
                              
                              profile_picFb= [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",Fbid];
                              
@@ -201,6 +224,7 @@
              
          }];
     }
+   
 }
 -(IBAction)LoginWithTwitterAction:(id)sender
 {
