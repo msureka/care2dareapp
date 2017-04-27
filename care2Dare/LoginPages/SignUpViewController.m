@@ -22,7 +22,8 @@
     NSMutableArray * array_login;
      NSDictionary *urlplist;
     NSUserDefaults * defaults;
-    NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt;
+    NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
+    NSMutableArray *fb_friend_id;
 }
 @end
 
@@ -147,7 +148,7 @@
         
         
         
-        [login logInWithReadPermissions: @[@"public_profile", @"email"]
+        [login logInWithReadPermissions: @[@"public_profile", @"email",@"user_friends"]
                      fromViewController:self
                                 handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
          {
@@ -171,7 +172,7 @@
                  
                  NSLog(@"Logged in");
                  NSLog(@"Process result123123=%@",result);
-                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,first_name,last_name,gender,email,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,friends,first_name,last_name,gender,email,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                      if (!error) {
                          if ([result isKindOfClass:[NSDictionary class]])
                          {
@@ -184,7 +185,23 @@
                              
                   regTypeVal=@"FACEBOOK";
                          
-            
+                             NSArray * allKeys = [[result valueForKey:@"friends"]objectForKey:@"data"];
+                             
+                             //                             fb_friend_Name = [[NSMutableArray alloc]init];
+                             fb_friend_id  =  [[NSMutableArray alloc]init];
+                             
+                             for (int i=0; i<[allKeys count]; i++)
+                             {
+                                 //   [fb_friend_Name addObject:[[[[result valueForKey:@"friends"]objectForKey:@"data"] objectAtIndex:i] valueForKey:@"name"]];
+                                 
+                                 [fb_friend_id addObject:[[[[result valueForKey:@"friends"]objectForKey:@"data"] objectAtIndex:i] valueForKey:@"id"]];
+                                 
+                             }
+                             
+                             Str_fb_friend_id=[fb_friend_id componentsJoinedByString:@","];
+                             Str_fb_friend_id_Count=[NSString stringWithFormat:@"%d",fb_friend_id.count];
+                             NSLog(@"Friends ID : %@",Str_fb_friend_id);
+
                              
         profile_picFb= [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",Fbid];
                              
@@ -207,6 +224,7 @@
 -(IBAction)LoginWithTwitterAction:(id)sender
 {
       [self.view endEditing:YES];
+     [self.view showActivityViewWithLabel:@"Loading"];
     [[Twitter sharedInstance] logInWithMethods:TWTRLoginMethodWebBased completion:^(TWTRSession *session, NSError *error)
      {
          if (session)
@@ -241,13 +259,18 @@
                   regTypeVal =@"TWITTER";
                   genderfb=@"";
                   profile_picFb=[Array_sinupFb valueForKey:@"profile_image_url"];
-                  [self FbTwittercommunicationServer];
+                  
+                  [self TwitterFriendsList];
+                  
+                  //[self FbTwittercommunicationServer];
                   
               }];
              
              
              
-         } else {
+         } else
+         {
+              [self.view hideActivityViewWithAfterDelay:1];
              NSLog(@"error: %@", [error localizedDescription]);
          }
      }];
@@ -514,7 +537,54 @@
         
     }
 }
-
+-(void)TwitterFriendsList
+{
+    
+    
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:Fbid];
+    NSString *statusesShowEndpoint = @"https://api.twitter.com/1.1/friends/ids.json";
+    NSDictionary *params = @{@"id" : Fbid};
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:statusesShowEndpoint parameters:params error:&clientError];
+    
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                // handle the response data e.g.
+                NSError *jsonError;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                
+                NSArray *json22=[json objectForKey:@"ids"];
+                
+                
+                NSLog(@"jsonjson: %d",json22.count);
+                
+                Str_fb_friend_id=[json22 componentsJoinedByString:@","];
+                Str_fb_friend_id_Count=[NSString stringWithFormat:@"%d",json22.count];
+                NSLog(@"Str_fb_friend_id: %@",Str_fb_friend_id);
+                NSLog(@"jsonjson: %@",json22);
+                
+                [self FbTwittercommunicationServer];
+            }
+            else
+            {
+                NSLog(@"Error: %@", connectionError);
+                
+                [self TwitterFriendsList];
+            }
+        }];
+    }
+    else
+    {
+        NSLog(@"Error: %@", clientError);
+        
+        [self TwitterFriendsList];
+    }
+    
+    
+    
+}
 
 -(void)FbTwittercommunicationServer
 {
@@ -558,7 +628,12 @@
     NSString *Platform= @"platform";
     NSString *PlatformVal =@"ios";
     
-    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",fbid1,Fbid,email,emailFb,gender,genderfb,name,nameFb,password,passwordVal,Dob,DobVal,regType,regTypeVal,city,cityVal,country,countryVal,devicetoken,devicetokenVal,Platform,PlatformVal,imageurl,profile_picFb];
+    NSString *nooffriends= @"nooffriends";
+    
+    NSString *friendlist= @"friendlist";
+    NSString *friendlistval =[NSString stringWithFormat:@"%@",Str_fb_friend_id];
+    
+    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",fbid1,Fbid,email,emailFb,gender,genderfb,name,nameFb,password,passwordVal,Dob,DobVal,regType,regTypeVal,city,cityVal,country,countryVal,devicetoken,devicetokenVal,Platform,PlatformVal,imageurl,profile_picFb,nooffriends,Str_fb_friend_id_Count,friendlist,friendlistval];
     
     
     

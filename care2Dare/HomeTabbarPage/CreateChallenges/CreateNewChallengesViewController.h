@@ -85,6 +85,8 @@
 - (IBAction)TextAction_Total:(id)sender;
 @property(weak,nonatomic)IBOutlet UITextField *TotalTextField;
 @property (strong, nonatomic) NSURL *videoURL;
+@property (strong, nonatomic) NSURL *finalURL;
+
 @property (strong, nonatomic) MPMoviePlayerController *videoController;
 
 

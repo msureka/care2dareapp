@@ -75,7 +75,7 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated
-{
+{[[UIApplication sharedApplication] setStatusBarHidden:YES];
     //[self CommunicationPlayVedio];
     timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
     
@@ -189,6 +189,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
             {
                 
                 cell_one.indicator_loading.hidden=NO;
+                [cell_one.indicator_loading startAnimating];
                 cell_one.Button_VolumeMute.hidden=YES;
                 cell_one.Image_3Dots.hidden=YES;
                 for(int i=0;i<Array_VediosData.count;i++)
@@ -328,6 +329,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                  cell_one.image_Thumbnail.hidden=NO;
                // cell_one.image_Thumbnail.image=str_image_Data.image;
                 cell_one.indicator_loading.hidden=NO;
+                [cell_one.indicator_loading startAnimating];
                 cell_one.progressslider.hidden=YES;
                 cell_one.Button_VolumeMute.hidden=YES;
                 cell_one.Image_3Dots.hidden=YES;
@@ -738,6 +740,8 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
 
 -(void)Button_Back_Action:(UIButton *)sender
 {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
     [cell_one.PlayerView removeFromSuperview];
     [playerViewController.view removeFromSuperview];
     [player pause];
@@ -989,6 +993,12 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 }
 - (IBAction)MutePlay_Action:(id)sender
 {
+    
+//    playerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    
+//    // Present the movie player view controller
+//    [self dismissViewControllerAnimated:YES completion:nil];
+   
     if (cell_one.Button_VolumeMute.isSelected==YES)
     {
         player.muted=NO;
@@ -1014,6 +1024,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 {
      [playerViewController.view removeFromSuperview];
     cell_one.indicator_loading.hidden=NO;
+    [cell_one.indicator_loading startAnimating];
     cell_one.Button_VolumeMute.hidden=NO;
     cell_one.Image_3Dots.hidden=NO;
     [cell_one.indicator_loading startAnimating];

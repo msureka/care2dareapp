@@ -4,7 +4,7 @@
 //
 //  Created by Spiel's Macmini on 3/8/17.
 //  Copyright © 2017 Spiel's Macmini. All rights reserved.
-//
+//c
 
 #import "CreateNewChallengesViewController.h"
 #import "Base64.h"
@@ -12,7 +12,7 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "UIView+RNActivityView.h"
-
+#import "SDAVAssetExportSession.h"
 @interface CreateNewChallengesViewController ()<UITextViewDelegate,UITextFieldDelegate>
 {
     NSUserDefaults *defaults;
@@ -1027,7 +1027,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
     cameraUI.showsCameraControls = YES;
    // cameraUI.videoMaximumDuration = 07.0f;
@@ -1096,73 +1096,198 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         assettype=@"Video";
         self.videoURL = info[UIImagePickerControllerMediaURL];
         
-        imageData=[NSData dataWithContentsOfFile:self.videoURL];
-        // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
-        ImageNSdata = [Base64 encode:imageData];
+        NSData* videoData = [NSData dataWithContentsOfFile:[self.videoURL path]];
+        int videoSize = [videoData length]/1024/1024;
         
+      
+        NSLog(@"data size==%d",videoSize);
+
         
-        encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-        
-        
-        
-        [picker dismissViewControllerAnimated:YES completion:NULL];
-        
-        self.videoController = [[MPMoviePlayerController alloc] init];
-        
-        [self.videoController setContentURL:self.videoURL];
-        
-        
-        
-        [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
-        _videoController.fullscreen=YES;
-        _videoController.allowsAirPlay=NO;
-        _videoController.shouldAutoplay=YES;
-        
-        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:self.videoURL options:nil];
-        
-        
-        
-        
-        
-        AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-        generateImg.appliesPreferredTrackTransform = YES;
-        NSError *error = NULL;
-        CMTime time = CMTimeMake(1, 7);
-        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
-        NSLog(@"error==%@, Refimage==%@", error, refImg);
-        
-        
-        UIImage *FrameImage= [[UIImage alloc] initWithCGImage:refImg];
-        
-        BackroundImg.image=FrameImage;
+//        
+//        NSLog(@"video url is== %@", self.videoURL);
+//        
+//        NSString *outputPath = [self outputFilePath];
+//        
+//        NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
+//        
+//        [self convertVideoToLowQuailtyWithInputURL:self.videoURL outputURL:outputURL handler:^(AVAssetExportSession *exportSession)
+//         {
+//             if (exportSession.status == AVAssetExportSessionStatusCompleted)
+//             {
+//                 printf("completed\n");
+//                 NSData* videoData1 = [NSData dataWithContentsOfFile:[_videoURL1 path]];
+//                 int videoSize1 = [videoData1 length]/1024/1024;
+//                 NSLog(@"data size==%d",videoSize1);
+//
+//                 
+//             
+//             }
+//             else
+//             {
+//                 printf("error\n");
+//                             }
+//         }];
+//
+//        
         
         
         
         
         
-        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+        ///////////////////////////////////////////////////
+        
+        NSString *finalVideoURLString = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        finalVideoURLString = [finalVideoURLString stringByAppendingPathComponent:@"compressedVideo.mp4"];
+        
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        
+//        NSString *finalVideoURLString = [documentsDirectory stringByAppendingPathComponent:@"compressedVideo.mp4"];
+        NSURL *outputVideoUrl = ([[NSURL URLWithString:finalVideoURLString] isFileURL] == 1)?([NSURL URLWithString:finalVideoURLString]):([NSURL fileURLWithPath:finalVideoURLString]); // Url Should be a file Url, so here we check and convert it into a file Url
         
         
-        ImageNSdataThumb = [Base64 encode:imageDataThumb];
+       
+        SDAVAssetExportSession *compressionEncoder = [SDAVAssetExportSession.alloc initWithAsset:[AVAsset assetWithURL:_videoURL]]; // provide inputVideo Url Here
+        compressionEncoder.outputFileType = AVFileTypeMPEG4;
+        compressionEncoder.outputURL = outputVideoUrl; //Provide output video Url here
+        compressionEncoder.videoSettings = @
+        {
+        AVVideoCodecKey: AVVideoCodecH264,
+        AVVideoWidthKey: @480,   //Set your resolution width here
+        AVVideoHeightKey: @640,  //set your resolution height here
+        AVVideoCompressionPropertiesKey: @
+            {
+            AVVideoAverageBitRateKey: @1500000, // Give your bitrate here for lower size give low values
+            AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
+            },
+        };
+        compressionEncoder.audioSettings = @
+        {
+        AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+        AVNumberOfChannelsKey: @2,
+        AVSampleRateKey: @44100,
+        AVEncoderBitRateKey: @128000,
+        };
+        
+        [compressionEncoder exportAsynchronouslyWithCompletionHandler:^
+         {
+             if (compressionEncoder.status == AVAssetExportSessionStatusCompleted)
+             {
+                 NSLog(@"Compression Export Completed Successfully");
+             
+                 NSData* videoData = [NSData dataWithContentsOfFile:[outputVideoUrl path]];
+                     int videoSize = [videoData length]/1024/1024;
+                 
+                // [self.videoURL path]
+                     NSLog(@"data size path==%d",videoSize);
+                 
+                 
+                 
+                 imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
+                 // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                 
+                 ImageNSdata = [Base64 encode:imageData];
+                 
+                 
+                 
+                 
+                 
+                 encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+                 
+                 
+                 
+                 [picker dismissViewControllerAnimated:YES completion:NULL];
+                 
+                 self.videoController = [[MPMoviePlayerController alloc] init];
+                 
+                 [self.videoController setContentURL:outputVideoUrl];
+                 
+                 
+                 
+                 [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
+                 _videoController.fullscreen=YES;
+                 _videoController.allowsAirPlay=NO;
+                 _videoController.shouldAutoplay=YES;
+                 
+                 AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputVideoUrl options:nil];
+                 
+                 
+                 
+                 
+                 
+                 AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+                 generateImg.appliesPreferredTrackTransform = YES;
+                 NSError *error = NULL;
+                 CMTime time = CMTimeMake(1, 7);
+                 CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
+                 NSLog(@"error==%@, Refimage==%@", error, refImg);
+                 
+                 
+                 UIImage *FrameImage= [[UIImage alloc] initWithCGImage:refImg];
+                 
+                 BackroundImg.image=FrameImage;
+                 
+                 
+                 
+                 
+                 
+                 imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+                 
+                 
+                 ImageNSdataThumb = [Base64 encode:imageDataThumb];
+                 
+                 
+                 encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+                 
+                 
+                 
+                 
+                 
+                 // [self.ImageBackView addSubview:self.videoController.view];
+                 //   UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPlayerTapped:)];
+                 //  singleFingerTap.numberOfTapsRequired = 1;
+                 //  singleFingerTap.delegate = self;
+                 //  [_videoController.view addGestureRecognizer:singleFingerTap];
+                 
+                 // [self.videoController play];
+                 
+                 
+                 [self dismissModalViewControllerAnimated:YES];
+                 
+                 
+                 
+                 
+
+             }
+             else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)
+             {
+                 NSLog(@"Compression Export Canceled");
+             }
+             else
+             {
+                 NSLog(@"Compression Failed");
+                 
+             }
+         }];
+        
+        NSLog(@"Compression url==%@",finalVideoURLString);
+        
+         NSLog(@"Compression url==%@",self.videoURL);
+         NSLog(@"Compression url==%@",outputVideoUrl);
+         NSLog(@"Compression url==%@",compressionEncoder.outputURL);
         
         
-        encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
         
         
         
         
-        // [self.ImageBackView addSubview:self.videoController.view];
-        //   UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPlayerTapped:)];
-        //  singleFingerTap.numberOfTapsRequired = 1;
-        //  singleFingerTap.delegate = self;
-        //  [_videoController.view addGestureRecognizer:singleFingerTap];
-        
-        // [self.videoController play];
         
         
-        [self dismissModalViewControllerAnimated:YES];
+        
+        
+        
     }
     else
     {
@@ -1424,4 +1549,68 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     return textView.text.length + (text.length - range.length) <= 250;
 }
 
+
+    
+
+// Getting the path of outPut file
+//- (NSString *)outputFilePath{
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    
+//    
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"compressed.MOV"]; NSFileManager *fileManager = [NSFileManager defaultManager];
+//    
+//    //    return path;
+//    
+//    if ([fileManager fileExistsAtPath: path])
+//    {
+//        [fileManager removeItemAtPath:path error:nil];
+//    }
+//    
+//    path = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat: @"compressed.MOV"] ];
+//    
+//    NSLog(@"path is== %@", path);
+//    NSData* videoData = [NSData dataWithContentsOfFile:path];
+//    int videoSize = [videoData length]/1024/1024;
+//    
+//    
+//    NSLog(@"data size path==%d",videoSize);
+//    
+//    return path;
+//    
+//}
+//
+//
+//// Actual compression is here.
+//
+//- (void)convertVideoToLowQuailtyWithInputURL:(NSURL*)inputURL
+//                                   outputURL:(NSURL*)outputURL
+//                                     handler:(void (^)(AVAssetExportSession*))handler
+//{
+//    
+//    
+//    //    [self startCompressingTheVideo:outputURL];
+//    //
+//    //
+//    //    return;
+//    [[NSFileManager defaultManager] removeItemAtURL:outputURL error:nil];
+//    
+//    //    AVAssetWriter
+//    
+//    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
+//    
+//    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetLowQuality];
+//    
+//    
+//    //    exportSession.fileLengthLimit = 30*1024;
+//    
+//    exportSession.outputURL = outputURL;
+//    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+//    [exportSession exportAsynchronouslyWithCompletionHandler:^(void)
+//     {
+//         handler(exportSession);
+//         //         [exportSession release];
+//     }];
+//}
 @end

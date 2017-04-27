@@ -17,6 +17,7 @@
 #import "LoginPageViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <Messages/Messages.h>
+#import "MainnavigationViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
@@ -482,9 +483,13 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginPageViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPageViewController"];
-    [[UIApplication sharedApplication].keyWindow setRootViewController:Home_add];
+    MainnavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainnavigationViewController"];
+    
+    //self.window.rootViewController=loginController;
+
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    LoginPageViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPageViewController"];
+    [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
  
 }
 - (IBAction)DoneButton:(id)sender;

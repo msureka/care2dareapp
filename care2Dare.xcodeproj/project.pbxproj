@@ -237,6 +237,7 @@
 		9A73CF651E6FBFDB00613682 /* ChallengesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */; };
 		9A99BAD31E81378D00A2C3E2 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD11E81378D00A2C3E2 /* Messages.framework */; };
 		9A99BAD41E81378D00A2C3E2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */; };
+		9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */; };
 		9AA645AB1E8BB49500236B7A /* ChatText.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA645AA1E8BB49500236B7A /* ChatText.plist */; };
 		9AA645C11E7BAE0500E49B65 /* ContributeMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA645C01E7BAE0500E49B65 /* ContributeMoneyViewController.m */; };
 		9AA645C61E7BBEFA00E49B65 /* help-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA645C31E7BBEFA00E49B65 /* help-gray.png */; };
@@ -721,6 +722,8 @@
 		9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengesTableViewCell.m; sourceTree = "<group>"; };
 		9A99BAD11E81378D00A2C3E2 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		9AA25EE11EB1EF3500B6DF45 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		9AA645AA1E8BB49500236B7A /* ChatText.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChatText.plist; sourceTree = "<group>"; };
 		9AA645BF1E7BAE0500E49B65 /* ContributeMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContributeMoneyViewController.h; sourceTree = "<group>"; };
 		9AA645C01E7BAE0500E49B65 /* ContributeMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContributeMoneyViewController.m; sourceTree = "<group>"; };
@@ -1599,6 +1602,8 @@
 				9AA9B51A1E6FE81400C6EF37 /* CreateChallengesPageViewController.m */,
 				9AA9B51C1E6FE82B00C6EF37 /* CreateNewChallengesViewController.h */,
 				9AA9B51D1E6FE82B00C6EF37 /* CreateNewChallengesViewController.m */,
+				9AA25EE11EB1EF3500B6DF45 /* SDAVAssetExportSession.h */,
+				9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */,
 			);
 			path = CreateChallenges;
 			sourceTree = "<group>";
@@ -2407,6 +2412,7 @@
 				9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */,
 				9AF84F071E8FB0810008408E /* AccptTwoTableViewCell.m in Sources */,
 				9A5727B21E717D1D006A5F52 /* Base64.m in Sources */,
+				9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */,
 				9A64C86B1E7133EB008115FF /* CLTokenInputView.m in Sources */,
 				9AF9DBF51E9B608A00A652D9 /* AFHTTPClient.m in Sources */,
 				9A0605CE1E6D6D4200FF4229 /* PublicTableViewCell.m in Sources */,

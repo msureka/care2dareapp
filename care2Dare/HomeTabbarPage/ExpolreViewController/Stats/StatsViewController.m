@@ -27,7 +27,7 @@
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self coomunicationServer_Stats];
 }
 - (void) viewDidLayoutSubviews
