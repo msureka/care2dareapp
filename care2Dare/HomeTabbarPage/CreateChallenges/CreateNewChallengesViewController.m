@@ -13,8 +13,10 @@
 #import "SBJsonParser.h"
 #import "UIView+RNActivityView.h"
 #import "SDAVAssetExportSession.h"
-@interface CreateNewChallengesViewController ()<UITextViewDelegate,UITextFieldDelegate>
+@interface CreateNewChallengesViewController ()<UITextViewDelegate,UITextFieldDelegate,NSURLSessionDelegate>
 {
+    NSURLSessionDataTask *dataTaskupload;
+    
     NSUserDefaults *defaults;
     float pixelsPerValue;
     float leftAdjust;
@@ -23,25 +25,27 @@
     NSMutableArray * array_CreateChallenges;
     
     MHFacebookImageViewer * Controller;
-    
+    UIImage *FrameImage;
     NSDictionary *urlplist;
     
     UIGestureRecognizer * TabGestureDetailView, *tapGestureText,*BackImageGesture,*RecordVedioTabGesture;
-    
+    NSNumber *Vedio_Height,*Vedio_Width;;
     UIImage *chosenImage;
     NSData *imageData,*imageDataThumb;
+    UILabel * Label_confirm1;
+     UILabel * Label_confirm11;
+     UILabel * Label_confirm;
+    UIView * transperentViewIndicator,*whiteView1,* transperentViewIndicator11,*whiteView111;
     
-    UIView * transperntView;
-    
-    UIActivityIndicatorView * indiacctorAlertView;
+    UIActivityIndicatorView * indicatorAlert;
     float sum;
     int count;
     MPMoviePlayerViewController * movieController;
     
     UIView *headerView2,*headerView1;
     UIButton *headerLabel1,* headerLabel2;
-    
-  
+    UIImagePickerController * pcker1;
+    UIButton *Button_close;
 }
 @end
 
@@ -76,23 +80,6 @@
     
     
 
-    
-    
-    
-    transperntView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    transperntView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-    
-    
-    indiacctorAlertView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    indiacctorAlertView.frame=CGRectMake(40, 40, 20, 20);
-    indiacctorAlertView.center=transperntView.center;
-    [indiacctorAlertView startAnimating];
-    [indiacctorAlertView setColor:[UIColor blackColor]];
-    [transperntView addSubview:indiacctorAlertView];
-    [self.view addSubview:transperntView];
-    transperntView.hidden=YES;
-    
-    
     
     _Label_totalAmount.hidden=YES;
     
@@ -194,9 +181,130 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataReceivedId:) name:@"PassDataArrayUserId" object:nil];
     
  
+    transperentViewIndicator=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    transperentViewIndicator.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    
+    whiteView1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 110,110)];
+    whiteView1.center=transperentViewIndicator.center;
+    [whiteView1 setBackgroundColor:[UIColor blackColor]];
+    whiteView1.layer.cornerRadius=9;
+       indicatorAlert = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        indicatorAlert.frame=CGRectMake((whiteView1.frame.size.width/2)-10, (whiteView1.frame.size.height/2)-15, 20, 20);
+        [indicatorAlert startAnimating];
+        [indicatorAlert setColor:[UIColor whiteColor]];
+    
+    Label_confirm1=[[UILabel alloc]initWithFrame:CGRectMake(0,(indicatorAlert.frame.size.height+indicatorAlert.frame.origin.y)+5, whiteView1.frame.size.width, 40)];
+    
+  
+    Label_confirm1.text=@"Preparing...";
+    Label_confirm1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16.0];
+    Label_confirm1.textColor=[UIColor whiteColor];
+    Label_confirm1.textAlignment=NSTextAlignmentCenter;
+    
+  
+     [whiteView1 addSubview:indicatorAlert];
+   
+    [whiteView1 addSubview:Label_confirm1];
+    
+    [transperentViewIndicator addSubview:whiteView1];
+    
+ 
+    
+    
+    transperentViewIndicator11=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    transperentViewIndicator11.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    
+    whiteView111=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 150,150)];
+    whiteView111.center=transperentViewIndicator11.center;
+    [whiteView111 setBackgroundColor:[UIColor blackColor]];
+    whiteView111.layer.cornerRadius=9;
+    //   indicatorAlert = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    //    indicatorAlert.frame=CGRectMake(40, 40, 20, 20);
+    //    [indicatorAlert startAnimating];
+    //    [indicatorAlert setColor:[UIColor whiteColor]];
+    
+    Label_confirm11=[[UILabel alloc]initWithFrame:CGRectMake(0, 50, 150, 40)];
+    
+    [Label_confirm11 setFont:[UIFont systemFontOfSize:12]];
+    Label_confirm11.text=@"0 %";
+    Label_confirm11.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:40.0];
+    Label_confirm11.textColor=[UIColor whiteColor];
+    Label_confirm11.textAlignment=NSTextAlignmentCenter;
+    
+    Label_confirm=[[UILabel alloc]initWithFrame:CGRectMake(0, 110, 150, 28)];
+    
+    [Label_confirm setFont:[UIFont systemFontOfSize:12]];
+    Label_confirm.text=@"Creating...";
+    Label_confirm.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:20.0];
+    Label_confirm.textColor=[UIColor whiteColor];
+    Label_confirm.textAlignment=NSTextAlignmentCenter;
+    
+    Button_close=[[UIButton alloc]initWithFrame:CGRectMake(whiteView111.frame.size.width-23, -4, 28,28)];
+    Button_close.layer.cornerRadius=Button_close.frame.size.height/2;
+    
+    Button_close.backgroundColor=[UIColor whiteColor];
+    [Button_close setTitle:@"X" forState:UIControlStateNormal];
+    [Button_close setTitleColor:[UIColor redColor]forState:UIControlStateNormal];
+    Button_close.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+    [Button_close addTarget:self action:@selector(UploadinView_Close:) forControlEvents:UIControlEventTouchUpInside];
+    [whiteView111 addSubview:Button_close];
+    [whiteView111 addSubview:Label_confirm];
+    [whiteView111 addSubview:Label_confirm11];
+    
+    [transperentViewIndicator11 addSubview:whiteView111];
+    
+    [self.view addSubview:transperentViewIndicator11];
+    
+    transperentViewIndicator11.hidden=YES;
+    
+    
+    }
+-(void)UploadinView_Close:(UIButton *)sender
+{
+    
+    
+    UIAlertController * alert=[UIAlertController
+                               
+                               alertControllerWithTitle:@"Cancel?" message:@"Are you sure you want to cancel your upload?"preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Resume"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    
+                                    [dataTaskupload resume];
+                                    transperentViewIndicator11.hidden=NO;
+                                    
+                                }];
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   
+                                   [dataTaskupload cancel];
+                                   transperentViewIndicator11.hidden=YES;
+                               }];
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
     
     
     
+}
+
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+   didSendBodyData:(int64_t)bytesSent
+    totalBytesSent:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    float progress = ((double)totalBytesSent / (double)totalBytesExpectedToSend)*100;
+    NSLog(@"percentage  of dattataa==%f",progress);
+    Label_confirm11.text=[NSString stringWithFormat:@"%.f%@",progress,@" %"];
 }
 - (void)_Label_ChallengesName_Tapped:(UITapGestureRecognizer *)recognizer
 {
@@ -485,8 +593,9 @@
             }
             else
             {
-                [self.view showActivityViewWithLabel:@"Loading"];
-                
+               // [self.view showActivityViewWithLabel:@"Loading"];
+                transperentViewIndicator11.hidden=NO;
+                Label_confirm11.text=@"0 %";
                 NSString *userid= @"userid";
                 NSString *useridVal =[defaults valueForKey:@"userid"];
                 
@@ -526,7 +635,7 @@
                 
 #pragma mark - swipe sesion
                 
-                NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+                NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue: [NSOperationQueue mainQueue]];
                 
                 NSURL *url;
                 NSString *  urlStrLivecount=[urlplist valueForKey:@"createchallenge"];;
@@ -542,7 +651,7 @@
                 
                 
                 
-                NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                dataTaskupload =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                                  {
                                                      if(data)
                                                      {
@@ -566,7 +675,7 @@
                                                              NSLog(@"array_CreateChallenges ResultString %@",ResultString);
                                                              if ([ResultString isEqualToString:@"nouserid"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                               transperentViewIndicator11.hidden=YES;;
                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                                  
                                                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -579,7 +688,7 @@
                                                              }
                                                              if ([ResultString isEqualToString:@"nomedia"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                                 transperentViewIndicator11.hidden=YES;;
                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                                  
                                                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -593,7 +702,7 @@
                                                              
                                                              if ([ResultString isEqualToString:@"nullerror"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                                 transperentViewIndicator11.hidden=YES;
                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                                  
                                                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -608,7 +717,7 @@
                                                              }
                                                              if ([ResultString isEqualToString:@"imageerror"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                                 transperentViewIndicator11.hidden=YES;
                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
                                                                  
                                                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -623,7 +732,7 @@
                                                              }
                                                              if ([ResultString isEqualToString:@"inserterror"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                               transperentViewIndicator11.hidden=YES;
                                                                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
                                                                  
                                                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -639,7 +748,7 @@
                                                              
                                                              if ([ResultString isEqualToString:@"done"])
                                                              {
-                                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                                 transperentViewIndicator11.hidden=YES;
                                                                  //                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
                                                                  //
                                                                  //                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -664,20 +773,29 @@
                                                          else
                                                          {
                                                              NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                             [self.view hideActivityViewWithAfterDelay:0];
+                                                        transperentViewIndicator11.hidden=YES;
                                                          }
                                                          
                                                          
                                                      }
                                                      else if(error)
                                                      {
-                                                         [self.view hideActivityViewWithAfterDelay:0];
+                                                         NSString * str_errorDesc=[NSString stringWithFormat:@"%@",error.localizedDescription];
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:str_errorDesc preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                            style:UIAlertActionStyleDefault handler:nil];
+                                                         [alertController addAction:actionOk];
+                                                         [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                         transperentViewIndicator11.hidden=YES;
+
                                                          NSLog(@"error login2.......%@",error.description);
                                                      }
                                                      
                                                      
                                                  }];
-                [dataTask resume];
+                [dataTaskupload resume];
             }
             
             
@@ -711,8 +829,8 @@
     }
     else
     {
-         [self.view showActivityViewWithLabel:@"Loading"];
-        
+         transperentViewIndicator11.hidden=NO;
+          Label_confirm11.text=@"0 %";
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
         
@@ -752,7 +870,7 @@
         
 #pragma mark - swipe sesion
         
-        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue: [NSOperationQueue mainQueue]];
         
         NSURL *url;
         NSString *  urlStrLivecount=[urlplist valueForKey:@"createchallenge"];;
@@ -768,7 +886,7 @@
         
         
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        dataTaskupload =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
                                          {
                                          if(data)
                                          {
@@ -792,7 +910,7 @@
                                                  NSLog(@"array_CreateChallenges ResultString %@",ResultString);
                                                  if ([ResultString isEqualToString:@"nouserid"])
                                                  {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                     transperentViewIndicator11.hidden=YES;
 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -805,7 +923,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                                  }
                                                  if ([ResultString isEqualToString:@"nomedia"])
                                                  {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                      transperentViewIndicator11.hidden=YES;
                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -819,7 +937,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                                  
                                     if ([ResultString isEqualToString:@"nullerror"])
                                         {
-                                        [self.view hideActivityViewWithAfterDelay:0];
+                                        transperentViewIndicator11.hidden=YES;
                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -834,7 +952,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                                  }
                                                  if ([ResultString isEqualToString:@"imageerror"])
                                                  {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                     transperentViewIndicator11.hidden=YES;
                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -849,7 +967,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                                  }
                                                  if ([ResultString isEqualToString:@"inserterror"])
                                                  {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                     transperentViewIndicator11.hidden=YES;
                                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -865,7 +983,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                                  
                                                  if ([ResultString isEqualToString:@"done"])
                                                  {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                      transperentViewIndicator11.hidden=YES;
 //                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
 //                                                     
 //                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -890,20 +1008,29 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                              else
                                              {
                                                  NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                                 transperentViewIndicator11.hidden=YES;
                                              }
                                              
                                              
                                          }
                                          else if(error)
                                          {
-                                             [self.view hideActivityViewWithAfterDelay:0];
+                                           transperentViewIndicator11.hidden=YES;
+                                             NSString * str_errorDesc=[NSString stringWithFormat:@"%@",error.localizedDescription];
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:str_errorDesc preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                style:UIAlertActionStyleDefault handler:nil];
+                                             [alertController addAction:actionOk];
+                                             [self presentViewController:alertController animated:YES completion:nil];
+                                             
+                                             transperentViewIndicator11.hidden=YES;
                                              NSLog(@"error login2.......%@",error.description);
                                          }
                                              
                                              
                                          }];
-        [dataTask resume];
+        [dataTaskupload resume];
     }
     
     
@@ -1027,7 +1154,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    cameraUI.videoQuality = UIImagePickerControllerQualityType640x480;
     
     cameraUI.showsCameraControls = YES;
    // cameraUI.videoMaximumDuration = 07.0f;
@@ -1070,7 +1197,161 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     
     
 }
+-(void)RecordingVediosImagepicker
+{
+   [pcker1.view addSubview:transperentViewIndicator];
+    NSString *finalVideoURLString = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    finalVideoURLString = [finalVideoURLString stringByAppendingPathComponent:@"compressedVideo.mp4"];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    [manager createDirectoryAtPath:finalVideoURLString withIntermediateDirectories:YES attributes:nil error:nil];
+    [manager removeItemAtPath:finalVideoURLString error:nil];
 
+    NSURL *outputVideoUrl = ([[NSURL URLWithString:finalVideoURLString] isFileURL] == 1)?([NSURL URLWithString:finalVideoURLString]):([NSURL fileURLWithPath:finalVideoURLString]); // Url Should be a file Url, so here we check and convert it into a file Url
+    
+    
+    
+    SDAVAssetExportSession *compressionEncoder = [SDAVAssetExportSession.alloc initWithAsset:[AVAsset assetWithURL:_videoURL]]; // provide inputVideo Url Here
+    compressionEncoder.outputFileType = AVFileTypeMPEG4;
+    compressionEncoder.outputURL = outputVideoUrl;
+    compressionEncoder.shouldOptimizeForNetworkUse = YES;//Provide output video Url here
+    compressionEncoder.videoSettings = @
+    {
+    AVVideoCodecKey: AVVideoCodecH264,
+    AVVideoWidthKey: Vedio_Width,   //Set your resolution width here
+    AVVideoHeightKey: Vedio_Height,  //set your resolution height here
+    AVVideoCompressionPropertiesKey: @
+        {
+        AVVideoAverageBitRateKey: @500000, // Give your bitrate here for lower size give low values
+        AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
+        },
+    };
+    compressionEncoder.audioSettings = @
+    {
+    AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+    AVNumberOfChannelsKey: @2,
+    AVSampleRateKey: @44100,
+    AVEncoderBitRateKey: @128000,
+    };
+    
+    [compressionEncoder exportAsynchronouslyWithCompletionHandler:^
+     {
+         if (compressionEncoder.status == AVAssetExportSessionStatusCompleted)
+         {
+             NSLog(@"Compression Export Completed Successfully");
+             
+             NSData* videoData = [NSData dataWithContentsOfFile:[outputVideoUrl path]];
+             int videoSize = [videoData length]/1024/1024;
+             
+             // [self.videoURL path]
+             NSLog(@"data size path==%d",videoSize);
+             
+             imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
+             // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+             
+             ImageNSdata = [Base64 encode:imageData];
+             
+             encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+             
+             
+             self.videoController = [[MPMoviePlayerController alloc] init];
+             
+             [self.videoController setContentURL:outputVideoUrl];
+             
+             
+             
+             [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
+             _videoController.fullscreen=YES;
+             _videoController.allowsAirPlay=NO;
+             _videoController.shouldAutoplay=YES;
+             
+             
+             BackroundImg.image=FrameImage;
+             
+            
+             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+             
+             
+             ImageNSdataThumb = [Base64 encode:imageDataThumb];
+             
+             
+             encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+             
+              [pcker1.view hideActivityViewWithAfterDelay:1];
+             
+            [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+             
+             
+         }
+         else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)
+         {
+             NSLog(@"Compression Export Canceled");
+             
+             NSLog(@"Compression Failed==%@",compressionEncoder.error);
+             UIAlertController * alert=[UIAlertController
+                                        
+                                        alertControllerWithTitle:@"Compression Canceled" message:@"Compression Export Canceled. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction* yesButton = [UIAlertAction
+                                         actionWithTitle:@"ReCompress"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                               [self.view hideActivityViewWithAfterDelay:0];
+                                             [self RecordingVediosImagepicker];
+                                             
+                                         }];
+             UIAlertAction* noButton = [UIAlertAction
+                                        actionWithTitle:@"Cancel"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                              [self.view hideActivityViewWithAfterDelay:0];
+                                            [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+                                            
+                                        }];
+             
+             [alert addAction:yesButton];
+             [alert addAction:noButton];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+         }
+         else
+         {
+             NSLog(@"Compression Failed==%@",compressionEncoder.error);
+             UIAlertController * alert=[UIAlertController
+                                        
+                                        alertControllerWithTitle:@"Compression Error" message:@"Could not compress your video. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction* yesButton = [UIAlertAction
+                                         actionWithTitle:@"ReCompress"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                               [self.view hideActivityViewWithAfterDelay:0];
+                                             [self RecordingVediosImagepicker];
+                                             
+                                         }];
+             UIAlertAction* noButton = [UIAlertAction
+                                        actionWithTitle:@"Cancel"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                              [self.view hideActivityViewWithAfterDelay:0];
+                                        [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+                                            
+                                        }];
+             
+             [alert addAction:yesButton];
+             [alert addAction:noButton];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+         }
+     }];
+    
+   
+}
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -1080,7 +1361,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         ;
         BackroundImg.hidden=NO;
         Image_Play.hidden=NO;
-        NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
         
         
         _videoController.view.hidden=NO;
@@ -1102,185 +1382,41 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
       
         NSLog(@"data size==%d",videoSize);
+        
+   
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:self.videoURL options:nil];
+        
+        
+        AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        generateImg.appliesPreferredTrackTransform = YES;
+        NSError *error = NULL;
+        CMTime time = CMTimeMake(1, 7);
+        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
+        NSLog(@"error==%@, Refimage==%@", error, refImg);
+        
+        
+  FrameImage= [[UIImage alloc] initWithCGImage:refImg];
 
-        
-//        
-//        NSLog(@"video url is== %@", self.videoURL);
-//        
-//        NSString *outputPath = [self outputFilePath];
-//        
-//        NSURL *outputURL = [NSURL fileURLWithPath:outputPath];
-//        
-//        [self convertVideoToLowQuailtyWithInputURL:self.videoURL outputURL:outputURL handler:^(AVAssetExportSession *exportSession)
-//         {
-//             if (exportSession.status == AVAssetExportSessionStatusCompleted)
-//             {
-//                 printf("completed\n");
-//                 NSData* videoData1 = [NSData dataWithContentsOfFile:[_videoURL1 path]];
-//                 int videoSize1 = [videoData1 length]/1024/1024;
-//                 NSLog(@"data size==%d",videoSize1);
-//
-//                 
-//             
-//             }
-//             else
-//             {
-//                 printf("error\n");
-//                             }
-//         }];
-//
-//        
+        NSLog(@"FrameImage height size==%f",FrameImage.size.height);
+        NSLog(@"FrameImage width %fze==%f",FrameImage.size.width);
         
         
         
-        
-        
-        ///////////////////////////////////////////////////
-        
-        NSString *finalVideoURLString = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        finalVideoURLString = [finalVideoURLString stringByAppendingPathComponent:@"compressedVideo.mp4"];
-        
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//        
-//        NSString *finalVideoURLString = [documentsDirectory stringByAppendingPathComponent:@"compressedVideo.mp4"];
-        NSURL *outputVideoUrl = ([[NSURL URLWithString:finalVideoURLString] isFileURL] == 1)?([NSURL URLWithString:finalVideoURLString]):([NSURL fileURLWithPath:finalVideoURLString]); // Url Should be a file Url, so here we check and convert it into a file Url
-        
-        
-       
-        SDAVAssetExportSession *compressionEncoder = [SDAVAssetExportSession.alloc initWithAsset:[AVAsset assetWithURL:_videoURL]]; // provide inputVideo Url Here
-        compressionEncoder.outputFileType = AVFileTypeMPEG4;
-        compressionEncoder.outputURL = outputVideoUrl; //Provide output video Url here
-        compressionEncoder.videoSettings = @
+        if (FrameImage.size.height > FrameImage.size.width)
         {
-        AVVideoCodecKey: AVVideoCodecH264,
-        AVVideoWidthKey: @480,   //Set your resolution width here
-        AVVideoHeightKey: @640,  //set your resolution height here
-        AVVideoCompressionPropertiesKey: @
-            {
-            AVVideoAverageBitRateKey: @1500000, // Give your bitrate here for lower size give low values
-            AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
-            },
-        };
-        compressionEncoder.audioSettings = @
+            Vedio_Height=@640;
+            Vedio_Width=@480;
+        }
+        else
         {
-        AVFormatIDKey: @(kAudioFormatMPEG4AAC),
-        AVNumberOfChannelsKey: @2,
-        AVSampleRateKey: @44100,
-        AVEncoderBitRateKey: @128000,
-        };
-        
-        [compressionEncoder exportAsynchronouslyWithCompletionHandler:^
-         {
-             if (compressionEncoder.status == AVAssetExportSessionStatusCompleted)
-             {
-                 NSLog(@"Compression Export Completed Successfully");
-             
-                 NSData* videoData = [NSData dataWithContentsOfFile:[outputVideoUrl path]];
-                     int videoSize = [videoData length]/1024/1024;
-                 
-                // [self.videoURL path]
-                     NSLog(@"data size path==%d",videoSize);
-                 
-                 
-                 
-                 imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
-                 // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                 
-                 ImageNSdata = [Base64 encode:imageData];
-                 
-                 
-                 
-                 
-                 
-                 encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-                 
-                 
-                 
-                 [picker dismissViewControllerAnimated:YES completion:NULL];
-                 
-                 self.videoController = [[MPMoviePlayerController alloc] init];
-                 
-                 [self.videoController setContentURL:outputVideoUrl];
-                 
-                 
-                 
-                 [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
-                 _videoController.fullscreen=YES;
-                 _videoController.allowsAirPlay=NO;
-                 _videoController.shouldAutoplay=YES;
-                 
-                 AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:outputVideoUrl options:nil];
-                 
-                 
-                 
-                 
-                 
-                 AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-                 generateImg.appliesPreferredTrackTransform = YES;
-                 NSError *error = NULL;
-                 CMTime time = CMTimeMake(1, 7);
-                 CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
-                 NSLog(@"error==%@, Refimage==%@", error, refImg);
-                 
-                 
-                 UIImage *FrameImage= [[UIImage alloc] initWithCGImage:refImg];
-                 
-                 BackroundImg.image=FrameImage;
-                 
-                 
-                 
-                 
-                 
-                 imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
-                 
-                 
-                 ImageNSdataThumb = [Base64 encode:imageDataThumb];
-                 
-                 
-                 encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-                 
-                 
-                 
-                 
-                 
-                 // [self.ImageBackView addSubview:self.videoController.view];
-                 //   UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPlayerTapped:)];
-                 //  singleFingerTap.numberOfTapsRequired = 1;
-                 //  singleFingerTap.delegate = self;
-                 //  [_videoController.view addGestureRecognizer:singleFingerTap];
-                 
-                 // [self.videoController play];
-                 
-                 
-                 [self dismissModalViewControllerAnimated:YES];
-                 
-                 
-                 
-                 
-
-             }
-             else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)
-             {
-                 NSLog(@"Compression Export Canceled");
-             }
-             else
-             {
-                 NSLog(@"Compression Failed");
-                 
-             }
-         }];
-        
-        NSLog(@"Compression url==%@",finalVideoURLString);
-        
-         NSLog(@"Compression url==%@",self.videoURL);
-         NSLog(@"Compression url==%@",outputVideoUrl);
-         NSLog(@"Compression url==%@",compressionEncoder.outputURL);
+            Vedio_Height=@480;
+            Vedio_Width=@640;
+        }
         
         
         
-        
-        
+        pcker1=picker;
+        [self RecordingVediosImagepicker];
         
         
         
@@ -1486,8 +1622,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
     {
-        
-        _Button_Create.enabled=YES;
+   _Button_Create.enabled=YES;
          [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _Button_Create.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
     }
