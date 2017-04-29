@@ -146,6 +146,8 @@
 		9A45BA2B1E8E310900BAC5E8 /* friendrequested.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A45BA221E8E310900BAC5E8 /* friendrequested.png */; };
 		9A45BA2C1E8E310900BAC5E8 /* friendrequested@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A45BA231E8E310900BAC5E8 /* friendrequested@2x.png */; };
 		9A45BA2D1E8E310900BAC5E8 /* friendrequested@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A45BA241E8E310900BAC5E8 /* friendrequested@3x.png */; };
+		9A54BD171EB4964A00F976F3 /* Pause Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A54BD151EB4964A00F976F3 /* Pause Filled-100.png */; };
+		9A54BD181EB4964A00F976F3 /* Play Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A54BD161EB4964A00F976F3 /* Play Filled-100.png */; };
 		9A57279A1E7179CF006A5F52 /* Done.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A57278A1E7179CF006A5F52 /* Done.png */; };
 		9A57279B1E7179CF006A5F52 /* Done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A57278B1E7179CF006A5F52 /* Done@2x.png */; };
 		9A57279D1E7179CF006A5F52 /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A57278F1E7179CF006A5F52 /* MHFacebookImageViewer.m */; };
@@ -598,6 +600,8 @@
 		9A45BA221E8E310900BAC5E8 /* friendrequested.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendrequested.png; sourceTree = "<group>"; };
 		9A45BA231E8E310900BAC5E8 /* friendrequested@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friendrequested@2x.png"; sourceTree = "<group>"; };
 		9A45BA241E8E310900BAC5E8 /* friendrequested@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friendrequested@3x.png"; sourceTree = "<group>"; };
+		9A54BD151EB4964A00F976F3 /* Pause Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pause Filled-100.png"; sourceTree = "<group>"; };
+		9A54BD161EB4964A00F976F3 /* Play Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play Filled-100.png"; sourceTree = "<group>"; };
 		9A57278A1E7179CF006A5F52 /* Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Done.png; sourceTree = "<group>"; };
 		9A57278B1E7179CF006A5F52 /* Done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done@2x.png"; sourceTree = "<group>"; };
 		9A57278E1E7179CF006A5F52 /* MHFacebookImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFacebookImageViewer.h; sourceTree = "<group>"; };
@@ -1271,6 +1275,15 @@
 			path = addfriendsimages;
 			sourceTree = "<group>";
 		};
+		9A54BD141EB4964A00F976F3 /* playpause */ = {
+			isa = PBXGroup;
+			children = (
+				9A54BD151EB4964A00F976F3 /* Pause Filled-100.png */,
+				9A54BD161EB4964A00F976F3 /* Play Filled-100.png */,
+			);
+			path = playpause;
+			sourceTree = "<group>";
+		};
 		9A5727771E7179CF006A5F52 /* ImageZoomIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1741,6 +1754,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9A54BD141EB4964A00F976F3 /* playpause */,
 				9AFD24041EAF5A9A00A9E934 /* payicon */,
 				9A62705C1EA0A0B6003C85E4 /* volumemute */,
 				9A698B4C1E9E23DE00FB7FB7 /* redcircle */,
@@ -2218,6 +2232,7 @@
 				9AED22161E6A8C6A0004A8D0 /* explore1@2x.png in Resources */,
 				9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */,
 				9AA9B5351E700AC700C6EF37 /* blueprivate.png in Resources */,
+				9A54BD171EB4964A00F976F3 /* Pause Filled-100.png in Resources */,
 				9AED223C1E6A9D900004A8D0 /* exploreworld.png in Resources */,
 				9A45BA2D1E8E310900BAC5E8 /* friendrequested@3x.png in Resources */,
 				9A698B511E9E23DE00FB7FB7 /* redcircle@2x.png in Resources */,
@@ -2242,6 +2257,7 @@
 				9AED22191E6A8C6A0004A8D0 /* explore@3x.png in Resources */,
 				9A6E39E51E7AB64800B4AD5B /* challenge_favourite@3x.png in Resources */,
 				9AA9B50F1E6FDD0900C6EF37 /* PlegeIncomingTableViewCell.xib in Resources */,
+				9A54BD181EB4964A00F976F3 /* Play Filled-100.png in Resources */,
 				9A19B4121E6EDA3100262BC1 /* blueplus.png in Resources */,
 				9A0605CF1E6D6D4200FF4229 /* PublicTableViewCell.xib in Resources */,
 				9AED22291E6A8C6A0004A8D0 /* watch1@3x.png in Resources */,

@@ -23,6 +23,7 @@
 #define CELL_CONTENT_MARGIN 0.0f
 @interface WatchVediosViewController ()
 {
+    NSTimer * timerFadeout;
     UIButton *Button_PlayPause;
     NSTimer * timer;
     Float64 dur,progrssVal,CurrentTimes;
@@ -33,7 +34,7 @@
     NSUserDefaults *defaults;
     NSMutableArray * Array_VediosData;
     NSDictionary *urlplist;
-    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1,*Str_totalViews;
+    NSString *str_name,*str_days,*str_friendstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1,*Str_totalViews,*Falg_FadeInFadeOut;
     NSInteger indexVedio;
     CALayer *Bottomborder_Cell2;
     CGSize size;
@@ -71,8 +72,110 @@
     
     NSLog(@"Size of pic is %f",imageWidth);
     NSLog(@"Size of pic is %f",imageHeight);
+   Falg_FadeInFadeOut=@"yes";
+
+}
+-(void) fadein
+{
+    
+    [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        cell_one.Button_back.alpha=1;
+        cell_one.Button_VolumeMute.alpha=1;
+        cell_one.Button_Threedots.alpha=1;
+        cell_one.Image_3Dots.alpha=1;
+        Button_PlayPause.alpha=1;
+        
+        
+    } completion:^(BOOL finished) {
+        
+        if (finished)
+        {
+        cell_one.PlayerView_Backround.hidden=YES;
+        
+
+//        
+//        [UIView animateWithDuration:.3 delay:2.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            
+//            cell_one.Button_back.alpha=0;
+//            cell_one.Button_VolumeMute.alpha=0;
+//            cell_one.Button_Threedots.alpha=0;
+//            cell_one.Image_3Dots.alpha=0;
+//            Button_PlayPause.alpha=0;
+//
+//            
+//        } completion:^(BOOL finished) {
+//            
+//            if (finished)
+//                cell_one.PlayerView_Backround.hidden=NO;
+//            
+//            
+//        }];
+        if (player.rate == 1.0)
+        {
+            
+            timerFadeout =  [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(FadeMethod:) userInfo:nil  repeats:NO];
+//            //        [player pause];
+            
+        }
+            else
+            {
+//                timerFadeout =  [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(FadeMethod:) userInfo:nil  repeats:YES];
+                //        [player play];
+            }
+
+        }
+        
+    }];
+    
+
+//        [UIView animateWithDuration:0.2f animations:^{
+//            
+//          cell_one.Button_back.alpha=0;
+//            cell_one.Button_VolumeMute.alpha=0;
+//            cell_one.Button_Threedots.alpha=0;
+//            cell_one.Image_3Dots.alpha=0;
+//            Button_PlayPause.alpha=0;
+//        } completion:nil];
+//        
+//    Falg_FadeInFadeOut=@"no";
+//    cell_one.PlayerView_Backround.hidden=NO;
+    
+}
+-(void)fadeout
+{
     
     
+    
+//    cell_one.Button_back.alpha=0;
+//    cell_one.Button_VolumeMute.alpha=0;
+//    cell_one.Button_Threedots.alpha=0;
+//    cell_one.Image_3Dots.alpha=0;
+//  Button_PlayPause.alpha=0;
+    [UIView animateWithDuration:0.2f animations:^{
+        
+        cell_one.Button_back.alpha=0;
+        cell_one.Button_VolumeMute.alpha=0;
+        cell_one.Button_Threedots.alpha=0;
+        cell_one.Image_3Dots.alpha=0;
+        Button_PlayPause.alpha=0;
+    } completion:nil];
+    cell_one.PlayerView_Backround.hidden=NO;
+   Falg_FadeInFadeOut=@"yes";
+    
+}
+-(void)FadeMethod:(NSTimer *)timer1
+{
+   
+    if (player.rate == 1.0)
+    {
+      [self fadeout];
+       
+        [timerFadeout invalidate];
+        timerFadeout=nil;
+    }
+  
+   
 }
 -(void)viewWillAppear:(BOOL)animated
 {[[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -323,6 +426,8 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
         {
             cell_one = (WatchVedioTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdv1 forIndexPath:indexPath];
             [cell_one.Button_back addTarget:self action:@selector(Button_Back_Action:) forControlEvents:UIControlEventTouchUpInside];
+         
+             cell_one.PlayerView_Backround.hidden=YES;
             
             if (Array_VediosData.count==0)
             {
@@ -967,13 +1072,18 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 {
     if (player.rate == 1.0)
     {
-      
+        
+        [Button_PlayPause setImage:[UIImage imageNamed:@"Play Filled-100.png"] forState:UIControlStateNormal];
         [player pause];
         
     } else
     {
-        
+       
         [player play];
+        [self fadeout];
+        
+        [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
+
     }
     
 }
@@ -985,8 +1095,9 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
        
         [player pause];
         
-    } else {
-        
+    } else
+    {
+      
         [player play];
     }
     //[player play];
@@ -1069,7 +1180,12 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     dur = CMTimeGetSeconds(player.currentItem.asset.duration);
     CurrentTimes=CMTimeGetSeconds(currentTime);
     NSLog(@"duration: %.2f", dur);
-    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
+//    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
+    
+    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,50,50)];
+    
+     [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
+    
     [Button_PlayPause setTitle:@"" forState:UIControlStateNormal];
     [Button_PlayPause addTarget:self action:@selector(Play_Action:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -1082,12 +1198,20 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     Button_PlayPause.center=cell_one.PlayerView.center;
     [cell_one.PlayerView addSubview:Button_PlayPause];
     
+    
+    cell_one.PlayerView_Backround.userInteractionEnabled=YES;
+    UITapGestureRecognizer *image_PlayerTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PlayerTapped_ViewAction:)];
+    [cell_one.PlayerView_Backround addGestureRecognizer:image_PlayerTapped];
+
+    
+    
     cell_one.Button_VolumeMute.hidden=NO;
     player.muted=NO;
     
     [cell_one.Button_VolumeMute setImage:[UIImage imageNamed:@"High Volume Filled-100.png"] forState:UIControlStateNormal];
     cell_one.Button_VolumeMute.selected=NO;
-
+   // cell_one.PlayerView_Backround.hidden=YES;
+[self fadein];
     
 }
 
@@ -1245,6 +1369,19 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
 //    NSLog(@"Array_new33=%@",Array_new);;
 
     
+}
+-(void)PlayerTapped_ViewAction:(UIGestureRecognizer *)reconizer
+{
+    if ([Falg_FadeInFadeOut isEqualToString:@"yes"])
+    {
+        [self fadein];
+      Falg_FadeInFadeOut=@"no";
+    }
+    else
+    {
+         [self fadeout];
+      Falg_FadeInFadeOut=@"yes";
+    }
 }
 
 -(void)Image_Share_Action:(UIGestureRecognizer *)reconizer

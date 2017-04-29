@@ -17,7 +17,7 @@
 #import "UIImageView+MHFacebookImageViewer.h"
 #import "ProfilePageDetailsViewController.h"
 #import "WatchVediosViewController.h"
-
+#import "SDAVAssetExportSession.h"
 
 
 #define FONT_SIZE 15.0f
@@ -27,7 +27,8 @@
 
 @interface ContributeDaetailPageViewController ()<NSURLSessionDelegate>
 {
-    UIView *sectionView,*transperentViewIndicator,*whiteView1;
+    UIView *sectionView,*transperentViewIndicator,*whiteView1,*transperentViewIndicatorcc,*whiteView1cc;
+;
     UIImageView *Image_Share;
     UIButton *Button_Contribute;
     CGRect textRect;
@@ -47,15 +48,17 @@
     CALayer *upperBorder,*upperBorder1;
     NSData *imageDataThumb;
     UIButton * Button_close;
-    UIActivityIndicatorView *indicatorAlert;
-    UILabel * Label_confirm,*Label_confirm1;
-    
+    UIActivityIndicatorView *indicatorAlert,*indicatorAlertcc;
+    UILabel * Label_confirm,*Label_confirm1,*Label_confirm1cc;
+   
     UIImageView * Imagepro;
     UIScrollView * scrollView;
     CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH;
     CGRect scrollFrame;
      MPMoviePlayerViewController * movieController;
-    
+    NSNumber *Vedio_Height,*Vedio_Width;
+    UIImage *FrameImage;
+    UIImagePickerController * picker1;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottomSpace;
@@ -307,10 +310,38 @@
     transperentViewIndicator.hidden=YES;
     
     
+    ///////compress...////////////////
     
     
+    transperentViewIndicatorcc=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    transperentViewIndicatorcc.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    
+    whiteView1cc=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 110,110)];
+    whiteView1cc.center=transperentViewIndicatorcc.center;
+    [whiteView1cc setBackgroundColor:[UIColor blackColor]];
+    whiteView1cc.layer.cornerRadius=9;
+    indicatorAlertcc = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicatorAlertcc.frame=CGRectMake((whiteView1cc.frame.size.width/2)-10, (whiteView1cc.frame.size.height/2)-15, 20, 20);
+    [indicatorAlertcc startAnimating];
+    [indicatorAlertcc setColor:[UIColor whiteColor]];
+    
+    Label_confirm1cc=[[UILabel alloc]initWithFrame:CGRectMake(0,(indicatorAlertcc.frame.size.height+indicatorAlertcc.frame.origin.y)+5, whiteView1cc.frame.size.width, 40)];
     
     
+    Label_confirm1cc.text=@"Preparing...";
+    Label_confirm1cc.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16.0];
+    Label_confirm1cc.textColor=[UIColor whiteColor];
+    Label_confirm1cc.textAlignment=NSTextAlignmentCenter;
+    
+    
+    [whiteView1cc addSubview:indicatorAlertcc];
+    
+    [whiteView1cc addSubview:Label_confirm1cc];
+    
+    [transperentViewIndicatorcc addSubview:whiteView1cc];
+    
+    
+    ////////////////////////////////////
     
     
     
@@ -1130,6 +1161,7 @@
         
     }
 }
+
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
                                    usingDelegate: (id <UIImagePickerControllerDelegate,
                                                    UINavigationControllerDelegate>) delegate {
@@ -1161,7 +1193,168 @@
     
     return YES;
 }
-
+-(void)RecordingVediosImagepicker
+{
+    [picker1.view addSubview:transperentViewIndicatorcc];
+        transperentViewIndicator.hidden=NO;
+    NSString *finalVideoURLString = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    finalVideoURLString = [finalVideoURLString stringByAppendingPathComponent:@"compressedVideo.mp4"];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    [manager createDirectoryAtPath:finalVideoURLString withIntermediateDirectories:YES attributes:nil error:nil];
+    [manager removeItemAtPath:finalVideoURLString error:nil];
+    
+    NSURL *outputVideoUrl = ([[NSURL URLWithString:finalVideoURLString] isFileURL] == 1)?([NSURL URLWithString:finalVideoURLString]):([NSURL fileURLWithPath:finalVideoURLString]); // Url Should be a file Url, so here we check and convert it into a file Url
+    
+    
+    
+    SDAVAssetExportSession *compressionEncoder = [SDAVAssetExportSession.alloc initWithAsset:[AVAsset assetWithURL:_videoURL]]; // provide inputVideo Url Here
+    compressionEncoder.outputFileType = AVFileTypeMPEG4;
+    compressionEncoder.outputURL = outputVideoUrl;
+    compressionEncoder.shouldOptimizeForNetworkUse = YES;//Provide output video Url here
+    compressionEncoder.videoSettings = @
+    {
+    AVVideoCodecKey: AVVideoCodecH264,
+    AVVideoWidthKey: Vedio_Width,   //Set your resolution width here
+    AVVideoHeightKey: Vedio_Height,  //set your resolution height here
+    AVVideoCompressionPropertiesKey: @
+        {
+        AVVideoAverageBitRateKey: @500000, // Give your bitrate here for lower size give low values
+        AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
+        },
+    };
+    compressionEncoder.audioSettings = @
+    {
+    AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+    AVNumberOfChannelsKey: @2,
+    AVSampleRateKey: @44100,
+    AVEncoderBitRateKey: @128000,
+    };
+    
+    [compressionEncoder exportAsynchronouslyWithCompletionHandler:^
+     {
+         if (compressionEncoder.status == AVAssetExportSessionStatusCompleted)
+         {
+             NSLog(@"Compression Export Completed Successfully");
+             
+             NSData* videoData = [NSData dataWithContentsOfFile:[outputVideoUrl path]];
+             int videoSize = [videoData length]/1024/1024;
+             
+             // [self.videoURL path]
+             NSLog(@"data size path==%d",videoSize);
+             
+             
+             imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
+             // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+             
+             ImageNSdata = [Base64 encode:imageData];
+             
+             
+             encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+             
+             
+             
+             [picker1 dismissViewControllerAnimated:YES completion:NULL];
+             
+             self.videoController = [[MPMoviePlayerController alloc] init];
+             
+             [self.videoController setContentURL:self.videoURL];
+             
+             
+             
+             [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
+             _videoController.fullscreen=YES;
+             _videoController.allowsAirPlay=NO;
+             _videoController.shouldAutoplay=YES;
+             
+             
+             
+             
+             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+             
+             
+             ImageNSdataThumb = [Base64 encode:imageDataThumb];
+             
+             
+             encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+             
+             if (encodedImageThumb !=nil)
+             {
+                 transperentViewIndicator.hidden=NO;
+                 [self Communication_RecordVid];
+             }
+             
+             
+             
+         }
+         else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)
+         {
+             NSLog(@"Compression Export Canceled");
+             
+             NSLog(@"Compression Failed==%@",compressionEncoder.error);
+             UIAlertController * alert=[UIAlertController
+                                        
+                                        alertControllerWithTitle:@"Compression Canceled" message:@"Compression Export Canceled. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction* yesButton = [UIAlertAction
+                                         actionWithTitle:@"ReCompress"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                [self RecordingVediosImagepicker];
+                                             
+                                         }];
+             UIAlertAction* noButton = [UIAlertAction
+                                        actionWithTitle:@"Cancel"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                            
+                                            [picker1 dismissViewControllerAnimated:YES completion:NULL];
+                                            
+                                        }];
+             
+             [alert addAction:yesButton];
+             [alert addAction:noButton];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+         }
+         else
+         {
+             NSLog(@"Compression Failed==%@",compressionEncoder.error);
+             UIAlertController * alert=[UIAlertController
+                                        
+                                        alertControllerWithTitle:@"Compression Error" message:@"Could not compress your video. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction* yesButton = [UIAlertAction
+                                         actionWithTitle:@"ReCompress"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             
+                        [self RecordingVediosImagepicker];
+                                             
+                                         }];
+             UIAlertAction* noButton = [UIAlertAction
+                                        actionWithTitle:@"Cancel"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                            
+                                            [picker1 dismissViewControllerAnimated:YES completion:NULL];
+                                            
+                                        }];
+             
+             [alert addAction:yesButton];
+             [alert addAction:noButton];
+             
+             [self presentViewController:alert animated:YES completion:nil];
+             
+         }
+     }];
+    
+ 
+}
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -1171,7 +1364,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     if ([strCameraVedio isEqualToString:@"Record"])
     {
         
-        NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+        
         
         
         _videoController.view.hidden=NO;
@@ -1187,34 +1380,15 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    
         self.videoURL = info[UIImagePickerControllerMediaURL];
         
-        imageData=[NSData dataWithContentsOfFile:self.videoURL];
-        // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
-        ImageNSdata = [Base64 encode:imageData];
-        
-        
-        encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+        NSData* videoData = [NSData dataWithContentsOfFile:[self.videoURL path]];
+        int videoSize = [videoData length]/1024/1024;
         
         
+        NSLog(@"data size==%d",videoSize);
         
-        [picker dismissViewControllerAnimated:YES completion:NULL];
-        
-        self.videoController = [[MPMoviePlayerController alloc] init];
-        
-        [self.videoController setContentURL:self.videoURL];
-        
-        
-        
-        [self.videoController setScalingMode:MPMovieScalingModeAspectFill];
-        _videoController.fullscreen=YES;
-        _videoController.allowsAirPlay=NO;
-        _videoController.shouldAutoplay=YES;
         
         AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:self.videoURL options:nil];
-        
-        
-        
-        
         
         AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         generateImg.appliesPreferredTrackTransform = YES;
@@ -1224,28 +1398,32 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         NSLog(@"error==%@, Refimage==%@", error, refImg);
         
         
-        UIImage *FrameImage= [[UIImage alloc] initWithCGImage:refImg];
+        FrameImage= [[UIImage alloc] initWithCGImage:refImg];
+        
+        NSLog(@"FrameImage height size==%f",FrameImage.size.height);
+        NSLog(@"FrameImage width %fze==%f",FrameImage.size.width);
         
         
         
-        
-        
-        
-        imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
-        
-        
-        ImageNSdataThumb = [Base64 encode:imageDataThumb];
-        
-        
-        encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-        
-        if (encodedImageThumb !=nil)
+        if (FrameImage.size.height > FrameImage.size.width)
         {
-             transperentViewIndicator.hidden=NO;
-             [self Communication_RecordVid];
+            Vedio_Height=@640;
+            Vedio_Width=@480;
         }
+        else
+        {
+            Vedio_Height=@480;
+            Vedio_Width=@640;
+        }
+
+        picker1=picker;
+        [self RecordingVediosImagepicker];
         
-        [self dismissModalViewControllerAnimated:YES];
+        
+        
+        
+        
+      
     }
     
     else

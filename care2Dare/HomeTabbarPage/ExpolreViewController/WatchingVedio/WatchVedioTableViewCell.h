@@ -16,7 +16,7 @@
 @property (nonatomic,strong) IBOutlet UIButton *Button_Threedots;
 @property (nonatomic,strong) IBOutlet UIImageView *Image_3Dots;
 @property (nonatomic,strong) IBOutlet UIImageView *image_Thumbnail;
-
+@property (nonatomic,strong) IBOutlet UIView *PlayerView_Backround;
 @property (nonatomic,strong) IBOutlet UIActivityIndicatorView *indicator_loading;
 
 @end
