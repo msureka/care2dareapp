@@ -35,11 +35,11 @@
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     defaults=[[NSUserDefaults alloc]init];
-    NSString *myString = @"Care2Dare";
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:myString];
-    NSRange range = [myString rangeOfString:@"Care2"];
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0] range:range];
-    Label_TitleName.attributedText = attString;
+//    NSString *myString = @"Care2Dare";
+//    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:myString];
+//    NSRange range = [myString rangeOfString:@"Care2"];
+//    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0] range:range];
+//    Label_TitleName.attributedText = attString;
     CALayer *borderBottom_uname = [CALayer layer];
     borderBottom_uname.backgroundColor = [UIColor whiteColor].CGColor;
     borderBottom_uname.frame = CGRectMake(0, textfield_name.frame.size.height-0.8, textfield_name.frame.size.width,0.5f);

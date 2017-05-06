@@ -9,6 +9,7 @@
 #import "HomeTabBarViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
+#define color180 [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1]
 @interface HomeTabBarViewController ()<UITabBarDelegate,UITabBarControllerDelegate>
 {
      UITabBarItem *item0,*item1,*item2,*item3,*item4;
@@ -45,12 +46,12 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
 
     
-    item0.selectedImage = [[UIImage imageNamed:@"watch1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item0.image = [[UIImage imageNamed:@"watch.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.selectedImage = [[UIImage imageNamed:@"watch.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.image = [[UIImage imageNamed:@"watch1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
    
     
-    item1.selectedImage = [[UIImage imageNamed:@"explore1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item1.image = [[UIImage imageNamed:@"explore.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.selectedImage = [[UIImage imageNamed:@"explore.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.image = [[UIImage imageNamed:@"explore1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     item2.selectedImage = [[UIImage imageNamed:@"create.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -58,15 +59,59 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     
     
-    item3.selectedImage = [[UIImage imageNamed:@"favourites1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item3.image = [[UIImage imageNamed:@"favourites.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.selectedImage = [[UIImage imageNamed:@"favourites.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.image = [[UIImage imageNamed:@"favourites1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
-    item4.selectedImage = [[UIImage imageNamed:@"profile1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item4.image = [[UIImage imageNamed:@"profile.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item4.selectedImage = [[UIImage imageNamed:@"profile.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item4.image = [[UIImage imageNamed:@"profile1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
+
+//    
+    item0.title=@"WATCH";
+    item1.title=@"EXPLORE";
+    item2.title=@"";
+    item3.title=@"ACTIVITY";
+    item4.title=@"PROFILE";
     
+    [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    color180,UITextAttributeTextColor,
+[NSValue valueWithUIOffset:UIOffsetMake(0,0)], UITextAttributeTextShadowOffset,
+                                            [UIFont fontWithName:@"SanFranciscoDisplay-Semibold" size:11.0], UITextAttributeFont, nil]
+                                  forState:UIControlStateNormal];
+    
+    [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                   color180,UITextAttributeTextColor,
+                                   [NSValue valueWithUIOffset:UIOffsetMake(0,0)], UITextAttributeTextShadowOffset,
+                                   [UIFont fontWithName:@"SanFranciscoDisplay-Semibold" size:11.0], UITextAttributeFont, nil]
+                         forState:UIControlStateNormal];
+    [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                  color180,UITextAttributeTextColor,
+                                   [NSValue valueWithUIOffset:UIOffsetMake(0,0)], UITextAttributeTextShadowOffset,
+                                   [UIFont fontWithName:@"SanFranciscoDisplay-Semibold" size:11.0], UITextAttributeFont, nil]
+                         forState:UIControlStateNormal];
+    [item3 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                   color180,UITextAttributeTextColor,
+                                   [NSValue valueWithUIOffset:UIOffsetMake(0,0)], UITextAttributeTextShadowOffset,
+                                   [UIFont fontWithName:@"SanFranciscoDisplay-Semibold" size:11.0], UITextAttributeFont, nil]
+                         forState:UIControlStateNormal];
+    [item4 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                   color180,UITextAttributeTextColor,
+                                   [NSValue valueWithUIOffset:UIOffsetMake(0,0)], UITextAttributeTextShadowOffset,
+                                   [UIFont fontWithName:@"SanFranciscoDisplay-Semibold" size:11.0], UITextAttributeFont, nil]
+                         forState:UIControlStateNormal];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1], NSForegroundColorAttributeName
+                                                       ,nil] forState:UIControlStateNormal];
+
+       [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary  dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+  
+
+//    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+//    [[UITabBar appearance] setAlpha:1];
+    
+   
 //    if ([[defautls valueForKey:@"letsChat"] isEqualToString:@"yes"] || [[defautls valueForKey:@"letsChatAd"] isEqualToString:@"yes"])
 //    {
 //   
@@ -267,6 +312,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     tabFrame.size.height = 56;
     tabFrame.origin.y = self.view.frame.size.height - 56;
     self.tabBar.frame = tabFrame;
+    
+   
 }
 - (void)tabBar:(UITabBar *)theTabBar didSelectItem:(UITabBarItem *)item
 {

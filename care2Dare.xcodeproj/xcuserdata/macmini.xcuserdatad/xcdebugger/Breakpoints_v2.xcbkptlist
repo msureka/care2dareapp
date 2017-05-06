@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
-            timestampString = "515075739.473262"
+            timestampString = "515754880.14517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1322"
-            endingLineNumber = "1322"
+            startingLineNumber = "1331"
+            endingLineNumber = "1331"
             landmarkName = "-RecordingVediosImagepicker"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,12 +25,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
-            timestampString = "515075460.59772"
+            filePath = "care2Dare/HomeTabbarPage/ExpolreViewController/WatchingVedio/WatchVediosViewController.m"
+            timestampString = "515506133.939839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
+            landmarkName = "-CommunicationPlayVedio"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
+            timestampString = "515754880.14517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "609"
+            endingLineNumber = "609"
             landmarkName = "-ButtonCreateChallenges_Action:"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,12 +58,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
-            timestampString = "515075487.045483"
+            timestampString = "515754880.14517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
             landmarkName = "-ButtonCreateChallenges_Action:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
+            timestampString = "515754880.14517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "-_Label_ChallengesName_Tapped:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
+            timestampString = "515754880.14517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
+            landmarkName = "-ButtonCreateChallenges_Action:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateNewChallengesViewController.m"
+            timestampString = "515754880.14517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1058"
+            endingLineNumber = "1058"
+            landmarkName = "-Textfield_Amount_Action:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

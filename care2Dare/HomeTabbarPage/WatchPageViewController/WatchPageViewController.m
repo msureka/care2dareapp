@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "WatchVediosViewController.h"
 #import "ProfilePageDetailsViewController.h"
+#import "WatchVedioScrollViewController.h"
 @interface WatchPageViewController ()
 {
     NSMutableArray *Array_Watch,*Array_Watch1;
@@ -270,7 +271,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     
     cell_one.Image_Thumbnail.userInteractionEnabled=YES;
     [cell_one.Image_Thumbnail sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
-  
+    cell_one.Image_Thumbnail.tag=indexPath.row;
     cell_one.Image_Thumbnail.userInteractionEnabled=YES;
     UITapGestureRecognizer * ImageThumbnail_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped:)];
     [cell_one.Image_Thumbnail addGestureRecognizer:ImageThumbnail_Tapped];
@@ -623,15 +624,17 @@ transparancyTuchView.hidden=YES;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
-    
+     WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=cell_one.Image_Thumbnail;
@@ -647,9 +650,9 @@ transparancyTuchView.hidden=YES;
     
 
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
-    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     
@@ -672,8 +675,9 @@ transparancyTuchView.hidden=YES;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
@@ -694,9 +698,9 @@ transparancyTuchView.hidden=YES;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
-    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     
@@ -717,9 +721,9 @@ transparancyTuchView.hidden=YES;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
-    
+  WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     
@@ -738,9 +742,9 @@ transparancyTuchView.hidden=YES;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
-    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
     set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
     

@@ -716,12 +716,12 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"n
         /*---------- End color Borders------------*/
         
         
-        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,44)];
+        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
         [sectionView setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
         
         
         
-        Button_Dareyou=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,44)];
+        Button_Dareyou=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,38)];
         [Button_Dareyou setTitle:@"I DARE YOU" forState:UIControlStateNormal];
         Button_Dareyou.backgroundColor=[UIColor clearColor];
         Button_Dareyou.tag=section;
@@ -762,7 +762,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"n
     }
     if (section==1)
     {
-        return 44;
+        return 38;
     }
     return 0;
     //

@@ -396,12 +396,12 @@
     if (section==1)
     {
         
-        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,40)];
+        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
        
         
         
         
-        Button_Deny=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width/2,44)];
+        Button_Deny=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width/2,38)];
         [Button_Deny setTitle:@"DENY" forState:UIControlStateNormal];
         Button_Deny.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
         Button_Deny.tag=section;
@@ -413,7 +413,7 @@
        
         
         
-        Button_Accept=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,0,self.view.frame.size.width/2,44)];
+        Button_Accept=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,0,self.view.frame.size.width/2,38)];
         [Button_Accept setTitle:@"ACCEPT" forState:UIControlStateNormal];
         Button_Accept.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];;
         Button_Accept.tag=section;
@@ -567,7 +567,7 @@
     if (section==1)
     {
         
-        return 44;
+        return 38;
         
     }
     

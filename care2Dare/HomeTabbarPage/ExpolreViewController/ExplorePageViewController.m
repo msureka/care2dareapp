@@ -11,6 +11,10 @@
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
 #import "ContributeDaetailPageViewController.h"
+#define BlueColor [UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor
+#define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
+#define GreenColor [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor
+
 @interface ExplorePageViewController ()<UISearchBarDelegate>
 {
     CALayer *borderBottom_world,*borderBottom_ExpFrnd;
@@ -114,7 +118,7 @@
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
     
     
-    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
     [view_ExpWorld.layer addSublayer:borderBottom_world];
     
@@ -458,7 +462,7 @@
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
 
     
-    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
     [view_ExpWorld.layer addSublayer:borderBottom_world];
     
@@ -468,7 +472,7 @@
     image_ExpFriend.clipsToBounds=YES;
     
     
-    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
      [self ClienserverComm_worldExp];
@@ -502,7 +506,7 @@
     image_ExpFriend.clipsToBounds=YES;
     
 
-    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-2.5, View_ExpFriend.frame.size.width, 2.5);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
      [self ClienserverComm_FriendExp];

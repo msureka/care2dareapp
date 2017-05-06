@@ -639,7 +639,7 @@
     if (section==1)
     {
         
-        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, -40,self.view.frame.size.width,40)];
+        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, -38,self.view.frame.size.width,38)];
         [sectionView setBackgroundColor:[UIColor whiteColor]];
         //        sectionView.layer.borderWidth=1.0f;
         //        sectionView.layer.borderColor=[UIColor redColor].CGColor;
@@ -785,7 +785,7 @@
     }
     if (section==1)
     {
-        return 44;
+        return 38;
     }
     return 0;
     //

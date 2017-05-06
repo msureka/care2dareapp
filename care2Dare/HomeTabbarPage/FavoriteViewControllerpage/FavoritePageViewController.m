@@ -11,6 +11,9 @@
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
 #import "ContributeDaetailPageViewController.h"
+#define BlueColor [UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor
+#define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
+#define GreenColor [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor
 @interface FavoritePageViewController ()
 {
     CALayer *borderBottom_world,*borderBottom_ExpFrnd,*bootomBorder_Cell,*Bottomborder_Cell2;
@@ -88,7 +91,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
     View_ExpFavorite.clipsToBounds=YES;
     
     
-    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.backgroundColor = [UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
    // borderBottom_world.frame=view_ExpPledges.bounds;
     borderBottom_world.frame = CGRectMake(0, view_ExpPledges.frame.size.height-2.5,  view_ExpPledges.frame.size.width, 2.5);
     [view_ExpPledges.layer addSublayer:borderBottom_world];
@@ -421,7 +424,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
     Label_Favorite.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     Label_Pledges.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     
-    borderBottom_world.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;// [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpPledges.frame.size.height-2.5, view_ExpPledges.frame.size.width, 2.5);
     [view_ExpPledges.layer addSublayer:borderBottom_world];
     
@@ -465,7 +468,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
 
     
     
-    borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;// [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFavorite.frame.size.height-2.5, View_ExpFavorite.frame.size.width, 2.5);
     [View_ExpFavorite.layer addSublayer:borderBottom_ExpFrnd];
     

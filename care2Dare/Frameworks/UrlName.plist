@@ -54,5 +54,11 @@
 	<string>http://www.care2dareapp.com/app/checknotifications3.php</string>
 	<key>stats</key>
 	<string>http://www.care2dareapp.com/app/stats.php</string>
+	<key>delete</key>
+	<string>http://www.care2dareapp.com/app/delete.php</string>
+	<key>flag</key>
+	<string>http://www.care2dareapp.com/app/flag.php</string>
+	<key>New item</key>
+	<string></string>
 </dict>
 </plist>

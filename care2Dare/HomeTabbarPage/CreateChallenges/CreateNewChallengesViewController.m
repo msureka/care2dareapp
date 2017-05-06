@@ -148,11 +148,20 @@
     }
     else
     {
+        
+        NSLog(@"defaults valueForKey:username==%@",[defaults valueForKey:@"usernames"]);
+        NSString * Str_ArrayUsernames=[defaults valueForKey:@"usernames"];
+        
         _Label_ChallengesName.text=[defaults valueForKey:@"usernames"];
+        
+        if (![Str_ArrayUsernames isEqualToString:@""])
+        {
+            
         
         Array_Names=[[NSMutableArray arrayWithObjects:[defaults valueForKey:@"usernames"], nil]mutableCopy];
         
         Array_UserId=[[NSMutableArray arrayWithObjects:[defaults valueForKey:@"userids"], nil]mutableCopy];
+        }
 
 //        [defaults setObject:userId_prof forKey:@"userids"];
     }
@@ -1221,7 +1230,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     AVVideoHeightKey: Vedio_Height,  //set your resolution height here
     AVVideoCompressionPropertiesKey: @
         {
-        AVVideoAverageBitRateKey: @500000, // Give your bitrate here for lower size give low values
+        AVVideoAverageBitRateKey: @750000, // Give your bitrate here for lower size give low values
         AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
         },
     };

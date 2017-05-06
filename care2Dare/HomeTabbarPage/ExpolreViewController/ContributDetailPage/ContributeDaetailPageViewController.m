@@ -18,7 +18,7 @@
 #import "ProfilePageDetailsViewController.h"
 #import "WatchVediosViewController.h"
 #import "SDAVAssetExportSession.h"
-
+#import "WatchVedioScrollViewController.h"
 
 #define FONT_SIZE 15.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
@@ -29,8 +29,8 @@
 {
     UIView *sectionView,*transperentViewIndicator,*whiteView1,*transperentViewIndicatorcc,*whiteView1cc;
 ;
-    UIImageView *Image_Share;
-    UIButton *Button_Contribute;
+   
+    UIButton *Button_Contribute,*Button_FavouriteTap,*Image_Share;;
     CGRect textRect;
     NSUserDefaults *defaults;
     NSDictionary *urlplist;
@@ -59,6 +59,7 @@
     NSNumber *Vedio_Height,*Vedio_Width;
     UIImage *FrameImage;
     UIImagePickerController * picker1;
+    
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottomSpace;
@@ -1127,7 +1128,7 @@
 -(IBAction)CameraButtonAct:(id)sender
 {
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take from camera",@"Choose from gallery",nil];
-    popup.tag = 3;
+    popup.tag = 888;
     [popup showInView:self.view];
     
     
@@ -1135,6 +1136,10 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if ((long)actionSheet.tag==888)
+    {
+        
+    
     
     if (buttonIndex== 0)
     {
@@ -1160,6 +1165,54 @@
         
         
     }
+        
+    }
+    else if ((long)actionSheet.tag == 707)
+    {
+        if (buttonIndex== 0)
+        {
+            [self FlagVedioCommunication];
+        }
+    }
+    else if ((long)actionSheet.tag == 777)
+    {
+        NSLog(@"INDEXAcrtionShhet==%ld",(long)buttonIndex);
+        
+        if (buttonIndex== 0)
+        {
+            
+            UIAlertController * alert=[UIAlertController
+                                       
+                                       alertControllerWithTitle:@"Delete Challenge?" message:@"Are you sure you want to delete your challenge?"preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* yesButton = [UIAlertAction
+                                        actionWithTitle:@"Yes"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                            
+                                            [self DeleteVideoCommunication];
+                                            
+                                        }];
+            UIAlertAction* noButton = [UIAlertAction
+                                       actionWithTitle:@"No"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action)
+                                       {
+                                           
+                                           
+                                       }];
+            
+            [alert addAction:yesButton];
+            [alert addAction:noButton];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        else  if (buttonIndex== 1)
+        {
+            [self FlagVedioCommunication];
+        }
+    }
+
 }
 
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
@@ -1179,7 +1232,7 @@
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    cameraUI.videoQuality = UIImagePickerControllerQualityType640x480;
     
     cameraUI.showsCameraControls = YES;
 //    cameraUI.videoMaximumDuration = 07.0f;
@@ -1218,7 +1271,7 @@
     AVVideoHeightKey: Vedio_Height,  //set your resolution height here
     AVVideoCompressionPropertiesKey: @
         {
-        AVVideoAverageBitRateKey: @500000, // Give your bitrate here for lower size give low values
+        AVVideoAverageBitRateKey: @750000, // Give your bitrate here for lower size give low values
         AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
         },
     };
@@ -1761,22 +1814,19 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             
             
             
-            if ([CheckFavInserted isEqualToString:@"TRUE"])
-            {
-                [cell_OneImageVid.Image_Favourite setImage:[UIImage imageNamed:@"challenge_favourite1.png"]];
-            }
-            else
-            {
-               [cell_OneImageVid.Image_Favourite setImage:[UIImage imageNamed:@"challenge_favourite.png"]];
-            }
+//            if ([CheckFavInserted isEqualToString:@"TRUE"])
+//            {
+//                [cell_OneImageVid.Image_Favourite setImage:[UIImage imageNamed:@"challenge_favourite1.png"]];
+//            }
+//            else
+//            {
+//               [cell_OneImageVid.Image_Favourite setImage:[UIImage imageNamed:@"challenge_favourite.png"]];
+//            }
            
        
       
-            UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FavouriteTapped_Action:)];
+            UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThreeDotsTapped_Action:)];
             [cell_OneImageVid.Image_Favourite addGestureRecognizer:FavouriteTapped];
-
-            UITapGestureRecognizer *FlagTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(FlagTapped_Action:)];
-            [cell_OneImageVid.Image_Flag addGestureRecognizer:FlagTapped];
 
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
@@ -2551,17 +2601,29 @@ if (section==0)
 if (section==1)
 {
     
-    sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,40)];
+    sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
     [sectionView setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
    
     
     
-    Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-61,44)];
+    
+    
+    Button_FavouriteTap=[[UIButton alloc]initWithFrame:CGRectMake(0,0,50,38)];
+    
+    Button_FavouriteTap.tag=section;
+    Button_FavouriteTap.backgroundColor=[UIColor grayColor];
+    
+    [Button_FavouriteTap addTarget:self action:@selector(FavouriteTapped_Action:)
+                forControlEvents:UIControlEventTouchUpInside];
+    Button_FavouriteTap.backgroundColor=[UIColor clearColor];
+    
+    
+    Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(50,0, self.view.frame.size.width-100,38)];
     
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
     {
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
-        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
+//        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
         
         [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
                     forControlEvents:UIControlEventTouchUpInside];
@@ -2569,7 +2631,7 @@ if (section==1)
     else
     {
         
-        [Button_Contribute setTitle:@"CONTRIBUTE" forState:UIControlStateNormal];
+        [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor clearColor];
         
         [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
@@ -2583,21 +2645,37 @@ if (section==1)
     Button_Contribute.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
    
     
-    Image_Share.tag=section;
+   
     
     
-    Image_Share=[[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width-61),0,61,44)];
+    
+    
+    Image_Share=[[UIButton alloc]initWithFrame:CGRectMake((Button_Contribute.frame.origin.x+Button_Contribute.frame.size.width),0,50,38)];
      Image_Share.backgroundColor=[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1];
-    [Image_Share setImage:[UIImage imageNamed:@"sharewithbg.png"]];
-    Image_Share.contentMode=UIViewContentModeScaleAspectFit;
+    [Image_Share setImage:[UIImage imageNamed:@"sharebutton.png"]forState:UIControlStateNormal];;
+//    Image_Share.contentMode=UIViewContentModeScaleAspectFit;
      Image_Share.tag=section;
-    
+    Image_Share.backgroundColor=[UIColor clearColor];
     Image_Share.userInteractionEnabled=YES;
-    UITapGestureRecognizer * image_shareTab =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Share_Action:)];
-    [Image_Share addGestureRecognizer:image_shareTab];
+    
+    [Image_Share addTarget:self action:@selector(Share_Action:)
+                forControlEvents:UIControlEventTouchUpInside];
+
     
     [sectionView addSubview:Button_Contribute];
     [sectionView addSubview:Image_Share];
+    [sectionView addSubview:Button_FavouriteTap];
+    
+    
+    
+            if ([CheckFavInserted isEqualToString:@"TRUE"])
+                {
+                    [Button_FavouriteTap setImage:[UIImage imageNamed:@"favouritebutton1.png"] forState:UIControlStateNormal];
+                }
+                else
+                {
+                   [Button_FavouriteTap setImage:[UIImage imageNamed:@"favouritebutton.png"] forState:UIControlStateNormal];
+                }
     
     
     sectionView.tag=section;
@@ -2664,7 +2742,7 @@ return  sectionView;
 
 
 }
--(void)Share_Action:(UIGestureRecognizer *)reconizer
+-(IBAction)Share_Action:(id)sender
 {
     
 }
@@ -2709,7 +2787,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     if (section==1)
     {
         
-            return 44;
+            return 38;
        
     }
     if (section==2 )
@@ -2721,7 +2799,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     }
     else
     {
-          return 44;
+          return 38;
     }
     }
     
@@ -2742,7 +2820,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)FavouriteTapped_Action:(UIGestureRecognizer *)reconizer
+-(IBAction)FavouriteTapped_Action:(id)sender
 {
     
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
@@ -2860,8 +2938,31 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         [dataTask resume];
     }
 }
--(void)FlagTapped_Action:(UIGestureRecognizer *)reconizer
+-(void)ThreeDotsTapped_Action:(UIGestureRecognizer *)reconizer
 {
+    
+//    if([[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]isEqualToString:@"0"] ||[[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]])
+//    {
+//        
+//    
+    
+    if([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0] valueForKey:@"userid1"]])
+    {
+    
+    
+        
+        UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete Challenge" otherButtonTitles:@"Flag as inappropriate",nil];
+        popup.tag = 777;
+        [popup showInView:self.view];
+    }
+    else
+    {
+        
+        UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Flag as inappropriate",nil];
+        popup.tag = 707;
+        [popup showInView:self.view];
+    }
+    
     
 }
 
@@ -3105,7 +3206,6 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     
     NSLog(@"Useridd11==%@",[[AllArrayData objectAtIndex:0] valueForKey:@"challengersuserid"]);
     
-    
     if([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0] valueForKey:@"userid1"]])
     {
        
@@ -3128,7 +3228,9 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
 }
 -(void)ImageTapped_profile:(UIGestureRecognizer *)reconizer
 {
-    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+     WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+    
     UIGestureRecognizer *recognizer = (UIGestureRecognizer*)reconizer;
     UIImageView *imageView = (UIImageView *)recognizer.view;
     
@@ -3154,5 +3256,263 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     return textView.text.length + (text.length - range.length) <= 250;
+}
+-(void)DeleteVideoCommunication
+{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        NSString *userid1= @"userid";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+        NSString *deletetype= @"deletetype";
+        NSString *deletetypeval=@"CHALLENGE";
+        
+        NSString *VedioIds= @"deleteid";
+        NSString *videoid1=[[AllArrayData valueForKey:@"challengeid"]objectAtIndex:0];
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",userid1,useridVal1,deletetype,deletetypeval,VedioIds,videoid1];
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"delete"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     if ([ResultString isEqualToString:@"done"])
+                                                     {
+                                                         
+                                                         
+                                                         
+                                                         UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Deleted" message:@"Your challenge has been successfully deleted!"preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                             style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                                                                     {
+                                                    [self ButtonBack_Action:nil];
+                                                                                     }];
+                                                         
+                                                         [alert addAction:yesButton];
+                                                         
+                                                         [self presentViewController:alert animated:YES completion:nil];
+                                                         
+                                                         
+                                                     }
+                                                     if ([ResultString isEqualToString:@"deleteerror"])
+                                                     {
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The challenge could not be deleted. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                            style:UIAlertActionStyleDefault
+                                                                                                          handler:nil];
+                                                         [alertController addAction:actionOk];
+                                                         [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                     }
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                                 
+                                                 
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    };
+    
+    
+}
+
+
+-(void)FlagVedioCommunication
+{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        NSString *userid1= @"userid";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+        NSString *FlagType= @"flagtype";
+        NSString *FlagTypeval=@"CHALLENGE";
+        
+        NSString *VedioIds= @"flagid";
+        NSString *videoid1=[[AllArrayData valueForKey:@"challengeid"]objectAtIndex:0];
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",userid1,useridVal1,FlagType,FlagTypeval,VedioIds,videoid1];
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"flag"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                     if ([ResultString isEqualToString:@"done"])
+                                                     {
+                                                         
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Flagged" message:@"The concerned challenge has been flagged and the team will review it and take appropriate action. Thank-you for the heads up!" preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                            style:UIAlertActionStyleDefault
+                                                                                                          handler:nil];
+                                                         [alertController addAction:actionOk];
+                                                         [self presentViewController:alertController animated:YES completion:nil];
+                                                     }
+                                                     if ([ResultString isEqualToString:@"deleteerror"])
+                                                     {
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The challenge could not be flagged. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                            style:UIAlertActionStyleDefault
+                                                                                                          handler:nil];
+                                                         [alertController addAction:actionOk];
+                                                         [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                     }
+                                                     
+                                                     
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                                 
+                                                 
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    };
+    
+    
 }
 @end
