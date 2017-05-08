@@ -353,7 +353,7 @@
                 
                 [Imagepro setTag:i];
                 
-                
+                Imagepro.contentMode=UIViewContentModeScaleAspectFill;
                 UITapGestureRecognizer * ImageTap =[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(ImageTapped_profile:)];
                 [Imagepro addGestureRecognizer:ImageTap];

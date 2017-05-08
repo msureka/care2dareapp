@@ -190,7 +190,14 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     }
     if (indexPath.section==1)
     {
+        if (Array_Stats.count==0)
+        {
+                      return 0;
+        }
+        else
+        {
             return 160;
+        }
     }
     if (indexPath.section==2)
     {
@@ -440,6 +447,17 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
     if (section==0)
     {
         return 0;
+    }
+    else if (section==1)
+    {
+    if (Array_Stats.count==0)
+    {
+           return 0;
+    }
+        else
+        {
+          return 34;
+        }
     }
     else
     {

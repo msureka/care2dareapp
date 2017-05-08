@@ -239,8 +239,11 @@ if ([ResultString isEqualToString:@"nouserid"])
     
 
             cell_one = (WatchViewTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdv1 forIndexPath:indexPath];
-    
-    
+    cell_one.Image_Thumbnail.tag=indexPath.row;
+    NSDictionary * dic_value=[Array_Watch objectAtIndex:indexPath.row];
+    NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
+   
+
     if (Array_Watch.count-1==indexPath.row)
     {
         Bottomborder_Cell2 = [CALayer layer];
@@ -250,13 +253,16 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
-        Bottomborder_Cell2 = [CALayer layer];
-        Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-        Bottomborder_Cell2.frame = CGRectMake(0, cell_one.frame.size.height-1,cell_one.frame.size.width, 1);
-        [cell_one.layer addSublayer:Bottomborder_Cell2];
+        if (countVedio >=2)
+        {
+            Bottomborder_Cell2 = [CALayer layer];
+            Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+            Bottomborder_Cell2.frame = CGRectMake(0, cell_one.frame.size.height-1,cell_one.frame.size.width, 1);
+            [cell_one.layer addSublayer:Bottomborder_Cell2];
+        }
+       
     }
-      cell_one.Image_Thumbnail.tag=indexPath.row;
-    NSDictionary * dic_value=[Array_Watch objectAtIndex:indexPath.row];
+      
     
             NSURL *url=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
             
@@ -279,7 +285,8 @@ if ([ResultString isEqualToString:@"nouserid"])
     cell_one.Button_playbutton.tag=indexPath.row;
     [cell_one.Button_playbutton addTarget:self action:@selector(Button_PlayVedioNextPage:) forControlEvents:UIControlEventTouchUpInside];
     cell_one.Label_title.text=[dic_value valueForKey:@"challengetitle"];
-    NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
+    cell_one.Label_days.text=[dic_value valueForKey:@"posttime"];
+//    NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
     if (countVedio >=5)
     {
         cell_one.Label_mores.hidden=NO;

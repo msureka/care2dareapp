@@ -2744,7 +2744,15 @@ return  sectionView;
 }
 -(IBAction)Share_Action:(id)sender
 {
-    
+    NSString * texttoshare=[NSString stringWithFormat:@"%@%@",[[AllArrayData objectAtIndex:0] valueForKey:@"usersname"],@" has posted a new challenge. Download the app now - http://www.care2dareapp.com or View the challenge here: "];
+   
+    NSURL * urltoshare=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"mediaurl"]]];
+    NSArray *activityItems1=@[texttoshare,urltoshare];
+    NSArray *activityItems =@[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks];
+    UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems1 applicationActivities:nil];
+    activityViewControntroller.excludedActivityTypes = activityItems;
+    //  [self.view addSubview:activityViewControntroller];
+    [self presentViewController:activityViewControntroller animated:YES completion:nil];
 }
 -(void)Contribute_RecordedChallenge:(UIButton *)sender
 {

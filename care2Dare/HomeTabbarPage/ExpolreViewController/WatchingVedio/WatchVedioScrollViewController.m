@@ -546,10 +546,10 @@
                                                NSLog(@"error login2.......%@",error.description);
                                                  NSLog(@"error login2.......%@",error.description);
                                                  //[self CommunicationPlayVedio];
-                                NSString * errorstr=[NSString stringWithFormat:@"%@",[error valueForKey:@"NSLocalizedDescription"]];
+                             
                                                  UIAlertController * alert=[UIAlertController
                                                                             
-                                                                            alertControllerWithTitle:@"Network Error" message:errorstr preferredStyle:UIAlertControllerStyleAlert];
+                                                                            alertControllerWithTitle:@"Network Error" message:@"The request timed out." preferredStyle:UIAlertControllerStyleAlert];
                                                  
                                                  UIAlertAction* yesButton = [UIAlertAction
                                                                              actionWithTitle:@"OK"
@@ -1619,7 +1619,18 @@
 
 -(void)Image_Share_Action:(UIGestureRecognizer *)reconizer
 {
+    [player pause];
+    [Button_PlayPause setImage:[UIImage imageNamed:@"Play Filled-100.png"] forState:UIControlStateNormal];
     
+    NSString * texttoshare=[NSString stringWithFormat:@"%@%@",str_name,@" has recorded a new challenge video. Download the app now - http://www.care2dareapp.com or Watch the video here: "];
+    
+    NSURL * urltoshare=[NSURL URLWithString:[NSString stringWithFormat:@"%@",Str_urlVedio]];
+    NSArray *activityItems1=@[texttoshare,urltoshare];
+    NSArray *activityItems =@[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks];
+    UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems1 applicationActivities:nil];
+    activityViewControntroller.excludedActivityTypes = activityItems;
+    //  [self.view addSubview:activityViewControntroller];
+    [self presentViewController:activityViewControntroller animated:YES completion:nil];
 }
 -(void)ImageSelectrowPlayVedio_Action:(UIGestureRecognizer *)reconizer
 {
