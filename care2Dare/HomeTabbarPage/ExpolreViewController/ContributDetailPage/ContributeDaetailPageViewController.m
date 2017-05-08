@@ -59,7 +59,8 @@
     NSNumber *Vedio_Height,*Vedio_Width;
     UIImage *FrameImage;
     UIImagePickerController * picker1;
-    
+    UIImageView *image_newSymbolstatus;
+    CGFloat XpostionNewSymbol,YpostionNewSymbol,WpostionNewSymbol,HpostionNewSymbol;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarBottomSpace;
@@ -345,10 +346,13 @@
     ////////////////////////////////////
     
     
-    
+    XpostionNewSymbol=40;
+    YpostionNewSymbol=0;
+    WpostionNewSymbol=26;
+    HpostionNewSymbol=26;
     
     Xpostion=12;
-    Ypostion=0;
+    Ypostion=8;
     Xwidth=60;
     Yheight=60;
     ScrollContentSize=0;
@@ -356,6 +360,7 @@
     Ypostion_label=67;
     Xwidth_label=60;
     Yheight_label=20;
+    
     
     
         str_TappedLabel=@"no";
@@ -768,8 +773,13 @@
 {
     [super viewWillAppear:animated];
     
+    XpostionNewSymbol=40;
+    YpostionNewSymbol=0;
+    WpostionNewSymbol=26;
+    HpostionNewSymbol=26;
+    
     Xpostion=12;
-    Ypostion=0;
+    Ypostion=8;
     Xwidth=60;
     Yheight=60;
     ScrollContentSize=0;
@@ -777,7 +787,7 @@
     Ypostion_label=67;
     Xwidth_label=60;
     Yheight_label=20;
-    
+    [self Communication_showrecordVid];
     [self subscribeToKeyboard];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -2102,7 +2112,15 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 {
                     
                      Imagepro = [[UIImageView alloc] initWithFrame:CGRectMake(Xpostion, Ypostion, Xwidth, Yheight)];
+                    image_newSymbolstatus=[[UIImageView alloc]initWithFrame:CGRectMake((Imagepro.frame.origin.x+Imagepro.frame.size.width)-16, YpostionNewSymbol, WpostionNewSymbol, HpostionNewSymbol)];
                     
+                    
+                    image_newSymbolstatus.contentMode=UIViewContentModeScaleAspectFill;
+                    
+                    image_newSymbolstatus.userInteractionEnabled=YES;
+                    
+                     [image_newSymbolstatus setTag:i];
+                    [image_newSymbolstatus setImage:[UIImage imageNamed:@"new.png"]];
                     Imagepro.contentMode=UIViewContentModeScaleAspectFill;
                     
                     Imagepro.userInteractionEnabled=YES;
@@ -2118,8 +2136,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     Imagepro.clipsToBounds=YES;
                     Imagepro.layer.cornerRadius=9.0f;
                     
-                    
+                 
                     [cell_recordvid.myscrollView addSubview:Imagepro];
+                       [cell_recordvid.myscrollView addSubview:image_newSymbolstatus];
                     
                     Imagepro.backgroundColor=[UIColor redColor];
                     //                name = "Er Sachin Mokashi";
@@ -2137,17 +2156,30 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
                     
-                    
+                    if ([[[Array_showrecordvid objectAtIndex:i]valueForKey:@"newstatus"] isEqualToString:@"yes"])
+                    {
+                        image_newSymbolstatus.hidden=NO;
+                    }
+                    else
+                    {
+                       image_newSymbolstatus.hidden=YES;
+                    }
                     
                     
                     Xpostion+=Xwidth+20;
-                    
+//                    XpostionNewSymbol+=WpostionNewSymbol;
                     
                     ScrollContentSize+=Xwidth;
                     cell_recordvid.myscrollView.contentSize=CGSizeMake(Xpostion, 88);
                 }
+                
+                XpostionNewSymbol=40;
+                YpostionNewSymbol=0;
+                WpostionNewSymbol=26;
+                HpostionNewSymbol=26;
+                
                 Xpostion=12;
-                Ypostion=0;
+                Ypostion=8;
                 Xwidth=60;
                 Yheight=60;
                 ScrollContentSize=0;

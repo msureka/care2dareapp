@@ -845,10 +845,13 @@
             for (NSDictionary *book in SearchCrickArray_worldExp)
             {
                 NSString * string=[book objectForKey:@"title"];
-               
+                NSString * string1=[book objectForKey:@"usersname"];
+                NSString * string2=[book objectForKey:@"challengersname"];
+                
                 NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
-               
-                if (r.location !=NSNotFound )
+            NSRange r1=[string1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                NSRange r2=[string2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                if (r.location !=NSNotFound || r1.location !=NSNotFound || r2.location !=NSNotFound)
                 {
                     
                     [Array_WorldExp addObject:book];
@@ -884,11 +887,16 @@
             for (NSDictionary *book in SearchCrickArray_FriendExp)
             {
                 NSString * string=[book objectForKey:@"title"];
+                NSString * string1=[book objectForKey:@"usersname"];
+                NSString * string2=[book objectForKey:@"challengersname"];
                 
-                NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            NSRange r1=[string1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            NSRange r2=[string2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
                 
-                if (r.location !=NSNotFound )
+                if (r.location !=NSNotFound || r1.location !=NSNotFound || r2.location !=NSNotFound)
                 {
+
                     
                     [Array_FriendExp addObject:book];
                     

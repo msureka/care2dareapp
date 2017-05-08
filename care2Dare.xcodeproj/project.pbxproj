@@ -387,6 +387,7 @@
 		9AED228E1E6AE27B0004A8D0 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AED22821E6AE27B0004A8D0 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AED22901E6AE3300004A8D0 /* UrlName.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AED228F1E6AE3300004A8D0 /* UrlName.plist */; };
 		9AED22941E6AE83F0004A8D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AED22931E6AE83F0004A8D0 /* CoreLocation.framework */; };
+		9AF310851EC07F09005CD485 /* FriendAddsuggTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF310841EC07F09005CD485 /* FriendAddsuggTableViewCell.m */; };
 		9AF84EFE1E8FAA6D0008408E /* AcceptContributeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF84EFD1E8FAA6D0008408E /* AcceptContributeDetailViewController.m */; };
 		9AF84F011E8FAAD80008408E /* AccImgVidTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF84F001E8FAAD80008408E /* AccImgVidTableViewCell.m */; };
 		9AF84F071E8FB0810008408E /* AccptTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF84F061E8FB0810008408E /* AccptTwoTableViewCell.m */; };
@@ -930,6 +931,8 @@
 		9AED22821E6AE27B0004A8D0 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		9AED228F1E6AE3300004A8D0 /* UrlName.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UrlName.plist; sourceTree = "<group>"; };
 		9AED22931E6AE83F0004A8D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9AF310831EC07F09005CD485 /* FriendAddsuggTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendAddsuggTableViewCell.h; sourceTree = "<group>"; };
+		9AF310841EC07F09005CD485 /* FriendAddsuggTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendAddsuggTableViewCell.m; sourceTree = "<group>"; };
 		9AF84EFC1E8FAA6D0008408E /* AcceptContributeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptContributeDetailViewController.h; sourceTree = "<group>"; };
 		9AF84EFD1E8FAA6D0008408E /* AcceptContributeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcceptContributeDetailViewController.m; sourceTree = "<group>"; };
 		9AF84EFF1E8FAAD80008408E /* AccImgVidTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccImgVidTableViewCell.h; sourceTree = "<group>"; };
@@ -1081,6 +1084,8 @@
 				9A19B4281E6EDD6500262BC1 /* FriendsReqTableViewCell.m */,
 				9A19B42A1E6EDD7E00262BC1 /* FriendAddReqTableViewCell.h */,
 				9A19B42B1E6EDD7E00262BC1 /* FriendAddReqTableViewCell.m */,
+				9AF310831EC07F09005CD485 /* FriendAddsuggTableViewCell.h */,
+				9AF310841EC07F09005CD485 /* FriendAddsuggTableViewCell.m */,
 				9A73CF631E6FBFDB00613682 /* ChallengesTableViewCell.h */,
 				9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */,
 				9A0605C01E6D6B3B00FF4229 /* profilePageTableViewCell.h */,
@@ -2573,6 +2578,7 @@
 				9AED22591E6AB7D80004A8D0 /* WorldExpTableViewCell.m in Sources */,
 				9A19B3FC1E6EB01900262BC1 /* UIImageView+HighlightedWebCache.m in Sources */,
 				9A6E39C91E7A652200B4AD5B /* CommentsTableViewCell.m in Sources */,
+				9AF310851EC07F09005CD485 /* FriendAddsuggTableViewCell.m in Sources */,
 				9ABB5DBA1E6953CC00482105 /* SignUpViewController.m in Sources */,
 				9AED22521E6AB7680004A8D0 /* ExplorePageViewController.m in Sources */,
 				9AA9B51E1E6FE82B00C6EF37 /* CreateNewChallengesViewController.m in Sources */,
