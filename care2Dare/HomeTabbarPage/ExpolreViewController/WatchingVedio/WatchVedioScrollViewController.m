@@ -58,7 +58,7 @@
 {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
-    
+    indexVedio=1;
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -105,7 +105,7 @@
     
     progressslider.progress=0.0f;
     
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.0f);
     progressslider.transform = transform;
     [progressslider setProgressViewStyle:UIProgressViewStyleBar];
     
@@ -154,7 +154,7 @@
     
     Button_back=[[UIButton alloc]initWithFrame:CGRectMake(16,16,30,30)];
     
-    [Button_back setImage:[UIImage imageNamed:@"graybackarrow.png"] forState:UIControlStateNormal];
+    [Button_back setImage:[UIImage imageNamed:@"whitebackarrow.png"] forState:UIControlStateNormal];
     [Button_back setTitle:@"" forState:UIControlStateNormal];
     [Button_back addTarget:self action:@selector(Button_Back_Action:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -192,7 +192,7 @@
     [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     Button_PlayPause.center=View_PlayerView.center;
     
-    Button_VolumeMute=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-50,imageHeight-40,30,30)];
+    Button_VolumeMute=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-30,imageHeight-30,20,20)];
   
     
     [Button_VolumeMute setTitle:@"" forState:UIControlStateNormal];
@@ -206,7 +206,7 @@
 
     
     
-    Button_ThreeDots=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-40,20,30,30)];
+    Button_ThreeDots=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-40,20,32,32)];
     
     
     [Button_ThreeDots setTitle:@"" forState:UIControlStateNormal];
@@ -216,8 +216,10 @@
     [Button_ThreeDots setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [Button_ThreeDots setImage:[UIImage imageNamed:@"3dots.png"] forState:UIControlStateNormal];
+    Button_ThreeDots.contentMode=UIViewContentModeScaleAspectFit;
     
-    
+    [[Button_ThreeDots imageView] setContentMode: UIViewContentModeScaleAspectFit];
+    [Button_ThreeDots setImage:[UIImage imageNamed:@"3dots.png"] forState:UIControlStateNormal];
 ////////////////////////////////////////////////////////////////////////////
     
 /////plyerView 2...............///
@@ -1286,7 +1288,9 @@
         }
         
         
+        NSURL *url=[NSURL URLWithString:str_profileurl];
         
+        [Image_Profile_View2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
         label_days_View2.text=str_days;
         label_reviews.text=Str_totalViews;
         

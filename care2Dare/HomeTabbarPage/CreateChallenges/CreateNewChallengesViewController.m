@@ -1163,7 +1163,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    cameraUI.videoQuality = UIImagePickerControllerQualityType640x480;
+    cameraUI.videoQuality = UIImagePickerControllerQualityTypeIFrame1280x720;
     
     cameraUI.showsCameraControls = YES;
    // cameraUI.videoMaximumDuration = 07.0f;
@@ -1230,7 +1230,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     AVVideoHeightKey: Vedio_Height,  //set your resolution height here
     AVVideoCompressionPropertiesKey: @
         {
-        AVVideoAverageBitRateKey: @750000, // Give your bitrate here for lower size give low values
+        AVVideoAverageBitRateKey: @2000000, // Give your bitrate here for lower size give low values
         AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
         },
     };
@@ -1413,13 +1413,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         if (FrameImage.size.height > FrameImage.size.width)
         {
-            Vedio_Height=@640;
-            Vedio_Width=@480;
+            Vedio_Height=@960;
+            Vedio_Width=@540;
         }
         else
         {
-            Vedio_Height=@480;
-            Vedio_Width=@640;
+            Vedio_Height=@540;
+            Vedio_Width=@960;
         }
         
         
