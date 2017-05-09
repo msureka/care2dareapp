@@ -10,6 +10,8 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
+#import "WatchVedioScrollViewController.h"
+#import "ContributeDaetailPageViewController.h"
 @interface ProfileNotificationViewController ()
 {
     UIView *sectionView;
@@ -838,7 +840,7 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
             
             
         NSURL *url,*url1;
-            url=[NSURL URLWithString:[dic_Values valueForKey:@"challengeurl"]];
+            url=[NSURL URLWithString:[dic_Values valueForKey:@"mediathumbnailurl"]];
              url1=[NSURL URLWithString:[dic_Values valueForKey:@"byprofileimageurl"]];
             
             cell_PublicNoti.image_profile.clipsToBounds=YES;
@@ -847,6 +849,15 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
             
 if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
         {
+            if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+            {
+                cell_PublicNoti.image_Playbutton1.hidden=NO;
+            }
+            else
+            {
+                cell_PublicNoti.image_Playbutton1.hidden=YES;
+            }
+            
             [cell_PublicNoti.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
               [cell_PublicNoti.image_profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             cell_PublicNoti.image_profile.layer.cornerRadius=9.0f;
@@ -894,6 +905,15 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
         }
         else
         {
+            if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+            {
+                cell_PublicNoti.image_Playbutton2.hidden=NO;
+            }
+            else
+            {
+                cell_PublicNoti.image_Playbutton2.hidden=YES;
+            }
+            
             [cell_PublicNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             [cell_PublicNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             
@@ -997,7 +1017,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
 
             
             NSURL *url,*url1;
-            url=[NSURL URLWithString:[dic_Values valueForKey:@"challengeurl"]];
+            url=[NSURL URLWithString:[dic_Values valueForKey:@"mediathumbnailurl"]];
             url1=[NSURL URLWithString:[dic_Values valueForKey:@"byprofileimageurl"]];
             
             cell_PrivateNoti.image_profile.clipsToBounds=YES;
@@ -1006,6 +1026,16 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             
             if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
             {
+                if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+                {
+                cell_PrivateNoti.image_Playbutton1.hidden=NO;
+                }
+                else
+                {
+                cell_PrivateNoti.image_Playbutton1.hidden=YES;
+                }
+            
+            
                 [cell_PrivateNoti.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 [cell_PrivateNoti.image_profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 cell_PrivateNoti.image_profile.layer.cornerRadius=9.0f;
@@ -1053,6 +1083,16 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             }
             else
             {
+                
+                if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+                {
+                    cell_PrivateNoti.image_Playbutton2.hidden=NO;
+                }
+                else
+                {
+                    cell_PrivateNoti.image_Playbutton2.hidden=YES;
+                }
+                
                 [cell_PrivateNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 [cell_PrivateNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 
@@ -1710,7 +1750,32 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
     {
+      
+        ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+        NSDictionary *  didselectDic;
+       
         
+        if (indexPath.section==0)
+        {
+            didselectDic=[Array_Public  objectAtIndex:indexPath.row];
+            set.ProfileImgeData =cell_PublicNoti.image_profile;
+        }
+        if (indexPath.section==1)
+        {
+            didselectDic=[Array_Private  objectAtIndex:indexPath.row];
+            set.ProfileImgeData =cell_PrivateNoti.image_profile;
+        }
+        
+        
+        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+        [Array_new addObject:didselectDic];
+        set.AllArrayData =Array_new;
+        NSLog(@"Array_new11=%@",Array_new);;
+                NSLog(@"Array_new22=%@",Array_new);;
+        
+        
+        [self.navigationController pushViewController:set animated:YES];
+        NSLog(@"Array_new33=%@",Array_new);;
     }
     if([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
@@ -1720,6 +1785,26 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
         
+    
+        
+//        NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+        
+        //    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+        
+        WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+        
+        set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengeid"]];
+        
+        set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row]valueForKey:@"byuserid"]];
+        
+        //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+        
+        set.videoid1=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"videoid"]];
+        
+        set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengetitle"]];
+        set.str_image_Data=cell_VedioNoti.image_profile2;
+         set.indexVedioindex=indexPath.row;
+        [self.navigationController pushViewController:set animated:YES];
         
     }
     

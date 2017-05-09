@@ -13,6 +13,12 @@
 @property(strong,nonatomic)IBOutlet UIImageView * Image_Profile;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_PalyBuutton;
 
+@property(strong,nonatomic)IBOutlet UIImageView * Image_Profile2;
+@property(strong,nonatomic)IBOutlet UIImageView * Image_PalyBuutton2;
+
+@property(strong,nonatomic)IBOutlet UIImageView * Image_Profile3;
+@property(strong,nonatomic)IBOutlet UIImageView * Image_PalyBuutton3;
+
 @property(strong,nonatomic)IBOutlet UILabel * Label_Changename;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Time;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Titile;

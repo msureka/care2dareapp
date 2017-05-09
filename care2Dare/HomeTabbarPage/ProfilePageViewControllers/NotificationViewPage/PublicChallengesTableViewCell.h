@@ -13,6 +13,9 @@
 @property(nonatomic,weak)IBOutlet UILabel * Lable_JsonResult;
 @property(nonatomic,weak)IBOutlet UIImageView * image_profile2;
 
+@property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton1;
+@property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton2;
+
 @property(nonatomic,weak)IBOutlet UILabel * Label_Name;
 
 @property(nonatomic,weak)IBOutlet UIImageView * image_Redmsg;

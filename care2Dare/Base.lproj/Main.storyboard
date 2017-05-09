@@ -1348,7 +1348,7 @@
         <scene sceneID="8AP-Qd-tIh">
             <objects>
                 <navigationController storyboardIdentifier="CreateChallengesViewController" navigationBarHidden="YES" id="WK1-TI-xZZ" customClass="CreateChallengesViewController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PcT-ob-gX6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PcT-ob-gX6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2316,7 +2316,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RTG-md-wzo">
-                                <frame key="frameInset" minX="0.0%" minY="16.79%" width="100.00%" height="83.21%"/>
+                                <frame key="frameInset" minX="0.0%" minY="16.49%" width="100.00%" height="83.51%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2351,8 +2351,18 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="4iz-1u-ODi">
+                                                    <frame key="frameInset" minX="26" minY="28" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-n9-WNg">
                                                     <frame key="frameInset" minX="4" minY="4" width="12" height="12"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="yRD-ps-EN6">
+                                                    <frame key="frameInset" minX="325" minY="28" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -2361,6 +2371,8 @@
                                         <connections>
                                             <outlet property="Label_Name" destination="rhz-M9-ah3" id="xwh-by-0cD"/>
                                             <outlet property="Lable_JsonResult" destination="nLO-Q8-b1C" id="1ZC-mX-2GL"/>
+                                            <outlet property="image_Playbutton1" destination="4iz-1u-ODi" id="OLw-xp-EYS"/>
+                                            <outlet property="image_Playbutton2" destination="yRD-ps-EN6" id="Gll-Pe-HeO"/>
                                             <outlet property="image_Redmsg" destination="Frv-n9-WNg" id="ggp-dB-TRf"/>
                                             <outlet property="image_profile" destination="PvD-l7-TKk" id="mrM-x3-Mo5"/>
                                             <outlet property="image_profile2" destination="1d4-SQ-Vj5" id="qDC-G9-D9s"/>
@@ -2385,6 +2397,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="BCe-gS-dbq">
+                                                    <frame key="frameInset" minX="26" minY="28" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="J7e-Tl-eGz">
                                                     <frame key="frameInset" minX="4" minY="4" width="12" height="12"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2395,10 +2412,17 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="WDq-QD-geh">
+                                                    <frame key="frameInset" minX="325" minY="28" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="Label_Name" destination="p8L-jG-ATk" id="cf2-sc-kXY"/>
+                                            <outlet property="image_Playbutton1" destination="BCe-gS-dbq" id="lUa-cn-R82"/>
+                                            <outlet property="image_Playbutton2" destination="WDq-QD-geh" id="zlF-RQ-3fg"/>
                                             <outlet property="image_Redmsg" destination="J7e-Tl-eGz" id="jYf-Zo-fgA"/>
                                             <outlet property="image_profile" destination="Eqa-TW-RKy" id="CtE-3X-4aU"/>
                                             <outlet property="image_profile2" destination="qe7-si-mQh" id="ewj-F8-CXy"/>
@@ -2856,7 +2880,7 @@
         <scene sceneID="SNv-3Q-sid">
             <objects>
                 <navigationController storyboardIdentifier="TabNavigationViewController" navigationBarHidden="YES" id="vDh-Yl-EQe" customClass="TabNavigationViewController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m56-Nk-by1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m56-Nk-by1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2895,7 +2919,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MainnavigationViewController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="I8h-tk-maf" customClass="MainnavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jjB-Yg-GsK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jjB-Yg-GsK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

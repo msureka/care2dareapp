@@ -53,12 +53,14 @@
 
 @implementation WatchVedioScrollViewController
 @synthesize table_scrollview;
-@synthesize str_Userid2val,str_ChallengeidVal,str_challengeTitle,str_image_Data,videoid1;
+@synthesize str_Userid2val,str_ChallengeidVal,str_challengeTitle,str_image_Data,videoid1,indexVedioindex;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
-    indexVedio=1;
+//    indexVedio=1;
+    
+    indexVedio=indexVedioindex+1;
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -834,7 +836,7 @@
     //    }
     
     
-    if (indexVedio==Array_VediosData.count )
+    if (indexVedio==Array_VediosData.count)
     {
         indexVedio=0;
         
@@ -1653,7 +1655,7 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
     
     str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)imagesTagRow.tag]valueForKey:@"useridvideo"]];
     videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)imagesTagRow.tag]valueForKey:@"videoid1"]];
-    
+    indexVedio=((long)imagesTagRow.tag)+1;
     [self CommunicationPlayVedio];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

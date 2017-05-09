@@ -22,6 +22,7 @@
     NSArray *SearchCrickArray;
     UIView *transparancyTuchView;
     CALayer*  borderBottom_topheder,*Bottomborder_Cell2;
+    NSInteger  buttonIndex;
     
 }
 @end
@@ -283,6 +284,8 @@ if ([ResultString isEqualToString:@"nouserid"])
     [cell_one.Image_Thumbnail addGestureRecognizer:ImageThumbnail_Tapped];
     
     cell_one.Button_playbutton.tag=indexPath.row;
+   
+    cell_one.Button_playbutton.backgroundColor=[UIColor clearColor];
     [cell_one.Button_playbutton addTarget:self action:@selector(Button_PlayVedioNextPage:) forControlEvents:UIControlEventTouchUpInside];
     cell_one.Label_title.text=[dic_value valueForKey:@"challengetitle"];
     cell_one.Label_days.text=[dic_value valueForKey:@"posttime"];
@@ -309,6 +312,11 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
+        
+        cell_one.Button_playbutton1.tag=indexPath.row;
+        
+        cell_one.Button_playbutton1.backgroundColor=[UIColor clearColor];
+        [cell_one.Button_playbutton1 addTarget:self action:@selector(Button_PlayVedioNextPage1:) forControlEvents:UIControlEventTouchUpInside];
          cell_one.Image_ThumbnailVedio1.hidden=NO;
        urlthum1=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl2"]];
           [cell_one.Image_ThumbnailVedio1 sd_setImageWithURL:urlthum1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -325,6 +333,10 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
+        cell_one.Button_playbutton2.tag=indexPath.row;
+        
+        cell_one.Button_playbutton2.backgroundColor=[UIColor clearColor];
+        [cell_one.Button_playbutton2 addTarget:self action:@selector(Button_PlayVedioNextPage2:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio2.hidden=NO;
         urlthum2=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl3"]];
         [cell_one.Image_ThumbnailVedio2 sd_setImageWithURL:urlthum2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -341,6 +353,10 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
+        cell_one.Button_playbutton3.tag=indexPath.row;
+        
+        cell_one.Button_playbutton3.backgroundColor=[UIColor clearColor];
+        [cell_one.Button_playbutton3 addTarget:self action:@selector(Button_PlayVedioNextPage3:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio3.hidden=NO;
         urlthum3=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl4"]];
         [cell_one.Image_ThumbnailVedio3 sd_setImageWithURL:urlthum3 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -356,6 +372,10 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
+        cell_one.Button_playbutton4.tag=indexPath.row;
+        
+        cell_one.Button_playbutton4.backgroundColor=[UIColor clearColor];
+        [cell_one.Button_playbutton4 addTarget:self action:@selector(Button_PlayVedioNextPage4:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio4.hidden=NO;
         urlthum4=[NSURL URLWithString:[dic_value valueForKey:@"thumbnailurl5"]];
         [cell_one.Image_ThumbnailVedio4 sd_setImageWithURL:urlthum4 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -628,10 +648,10 @@ transparancyTuchView.hidden=YES;
 {
     
     UIButton *button = (UIButton *)senderb;
-    
-    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
-    
-//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+   
+   NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+   
+////    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
     
      WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
     
@@ -639,14 +659,107 @@ transparancyTuchView.hidden=YES;
     
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
     
-    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
-    
+//    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+     set.indexVedioindex=0;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
-    
-    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+   set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=cell_one.Image_Thumbnail;
+    
     [self.navigationController pushViewController:set animated:YES];
 }
+- (void)Button_PlayVedioNextPage1:(UIButton *)senderb
+{
+    
+    UIButton *button = (UIButton *)senderb;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+    
+    ////    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+    
+    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
+    
+    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
+    
+    //    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    set.indexVedioindex=1;
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
+    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+    set.str_image_Data=cell_one.Image_Thumbnail;
+    
+    [self.navigationController pushViewController:set animated:YES];
+}
+- (void)Button_PlayVedioNextPage2:(UIButton *)senderb
+{
+    
+    UIButton *button = (UIButton *)senderb;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+    
+    ////    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+    
+    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
+    
+    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
+    
+    //    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    set.indexVedioindex=2;
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
+    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+    set.str_image_Data=cell_one.Image_Thumbnail;
+    
+    [self.navigationController pushViewController:set animated:YES];
+}
+- (void)Button_PlayVedioNextPage3:(UIButton *)senderb
+{
+    
+    UIButton *button = (UIButton *)senderb;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+    
+    ////    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+    
+    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
+    
+    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
+    
+    //    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    set.indexVedioindex=3;
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
+    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+    set.str_image_Data=cell_one.Image_Thumbnail;
+    
+    [self.navigationController pushViewController:set animated:YES];
+}
+- (void)Button_PlayVedioNextPage4:(UIButton *)senderb
+{
+    
+    UIButton *button = (UIButton *)senderb;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+    
+    ////    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+    
+    WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
+    
+    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengeid"]];
+    
+    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag]valueForKey:@"useridvideo1"]];
+    
+    //    //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    set.indexVedioindex=4;
+    set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
+    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
+    set.str_image_Data=cell_one.Image_Thumbnail;
+    
+    [self.navigationController pushViewController:set animated:YES];
+}
+
 - (void)ImageThumbnailVideo_Tapped:(UITapGestureRecognizer *)sender1
 {
     UIGestureRecognizer *rec = (UIGestureRecognizer*)sender1;
@@ -666,6 +779,7 @@ transparancyTuchView.hidden=YES;
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo1"]];
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+    set.indexVedioindex=0;
     
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid1"]];
    
@@ -692,6 +806,7 @@ transparancyTuchView.hidden=YES;
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo2"]];
      set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid2"]];
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+     set.indexVedioindex=1;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=imageView;
@@ -716,6 +831,7 @@ transparancyTuchView.hidden=YES;
      set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid3"]];
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+     set.indexVedioindex=2;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=imageView;
@@ -737,7 +853,7 @@ transparancyTuchView.hidden=YES;
     set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo4"]];
      set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid4"]];
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
-    
+     set.indexVedioindex=3;
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=imageView;
     [self.navigationController pushViewController:set animated:YES];
@@ -761,6 +877,7 @@ transparancyTuchView.hidden=YES;
     
     
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
+     set.indexVedioindex=4;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
     set.str_image_Data=imageView;

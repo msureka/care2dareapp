@@ -50,7 +50,7 @@
                 <outlet property="image_profile" destination="Gt6-5v-Uyc" id="sfy-Ic-Kd4"/>
                 <outlet property="image_profile2" destination="7TE-xu-Zrx" id="jrj-fT-qyb"/>
             </connections>
-            <point key="canvasLocation" x="66" y="126"/>
+            <point key="canvasLocation" x="65.5" y="126"/>
         </tableViewCell>
     </objects>
     <resources>

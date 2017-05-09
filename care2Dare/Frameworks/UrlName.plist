@@ -47,7 +47,7 @@
 	<key>notificationcount</key>
 	<string>http://www.care2dareapp.com/app/notificationcount.php</string>
 	<key>checknotifications</key>
-	<string>http://www.care2dareapp.com/app/checknotifications.php</string>
+	<string>http://www.care2dareapp.com/app/checknotifications1.php</string>
 	<key>checknotifications2</key>
 	<string>http://www.care2dareapp.com/app/checknotifications2.php</string>
 	<key>checknotifications3</key>

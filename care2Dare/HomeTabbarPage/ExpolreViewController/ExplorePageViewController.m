@@ -27,6 +27,8 @@
     NSArray *SearchCrickArray_worldExp,*SearchCrickArray_FriendExp;
     CALayer *bootomBorder_Cell;
     NSURLSessionDataTask *dataTaskExp,*dataTaskWld;
+    NSInteger Array_WorldCount,modvalues;
+    
 }
 @end
 
@@ -395,6 +397,15 @@
                                                      }
                         if (Array_WorldExp.count !=0)
                     {
+                        float arraycount=Array_WorldExp.count;
+                        float newarraycount=arraycount/3.0;
+                        
+                        NSLog(@"Modddvalues==%f",ceil(newarraycount));
+                      
+                        Array_WorldCount= ceil(newarraycount);
+                        
+                         modvalues=(Array_WorldExp.count%3);
+                        NSLog(@"Modddvalues==%d",modvalues);
                 Label_JsonResult.hidden=YES;
                 [Tableview_Explore reloadData];
                             }
@@ -534,7 +545,7 @@
 
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-            return Array_WorldExp.count;
+            return Array_WorldCount;
         }
         else if ([cellChecking isEqualToString:@"FriendExp"])
         {
@@ -567,81 +578,435 @@
                 }
                 
                 
-                bootomBorder_Cell = [CALayer layer];
-                bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                bootomBorder_Cell.frame = CGRectMake(0, cell_WorldExp.frame.size.height-1, cell_WorldExp.frame.size.width, 1);
-                [cell_WorldExp.layer addSublayer:bootomBorder_Cell];
+//                bootomBorder_Cell = [CALayer layer];
+//                bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+//                bootomBorder_Cell.frame = CGRectMake(0, cell_WorldExp.frame.size.height-1, cell_WorldExp.frame.size.width, 1);
+//                [cell_WorldExp.layer addSublayer:bootomBorder_Cell];
                 
-                 NSDictionary * dic_worldexp=[Array_WorldExp objectAtIndex:indexPath.row];
-                cell_WorldExp.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
-                cell_WorldExp.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
-                cell_WorldExp.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
-                NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+                
+                
+               
+                
+                NSDictionary *dic_worldexp,*dic_worldexp2,*dic_worldexp1;
+                if (indexPath.row ==Array_WorldCount-1)
+                {
+                    
+                
+                    if (modvalues==0)
+                    {
+                         dic_worldexp=[Array_WorldExp objectAtIndex:(indexPath.row)*3];
+                         dic_worldexp1=[Array_WorldExp objectAtIndex:((indexPath.row)*3)+1];
+                         dic_worldexp2=[Array_WorldExp objectAtIndex:((indexPath.row)*3)+2];
+                        
+                        cell_WorldExp.Image_PalyBuutton.tag=((indexPath.row)*3);
+                        cell_WorldExp.Image_PalyBuutton2.tag=((indexPath.row)*3)+1;
+                        cell_WorldExp.Image_PalyBuutton3.tag=((indexPath.row)*3)+2;
+                        
+                        cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
+                        cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
+                        cell_WorldExp.Image_Profile3.tag=((indexPath.row)*3)+2;
+                        
+                        cell_WorldExp.Image_Profile.hidden=NO;
+                        cell_WorldExp.Image_Profile2.hidden=NO;
+                        cell_WorldExp.Image_Profile3.hidden=NO;
+                        
+                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                        cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+                        cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                    }
+                    if (modvalues==1)
+                    {
+                        dic_worldexp=[Array_WorldExp objectAtIndex:(indexPath.row)*3];
+                        
+                        cell_WorldExp.Image_PalyBuutton.tag=((indexPath.row)*3);
+                        
+                        
+                        cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
+                        
+                        
+                        cell_WorldExp.Image_Profile.hidden=NO;
+                        cell_WorldExp.Image_Profile2.hidden=YES;
+                        cell_WorldExp.Image_Profile3.hidden=YES;
+                      
+                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                        cell_WorldExp.Image_PalyBuutton2.hidden=YES;
+                        cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                        
+                    }
+                    if (modvalues==2)
+                    {
+                       
+                        dic_worldexp=[Array_WorldExp objectAtIndex:(indexPath.row)*3];
+                      dic_worldexp1=[Array_WorldExp objectAtIndex:((indexPath.row)*3)+1];
+                        
+                        cell_WorldExp.Image_PalyBuutton.tag=((indexPath.row)*3);
+                        cell_WorldExp.Image_PalyBuutton2.tag=((indexPath.row)*3)+1;
+                       
+                        
+                        cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
+                        cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
+                       
+                         cell_WorldExp.Image_Profile.hidden=NO;
+                         cell_WorldExp.Image_Profile2.hidden=NO;
+                         cell_WorldExp.Image_Profile3.hidden=YES;
+                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                        cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+                        cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                    
+                    }
+                }
+                else
+                {
+                    dic_worldexp=[Array_WorldExp objectAtIndex:(indexPath.row)*3];
+                    dic_worldexp1=[Array_WorldExp objectAtIndex:((indexPath.row)*3)+1];
+                    dic_worldexp2=[Array_WorldExp objectAtIndex:((indexPath.row)*3)+2];
+                    
+                    cell_WorldExp.Image_PalyBuutton.tag=((indexPath.row)*3);
+                    cell_WorldExp.Image_PalyBuutton2.tag=((indexPath.row)*3)+1;
+                    cell_WorldExp.Image_PalyBuutton3.tag=((indexPath.row)*3)+2;
+                    
+                    cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
+                    cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
+                    cell_WorldExp.Image_Profile3.tag=((indexPath.row)*3)+2;
+                    
+                    cell_WorldExp.Image_Profile.hidden=NO;
+                    cell_WorldExp.Image_Profile2.hidden=NO;
+                    cell_WorldExp.Image_Profile3.hidden=NO;
+                    
+                    cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                    cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+                    cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                }
                 
 
-        CGRect textRect = [text boundingRectWithSize:cell_WorldExp.Label_Titile.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_WorldExp.Label_Titile.font} context:nil];
                 
-    int numberOfLines = textRect.size.height / cell_WorldExp.Label_Titile.font.pointSize;;
-        if (numberOfLines==1)
-        {
-    [cell_WorldExp.Label_Titile setFrame:CGRectMake(cell_WorldExp.Label_Titile.frame.origin.x, cell_WorldExp.Label_Titile.frame.origin.y, cell_WorldExp.Label_Titile.frame.size.width, cell_WorldExp.Label_Titile.frame.size.height/2)];
-                }
+                
+            cell_WorldExp.Image_Profile.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped2:)];
+                [cell_WorldExp.Image_Profile addGestureRecognizer:ImageThumbnail_Tapped];
+                
+                
+                  cell_WorldExp.Image_Profile2.userInteractionEnabled=YES;
+                UITapGestureRecognizer * ImageThumbnail_Tapped2 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped2:)];
+                [cell_WorldExp.Image_Profile2 addGestureRecognizer:ImageThumbnail_Tapped2];
+                
+                  cell_WorldExp.Image_Profile3.userInteractionEnabled=YES;
+                UITapGestureRecognizer * ImageThumbnail_Tapped3 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped2:)];
+                [cell_WorldExp.Image_Profile3 addGestureRecognizer:ImageThumbnail_Tapped3];
+                
+                
+//                cell_WorldExp.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
+//                cell_WorldExp.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
+//                cell_WorldExp.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+//                NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+                
+
+//        CGRect textRect = [text boundingRectWithSize:cell_WorldExp.Label_Titile.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_WorldExp.Label_Titile.font} context:nil];
+//                
+//    int numberOfLines = textRect.size.height / cell_WorldExp.Label_Titile.font.pointSize;;
+//        if (numberOfLines==1)
+//        {
+//    [cell_WorldExp.Label_Titile setFrame:CGRectMake(cell_WorldExp.Label_Titile.frame.origin.x, cell_WorldExp.Label_Titile.frame.origin.y, cell_WorldExp.Label_Titile.frame.size.width, cell_WorldExp.Label_Titile.frame.size.height/2)];
+//                }
               
                 
                 
-                NSLog(@"number of lines=%d",numberOfLines);
+//                NSLog(@"number of lines=%d",numberOfLines);
+//                
+//                 cell_WorldExp.Label_Time.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"createtime"]];
+         
                 
-                 cell_WorldExp.Label_Time.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"createtime"]];
-               // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"challengeid"];
-               // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"challengerdetails"];
-               
-                //cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"mediatype"];
-               // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"mediaurl"];
-               // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"noofchallengers"];
-               // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"payperchallenger"];
-                cell_WorldExp.Image_Profile.tag=indexPath.row;
-               
-    if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+                
+                 NSURL *url,*url1,*url2;
+                
+                
+                
+                    if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+                                {
+                
+                        cell_WorldExp.Image_PalyBuutton.hidden=YES;
+                                    
+                            url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                
+                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                
+
+                                
+                
+                        }
+                  else
+                        {
+                
+                    cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                            
+                url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+                                        
+            [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                            
+                                    }
+                
+                
+                
+                if ( [[dic_worldexp1 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
                 {
-                    cell_WorldExp.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                 
+                cell_WorldExp.Image_PalyBuutton2.hidden=YES;
                     
-                    [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+               url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+                    
+            [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                  
                 }
                 else
                 {
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+                
+                    cell_WorldExp.Image_PalyBuutton2.hidden=NO;
                     
-                    [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
-                    cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                                url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
+
+                [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    
+                }
+            
+
+                if ([[dic_worldexp2 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+                {
+                    
+                    cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                    
+                    
+                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+                
+            [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
                     
                 }
+                else
+                {
+                    
+                  
+                    cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                    
+                    
+                url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
+                      [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    
+                   
+            }
+            
+
                 
                 
                 
-                UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
-                NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
-                NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:[dic_worldexp valueForKey:@"usersname"] attributes: arialDict];
                 
-                UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-SemiBold" size:14.0];
-                NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
-                NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @" Challenges " attributes:verdanaDict];
+   ///////////////********...........88888888...........************////////////
+               
+//    if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"] || [[dic_worldexp1 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"] || [[dic_worldexp2 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+//                {
+//                    
+//                    cell_WorldExp.Image_PalyBuutton.hidden=YES;
+//                    cell_WorldExp.Image_PalyBuutton2.hidden=YES;
+//                    cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+//                    
+//                    NSURL *url,*url1,*url2;
+//                    if (indexPath.row ==Array_WorldCount-1)
+//                    {
+//                        
+//                    
+//                        if (modvalues==0)
+//                        {
+//                     
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=NO;
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        }
+//                        if (modvalues==1)
+//                        {
+//                     
+//                        
+//                        
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=YES;
+//                        cell_WorldExp.Image_Profile3.hidden=YES;
+//                        
+//                        
+//                        
+//                        }
+//                        if (modvalues==2)
+//                        {
+//                        
+//                      
+//                        
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=YES;
+//                        }
+//                        
+//                    }
+//                    else
+//                    {
+//                        
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=NO;
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                    }
+//                    
+//                    
+//                   
+//                    
+//        }
+      //  else
+//        {
+//                    
+//                    NSURL *url,*url1,*url2;
+//                    if (indexPath.row ==Array_WorldCount-1)
+//                    {
+//
+//                        if (modvalues==0)
+//                        {
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+//                        
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=NO;
+//
+//                        }
+//                        if (modvalues==1)
+//                        {
+//                      
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=YES;
+//                        cell_WorldExp.Image_Profile3.hidden=YES;
+//                        
+//                        
+//                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton2.hidden=YES;
+//                        cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+// 
+//                        
+//                        }
+//                        if (modvalues==2)
+//                        {
+//                        
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//
+//                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=YES;
+////
+//  
+//                        }
+//
+//                    
+//                    
+//                    
+//                }
+//                else
+//                {
+//                        url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
+//                        
+//                        [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                        
+//                        cell_WorldExp.Image_PalyBuutton.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+//                        cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+//                        cell_WorldExp.Image_Profile.hidden=NO;
+//                        cell_WorldExp.Image_Profile2.hidden=NO;
+//                        cell_WorldExp.Image_Profile3.hidden=NO;
+//                    }
+//                }
+////////////////....................888888888..............//////////////
                 
+//                UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+//                NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+//                NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:[dic_worldexp valueForKey:@"usersname"] attributes: arialDict];
+//                
+//                UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-SemiBold" size:14.0];
+//                NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+//                NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @" Challenges " attributes:verdanaDict];
+//                
+//                
+//                UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+//                NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
+//                NSMutableAttributedString *cAttrString = [[NSMutableAttributedString alloc]initWithString:[dic_worldexp valueForKey:@"challengerdetails"] attributes:verdanaDict2];
+//                
+//                [aAttrString appendAttributedString:vAttrString];
+//                [aAttrString appendAttributedString:cAttrString];
+//                
+//                
+//                cell_WorldExp.Label_Changename.attributedText = aAttrString;
                 
-                UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
-                NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
-                NSMutableAttributedString *cAttrString = [[NSMutableAttributedString alloc]initWithString:[dic_worldexp valueForKey:@"challengerdetails"] attributes:verdanaDict2];
-                
-                [aAttrString appendAttributedString:vAttrString];
-                [aAttrString appendAttributedString:cAttrString];
-                
-                
-                cell_WorldExp.Label_Changename.attributedText = aAttrString;
-                
-            //    cell_WorldExp.Label_Changename.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"usersname"]];
+            
                 
 
                
@@ -755,7 +1120,7 @@
   
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-        return 140;
+        return 124;
         }
         if ([cellChecking isEqualToString:@"FriendExp"])
         {
@@ -765,36 +1130,72 @@
   
     return 0;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)ImageThumbnailVideo_Tapped2:(UITapGestureRecognizer *)sender12
 {
+    UIGestureRecognizer *rec = (UIGestureRecognizer*)sender12;
+    UIImageView *imageView = (UIImageView *)rec.view;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
     NSDictionary *  didselectDic;
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
-        didselectDic=[Array_WorldExp  objectAtIndex:indexPath.row];
-        cell_WorldExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_WorldExp.Image_Profile;
+        didselectDic=[Array_WorldExp  objectAtIndex:(long)imageView.tag];
+       
+        set.ProfileImgeData =imageView;
     }
+//    if ([cellChecking isEqualToString:@"FriendExp"])
+//    {
+//        didselectDic=[Array_FriendExp  objectAtIndex:(long)imageView.tag];
+//        
+//        set.ProfileImgeData =imageView;
+//    }
+    
+    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+    [Array_new addObject:didselectDic];
+    set.AllArrayData =Array_new;
+    NSLog(@"Array_new11=%@",Array_new);;
+    
+    
+    
+    
+    NSLog(@"Array_new22=%@",Array_new);;
+
+    
+    [self.navigationController pushViewController:set animated:YES];
+    NSLog(@"Array_new33=%@",Array_new);;
+
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+    NSDictionary *  didselectDic;
+//    if ([cellChecking isEqualToString:@"WorldExp"])
+//    {
+//        didselectDic=[Array_WorldExp  objectAtIndex:indexPath.row];
+//        cell_WorldExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
+//         set.ProfileImgeData =cell_WorldExp.Image_Profile;
+//    }
     if ([cellChecking isEqualToString:@"FriendExp"])
     {
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
         cell_FriendExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
          set.ProfileImgeData =cell_FriendExp.Image_Profile;
+        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+        [Array_new addObject:didselectDic];
+        set.AllArrayData =Array_new;
+        NSLog(@"Array_new11=%@",Array_new);;
+        
+        NSLog(@"Array_new22=%@",Array_new);;
+        NSLog(@"indexPathrow=%ld",(long)indexPath.row);;
+        
+        [self.navigationController pushViewController:set animated:YES];
+        NSLog(@"Array_new33=%@",Array_new);;
     }
-   
-            NSMutableArray * Array_new=[[NSMutableArray alloc]init];
-            [Array_new addObject:didselectDic];
-            set.AllArrayData =Array_new;
-     NSLog(@"Array_new11=%@",Array_new);;
+
     
-   
-    
-    
-     NSLog(@"Array_new22=%@",Array_new);;
-    NSLog(@"indexPathrow=%ld",(long)indexPath.row);;
-    
-    [self.navigationController pushViewController:set animated:YES];
-       NSLog(@"Array_new33=%@",Array_new);;
     
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

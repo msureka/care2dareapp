@@ -16,4 +16,7 @@
 @property(nonatomic,weak)IBOutlet UILabel * Label_Name;
 
 @property(nonatomic,weak)IBOutlet UIImageView * image_Redmsg;
+
+@property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton1;
+@property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton2;
 @end

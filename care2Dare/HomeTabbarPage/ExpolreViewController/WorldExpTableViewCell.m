@@ -9,11 +9,17 @@
 #import "WorldExpTableViewCell.h"
 
 @implementation WorldExpTableViewCell
-@synthesize Image_Profile;
+@synthesize Image_Profile,Image_Profile2,Image_Profile3;
 - (void)awakeFromNib {
     [super awakeFromNib];
     Image_Profile.clipsToBounds=YES;
      Image_Profile.layer.cornerRadius=9.0f;
+    
+    Image_Profile2.clipsToBounds=YES;
+    Image_Profile2.layer.cornerRadius=9.0f;
+    
+    Image_Profile3.clipsToBounds=YES;
+    Image_Profile3.layer.cornerRadius=9.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
