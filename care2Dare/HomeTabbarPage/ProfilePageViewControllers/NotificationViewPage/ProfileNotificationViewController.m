@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "WatchVedioScrollViewController.h"
 #import "ContributeDaetailPageViewController.h"
+#import "AcceptContributeDetailViewController.h"
 @interface ProfileNotificationViewController ()
 {
     UIView *sectionView;
@@ -83,6 +84,26 @@ flag_challenge=@"no";
 
     
     [self ClienserverCommAll];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+    {
+        [self ClienserverCommAll];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Contribution"])
+    {
+        
+        [self ClienserverComm_Contribution];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
+    {
+      
+        
+        [self ClienserverComm_Vedios];
+        
+    }
 }
 - (void) viewDidLayoutSubviews
 {
@@ -834,7 +855,7 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
             
 
             
-            
+            cell_PublicNoti.image_profile.tag=indexPath.row;
             
             
             
@@ -852,10 +873,12 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
             {
                 cell_PublicNoti.image_Playbutton1.hidden=NO;
+                cell_PublicNoti.image_Playbutton2.hidden=YES;
             }
             else
             {
                 cell_PublicNoti.image_Playbutton1.hidden=YES;
+                cell_PublicNoti.image_Playbutton2.hidden=YES;
             }
             
             [cell_PublicNoti.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -907,11 +930,14 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
         {
             if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
             {
+                cell_PublicNoti.image_Playbutton1.hidden=YES;
                 cell_PublicNoti.image_Playbutton2.hidden=NO;
+                
             }
             else
             {
-                cell_PublicNoti.image_Playbutton2.hidden=YES;
+                cell_PublicNoti.image_Playbutton1.hidden=YES;
+                 cell_PublicNoti.image_Playbutton2.hidden=YES;
             }
             
             [cell_PublicNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -974,6 +1000,8 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             
             }
             
+           
+            
             return cell_PublicNoti;
             
             
@@ -1029,10 +1057,12 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
                 {
                 cell_PrivateNoti.image_Playbutton1.hidden=NO;
+                    cell_PrivateNoti.image_Playbutton2.hidden=YES;
                 }
                 else
                 {
                 cell_PrivateNoti.image_Playbutton1.hidden=YES;
+                    cell_PrivateNoti.image_Playbutton2.hidden=YES;
                 }
             
             
@@ -1087,10 +1117,12 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
                 {
                     cell_PrivateNoti.image_Playbutton2.hidden=NO;
+                    cell_PrivateNoti.image_Playbutton1.hidden=YES;
                 }
                 else
                 {
                     cell_PrivateNoti.image_Playbutton2.hidden=YES;
+                    cell_PrivateNoti.image_Playbutton1.hidden=YES;
                 }
                 
                 [cell_PrivateNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -1152,7 +1184,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             }
             
 
-            
+             cell_PrivateNoti.image_profile.tag=indexPath.row;
             
             
             return cell_PrivateNoti;
@@ -1752,31 +1784,102 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
       
         ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+        AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
+        
         NSDictionary *  didselectDic;
        
+        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+       
         
-        if (indexPath.section==0)
-        {
-            didselectDic=[Array_Public  objectAtIndex:indexPath.row];
+        
+        
+if (indexPath.section==0)
+    {
+    didselectDic=[Array_Public  objectAtIndex:indexPath.row];
+       cell_PublicNoti = [Tableview_Notif cellForRowAtIndexPath:indexPath];
+    if (![[didselectDic valueForKey:@"accepted"]isEqualToString:@"no"])
+            {
+            
+            if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
+            {
             set.ProfileImgeData =cell_PublicNoti.image_profile;
+            }
+            else
+            {
+               set.ProfileImgeData =cell_PublicNoti.image_profile2;
+            }
+               
+                [Array_new addObject:didselectDic];
+                set.AllArrayData =Array_new;
+                
+                NSLog(@"Array_new33=%@",Array_new);;
+                [self.navigationController pushViewController:set animated:YES];
+            }
+            else
+            {
+                [Array_new addObject:didselectDic];
+                
+           if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
+                {
+                    set2.ProfileImgeData =cell_PublicNoti.image_profile;
+                }
+                else
+                {
+                    set2.ProfileImgeData =cell_PublicNoti.image_profile2;
+                }
+                set2.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set2 animated:YES];
+            }
+        
         }
         if (indexPath.section==1)
         {
-            didselectDic=[Array_Private  objectAtIndex:indexPath.row];
+        didselectDic=[Array_Private  objectAtIndex:indexPath.row];
+            cell_PrivateNoti = [Tableview_Notif cellForRowAtIndexPath:indexPath];
+    if (![[didselectDic valueForKey:@"accepted"]isEqualToString:@"no"])
+            {
+            
+
+            if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
+            {
+           
             set.ProfileImgeData =cell_PrivateNoti.image_profile;
+            }
+            else
+            {
+              set.ProfileImgeData =cell_PrivateNoti.image_profile2;
+            }
+                
+               
+                [Array_new addObject:didselectDic];
+                set.AllArrayData =Array_new;
+                
+                NSLog(@"Array_new33=%@",Array_new);;
+                [self.navigationController pushViewController:set animated:YES];
+   
+
+            }
+            else
+            {
+                [Array_new addObject:didselectDic];
+                
+                if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
+                {
+                    set2.ProfileImgeData =cell_PrivateNoti.image_profile;
+                }
+                else
+                {
+                    set2.ProfileImgeData =cell_PrivateNoti.image_profile2;
+                }
+                set2.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set2 animated:YES];
+            
+      
+            }
         }
         
         
-        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
-        [Array_new addObject:didselectDic];
-        set.AllArrayData =Array_new;
-        NSLog(@"Array_new11=%@",Array_new);;
-                NSLog(@"Array_new22=%@",Array_new);;
-        
-        
-        [self.navigationController pushViewController:set animated:YES];
-        NSLog(@"Array_new33=%@",Array_new);;
-    }
+            }
     if([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
  

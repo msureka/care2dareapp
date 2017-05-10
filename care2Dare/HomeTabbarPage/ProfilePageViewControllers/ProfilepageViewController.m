@@ -518,12 +518,12 @@
                 
                 if ([[dic_worldexp valueForKey:@"accepted"]isEqualToString:@"yes"])
                 {
-                    cell_Public.Image_NewFrnd.hidden=YES;
+                    cell_Private.Image_NewFrnd.hidden=YES;
                     
                 }
                 else
                 {
-                    cell_Public.Image_NewFrnd.hidden=NO;
+                    cell_Private.Image_NewFrnd.hidden=NO;
                 }
 
                 

@@ -1008,7 +1008,7 @@
                 
             
                 
-
+  [cell_WorldExp setNeedsLayout];
                
                 return cell_WorldExp;
                 

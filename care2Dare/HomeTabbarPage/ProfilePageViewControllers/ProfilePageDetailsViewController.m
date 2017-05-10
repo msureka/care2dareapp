@@ -340,13 +340,13 @@ style:UIAlertActionStyleDefault
                                                          
                                                      }
                                                      
-  if (Array_Public.count !=0)
+  if (Array_Public1.count !=0)
      {
     Array_Public=[[NSMutableArray alloc]init];
 
 for (int i=0; i<Array_Public1.count; i++)
               {
-if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"no"])
+if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"yes"])
                     {
     [Array_Public addObject:[Array_Public1 objectAtIndex:i]];
                        }

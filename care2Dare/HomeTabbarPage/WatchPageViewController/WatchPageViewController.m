@@ -290,11 +290,11 @@ if ([ResultString isEqualToString:@"nouserid"])
     cell_one.Label_title.text=[dic_value valueForKey:@"challengetitle"];
     cell_one.Label_days.text=[dic_value valueForKey:@"posttime"];
 //    NSInteger countVedio=[[dic_value valueForKey:@"videocount"] integerValue];
-    if (countVedio >=5)
+    if (countVedio >=6)
     {
         cell_one.Label_mores.hidden=NO;
         cell_one.Label_moreVedios.hidden=NO;
-        cell_one.Label_mores.text=[dic_value valueForKey:@"videocount"];
+        cell_one.Label_mores.text=[NSString stringWithFormat:@"%d",([[dic_value valueForKey:@"videocount"]integerValue])-5];
     }
     else
     {
@@ -518,7 +518,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     }
     else
     {
-        return 357;
+        return 386;
     }
 return 0;
     
