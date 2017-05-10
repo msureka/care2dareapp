@@ -294,7 +294,16 @@ if ([ResultString isEqualToString:@"nouserid"])
     {
         cell_one.Label_mores.hidden=NO;
         cell_one.Label_moreVedios.hidden=NO;
-        cell_one.Label_mores.text=[NSString stringWithFormat:@"%d",([[dic_value valueForKey:@"videocount"]integerValue])-5];
+         cell_one.Label_mores.text=[NSString stringWithFormat:@"%@%d",@"+",([[dic_value valueForKey:@"videocount"]integerValue])-5];
+        if((countVedio-5)==1)
+        {
+       cell_one.Label_moreVedios.text=@"Video";
+        }
+        else
+        {
+           cell_one.Label_moreVedios.text=@"Videos";
+        }
+        
     }
     else
     {

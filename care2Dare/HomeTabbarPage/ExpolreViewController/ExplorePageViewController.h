@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "WorldExpTableViewCell.h"
 #import "FriendExpTableViewCell.h"
+#import "MDPieView.h"
+#import "MDpieView1.h"
+#import "MDPieView2.h"
 @interface ExplorePageViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,weak)IBOutlet UIImageView * image_ExpWorld;
 @property(nonatomic,weak)IBOutlet UIImageView * image_ExpFriend;
@@ -23,6 +26,12 @@
 @property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;
 @property(nonatomic,strong)FriendExpTableViewCell * cell_FriendExp;
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
+@property (nonatomic,assign) float percent;
+@property (nonatomic,assign) float percent1;
+@property (nonatomic,assign) float percent2;
+@property (nonatomic,strong)MDPieView *pieView;
+@property (nonatomic,strong)MDPieView1 *pieView1;
+@property (nonatomic,strong)MDPieView2 *pieView2;
 //-(IBAction)SignUpView:(id)sender;
 //
 //-(IBAction)ForgetPasswordAction:(id)sender;

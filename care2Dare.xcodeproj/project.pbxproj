@@ -257,6 +257,9 @@
 		9AA645DF1E7C10C300E49B65 /* mypledge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA645DC1E7C10C300E49B65 /* mypledge.png */; };
 		9AA645E01E7C10C300E49B65 /* mypledge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA645DD1E7C10C300E49B65 /* mypledge@2x.png */; };
 		9AA645E11E7C10C300E49B65 /* mypledge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA645DE1E7C10C300E49B65 /* mypledge@3x.png */; };
+		9AA66E081EC3159800DA5662 /* MDPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA66E071EC3159800DA5662 /* MDPieView.m */; };
+		9AA66E0E1EC334E000DA5662 /* MDpieView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA66E0D1EC334E000DA5662 /* MDpieView1.m */; };
+		9AA66E111EC335CE00DA5662 /* MDPieView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA66E101EC335CE00DA5662 /* MDPieView2.m */; };
 		9AA9B4FC1E6FC86400C6EF37 /* ProfileNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9B4FB1E6FC86400C6EF37 /* ProfileNotificationViewController.m */; };
 		9AA9B4FF1E6FCAAE00C6EF37 /* PublicChallengesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9B4FE1E6FCAAE00C6EF37 /* PublicChallengesTableViewCell.m */; };
 		9AA9B5021E6FCAD600C6EF37 /* PrivateChallengesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9B5011E6FCAD600C6EF37 /* PrivateChallengesTableViewCell.m */; };
@@ -766,6 +769,12 @@
 		9AA645DC1E7C10C300E49B65 /* mypledge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mypledge.png; sourceTree = "<group>"; };
 		9AA645DD1E7C10C300E49B65 /* mypledge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mypledge@2x.png"; sourceTree = "<group>"; };
 		9AA645DE1E7C10C300E49B65 /* mypledge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mypledge@3x.png"; sourceTree = "<group>"; };
+		9AA66E061EC3159800DA5662 /* MDPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPieView.h; sourceTree = "<group>"; };
+		9AA66E071EC3159800DA5662 /* MDPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPieView.m; sourceTree = "<group>"; };
+		9AA66E0C1EC334E000DA5662 /* MDPieView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPieView1.h; sourceTree = "<group>"; };
+		9AA66E0D1EC334E000DA5662 /* MDpieView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDpieView1.m; sourceTree = "<group>"; };
+		9AA66E0F1EC335CE00DA5662 /* MDPieView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPieView2.h; sourceTree = "<group>"; };
+		9AA66E101EC335CE00DA5662 /* MDPieView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPieView2.m; sourceTree = "<group>"; };
 		9AA9B4FA1E6FC86400C6EF37 /* ProfileNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileNotificationViewController.h; sourceTree = "<group>"; };
 		9AA9B4FB1E6FC86400C6EF37 /* ProfileNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileNotificationViewController.m; sourceTree = "<group>"; };
 		9AA9B4FD1E6FCAAE00C6EF37 /* PublicChallengesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicChallengesTableViewCell.h; sourceTree = "<group>"; };
@@ -1251,6 +1260,7 @@
 		9A43550A1E696F1200ED8FD5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AA66E051EC3159800DA5662 /* CircleProgressbar */,
 				9AA645AA1E8BB49500236B7A /* ChatText.plist */,
 				9A5727AF1E717D1D006A5F52 /* BaseEncoding */,
 				9A5727771E7179CF006A5F52 /* ImageZoomIn */,
@@ -1625,6 +1635,19 @@
 				9AA645DE1E7C10C300E49B65 /* mypledge@3x.png */,
 			);
 			path = mypledge;
+			sourceTree = "<group>";
+		};
+		9AA66E051EC3159800DA5662 /* CircleProgressbar */ = {
+			isa = PBXGroup;
+			children = (
+				9AA66E061EC3159800DA5662 /* MDPieView.h */,
+				9AA66E071EC3159800DA5662 /* MDPieView.m */,
+				9AA66E0C1EC334E000DA5662 /* MDPieView1.h */,
+				9AA66E0D1EC334E000DA5662 /* MDpieView1.m */,
+				9AA66E0F1EC335CE00DA5662 /* MDPieView2.h */,
+				9AA66E101EC335CE00DA5662 /* MDPieView2.m */,
+			);
+			path = CircleProgressbar;
 			sourceTree = "<group>";
 		};
 		9AA9B4F91E6FC83F00C6EF37 /* NotificationViewPage */ = {
@@ -2505,6 +2528,7 @@
 				9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */,
 				9A64C86B1E7133EB008115FF /* CLTokenInputView.m in Sources */,
 				9AF9DBF51E9B608A00A652D9 /* AFHTTPClient.m in Sources */,
+				9AA66E0E1EC334E000DA5662 /* MDpieView1.m in Sources */,
 				9A0605CE1E6D6D4200FF4229 /* PublicTableViewCell.m in Sources */,
 				9AF9DBE11E9B50E600A652D9 /* WatchViewTableViewCell.m in Sources */,
 				9AF9DBFA1E9B608A00A652D9 /* AFPropertyListRequestOperation.m in Sources */,
@@ -2555,6 +2579,7 @@
 				9AA645D81E7BECE800E49B65 /* RaisedFourTableViewCell.m in Sources */,
 				9AA645D51E7BECD000E49B65 /* RaisedThreeTableViewCell.m in Sources */,
 				9A19B4011E6EC60D00262BC1 /* TabNavigationViewController.m in Sources */,
+				9AA66E111EC335CE00DA5662 /* MDPieView2.m in Sources */,
 				9AED22881E6AE27B0004A8D0 /* SBJsonStreamParserState.m in Sources */,
 				9A5D67641EA4BD9A001176B3 /* StatsThreeTableViewCell.m in Sources */,
 				9A19B3FB1E6EB01900262BC1 /* UIImage+WebP.m in Sources */,
@@ -2567,6 +2592,7 @@
 				9A19B3EF1E6EB01900262BC1 /* MKAnnotationView+WebCache.m in Sources */,
 				9AA645D21E7BECBF00E49B65 /* RaisedTwoTableViewCell.m in Sources */,
 				9AA9B51B1E6FE81400C6EF37 /* CreateChallengesPageViewController.m in Sources */,
+				9AA66E081EC3159800DA5662 /* MDPieView.m in Sources */,
 				9A362F961EBA0B4900455C00 /* WatchVedioScrollViewController.m in Sources */,
 				9A64C87C1E7137E5008115FF /* LCNContactViewStyle.m in Sources */,
 				9A5D676A1EA4BDD1001176B3 /* StatsViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MDPieView.h"
 @interface WorldExpTableViewCell : UITableViewCell
 
 @property(strong,nonatomic)IBOutlet UIImageView * Image_Profile;
@@ -24,5 +24,6 @@
 @property(strong,nonatomic)IBOutlet UILabel * Label_Titile;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Backer;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Raised;
+
 
 @end

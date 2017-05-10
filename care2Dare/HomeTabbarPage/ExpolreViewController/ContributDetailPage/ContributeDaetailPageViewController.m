@@ -348,8 +348,8 @@
     
     XpostionNewSymbol=40;
     YpostionNewSymbol=0;
-    WpostionNewSymbol=26;
-    HpostionNewSymbol=26;
+    WpostionNewSymbol=20;
+    HpostionNewSymbol=20;
     
     Xpostion=12;
     Ypostion=8;
@@ -775,8 +775,8 @@
     
     XpostionNewSymbol=40;
     YpostionNewSymbol=0;
-    WpostionNewSymbol=26;
-    HpostionNewSymbol=26;
+    WpostionNewSymbol=20;
+    HpostionNewSymbol=20;
     
     Xpostion=12;
     Ypostion=8;
@@ -2175,8 +2175,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 XpostionNewSymbol=40;
                 YpostionNewSymbol=0;
-                WpostionNewSymbol=26;
-                HpostionNewSymbol=26;
+                WpostionNewSymbol=20;
+                HpostionNewSymbol=20;
                 
                 Xpostion=12;
                 Ypostion=8;

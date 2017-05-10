@@ -38,6 +38,11 @@
 {
     [super viewDidLoad];
     
+    self.percent = 0.1;
+     self.percent1 = 0.1;
+     self.percent2 = 0.1;
+    
+    
     cellChecking=@"WorldExp";
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
@@ -554,6 +559,8 @@
     
     return 0;
 }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -585,7 +592,21 @@
                 
                 
                 
+                
+                
                
+                
+               
+                
+                self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                [cell_WorldExp addSubview:self.pieView];
+                
+                
+                self.pieView1 = [[MDPieView1 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile2.frame.size.width+cell_WorldExp.Image_Profile2.frame.origin.x)-26, (cell_WorldExp.Image_Profile2.frame.size.height+cell_WorldExp.Image_Profile2.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                [cell_WorldExp addSubview:self.pieView1];
+                
+                self.pieView2 = [[MDPieView2 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile3.frame.size.width+cell_WorldExp.Image_Profile3.frame.origin.x)-26, (cell_WorldExp.Image_Profile3.frame.size.height+cell_WorldExp.Image_Profile3.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                [cell_WorldExp addSubview:self.pieView2];
                 
                 NSDictionary *dic_worldexp,*dic_worldexp2,*dic_worldexp1;
                 if (indexPath.row ==Array_WorldCount-1)
@@ -606,6 +627,10 @@
                         cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
                         cell_WorldExp.Image_Profile3.tag=((indexPath.row)*3)+2;
                         
+                        self.pieView.tag=((indexPath.row)*3)+0;
+                        self.pieView1.tag=((indexPath.row)*3)+1;
+                        self.pieView2.tag=((indexPath.row)*3)+2;
+                        
                         cell_WorldExp.Image_Profile.hidden=NO;
                         cell_WorldExp.Image_Profile2.hidden=NO;
                         cell_WorldExp.Image_Profile3.hidden=NO;
@@ -613,6 +638,10 @@
                         cell_WorldExp.Image_PalyBuutton.hidden=NO;
                         cell_WorldExp.Image_PalyBuutton2.hidden=NO;
                         cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                        
+                        self.pieView.hidden=NO;
+                        self.pieView1.hidden=NO;
+                        self.pieView2.hidden=NO;
                     }
                     if (modvalues==1)
                     {
@@ -621,8 +650,11 @@
                         cell_WorldExp.Image_PalyBuutton.tag=((indexPath.row)*3);
                         
                         
-                        cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
+                        cell_WorldExp.Image_Profile.tag=((indexPath.row)*3);
                         
+                        self.pieView.tag=((indexPath.row)*3)+0;
+                        
+
                         
                         cell_WorldExp.Image_Profile.hidden=NO;
                         cell_WorldExp.Image_Profile2.hidden=YES;
@@ -631,6 +663,11 @@
                         cell_WorldExp.Image_PalyBuutton.hidden=NO;
                         cell_WorldExp.Image_PalyBuutton2.hidden=YES;
                         cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                        
+                        self.pieView.hidden=NO;
+                        self.pieView1.hidden=YES;
+                        self.pieView2.hidden=YES;
+
                         
                     }
                     if (modvalues==2)
@@ -646,12 +683,21 @@
                         cell_WorldExp.Image_Profile.tag=((indexPath.row)*3)+0;
                         cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
                        
+                        self.pieView.tag=((indexPath.row)*3)+0;
+                        self.pieView1.tag=((indexPath.row)*3)+1;
+                        
+
+                        
                          cell_WorldExp.Image_Profile.hidden=NO;
                          cell_WorldExp.Image_Profile2.hidden=NO;
                          cell_WorldExp.Image_Profile3.hidden=YES;
                         cell_WorldExp.Image_PalyBuutton.hidden=NO;
                         cell_WorldExp.Image_PalyBuutton2.hidden=NO;
                         cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                        
+                        self.pieView.hidden=NO;
+                        self.pieView1.hidden=NO;
+                        self.pieView2.hidden=YES;
                     
                     }
                 }
@@ -669,6 +715,10 @@
                     cell_WorldExp.Image_Profile2.tag=((indexPath.row)*3)+1;
                     cell_WorldExp.Image_Profile3.tag=((indexPath.row)*3)+2;
                     
+                    self.pieView.tag=((indexPath.row)*3)+0;
+                    self.pieView1.tag=((indexPath.row)*3)+1;
+                    self.pieView2.tag=((indexPath.row)*3)+2;
+
                     cell_WorldExp.Image_Profile.hidden=NO;
                     cell_WorldExp.Image_Profile2.hidden=NO;
                     cell_WorldExp.Image_Profile3.hidden=NO;
@@ -676,9 +726,16 @@
                     cell_WorldExp.Image_PalyBuutton.hidden=NO;
                     cell_WorldExp.Image_PalyBuutton2.hidden=NO;
                     cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                    
+                    self.pieView.hidden=NO;
+                    self.pieView1.hidden=NO;
+                    self.pieView2.hidden=NO;
                 }
                 
-
+               // self.percent = 0.0;
+              
+                
+                
                 
                 
             cell_WorldExp.Image_Profile.userInteractionEnabled=YES;
@@ -730,7 +787,17 @@
                 
                         [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                 
-
+                                    
+                                    NSString * tagreach=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"daysleft"]];
+                                    NSString * Totaldays=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"totaldays"]];
+                                    
+                                    CGFloat progrssVal=1-([tagreach floatValue])/[Totaldays floatValue];
+                                    NSString *per= [ NSString stringWithFormat:@"%.3f",progrssVal];
+                                    // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                                    self.percent =[per floatValue];
+                                    NSLog(@"percentage==%f",progrssVal);
+                                    NSLog(@"percentage111==%f",[per floatValue]);
+                                    [self.pieView reloadViewWithPercent:self.percent];
                                 
                 
                         }
@@ -742,6 +809,19 @@
                 url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                                         
             [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                            
+                            
+                            
+                            NSString * tagreach=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"daysleft"]];
+                            NSString * Totaldays=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"totaldays"]];
+                            
+                            CGFloat progrssVal=1-([tagreach floatValue])/[Totaldays floatValue];
+                            NSString *per= [ NSString stringWithFormat:@"%.3f",progrssVal];
+                            // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                            self.percent =[per floatValue];
+                            NSLog(@"percentage==%f",progrssVal);
+                            NSLog(@"percentage111==%f",[per floatValue]);
+                            [self.pieView reloadViewWithPercent:self.percent];
                             
                                     }
                 
@@ -757,6 +837,17 @@
                     
             [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                   
+                    NSString * tagreach1=[NSString stringWithFormat:@"%@",[dic_worldexp1 valueForKey:@"daysleft"]];
+                    NSString * Totaldays1=[NSString stringWithFormat:@"%@",[dic_worldexp1 valueForKey:@"totaldays"]];
+                    
+                    CGFloat progrssVal1=1-([tagreach1 floatValue])/[Totaldays1 floatValue];
+                    NSString *per1= [ NSString stringWithFormat:@"%.3f",progrssVal1];
+                    // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                    self.percent1 =[per1 floatValue];
+                    NSLog(@"percentage==%f",progrssVal1);
+                    NSLog(@"percentage111worldxp2==%f",[per1 floatValue]);
+                    [self.pieView1 reloadViewWithPercent:self.percent1];
+                    
                 }
                 else
                 {
@@ -768,6 +859,16 @@
 
                 [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
+                    NSString * tagreach1=[NSString stringWithFormat:@"%@",[dic_worldexp1 valueForKey:@"daysleft"]];
+                    NSString * Totaldays1=[NSString stringWithFormat:@"%@",[dic_worldexp1 valueForKey:@"totaldays"]];
+                    
+                    CGFloat progrssVal1=1-([tagreach1 floatValue])/[Totaldays1 floatValue];
+                    NSString *per1= [ NSString stringWithFormat:@"%.3f",progrssVal1];
+                    // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                    self.percent1 =[per1 floatValue];
+                    NSLog(@"percentage==%f",progrssVal1);
+                    NSLog(@"percentage111worldxp2==%f",[per1 floatValue]);
+                    [self.pieView1 reloadViewWithPercent:self.percent1];
                 }
             
 
@@ -781,6 +882,16 @@
                 
             [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
+                    NSString * tagreach2=[NSString stringWithFormat:@"%@",[dic_worldexp2 valueForKey:@"daysleft"]];
+                    NSString * Totaldays2=[NSString stringWithFormat:@"%@",[dic_worldexp2 valueForKey:@"totaldays"]];
+                    
+                    CGFloat progrssVal2=1-([tagreach2 floatValue])/[Totaldays2 floatValue];
+                    NSString *per2= [ NSString stringWithFormat:@"%.3f",progrssVal2];
+                    // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                    self.percent2 =[per2 floatValue];
+                    NSLog(@"percentage==%f",progrssVal2);
+                    NSLog(@"percentage111==%f",[per2 floatValue]);
+                    [self.pieView2 reloadViewWithPercent:self.percent2];
                     
                 }
                 else
@@ -793,6 +904,16 @@
                 url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
                       [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
+                    NSString * tagreach2=[NSString stringWithFormat:@"%@",[dic_worldexp2 valueForKey:@"daysleft"]];
+                    NSString * Totaldays2=[NSString stringWithFormat:@"%@",[dic_worldexp2 valueForKey:@"totaldays"]];
+                    
+                    CGFloat progrssVal2=1-([tagreach2 floatValue])/[Totaldays2 floatValue];
+                    NSString *per2= [ NSString stringWithFormat:@"%.3f",progrssVal2];
+                    // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
+                    self.percent2 =[per2 floatValue];
+                    NSLog(@"percentage==%f",progrssVal2);
+                    NSLog(@"percentage111==%f",[per2 floatValue]);
+                    [self.pieView2 reloadViewWithPercent:self.percent2];
                    
             }
             
@@ -1120,7 +1241,7 @@
   
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-        return 124;
+        return 125;
         }
         if ([cellChecking isEqualToString:@"FriendExp"])
         {
