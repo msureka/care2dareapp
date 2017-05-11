@@ -16,5 +16,6 @@
 @property(nonatomic,strong)NSString *videoid1;
 @property(nonatomic)NSInteger indexVedioindex;
 @property(nonatomic,strong)NSString *str_challengeTitle;
-@property(nonatomic,strong)UIImageView *str_image_Data;
+//@property(nonatomic,retain)UIImageView *str_image_Data;
+@property(nonatomic,retain)UIImage *str_image_Data;
 @end

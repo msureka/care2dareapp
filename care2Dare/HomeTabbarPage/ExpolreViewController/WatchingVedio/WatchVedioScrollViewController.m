@@ -70,7 +70,7 @@
     ImageArrayTag=[[NSMutableArray alloc]init];
     
     UIImageView *attachmentImageNew = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height)];
-    attachmentImageNew.image = str_image_Data.image;
+    attachmentImageNew.image = str_image_Data;
     attachmentImageNew.backgroundColor = [UIColor redColor];
     attachmentImageNew.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -377,6 +377,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+      [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     //[self CommunicationPlayVedio];
     timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
@@ -485,7 +486,7 @@
                                                      
                                                      
                 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                     
+                                                   
                                                      
         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
@@ -534,7 +535,7 @@
                                                          }
                                                          
                                                      }
-                                                     
+                                                   
                                                      
                                                  }
                                                  else
@@ -542,6 +543,7 @@
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
                                                      [self CommunicationPlayVedio];
                                                  }
+                                             
                                              }
                                              else if(error)
                                              {
@@ -958,7 +960,7 @@
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                 //    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
                                                      
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];

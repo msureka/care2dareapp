@@ -180,7 +180,9 @@ isScrolling=@"yes";
    
 }
 -(void)viewWillAppear:(BOOL)animated
-{[[UIApplication sharedApplication] setStatusBarHidden:YES];
+{
+      [super viewWillAppear:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     //[self CommunicationPlayVedio];
     timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(targetMethod:) userInfo:nil  repeats:YES];
     
@@ -1180,7 +1182,7 @@ NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",us
                                                  if(statusCode == 200)
                                                  {
                                                      
-SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
 
 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];

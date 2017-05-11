@@ -30,9 +30,9 @@
 
 
 @property(nonatomic,strong)NSMutableArray * AllArrayData;
-@property(nonatomic,strong)UIImageView * ProfileImgeData;
+//@property(nonatomic,retain)UIImageView * ProfileImgeData;
 
-
+@property(nonatomic,retain)UIImage * ProfileImgeData;
 
 
 @end

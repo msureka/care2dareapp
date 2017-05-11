@@ -1851,7 +1851,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
                 [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
-            cell_OneImageVid.Image_Backround.image=ProfileImgeData.image;
+            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
             
             return cell_OneImageVid;
             
@@ -2934,11 +2934,13 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      NSLog(@"Array_WorldExp ResultString %@",ResultString);
+                                                    
 //                                                     if ([ResultString isEqualToString:@"nouserid"])
 //                                                     {
 //                                                         
@@ -3287,7 +3289,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
  //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
     
       set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"title"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
 }
 -(void)ImageTap_playButtonAction:(UIGestureRecognizer *)reconizer
@@ -3374,7 +3376,7 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
                                                      
                                                      
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      
@@ -3507,7 +3509,7 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
                                                      
                                                      
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      

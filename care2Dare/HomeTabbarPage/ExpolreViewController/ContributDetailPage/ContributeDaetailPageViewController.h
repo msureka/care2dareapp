@@ -57,8 +57,8 @@
 @property(nonatomic,strong)CommentsTableViewCell * cell_ThreeComments;
 @property(nonatomic,strong)RecordedVidTableViewCell * cell_recordvid;
 @property(nonatomic,strong)NSMutableArray * AllArrayData;
-@property(nonatomic,strong)UIImageView * ProfileImgeData;
-
+//@property(nonatomic,retain)UIImageView * ProfileImgeData;
+@property(nonatomic,retain)UIImage * ProfileImgeData;
 
 
 @property(weak,nonatomic)IBOutlet UITextView * TextViews;

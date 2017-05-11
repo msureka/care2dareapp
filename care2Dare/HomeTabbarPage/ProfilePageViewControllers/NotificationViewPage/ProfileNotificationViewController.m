@@ -1802,11 +1802,11 @@ if (indexPath.section==0)
             
             if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
             {
-            set.ProfileImgeData =cell_PublicNoti.image_profile;
+            set.ProfileImgeData =cell_PublicNoti.image_profile.image;
             }
             else
             {
-               set.ProfileImgeData =cell_PublicNoti.image_profile2;
+               set.ProfileImgeData =cell_PublicNoti.image_profile2.image;
             }
                
                 [Array_new addObject:didselectDic];
@@ -1821,11 +1821,11 @@ if (indexPath.section==0)
                 
            if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
                 {
-                    set2.ProfileImgeData =cell_PublicNoti.image_profile;
+                    set2.ProfileImgeData =cell_PublicNoti.image_profile.image;
                 }
                 else
                 {
-                    set2.ProfileImgeData =cell_PublicNoti.image_profile2;
+                    set2.ProfileImgeData =cell_PublicNoti.image_profile2.image;
                 }
                 set2.AllArrayData =Array_new;
                 [self.navigationController pushViewController:set2 animated:YES];
@@ -1843,11 +1843,11 @@ if (indexPath.section==0)
             if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
             {
            
-            set.ProfileImgeData =cell_PrivateNoti.image_profile;
+            set.ProfileImgeData =cell_PrivateNoti.image_profile.image;
             }
             else
             {
-              set.ProfileImgeData =cell_PrivateNoti.image_profile2;
+              set.ProfileImgeData =cell_PrivateNoti.image_profile2.image;
             }
                 
                
@@ -1865,11 +1865,11 @@ if (indexPath.section==0)
                 
                 if ([[didselectDic valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"])
                 {
-                    set2.ProfileImgeData =cell_PrivateNoti.image_profile;
+                    set2.ProfileImgeData =cell_PrivateNoti.image_profile.image;
                 }
                 else
                 {
-                    set2.ProfileImgeData =cell_PrivateNoti.image_profile2;
+                    set2.ProfileImgeData =cell_PrivateNoti.image_profile2.image;
                 }
                 set2.AllArrayData =Array_new;
                 [self.navigationController pushViewController:set2 animated:YES];
@@ -1905,7 +1905,7 @@ if (indexPath.section==0)
         set.videoid1=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"videoid"]];
         
         set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengetitle"]];
-        set.str_image_Data=cell_VedioNoti.image_profile2;
+        set.str_image_Data=cell_VedioNoti.image_profile2.image;
          set.indexVedioindex=indexPath.row;
         [self.navigationController pushViewController:set animated:YES];
         

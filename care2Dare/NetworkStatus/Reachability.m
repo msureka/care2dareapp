@@ -105,18 +105,18 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 + (instancetype)reachabilityWithHostName:(NSString *)hostName
 {
-	Reachability* returnValue = NULL;
+	Reachability* returnValue = nil;
 	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
-	if (reachability != NULL)
+	if (reachability != nil)
 	{
 		returnValue= [[self alloc] init];
-		if (returnValue != NULL)
+		if (returnValue != nil)
 		{
 			returnValue->_reachabilityRef = reachability;
 			returnValue->_alwaysReturnLocalWiFiStatus = NO;
 		}
 	}
-	return returnValue;
+    return returnValue;
 }
 
 
@@ -128,7 +128,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 	if (reachability != NULL)
 	{
-		returnValue = [[self alloc] init];
+		returnValue = [[self alloc]init];
 		if (returnValue != NULL)
 		{
 			returnValue->_reachabilityRef = reachability;

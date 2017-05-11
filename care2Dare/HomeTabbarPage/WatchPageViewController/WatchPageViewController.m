@@ -73,6 +73,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+      [super viewWillAppear:YES];
   [self ClienserverComm_watchView];
 }
 -(void)ClienserverComm_watchView
@@ -672,7 +673,7 @@ transparancyTuchView.hidden=YES;
      set.indexVedioindex=0;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
    set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=cell_one.Image_Thumbnail.image;
     
     [self.navigationController pushViewController:set animated:YES];
 }
@@ -695,7 +696,7 @@ transparancyTuchView.hidden=YES;
     set.indexVedioindex=1;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=cell_one.Image_Thumbnail.image;
     
     [self.navigationController pushViewController:set animated:YES];
 }
@@ -718,7 +719,7 @@ transparancyTuchView.hidden=YES;
     set.indexVedioindex=2;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=cell_one.Image_Thumbnail.image;
     
     [self.navigationController pushViewController:set animated:YES];
 }
@@ -741,7 +742,7 @@ transparancyTuchView.hidden=YES;
     set.indexVedioindex=3;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=cell_one.Image_Thumbnail.image;
     
     [self.navigationController pushViewController:set animated:YES];
 }
@@ -764,7 +765,7 @@ transparancyTuchView.hidden=YES;
     set.indexVedioindex=4;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"videoid1"]];
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)button.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=cell_one.Image_Thumbnail;
+    set.str_image_Data=cell_one.Image_Thumbnail.image;
     
     [self.navigationController pushViewController:set animated:YES];
 }
@@ -793,7 +794,7 @@ transparancyTuchView.hidden=YES;
     set.videoid1=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"videoid1"]];
    
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
 
 }
@@ -818,7 +819,7 @@ transparancyTuchView.hidden=YES;
      set.indexVedioindex=1;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
     
 }
@@ -843,7 +844,7 @@ transparancyTuchView.hidden=YES;
      set.indexVedioindex=2;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
 }
 - (void)ImageThumbnailVideo_Tapped3:(UITapGestureRecognizer *)sender13
@@ -864,7 +865,7 @@ transparancyTuchView.hidden=YES;
     //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
      set.indexVedioindex=3;
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
 }
 - (void)ImageThumbnailVideo_Tapped4:(UITapGestureRecognizer *)sender14
@@ -889,7 +890,7 @@ transparancyTuchView.hidden=YES;
      set.indexVedioindex=4;
     
     set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_Watch objectAtIndex:(long)imageView.tag] valueForKey:@"challengetitle"]];
-    set.str_image_Data=imageView;
+    set.str_image_Data=imageView.image;
     [self.navigationController pushViewController:set animated:YES];
 }
 

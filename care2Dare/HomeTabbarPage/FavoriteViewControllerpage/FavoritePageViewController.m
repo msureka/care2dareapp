@@ -728,21 +728,24 @@ self.refreshControl.tintColor = [UIColor blackColor];
 {
     ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
     NSDictionary *  didselectDic;
+    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+    
     if ([cellChecking isEqualToString:@"Pledges"])
     {
         didselectDic=[Array_Plaeges  objectAtIndex:indexPath.row];
         cell_Pledge = [Tableview_Favorites cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_Pledge.Image_Profile;
+         set.ProfileImgeData =cell_Pledge.Image_Profile.image;
+        [Array_new addObject:didselectDic];
     }
     if ([cellChecking isEqualToString:@"Favorites"])
     {
         didselectDic=[Array_Faourite  objectAtIndex:indexPath.row];
         cell_Favorite = [Tableview_Favorites cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_Favorite.Image_Profile;
+         set.ProfileImgeData =cell_Favorite.Image_Profile.image;
+        [Array_new addObject:didselectDic];
     }
     
-    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
-    [Array_new addObject:didselectDic];
+   
     set.AllArrayData =Array_new;
     NSLog(@"Array_new11=%@",Array_new);;
     

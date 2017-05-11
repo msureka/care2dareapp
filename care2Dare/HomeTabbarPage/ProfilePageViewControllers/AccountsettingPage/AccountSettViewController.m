@@ -72,6 +72,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
        [TableView_Setting reloadData];
     
     
@@ -188,8 +189,8 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 
                 break;
         }
-    return nil;
-    
+  //  return nil;
+    abort();
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

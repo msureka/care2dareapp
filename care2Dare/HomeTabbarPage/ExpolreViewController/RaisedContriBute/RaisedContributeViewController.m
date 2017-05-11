@@ -224,6 +224,7 @@
              NSLog(@"Challengers Array==%@",Array_Challengers);
 
         }
+                         ResultString=nil;
   }
     else
     {
@@ -247,7 +248,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
-
+    [super viewWillAppear:YES];
     Xpostion=12;
     Ypostion=7;
     Xwidth=60;
@@ -536,8 +537,8 @@
             break;
             
     }
-    return nil;
-    
+  //  return nil;
+    abort();
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

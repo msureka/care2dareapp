@@ -208,10 +208,8 @@
                 UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
                 [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
-            cell_OneImageVid.Image_Backround.image=ProfileImgeData.image;
+            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
             
-            
-           
             
             return cell_OneImageVid;
             
@@ -522,7 +520,7 @@
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
@@ -655,12 +653,12 @@
     {
         NSLog(@"INDEXAcrtionShhet==%ld",(long)buttonIndex);
         
-        if (buttonIndex== 0)
+        if (buttonIndex== 1)
         {
             
             
         }
-        if (buttonIndex== 1)
+        if (buttonIndex== 0)
         {
             [self FlagVedioCommunication];
         }
@@ -739,7 +737,7 @@
                                                      
                                                      
                                                      
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                   //  SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      

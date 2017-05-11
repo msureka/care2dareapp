@@ -35,6 +35,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+      [super viewWillAppear:YES];
     NSInteger tabindex=[[defaults valueForKey:@"tabchk"] integerValue];
      NSLog(@"tabindexxxxx=%ld",(long)tabindex);
     [(UITabBarController*)self.navigationController.topViewController setSelectedIndex:tabindex];

@@ -156,7 +156,7 @@
      if(statusCode == 200)
      {
                                                      
-     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+     //SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
  ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];

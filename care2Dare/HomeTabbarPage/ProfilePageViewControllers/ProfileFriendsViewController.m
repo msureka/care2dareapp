@@ -84,7 +84,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+      [super viewWillAppear:YES];
     transparancyTuchView.hidden=YES;
     Textfield_Search.text=@"";
     FlagSearchBar=@"no";

@@ -128,7 +128,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
     [self communicationServer];
     
-    NSTimer *HomechatTimer =  [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(communicationServer) userInfo:nil  repeats:YES];
+    NSTimer * HomechatTimer =  [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(communicationServer) userInfo:nil  repeats:YES];
 }
 -(void)communicationServer
 {

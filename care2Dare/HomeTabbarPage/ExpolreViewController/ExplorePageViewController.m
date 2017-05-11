@@ -1224,8 +1224,8 @@
                 
       
     }
-    return nil;
-    
+   // return nil;
+    abort();
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1268,10 +1268,9 @@
     [Array_new addObject:didselectDic];
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
+    set2.ProfileImgeData =imageView.image;
+    set.ProfileImgeData =imageView.image;
        
-       
-        set.ProfileImgeData =imageView;
-        set2.ProfileImgeData=imageView;
     }
     
  if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"]|| [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""] )
@@ -1314,8 +1313,8 @@
     {
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
         cell_FriendExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_FriendExp.Image_Profile;
-        set2.ProfileImgeData =cell_FriendExp.Image_Profile;
+         set.ProfileImgeData =cell_FriendExp.Image_Profile.image;
+        set2.ProfileImgeData =cell_FriendExp.Image_Profile.image;
         NSMutableArray * Array_new=[[NSMutableArray alloc]init];
         [Array_new addObject:didselectDic];
         if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"] || [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""])
