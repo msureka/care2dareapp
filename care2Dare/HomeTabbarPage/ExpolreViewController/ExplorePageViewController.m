@@ -11,6 +11,7 @@
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
 #import "ContributeDaetailPageViewController.h"
+#import "AcceptContributeDetailViewController.h"
 #define BlueColor [UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor
 #define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
 #define GreenColor [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor
@@ -1258,47 +1259,56 @@
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+    
+     AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
+    
     NSDictionary *  didselectDic;
+    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+     didselectDic=[Array_WorldExp  objectAtIndex:(long)imageView.tag];
+    [Array_new addObject:didselectDic];
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
-        didselectDic=[Array_WorldExp  objectAtIndex:(long)imageView.tag];
+       
        
         set.ProfileImgeData =imageView;
     }
-//    if ([cellChecking isEqualToString:@"FriendExp"])
-//    {
-//        didselectDic=[Array_FriendExp  objectAtIndex:(long)imageView.tag];
-//        
-//        set.ProfileImgeData =imageView;
-//    }
     
-    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
-    [Array_new addObject:didselectDic];
-    set.AllArrayData =Array_new;
-    NSLog(@"Array_new11=%@",Array_new);;
+ if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+            {
+               
+                set.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set animated:YES];
+                
+            }
+            else
+            {
+              
+                set2.AllArrayData =Array_new;
+                [self.navigationController pushViewController:set2 animated:YES];
+            }
+            
     
-    
-    
-    
-    NSLog(@"Array_new22=%@",Array_new);;
+        
+        NSLog(@"Array_new11=%@",Array_new);;
+        
+        
+        
+        
 
+        
+        
     
-    [self.navigationController pushViewController:set animated:YES];
-    NSLog(@"Array_new33=%@",Array_new);;
-
+    
+    
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+    AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
     NSDictionary *  didselectDic;
-//    if ([cellChecking isEqualToString:@"WorldExp"])
-//    {
-//        didselectDic=[Array_WorldExp  objectAtIndex:indexPath.row];
-//        cell_WorldExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
-//         set.ProfileImgeData =cell_WorldExp.Image_Profile;
-//    }
+
     if ([cellChecking isEqualToString:@"FriendExp"])
     {
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
@@ -1306,14 +1316,23 @@
          set.ProfileImgeData =cell_FriendExp.Image_Profile;
         NSMutableArray * Array_new=[[NSMutableArray alloc]init];
         [Array_new addObject:didselectDic];
-        set.AllArrayData =Array_new;
+        if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+        {
+            
+            set.AllArrayData =Array_new;
+            [self.navigationController pushViewController:set animated:YES];
+            
+        }
+        else
+        {
+            
+            set2.AllArrayData =Array_new;
+            [self.navigationController pushViewController:set2 animated:YES];
+        }
+        
+        
+        
         NSLog(@"Array_new11=%@",Array_new);;
-        
-        NSLog(@"Array_new22=%@",Array_new);;
-        NSLog(@"indexPathrow=%ld",(long)indexPath.row);;
-        
-        [self.navigationController pushViewController:set animated:YES];
-        NSLog(@"Array_new33=%@",Array_new);;
     }
 
     
