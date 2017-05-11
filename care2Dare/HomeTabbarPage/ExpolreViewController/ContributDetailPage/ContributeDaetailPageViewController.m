@@ -1889,6 +1889,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             UITapGestureRecognizer *image_FristProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_FirstProfile_ActionDetails:)];
                 [cell_TwoDetails.image_FristProfile addGestureRecognizer:image_FristProfileTapped];
                 
+                  cell_TwoDetails.image_SecProfile.userInteractionEnabled=YES;
+                
+                UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
+                [cell_TwoDetails.image_SecProfile addGestureRecognizer:image_SecProfileTapped];
+                
                 
                 [cell_TwoDetails.image_FristProfile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 

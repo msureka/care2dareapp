@@ -1381,7 +1381,18 @@
                 }
                 
             }
-            
+        
+                float arraycount=Array_WorldExp.count;
+                float newarraycount=arraycount/3.0;
+                
+                NSLog(@"Modddvalues==%f",ceil(newarraycount));
+                
+                Array_WorldCount= ceil(newarraycount);
+                
+                modvalues=(Array_WorldExp.count%3);
+                NSLog(@"Modddvalues==%d",modvalues);
+                
+           
         }
         
     }
