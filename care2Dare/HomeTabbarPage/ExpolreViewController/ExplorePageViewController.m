@@ -1271,9 +1271,10 @@
        
        
         set.ProfileImgeData =imageView;
+        set2.ProfileImgeData=imageView;
     }
     
- if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+ if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"]|| [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""] )
             {
                
                 set.AllArrayData =Array_new;
@@ -1314,9 +1315,10 @@
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
         cell_FriendExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
          set.ProfileImgeData =cell_FriendExp.Image_Profile;
+        set2.ProfileImgeData =cell_FriendExp.Image_Profile;
         NSMutableArray * Array_new=[[NSMutableArray alloc]init];
         [Array_new addObject:didselectDic];
-        if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+        if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"] || [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""])
         {
             
             set.AllArrayData =Array_new;
