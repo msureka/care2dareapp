@@ -11,6 +11,6 @@
 @interface AccImgVidTableViewCell : UITableViewCell
 @property(strong,nonatomic)IBOutlet UIImageView * image_playButton;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_Backround;
-@property(nonatomic,weak)IBOutlet UIImageView * Image_Flag;
+@property(nonatomic,weak)IBOutlet UIImageView * Image_ThreeDotsFlag;
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Favourite;
 @end
