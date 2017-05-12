@@ -324,7 +324,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     {
         
         cell_one.Button_playbutton1.tag=indexPath.row;
-        
+        cell_one.Image_ThumbnailVedio1.tag=indexPath.row;
         cell_one.Button_playbutton1.backgroundColor=[UIColor clearColor];
         [cell_one.Button_playbutton1 addTarget:self action:@selector(Button_PlayVedioNextPage1:) forControlEvents:UIControlEventTouchUpInside];
          cell_one.Image_ThumbnailVedio1.hidden=NO;
@@ -344,7 +344,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     else
     {
         cell_one.Button_playbutton2.tag=indexPath.row;
-        
+          cell_one.Image_ThumbnailVedio2.tag=indexPath.row;
         cell_one.Button_playbutton2.backgroundColor=[UIColor clearColor];
         [cell_one.Button_playbutton2 addTarget:self action:@selector(Button_PlayVedioNextPage2:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio2.hidden=NO;
@@ -364,7 +364,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     else
     {
         cell_one.Button_playbutton3.tag=indexPath.row;
-        
+          cell_one.Image_ThumbnailVedio3.tag=indexPath.row;
         cell_one.Button_playbutton3.backgroundColor=[UIColor clearColor];
         [cell_one.Button_playbutton3 addTarget:self action:@selector(Button_PlayVedioNextPage3:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio3.hidden=NO;
@@ -383,7 +383,7 @@ if ([ResultString isEqualToString:@"nouserid"])
     else
     {
         cell_one.Button_playbutton4.tag=indexPath.row;
-        
+          cell_one.Image_ThumbnailVedio4.tag=indexPath.row;
         cell_one.Button_playbutton4.backgroundColor=[UIColor clearColor];
         [cell_one.Button_playbutton4 addTarget:self action:@selector(Button_PlayVedioNextPage4:) forControlEvents:UIControlEventTouchUpInside];
         cell_one.Image_ThumbnailVedio4.hidden=NO;

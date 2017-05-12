@@ -801,14 +801,14 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"y
             [Array_new addObject:didselectDic];
             if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
             {
-                set.ProfileImgeData =cell_Public.Image_Profile.image;
+               // set.ProfileImgeData =cell_Public.Image_Profile.image;
                 set.AllArrayData =Array_new;
                 [self.navigationController pushViewController:set animated:YES];
                 
             }
             else
             {
-                set2.ProfileImgeData =cell_Public.Image_Profile.image;
+               // set2.ProfileImgeData =cell_Public.Image_Profile.image;
                 set2.AllArrayData =Array_new;
                 [self.navigationController pushViewController:set2 animated:YES];
             }

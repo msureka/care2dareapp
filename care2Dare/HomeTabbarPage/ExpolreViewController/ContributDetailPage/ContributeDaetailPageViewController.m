@@ -73,7 +73,7 @@
 
 
 @implementation ContributeDaetailPageViewController
-@synthesize cell_TwoDetails,cell_OneImageVid,cell_ThreeComments,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,ProfileImgeData,AllArrayData,view_Topheader,cell_recordvid;
+@synthesize cell_TwoDetails,cell_OneImageVid,cell_ThreeComments,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,cell_recordvid;
 @synthesize TextViews,BackTextViews;
 @synthesize textOne,ViewTextViewOne,Tableview_ContriBute;
 
@@ -1838,21 +1838,29 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThreeDotsTapped_Action:)];
             [cell_OneImageVid.Image_Favourite addGestureRecognizer:FavouriteTapped];
 
+           
+     
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
                 [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
                 cell_OneImageVid.image_playButton.hidden=YES;
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"]];
+                
+                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
             }
             else
             {
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
                 
+                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
              cell_OneImageVid.image_playButton.hidden=NO;
                 cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
     UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
                 [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
-            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
+//            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
             
+         
             return cell_OneImageVid;
             
             

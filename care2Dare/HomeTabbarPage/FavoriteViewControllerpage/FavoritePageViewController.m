@@ -734,14 +734,14 @@ self.refreshControl.tintColor = [UIColor blackColor];
     {
         didselectDic=[Array_Plaeges  objectAtIndex:indexPath.row];
         cell_Pledge = [Tableview_Favorites cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_Pledge.Image_Profile.image;
+        // set.ProfileImgeData =cell_Pledge.Image_Profile.image;
         [Array_new addObject:didselectDic];
     }
     if ([cellChecking isEqualToString:@"Favorites"])
     {
         didselectDic=[Array_Faourite  objectAtIndex:indexPath.row];
         cell_Favorite = [Tableview_Favorites cellForRowAtIndexPath:indexPath];
-         set.ProfileImgeData =cell_Favorite.Image_Profile.image;
+       //  set.ProfileImgeData =cell_Favorite.Image_Profile.image;
         [Array_new addObject:didselectDic];
     }
     
