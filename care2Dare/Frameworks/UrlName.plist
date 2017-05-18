@@ -58,7 +58,9 @@
 	<string>http://www.care2dareapp.com/app/delete.php</string>
 	<key>flag</key>
 	<string>http://www.care2dareapp.com/app/flag.php</string>
-	<key>New item</key>
-	<string></string>
+	<key>invite_contact</key>
+	<string>http://www.care2dareapp.com/app/invite_contact.php</string>
+	<key>invite_fb_twitter</key>
+	<string>http://www.care2dareapp.com/app/invite_fb_twitter.php</string>
 </dict>
 </plist>

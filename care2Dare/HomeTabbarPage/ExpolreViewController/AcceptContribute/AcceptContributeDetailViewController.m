@@ -48,7 +48,7 @@
 @end
 
 @implementation AcceptContributeDetailViewController
-@synthesize cell_TwoDetails,cell_OneImageVid,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,ProfileImgeData,AllArrayData,view_Topheader,Tableview_ContriBute;
+@synthesize cell_TwoDetails,cell_OneImageVid,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,Tableview_ContriBute;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -198,17 +198,23 @@
             
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"]];
+                  [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                 cell_OneImageVid.image_playButton.hidden=YES;
                  [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
             }
             else
             {
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
+                
+                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                
                 cell_OneImageVid.image_playButton.hidden=NO;
                 cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
                 UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
                 [cell_OneImageVid.image_playButton addGestureRecognizer:ImageTap_playButton];
             }
-            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
+//            cell_OneImageVid.Image_Backround.image=ProfileImgeData;
             
             
             return cell_OneImageVid;

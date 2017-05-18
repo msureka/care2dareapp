@@ -1239,13 +1239,20 @@
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
+//    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront])
+//    {
+//        cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+//    }
+    //    else
+    //    {
+    //     cameraUI.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    //    }
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
     cameraUI.videoQuality = UIImagePickerControllerQualityType640x480;
     
     cameraUI.showsCameraControls = YES;
-//    cameraUI.videoMaximumDuration = 07.0f;
+    cameraUI.videoMaximumDuration = 60.0f;
     
     cameraUI.allowsEditing = YES;
     
@@ -1734,8 +1741,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         NSLog(@"error login2.......%@",error.description);
                                                  
                     NSLog(@"error login2.......%@",error.localizedDescription);
-                                                 NSString * str_errorDesc=[NSString stringWithFormat:@"%@",error.localizedDescription];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:str_errorDesc preferredStyle:UIAlertControllerStyleAlert];
+                                                
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection time out" preferredStyle:UIAlertControllerStyleAlert];
                                                  
             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
              style:UIAlertActionStyleDefault handler:nil];

@@ -106,6 +106,14 @@
 		9A1B93931E94ECF5004A7B75 /* RecordedVidTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1B93911E94ECF5004A7B75 /* RecordedVidTableViewCell.m */; };
 		9A1B93941E94ECF5004A7B75 /* RecordedVidTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A1B93921E94ECF5004A7B75 /* RecordedVidTableViewCell.xib */; };
 		9A24D7F51E8E169200621996 /* ProfilePageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A24D7F41E8E169200621996 /* ProfilePageDetailsViewController.m */; };
+		9A25031C1ECC489B00402839 /* TwitterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A25031B1ECC489B00402839 /* TwitterListViewController.m */; };
+		9A25031F1ECC48B400402839 /* FacebookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A25031E1ECC48B400402839 /* FacebookListViewController.m */; };
+		9A2503221ECC497300402839 /* TwitteroneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2503211ECC497300402839 /* TwitteroneTableViewCell.m */; };
+		9A2503251ECC514100402839 /* FacebookoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2503241ECC514100402839 /* FacebookoneTableViewCell.m */; };
+		9A2F08101ECC108600C46DF9 /* ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */; };
+		9A2F08131ECC121E00C46DF9 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2F08111ECC121E00C46DF9 /* Contacts.framework */; };
+		9A2F08141ECC121E00C46DF9 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2F08121ECC121E00C46DF9 /* ContactsUI.framework */; };
+		9A2F08171ECC12E300C46DF9 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2F08161ECC12E300C46DF9 /* ContactTableViewCell.m */; };
 		9A362F961EBA0B4900455C00 /* WatchVedioScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A362F951EBA0B4900455C00 /* WatchVedioScrollViewController.m */; };
 		9A38F5921E96641700EADE7F /* WatchVedioShareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A38F5901E96641700EADE7F /* WatchVedioShareTableViewCell.m */; };
 		9A38F5931E96641700EADE7F /* WatchVedioShareTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A38F5911E96641700EADE7F /* WatchVedioShareTableViewCell.xib */; };
@@ -133,6 +141,7 @@
 		9A38F5C21E9666BC00EADE7F /* whitearrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A38F5AA1E9666BC00EADE7F /* whitearrow.png */; };
 		9A38F5C31E9666BC00EADE7F /* whitearrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A38F5AB1E9666BC00EADE7F /* whitearrow@2x.png */; };
 		9A38F5C41E9666BC00EADE7F /* whitearrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A38F5AC1E9666BC00EADE7F /* whitearrow@3x.png */; };
+		9A3B7FBD1ECD794C004A101B /* TwittertwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7FBC1ECD794C004A101B /* TwittertwoTableViewCell.m */; };
 		9A4355131E696F9A00ED8FD5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A43550E1E696F9A00ED8FD5 /* Bolts.framework */; };
 		9A4355141E696F9A00ED8FD5 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A43550F1E696F9A00ED8FD5 /* FacebookSDKStrings.bundle */; };
 		9A4355151E696F9A00ED8FD5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4355101E696F9A00ED8FD5 /* FBSDKCoreKit.framework */; };
@@ -572,6 +581,20 @@
 		9A1B93921E94ECF5004A7B75 /* RecordedVidTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordedVidTableViewCell.xib; sourceTree = "<group>"; };
 		9A24D7F31E8E169200621996 /* ProfilePageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePageDetailsViewController.h; sourceTree = "<group>"; };
 		9A24D7F41E8E169200621996 /* ProfilePageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePageDetailsViewController.m; sourceTree = "<group>"; };
+		9A25031A1ECC489B00402839 /* TwitterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterListViewController.h; sourceTree = "<group>"; };
+		9A25031B1ECC489B00402839 /* TwitterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterListViewController.m; sourceTree = "<group>"; };
+		9A25031D1ECC48B400402839 /* FacebookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookListViewController.h; sourceTree = "<group>"; };
+		9A25031E1ECC48B400402839 /* FacebookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookListViewController.m; sourceTree = "<group>"; };
+		9A2503201ECC497300402839 /* TwitteroneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitteroneTableViewCell.h; sourceTree = "<group>"; };
+		9A2503211ECC497300402839 /* TwitteroneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitteroneTableViewCell.m; sourceTree = "<group>"; };
+		9A2503231ECC514100402839 /* FacebookoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookoneTableViewCell.h; sourceTree = "<group>"; };
+		9A2503241ECC514100402839 /* FacebookoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookoneTableViewCell.m; sourceTree = "<group>"; };
+		9A2F080E1ECC108600C46DF9 /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
+		9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
+		9A2F08111ECC121E00C46DF9 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		9A2F08121ECC121E00C46DF9 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		9A2F08151ECC12E300C46DF9 /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		9A2F08161ECC12E300C46DF9 /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		9A362F941EBA0B4900455C00 /* WatchVedioScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchVedioScrollViewController.h; sourceTree = "<group>"; };
 		9A362F951EBA0B4900455C00 /* WatchVedioScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchVedioScrollViewController.m; sourceTree = "<group>"; };
 		9A38F58F1E96641700EADE7F /* WatchVedioShareTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchVedioShareTableViewCell.h; sourceTree = "<group>"; };
@@ -601,6 +624,8 @@
 		9A38F5AA1E9666BC00EADE7F /* whitearrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitearrow.png; sourceTree = "<group>"; };
 		9A38F5AB1E9666BC00EADE7F /* whitearrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitearrow@2x.png"; sourceTree = "<group>"; };
 		9A38F5AC1E9666BC00EADE7F /* whitearrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitearrow@3x.png"; sourceTree = "<group>"; };
+		9A3B7FBB1ECD794C004A101B /* TwittertwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwittertwoTableViewCell.h; sourceTree = "<group>"; };
+		9A3B7FBC1ECD794C004A101B /* TwittertwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwittertwoTableViewCell.m; sourceTree = "<group>"; };
 		9A43550E1E696F9A00ED8FD5 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9A43550F1E696F9A00ED8FD5 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		9A4355101E696F9A00ED8FD5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -991,6 +1016,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A2F08131ECC121E00C46DF9 /* Contacts.framework in Frameworks */,
+				9A2F08141ECC121E00C46DF9 /* ContactsUI.framework in Frameworks */,
 				9A13131E1E94AF1A00C23EFE /* MediaPlayer.framework in Frameworks */,
 				9A13131D1E94AF0F00C23EFE /* AVFoundation.framework in Frameworks */,
 				9A99BAD31E81378D00A2C3E2 /* Messages.framework in Frameworks */,
@@ -1127,6 +1154,9 @@
 		9A19B3A31E6E803000262BC1 /* AccountsettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				9A2F080B1ECC106400C46DF9 /* ContactList */,
+				9A2F080C1ECC106400C46DF9 /* FacebookList */,
+				9A2F080D1ECC106400C46DF9 /* TwitterList */,
 				9A19B3A81E6E803000262BC1 /* AccountSettViewController.h */,
 				9A19B3A91E6E803000262BC1 /* AccountSettViewController.m */,
 				9A19B3A41E6E803000262BC1 /* AccFourTableViewCell.h */,
@@ -1224,6 +1254,41 @@
 				9A19B4111E6EDA3100262BC1 /* searchbar@3x.png */,
 			);
 			path = friendsscreen;
+			sourceTree = "<group>";
+		};
+		9A2F080B1ECC106400C46DF9 /* ContactList */ = {
+			isa = PBXGroup;
+			children = (
+				9A2F080E1ECC108600C46DF9 /* ContactListViewController.h */,
+				9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */,
+				9A2F08151ECC12E300C46DF9 /* ContactTableViewCell.h */,
+				9A2F08161ECC12E300C46DF9 /* ContactTableViewCell.m */,
+			);
+			path = ContactList;
+			sourceTree = "<group>";
+		};
+		9A2F080C1ECC106400C46DF9 /* FacebookList */ = {
+			isa = PBXGroup;
+			children = (
+				9A25031D1ECC48B400402839 /* FacebookListViewController.h */,
+				9A25031E1ECC48B400402839 /* FacebookListViewController.m */,
+				9A2503231ECC514100402839 /* FacebookoneTableViewCell.h */,
+				9A2503241ECC514100402839 /* FacebookoneTableViewCell.m */,
+			);
+			path = FacebookList;
+			sourceTree = "<group>";
+		};
+		9A2F080D1ECC106400C46DF9 /* TwitterList */ = {
+			isa = PBXGroup;
+			children = (
+				9A25031A1ECC489B00402839 /* TwitterListViewController.h */,
+				9A25031B1ECC489B00402839 /* TwitterListViewController.m */,
+				9A2503201ECC497300402839 /* TwitteroneTableViewCell.h */,
+				9A2503211ECC497300402839 /* TwitteroneTableViewCell.m */,
+				9A3B7FBB1ECD794C004A101B /* TwittertwoTableViewCell.h */,
+				9A3B7FBC1ECD794C004A101B /* TwittertwoTableViewCell.m */,
+			);
+			path = TwitterList;
 			sourceTree = "<group>";
 		};
 		9A38F5941E9666BC00EADE7F /* watchvideoimages */ = {
@@ -1853,8 +1918,8 @@
 				9A02B9021E8B916A00FA68F6 /* Screenshot Filled-50.png */,
 				9ABB5DAD1E6945D300482105 /* facebook@2x.png */,
 				9ABB5DB01E6945D300482105 /* twitter@2x.png */,
-				9ABB5DB11E6945D300482105 /* twitter@3x.png */,
 				9A726E511E7F989200A2F44C /* download.jpeg */,
+				9ABB5DB11E6945D300482105 /* twitter@3x.png */,
 				9A0605D01E6D755400FF4229 /* 10154143609282724.jpg */,
 			);
 			path = Images;
@@ -2023,6 +2088,8 @@
 		9AED22921E6AE83F0004A8D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A2F08111ECC121E00C46DF9 /* Contacts.framework */,
+				9A2F08121ECC121E00C46DF9 /* ContactsUI.framework */,
 				9A99BAD11E81378D00A2C3E2 /* Messages.framework */,
 				9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */,
 				9A5727B91E7180EA006A5F52 /* AVKit.framework */,
@@ -2524,6 +2591,7 @@
 				9A24D7F51E8E169200621996 /* ProfilePageDetailsViewController.m in Sources */,
 				9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */,
 				9AF84F071E8FB0810008408E /* AccptTwoTableViewCell.m in Sources */,
+				9A25031C1ECC489B00402839 /* TwitterListViewController.m in Sources */,
 				9A5727B21E717D1D006A5F52 /* Base64.m in Sources */,
 				9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */,
 				9A64C86B1E7133EB008115FF /* CLTokenInputView.m in Sources */,
@@ -2535,6 +2603,7 @@
 				9A19B3B01E6E803000262BC1 /* AccountSettViewController.m in Sources */,
 				9AA9B5021E6FCAD600C6EF37 /* PrivateChallengesTableViewCell.m in Sources */,
 				9AF9DBF91E9B608A00A652D9 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				9A2F08101ECC108600C46DF9 /* ContactListViewController.m in Sources */,
 				9A57279D1E7179CF006A5F52 /* MHFacebookImageViewer.m in Sources */,
 				9ABB5DAA1E693EF500482105 /* LoginPageViewController.m in Sources */,
 				9AA645CF1E7BECAA00E49B65 /* RaisedoneTableViewCell.m in Sources */,
@@ -2562,7 +2631,9 @@
 				9A19B42C1E6EDD7E00262BC1 /* FriendAddReqTableViewCell.m in Sources */,
 				9AF84F011E8FAAD80008408E /* AccImgVidTableViewCell.m in Sources */,
 				9A19B3F61E6EB01900262BC1 /* SDWebImageManager.m in Sources */,
+				9A25031F1ECC48B400402839 /* FacebookListViewController.m in Sources */,
 				9AED228C1E6AE27B0004A8D0 /* SBJsonTokeniser.m in Sources */,
+				9A2F08171ECC12E300C46DF9 /* ContactTableViewCell.m in Sources */,
 				9A19B4041E6ECA6400262BC1 /* MainnavigationViewController.m in Sources */,
 				9AA9B5091E6FDCE500C6EF37 /* PledgeOutoingTableViewCell.m in Sources */,
 				9AED228A1E6AE27B0004A8D0 /* SBJsonStreamWriterAccumulator.m in Sources */,
@@ -2576,9 +2647,11 @@
 				9AED21F21E6A891D0004A8D0 /* HomeTabBarViewController.m in Sources */,
 				9ABB5D661E69335600482105 /* AppDelegate.m in Sources */,
 				9A4355231E697B9F00ED8FD5 /* UIView+RNActivityView.m in Sources */,
+				9A2503221ECC497300402839 /* TwitteroneTableViewCell.m in Sources */,
 				9AA645D81E7BECE800E49B65 /* RaisedFourTableViewCell.m in Sources */,
 				9AA645D51E7BECD000E49B65 /* RaisedThreeTableViewCell.m in Sources */,
 				9A19B4011E6EC60D00262BC1 /* TabNavigationViewController.m in Sources */,
+				9A2503251ECC514100402839 /* FacebookoneTableViewCell.m in Sources */,
 				9AA66E111EC335CE00DA5662 /* MDPieView2.m in Sources */,
 				9AED22881E6AE27B0004A8D0 /* SBJsonStreamParserState.m in Sources */,
 				9A5D67641EA4BD9A001176B3 /* StatsThreeTableViewCell.m in Sources */,
@@ -2633,6 +2706,7 @@
 				9A19B3F91E6EB01900262BC1 /* UIImage+GIF.m in Sources */,
 				9AF9DBF71E9B608A00A652D9 /* AFImageRequestOperation.m in Sources */,
 				9A19B3AF1E6E803000262BC1 /* AccOneTableViewCell.m in Sources */,
+				9A3B7FBD1ECD794C004A101B /* TwittertwoTableViewCell.m in Sources */,
 				9A6E39C01E7A638800B4AD5B /* ContributeDaetailPageViewController.m in Sources */,
 				9A19B3F11E6EB01900262BC1 /* SDImageCache.m in Sources */,
 				9A19B3F01E6EB01900262BC1 /* NSData+ImageContentType.m in Sources */,

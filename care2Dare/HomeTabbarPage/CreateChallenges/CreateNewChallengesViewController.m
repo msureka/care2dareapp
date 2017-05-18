@@ -13,7 +13,8 @@
 #import "SBJsonParser.h"
 #import "UIView+RNActivityView.h"
 #import "SDAVAssetExportSession.h"
-@interface CreateNewChallengesViewController ()<UITextViewDelegate,UITextFieldDelegate,NSURLSessionDelegate>
+#import "AppDelegate.h"
+@interface CreateNewChallengesViewController ()<UITextViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,NSURLSessionDelegate>
 {
     NSURLSessionDataTask *dataTaskupload;
     
@@ -45,8 +46,12 @@
     UIView *headerView2,*headerView1;
     UIButton *headerLabel1,* headerLabel2;
     UIImagePickerController * pcker1;
+    UIImagePickerController *cameraUI;
     UIButton *Button_close;
+    int remainingCounts;
+    NSTimer *videoTimer;
 }
+@property (nonatomic, retain) NSTimer *videoTimer;
 @end
 
 @implementation CreateNewChallengesViewController
@@ -54,6 +59,10 @@
 @synthesize slider_Days,Label_Currentsdays;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    
     
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -411,7 +420,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     {
         
         _Label_totalAmount.hidden=NO;
-        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*Array_Names.count];
+        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count+1)];
         _Label_ChallengesName.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:20];
         _Label_ChallengesName.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
         
@@ -789,8 +798,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                                      }
                                                      else if(error)
                                                      {
-                                                         NSString * str_errorDesc=[NSString stringWithFormat:@"%@",error.localizedDescription];
-                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:str_errorDesc preferredStyle:UIAlertControllerStyleAlert];
+                                                       
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
                                                          
                                                          UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                             style:UIAlertActionStyleDefault handler:nil];
@@ -1025,8 +1034,8 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
                                          else if(error)
                                          {
                                            transperentViewIndicator11.hidden=YES;
-                                             NSString * str_errorDesc=[NSString stringWithFormat:@"%@",error.localizedDescription];
-                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:str_errorDesc preferredStyle:UIAlertControllerStyleAlert];
+                                            
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
                                              
                                              UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                 style:UIAlertActionStyleDefault handler:nil];
@@ -1055,8 +1064,8 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     //    [self.startScreenScrollView setContentOffset:CGPointMake(0,_Button_Create.frame.origin.y-(_Button_Create.frame.size.height*2)) animated:YES];
     [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-250)-(_Textfield_Amount.frame.size.height)) animated:YES];
     
-    _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*Array_Names.count];
-    CGFloat calculate=[_Textfield_Amount.text floatValue]*Array_Names.count;
+    _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count+1)];
+    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
     
     if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
     {
@@ -1156,21 +1165,24 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
         || (delegate == nil)
         || (controller == nil))
         return NO;
-    
-    
-    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+   // UIImage *flippedImage = [UIImage imageWithCGImage:picture.CGImage scale:picture.scale orientation:UIImageOrientationLeftMirrored];
+   
+    cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+
     
     // Displays a control that allows the user to choose movie capture
     cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
     cameraUI.videoQuality = UIImagePickerControllerQualityTypeIFrame1280x720;
     
     cameraUI.showsCameraControls = YES;
-   // cameraUI.videoMaximumDuration = 07.0f;
-    
+  cameraUI.videoMaximumDuration = 5.0f;
+ 
     cameraUI.allowsEditing = NO;
     
     cameraUI.delegate = delegate;
+//    self.videoTimer =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeValue) userInfo:nil repeats:YES];
+//    remainingCounts = 60;
     
     [controller presentModalViewController: cameraUI animated: YES];
     return YES;
@@ -1757,4 +1769,32 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 //         //         [exportSession release];
 //     }];
 //}
+//-(void)changeValue{
+//    
+//  
+//    NSLog(@"Timer vediorecording timeremainingCounts==%d",remainingCounts);
+//    if (--remainingCounts == 0)
+//    {
+//        NSLog(@"Timer vediorecording timeremainingCounts==%d",remainingCounts);
+//        [cameraUI stopVideoCapture];
+//        [self.videoTimer invalidate];
+//    }
+//}
+//- (void)stopCamera:(id)sender{
+//    NSLog(@"stop camera");
+//    [self.videoTimer invalidate];
+//    
+//    [pcker1 stopVideoCapture];
+//}
+//
+//- (void)windowDidBecomeVisible:(NSNotification *)notification
+//{
+//
+//     NSLog(@"windowDidBecomeVisiblewindowDidBecomeVisible==%@",[notification object]);
+//     ;
+// 
+//    
+//     }
+
+
 @end

@@ -32,7 +32,7 @@
 @property(nonatomic,strong)NSMutableArray * AllArrayData;
 //@property(nonatomic,retain)UIImageView * ProfileImgeData;
 
-@property(nonatomic,retain)UIImage * ProfileImgeData;
+//@property(nonatomic,retain)UIImage * ProfileImgeData;
 
 
 @end

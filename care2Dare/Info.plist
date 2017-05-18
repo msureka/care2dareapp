@@ -82,6 +82,8 @@
 	<string>Permission to use Media library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Permission to use the Camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Permission to access Contacts</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>You need to Allow Location Permission to use Care2Dare</string>
 	<key>NSMicrophoneUsageDescription</key>

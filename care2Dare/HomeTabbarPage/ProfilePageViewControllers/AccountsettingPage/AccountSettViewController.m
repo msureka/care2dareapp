@@ -10,6 +10,7 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Bolts/Bolts.h>
@@ -18,6 +19,9 @@
 #import <MessageUI/MessageUI.h>
 #import <Messages/Messages.h>
 #import "MainnavigationViewController.h"
+#import "ContactListViewController.h"
+#import "FacebookListViewController.h"
+#import "TwitterListViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
@@ -327,14 +331,14 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     return 45;
    
 }
-//- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error
-//{
-//    
-//}
-//- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
-//{
-//    NSLog(@"RESUltssssInvite==%@",results);
-//}
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error
+{
+    
+}
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"RESUltssssInvite==%@",results);
+}
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     switch (result)
@@ -362,21 +366,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-////    if([MFMessageComposeViewController canSendText])
-////    {
-//        controller.body = @"Hello  sachin mokashi";
-//       // controller.recipients = [NSArray arrayWithObjects:@"+918237499204", nil];
-//        
-//  controller.recipients = [NSArray arrayWithObjects:@"8850519524", @"8237499204", nil];
-//        controller.messageComposeDelegate = self;
-//           [self presentModalViewController:controller animated:YES];
-   // }
-  
-//    FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-//    NSString *urlString = @"https://fb.me/1317286481660217";
-//    content.appLinkURL = [NSURL URLWithString:urlString];
-//    [FBSDKAppInviteDialog showWithContent:content delegate:self];
+
 
     
     
@@ -386,23 +376,46 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         
         if (indexPath.row==0)
         {
-//        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        
-//  SettingGenderViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"SettingGenderViewController"];
-//        
-//        [self.navigationController pushViewController:set animated:YES];
+            //contact list msg sends
+            //    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+            ////    if([MFMessageComposeViewController canSendText])
+            ////    {
+            //        controller.body = @"Hello  sachin mokashi";
+            //       // controller.recipients = [NSArray arrayWithObjects:@"+918237499204", nil];
+            //
+            //  controller.recipients = [NSArray arrayWithObjects:@"8850519524", @"8237499204", nil];
+            //        controller.messageComposeDelegate = self;
+            //           [self presentModalViewController:controller animated:YES];
+            // }
+            
+           // facebook freindsintigration
+            
+//                FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+//                NSString *urlString = @"https://fb.me/1317286481660217";
+//                content.appLinkURL = [NSURL URLWithString:urlString];
+//                [FBSDKAppInviteDialog showWithContent:content delegate:self];
+            
+  
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FacebookListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"FacebookListViewController"];
+            [self.navigationController pushViewController:set animated:YES];
         }
         
         if (indexPath.row==1)
         {
 
-
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TwitterListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"TwitterListViewController"];
+            [self.navigationController pushViewController:set animated:YES];
             
         }
         
         if (indexPath.row==2)
         {
- 
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ContactListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"ContactListViewController"];
+            [self.navigationController pushViewController:set animated:YES];
+
         }
         
     }
@@ -484,9 +497,30 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [FBSDKProfile setCurrentProfile:nil];
     
+    
+    NSString * twitterid=[defaults valueForKey:@"twitterid"];
+    NSString *signedInUserID = [TWTRAPIClient clientWithCurrentUser].userID;
+    if (signedInUserID)
+    {
+        [[[Twitter sharedInstance] sessionStore] logOutUserID:signedInUserID];
+    }
+[[[Twitter sharedInstance] sessionStore] logOutUserID:[defaults valueForKey:@"twitterid"]];
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    NSString *userID = store.session.userID;
+    [store logOutUserID:userID];
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
+    for (NSHTTPCookie *cookie in cookies)
+    {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
     MainnavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainnavigationViewController"];
     
-    //self.window.rootViewController=loginController;
+    
+    
+
+    
+   //self.window.rootViewController=loginController;
 
 //    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    LoginPageViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPageViewController"];
