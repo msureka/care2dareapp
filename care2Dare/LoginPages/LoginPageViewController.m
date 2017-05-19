@@ -204,7 +204,8 @@
                              
                              NSLog(@"my url DataFBB=%@",result);
                              regTypeVal =@"FACEBOOK";
-                             
+                             [defaults setObject:@"FACEBOOK" forKey:@"SettingLogin"];
+                             [defaults synchronize];
                              [self FbTwittercommunicationServer];
                              
                          }
@@ -273,7 +274,8 @@
                     regTypeVal =@"TWITTER";
                   genderfb=@"";
                   profile_picFb=[Array_sinupFb valueForKey:@"profile_image_url"];
-                  
+                  [defaults setObject:@"TWITTER" forKey:@"SettingLogin"];
+                  [defaults synchronize];
                   
                   
                   [self TwitterFriendsList];
@@ -451,7 +453,7 @@
                                         
         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
                                         
-                                        
+              [defaults setObject:@"EMAIL" forKey:@"SettingLogin"];                          
             [defaults setObject:@"yes" forKey:@"LoginView"];
             [defaults synchronize];
                                         

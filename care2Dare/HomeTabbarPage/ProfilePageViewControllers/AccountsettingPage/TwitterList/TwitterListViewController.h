@@ -15,5 +15,6 @@
 @property(strong,nonatomic)IBOutlet UIActivityIndicatorView *indicator;
 @property(strong,nonatomic)TwitteroneTableViewCell *cell_twitter;
 @property(strong,nonatomic)TwittertwoTableViewCell *cell_twitter2;
+@property(strong,nonatomic)IBOutlet UISearchBar *searchbar;
 -(IBAction)Button_Back:(id)sender;
 @end

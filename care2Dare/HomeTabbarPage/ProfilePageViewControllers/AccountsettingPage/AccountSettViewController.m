@@ -22,6 +22,7 @@
 #import "ContactListViewController.h"
 #import "FacebookListViewController.h"
 #import "TwitterListViewController.h"
+#import "UIView+RNActivityView.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
@@ -35,6 +36,9 @@
     NSMutableArray *Array_Delete,*Array_ChangeproInfo;
    
     NSString *EnglishStr,*ArabicStr;
+    NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
+    
+    NSMutableArray *fb_friend_id;
    
 }
 
@@ -63,7 +67,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     
     
     
-    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms",@"About",@"Log Out",nil];
+    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms",@"About",@"Log Out",@"Delete",nil];
     
    
     
@@ -183,8 +187,16 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
               
                 Threecell3.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
                 Threecell3.layer.borderWidth=1.0f;
-                
-                Threecell3.LabelVal.text=[Array_Title3 objectAtIndex:indexPath.row];
+                 Threecell3.LabelVal.text=[Array_Title3 objectAtIndex:indexPath.row];
+                if (indexPath.row==4)
+                {
+                    Threecell3.LabelVal.textColor=[UIColor redColor];
+                }
+                else
+                {
+                  Threecell3.LabelVal.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
+                }
+               
                 
                 
                 return Threecell3;
@@ -396,17 +408,48 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 //                [FBSDKAppInviteDialog showWithContent:content delegate:self];
             
   
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            FacebookListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"FacebookListViewController"];
-            [self.navigationController pushViewController:set animated:YES];
+            if (![[defaults valueForKey:@"SettingLogin"]isEqualToString:@"FACEBOOK"] ||[[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
+            {
+                if ([[defaults valueForKey:@"facebookconnect"]isEqualToString:@"yes"])
+                {
+                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    FacebookListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"FacebookListViewController"];
+                    [self.navigationController pushViewController:set animated:YES];
+                }
+                else
+                {
+                [self logingWithFB];
+                }
+            }
+            else
+            {
+                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                FacebookListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"FacebookListViewController"];
+                [self.navigationController pushViewController:set animated:YES];
+            }
         }
         
         if (indexPath.row==1)
         {
-
+            if (![[defaults valueForKey:@"SettingLogin"]isEqualToString:@"TWITTER"] ||[[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
+            {
+                if ([[defaults valueForKey:@"twitterconnect"]isEqualToString:@"yes"])
+                {
+                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    TwitterListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"TwitterListViewController"];
+                    [self.navigationController pushViewController:set animated:YES];
+                }
+                else
+                {
+                [self loginWithTW];
+                }
+            }
+            else
+            {
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TwitterListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"TwitterListViewController"];
             [self.navigationController pushViewController:set animated:YES];
+            }
             
         }
         
@@ -471,17 +514,140 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
             
         }
         
-        
+        if (indexPath.row==4)
+        {
+            [self DeleteAccount];
+            
+        }
+
     }
 
 
 
 }
-
+-(void)DeleteAccount
+{
+    
+    
+    
+    //   [self.view showActivityViewWithLabel:@"Loading"];
+    
+    NSString *userid= @"userid";
+    NSString *useridval =[defaults valueForKey:@"userid"];
+    
+    
+    
+    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridval];
+    
+    
+    
+#pragma mark - swipe sesion
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL *url;
+    NSString *  urlStrLivecount=[urlplist valueForKey:@"deleteaccount"];;
+    url =[NSURL URLWithString:urlStrLivecount];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];//Web API Method
+    
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+    NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                     {
+                                         
+                                         if(data)
+                                         {
+                                             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                             NSInteger statusCode = httpResponse.statusCode;
+                                             if(statusCode == 200)
+                                             {
+                                                 
+                                                 
+                                                 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                 
+                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                 
+                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                 
+                                                 if ([ResultString isEqualToString:@"selecterror"]||[ResultString isEqualToString:@"nullerror"])
+                                                 {
+                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not retrieve one of the Account Ids. Please login and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                     
+                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                        style:UIAlertActionStyleDefault
+                                                                                                      handler:nil];
+                                                     [alertController addAction:actionOk];
+                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                                     
+                                                     
+                                                     
+                                                     
+                                                 }
+                                                 if ([ResultString isEqualToString:@"done"])
+                                                 {
+                                                     
+                                                     [self.view hideActivityViewWithAfterDelay:0];
+                                                     
+             UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Delete Video?" message:@"Are you sure you want to delete your video?"preferredStyle:UIAlertControllerStyleAlert];
+                                                     
+                  UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                    {
+                        [self LogoutAccount];
+                     
+                                                                                     
+                                }];
+                 UIAlertAction* noButton = [UIAlertAction
+                        actionWithTitle:@"No"
+                        style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action)
+                            {
+                                                                                    
+                                                                                    
+                                }];
+                                                     
+                        [alert addAction:yesButton];
+                            [alert addAction:noButton];
+                        [self presentViewController:alert animated:YES completion:nil];
+                                                 }
+                                                 
+                                                 }
+                                                 
+                                             
+                                             
+                                             else
+                                             {
+                                                 NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                             }
+                                             
+                                             
+                                         }
+                                         else if(error)
+                                         {
+                                             [self.view hideActivityViewWithAfterDelay:0];
+                                             NSLog(@"error login2.......%@",error.description);
+                                         }
+                                         
+                                         
+                                     }];
+    [dataTask resume];
+    
+}
 
 -(void)LogoutAccount
 {
     [defaults setObject:@"no" forKey:@"LoginView"];
+    [defaults setObject:@"no" forKey:@"facebookconnect"];
+    [defaults setObject:@"no" forKey:@"twitterconnect"];
+    
         [defaults synchronize];
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -504,16 +670,19 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     {
         [[[Twitter sharedInstance] sessionStore] logOutUserID:signedInUserID];
     }
+    
 [[[Twitter sharedInstance] sessionStore] logOutUserID:[defaults valueForKey:@"twitterid"]];
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
     NSString *userID = store.session.userID;
     [store logOutUserID:userID];
+    
     NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"];
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
     for (NSHTTPCookie *cookie in cookies)
     {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
     }
+    
     MainnavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainnavigationViewController"];
     
     
@@ -574,8 +743,364 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     }
     
 }
-
-
-
-
+-(void)loginWithTW
+{
+   
+    
+    [self.view showActivityViewWithLabel:@"Loading"];
+    
+    /*   [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+     if (session) {
+     NSLog(@"signed in as %@", [session userName]);
+     
+     } else {
+     NSLog(@"error: %@", [error localizedDescription]);
+     }
+     }];
+     */
+    
+    [[Twitter sharedInstance] logInWithMethods:TWTRLoginMethodWebBased completion:^(TWTRSession *session, NSError *error)
+     {
+         if (session)
+         {
+             
+             NSLog(@"signed in as %@", [session userName]);
+             NSLog(@"signed in as %@", session);
+             
+             TWTRAPIClient *client = [TWTRAPIClient clientWithCurrentUser];
+             NSURLRequest *request = [client URLRequestWithMethod:@"GET"
+                                                              URL:@"https://api.twitter.com/1.1/account/verify_credentials.json"
+                                                       parameters:@{@"include_email": @"true", @"skip_status": @"true"}
+                                                            error:nil];
+             
+             //@"https://api.twitter.com/1.1/users/show.json";
+             
+             
+             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+              {
+                  NSLog(@"datadata in as %@", data);
+                  NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                  NSLog(@"ResultString in as %@", ResultString);
+                  NSMutableDictionary *  Array_sinupFb=[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                  
+                  NSLog(@"Array_sinupFbArray_sinupFb in as %@", Array_sinupFb);
+                  NSLog(@"emailemail in as %@", [Array_sinupFb valueForKey:@"email"]);
+                  NSLog(@"location in as %@", [Array_sinupFb valueForKey:@"location"]);
+                  NSLog(@"name in as %@", [Array_sinupFb valueForKey:@"name"]);
+                  nameFb=[Array_sinupFb valueForKey:@"name"];
+                  emailFb=[Array_sinupFb valueForKey:@"email"];
+                  Fbid= [session userID];
+                  [defaults setObject:Fbid forKey:@"twitterids"];
+                  [defaults synchronize];
+                  regTypeVal =@"TWITTER";
+                
+                  
+                  
+                  [self TwitterFriendsList];
+                  
+                  //         [self FbTwittercommunicationServer];
+                  
+              }];
+             
+             
+             
+         } else
+         {
+             NSLog(@"error: %@", [error localizedDescription]);
+             [self.view hideActivityViewWithAfterDelay:1];
+         }
+     }];
+    
+}
+-(void)TwitterFriendsList
+{
+    
+    
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:Fbid];
+    NSString *statusesShowEndpoint = @"https://api.twitter.com/1.1/friends/ids.json";
+    NSDictionary *params = @{@"id" : Fbid};
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:statusesShowEndpoint parameters:params error:&clientError];
+    
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                // handle the response data e.g.
+                NSError *jsonError;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                
+                NSArray *json22=[json objectForKey:@"ids"];
+                
+                
+                NSLog(@"jsonjson: %d",json22.count);
+                
+                Str_fb_friend_id=[json22 componentsJoinedByString:@","];
+                Str_fb_friend_id_Count=[NSString stringWithFormat:@"%d",json22.count];
+                NSLog(@"Str_fb_friend_id: %@",Str_fb_friend_id);
+                NSLog(@"jsonjson: %@",json22);
+                
+                [self FbTwittercommunicationServer];
+            }
+            else
+            {
+                NSLog(@"Error: %@", connectionError);
+                
+                [self TwitterFriendsList];
+            }
+        }];
+    }
+    else
+    {
+        NSLog(@"Error: %@", clientError);
+        
+        [self TwitterFriendsList];
+    }
+    
+    
+    
+}
+-(void)logingWithFB
+{
+    
+        Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+        if (networkStatus == NotReachable)
+        {
+            //        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Play:Date." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            //        message.tag=100;
+            //        [message show];
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Play:Date." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action)
+                                       {
+                                           [alertController dismissViewControllerAnimated:YES completion:nil];
+                                           exit(0);
+                                       }];
+            
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
+            
+        }
+        else
+        {
+            [self.view showActivityViewWithLabel:@"Loading"];
+            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+            
+            
+            
+            [login logInWithReadPermissions: @[@"public_profile", @"email",@"user_friends"]
+                         fromViewController:self
+                                    handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
+             {
+                 NSLog(@"Process result=%@",result);
+                 NSLog(@"Process error=%@",error);
+                 if (error)
+                 {
+                     [self.view hideActivityViewWithAfterDelay:1];
+                     
+                     NSLog(@"Process error");
+                 }
+                 else if (result.isCancelled)
+                 {
+                     [self.view hideActivityViewWithAfterDelay:1];
+                     
+                     NSLog(@"Cancelled");
+                 }
+                 else
+                 {
+                     
+                     
+                     NSLog(@"Logged in");
+                     NSLog(@"Process result123123=%@",result);
+                     [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,friends,name,first_name,last_name,gender,email,picture.width(100).height(100)"}]startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                         if (!error) {
+                             if ([result isKindOfClass:[NSDictionary class]])
+                             {
+                                 NSLog(@"Results=%@",result);
+                                 emailFb=[result objectForKey:@"email"];
+                                 Fbid=[result objectForKey:@"id"];
+                                 nameFb=[result objectForKey:@"name"];
+                                
+                                 
+                                 
+                                 NSArray * allKeys = [[result valueForKey:@"friends"]objectForKey:@"data"];
+                                 
+                                 fb_friend_id  =  [[NSMutableArray alloc]init];
+                                 
+                                 for (int i=0; i<[allKeys count]; i++)
+                                 {
+                                  [fb_friend_id addObject:[[[[result valueForKey:@"friends"]objectForKey:@"data"] objectAtIndex:i] valueForKey:@"id"]];
+                                     
+                                 }
+                                 Str_fb_friend_id_Count=[NSString stringWithFormat:@"%d",fb_friend_id.count];
+                                 Str_fb_friend_id=[fb_friend_id componentsJoinedByString:@","];
+                                 ;
+                                regTypeVal =@"FACEBOOK";
+                                 [defaults setObject:Fbid forKey:@"facebookid"];
+                                 [defaults synchronize];
+                                 [self FbTwittercommunicationServer];
+                                 
+                             }
+                             
+                             
+                         }
+                     }];
+                     
+                 }
+                 
+             }];
+        }
+        
+    
+}
+-(void)FbTwittercommunicationServer
+{
+    
+    
+    
+    //   [self.view showActivityViewWithLabel:@"Loading"];
+   
+    NSString *userid= @"userid";
+    NSString *useridval =[defaults valueForKey:@"userid"];
+    
+     NSString *email= @"email";
+    
+    NSString *fbid1;
+    
+    if ([regTypeVal isEqualToString:@"FACEBOOK"])
+    {
+        fbid1= @"fbid";
+    }
+    else
+    {
+        fbid1= @"twitterid";
+    }
+    
+    NSString *regType= @"regtype";
+   
+    NSString *friendlist= @"friendlist";
+    NSString *friendlistval =[NSString stringWithFormat:@"%@",Str_fb_friend_id];
+    
+    
+    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",fbid1,Fbid,email,emailFb,regType,regTypeVal,userid,useridval,friendlist,friendlistval];
+    
+    
+    
+#pragma mark - swipe sesion
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL *url;
+    NSString *  urlStrLivecount=[urlplist valueForKey:@"connect_fb_twitter"];;
+    url =[NSURL URLWithString:urlStrLivecount];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];//Web API Method
+    
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+    NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                     {
+                                         
+                                         if(data)
+                                         {
+                                             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                             NSInteger statusCode = httpResponse.statusCode;
+                                             if(statusCode == 200)
+                                             {
+                                                 
+                        
+                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                
+                           ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                            
+                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                  
+                     if ([ResultString isEqualToString:@"error"])
+                                {
+                        [self.view hideActivityViewWithAfterDelay:0];
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not retrieve one of the Account Ids. Please login and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                     
+                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                style:UIAlertActionStyleDefault
+                                            handler:nil];
+                                    [alertController addAction:actionOk];
+                                    [self presentViewController:alertController animated:YES completion:nil];
+                                                     
+                                    
+                                                     
+                                                     
+                                }
+                            if ([ResultString isEqualToString:@"anotheruser"])
+                            {
+                                
+                            [self.view hideActivityViewWithAfterDelay:0];
+                                [self.view hideActivityViewWithAfterDelay:0];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You already have another account with us linked to Facebook. Please login through that or delete that account." preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                   style:UIAlertActionStyleDefault
+                                                                                 handler:nil];
+                                [alertController addAction:actionOk];
+                                [self presentViewController:alertController animated:YES completion:nil];
+                            }
+                    if ([ResultString isEqualToString:[defaults valueForKey:@"facebookid"]])
+                            {
+                                 [self.view hideActivityViewWithAfterDelay:0];
+                                if ([regTypeVal isEqualToString:@"FACEBOOK"])
+                                {
+                                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                    FacebookListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"FacebookListViewController"];
+                                    [self.navigationController pushViewController:set animated:YES];
+                                    [defaults setObject:@"yes" forKey:@"facebookconnect"];
+                                    [defaults synchronize];
+                                    
+                                }
+                            }
+                    if ([ResultString isEqualToString:[defaults valueForKey:@"twitterids"]])
+                        {
+                             [self.view hideActivityViewWithAfterDelay:0];
+                                if ([regTypeVal isEqualToString:@"TWITTER"])
+                                {
+                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    TwitterListViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"TwitterListViewController"];
+                                    [self.navigationController pushViewController:set animated:YES];
+                                    [defaults setObject:@"yes" forKey:@"twitterconnect"];
+                                    [defaults synchronize];
+                                }
+                        }
+                            
+                                                 
+                                             }
+                                             
+                                             else
+                                             {
+                                                 NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                 [self.view hideActivityViewWithAfterDelay:0];
+                                             }
+                                             
+                                             
+                                         }
+                                         else if(error)
+                                         {
+                                             [self.view hideActivityViewWithAfterDelay:0];
+                                             NSLog(@"error login2.......%@",error.description);
+                                         }
+                                         
+                                         
+                                     }];
+    [dataTask resume];
+    
+}
 @end

@@ -38,48 +38,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/AccountsettingPage/TwitterList/TwitterListViewController.m"
-            timestampString = "516789849.666974"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "531"
-            endingLineNumber = "531"
-            landmarkName = "-InviteUser:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/AccountsettingPage/TwitterList/TwitterListViewController.m"
-            timestampString = "516789850.546909"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
-            landmarkName = "-InviteUser:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "care2Dare/LoginPages/LoginPageViewController.m"
-            timestampString = "516793012.463121"
+            filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/AccountsettingPage/ContactList/ContactListViewController.m"
+            timestampString = "516878869.169493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-LoginWithTwitterAction:"
+            startingLineNumber = "681"
+            endingLineNumber = "681"
+            landmarkName = "-AddUser:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

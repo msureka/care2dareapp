@@ -22,17 +22,23 @@
     UIView *sectionView;
     CALayer *borderBottom_SectionView0,*borderBottom_SectionView1;
     CALayer *Bottomborder_Cell2;
+      NSMutableArray * Array_searchFriend1;
+    NSArray * Array_Add,*array_invite;
+    
 }
 @end
 
 @implementation TwitterListViewController
-@synthesize tableview_twitter,indicator,Lable_JSONResult,cell_twitter,cell_twitter2;
+@synthesize tableview_twitter,indicator,Lable_JSONResult,cell_twitter,cell_twitter2,searchbar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    Array_searchFriend1=[[NSMutableArray alloc]init];
+    Array_Add=[[NSArray alloc]init];
+    array_invite=[[NSArray alloc]init];
     
     borderBottom_SectionView0 = [CALayer layer];
     borderBottom_SectionView1 = [CALayer layer];
@@ -42,7 +48,9 @@
     [indicator startAnimating];
     Lable_JSONResult.hidden=YES;
     array_Countval=0;
+    searchbar.showsCancelButton=NO;
     
+   
     flagTwitterMergeArray=@"yes";
  
     
@@ -80,8 +88,15 @@
         
         
         NSString *userid= @"userid";
-        NSString *useridVal =[defaults valueForKey:@"userid"];
-        
+        NSString *useridVal;
+        if ( [[defaults valueForKey:@"SettingLogin"] isEqualToString:@"FACEBOOK"] || [[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
+        {
+            useridVal =[defaults valueForKey:@"twitterids"];
+        }
+        else
+        {
+          useridVal =[defaults valueForKey:@"userid"];
+        }
         NSString *requestt= @"request";
         NSString *requestvalt =@"TWITTER";
 
@@ -125,7 +140,7 @@
                                         SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                      
                                     Arrat_TwitterList =[objSBJsonParser objectWithData:data];
-                                                     
+                                                    
                              NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      
                                                      
@@ -170,6 +185,7 @@
                             }
                             if (ArryMerge_twitterlistSection0.count !=0)
                             {
+                                Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
                                 [tableview_twitter setHidden:NO];
                                 indicator.hidden=YES;
                                 [indicator stopAnimating];
@@ -265,6 +281,9 @@
                 
                 
             }
+            NSLog(@"Image width ==%f",cell_twitter.image_profile_img.frame.size.width);
+             NSLog(@"Image Height ==%f",cell_twitter.image_profile_img.frame.size.height);
+            [cell_twitter.image_profile_img setFrame:CGRectMake(cell_twitter.image_profile_img.frame.origin.x, cell_twitter.image_profile_img.frame.origin.y, cell_twitter.image_profile_img.frame.size.height, cell_twitter.image_profile_img.frame.size.height)];
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
             
             [cell_twitter.image_profile_img sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -305,6 +324,8 @@
             cell_twitter2.Button_invite1.tag=indexPath.row;
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
             
+              [cell_twitter2.image_profile_img1 setFrame:CGRectMake(cell_twitter2.image_profile_img1.frame.origin.x, cell_twitter2.image_profile_img1.frame.origin.y, cell_twitter2.image_profile_img1.frame.size.height, cell_twitter2.image_profile_img1.frame.size.height)];
+            
             [cell_twitter2.image_profile_img1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             
             
@@ -335,7 +356,7 @@
         //        Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"Add Users";
+        Label1.text=@"Add Friends";
         [sectionView addSubview:Label1];
         sectionView.tag=section;
         
@@ -350,7 +371,7 @@
         //        Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"Twitter Inviters";
+        Label1.text=@"Invite Twitter Friends";
         [sectionView addSubview:Label1];
         
         sectionView.tag=section;
@@ -462,12 +483,13 @@
                 [DictVal setValue:[[json valueForKey:@"name"]objectAtIndex:i] forKey:@"name"];
                 [DictVal setValue:[[json valueForKey:@"profile_image_url"]objectAtIndex:i] forKey:@"imageurl"];
                 [DictVal setValue:[[json valueForKey:@"id_str"]objectAtIndex:i] forKey:@"id_str"];
+                    [DictVal setValue:[[json valueForKey:@"screen_name"]objectAtIndex:i] forKey:@"screen_name"];
                     [ArryMerge_twitterlistSection1 addObject:DictVal];
                 }
                 
 
         NSLog(@"namename: %@",ArryMerge_twitterlistSection1);
-                
+                 array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
                 if ( [flagTwitterMergeArray isEqualToString:@"yes"])
                 {
                     
@@ -482,6 +504,10 @@
                 else
                 {
                     array_Countval=0;
+                    [tableview_twitter setHidden:NO];
+                    indicator.hidden=YES;
+                    [indicator stopAnimating];
+                    Lable_JSONResult.hidden=YES;
                     [tableview_twitter reloadData];
                     
                 }
@@ -517,9 +543,10 @@
 -(void)InviteUser:(UIButton *)sender
 {
     TWTRComposer *composer = [[TWTRComposer alloc] init];
+    NSString *screen_name=[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"screen_name"];
     
-    [composer setText:@"http://www.care2Dare.com"];
-    [composer setImage:[UIImage imageNamed:@"twitterBird"]];
+    [composer setText:[NSString stringWithFormat:@"%@%@%@",@"@",screen_name,@" Download Care2Dare App and challenge your friends for a good cause! Get it from the Appstore now - http://www.care2Dare.com"]];
+    //[composer setImage:[UIImage imageNamed:@"twitterBird"]];
     
     // Called from a UIViewController
     [composer showFromViewController:self completion:^(TWTRComposerResult result) {
@@ -531,6 +558,49 @@
             NSLog(@"Sending Tweet!");
         }
     }];
+    
+//@https://api.twitter.com/1.1/direct_messages/new.json?text=hello%2C%20tworld.%20welcome%20to%201.1.&screen_name=theseancook
+//     NSString *Fbid=[defaults valueForKey:@"twitterid"];
+//    NSString *useridd=[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"id_str"];
+//    
+//    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:Fbid];
+////Download Care2Dare App and challenge your friends for a good cause! Get it from the Appstore now -
+//    NSString *statusesShowEndpoint =[NSString stringWithFormat:@"%@%@",@"https://api.twitter.com/1.1/direct_messages/new.json?text=http://www.care2Dare.com&user_id=",useridd];
+//    NSDictionary *params = @{@"id" : Fbid};
+//    NSError *clientError;
+//    
+//    NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:statusesShowEndpoint parameters:params error:&clientError];
+//    
+//    if (request) {
+//        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+//        {
+//            if (data) {
+//                // handle the response data e.g.
+//                NSError *jsonError;
+//                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+//             NSLog(@"jsonjsonjson: %@", json);
+//              
+//                
+//            }
+//            else
+//            {
+//                NSLog(@"Error: %@", connectionError);
+//                
+//               
+//            }
+//        }];
+//    }
+//    else
+//    {
+//        NSLog(@"Error: %@", clientError);
+//        
+//        // [self twitterlist_intigrate];
+//    }
+
+    
+    
+    
+    
 }
 -(void)AddUser:(UIButton *)sender
 {
@@ -633,5 +703,69 @@
     }
     
     
+}
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+      searchbar.showsCancelButton=YES;
+ NSArray * Array_searchFriend=[[array_invite arrayByAddingObjectsFromArray:Array_Add]mutableCopy];
+    if (searchText.length==0)
+    {
+        
+        [Array_searchFriend1 removeAllObjects];
+        [ArryMerge_twitterlistSection0 removeAllObjects];
+        [ArryMerge_twitterlistSection1 removeAllObjects];
+        
+        [Array_searchFriend1 addObjectsFromArray:Array_searchFriend];
+         [ArryMerge_twitterlistSection0 addObjectsFromArray:Array_Add];
+         [ArryMerge_twitterlistSection1 addObjectsFromArray:array_invite];
+        
+    }
+    else
+        
+    {
+        
+        [Array_searchFriend1 removeAllObjects];
+         [ArryMerge_twitterlistSection0 removeAllObjects];
+         [ArryMerge_twitterlistSection1 removeAllObjects];
+        
+        for (NSDictionary *book in Array_searchFriend)
+        {
+            NSString * string=[book objectForKey:@"name"];
+            
+            NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            
+            if (r.location !=NSNotFound )
+            {
+                
+                [Array_searchFriend1 addObject:book];
+                
+            }
+            
+        }
+        for (int i=0; i<Array_searchFriend1.count; i++)
+        {
+            if ([[[Array_searchFriend1 objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
+            {
+                [ArryMerge_twitterlistSection0 addObject:[Array_searchFriend1 objectAtIndex:i]];
+            }
+            else
+            {
+                [ArryMerge_twitterlistSection1 addObject:[Array_searchFriend1 objectAtIndex:i]];
+            }
+        }
+        
+    }
+    
+    
+    
+    [tableview_twitter reloadData];
+    
+    
+    
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+        searchbar.showsCancelButton=NO;
+   [self.view endEditing:YES];
 }
 @end

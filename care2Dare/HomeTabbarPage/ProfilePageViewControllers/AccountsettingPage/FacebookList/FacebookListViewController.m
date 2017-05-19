@@ -22,7 +22,7 @@
 @end
 
 @implementation FacebookListViewController
-@synthesize tableview_facebook,indicator,Lable_JSONResult,cell_fb;
+@synthesize tableview_facebook,indicator,Lable_JSONResult,cell_fb,searchbar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,7 +35,10 @@
     indicator.hidden=NO;
     [indicator startAnimating];
     Lable_JSONResult.hidden=YES;
+    searchbar.showsCancelButton=NO;
     
+    
+
 }
 - (void)Facebookcommunication
 {
@@ -68,12 +71,17 @@
         
         
         NSString *userid= @"userid";
-        NSString *useridVal =[defaults valueForKey:@"userid"];
-        
+        NSString *useridVal;
+        if ( [[defaults valueForKey:@"SettingLogin"] isEqualToString:@"TWITTER"]||[[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
+        {
+            useridVal =[defaults valueForKey:@"facebookid"];
+        }
+        else
+        {
+       useridVal =[defaults valueForKey:@"userid"];
+        }
         NSString *requestt= @"request";
         NSString *requestvalt =@"FACEBOOK";
-        
-        
         
         NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid,useridVal,requestt,requestvalt];
         
@@ -363,7 +371,7 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     
-    
+    searchbar.showsCancelButton=YES;
     if (searchText.length==0)
     {
         
@@ -400,6 +408,11 @@
     
     
     
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    searchbar.showsCancelButton=NO;
+    [self.view endEditing:YES];
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

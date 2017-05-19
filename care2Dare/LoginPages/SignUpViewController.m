@@ -182,7 +182,8 @@
               //  nameFb=[NSString stringWithFormat:@"%@%@%@",[result objectForKey:@"first_name"],@" ",[result objectForKey:@"last_name"]];
                 nameFb=[result objectForKey:@"name"];
                 genderfb=[result objectForKey:@"gender"];
-                             
+                             [defaults setObject:@"FACEBOOK" forKey:@"SettingLogin"];
+                             [defaults synchronize];
                   regTypeVal=@"FACEBOOK";
                          
                              NSArray * allKeys = [[result valueForKey:@"friends"]objectForKey:@"data"];
@@ -261,7 +262,8 @@
                   regTypeVal =@"TWITTER";
                   genderfb=@"";
                   profile_picFb=[Array_sinupFb valueForKey:@"profile_image_url"];
-                  
+                  [defaults setObject:@"TWITTER" forKey:@"SettingLogin"];
+                  [defaults synchronize];
                   [self TwitterFriendsList];
                   
                   //[self FbTwittercommunicationServer];
@@ -475,6 +477,7 @@
                     
                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
                     
+                      [defaults setObject:@"EMAIL" forKey:@"SettingLogin"];
                     
                     [defaults setObject:@"yes" forKey:@"LoginView"];
                     [defaults synchronize];

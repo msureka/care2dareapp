@@ -185,6 +185,7 @@
 		9A5D676A1EA4BDD1001176B3 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67691EA4BDD1001176B3 /* StatsViewController.m */; };
 		9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */; };
 		9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */; };
+		9A6493D41ECEC51700E04318 /* ContactAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6493D31ECEC51700E04318 /* ContactAddTableViewCell.m */; };
 		9A64C8581E711475008115FF /* UIViewController+KeyboardAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C8571E711475008115FF /* UIViewController+KeyboardAnimation.m */; };
 		9A64C85E1E71333B008115FF /* InviteSprintTagUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C85B1E71333B008115FF /* InviteSprintTagUserViewController.m */; };
 		9A64C85F1E71333B008115FF /* InviteSprintUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A64C85D1E71333B008115FF /* InviteSprintUserTableViewCell.m */; };
@@ -684,6 +685,8 @@
 		9A5D67691EA4BDD1001176B3 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		9A62705D1EA0A0B6003C85E4 /* High Volume Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "High Volume Filled-100.png"; sourceTree = "<group>"; };
 		9A62705E1EA0A0B6003C85E4 /* Mute Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mute Filled-100.png"; sourceTree = "<group>"; };
+		9A6493D21ECEC51700E04318 /* ContactAddTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactAddTableViewCell.h; sourceTree = "<group>"; };
+		9A6493D31ECEC51700E04318 /* ContactAddTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactAddTableViewCell.m; sourceTree = "<group>"; };
 		9A64C8561E711475008115FF /* UIViewController+KeyboardAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KeyboardAnimation.h"; sourceTree = "<group>"; };
 		9A64C8571E711475008115FF /* UIViewController+KeyboardAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KeyboardAnimation.m"; sourceTree = "<group>"; };
 		9A64C85A1E71333B008115FF /* InviteSprintTagUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteSprintTagUserViewController.h; sourceTree = "<group>"; };
@@ -1263,6 +1266,8 @@
 				9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */,
 				9A2F08151ECC12E300C46DF9 /* ContactTableViewCell.h */,
 				9A2F08161ECC12E300C46DF9 /* ContactTableViewCell.m */,
+				9A6493D21ECEC51700E04318 /* ContactAddTableViewCell.h */,
+				9A6493D31ECEC51700E04318 /* ContactAddTableViewCell.m */,
 			);
 			path = ContactList;
 			sourceTree = "<group>";
@@ -2707,6 +2712,7 @@
 				9AF9DBF71E9B608A00A652D9 /* AFImageRequestOperation.m in Sources */,
 				9A19B3AF1E6E803000262BC1 /* AccOneTableViewCell.m in Sources */,
 				9A3B7FBD1ECD794C004A101B /* TwittertwoTableViewCell.m in Sources */,
+				9A6493D41ECEC51700E04318 /* ContactAddTableViewCell.m in Sources */,
 				9A6E39C01E7A638800B4AD5B /* ContributeDaetailPageViewController.m in Sources */,
 				9A19B3F11E6EB01900262BC1 /* SDImageCache.m in Sources */,
 				9A19B3F01E6EB01900262BC1 /* NSData+ImageContentType.m in Sources */,
