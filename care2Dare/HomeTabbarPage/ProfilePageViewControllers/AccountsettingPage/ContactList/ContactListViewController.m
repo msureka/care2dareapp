@@ -593,7 +593,7 @@
         mailCont.mailComposeDelegate = self;
         [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
         [mailCont setSubject:@"Download care2dare"];
-        [mailCont setMessageBody:@"Hey, \n\n care2dare is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.care2dare.com to download it on your mobile phone! \n\n Thanks!" isHTML:NO];
+        [mailCont setMessageBody:@"Hey,\n\nChallenge your friends to a dare and help contribute to the society! \n\nVisit http://www.care2dare.com to download it on your mobile phone!\n\nThanks!" isHTML:NO];
         [self presentViewController:mailCont animated:YES completion:nil];
         
         }
@@ -610,7 +610,7 @@
         [recipients addObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendmobileno"]]; // Append example phone number to array
         messageController.recipients = recipients; // Set the recipients of the message to the created array
         
-        messageController.body = @"Hiiiiiiiiiiiii"; // Set initial text to example message
+        messageController.body = @"Challenge your friends to a dare and help contribute to the society! Visit http://www.care2dare.com to download it on your mobile phone!"; // Set initial text to example message
         
         dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
         [self presentViewController:messageController animated:YES completion:NULL];

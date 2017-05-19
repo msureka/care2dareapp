@@ -89,14 +89,14 @@
         
         NSString *userid= @"userid";
         NSString *useridVal;
-        if ( [[defaults valueForKey:@"SettingLogin"] isEqualToString:@"FACEBOOK"] || [[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
-        {
-            useridVal =[defaults valueForKey:@"twitterids"];
-        }
-        else
-        {
+//        if ( [[defaults valueForKey:@"SettingLogin"] isEqualToString:@"FACEBOOK"] || [[defaults valueForKey:@"SettingLogin"]isEqualToString:@"EMAIL"])
+//        {
+//            useridVal =[defaults valueForKey:@"twitterids"];
+//        }
+//        else
+//        {
           useridVal =[defaults valueForKey:@"userid"];
-        }
+       // }
         NSString *requestt= @"request";
         NSString *requestvalt =@"TWITTER";
 

@@ -67,7 +67,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     
     
     
-    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms",@"About",@"Log Out",@"Delete",nil];
+    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms",@"About",@"Log Out",@"Delete my account",nil];
     
    
     
@@ -516,7 +516,32 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         
         if (indexPath.row==4)
         {
-            [self DeleteAccount];
+            {
+                
+                [self.view hideActivityViewWithAfterDelay:0];
+                
+                UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Delete Account?" message:@"Are you sure you want to delete your account? This will remove all your challenges, videos, contributions and all other details permanently."preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                            {
+                                                [self DeleteAccount];
+                                                
+                                                
+                                            }];
+                UIAlertAction* noButton = [UIAlertAction
+                                           actionWithTitle:@"No"
+                                           style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action)
+                                           {
+                                               
+                                               
+                                           }];
+                
+                [alert addAction:yesButton];
+                [alert addAction:noButton];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            
             
         }
 
@@ -579,7 +604,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                                                  if ([ResultString isEqualToString:@"selecterror"]||[ResultString isEqualToString:@"nullerror"])
                                                  {
                                                      [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not retrieve one of the Account Ids. Please login and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not retrieve your Account Id. Please login and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                         style:UIAlertActionStyleDefault
@@ -596,25 +621,17 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                                                      
                                                      [self.view hideActivityViewWithAfterDelay:0];
                                                      
-             UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Delete Video?" message:@"Are you sure you want to delete your video?"preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Account Deleted" message:@"Your account has been permanently deleted."preferredStyle:UIAlertControllerStyleAlert];
                                                      
-                  UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                  UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                     {
                         [self LogoutAccount];
                      
                                                                                      
                                 }];
-                 UIAlertAction* noButton = [UIAlertAction
-                        actionWithTitle:@"No"
-                        style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action)
-                            {
-                                                                                    
-                                                                                    
-                                }];
-                                                     
+                                
                         [alert addAction:yesButton];
-                            [alert addAction:noButton];
+                           
                         [self presentViewController:alert animated:YES completion:nil];
                                                  }
                                                  
