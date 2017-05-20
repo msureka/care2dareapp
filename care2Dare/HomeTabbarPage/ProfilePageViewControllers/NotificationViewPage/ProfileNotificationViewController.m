@@ -118,7 +118,7 @@ flag_challenge=@"no";
     
     
   
-    borderBottom_challenges.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_challenges.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_challenges.frame = CGRectMake(0, Button_Challenges.frame.size.height-2.5, Button_Challenges.frame.size.width,2.5);
     [Button_Challenges.layer addSublayer:borderBottom_challenges];
     
@@ -909,7 +909,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             NSString *myString =[NSString stringWithFormat:@"%@%@%@",@"New challenge",@" from received ",[dic_Values valueForKey:@"byname"]];
             
             NSRange range = [myString rangeOfString:@"New challenge"];
-            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
             
             cell_PublicNoti.Label_Name.attributedText = aAttrString;
             
@@ -1094,7 +1094,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 NSString *myString =[NSString stringWithFormat:@"%@%@%@",@"New challenge",@" from received ",[dic_Values valueForKey:@"byname"]];
                 
                 NSRange range = [myString rangeOfString:@"New challenge"];
-                [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+                [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
                 
                 cell_PrivateNoti.Label_Name.attributedText = aAttrString;
                 
@@ -1309,7 +1309,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             NSString *myString =[NSString stringWithFormat:@"%@%@%@",str_Name,str_ConTotal,@" to your challenge"];
             
             NSRange range = [myString rangeOfString:str_ConTotal];
-            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
             
             cell_PlegeIncoNoti.Label_Name.attributedText = aAttrString;
             
@@ -1411,7 +1411,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             NSString *myString =[NSString stringWithFormat:@"%@%@%@",str_Name,str_ConTotal,@" to a challenge"];
             
             NSRange range = [myString rangeOfString:str_ConTotal];
-            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+            [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
             
             cell_PlegeOutNoti.Label_Name.attributedText = aAttrString;
             
@@ -1547,7 +1547,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     NSString *myString =[NSString stringWithFormat:@"%@%@%@",str_Name,str_ConTotal,@"new video"];
     
     NSRange range = [myString rangeOfString:@"new video"];
-    [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+    [aAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
     
     cell_VedioNoti.Label_Name.attributedText = aAttrString;
     
@@ -1928,7 +1928,7 @@ if (indexPath.section==0)
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     
    // borderBottom_challenges= [CALayer layer];
-    borderBottom_challenges.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_challenges.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_challenges.frame = CGRectMake(0, Button_Challenges.frame.size.height-2.5, Button_Challenges.frame.size.width,2.5);
     [Button_Challenges.layer addSublayer:borderBottom_challenges];
     
@@ -1987,7 +1987,7 @@ if (indexPath.section==0)
     [Button_Challenges.layer addSublayer:borderBottom_challenges];
     
    // borderBottom_Contribution = [CALayer layer];
-    borderBottom_Contribution.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_Contribution.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_Contribution.frame = CGRectMake(0, Button_Contribution.frame.size.height-2.5, Button_Contribution.frame.size.width,2.5);
     [Button_Contribution.layer addSublayer:borderBottom_Contribution];
     
@@ -2048,7 +2048,7 @@ if (indexPath.section==0)
     [Button_Contribution.layer addSublayer:borderBottom_Contribution];
     
    // borderBottom_Vedios = [CALayer layer];
-    borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_Vedios.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-2.5, Button_Videos.frame.size.width,2.5);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
     if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])

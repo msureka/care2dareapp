@@ -142,7 +142,7 @@
     UITapGestureRecognizer *ImageTap_private =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_privateTapped:)];
     [_Image_Private addGestureRecognizer:ImageTap_private];
     
-    _Label_Public.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+    _Label_Public.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     _Label_Private.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     [_Image_Public setImage:[UIImage imageNamed:@"blueworld.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"private.png"]];
@@ -352,7 +352,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     challengetypeVal=@"PUBLIC";
     [_Image_Public setImage:[UIImage imageNamed:@"blueworld.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"private.png"]];
-    _Label_Public.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+    _Label_Public.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     _Label_Private.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
 }
 - (void)LabelTap_privateTapped:(UITapGestureRecognizer *)recognizer
@@ -360,7 +360,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     challengetypeVal=@"PRIVATE";
     [_Image_Public setImage:[UIImage imageNamed:@"profile_world.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"blueprivate.png"]];
-    _Label_Private.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+    _Label_Private.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     _Label_Public.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     
 }
@@ -1085,7 +1085,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
         
         _Button_Create.enabled=YES;
          [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _Button_Create.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+        _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     }
     else
     {
@@ -1115,7 +1115,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
           
             _Button_Create.enabled=YES;
              [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            _Button_Create.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+            _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
         }
         else
         {
@@ -1489,7 +1489,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         _Button_Create.enabled=YES;
         [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _Button_Create.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+        _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     }
     else
     {
@@ -1645,7 +1645,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     {
    _Button_Create.enabled=YES;
          [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _Button_Create.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+        _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     }
     else
     {

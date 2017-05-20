@@ -717,7 +717,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"y
         
         
         sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
-        [sectionView setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+        [sectionView setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
         
         
         

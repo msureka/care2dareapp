@@ -195,7 +195,7 @@
                                [regexfname enumerateMatchesInString:textfname options:kNilOptions range:rangefname usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                     
                     NSRange subStringRange = [result rangeAtIndex:0];
-                    [mutableAttributedStringfname addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1] range:subStringRange];
+                    [mutableAttributedStringfname addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] range:subStringRange];
                 }];
                 
                 if ([FlagSearchBar isEqualToString:@"yes"])
@@ -285,7 +285,7 @@
                 [regexfname enumerateMatchesInString:textfname options:kNilOptions range:rangefname usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                     
                     NSRange subStringRange = [result rangeAtIndex:0];
-                    [mutableAttributedStringfname addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1] range:subStringRange];
+                    [mutableAttributedStringfname addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] range:subStringRange];
                 }];
                 
                 if ([FlagSearchBar isEqualToString:@"yes"])
