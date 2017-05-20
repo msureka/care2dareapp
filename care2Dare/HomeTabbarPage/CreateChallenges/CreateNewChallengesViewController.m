@@ -182,6 +182,11 @@
     
     UITapGestureRecognizer *LabelTap_Label_ChallengesName =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_Label_ChallengesName_Tapped:)];
     [_Label_ChallengesName addGestureRecognizer:LabelTap_Label_ChallengesName];
+    _startScreenScrollView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *startScreenScrollView_Tapp =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startScreenScrollViewTapped:)];
+    [_startScreenScrollView addGestureRecognizer:startScreenScrollView_Tapp];
+
+    
     
     
     _Label_ChallengesName.textColor = [UIColor lightGrayColor];
@@ -192,7 +197,7 @@
     _Textview_Desc.delegate=self;
     _Textview_Desc.text = @"title goes here";
     self.startScreenScrollView.scrollEnabled=NO;
-    _Textview_Desc.textColor = [UIColor lightGrayColor];
+    _Textview_Desc.textColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataReceived:) name:@"PassDataArray" object:nil];
     
@@ -1133,7 +1138,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     
     if ([textView.text isEqualToString:@""]) {
         textView.text = @"title goes here";
-        textView.textColor = [UIColor lightGrayColor];
+        textView.textColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     }
     [textView resignFirstResponder];
 }
@@ -1663,6 +1668,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 // this enables you to handle multiple recognizers on single view
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
+}
+-(void)startScreenScrollViewTapped:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.view endEditing:YES];
 }
 -(void) onPlayerTapped:(UIGestureRecognizer *)gestureRecognizer
 {

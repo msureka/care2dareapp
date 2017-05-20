@@ -1775,7 +1775,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
 RaisedContributeViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"RaisedContributeViewController"];
     set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengeid"]];
+    
     set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"backamount"]];
+    
+    set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"createdate"]];
+    
+    
     [self.navigationController pushViewController:set animated:YES];
 }
 
@@ -3400,7 +3405,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengersprofilepic2"]];
         
-        set.Images_data=cell_TwoDetails.image_SecProfile1;
+       // set.Images_data=cell_TwoDetails.image_SecProfile1;
         [self.navigationController pushViewController:set animated:YES];
     }
 
@@ -3425,7 +3430,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengersprofilepic3"]];
         
-        set.Images_data=cell_TwoDetails.image_SecProfile2;
+       // set.Images_data=cell_TwoDetails.image_SecProfile2;
         [self.navigationController pushViewController:set animated:YES];
     }
 
@@ -3450,7 +3455,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
       
       set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengersprofilepic"]];
       
-      set.Images_data=cell_TwoDetails.image_SecProfile;
+     // set.Images_data=cell_TwoDetails.image_SecProfile;
       [self.navigationController pushViewController:set animated:YES];
   }
     
@@ -3476,7 +3481,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersprofilepic"]];
         
-        set.Images_data=cell_TwoDetails.image_SecProfile;
+       // set.Images_data=cell_TwoDetails.image_SecProfile;
         [self.navigationController pushViewController:set animated:YES];
     }
     

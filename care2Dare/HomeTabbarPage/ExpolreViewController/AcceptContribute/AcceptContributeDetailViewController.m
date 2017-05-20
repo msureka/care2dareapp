@@ -628,7 +628,7 @@
     
     set.user_imageUrl=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"usersprofilepic"]];
     
-    set.Images_data=cell_TwoDetails.image_Profile;
+   // set.Images_data=cell_TwoDetails.image_Profile;
     [self.navigationController pushViewController:set animated:YES];
   
     

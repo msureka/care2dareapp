@@ -1402,7 +1402,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
         
         set.user_imageUrl=str_profileurl;
         
-        set.Images_data=cell_two.ImageLeft_LeftProfile;
+       // set.Images_data=cell_two.ImageLeft_LeftProfile;
         
         
         
@@ -1462,7 +1462,7 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withStri
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)images.tag]valueForKey:@"profileimage"]];
         
-        set.Images_data=cell_Four.ImageRight_RightProfile;
+        //set.Images_data=cell_Four.ImageRight_RightProfile;
         
         
      

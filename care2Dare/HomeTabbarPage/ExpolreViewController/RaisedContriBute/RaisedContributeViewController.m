@@ -11,6 +11,7 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "ContributeMoneyViewController.h"
+#import "ProfilePageDetailsViewController.h"
 @interface RaisedContributeViewController ()
 {
     UIView *sectionView;
@@ -30,7 +31,7 @@
 
 
 @implementation RaisedContributeViewController
-@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader;
+@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader,Str_Raised_StartDateTime;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -116,9 +117,6 @@
     
     [self Communicaion_Raised];
   
-    
-    
-    
 }
 -(void)Image_Pay_Action:(UIGestureRecognizer *)reconizer
 {
@@ -565,7 +563,30 @@
         Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"Challenged";
+      //  Label1.text=@"Challenged on:";
+//        Label1.text=[NSString stringWithFormat:@"%@%@",@"Challenged on: ",Str_Raised_StartDateTime];
+        
+
+        
+      
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        NSDate *dte = [dateFormat dateFromString:Str_Raised_StartDateTime];
+        [dateFormat setDateFormat:@"EEE, MMM d, yyyy"];
+        
+        NSLog(@"Date format saecond %@",[NSString stringWithFormat:@"%@",[dateFormat stringFromDate:dte]]);
+        NSString *str_Date=[NSString stringWithFormat:@"%@",[dateFormat stringFromDate:dte]];
+        
+            NSString *myString = [NSString stringWithFormat:@"%@%@",@"Challenged on: ",str_Date];
+            NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:myString];
+            NSRange range = [myString rangeOfString:str_Date];
+            [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0] range:range];
+        NSRange range1 = [myString rangeOfString:str_Date];
+        [attString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:15.0f] range:range1];
+        
+        Label1.attributedText=attString;
+        
+        
         [sectionView addSubview:Label1];
         sectionView.tag=section;
         
@@ -637,6 +658,25 @@
 }
 -(void)ImageTapped_profile:(UIGestureRecognizer *)reconizer
 {
+    UIGestureRecognizer *recognizer1 = (UIGestureRecognizer*)reconizer;
+    UIImageView *imageView = (UIImageView *)recognizer1.view;
+    
+    if([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Challengers objectAtIndex:(long)imageView.tag] valueForKey:@"challengeruserid"]])
+    {
+        
+    }
+    else
+    {
+        ProfilePageDetailsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfilePageDetailsViewController"];
+        set.userId_prof=[NSString stringWithFormat:@"%@",[[Array_Challengers objectAtIndex:(long)imageView.tag]valueForKey:@"challengeruserid"]];
+        
+        set.user_name=[NSString stringWithFormat:@"%@",[[Array_Challengers objectAtIndex:(long)imageView.tag]valueForKey:@"challengersname"]];
+        
+        set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_Challengers objectAtIndex:(long)imageView.tag]valueForKey:@"challengersprofilepic"]];
+        
+//        set.Images_data=imageView;
+        [self.navigationController pushViewController:set animated:YES];
+    }
     
 }
 @end

@@ -23,7 +23,7 @@
 {
     UIView * View_PlayerView,*View_PlayerView1,*View_PlayerView2,*playerView_linereviewsVedio,*PlayerView_Backround,*PlayerView3;
     NSTimer * timerFadeout;
-    UIButton *Button_PlayPause,*Button_VolumeMute,*Button_ThreeDots,* Button_back;
+    UIButton *Button_PlayPause,*Button_VolumeMute,*Button_ThreeDots,* Button_back,*Button_Play_next,*Button_Play_privious;
     NSTimer * timer;
     Float64 dur,progrssVal,CurrentTimes;
     NSURL *urlVediop;
@@ -42,7 +42,7 @@
     UIProgressView * progressslider;
     UIImageView * Image_Profile_View2,*image_Comments,*image_Share,*Image_stats,  * Image_NewFrnd;
     UIButton *ButtonImage_acceptFrnd_View2;
-    UILabel * Label_profilename_view2,*label_days_View2,*Label_stats,*label_comments,*label_share,*label_reviews,*label_reviewvedio;
+    UILabel * Label_profilename_view2,*label_days_View2,*Label_stats,*label_comments,*label_share,*label_reviews,*label_reviewvedio,*Label_PlayvideoStartTime,*Label_PlayvideoEndTime;
     UITextView * TextView_Title3;
      CGFloat X_postion_view3, Y_postion_view3, Width_postion_view3, Height_postion_view3;
     UIActivityIndicatorView *indicatorView;
@@ -194,6 +194,36 @@
     [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     Button_PlayPause.center=View_PlayerView.center;
     
+    
+    //Button next vedio play...............
+    
+    Button_Play_next=[[UIButton alloc]initWithFrame:CGRectMake(Button_PlayPause.frame.origin.x+100, Button_PlayPause.frame.origin.y,50,50)];
+    
+    [Button_Play_next setImage:[UIImage imageNamed:@"nextFilled-100.png"] forState:UIControlStateNormal];
+    
+    [Button_Play_next setTitle:@"" forState:UIControlStateNormal];
+    [Button_Play_next addTarget:self action:@selector(Play_NextVideo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    Button_Play_next.backgroundColor=[UIColor clearColor];
+    [Button_Play_next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  
+    
+    //Button Privous vedio play...............
+    
+    Button_Play_privious=[[UIButton alloc]initWithFrame:CGRectMake(Button_PlayPause.frame.origin.x-100, Button_PlayPause.frame.origin.y,50,50)];
+
+    
+    [Button_Play_privious setImage:[UIImage imageNamed:@"Skip to Start Filled-100"] forState:UIControlStateNormal];
+    
+    [Button_Play_privious setTitle:@"" forState:UIControlStateNormal];
+    [Button_Play_privious addTarget:self action:@selector(Play_PriviousVideo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    Button_Play_privious.backgroundColor=[UIColor clearColor];
+    [Button_Play_privious setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  
+//.............................................................................//
+    
+    
     Button_VolumeMute=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-30,imageHeight-30,20,20)];
   
     
@@ -206,7 +236,22 @@
     [Button_VolumeMute setImage:[UIImage imageNamed:@"High Volume Filled-100.png"] forState:UIControlStateNormal];
     
 
+    //Label_Video strat time..............................
     
+    
+    Label_PlayvideoStartTime=[[UILabel alloc]initWithFrame:CGRectMake(10,Button_VolumeMute.frame.origin.y,40,20)];
+    Label_PlayvideoStartTime.backgroundColor=[UIColor clearColor];
+    Label_PlayvideoStartTime.text=@"0:0";
+    Label_PlayvideoStartTime.textColor=[UIColor whiteColor];
+    
+    //Label_Video End time..............................
+    
+    Label_PlayvideoEndTime=[[UILabel alloc]initWithFrame:CGRectMake(Button_VolumeMute.frame.origin.x-50,Button_VolumeMute.frame.origin.y,40,20)];
+    Label_PlayvideoEndTime.backgroundColor=[UIColor clearColor];
+    Label_PlayvideoEndTime.text=@"0:0";
+     Label_PlayvideoEndTime.textColor=[UIColor whiteColor];
+    
+  // .............................................................
     
     Button_ThreeDots=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width-40,20,32,32)];
     
@@ -620,7 +665,13 @@
 //          NSLog(@"size of Vedio=%f",size.height);
     
      [playerViewController.view addSubview:Button_PlayPause];
+     [playerViewController.view addSubview:Button_Play_privious];
+     [playerViewController.view addSubview:Button_Play_next];
      [playerViewController.view addSubview:Button_VolumeMute];
+    
+     [playerViewController.view addSubview:Label_PlayvideoEndTime];
+     [playerViewController.view addSubview:Label_PlayvideoStartTime];
+    
     [playerViewController.view addSubview:Button_ThreeDots];
     item = [AVPlayerItem playerItemWithAsset: asset];
     
@@ -643,6 +694,8 @@
         dur = CMTimeGetSeconds(player.currentItem.asset.duration);
         CurrentTimes=CMTimeGetSeconds(currentTime);
         NSLog(@"durationPlayVedio: %.2f", dur);
+     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/60];
+    Label_PlayvideoEndTime.text=[NSString stringWithFormat:@"%.2f",dur/60];
     //    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
      player.muted=NO;
 //   [self.view.layer removeAllAnimations];
@@ -741,6 +794,34 @@
         [Button_VolumeMute setImage:[UIImage imageNamed:@"Mute Filled-100.png"] forState:UIControlStateNormal];
     }
     
+}
+- (IBAction)Play_NextVideo:(id)sender
+{
+    
+    table_scrollview.contentOffset = CGPointMake(0,0);
+    Str_UserTapPlayVedioindex=@"yes";
+   
+    
+    
+    //    progressslider.hidden=YES;
+    //    Button_VolumeMute.hidden=YES;
+    //    cell_one.Image_3Dots.hidden=YES;
+    //    [playerViewController.view removeFromSuperview];
+    //    //[cell_one.PlayerView removeFromSuperview];
+    //    // [cell_one.PlayerView addSubview:playerViewController.view
+    Flag_watch=@"yes";
+    
+    //  //       Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
+    // //           indexVedio=indexPath.row;
+    
+    str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+    videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+    indexVedio=indexVedio+1;
+    [self CommunicationPlayVedio];
+    
+}
+- (IBAction)Play_PriviousVideo:(id)sender
+{
 }
 - (IBAction)Play_Action:(id)sender
 {
@@ -845,6 +926,8 @@
     }
     CMTime currentTime = item.currentTime;
     CurrentTimes=CMTimeGetSeconds(currentTime);
+
+     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/60];
     
     [progressslider setProgress:CurrentTimes/dur];
     NSLog(@"Timer-CurrentTimes duration: %.2f", CurrentTimes);
@@ -870,20 +953,17 @@
     {
     if (CurrentTimes==dur)
     {
-        indicatorView.hidden=NO;
-        [indicatorView startAnimating];
-       // [playerViewController.view removeFromSuperview];
-        //        [timer invalidate];
-        //        timer = nil;
-        // Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videourl" ]];
-        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+//        indicatorView.hidden=NO;
+//        [indicatorView startAnimating];
+//       
+//        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+//        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+//        
+//        [self CommunicationPlayVedio];
+//        indexVedio++;
+//        Flag_watch=@"no";
         
-        [self CommunicationPlayVedio];
-        indexVedio++;
-        Flag_watch=@"no";
         
-        // [Tableview_Explore reloadData];
     }
     }
 }
@@ -1382,7 +1462,7 @@
         
         set.user_imageUrl=str_profileurl;
         
-        set.Images_data=images;
+       // set.Images_data=images;
         
         
         
@@ -1442,7 +1522,7 @@
         
         set.user_imageUrl=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)images.tag]valueForKey:@"profileimage"]];
         
-        set.Images_data=images;
+       // set.Images_data=images;
         
         
         
@@ -1643,7 +1723,7 @@ Str_UserTapPlayVedioindex=@"yes";
 UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
     imagesTagRow=(UIImageView *)rcz.view;
   
-
+[Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
 //    progressslider.hidden=YES;
 //    Button_VolumeMute.hidden=YES;
 //    cell_one.Image_3Dots.hidden=YES;
@@ -1674,8 +1754,12 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
         
         Button_back.alpha=1;
         Button_VolumeMute.alpha=1;
+        Label_PlayvideoEndTime.alpha=1;
+        Label_PlayvideoStartTime.alpha=1;
         Button_ThreeDots.alpha=1;
         Button_PlayPause.alpha=1;
+          Button_Play_privious.alpha=1;
+          Button_Play_next.alpha=1;
         PlayerView_Backround.hidden=YES;
         
         
@@ -1714,8 +1798,12 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
         
         Button_back.alpha=0;
         Button_VolumeMute.alpha=0;
+        Label_PlayvideoEndTime.alpha=0;
+        Label_PlayvideoStartTime.alpha=0;
         Button_ThreeDots.alpha=0;
         Button_PlayPause.alpha=0;
+         Button_Play_privious.alpha=0;
+         Button_Play_next.alpha=0;
         PlayerView_Backround.hidden=NO;
         
     } completion:nil];

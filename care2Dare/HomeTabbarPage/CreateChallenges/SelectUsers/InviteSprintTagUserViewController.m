@@ -52,7 +52,8 @@
     selectedNames = [NSMutableArray arrayWithCapacity:Search_Array_Recoom.count];
     selectedUserid= [NSMutableArray arrayWithCapacity:Search_Array_Recoom.count];
     Table_ContactView.hidden = YES;
-    Send_Button.enabled=NO;
+    Send_Button.enabled=YES;
+    Send_Button.hidden=NO;
     Send_Button.backgroundColor=[UIColor clearColor];
     Send_Button.alpha=0.8;
 
@@ -199,6 +200,7 @@
     if ((selectedUserid.count==0 && self.selectedNames.count==0)||![selectedUserid containsObject:name1] )
     {
           Send_Button.enabled=YES;
+        Send_Button.hidden=NO;
             Send_Button.backgroundColor=[UIColor clearColor];
             Send_Button.alpha=1;
         
@@ -321,15 +323,16 @@
 }
 -(IBAction)BackButton:(id)sender
 {
-     strInvite_users= [selectedNames componentsJoinedByString:@","];
-    NSDictionary *theInfo = [NSDictionary dictionaryWithObjectsAndKeys:selectedNames,@"desc", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PassDataArray" object:self
-                                                      userInfo:theInfo];
-    NSDictionary *theInfo1 = [NSDictionary dictionaryWithObjectsAndKeys:selectedUserid,@"descId", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PassDataArrayUserId" object:self
-                                                      userInfo:theInfo1];
-    NSLog(@"concat_UserId ==%@ ",strInvite_users);
-    NSLog(@"concat_UserId ==%@ ",selectedNames);
+   
+//     strInvite_users= [selectedNames componentsJoinedByString:@","];
+//    NSDictionary *theInfo = [NSDictionary dictionaryWithObjectsAndKeys:selectedNames,@"desc", nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"PassDataArray" object:self
+//                                                      userInfo:theInfo];
+//    NSDictionary *theInfo1 = [NSDictionary dictionaryWithObjectsAndKeys:selectedUserid,@"descId", nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"PassDataArrayUserId" object:self
+//                                                      userInfo:theInfo1];
+//    NSLog(@"concat_UserId ==%@ ",strInvite_users);
+//    NSLog(@"concat_UserId ==%@ ",selectedNames);
     [self.navigationController popViewControllerAnimated:YES];
 //        [self.navigationController popViewControllerAnimated:YES];
     
@@ -461,7 +464,8 @@ userInfo:theInfo];
     }
     if (self.selectedNames.count==0)
     {
-        Send_Button.enabled=NO;
+        Send_Button.enabled=YES;
+        Send_Button.hidden=NO;
         Send_Button.backgroundColor=[UIColor clearColor];
         Send_Button.alpha=0.8;
         [Table_ContactView reloadData];
@@ -469,6 +473,7 @@ userInfo:theInfo];
     else
     {
         Send_Button.enabled=YES;
+        Send_Button.hidden=NO;
         Send_Button.backgroundColor=[UIColor clearColor];
         Send_Button.alpha=1;
     }

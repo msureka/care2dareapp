@@ -29,5 +29,5 @@
 @property(nonatomic,strong)NSString * userId_prof;
 @property(nonatomic,strong)NSString * user_imageUrl;
 @property(nonatomic,strong)NSString * user_name;
-@property(nonatomic,strong)UIImageView * Images_data;
+//@property(nonatomic,strong)UIImageView * Images_data;
 @end

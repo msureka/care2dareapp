@@ -36,7 +36,7 @@
 
 @implementation ProfilePageDetailsViewController
 
-@synthesize view_Topheader,cell_Public,cell_Private,cell_Profile,userId_prof,Images_data,user_name,user_imageUrl,Button_SetValues;
+@synthesize view_Topheader,cell_Public,cell_Private,cell_Profile,userId_prof,user_name,user_imageUrl,Button_SetValues;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -530,7 +530,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"y
             
             
            
-        cell_Profile.Image_ProfileImg.image=Images_data.image;
+        //cell_Profile.Image_ProfileImg.image=Images_data.image;
         NSURL *url=[NSURL URLWithString:user_imageUrl];
         [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             

@@ -325,6 +325,9 @@
 		9ABB5DB61E6945D300482105 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ABB5DB01E6945D300482105 /* twitter@2x.png */; };
 		9ABB5DB71E6945D300482105 /* twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ABB5DB11E6945D300482105 /* twitter@3x.png */; };
 		9ABB5DBA1E6953CC00482105 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB5DB91E6953CC00482105 /* SignUpViewController.m */; };
+		9AD4F29E1ED06D110085BE8F /* Recurring Appointment Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD4F29C1ED06D110085BE8F /* Recurring Appointment Filled-100.png */; };
+		9AD4F29F1ED06D110085BE8F /* Skip to Start Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD4F29D1ED06D110085BE8F /* Skip to Start Filled-100.png */; };
+		9AD4F2A11ED06EA90085BE8F /* nextFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD4F2A01ED06EA90085BE8F /* nextFilled-100.png */; };
 		9AD690A31EBDD47E00A7A774 /* favouritebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD6909A1EBDD47E00A7A774 /* favouritebutton.png */; };
 		9AD690A41EBDD47E00A7A774 /* favouritebutton1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD6909B1EBDD47E00A7A774 /* favouritebutton1.png */; };
 		9AD690A51EBDD47E00A7A774 /* favouritebutton1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD6909C1EBDD47E00A7A774 /* favouritebutton1@2x.png */; };
@@ -875,6 +878,9 @@
 		9ABB5DB11E6945D300482105 /* twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@3x.png"; sourceTree = "<group>"; };
 		9ABB5DB81E6953CC00482105 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		9ABB5DB91E6953CC00482105 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		9AD4F29C1ED06D110085BE8F /* Recurring Appointment Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Recurring Appointment Filled-100.png"; sourceTree = "<group>"; };
+		9AD4F29D1ED06D110085BE8F /* Skip to Start Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skip to Start Filled-100.png"; sourceTree = "<group>"; };
+		9AD4F2A01ED06EA90085BE8F /* nextFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextFilled-100.png"; sourceTree = "<group>"; };
 		9AD6909A1EBDD47E00A7A774 /* favouritebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favouritebutton.png; sourceTree = "<group>"; };
 		9AD6909B1EBDD47E00A7A774 /* favouritebutton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favouritebutton1.png; sourceTree = "<group>"; };
 		9AD6909C1EBDD47E00A7A774 /* favouritebutton1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favouritebutton1@2x.png"; sourceTree = "<group>"; };
@@ -1891,6 +1897,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9AD4F29B1ED06D110085BE8F /* replayandnextvideobuttons */,
 				08B23B891EBE045F00B33820 /* whitearrow */,
 				9AD690991EBDD47E00A7A774 /* sharefavouritebuttons */,
 				9A54BD141EB4964A00F976F3 /* playpause */,
@@ -1928,6 +1935,16 @@
 				9A0605D01E6D755400FF4229 /* 10154143609282724.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		9AD4F29B1ED06D110085BE8F /* replayandnextvideobuttons */ = {
+			isa = PBXGroup;
+			children = (
+				9AD4F2A01ED06EA90085BE8F /* nextFilled-100.png */,
+				9AD4F29C1ED06D110085BE8F /* Recurring Appointment Filled-100.png */,
+				9AD4F29D1ED06D110085BE8F /* Skip to Start Filled-100.png */,
+			);
+			path = replayandnextvideobuttons;
 			sourceTree = "<group>";
 		};
 		9AD690991EBDD47E00A7A774 /* sharefavouritebuttons */ = {
@@ -2321,6 +2338,7 @@
 				9AD690AA1EBDD47E00A7A774 /* sharebutton@2x.png in Resources */,
 				9ABB5DA41E693EA300482105 /* SanFranciscoDisplay-Medium.otf in Resources */,
 				9ABB5DA51E693EA300482105 /* SanFranciscoDisplay-Regular.otf in Resources */,
+				9AD4F29F1ED06D110085BE8F /* Skip to Start Filled-100.png in Resources */,
 				9ABB5DA21E693EA300482105 /* SanFranciscoDisplay-Bold.otf in Resources */,
 				9A6E39E41E7AB64800B4AD5B /* challenge_favourite@2x.png in Resources */,
 				9AA9B5471E700AC700C6EF37 /* whitearrow.png in Resources */,
@@ -2434,6 +2452,7 @@
 				9A6E39FD1E7ABA6700B4AD5B /* raised_hand.png in Resources */,
 				9AED221F1E6A8C6A0004A8D0 /* favourites@3x.png in Resources */,
 				9A45BA281E8E310900BAC5E8 /* addfriend1@3x.png in Resources */,
+				9AD4F29E1ED06D110085BE8F /* Recurring Appointment Filled-100.png in Resources */,
 				9A698B501E9E23DE00FB7FB7 /* redcircle.png in Resources */,
 				9AED22251E6A8C6A0004A8D0 /* profile@3x.png in Resources */,
 				08B23B8D1EBE045F00B33820 /* whitebackarrow.png in Resources */,
@@ -2479,6 +2498,7 @@
 				9AED22401E6A9D900004A8D0 /* playbutton@2x.png in Resources */,
 				9A45BA261E8E310900BAC5E8 /* addfriend1.png in Resources */,
 				9AED221C1E6A8C6A0004A8D0 /* favourites1@2x.png in Resources */,
+				9AD4F2A11ED06EA90085BE8F /* nextFilled-100.png in Resources */,
 				9AF84F1A1E8FCB5D0008408E /* new@2x.png in Resources */,
 				9A19B3C11E6E907D00262BC1 /* setting_facebook@2x.png in Resources */,
 				9A0606091E6D87B000FF4229 /* profile_privatetext1@2x.png in Resources */,
