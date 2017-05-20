@@ -12,6 +12,8 @@
 
 @property(nonatomic,weak)IBOutlet UIImageView * image_FristProfile;
 @property(nonatomic,weak)IBOutlet UIImageView * image_SecProfile;
+@property(nonatomic,weak)IBOutlet UIImageView * image_SecProfile1;
+@property(nonatomic,weak)IBOutlet UIImageView * image_SecProfile2;
 @property(nonatomic,weak)IBOutlet UILabel * Label_Dayleft;
 @property(nonatomic,weak)IBOutlet UILabel * label_Desc;
 @property(nonatomic,weak)IBOutlet UILabel * label_Mores;
@@ -27,4 +29,6 @@
 @property(nonatomic,weak)IBOutlet UITextView * textview;
 @property(nonatomic,weak)IBOutlet UIView * textview_View;
 
+@property(nonatomic,weak)IBOutlet UILabel * label_dayleftFrame;
+@property(nonatomic,weak)IBOutlet UILabel * label_Chalangeframe;
 @end
