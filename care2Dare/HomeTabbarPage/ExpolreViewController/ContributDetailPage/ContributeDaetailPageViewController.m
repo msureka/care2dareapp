@@ -2407,7 +2407,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
 //                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
-                    label1.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
+                    label1.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:0.2];
                     label.backgroundColor=[UIColor clearColor];
                     label.textColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
                 
@@ -2654,7 +2654,7 @@ if (section==1)
 {
     
     sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
-    [sectionView setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+    [sectionView setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
    
     
     
@@ -3066,7 +3066,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         self.placeholderLabel.hidden=YES;
         self.sendButton.hidden=NO;
         self.sendButton.enabled=YES;
-        [self.sendButton setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+        [self.sendButton setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
         self.sendButton.userInteractionEnabled = YES;
         [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         

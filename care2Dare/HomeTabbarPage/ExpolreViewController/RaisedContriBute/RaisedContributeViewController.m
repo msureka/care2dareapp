@@ -506,8 +506,8 @@
             if([[dict valueForKey:@"backeruserid"]isEqualToString:[defaults valueForKey:@"userid"]])
             {
              
-                cell_Four.label_name.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
-                cell_Four.label_RaisedAmt.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+                cell_Four.label_name.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+                cell_Four.label_RaisedAmt.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
             }
             else
             {
@@ -522,7 +522,7 @@
             if(indexPath.row==1)
             {
                 cell_Four.Image_likes.hidden=NO;
-                cell_Four.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
+                cell_Four.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:0.2];
             }
             else
             {

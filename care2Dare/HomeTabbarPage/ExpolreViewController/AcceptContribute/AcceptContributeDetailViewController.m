@@ -246,7 +246,7 @@
           
             NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:myString];
             NSRange range = [myString rangeOfString:@"challenges"];
-            [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1.0] range:range];
+            [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
             cell_TwoDetails.Label_AddmoreChallenges.attributedText=attString;
 
                 [cell_TwoDetails.image_Profile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
@@ -419,7 +419,7 @@
         
         Button_Accept=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,0,self.view.frame.size.width/2,38)];
         [Button_Accept setTitle:@"ACCEPT" forState:UIControlStateNormal];
-        Button_Accept.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];;
+        Button_Accept.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];;
         Button_Accept.tag=section;
         Button_Accept.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
         [Button_Accept addTarget:self action:@selector(Accept_Contribute_MoneyAction:)

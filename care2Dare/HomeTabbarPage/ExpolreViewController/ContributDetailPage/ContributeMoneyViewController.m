@@ -261,7 +261,7 @@ NSLog(@"error login2.......%@",error.description);
     }
     else
     {
-        textfield_Ammounts.textColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+        textfield_Ammounts.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
 //        Label_TotalContribute.textColor=[UIColor whiteColor];
 //        Label_TotalContribute.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
         
@@ -270,7 +270,7 @@ NSLog(@"error login2.......%@",error.description);
         [Button_Contribute_Send setTitle:[NSString stringWithFormat:@"%@%lu",@"SEND TOTAL: $",(unsigned long)chllengerAmt] forState:UIControlStateNormal];
         
            [Button_Contribute_Send setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+        Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
         
         
 //        Label_TotalContribute.text=[NSString stringWithFormat:@"%@%lu",@"SEND TOTAL: $",(unsigned long)calAmt];

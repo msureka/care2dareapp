@@ -12,7 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
-#define BlueColor [UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor
+#define BlueColor [UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor
 #define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
 #define GreenColor [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor
 
