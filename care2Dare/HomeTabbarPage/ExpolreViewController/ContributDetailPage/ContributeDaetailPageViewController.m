@@ -1909,10 +1909,10 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 cell_TwoDetails.label_Mores.userInteractionEnabled=YES;
 
                 
-                UITapGestureRecognizer *label_Morestap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Contribute_MoneyAction:)];
+                UITapGestureRecognizer *label_Morestap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ButtonTotalPoints_Action:)];
                 [cell_TwoDetails.label_Mores addGestureRecognizer:label_Morestap];
                 
-                UITapGestureRecognizer *label_Moretxttap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Contribute_MoneyAction:)];
+                UITapGestureRecognizer *label_Moretxttap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ButtonTotalPoints_Action:)];
                 [cell_TwoDetails.label_Moretxt addGestureRecognizer:label_Moretxttap];
                 
                 
@@ -1923,6 +1923,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 cell_TwoDetails.image_SecProfile1.tag=indexPath.row;
                 cell_TwoDetails.image_SecProfile2.tag=indexPath.row;
+        
+                NSInteger countchallengersDetails11=[[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]integerValue];
                 
     if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""] || [[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
                 {
@@ -1943,10 +1945,12 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
 
                     cell_TwoDetails.image_SecProfile1.hidden=YES;
                     cell_TwoDetails.image_SecProfile2.hidden=YES;
+                    cell_TwoDetails.label_Mores.hidden=YES;
+                    cell_TwoDetails.label_Moretxt.hidden=YES;
         }
-    else if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@"2"])
+    else if (countchallengersDetails11==1)
         {
-        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width-20), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width-25), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
                     
         [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
                     
@@ -1972,29 +1976,14 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         [cell_TwoDetails.image_SecProfile1 addGestureRecognizer:image_SecProfileTapped1];
                     cell_TwoDetails.image_SecProfile1.hidden=NO;
                     cell_TwoDetails.image_SecProfile2.hidden=YES;
+            
+            cell_TwoDetails.label_Mores.hidden=YES;
+            cell_TwoDetails.label_Moretxt.hidden=YES;
                 }
-                if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@"3"])
+                if (countchallengersDetails11>=2)
                 {
                     
-        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(8, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
-                    
-        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
-                    
-        [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
-                    
-        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
-                    
-                    
-                    
-        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
-                    
-        [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
-                    
-        [cell_TwoDetails.image_SecProfile2 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile1.frame.origin.x+cell_TwoDetails.image_SecProfile1.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile2.frame.origin.y, cell_TwoDetails.image_SecProfile2.frame.size.height, cell_TwoDetails.image_SecProfile2.frame.size.height)];
-                    
-        [cell_TwoDetails.label_Mores setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.origin.y, cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.size.height)];
-                    
-        [cell_TwoDetails.label_Moretxt setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.origin.y, cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.size.height)];
+        
                     
         UITapGestureRecognizer *image_SecProfileTapped1 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails1:)];
                     
@@ -2014,6 +2003,59 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     
         cell_TwoDetails.image_SecProfile1.hidden=NO;
         cell_TwoDetails.image_SecProfile2.hidden=NO;
+                    if (countchallengersDetails11>=3)
+                    {
+                        cell_TwoDetails.label_Mores.hidden=NO;
+                        cell_TwoDetails.label_Moretxt.hidden=NO;
+                        NSInteger totalchallengess=[[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]integerValue]-2;
+                        cell_TwoDetails.label_Mores.text=[NSString stringWithFormat:@"%@%ld",@"+",(long)totalchallengess];
+                        
+                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(8, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
+                        
+                        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
+                        
+                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+                        
+                        
+                        
+                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+                        
+                        [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
+                        
+                        [cell_TwoDetails.image_SecProfile2 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile1.frame.origin.x+cell_TwoDetails.image_SecProfile1.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile2.frame.origin.y, cell_TwoDetails.image_SecProfile2.frame.size.height, cell_TwoDetails.image_SecProfile2.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_Mores setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.origin.y, cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_Moretxt setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.origin.y, cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.size.height)];
+                        
+                        
+                    }
+                    else
+                    {
+                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(38, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
+                        
+                        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
+                        
+                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+                        
+                        
+                        
+                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+                        
+                        [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
+                        
+                        [cell_TwoDetails.image_SecProfile2 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile1.frame.origin.x+cell_TwoDetails.image_SecProfile1.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile2.frame.origin.y, cell_TwoDetails.image_SecProfile2.frame.size.height, cell_TwoDetails.image_SecProfile2.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_Mores setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.origin.y, cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.size.height)];
+                        
+                        [cell_TwoDetails.label_Moretxt setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.origin.y, cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.size.height)];
+                        cell_TwoDetails.label_Mores.hidden=YES;
+                        cell_TwoDetails.label_Moretxt.hidden=YES;
+                    }
                 }
                 
                 UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
@@ -2028,15 +2070,15 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 
                 
-                if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
-                {
-                    cell_TwoDetails.label_Mores.hidden=YES;
-                    cell_TwoDetails.label_Moretxt.hidden=YES;
-                }
-                else
-                {
-                cell_TwoDetails.label_Mores.text=[NSString stringWithFormat:@"%@%@",@"+",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]];
-                }
+//                if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
+//                {
+//                    cell_TwoDetails.label_Mores.hidden=YES;
+//                    cell_TwoDetails.label_Moretxt.hidden=YES;
+//                }
+//                else
+//                {
+//                cell_TwoDetails.label_Mores.text=[NSString stringWithFormat:@"%@%@",@"+",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]];
+//                }
               
                  cell_TwoDetails.label_Desc.text=[[AllArrayData objectAtIndex:0]valueForKey:@"title"];
                 
