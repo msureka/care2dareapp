@@ -126,7 +126,7 @@
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
     
     
-    borderBottom_world.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
     [view_ExpWorld.layer addSublayer:borderBottom_world];
     
@@ -479,7 +479,7 @@
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
 
     
-    borderBottom_world.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
     [view_ExpWorld.layer addSublayer:borderBottom_world];
     
@@ -523,7 +523,7 @@
     image_ExpFriend.clipsToBounds=YES;
     
 
-    borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-2.5, View_ExpFriend.frame.size.width, 2.5);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
      [self ClienserverComm_FriendExp];
@@ -599,14 +599,14 @@
                 
                
                 
-                self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView];
                 
                 
-                self.pieView1 = [[MDPieView1 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile2.frame.size.width+cell_WorldExp.Image_Profile2.frame.origin.x)-26, (cell_WorldExp.Image_Profile2.frame.size.height+cell_WorldExp.Image_Profile2.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                self.pieView1 = [[MDPieView1 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile2.frame.size.width+cell_WorldExp.Image_Profile2.frame.origin.x)-26, (cell_WorldExp.Image_Profile2.frame.size.height+cell_WorldExp.Image_Profile2.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView1];
                 
-                self.pieView2 = [[MDPieView2 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile3.frame.size.width+cell_WorldExp.Image_Profile3.frame.origin.x)-26, (cell_WorldExp.Image_Profile3.frame.size.height+cell_WorldExp.Image_Profile3.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+                self.pieView2 = [[MDPieView2 alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile3.frame.size.width+cell_WorldExp.Image_Profile3.frame.origin.x)-26, (cell_WorldExp.Image_Profile3.frame.size.height+cell_WorldExp.Image_Profile3.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView2];
                 
                 NSDictionary *dic_worldexp,*dic_worldexp2,*dic_worldexp1;
