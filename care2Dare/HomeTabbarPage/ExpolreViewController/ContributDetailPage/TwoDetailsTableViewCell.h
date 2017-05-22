@@ -31,4 +31,5 @@
 
 @property(nonatomic,weak)IBOutlet UILabel * label_dayleftFrame;
 @property(nonatomic,weak)IBOutlet UILabel * label_Chalangeframe;
+@property(nonatomic,weak)IBOutlet UIImageView * Image_Private_Public;
 @end

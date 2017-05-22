@@ -244,6 +244,12 @@
 		9A7258F31E96544600245AF4 /* WatchVediolistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A7258F11E96544600245AF4 /* WatchVediolistTableViewCell.xib */; };
 		9A7258F61E96545D00245AF4 /* WatchVediosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7258F51E96545D00245AF4 /* WatchVediosViewController.m */; };
 		9A73CF651E6FBFDB00613682 /* ChallengesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */; };
+		9A7864ED1ED31541006503D4 /* privateicon_challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864E71ED31541006503D4 /* privateicon_challenge.png */; };
+		9A7864EE1ED31541006503D4 /* privateicon_challenge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864E81ED31541006503D4 /* privateicon_challenge@2x.png */; };
+		9A7864EF1ED31541006503D4 /* privateicon_challenge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864E91ED31541006503D4 /* privateicon_challenge@3x.png */; };
+		9A7864F01ED31541006503D4 /* worldicon_challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EA1ED31541006503D4 /* worldicon_challenge.png */; };
+		9A7864F11ED31541006503D4 /* worldicon_challenge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EB1ED31541006503D4 /* worldicon_challenge@2x.png */; };
+		9A7864F21ED31541006503D4 /* worldicon_challenge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */; };
 		9A99BAD31E81378D00A2C3E2 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD11E81378D00A2C3E2 /* Messages.framework */; };
 		9A99BAD41E81378D00A2C3E2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */; };
 		9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */; };
@@ -760,6 +766,12 @@
 		9A7258F51E96545D00245AF4 /* WatchVediosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchVediosViewController.m; sourceTree = "<group>"; };
 		9A73CF631E6FBFDB00613682 /* ChallengesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengesTableViewCell.h; sourceTree = "<group>"; };
 		9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengesTableViewCell.m; sourceTree = "<group>"; };
+		9A7864E71ED31541006503D4 /* privateicon_challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = privateicon_challenge.png; sourceTree = "<group>"; };
+		9A7864E81ED31541006503D4 /* privateicon_challenge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privateicon_challenge@2x.png"; sourceTree = "<group>"; };
+		9A7864E91ED31541006503D4 /* privateicon_challenge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privateicon_challenge@3x.png"; sourceTree = "<group>"; };
+		9A7864EA1ED31541006503D4 /* worldicon_challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldicon_challenge.png; sourceTree = "<group>"; };
+		9A7864EB1ED31541006503D4 /* worldicon_challenge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldicon_challenge@2x.png"; sourceTree = "<group>"; };
+		9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldicon_challenge@3x.png"; sourceTree = "<group>"; };
 		9A99BAD11E81378D00A2C3E2 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9AA25EE11EB1EF3500B6DF45 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
@@ -1650,6 +1662,19 @@
 			path = WatchingVedio;
 			sourceTree = "<group>";
 		};
+		9A7864E61ED31541006503D4 /* privateandpublicicons */ = {
+			isa = PBXGroup;
+			children = (
+				9A7864E71ED31541006503D4 /* privateicon_challenge.png */,
+				9A7864E81ED31541006503D4 /* privateicon_challenge@2x.png */,
+				9A7864E91ED31541006503D4 /* privateicon_challenge@3x.png */,
+				9A7864EA1ED31541006503D4 /* worldicon_challenge.png */,
+				9A7864EB1ED31541006503D4 /* worldicon_challenge@2x.png */,
+				9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */,
+			);
+			path = privateandpublicicons;
+			sourceTree = "<group>";
+		};
 		9AA645C21E7BBEFA00E49B65 /* helpgray */ = {
 			isa = PBXGroup;
 			children = (
@@ -1871,6 +1896,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9A7864E61ED31541006503D4 /* privateandpublicicons */,
 				9AD4F29B1ED06D110085BE8F /* replayandnextvideobuttons */,
 				08B23B891EBE045F00B33820 /* whitearrow */,
 				9AD690991EBDD47E00A7A774 /* sharefavouritebuttons */,
@@ -2294,6 +2320,7 @@
 				9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */,
 				9AED22901E6AE3300004A8D0 /* UrlName.plist in Resources */,
 				9A6E39F21E7AB64800B4AD5B /* topname.png in Resources */,
+				9A7864F01ED31541006503D4 /* worldicon_challenge.png in Resources */,
 				9AED222A1E6A8C6A0004A8D0 /* watch@2x.png in Resources */,
 				9A45BA2B1E8E310900BAC5E8 /* friendrequested.png in Resources */,
 				9AD690A61EBDD47E00A7A774 /* favouritebutton1@3x.png in Resources */,
@@ -2344,8 +2371,10 @@
 				9A38F5B31E9666BC00EADE7F /* fullscreen.png in Resources */,
 				9AED22131E6A8C6A0004A8D0 /* create@3x.png in Resources */,
 				9A38F5B11E9666BC00EADE7F /* comments@2x.png in Resources */,
+				9A7864EE1ED31541006503D4 /* privateicon_challenge@2x.png in Resources */,
 				9A6E39F31E7AB64800B4AD5B /* topname@2x.png in Resources */,
 				9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */,
+				9A7864F21ED31541006503D4 /* worldicon_challenge@3x.png in Resources */,
 				9AA9B5371E700AC700C6EF37 /* blueprivate@3x.png in Resources */,
 				9A6E39E81E7AB64800B4AD5B /* flag@3x.png in Resources */,
 				9A57279B1E7179CF006A5F52 /* Done@2x.png in Resources */,
@@ -2371,6 +2400,7 @@
 				9A38F5B41E9666BC00EADE7F /* fullscreen@2x.png in Resources */,
 				9AA9B5391E700AC700C6EF37 /* blueworld@2x.png in Resources */,
 				9A0606051E6D87B000FF4229 /* profile_privatetext.png in Resources */,
+				9A7864F11ED31541006503D4 /* worldicon_challenge@2x.png in Resources */,
 				9A0605D71E6D820900FF4229 /* PledgeTableViewCell.xib in Resources */,
 				9AED22161E6A8C6A0004A8D0 /* explore1@2x.png in Resources */,
 				9A6270601EA0A0B6003C85E4 /* Mute Filled-100.png in Resources */,
@@ -2441,6 +2471,7 @@
 				9A0606071E6D87B000FF4229 /* profile_privatetext@3x.png in Resources */,
 				9AED221A1E6A8C6A0004A8D0 /* favourites.png in Resources */,
 				9AD690A41EBDD47E00A7A774 /* favouritebutton1.png in Resources */,
+				9A7864ED1ED31541006503D4 /* privateicon_challenge.png in Resources */,
 				9A6E39E31E7AB64800B4AD5B /* challenge_favourite1@3x.png in Resources */,
 				9A06060F1E6D87B000FF4229 /* profile_publictext1@2x.png in Resources */,
 				9AA9B5521E70279000C6EF37 /* greenslider@3x.png in Resources */,
@@ -2501,6 +2532,7 @@
 				9AED223D1E6A9D900004A8D0 /* exploreworld@2x.png in Resources */,
 				9A19B41D1E6EDA3100262BC1 /* searchbar@3x.png in Resources */,
 				9A1B93941E94ECF5004A7B75 /* RecordedVidTableViewCell.xib in Resources */,
+				9A7864EF1ED31541006503D4 /* privateicon_challenge@3x.png in Resources */,
 				9A06060A1E6D87B000FF4229 /* profile_privatetext1@3x.png in Resources */,
 				9A0605B41E6D66D900FF4229 /* profile_circle@3x.png in Resources */,
 				9AA9B50A1E6FDCE500C6EF37 /* PledgeOutoingTableViewCell.xib in Resources */,
