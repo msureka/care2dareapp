@@ -132,7 +132,7 @@ flag_challenge=@"no";
     borderBottom_Vedios.frame = CGRectMake(0, Button_Videos.frame.size.height-1, Button_Videos.frame.size.width,1);
     [Button_Videos.layer addSublayer:borderBottom_Vedios];
     
-    [Button_Challenges setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [Button_Challenges setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
 }
@@ -1923,7 +1923,7 @@ if (indexPath.section==0)
     CheckedTabbedButtons=@"Challenges";
    Textfield_Search.text=@"";
     searchString=@"";
-    [Button_Challenges setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [Button_Challenges setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     
@@ -1976,7 +1976,7 @@ if (indexPath.section==0)
         CheckedTabbedButtons=@"Contribution";
      Textfield_Search.text=@"";
  searchString=@"";
-    [Button_Contribution setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [Button_Contribution setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Videos setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     
@@ -2033,7 +2033,7 @@ if (indexPath.section==0)
   CheckedTabbedButtons=@"Vedio";
     searchString=@"";
      Textfield_Search.text=@"";
-    [Button_Videos setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [Button_Videos setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     

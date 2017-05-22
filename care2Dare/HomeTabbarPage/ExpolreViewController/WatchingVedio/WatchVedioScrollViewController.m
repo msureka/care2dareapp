@@ -23,7 +23,7 @@
 {
     UIView * View_PlayerView,*View_PlayerView1,*View_PlayerView2,*playerView_linereviewsVedio,*PlayerView_Backround,*PlayerView3;
     NSTimer * timerFadeout;
-    UIButton *Button_PlayPause,*Button_VolumeMute,*Button_ThreeDots,* Button_back,*Button_Play_next,*Button_Play_privious;
+    UIButton *Button_PlayPause,*Button_VolumeMute,*Button_ThreeDots,* Button_back,*Button_Play_next,*Button_Play_privious,*Button_Playretry;
     NSTimer * timer;
     Float64 dur,progrssVal,CurrentTimes;
     NSURL *urlVediop;
@@ -33,7 +33,7 @@
     NSUserDefaults *defaults;
     NSMutableArray * Array_VediosData;
     NSDictionary *urlplist;
-    NSString *str_name,*str_days,*str_friendstatus,*Str_newstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1,*Str_totalViews,*Falg_FadeInFadeOut,*Str_Flag_Positions,*str_FlagLoadinViewControllerelements,*Str_UserTapPlayVedioindex;
+    NSString *str_name,*str_days,*str_friendstatus,*Str_newstatus,*str_profileurl,*Flag_watch,*Str_urlVedio,* userId_Prof1,*Str_totalViews,*Falg_FadeInFadeOut,*Str_Flag_Positions,*str_FlagLoadinViewControllerelements,*Str_UserTapPlayVedioindex,*Str_FlabRestratVideo;
     NSInteger indexVedio;
     CALayer *Bottomborder_Cell2;
     CGSize size;
@@ -59,7 +59,7 @@
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
 //    indexVedio=1;
-    
+    Str_FlabRestratVideo=@"no";
     indexVedio=indexVedioindex+1;
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
@@ -179,7 +179,7 @@
     
     
     
-    
+    //button play and pause vedios.......................................
     
     
     
@@ -193,7 +193,23 @@
     Button_PlayPause.backgroundColor=[UIColor clearColor];
     [Button_PlayPause setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     Button_PlayPause.center=View_PlayerView.center;
+     Button_PlayPause.hidden=NO;
+    //..............................................................
     
+    //Button retry vedio .............................................
+    
+    Button_Playretry=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,50,50)];
+    
+    [Button_Playretry setImage:[UIImage imageNamed:@"Recurring Appointment Filled-100.png"] forState:UIControlStateNormal];
+    
+    [Button_Playretry setTitle:@"" forState:UIControlStateNormal];
+    [Button_Playretry addTarget:self action:@selector(Play_retryVideoAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    Button_Playretry.backgroundColor=[UIColor clearColor];
+    [Button_Playretry setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    Button_Playretry.center=View_PlayerView.center;
+    Button_Playretry.hidden=YES;
+    //.......................................................................................
     
     //Button next vedio play...............
     
@@ -207,7 +223,7 @@
     Button_Play_next.backgroundColor=[UIColor clearColor];
     [Button_Play_next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   
-    
+       Button_Play_next.hidden=YES;
     //Button Privous vedio play...............
     
     Button_Play_privious=[[UIButton alloc]initWithFrame:CGRectMake(Button_PlayPause.frame.origin.x-100, Button_PlayPause.frame.origin.y,50,50)];
@@ -220,7 +236,7 @@
     
     Button_Play_privious.backgroundColor=[UIColor clearColor];
     [Button_Play_privious setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  
+  Button_Play_privious.hidden=YES;
 //.............................................................................//
     
     
@@ -239,16 +255,18 @@
     //Label_Video strat time..............................
     
     
-    Label_PlayvideoStartTime=[[UILabel alloc]initWithFrame:CGRectMake(10,Button_VolumeMute.frame.origin.y,40,20)];
+    Label_PlayvideoStartTime=[[UILabel alloc]initWithFrame:CGRectMake(10,Button_VolumeMute.frame.origin.y,35,18)];
     Label_PlayvideoStartTime.backgroundColor=[UIColor clearColor];
     Label_PlayvideoStartTime.text=@"0:0";
+    Label_PlayvideoStartTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:12.0];
     Label_PlayvideoStartTime.textColor=[UIColor whiteColor];
     
     //Label_Video End time..............................
     
-    Label_PlayvideoEndTime=[[UILabel alloc]initWithFrame:CGRectMake(Button_VolumeMute.frame.origin.x-50,Button_VolumeMute.frame.origin.y,40,20)];
+    Label_PlayvideoEndTime=[[UILabel alloc]initWithFrame:CGRectMake(Button_VolumeMute.frame.origin.x-40,Button_VolumeMute.frame.origin.y,35,18)];
     Label_PlayvideoEndTime.backgroundColor=[UIColor clearColor];
     Label_PlayvideoEndTime.text=@"0:0";
+Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:12.0];
      Label_PlayvideoEndTime.textColor=[UIColor whiteColor];
     
   // .............................................................
@@ -656,14 +674,35 @@
         
         
     }
-//         [playerViewController.view removeFromSuperview];
-//     ;
-//    
-//    
-//    
-//        NSLog(@"size of Vedio=%f",size.height);
-//          NSLog(@"size of Vedio=%f",size.height);
+    if (indexVedio==1)
+    {
+        Button_Play_privious.hidden=YES;
+        if (Array_VediosData.count==1)
+        {
+            Button_Play_next.hidden=YES;
+
+        }
+        else
+        {
+          Button_Play_next.hidden=NO;
+        }
+        
+    }
+    else
+    {
+        
+        Button_Play_privious.hidden=NO;;
+        
+    }
+//    if ([Str_FlabRestratVideo isEqualToString:@"yes"])
+//    {
+//      
+//          Button_Play_next.hidden=YES;;
+//         Str_FlabRestratVideo=@"no";
+//    }
+   
     
+     [playerViewController.view addSubview:Button_Playretry];
      [playerViewController.view addSubview:Button_PlayPause];
      [playerViewController.view addSubview:Button_Play_privious];
      [playerViewController.view addSubview:Button_Play_next];
@@ -694,8 +733,8 @@
         dur = CMTimeGetSeconds(player.currentItem.asset.duration);
         CurrentTimes=CMTimeGetSeconds(currentTime);
         NSLog(@"durationPlayVedio: %.2f", dur);
-     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/60];
-    Label_PlayvideoEndTime.text=[NSString stringWithFormat:@"%.2f",dur/60];
+     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/100];
+    Label_PlayvideoEndTime.text=[NSString stringWithFormat:@"%.2f",dur/100];
     //    Button_PlayPause=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5),(cell_one.PlayerView.frame.size.width/2)+(cell_one.PlayerView.frame.size.width/5))];
      player.muted=NO;
 //   [self.view.layer removeAllAnimations];
@@ -795,12 +834,74 @@
     }
     
 }
+- (IBAction)Play_retryVideoAction:(id)sender
+{
+    indexVedio=0;
+    Str_FlabRestratVideo=@"yes";
+    Button_Playretry.hidden=YES;
+    Button_Play_next.hidden=NO;
+    Button_Play_privious.hidden=YES;
+    Button_PlayPause.hidden=NO;
+    if (Array_VediosData.count==1)
+    {
+        Button_Play_next.hidden=YES;
+        
+    }
+   
+
+    indicatorView.hidden=NO;
+    [indicatorView startAnimating];
+     [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
+    str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+    videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+    
+    [self CommunicationPlayVedio];
+    
+ indexVedio=1;
+    Flag_watch=@"no";
+   
+}
 - (IBAction)Play_NextVideo:(id)sender
 {
+    if (indexVedio==Array_VediosData.count-1)
+    {
+        Button_Play_next.hidden=YES;
+    }
+    else
+    {
+        
+    }
     
+        [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
+        table_scrollview.contentOffset = CGPointMake(0,0);
+        Str_UserTapPlayVedioindex=@"yes";
+        
+        
+        
+        //    progressslider.hidden=YES;
+        //    Button_VolumeMute.hidden=YES;
+        //    cell_one.Image_3Dots.hidden=YES;
+        //    [playerViewController.view removeFromSuperview];
+        //    //[cell_one.PlayerView removeFromSuperview];
+        //    // [cell_one.PlayerView addSubview:playerViewController.view
+        Flag_watch=@"yes";
+        
+        //  //       Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
+        // //           indexVedio=indexPath.row;
+        
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+        indexVedio=indexVedio+1;
+        [self CommunicationPlayVedio];
+    
+    
+    
+}
+- (IBAction)Play_PriviousVideo:(id)sender
+{
     table_scrollview.contentOffset = CGPointMake(0,0);
     Str_UserTapPlayVedioindex=@"yes";
-   
+     [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
     
     
     //    progressslider.hidden=YES;
@@ -813,15 +914,27 @@
     
     //  //       Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
     // //           indexVedio=indexPath.row;
+    if (indexVedio==0)
+    {
+        indexVedio=Array_VediosData.count-2;
+        Button_Play_next.hidden=NO;
+        Button_Playretry.hidden=YES;
+        Button_PlayPause.hidden=NO;
+    }
+    else
+    {
+       
+    indexVedio=indexVedio-2;
+        Button_Play_next.hidden=NO;
+    }
     
-    str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-    videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
-    indexVedio=indexVedio+1;
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+    
+  
+      indexVedio=indexVedio+1;
+   
     [self CommunicationPlayVedio];
-    
-}
-- (IBAction)Play_PriviousVideo:(id)sender
-{
 }
 - (IBAction)Play_Action:(id)sender
 {
@@ -919,15 +1032,24 @@
     //    }
     
     
+  
+
+
     if (indexVedio==Array_VediosData.count)
     {
+          // Button_Play_next.hidden=YES;
         indexVedio=0;
         
     }
+    else
+    {
+       //  Button_Play_next.hidden=NO;
+    }
+   
     CMTime currentTime = item.currentTime;
     CurrentTimes=CMTimeGetSeconds(currentTime);
 
-     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/60];
+     Label_PlayvideoStartTime.text=[NSString stringWithFormat:@"%.2f",CurrentTimes/100];
     
     [progressslider setProgress:CurrentTimes/dur];
     NSLog(@"Timer-CurrentTimes duration: %.2f", CurrentTimes);
@@ -953,15 +1075,37 @@
     {
     if (CurrentTimes==dur)
     {
-//        indicatorView.hidden=NO;
-//        [indicatorView startAnimating];
-//       
-//        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-//        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
-//        
-//        [self CommunicationPlayVedio];
-//        indexVedio++;
-//        Flag_watch=@"no";
+        if (indexVedio==0)
+        {
+            [Button_Play_next setImage:[UIImage imageNamed:@"nextFilled-100.png"] forState:UIControlStateNormal];
+              [Button_PlayPause setImage:[UIImage imageNamed:@"Play Filled-100.png"] forState:UIControlStateNormal];
+            [player pause];
+            Button_Play_next.hidden=YES;
+            Button_PlayPause.hidden=YES;
+            Button_Playretry.hidden=NO;
+            
+          
+        }
+        else
+        {
+            if (indexVedio==Array_VediosData.count-1)
+            {
+                 Button_Play_next.hidden=YES;
+            }
+            else
+            {
+                 Button_Play_next.hidden=NO;
+            }
+        indicatorView.hidden=NO;
+        [indicatorView startAnimating];
+       
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+        
+        [self CommunicationPlayVedio];
+        indexVedio++;
+        Flag_watch=@"no";
+        }
         
         
     }
@@ -1396,7 +1540,15 @@
         
         if ([Str_UserTapPlayVedioindex isEqualToString:@"no"])
         {
-            previousLed = [[ImageArrayTag objectAtIndex:indexVedio-1] viewWithTag:indexVedio-1];
+            if (indexVedio==0)
+            {
+                 previousLed = [[ImageArrayTag objectAtIndex:indexVedio] viewWithTag:indexVedio];
+            }
+            else
+            {
+                 previousLed = [[ImageArrayTag objectAtIndex:indexVedio-1] viewWithTag:indexVedio-1];
+            }
+           
         }
         else
         {
@@ -1760,6 +1912,7 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
         Button_PlayPause.alpha=1;
           Button_Play_privious.alpha=1;
           Button_Play_next.alpha=1;
+         Button_Playretry.alpha=1;
         PlayerView_Backround.hidden=YES;
         
         
@@ -1796,6 +1949,7 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
   
     [UIView animateWithDuration:0.2f animations:^{
         
+        
         Button_back.alpha=0;
         Button_VolumeMute.alpha=0;
         Label_PlayvideoEndTime.alpha=0;
@@ -1804,6 +1958,7 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
         Button_PlayPause.alpha=0;
          Button_Play_privious.alpha=0;
          Button_Play_next.alpha=0;
+        Button_Playretry.alpha=0;
         PlayerView_Backround.hidden=NO;
         
     } completion:nil];
