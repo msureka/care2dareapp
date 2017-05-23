@@ -30,6 +30,10 @@
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 -(IBAction)ButtonBack_Action:(id)sender;
 
+@property(nonatomic,weak)IBOutlet UILabel * Label_Resultserver;
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * indicatorView;
+
+
 
 
 @property(weak,nonatomic)IBOutlet UITextView * TextViews;

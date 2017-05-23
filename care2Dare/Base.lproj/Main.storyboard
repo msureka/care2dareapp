@@ -924,6 +924,18 @@
                                     <outlet property="delegate" destination="1pM-DC-LOL" id="7xP-SI-9a6"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="beH-Z0-ghi">
+                                <frame key="frameInset" minX="169" minY="354" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data not found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPT-e7-Geb">
+                                <frame key="frameInset" minX="16" minY="324" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="18"/>
+                                <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -931,7 +943,9 @@
                         <outlet property="Image_PayTopheader" destination="Ila-o3-a0k" id="TGI-2E-gtx"/>
                         <outlet property="Label_PayTopheader" destination="Snz-FG-yic" id="ZAV-Pw-Fht"/>
                         <outlet property="Label_RaisedAmt" destination="PFY-en-prC" id="HeI-XO-oTV"/>
+                        <outlet property="Label_Resultserver" destination="cPT-e7-Geb" id="vdq-6l-Gng"/>
                         <outlet property="Tableview_Raised" destination="Iso-Vr-Puq" id="TqQ-tM-l2o"/>
+                        <outlet property="indicatorView" destination="beH-Z0-ghi" id="Wxt-mM-Dqd"/>
                         <outlet property="view_Topheader" destination="WeI-e0-fsm" id="or6-x4-yOf"/>
                     </connections>
                 </viewController>

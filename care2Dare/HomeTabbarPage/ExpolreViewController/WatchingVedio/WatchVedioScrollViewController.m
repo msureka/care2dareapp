@@ -59,9 +59,8 @@
 {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
-//    indexVedio=1;
+
     Str_FlabRestratVideo=@"no";
-    indexVedio=indexVedioindex+1;
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -565,8 +564,9 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
                                                          
                                 for(int i=0;i<Array_VediosData.count;i++)
                                     {
-                            if ([[[Array_VediosData objectAtIndex:i]valueForKey:@"status"]isEqualToString:@"PLAY"])
+            if ([[[Array_VediosData objectAtIndex:i]valueForKey:@"status"]isEqualToString:@"PLAY"])
                                 {
+                                    indexVedio=i;
         str_name=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"name" ]];
                                                                  
         str_days=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:i]valueForKey:@"posttime" ]];
@@ -675,26 +675,33 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
         
         
     }
-    if (indexVedio==1)
-    {
-        Button_Play_privious.hidden=YES;
+  
         if (Array_VediosData.count==1)
         {
             Button_Play_next.hidden=YES;
-
+            Button_Play_privious.hidden=YES;
         }
-        else
-        {
-          Button_Play_next.hidden=NO;
-        }
-        
-    }
     else
     {
-        
-        Button_Play_privious.hidden=NO;;
-        
+        if (indexVedio==0)
+        {
+            Button_Play_next.hidden=NO;
+            Button_Play_privious.hidden=YES;
+        }
+    if (Array_VediosData.count-1==indexVedio)
+        {
+                    Button_Play_next.hidden=YES;
+                    Button_Play_privious.hidden=NO;
+        }
     }
+    
+    if (indexVedio>=1 && indexVedio<Array_VediosData.count-1)
+    {
+         Button_Play_next.hidden=NO;
+        Button_Play_privious.hidden=NO;
+    }
+   
+    
 //    if ([Str_FlabRestratVideo isEqualToString:@"yes"])
 //    {
 //      
@@ -858,41 +865,22 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
     
     [self CommunicationPlayVedio];
     
- indexVedio=1;
+ 
     Flag_watch=@"no";
    
 }
 - (IBAction)Play_NextVideo:(id)sender
 {
-    if (indexVedio==Array_VediosData.count-1)
-    {
-        Button_Play_next.hidden=YES;
-    }
-    else
-    {
-        
-    }
+   
     
         [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
         table_scrollview.contentOffset = CGPointMake(0,0);
         Str_UserTapPlayVedioindex=@"yes";
-        
-        
-        
-        //    progressslider.hidden=YES;
-        //    Button_VolumeMute.hidden=YES;
-        //    cell_one.Image_3Dots.hidden=YES;
-        //    [playerViewController.view removeFromSuperview];
-        //    //[cell_one.PlayerView removeFromSuperview];
-        //    // [cell_one.PlayerView addSubview:playerViewController.view
+    
         Flag_watch=@"yes";
-        
-        //  //       Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
-        // //           indexVedio=indexPath.row;
-        
-        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
-        indexVedio=indexVedio+1;
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio+1]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio+1]valueForKey:@"videoid1"]];
+    
         [self CommunicationPlayVedio];
     
     
@@ -904,36 +892,20 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
     Str_UserTapPlayVedioindex=@"yes";
      [Button_PlayPause setImage:[UIImage imageNamed:@"Pause Filled-100.png"] forState:UIControlStateNormal];
     
-    
-    //    progressslider.hidden=YES;
-    //    Button_VolumeMute.hidden=YES;
-    //    cell_one.Image_3Dots.hidden=YES;
-    //    [playerViewController.view removeFromSuperview];
-    //    //[cell_one.PlayerView removeFromSuperview];
-    //    // [cell_one.PlayerView addSubview:playerViewController.view
     Flag_watch=@"yes";
-    
-    //  //       Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexPath.row]valueForKey:@"videourl" ]];
-    // //           indexVedio=indexPath.row;
+  
     if (indexVedio==0)
     {
-        indexVedio=Array_VediosData.count-2;
-        Button_Play_next.hidden=NO;
-        Button_Playretry.hidden=YES;
-        Button_PlayPause.hidden=NO;
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:Array_VediosData.count-2]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:Array_VediosData.count-2]valueForKey:@"videoid1"]];
     }
     else
     {
-       
-    indexVedio=indexVedio-2;
-        Button_Play_next.hidden=NO;
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio-1]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio-1]valueForKey:@"videoid1"]];
     }
     
-        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
-    
   
-      indexVedio=indexVedio+1;
    
     [self CommunicationPlayVedio];
 }
@@ -999,53 +971,16 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
 
 -(void)targetMethod:(NSTimer *)timer1
 {
-    //    avPlayer.currentItem!.playbackLikelyToKeepUp
-    //    if (player.status == AVPlayerStatusReadyToPlay)
-    //    {
-    //                [cell_one.indicator_loading stopAnimating];
-    //            cell_one.indicator_loading.hidden=YES;
-    //    }
-    //    else if (player.status == AVPlayerStatusFailed)
-    //    {
-    //        // something went wrong. player.error should contain some information
-    //    }
-    //    else
-    //    {
-    //        cell_one.indicator_loading.hidden=NO;
-    //        //           // cell_one.Button_VolumeMute.hidden=YES;
-    //        //          //  cell_one.Image_3Dots.hidden=YES;
-    //    [cell_one.indicator_loading startAnimating];
-    //
-    //    }
-    //        if (item.playbackBufferEmpty)
-    //        {
-    //            cell_one.indicator_loading.hidden=NO;
-    //           // cell_one.Button_VolumeMute.hidden=YES;
-    //          //  cell_one.Image_3Dots.hidden=YES;
-    //            [cell_one.indicator_loading startAnimating];
-    //        }
-    //    else
-    //    {
-    //        [cell_one.indicator_loading stopAnimating];
-    //     cell_one.indicator_loading.hidden=YES;
-    //
-    //
-    //    }
     
-    
-  
 
 
-    if (indexVedio==Array_VediosData.count)
+    if (indexVedio==Array_VediosData.count-1)
     {
-          // Button_Play_next.hidden=YES;
         indexVedio=0;
         
     }
-    else
-    {
-       //  Button_Play_next.hidden=NO;
-    }
+
+    
    
     CMTime currentTime = item.currentTime;
     CurrentTimes=CMTimeGetSeconds(currentTime);
@@ -1100,11 +1035,10 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
         indicatorView.hidden=NO;
         [indicatorView startAnimating];
        
-        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"useridvideo"]];
-        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio]valueForKey:@"videoid1"]];
+        str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio+1]valueForKey:@"useridvideo"]];
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:indexVedio+1]valueForKey:@"videoid1"]];
         
         [self CommunicationPlayVedio];
-        indexVedio++;
         Flag_watch=@"no";
         }
         

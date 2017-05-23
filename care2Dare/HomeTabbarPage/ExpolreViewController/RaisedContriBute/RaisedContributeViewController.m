@@ -31,7 +31,7 @@
 
 
 @implementation RaisedContributeViewController
-@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader,Str_Raised_StartDateTime;
+@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader,Str_Raised_StartDateTime,Label_Resultserver,indicatorView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -62,7 +62,9 @@
     Yheight_label=20;
     
     
-    
+    indicatorView.hidden=NO;
+    Label_Resultserver.hidden=YES;
+    [indicatorView startAnimating];
     
     self.sendButton.userInteractionEnabled = NO;
     self.sendButton.hidden=NO;
@@ -220,8 +222,16 @@
             [Tableview_Raised reloadData];
             NSLog(@"Backers Array==%@",Array_Backer);
              NSLog(@"Challengers Array==%@",Array_Challengers);
-
+            indicatorView.hidden=YES;
+            Label_Resultserver.hidden=YES;
+            [indicatorView stopAnimating];
         }
+                         else
+                         {
+                             indicatorView.hidden=YES;
+                             Label_Resultserver.hidden=NO;
+                             [indicatorView stopAnimating];
+                         }
                          ResultString=nil;
   }
     else

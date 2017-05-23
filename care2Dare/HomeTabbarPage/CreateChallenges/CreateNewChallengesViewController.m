@@ -116,10 +116,10 @@
     //                        forState:UIControlStateNormal];
     //   [slider_Days setThumbImage:[UIImage imageNamed:@"greenslider.png"]                forState:UIControlStateNormal];
     
-    CALayer*  borderBottom_topheder = [CALayer layer];
-    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-    borderBottom_topheder.frame = CGRectMake(0, _view_SliderTimes.frame.size.height-1, _view_SliderTimes.frame.size.width,1);
-    [_view_SliderTimes.layer addSublayer:borderBottom_topheder];
+//    CALayer*  borderBottom_topheder = [CALayer layer];
+//    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+//    borderBottom_topheder.frame = CGRectMake(0, _view_SliderTimes.frame.size.height-1, _view_SliderTimes.frame.size.width,1);
+//    [_view_SliderTimes.layer addSublayer:borderBottom_topheder];
     CALayer *borderTop = [CALayer layer];
     borderTop.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
     
