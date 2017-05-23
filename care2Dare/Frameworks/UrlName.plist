@@ -66,5 +66,7 @@
 	<string>http://www.care2dareapp.com/app/connect_fb_twitter.php</string>
 	<key>deleteaccount</key>
 	<string>http://www.care2dareapp.com/app/deleteaccount.php</string>
+	<key>savepicture</key>
+	<string>http://www.care2dareapp.com/app/savepicture.php</string>
 </dict>
 </plist>

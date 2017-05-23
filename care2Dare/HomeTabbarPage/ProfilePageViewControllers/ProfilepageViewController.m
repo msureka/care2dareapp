@@ -30,6 +30,7 @@
     NSMutableArray * Array_AllData,* Array_Public,*Array_Private,*Array_Profile;
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
+    NSString * ImageNSdata,*encodedImage;
     
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
@@ -377,27 +378,32 @@
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
             [cell_Profile.Label_Friends22 addGestureRecognizer:ViewTap11];
             
+            NSURL *url=[NSURL URLWithString:Str_profileurl];
+            
+            [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            
             if ([[defaults valueForKey:@"logintype"] isEqualToString:@"FACEBOOK"]|| [[defaults valueForKey:@"logintype"] isEqualToString:@"TWITTER"])
             {
-                NSURL *url=[NSURL URLWithString:Str_profileurl];
-                
-                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+//                NSURL *url=[NSURL URLWithString:Str_profileurl];
+//                
+//                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                  [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
                 
             }
             else
             {
+                
         cell_Profile.Image_ProfileImg.userInteractionEnabled=YES;
     UITapGestureRecognizer *ViewTapprofile =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapprofileTappedView:)];
         [cell_Profile.Image_ProfileImg addGestureRecognizer:ViewTapprofile];
-                if(chosenImage ==nil)
-                {
-                 [cell_Profile.Image_ProfileImg setImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-                }
-                else
-                {
-                  cell_Profile.Image_ProfileImg.image=chosenImage;
-                }
+//                if(chosenImage ==nil)
+//                {
+//                 [cell_Profile.Image_ProfileImg setImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+//                }
+//                else
+//                {
+//                  cell_Profile.Image_ProfileImg.image=chosenImage;
+//                }
 
             }
             
@@ -1155,21 +1161,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
     
         chosenImage = info[UIImagePickerControllerOriginalImage];
-      
+       cell_Profile.Image_ProfileImg.image=chosenImage;
         
-//        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
-//        
-//        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
-//        
-//    
-//
-//        ImageNSdata = [Base64 encode:imageData];
-//        
-//        
-//        encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-//        
-//        
-     SelectGallery=@"yes";
+        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+    
+        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+          ImageNSdata = [Base64 encode:imageData];
+    
+    
+    encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+    
+    [self savepictureCommunication];
         
         [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
         [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -1186,6 +1188,105 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+-(void)savepictureCommunication
+{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        NSString *userid1= @"userid";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+        NSString *profileimage= @"profileimage";
+        
+  
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridVal1,profileimage,encodedImage];
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"savepicture"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                     NSMutableArray * array_profilepic=[[NSMutableArray alloc]init];
+                    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+            array_profilepic=[objSBJsonParser objectWithData:data];
+                          NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+              if (array_profilepic.count !=0)
+              {
+                  Str_profileurl=@"";
+            Str_profileurl=[[array_profilepic objectAtIndex:0]valueForKey:@"profilepic"];
+                  [_Tableview_Profile reloadData];
+               }
+                                                 
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                                 
+                                                 
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    };
+    
     
 }
 @end
