@@ -17,7 +17,8 @@
 #import "CreateChallengesViewController.h"
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
-
+#import "MHFacebookImageViewer.h"
+#import "UIImageView+MHFacebookImageViewer.h"
 @interface ProfilePageDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
@@ -31,7 +32,7 @@
     CALayer *Bottomborder_Cell2;
     UIButton *Button_Dareyou;
 }
-
+- (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @end
 
 @implementation ProfilePageDetailsViewController
@@ -538,6 +539,8 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
         [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             
             
+            [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
+            
             
             cell_Profile.Label_Friends22.userInteractionEnabled=YES;
             cell_Profile.Label_Challenges11.userInteractionEnabled=YES;
@@ -888,5 +891,13 @@ if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToStrin
     [defaults synchronize];
     CreateChallengesViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"CreateChallengesViewController"];
     [self.navigationController presentViewController:set animated:YES completion:NULL];
+}
+- (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image  {
+    
+    
+    [imageView setImage:image];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView setupImageViewer];
+    imageView.clipsToBounds = YES;
 }
 @end

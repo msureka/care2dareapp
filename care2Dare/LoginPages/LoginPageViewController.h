@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FRHyperLabel.h"
 @interface LoginPageViewController : UIViewController
 @property(nonatomic,weak)IBOutlet UILabel * Label_TitleName;
 @property(nonatomic,weak)IBOutlet UITextField * textfield_uname;

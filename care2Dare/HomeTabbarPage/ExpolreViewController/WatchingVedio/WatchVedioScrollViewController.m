@@ -1019,7 +1019,7 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
             Button_Play_next.hidden=YES;
             Button_PlayPause.hidden=YES;
             Button_Playretry.hidden=NO;
-            
+            [self fadein];
           
         }
         else

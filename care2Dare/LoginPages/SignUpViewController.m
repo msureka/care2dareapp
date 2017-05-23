@@ -16,6 +16,7 @@
 #import "SBJsonParser.h"
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
+#import "FRHyperLabel.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface SignUpViewController ()
 {
@@ -25,6 +26,7 @@
     NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
     NSMutableArray *fb_friend_id;
 }
+@property (weak, nonatomic) IBOutlet FRHyperLabel *termLabel;
 @end
 
 @implementation SignUpViewController
@@ -92,18 +94,66 @@
     borderLeftTw.frame = CGRectMake(0, 0, 1.0, Button_LoginTw.frame.size.height);
     [Button_LoginTw.layer addSublayer:borderLeftTw];
     
-    UIFont *arialFont = [UIFont fontWithName:@"San Francisco Display" size:14.0];
-    NSDictionary *arialDict = [NSDictionary dictionaryWithObject: arialFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"by signing in,you agree to our " attributes: arialDict];
+//    UIFont *arialFont = [UIFont fontWithName:@"San Francisco Display" size:14.0];
+//    NSDictionary *arialDict = [NSDictionary dictionaryWithObject: arialFont forKey:NSFontAttributeName];
+//    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"by signing in,you agree to our " attributes: arialDict];
+//    
+//    UIFont *VerdanaFont = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16.0];
+//    NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:VerdanaFont forKey:NSFontAttributeName];
+//    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @"Terms & Conditions" attributes:verdanaDict];
+//    
+//    [aAttrString appendAttributedString:vAttrString];
+//    
+//    
+//    Label_TermsAndCon.attributedText = aAttrString;
     
-    UIFont *VerdanaFont = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16.0];
-    NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:VerdanaFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @"Terms & Conditions" attributes:verdanaDict];
+    FRHyperLabel *label = self.termLabel;
+    label.numberOfLines = 0;
+    label.textAlignment = NSTextAlignmentCenter;
+    [label setFont:[UIFont fontWithName:@"San Francisco Display" size:12]];
     
-    [aAttrString appendAttributedString:vAttrString];
+    NSString *string = @"By signing in, you agree to our Terms of Service and Privacy Policy";
+    
+    //    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]};
+    //
+    
+    // NSString *myString = @"Care2Dare";
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSRange range = [string rangeOfString:@"Terms of Service"];
+    NSRange range1 = [string rangeOfString:@"Privacy Policy"];
+    [attString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:12.0] range:range];
+    [attString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:12.0] range:range1];
     
     
-    Label_TermsAndCon.attributedText = aAttrString;
+    
+    //    Label_TitleName.attributedText = attString;
+    
+    
+    
+    
+    
+    label.attributedText = attString;
+    
+    
+    
+    void(^handler)(FRHyperLabel *label, NSString *substring) = ^(FRHyperLabel *label, NSString *substring)
+    {
+        
+        if ([substring isEqualToString:@"Terms of Service"])
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/terms.html"]];
+            
+        }
+        if ([substring isEqualToString:@"Privacy Policy"])
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/privacy.html"]];
+            
+        }
+    };
+    
+    //Step 3: Add link substrings
+    
+    [label setLinksForSubstrings:@[@"Terms of Service", @"Privacy Policy"] withLinkHandler:handler];
     Button_signip .enabled=NO;
     Button_signip.titleLabel.textColor =Buttonlogincolor;
 }
@@ -476,7 +526,8 @@
                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"profileimage"]] forKey:@"profileimage"];
                     
                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
-                    
+                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
+                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
                       [defaults setObject:@"EMAIL" forKey:@"SettingLogin"];
                     
                     [defaults setObject:@"yes" forKey:@"LoginView"];
@@ -760,7 +811,7 @@
                             [defaults setObject:[[array_login objectAtIndex:0]valueForKey:@"profileimage"] forKey:@"profileimage"];
                             
                             [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
-                            
+                             [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
                             
                             [defaults setObject:@"yes" forKey:@"LoginView"];
                             [defaults synchronize];

@@ -16,10 +16,13 @@
 #import "Reachability.h"
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
+#import "MHFacebookImageViewer.h"
+#import "UIImageView+MHFacebookImageViewer.h"
 @interface ProfilepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
-    NSString *cellChecking,*Str_Frends,*str_challenges,*Str_name,*Str_profileurl;
+    UIImage *chosenImage;
+    NSString *cellChecking,*Str_Frends,*str_challenges,*Str_name,*Str_profileurl,*SelectGallery;
     UIView *sectionView;
       UIView *Button_Public,*Button_Private;
     UIImageView *Image_ButtinPublic,*Image_ButtonPrivate;
@@ -29,6 +32,7 @@
     CALayer *Bottomborder_Cell2;
     
 }
+- (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @end
 
 @implementation ProfilepageViewController
@@ -41,7 +45,7 @@
      self.tabBarController.tabBar.hidden=NO;
       cellChecking=@"public";
     
-    
+    SelectGallery=@"no";
     
     if ( [[defaults valueForKey:@"budge"]isEqualToString:@"0"] )
     {
@@ -359,17 +363,46 @@
             
             
       
+           
             
             
-            NSURL *url=[NSURL URLWithString:Str_profileurl];
             
-[cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
             
             cell_Profile.Label_Friends22.userInteractionEnabled=YES;
              cell_Profile.Label_Challenges11.userInteractionEnabled=YES;
             
+            
+            
+            
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
             [cell_Profile.Label_Friends22 addGestureRecognizer:ViewTap11];
+            
+            if ([[defaults valueForKey:@"logintype"] isEqualToString:@"FACEBOOK"]|| [[defaults valueForKey:@"logintype"] isEqualToString:@"TWITTER"])
+            {
+                NSURL *url=[NSURL URLWithString:Str_profileurl];
+                
+                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                 [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
+                
+            }
+            else
+            {
+        cell_Profile.Image_ProfileImg.userInteractionEnabled=YES;
+    UITapGestureRecognizer *ViewTapprofile =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapprofileTappedView:)];
+        [cell_Profile.Image_ProfileImg addGestureRecognizer:ViewTapprofile];
+                if(chosenImage ==nil)
+                {
+                 [cell_Profile.Image_ProfileImg setImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                }
+                else
+                {
+                  cell_Profile.Image_ProfileImg.image=chosenImage;
+                }
+
+            }
+            
+            
+//             [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
             
             
             UITapGestureRecognizer *ViewTap22 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Challenges11:)];
@@ -1064,5 +1097,95 @@ NSLog(@"error login2.......%@",error.description);
 }
 - (void)ViewTapTapped_Challenges:(UITapGestureRecognizer *)recognizer
 {
+}
+- (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image  {
+    
+    
+    [imageView setImage:image];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView setupImageViewer];
+    imageView.clipsToBounds = YES;
+}
+- (void)ViewTapprofileTappedView:(UITapGestureRecognizer *)recognizer
+{
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Gallery",@"Choose Cammera",nil];
+    popup.tag = 777;
+    [popup showInView:self.view];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"actionSheetTaggg==%ld",(long)actionSheet.tag);
+    
+    if ((long)actionSheet.tag == 777)
+    {
+        NSLog(@"INDEXAcrtionShhet==%ld",(long)buttonIndex);
+        
+        if (buttonIndex== 0)
+        {
+           
+            
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+            {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                //[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                picker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.allowsEditing = NO;
+                
+                [self presentViewController:picker animated:true completion:nil];
+            }
+        }
+        else  if (buttonIndex== 1)
+        {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = NO;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:true completion:nil];
+        }
+    }
+}
+-(void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+        
+    
+        chosenImage = info[UIImagePickerControllerOriginalImage];
+      
+        
+//        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+//        
+//        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+//        
+//    
+//
+//        ImageNSdata = [Base64 encode:imageData];
+//        
+//        
+//        encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+//        
+//        
+     SelectGallery=@"yes";
+        
+        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+        
+    
+    
+    
+}
+
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+   
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 @end

@@ -178,6 +178,7 @@
 		9A5727C01E718994006A5F52 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BD1E718994006A5F52 /* playbutton.png */; };
 		9A5727C11E718994006A5F52 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BE1E718994006A5F52 /* playbutton@2x.png */; };
 		9A5727C21E718994006A5F52 /* playbutton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5727BF1E718994006A5F52 /* playbutton@3x.png */; };
+		9A5B66DC1ED4464200AB9BF0 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B66DB1ED4464200AB9BF0 /* FRHyperLabel.m */; };
 		9A5D675E1EA4BD6F001176B3 /* StatsOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D675D1EA4BD6F001176B3 /* StatsOneTableViewCell.m */; };
 		9A5D67611EA4BD85001176B3 /* StatsTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67601EA4BD85001176B3 /* StatsTwoTableViewCell.m */; };
 		9A5D67641EA4BD9A001176B3 /* StatsThreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D67631EA4BD9A001176B3 /* StatsThreeTableViewCell.m */; };
@@ -672,6 +673,8 @@
 		9A5727BD1E718994006A5F52 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		9A5727BE1E718994006A5F52 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		9A5727BF1E718994006A5F52 /* playbutton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@3x.png"; sourceTree = "<group>"; };
+		9A5B66DA1ED4464200AB9BF0 /* FRHyperLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRHyperLabel.h; sourceTree = "<group>"; };
+		9A5B66DB1ED4464200AB9BF0 /* FRHyperLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRHyperLabel.m; sourceTree = "<group>"; };
 		9A5D675C1EA4BD6F001176B3 /* StatsOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsOneTableViewCell.h; sourceTree = "<group>"; };
 		9A5D675D1EA4BD6F001176B3 /* StatsOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsOneTableViewCell.m; sourceTree = "<group>"; };
 		9A5D675F1EA4BD85001176B3 /* StatsTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsTwoTableViewCell.h; sourceTree = "<group>"; };
@@ -1463,6 +1466,15 @@
 			path = playbutton;
 			sourceTree = "<group>";
 		};
+		9A5B66D91ED4464200AB9BF0 /* FRHyperLabel */ = {
+			isa = PBXGroup;
+			children = (
+				9A5B66DA1ED4464200AB9BF0 /* FRHyperLabel.h */,
+				9A5B66DB1ED4464200AB9BF0 /* FRHyperLabel.m */,
+			);
+			path = FRHyperLabel;
+			sourceTree = "<group>";
+		};
 		9A5D675B1EA4BD52001176B3 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
@@ -1883,6 +1895,7 @@
 		9ABB5DA71E693ECA00482105 /* LoginPages */ = {
 			isa = PBXGroup;
 			children = (
+				9A5B66D91ED4464200AB9BF0 /* FRHyperLabel */,
 				9ABB5DA81E693EF500482105 /* LoginPageViewController.h */,
 				9ABB5DA91E693EF500482105 /* LoginPageViewController.m */,
 				9ABB5DB81E6953CC00482105 /* SignUpViewController.h */,
@@ -2635,6 +2648,7 @@
 				9A64C8581E711475008115FF /* UIViewController+KeyboardAnimation.m in Sources */,
 				9A19B3F21E6EB01900262BC1 /* SDWebImageCompat.m in Sources */,
 				9A64C87D1E7137E5008115FF /* LCNContactView.m in Sources */,
+				9A5B66DC1ED4464200AB9BF0 /* FRHyperLabel.m in Sources */,
 				9AED22891E6AE27B0004A8D0 /* SBJsonStreamWriter.m in Sources */,
 				9A64C86C1E7133EB008115FF /* CLTokenView.m in Sources */,
 				9A0605D61E6D820900FF4229 /* PledgeTableViewCell.m in Sources */,

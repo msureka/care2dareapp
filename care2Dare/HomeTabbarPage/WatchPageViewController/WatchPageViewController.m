@@ -917,6 +917,7 @@ transparancyTuchView.hidden=YES;
     
     if([[[Array_Watch objectAtIndex:(long)imageV.tag] valueForKey:@"useridvideo1"]isEqualToString:@"0"] || [[[Array_Watch objectAtIndex:(long)imageV.tag] valueForKey:@"useridvideo1"]isEqualToString:[defaults valueForKey:@"userid"]])
     {
+     [self.tabBarController setSelectedIndex:4];
     }
     else
     {

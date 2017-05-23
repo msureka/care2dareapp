@@ -32,7 +32,7 @@
 
 + (instancetype) defaultStyle{
     LCNContactViewStyle *style = [LCNContactViewStyle new];
-    style.textColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+    style.textColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     //style.fontSize = [UIFont systemFontSize];
     [style setFontSize:16];
     style.backgroundColor = BACKGROUND_COLOR;
@@ -52,7 +52,7 @@
     
     //style.fontSize = [UIFont systemFontSize];
      [style setFontSize:16];
-    style.backgroundColor =[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1];
+    style.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     
     style.borderColor = BACKGROUND_COLOR;
     style.borderWidth = 1;

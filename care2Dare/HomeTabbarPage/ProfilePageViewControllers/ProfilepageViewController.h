@@ -10,7 +10,8 @@
 #import "profilePageTableViewCell.h"
 #import "PublicTableViewCell.h"
 #import "PrivateTableViewCell.h"
-@interface ProfilepageViewController : UIViewController
+
+@interface ProfilepageViewController : UIViewController<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 //@property(nonatomic,weak)IBOutlet UIImageView * image_ExpWorld;
 //@property(nonatomic,weak)IBOutlet UIImageView * image_ExpFriend;
 
@@ -33,4 +34,6 @@
 //@property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;
 //@property(nonatomic,strong)FriendExpTableViewCell * cell_FriendExp;
 //@property (nonatomic, retain) UIRefreshControl *refreshControl;
+
+
 @end
