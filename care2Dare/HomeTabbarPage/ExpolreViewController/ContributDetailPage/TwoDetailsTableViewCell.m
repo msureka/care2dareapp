@@ -27,6 +27,12 @@
     
     _image_ProfileComment.clipsToBounds=YES;
     _image_ProfileComment.layer.cornerRadius=_image_ProfileComment.frame.size.height/2;
+//    
+//    _ProgressBar_Total.clipsToBounds = YES;
+//    _ProgressBar_Total.layer.cornerRadius = 2;
+//    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.5f);
+//    _ProgressBar_Total.transform = transform;
+ 
 
 }
 

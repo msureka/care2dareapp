@@ -41,7 +41,7 @@
     CGFloat lastScale;
     CGFloat hh,ww,xx,yy,th,tw,xt,yt,bty,btw,bth,btx,Bluesch,Bluescw,Bluescy,Bluescx,textBluex,textBluey,textBluew,textBlueh,hhone,wwone,xxone,yyone;
     NSURLSessionDataTask *dataTaskupload;
-       NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist,*strCameraVedio,*mediatypeVal,*ImageNSdataThumb,*encodedImageThumb,*str_TappedLabel,*str_LabelCoordinates;
+       NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist,*strCameraVedio,*mediatypeVal,*ImageNSdataThumb,*encodedImageThumb,*str_TappedLabel,*str_LabelCoordinates,*str_falgUiprogressView;
     NSMutableArray * Array_Comment1,*Array_Comment,*Array_RecodVid,*Array_showrecordvid;
     NSData *imageData;
     NSArray *previousArray;
@@ -113,7 +113,7 @@
     ViewTextViewOne.clipsToBounds=YES;
     ViewTextViewOne.layer.cornerRadius=9.0f;
     
-    
+    str_falgUiprogressView=@"yes";
      flag1=@"yes";
     
     
@@ -499,7 +499,7 @@
                                                      
     if(Array_showrecordvid.count !=0)
                 {
-                                                        
+                  str_falgUiprogressView=@"no";
                     NSLog(@"showsVedio===%@",Array_showrecordvid);
                                                     
         [Tableview_ContriBute reloadData];
@@ -1940,13 +1940,23 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [cell_TwoDetails.Image_Private_Public setImage:[UIImage imageNamed:@"privateicon_challenge.png"]];
                 }
                 
-
+                
+                if ([str_falgUiprogressView isEqualToString:@"yes"])
+                {
+                  
                 
     if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""] || [[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
                 {
                     
     [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width/2), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
          
+//                    
+//                    CGRect frame = cell_TwoDetails.ProgressBar_Total.frame;
+//                    frame.origin.y=cell_TwoDetails.ProgressBar_Total.frame.origin.y;//pass the cordinate which you want
+//                    frame.origin.x= (self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width/2);//pass the cordinate which you want
+//                    cell_TwoDetails.ProgressBar_Total.frame= frame;
+//                    
+                   
                     
        [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
                     
@@ -2092,7 +2102,12 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         cell_TwoDetails.label_Moretxt.hidden=YES;
                     }
                 }
-                
+                    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
+                    cell_TwoDetails.ProgressBar_Total.transform = transform;
+                    cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
+                    cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
+                    str_falgUiprogressView=@"no";
+                }
                 UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
                 [cell_TwoDetails.image_SecProfile addGestureRecognizer:image_SecProfileTapped];
                 
@@ -2225,10 +2240,10 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
 
                 
-                CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
-                cell_TwoDetails.ProgressBar_Total.transform = transform;
-                cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
-                cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
+//                CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
+//                cell_TwoDetails.ProgressBar_Total.transform = transform;
+//                cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
+//                cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
             }
             else if (indexPath.row==1)
             {
@@ -2247,7 +2262,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 
                 
-                
+         
                 
                 
             }
@@ -2271,9 +2286,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 }
     
                 
-               
-                
-                
+   
+            
                 return cell_TwoDetails;
                 
             }

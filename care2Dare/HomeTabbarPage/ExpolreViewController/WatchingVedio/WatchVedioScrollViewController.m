@@ -48,6 +48,7 @@
     UIActivityIndicatorView *indicatorView;
     NSMutableArray *ImageArrayTag;
     UIImageView * imagesTagRow;
+
 }
 @end
 
@@ -296,7 +297,7 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
     Image_Profile_View2.layer.cornerRadius=Image_Profile_View2.frame.size.height/2;
     [View_PlayerView1 addSubview:Image_Profile_View2];
     
-    ButtonImage_acceptFrnd_View2=[[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width-60),17, 28, 28)];
+    ButtonImage_acceptFrnd_View2=[[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width-40),17, 28, 28)];
     ButtonImage_acceptFrnd_View2.backgroundColor=[UIColor clearColor];
  
     [View_PlayerView1 addSubview:ButtonImage_acceptFrnd_View2];
@@ -1735,7 +1736,7 @@ Label_PlayvideoEndTime.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" siz
         
         
         
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridval1,userid2,str_ChallengeidVal];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridval1,userid2,str_Userid2val];
         
         
         
@@ -1889,7 +1890,14 @@ UIGestureRecognizer * rcz=(UIGestureRecognizer *)reconizer;
     
     str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)imagesTagRow.tag]valueForKey:@"useridvideo"]];
     videoid1=[NSString stringWithFormat:@"%@",[[Array_VediosData objectAtIndex:(long)imagesTagRow.tag]valueForKey:@"videoid1"]];
+    if (indexVedio==1)
+    {
+        
+    }
+    else
+    {
     indexVedio=((long)imagesTagRow.tag)+1;
+    }
     [self CommunicationPlayVedio];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

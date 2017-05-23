@@ -1181,7 +1181,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     cameraUI.videoQuality = UIImagePickerControllerQualityTypeIFrame1280x720;
     
     cameraUI.showsCameraControls = YES;
-  cameraUI.videoMaximumDuration = 5.0f;
+  cameraUI.videoMaximumDuration = 60.0f;
  
     cameraUI.allowsEditing = NO;
     

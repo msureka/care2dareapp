@@ -277,12 +277,15 @@ style:UIAlertActionStyleDefault
         
         
         NSString *userid= @"userid";
-       
+          NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        NSString *profileuserid= @"profileuserid";
+     
         
         NSString *typeprofile= @"typeprofile";
         NSString *typeprofileval =@"PUBLIC";
         
-    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid,userId_prof,typeprofile,typeprofileval];
+    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@",userid,useridval1,profileuserid,userId_prof,typeprofile,typeprofileval];
         
         
         
@@ -346,7 +349,7 @@ style:UIAlertActionStyleDefault
 
 for (int i=0; i<Array_Public1.count; i++)
               {
-if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"yes"])
+if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualToString:@"yes"])
                     {
     [Array_Public addObject:[Array_Public1 objectAtIndex:i]];
                        }
@@ -588,7 +591,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"y
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
                 cell_Public.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
-            if ([[dic_worldexp valueForKey:@"accepted"]isEqualToString:@"yes"])
+            if ([[dic_worldexp valueForKey:@"userprofileaccepted"]isEqualToString:@"yes"])
             {
                 cell_Public.Image_NewFrnd.hidden=YES;
                 
@@ -799,7 +802,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"accepted"]isEqualToString:@"y
             cell_Public = [_Tableview_Profile cellForRowAtIndexPath:indexPath];
             
             [Array_new addObject:didselectDic];
-            if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
+            if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"]||[[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""])
             {
                // set.ProfileImgeData =cell_Public.Image_Profile.image;
                 set.AllArrayData =Array_new;

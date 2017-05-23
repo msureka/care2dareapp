@@ -230,7 +230,7 @@
         cell_fb.Button_invite.enabled=YES;
         [cell_fb.Button_invite setTitle:@"ADD" forState:UIControlStateNormal];
           [cell_fb.Button_invite addTarget:self action:@selector(AddUser:) forControlEvents:UIControlEventTouchUpInside];
-         [cell_fb.Button_invite setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+         [cell_fb.Button_invite setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
          [cell_fb.Button_invite setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else if ([[dictVal valueForKey:@"status"] isEqualToString:@"INVITE"])
@@ -238,7 +238,7 @@
         cell_fb.Button_invite.enabled=YES;
         [cell_fb.Button_invite setTitle:@"INVITE" forState:UIControlStateNormal];
           [cell_fb.Button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
-        [cell_fb.Button_invite setBackgroundColor:[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:1]];
+        [cell_fb.Button_invite setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
         [cell_fb.Button_invite setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     }
