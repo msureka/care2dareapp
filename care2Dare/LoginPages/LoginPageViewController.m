@@ -618,10 +618,10 @@
                                                  
                                                  
                                                  NSLog(@"array_login ResultString %@",ResultString);
-                                                 if ([ResultString isEqualToString:@"loginerror"])
+                        if ([ResultString isEqualToString:@"loginerror"])
                                                  {
                                                      [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Enter incorrect username and password." preferredStyle:UIAlertControllerStyleAlert];
+                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Incorrect Login" message:@"Please enter your registered email address and password and try again." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                         style:UIAlertActionStyleDefault
@@ -631,10 +631,10 @@
                                                      
                                                      
                                                  }
-                                                 if ([ResultString isEqualToString:@"deactive"])
+                    if ([ResultString isEqualToString:@"deactive"])
                                                  {
                                                      [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account is deactive." preferredStyle:UIAlertControllerStyleAlert];
+                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account has been deactivated." preferredStyle:UIAlertControllerStyleAlert];
                                                      
                                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                         style:UIAlertActionStyleDefault

@@ -1163,9 +1163,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         chosenImage = info[UIImagePickerControllerOriginalImage];
        cell_Profile.Image_ProfileImg.image=chosenImage;
         
-        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.5);
     
-        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+        imageData = UIImageJPEGRepresentation(chosenImage, 0.5);
           ImageNSdata = [Base64 encode:imageData];
     
     
