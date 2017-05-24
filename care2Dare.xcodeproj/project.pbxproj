@@ -251,6 +251,7 @@
 		9A7864F01ED31541006503D4 /* worldicon_challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EA1ED31541006503D4 /* worldicon_challenge.png */; };
 		9A7864F11ED31541006503D4 /* worldicon_challenge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EB1ED31541006503D4 /* worldicon_challenge@2x.png */; };
 		9A7864F21ED31541006503D4 /* worldicon_challenge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */; };
+		9A822FD31ED5974D001149DC /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A822FD11ED5974D001149DC /* ChangePasswordViewController.m */; };
 		9A99BAD31E81378D00A2C3E2 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD11E81378D00A2C3E2 /* Messages.framework */; };
 		9A99BAD41E81378D00A2C3E2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */; };
 		9AA25EE31EB1EF3500B6DF45 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */; };
@@ -775,6 +776,8 @@
 		9A7864EA1ED31541006503D4 /* worldicon_challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldicon_challenge.png; sourceTree = "<group>"; };
 		9A7864EB1ED31541006503D4 /* worldicon_challenge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldicon_challenge@2x.png"; sourceTree = "<group>"; };
 		9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldicon_challenge@3x.png"; sourceTree = "<group>"; };
+		9A822FD01ED5974D001149DC /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		9A822FD11ED5974D001149DC /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		9A99BAD11E81378D00A2C3E2 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		9A99BAD21E81378D00A2C3E2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9AA25EE11EB1EF3500B6DF45 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
@@ -1158,6 +1161,7 @@
 		9A19B3A31E6E803000262BC1 /* AccountsettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				9A822FCF1ED5972A001149DC /* ChangePassword */,
 				9A2F080B1ECC106400C46DF9 /* ContactList */,
 				9A2F080C1ECC106400C46DF9 /* FacebookList */,
 				9A2F080D1ECC106400C46DF9 /* TwitterList */,
@@ -1685,6 +1689,15 @@
 				9A7864EC1ED31541006503D4 /* worldicon_challenge@3x.png */,
 			);
 			path = privateandpublicicons;
+			sourceTree = "<group>";
+		};
+		9A822FCF1ED5972A001149DC /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				9A822FD01ED5974D001149DC /* ChangePasswordViewController.h */,
+				9A822FD11ED5974D001149DC /* ChangePasswordViewController.m */,
+			);
+			path = ChangePassword;
 			sourceTree = "<group>";
 		};
 		9AA645C21E7BBEFA00E49B65 /* helpgray */ = {
@@ -2750,6 +2763,7 @@
 				9A0605DF1E6D824300FF4229 /* FavoritePageViewController.m in Sources */,
 				9A38F5921E96641700EADE7F /* WatchVedioShareTableViewCell.m in Sources */,
 				9A5D67671EA4BDB3001176B3 /* StatsFourTableViewCell.m in Sources */,
+				9A822FD31ED5974D001149DC /* ChangePasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

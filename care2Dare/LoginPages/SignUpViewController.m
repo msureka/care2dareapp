@@ -141,12 +141,12 @@
         
         if ([substring isEqualToString:@"Terms of Service"])
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/terms.html"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/terms.html"]];
             
         }
         if ([substring isEqualToString:@"Privacy Policy"])
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/privacy.html"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/privacy.html"]];
             
         }
     };

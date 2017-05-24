@@ -68,5 +68,9 @@
 	<string>http://www.care2dareapp.com/app/deleteaccount.php</string>
 	<key>savepicture</key>
 	<string>http://www.care2dareapp.com/app/savepicture.php</string>
+	<key>forgotpassword</key>
+	<string>http://www.care2dareapp.com/app/forgotpassword.php</string>
+	<key>changepassword</key>
+	<string>http://www.care2dareapp.com/app/changepassword.php</string>
 </dict>
 </plist>

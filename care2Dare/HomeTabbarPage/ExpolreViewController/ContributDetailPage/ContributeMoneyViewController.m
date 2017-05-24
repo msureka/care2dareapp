@@ -31,9 +31,15 @@
     [view_Topheader.layer addSublayer:borderBottom_topheder];
     
     Button_Contribute_Send.enabled=NO;
+      [Button_Contribute_Send setTitle:@"SEND" forState:UIControlStateNormal];
+   
+    
+    
+    
+    
+    [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
-    [Button_Contribute_Send setTitle:@"SEND" forState:UIControlStateNormal];
-    [Button_Contribute_Send setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
+    
     Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%@%@",@"x",total_players,@" players"];
     [textfield_Ammounts becomeFirstResponder];
 }
@@ -248,12 +254,12 @@ NSLog(@"error login2.......%@",error.description);
     {
         textfield_Ammounts.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
         Button_Contribute_Send.enabled=NO;
-        Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+
         [Button_Contribute_Send setTitle:@"SEND" forState:UIControlStateNormal];
         
   
-       
-        [Button_Contribute_Send setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:0.9] forState:UIControlStateNormal];
+        [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
         
 //        Label_TotalContribute.text=@"SEND";
 //        Label_TotalContribute.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];

@@ -378,15 +378,13 @@
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
             [cell_Profile.Label_Friends22 addGestureRecognizer:ViewTap11];
             
-            NSURL *url=[NSURL URLWithString:Str_profileurl];
-            
-            [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+          
             
             if ([[defaults valueForKey:@"logintype"] isEqualToString:@"FACEBOOK"]|| [[defaults valueForKey:@"logintype"] isEqualToString:@"TWITTER"])
             {
-//                NSURL *url=[NSURL URLWithString:Str_profileurl];
-//                
-//                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                NSURL *url=[NSURL URLWithString:Str_profileurl];
+                
+                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                  [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
                 
             }
@@ -396,14 +394,16 @@
         cell_Profile.Image_ProfileImg.userInteractionEnabled=YES;
     UITapGestureRecognizer *ViewTapprofile =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapprofileTappedView:)];
         [cell_Profile.Image_ProfileImg addGestureRecognizer:ViewTapprofile];
-//                if(chosenImage ==nil)
-//                {
-//                 [cell_Profile.Image_ProfileImg setImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-//                }
-//                else
-//                {
-//                  cell_Profile.Image_ProfileImg.image=chosenImage;
-//                }
+                if(chosenImage ==nil)
+                {
+NSURL *url=[NSURL URLWithString:Str_profileurl];
+                    
+[cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                }
+                else
+                {
+                  cell_Profile.Image_ProfileImg.image=chosenImage;
+                }
 
             }
             
@@ -1114,7 +1114,7 @@ NSLog(@"error login2.......%@",error.description);
 }
 - (void)ViewTapprofileTappedView:(UITapGestureRecognizer *)recognizer
 {
-    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Gallery",@"Choose Cammera",nil];
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose from gallery",@"Take a picture",nil];
     popup.tag = 777;
     [popup showInView:self.view];
 }

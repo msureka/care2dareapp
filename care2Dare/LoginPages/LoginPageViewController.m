@@ -24,7 +24,7 @@
     NSDictionary *urlplist;
     NSMutableArray *array_login;
     NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
-    
+    NSString *String_Forgot;
     NSMutableArray *fb_friend_id;
 }
 @property (weak, nonatomic) IBOutlet FRHyperLabel *termLabel;
@@ -129,12 +129,12 @@
         
         if ([substring isEqualToString:@"Terms of Service"])
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/terms.html"]];
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/terms.html"]];
             
         }
         if ([substring isEqualToString:@"Privacy Policy"])
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://play-date.ae/privacy.html"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/privacy.html"]];
             
         }
     };
@@ -160,6 +160,185 @@
 -(IBAction)ForgetPasswordAction:(id)sender
 {
     
+    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Forgot Password" message:@"To send your password, please enter your registered email address." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av textFieldAtIndex:0].delegate = self;
+    [av show];
+    NSLog(@"dddd=%@",av);
+
+    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag==100)
+    {
+        exit(0);
+    }
+    else
+    {
+        if (buttonIndex==1)
+        {
+            if ([[alertView textFieldAtIndex:0].text isEqualToString:@""])
+            {
+                
+            }
+            else
+            {
+                String_Forgot=[alertView textFieldAtIndex:0].text;
+                [self ForgetPasswordCommunication];
+                NSLog(@"%@", [alertView textFieldAtIndex:0].text);
+            }
+        }
+        
+    }
+}
+-(void)ForgetPasswordCommunication
+{
+    
+    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
+    
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    
+    
+    
+    if ([emailTest evaluateWithObject:String_Forgot] == NO)
+        
+    {
+        
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"This seems to be incorrect. Please enter a valid email address and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        
+         [self.view endEditing:YES];
+    }
+    
+    else
+    {
+        
+        [self.view endEditing:YES];
+        [self.view showActivityViewWithLabel:@"Loading"];
+        NSString *email= @"email";
+       
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",email,String_Forgot];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"forgotpassword"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                               
+                    NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                    
+                                                     
+        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+            
+            if ([ResultString isEqualToString:@"noemail"])
+                {
+                [self.view hideActivityViewWithAfterDelay:0];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The email address you have entered is not registered in our system or your account has been deactivated. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                style:UIAlertActionStyleDefault handler:nil];
+                        [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                         
+                }
+            if ([ResultString isEqualToString:@"facebooklogin"])
+                {
+                        [self.view hideActivityViewWithAfterDelay:0];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You have registered with us via Facebook. Please use the Login with Facebook feature." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+            style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                    }
+                                                     
+                if ([ResultString isEqualToString:@"twitterlogin"])
+                    {
+                    [self.view hideActivityViewWithAfterDelay:0];
+                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You have registered with us via Twitter. Please use the Login with Twitter feature." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                        handler:nil];
+                        
+                        [alertController addAction:actionOk];
+                        [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                         
+                    }
+                                                     
+            if ([ResultString isEqualToString:@"sent"])
+                {
+            [self.view hideActivityViewWithAfterDelay:0];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Password Sent" message:@"Your password has been sent to your registered email address. Thank-you!" preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+                                                         
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                  }
+                                                    
+                      [self.view hideActivityViewWithAfterDelay:0];
+                                                     
+            }
+                                                 
+                        else
+                        {
+                        NSLog(@" error login1 ---%ld",(long)statusCode);
+                    [self.view hideActivityViewWithAfterDelay:0];
+                                                 }
+                                                 
+                                                 
+                                             }
+                        else if(error)
+                    {
+                [self.view hideActivityViewWithAfterDelay:0];
+                NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                             
+                                         }];
+        [dataTask resume];
+    }
 }
 -(IBAction)LoginWithFbAction:(id)sender
 {

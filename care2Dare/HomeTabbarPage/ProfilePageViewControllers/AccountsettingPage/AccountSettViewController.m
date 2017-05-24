@@ -23,6 +23,7 @@
 #import "FacebookListViewController.h"
 #import "TwitterListViewController.h"
 #import "UIView+RNActivityView.h"
+#import "ChangePasswordViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
@@ -67,7 +68,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     
     
     
-    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms",@"About",@"Log Out",@"Delete my account",nil];
+    Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms and Conditions",@"Privacy Policy",@"Log Out",@"Delete my account",nil];
     
    
     
@@ -169,6 +170,24 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 {
                     Twocell2.switchOutlet.hidden=YES;
                 }
+                
+                
+                if (indexPath.row == 1)
+                {
+                
+        if ([[defaults valueForKey:@"logintype"] isEqualToString:@"FACEBOOK"]|| [[defaults valueForKey:@"logintype"] isEqualToString:@"TWITTER"])
+                {
+                    
+                    Twocell2.LabelVal.textColor=[UIColor lightGrayColor];
+                }
+                else
+                {
+                    
+                    Twocell2.LabelVal.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
+                    
+                }
+                }
+                
                                return Twocell2;
                 
             }
@@ -227,7 +246,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         Label1.textColor=[UIColor lightGrayColor];
       
     Label1.font=[UIFont fontWithName:@"San Francisco Display" size:15.0f];
-        Label1.text=@"If checked.only your friends will be able to send you dare request";
+        Label1.text=@"If checked, only your friends will be able to send you dare requests";
         Label1.textAlignment = NSTextAlignmentLeft;
         Label1.numberOfLines =2;
         Label1.adjustsFontSizeToFitWidth=YES;
@@ -351,6 +370,29 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 {
     NSLog(@"RESUltssssInvite==%@",results);
 }
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
     switch (result)
@@ -473,6 +515,24 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         if (indexPath.row==1)
         {
             
+                
+    if ([[defaults valueForKey:@"logintype"] isEqualToString:@"FACEBOOK"]|| [[defaults valueForKey:@"logintype"] isEqualToString:@"TWITTER"])
+                {
+                    
+                   
+                }
+                else
+                {
+                    
+   UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    
+   ChangePasswordViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
+                    
+    [self.navigationController pushViewController:set animated:YES];
+                 
+                    
+                }
+            
 
         }
         if (indexPath.row==2)
@@ -494,18 +554,30 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         if (indexPath.row==0)
         {
             
+            NSString *emailTitle = @"Report a problem";
+            // Email Content
+            NSString *messageBody = @"";
+            NSArray *toRecipents = [NSArray arrayWithObject:@"support@care2dareapp.com"];
             
+            MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+            mc.mailComposeDelegate = self;
+            [mc setSubject:emailTitle];
+            [mc setMessageBody:messageBody isHTML:YES];
+            [mc setToRecipients:toRecipents];
+            
+            // Present mail view controller on screen
+            [self presentViewController:mc animated:YES completion:NULL];  
             
         }
         if (indexPath.row==1)
         {
-            
+           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/terms.html"]];
             
         }
         if (indexPath.row==2)
         {
             
-            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.care2dareapp.com/privacy.html"]];
             
         }
         if (indexPath.row==3)
