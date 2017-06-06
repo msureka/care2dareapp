@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *Send_Button;
 @property (strong, nonatomic)NSMutableArray *Array_InviteUserTags;
+//@property (strong, nonatomic) IBOutlet UITableView * Table_ContactView;
 -(IBAction)BackButton:(id)sender;
 
 -(IBAction)SendButtons:(id)sender;

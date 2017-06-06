@@ -72,5 +72,7 @@
 	<string>http://www.care2dareapp.com/app/forgotpassword.php</string>
 	<key>changepassword</key>
 	<string>http://www.care2dareapp.com/app/changepassword.php</string>
+	<key>suggested</key>
+	<string>http://www.care2dareapp.com/app/suggested.php</string>
 </dict>
 </plist>

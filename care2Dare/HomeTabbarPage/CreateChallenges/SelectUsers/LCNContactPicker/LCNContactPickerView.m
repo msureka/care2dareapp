@@ -38,7 +38,9 @@ static const CGFloat kHorizontalPadding = 3;
     self = [super initWithFrame:frame];
     if (self) {
         //行高
-        LCNContactModel *model = [LCNContactModel new];
+        
+  
+            LCNContactModel *model = [LCNContactModel new];
         model.contactName = @"18867103612";
         model.contact = @"18867103612";
         LCNContactView *tmpView = [[LCNContactView alloc] initWithContactModel:model];
@@ -98,7 +100,11 @@ static const CGFloat kHorizontalPadding = 3;
     self.textField.placeholder=@"Add Friends";
     [self.textField resignFirstResponder];
     [self.textField becomeFirstResponder];
-
+  
+    
+    [self.textField setAutocorrectionType:UITextAutocorrectionTypeNo];
+    
+   
     [self.scrollView addSubview:self.textField];
 }
 
@@ -153,6 +159,8 @@ static const CGFloat kHorizontalPadding = 3;
     //添加至数据源
     [self.contactArray addObject:model];
     [self.contactViewArray addObject:contactVeiw];
+    self.textField.placeholder=@"Add Friends";
+    [self.textField becomeFirstResponder];
     
 }
 
@@ -234,7 +242,8 @@ static const CGFloat kHorizontalPadding = 3;
     
     NSMutableArray *deletedArray = [NSMutableArray array];
     
-    for (NSInteger i = self.contactViewArray.count - 1; i >= 0; i--) {
+    for (NSInteger i = self.contactViewArray.count - 1; i >= 0; i--)
+    {
         if (self.contactViewArray[i] == contactView) {
             [contactView removeFromSuperview];
             [self.contactViewArray removeObjectAtIndex:i];
@@ -267,6 +276,10 @@ static const CGFloat kHorizontalPadding = 3;
     }
     
     self.lastAddedContactView = [self.contactViewArray lastObject];
+    self.textField.placeholder=@"Add Friends";
+    [self.textField becomeFirstResponder];
+    NSLog(@"arrayContact==%lu",(unsigned long)self.contactViewArray.count);
+     NSLog(@"arrayContact==%lu",(unsigned long)self.lastAddedContactView);
 }
 
 #pragma mark - LCNTextFieldDelegate
@@ -293,9 +306,11 @@ static const CGFloat kHorizontalPadding = 3;
     return YES;
 }
 
--(void)LCNTextfieldDeleteBackwardWithEmpty:(UITextField *)textField{
+-(void)LCNTextfieldDeleteBackwardWithEmpty:(UITextField *)textField
+{
     
-    if ([self.delegate respondsToSelector:@selector(LCNContactPickerDidRemoveContact:)]) {
+    if ([self.delegate respondsToSelector:@selector(LCNContactPickerDidRemoveContact:)])
+    {
         [self.delegate LCNContactPickerDidRemoveContact:[self.contactArray lastObject]];
     }
     
@@ -306,6 +321,15 @@ static const CGFloat kHorizontalPadding = 3;
     self.lastAddedContactView = [self.contactViewArray lastObject];
     [self reSizingTextField];
     [self reSizeingFrame];
+    
+
+    if (self.lastAddedContactView==0)
+    {
+            self.textField.placeholder=@"Add Friends";
+            [self.textField becomeFirstResponder];
+    }
+   
+    
 }
 
 
