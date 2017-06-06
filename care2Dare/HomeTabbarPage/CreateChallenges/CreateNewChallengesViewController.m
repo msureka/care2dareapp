@@ -21,7 +21,7 @@
     NSUserDefaults *defaults;
     float pixelsPerValue;
     float leftAdjust;
-    NSString * viewCheck,*String_Cont_Name,*MoneyString,*_String_Cont_UserId,*challengetypeVal,*mediatypeVal,* CheckDivMul,*Strin_Pay_Req_Type,*Str_paiduserid,*assettype,*StrCommaCount,*encodedImage,*encodedImageThumb,*strInvite_users,*strCameraVedio,*SelectGallery,* ImageNSdata,*ImageNSdataThumb,*strinRetake,* GalStr,*CameraStr,*RecordStr;;
+    NSString * viewCheck,*String_Cont_Name,*MoneyString,*_String_Cont_UserId,*challengetypeVal,*mediatypeVal,* CheckDivMul,*Strin_Pay_Req_Type,*Str_paiduserid,*assettype,*StrCommaCount,*encodedImage,*encodedImageThumb,*strInvite_users,*strCameraVedio,*SelectGallery,* ImageNSdata,*ImageNSdataThumb,*strinRetake,* GalStr,*CameraStr,*RecordStr,*challengetypeValDonate;;
     
     NSMutableArray * array_CreateChallenges;
     
@@ -55,7 +55,7 @@
 @end
 
 @implementation CreateNewChallengesViewController
-@synthesize Array_Names,Array_UserId,BackroundImg,Image_Play;
+@synthesize Array_Names,Array_UserId,BackroundImg,Image_Play,Image_Donate,Image_Raised,Label_Donate,Label_Raised;
 @synthesize slider_Days,Label_Currentsdays;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +80,7 @@
     [BackroundImg addGestureRecognizer:BackImageGesture];
     
     challengetypeVal=@"PUBLIC";
-    
+    challengetypeValDonate=@"RAISE";
     
     
     
@@ -130,6 +130,14 @@
     _Image_Public.userInteractionEnabled=YES;
     _Image_Private.userInteractionEnabled=YES;
     
+    
+    
+    Label_Raised.userInteractionEnabled=YES;
+    Label_Donate.userInteractionEnabled=YES;
+    Image_Raised.userInteractionEnabled=YES;
+    Image_Donate.userInteractionEnabled=YES;
+    
+    
     UITapGestureRecognizer *LabelTap_public =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_publicTapped:)];
     [_Label_Public addGestureRecognizer:LabelTap_public];
     
@@ -146,6 +154,31 @@
     _Label_Private.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     [_Image_Public setImage:[UIImage imageNamed:@"blueworld.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"private.png"]];
+    
+    
+    
+    UITapGestureRecognizer *LabelTap_raised =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_RaisedTapped:)];
+    [Label_Raised addGestureRecognizer:LabelTap_raised];
+    
+    UITapGestureRecognizer *LabelTap_Donate =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_DonateTapped:)];
+    [Label_Donate addGestureRecognizer:LabelTap_Donate];
+    
+    UITapGestureRecognizer *ImageTap_Donate =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_DonateTapped:)];
+    [Image_Donate addGestureRecognizer:ImageTap_Donate];
+    
+    UITapGestureRecognizer *ImageTap_Raised =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LabelTap_RaisedTapped:)];
+    [Image_Raised addGestureRecognizer:ImageTap_Raised];
+    
+    Label_Raised.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+    Label_Donate.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
+    [Image_Raised setImage:[UIImage imageNamed:@"raiseblue.png"]];
+    [Image_Donate setImage:[UIImage imageNamed:@"donategrey.png"]];
+    
+    //donateblue
+    //donategrey
+    //raiseblue
+    //raisegrey.png
+    
     _Label_ChallengesName.userInteractionEnabled=YES;
     
     NSLog(@"flaaaaag==%@",[defaults valueForKey:@"flag"]);
@@ -352,6 +385,46 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     //[self performSegueWithIdentifier:@"next" sender:self];
 }
+
+
+
+- (void)LabelTap_RaisedTapped:(UITapGestureRecognizer *)recognizer
+{
+
+    challengetypeValDonate=@"RAISE";
+    
+    
+    
+    [Image_Raised setImage:[UIImage imageNamed:@"raiseblue.png"]];
+    [Image_Donate setImage:[UIImage imageNamed:@"donategrey.png"]];
+    Label_Raised.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+    Label_Donate.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
+     _Label_totalAmount.hidden=YES;
+}
+- (void)LabelTap_DonateTapped:(UITapGestureRecognizer *)recognizer
+{
+    challengetypeValDonate=@"DONATE";
+    [Image_Raised setImage:[UIImage imageNamed:@"raisegrey.png"]];
+    [Image_Donate setImage:[UIImage imageNamed:@"donateblue.png"]];
+    Label_Donate.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+    Label_Raised.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
+    
+    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
+    
+    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
+    {
+        _Label_totalAmount.hidden=YES;
+    }
+    else
+    {
+        _Label_totalAmount.hidden=NO;
+        
+    }
+   
+
+    
+}
+
 - (void)LabelTap_publicTapped:(UITapGestureRecognizer *)recognizer
 {
     challengetypeVal=@"PUBLIC";
@@ -627,7 +700,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 NSString *titleVal =_Textview_Desc.text;
                 
                 NSString *challengetype= @"challengetype";
-                
+                NSString *contributiontype= @"contributiontype";
                 
                 NSString *mediatype= @"mediatype";
                 
@@ -637,6 +710,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 
                 NSString *payperchallenger= @"payperchallenger";
                 NSString *payperchallengerVal =_Textfield_Amount.text;
+                
+                
+                
                 
                 NSString *noofchallengers= @"noofchallengers";
                 NSString *noofchallengersVal;
@@ -652,7 +728,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 NSString *mediaimagethumb=@"mediathumbnail";
                 
                 
-                NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
+                NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,contributiontype,challengetypeValDonate,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
                 
                 
                 
@@ -862,6 +938,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         NSString *titleVal =_Textview_Desc.text;
         
         NSString *challengetype= @"challengetype";
+        NSString *contributiontype= @"contributiontype";
         
         
         NSString *mediatype= @"mediatype";
@@ -887,7 +964,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         NSString *mediaimagethumb=@"mediathumbnail";
 
         
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,contributiontype,challengetypeValDonate,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
         
         
         
@@ -1069,6 +1146,10 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     //    [self.startScreenScrollView setContentOffset:CGPointMake(0,_Button_Create.frame.origin.y-(_Button_Create.frame.size.height*2)) animated:YES];
     [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-250)-(_Textfield_Amount.frame.size.height)) animated:YES];
     
+    if ([challengetypeValDonate isEqualToString:@"DONATE"])
+    {
+        
+    
     _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count+1)];
     CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
     
@@ -1080,6 +1161,14 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     {
         _Label_totalAmount.hidden=NO;
    
+    }
+    }
+    else
+    {
+        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%@",@"total: $ ",_Textfield_Amount.text];
+       
+            _Label_totalAmount.hidden=YES;
+        
     }
     
 }

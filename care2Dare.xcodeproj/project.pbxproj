@@ -110,6 +110,18 @@
 		9A25031F1ECC48B400402839 /* FacebookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A25031E1ECC48B400402839 /* FacebookListViewController.m */; };
 		9A2503221ECC497300402839 /* TwitteroneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2503211ECC497300402839 /* TwitteroneTableViewCell.m */; };
 		9A2503251ECC514100402839 /* FacebookoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2503241ECC514100402839 /* FacebookoneTableViewCell.m */; };
+		9A25E5FE1EE674FC0010FBF7 /* donateblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F21EE674FC0010FBF7 /* donateblue.png */; };
+		9A25E5FF1EE674FC0010FBF7 /* donateblue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F31EE674FC0010FBF7 /* donateblue@2x.png */; };
+		9A25E6001EE674FC0010FBF7 /* donateblue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F41EE674FC0010FBF7 /* donateblue@3x.png */; };
+		9A25E6011EE674FC0010FBF7 /* donategrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F51EE674FC0010FBF7 /* donategrey.png */; };
+		9A25E6021EE674FC0010FBF7 /* donategrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F61EE674FC0010FBF7 /* donategrey@2x.png */; };
+		9A25E6031EE674FC0010FBF7 /* donategrey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F71EE674FC0010FBF7 /* donategrey@3x.png */; };
+		9A25E6041EE674FC0010FBF7 /* raiseblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F81EE674FC0010FBF7 /* raiseblue.png */; };
+		9A25E6051EE674FC0010FBF7 /* raiseblue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5F91EE674FC0010FBF7 /* raiseblue@2x.png */; };
+		9A25E6061EE674FC0010FBF7 /* raiseblue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5FA1EE674FC0010FBF7 /* raiseblue@3x.png */; };
+		9A25E6071EE674FC0010FBF7 /* raisegrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5FB1EE674FC0010FBF7 /* raisegrey.png */; };
+		9A25E6081EE674FC0010FBF7 /* raisegrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5FC1EE674FC0010FBF7 /* raisegrey@2x.png */; };
+		9A25E6091EE674FC0010FBF7 /* raisegrey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A25E5FD1EE674FC0010FBF7 /* raisegrey@3x.png */; };
 		9A2F08101ECC108600C46DF9 /* ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */; };
 		9A2F08131ECC121E00C46DF9 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2F08111ECC121E00C46DF9 /* Contacts.framework */; };
 		9A2F08141ECC121E00C46DF9 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2F08121ECC121E00C46DF9 /* ContactsUI.framework */; };
@@ -591,6 +603,18 @@
 		9A2503211ECC497300402839 /* TwitteroneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitteroneTableViewCell.m; sourceTree = "<group>"; };
 		9A2503231ECC514100402839 /* FacebookoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookoneTableViewCell.h; sourceTree = "<group>"; };
 		9A2503241ECC514100402839 /* FacebookoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookoneTableViewCell.m; sourceTree = "<group>"; };
+		9A25E5F21EE674FC0010FBF7 /* donateblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donateblue.png; sourceTree = "<group>"; };
+		9A25E5F31EE674FC0010FBF7 /* donateblue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "donateblue@2x.png"; sourceTree = "<group>"; };
+		9A25E5F41EE674FC0010FBF7 /* donateblue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "donateblue@3x.png"; sourceTree = "<group>"; };
+		9A25E5F51EE674FC0010FBF7 /* donategrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donategrey.png; sourceTree = "<group>"; };
+		9A25E5F61EE674FC0010FBF7 /* donategrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "donategrey@2x.png"; sourceTree = "<group>"; };
+		9A25E5F71EE674FC0010FBF7 /* donategrey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "donategrey@3x.png"; sourceTree = "<group>"; };
+		9A25E5F81EE674FC0010FBF7 /* raiseblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = raiseblue.png; sourceTree = "<group>"; };
+		9A25E5F91EE674FC0010FBF7 /* raiseblue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raiseblue@2x.png"; sourceTree = "<group>"; };
+		9A25E5FA1EE674FC0010FBF7 /* raiseblue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raiseblue@3x.png"; sourceTree = "<group>"; };
+		9A25E5FB1EE674FC0010FBF7 /* raisegrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = raisegrey.png; sourceTree = "<group>"; };
+		9A25E5FC1EE674FC0010FBF7 /* raisegrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raisegrey@2x.png"; sourceTree = "<group>"; };
+		9A25E5FD1EE674FC0010FBF7 /* raisegrey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raisegrey@3x.png"; sourceTree = "<group>"; };
 		9A2F080E1ECC108600C46DF9 /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
 		9A2F080F1ECC108600C46DF9 /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
 		9A2F08111ECC121E00C46DF9 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -1264,6 +1288,25 @@
 			path = friendsscreen;
 			sourceTree = "<group>";
 		};
+		9A25E5F11EE674FC0010FBF7 /* donateraisebuttons */ = {
+			isa = PBXGroup;
+			children = (
+				9A25E5F21EE674FC0010FBF7 /* donateblue.png */,
+				9A25E5F31EE674FC0010FBF7 /* donateblue@2x.png */,
+				9A25E5F41EE674FC0010FBF7 /* donateblue@3x.png */,
+				9A25E5F51EE674FC0010FBF7 /* donategrey.png */,
+				9A25E5F61EE674FC0010FBF7 /* donategrey@2x.png */,
+				9A25E5F71EE674FC0010FBF7 /* donategrey@3x.png */,
+				9A25E5F81EE674FC0010FBF7 /* raiseblue.png */,
+				9A25E5F91EE674FC0010FBF7 /* raiseblue@2x.png */,
+				9A25E5FA1EE674FC0010FBF7 /* raiseblue@3x.png */,
+				9A25E5FB1EE674FC0010FBF7 /* raisegrey.png */,
+				9A25E5FC1EE674FC0010FBF7 /* raisegrey@2x.png */,
+				9A25E5FD1EE674FC0010FBF7 /* raisegrey@3x.png */,
+			);
+			path = donateraisebuttons;
+			sourceTree = "<group>";
+		};
 		9A2F080B1ECC106400C46DF9 /* ContactList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1922,6 +1965,7 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9A25E5F11EE674FC0010FBF7 /* donateraisebuttons */,
 				9A7864E61ED31541006503D4 /* privateandpublicicons */,
 				9AD4F29B1ED06D110085BE8F /* replayandnextvideobuttons */,
 				08B23B891EBE045F00B33820 /* whitearrow */,
@@ -2364,6 +2408,7 @@
 				9A6E39E41E7AB64800B4AD5B /* challenge_favourite@2x.png in Resources */,
 				9AA9B5471E700AC700C6EF37 /* whitearrow.png in Resources */,
 				9A66DA121E8D19340035B081 /* wwf-01.jpg in Resources */,
+				9A25E6071EE674FC0010FBF7 /* raisegrey.png in Resources */,
 				9A0606061E6D87B000FF4229 /* profile_privatetext@2x.png in Resources */,
 				9A38F5AD1E9666BC00EADE7F /* 3dots.png in Resources */,
 				9A5727C21E718994006A5F52 /* playbutton@3x.png in Resources */,
@@ -2377,6 +2422,7 @@
 				9A38F5B91E9666BC00EADE7F /* mute.png in Resources */,
 				9ABB5DB61E6945D300482105 /* twitter@2x.png in Resources */,
 				9A0605B31E6D66D900FF4229 /* profile_circle@2x.png in Resources */,
+				9A25E6011EE674FC0010FBF7 /* donategrey.png in Resources */,
 				9AA645C61E7BBEFA00E49B65 /* help-gray.png in Resources */,
 				9A38F5B71E9666BC00EADE7F /* grayshare@2x.png in Resources */,
 				9A06060E1E6D87B000FF4229 /* profile_publictext1.png in Resources */,
@@ -2398,6 +2444,7 @@
 				9AED22131E6A8C6A0004A8D0 /* create@3x.png in Resources */,
 				9A38F5B11E9666BC00EADE7F /* comments@2x.png in Resources */,
 				9A7864EE1ED31541006503D4 /* privateicon_challenge@2x.png in Resources */,
+				9A25E6041EE674FC0010FBF7 /* raiseblue.png in Resources */,
 				9A6E39F31E7AB64800B4AD5B /* topname@2x.png in Resources */,
 				9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */,
 				9A7864F21ED31541006503D4 /* worldicon_challenge@3x.png in Resources */,
@@ -2414,6 +2461,7 @@
 				9AF84F131E8FCB5D0008408E /* blueprivate.png in Resources */,
 				9A19B3CA1E6E928C00262BC1 /* graybackarrow.png in Resources */,
 				9A6E39E01E7AB64800B4AD5B /* challenge_favourite.png in Resources */,
+				9A25E6051EE674FC0010FBF7 /* raiseblue@2x.png in Resources */,
 				9AED22121E6A8C6A0004A8D0 /* create@2x.png in Resources */,
 				9AED22261E6A8C6A0004A8D0 /* watch.png in Resources */,
 				9A45BA2C1E8E310900BAC5E8 /* friendrequested@2x.png in Resources */,
@@ -2425,6 +2473,7 @@
 				9AED22111E6A8C6A0004A8D0 /* create.png in Resources */,
 				9A38F5B41E9666BC00EADE7F /* fullscreen@2x.png in Resources */,
 				9AA9B5391E700AC700C6EF37 /* blueworld@2x.png in Resources */,
+				9A25E6081EE674FC0010FBF7 /* raisegrey@2x.png in Resources */,
 				9A0606051E6D87B000FF4229 /* profile_privatetext.png in Resources */,
 				9A7864F11ED31541006503D4 /* worldicon_challenge@2x.png in Resources */,
 				9A0605D71E6D820900FF4229 /* PledgeTableViewCell.xib in Resources */,
@@ -2461,10 +2510,12 @@
 				9A19B4121E6EDA3100262BC1 /* blueplus.png in Resources */,
 				9A0605CF1E6D6D4200FF4229 /* PublicTableViewCell.xib in Resources */,
 				9AED22291E6A8C6A0004A8D0 /* watch1@3x.png in Resources */,
+				9A25E6001EE674FC0010FBF7 /* donateblue@3x.png in Resources */,
 				9AED22411E6A9D900004A8D0 /* playbutton@3x.png in Resources */,
 				9A6E39FF1E7ABA6700B4AD5B /* raised_circle@3x.png in Resources */,
 				9AED22231E6A8C6A0004A8D0 /* profile1@3x.png in Resources */,
 				9A38F5BF1E9666BC00EADE7F /* volume.png in Resources */,
+				9A25E6031EE674FC0010FBF7 /* donategrey@3x.png in Resources */,
 				9AA9B5411E700AC700C6EF37 /* photolibrary.png in Resources */,
 				9A19B3C21E6E907D00262BC1 /* setting_facebook@3x.png in Resources */,
 				9A6E39EB1E7AB64800B4AD5B /* raised@3x.png in Resources */,
@@ -2493,6 +2544,7 @@
 				9A02B9031E8B916A00FA68F6 /* Screenshot Filled-50.png in Resources */,
 				9A19B41C1E6EDA3100262BC1 /* searchbar@2x.png in Resources */,
 				9A0605AE1E6D66D900FF4229 /* private@3x.png in Resources */,
+				9A25E6021EE674FC0010FBF7 /* donategrey@2x.png in Resources */,
 				9A0606101E6D87B000FF4229 /* profile_publictext1@3x.png in Resources */,
 				9A0606071E6D87B000FF4229 /* profile_privatetext@3x.png in Resources */,
 				9AED221A1E6A8C6A0004A8D0 /* favourites.png in Resources */,
@@ -2523,6 +2575,7 @@
 				9A0606091E6D87B000FF4229 /* profile_privatetext1@2x.png in Resources */,
 				9A0605AF1E6D66D900FF4229 /* profile_arrow.png in Resources */,
 				9AA9B53C1E700AC700C6EF37 /* camera@2x.png in Resources */,
+				9A25E6061EE674FC0010FBF7 /* raiseblue@3x.png in Resources */,
 				9AA645DF1E7C10C300E49B65 /* mypledge.png in Resources */,
 				9A38F5C11E9666BC00EADE7F /* volume@3x.png in Resources */,
 				9A6E39ED1E7AB64800B4AD5B /* raised_gray@2x.png in Resources */,
@@ -2532,6 +2585,7 @@
 				9A19B3C01E6E907D00262BC1 /* setting_facebook.png in Resources */,
 				9A0605BA1E6D66D900FF4229 /* settings@3x.png in Resources */,
 				9AD690A71EBDD47E00A7A774 /* favouritebutton@2x.png in Resources */,
+				9A25E5FF1EE674FC0010FBF7 /* donateblue@2x.png in Resources */,
 				9A19B3BE1E6E907D00262BC1 /* setting_contacts@2x.png in Resources */,
 				9AED22221E6A8C6A0004A8D0 /* profile1@2x.png in Resources */,
 				9A38F5B51E9666BC00EADE7F /* fullscreen@3x.png in Resources */,
@@ -2539,6 +2593,7 @@
 				9A38F5BC1E9666BC00EADE7F /* stats.png in Resources */,
 				9A0606081E6D87B000FF4229 /* profile_privatetext1.png in Resources */,
 				9A45BA251E8E310900BAC5E8 /* addfriend.png in Resources */,
+				9A25E5FE1EE674FC0010FBF7 /* donateblue.png in Resources */,
 				9ABB5DB21E6945D300482105 /* facebook.png in Resources */,
 				9A19B3C41E6E907D00262BC1 /* setting_twitter@2x.png in Resources */,
 				9AED225A1E6AB7D80004A8D0 /* WorldExpTableViewCell.xib in Resources */,
@@ -2584,6 +2639,7 @@
 				9A19B41B1E6EDA3100262BC1 /* searchbar.png in Resources */,
 				9AA9B5461E700AC700C6EF37 /* video@3x.png in Resources */,
 				9ABB5D6C1E69335600482105 /* Main.storyboard in Resources */,
+				9A25E6091EE674FC0010FBF7 /* raisegrey@3x.png in Resources */,
 				9A06060B1E6D87B000FF4229 /* profile_publictext.png in Resources */,
 				9AED222B1E6A8C6A0004A8D0 /* watch@3x.png in Resources */,
 				9AA9B5451E700AC700C6EF37 /* video@2x.png in Resources */,

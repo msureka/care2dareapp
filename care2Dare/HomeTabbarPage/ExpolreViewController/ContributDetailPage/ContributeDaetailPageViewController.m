@@ -2866,6 +2866,16 @@ if (section==1)
     
     Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(50,0, self.view.frame.size.width-100,38)];
     
+    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
+    {
+        [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
+        Button_Contribute.backgroundColor=[UIColor clearColor];
+        
+        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
     {
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
@@ -2886,7 +2896,7 @@ if (section==1)
        
     
     }
-    
+    }
     Button_Contribute.tag=section;
     Button_Contribute.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
    

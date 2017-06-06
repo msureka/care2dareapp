@@ -46,6 +46,13 @@
 @property(nonatomic,weak)IBOutlet UILabel * Label_Private;
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Public;
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Private;
+
+
+@property(nonatomic,weak)IBOutlet UILabel * Label_Donate;
+@property(nonatomic,weak)IBOutlet UILabel * Label_Raised;
+@property(nonatomic,weak)IBOutlet UIImageView * Image_Donate;
+@property(nonatomic,weak)IBOutlet UIImageView * Image_Raised;
+
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Play;
 @property(nonatomic,weak)IBOutlet UIView * view_SliderTimes;
 @property(nonatomic,weak)IBOutlet UILabel * Label_Currentsdays;
