@@ -273,8 +273,7 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    NSLog(@"SEACH CELL  Array_SearchData=%@", Array_SearchData);
-     NSLog(@"SEACH CELL  Array_SearchData=%@", [Array_SearchData objectAtIndex:indexPath.row]);
+
         return cell;
 //        }
 //        break;
