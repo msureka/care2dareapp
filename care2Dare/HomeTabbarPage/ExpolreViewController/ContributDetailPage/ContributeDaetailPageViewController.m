@@ -1941,9 +1941,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 }
                 
                 
-                if ([str_falgUiprogressView isEqualToString:@"yes"])
-                {
-                  
+//                if ([str_falgUiprogressView isEqualToString:@"yes"])
+//                {
+//                  
                 
     if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""] || [[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
                 {
@@ -2102,12 +2102,17 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         cell_TwoDetails.label_Moretxt.hidden=YES;
                     }
                 }
-                    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
-                    cell_TwoDetails.ProgressBar_Total.transform = transform;
-                    cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
-                    cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
+//                    if ([str_falgUiprogressView isEqualToString:@"yes"])
+//                    {
+//                    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
+//                    cell_TwoDetails.ProgressBar_Total.transform = transform;
+//                    cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
+//                    cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
                     str_falgUiprogressView=@"no";
-                }
+                    //}
+               // }
+                
+                
                 UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
                 [cell_TwoDetails.image_SecProfile addGestureRecognizer:image_SecProfileTapped];
                 
@@ -2255,6 +2260,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 cell_TwoDetails.label_Desc.hidden=YES;
                 cell_TwoDetails.label_Mores.hidden=YES;
                 cell_TwoDetails.image_SecProfile.hidden=YES;
+                cell_TwoDetails.image_SecProfile1.hidden=YES;
+                cell_TwoDetails.image_SecProfile2.hidden=YES;
                 cell_TwoDetails.image_FristProfile.hidden=YES;
                 cell_TwoDetails.ProgressBar_Total.hidden=YES;
                 cell_TwoDetails.label_Moretxt.hidden=YES;
@@ -2277,6 +2284,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 cell_TwoDetails.label_Desc.hidden=YES;
                 cell_TwoDetails.label_Mores.hidden=YES;
                 cell_TwoDetails.image_SecProfile.hidden=YES;
+                cell_TwoDetails.image_SecProfile1.hidden=YES;
+                cell_TwoDetails.image_SecProfile2.hidden=YES;
                 cell_TwoDetails.image_FristProfile.hidden=YES;
                 cell_TwoDetails.ProgressBar_Total.hidden=YES;
                 cell_TwoDetails.label_Moretxt.hidden=YES;
@@ -2868,11 +2877,22 @@ if (section==1)
     
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
     {
+        if ([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]])
+        {
+            [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
+            //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
+            
+            [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
+                        forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
         [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor clearColor];
         
         [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
                     forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     else
     {

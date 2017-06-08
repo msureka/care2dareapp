@@ -30,7 +30,7 @@
 //    
 //    _ProgressBar_Total.clipsToBounds = YES;
 //    _ProgressBar_Total.layer.cornerRadius = 2;
-//    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.5f);
+//    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
 //    _ProgressBar_Total.transform = transform;
  
 
