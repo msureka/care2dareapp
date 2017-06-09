@@ -1940,7 +1940,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [cell_TwoDetails.Image_Private_Public setImage:[UIImage imageNamed:@"privateicon_challenge.png"]];
                 }
                 
-                
+                cell_TwoDetails.ProgressBar_Total.tag =indexPath.row;
 //                if ([str_falgUiprogressView isEqualToString:@"yes"])
 //                {
 //                  
@@ -1948,28 +1948,22 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""] || [[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
                 {
                     
-    [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width/2), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+    [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total_View.frame.size.width/2), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
          
-//                    
-//                    CGRect frame = cell_TwoDetails.ProgressBar_Total.frame;
-//                    frame.origin.y=cell_TwoDetails.ProgressBar_Total.frame.origin.y;//pass the cordinate which you want
-//                    frame.origin.x= (self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width/2);//pass the cordinate which you want
-//                    cell_TwoDetails.ProgressBar_Total.frame= frame;
-//                    
                    
                     
-       [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
+       [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
                     
    
                     
                     
     [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.Image_Private_Public.frame.origin.x+cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
                     
-    [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+    [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
                     
-    [cell_TwoDetails.image_FristProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x-cell_TwoDetails.image_FristProfile.frame.size.width-10), cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
+    [cell_TwoDetails.image_FristProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x-cell_TwoDetails.image_FristProfile.frame.size.width-10), cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
                     
-    [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+    [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
                     
     [cell_TwoDetails.label_Mores setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.origin.y, cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.size.height)];
                     
@@ -1982,20 +1976,20 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         }
     else if (countchallengersDetails11==1)
         {
-        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total.frame.size.width-25), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+        [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total_View.frame.size.width-25), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
             
             
-               [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
+               [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
             
             
             
         [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.Image_Private_Public.frame.origin.x+cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
                     
-        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
                     
-        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x-cell_TwoDetails.image_FristProfile.frame.size.width-10), cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
+        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x-cell_TwoDetails.image_FristProfile.frame.size.width-10), cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
                     
-        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
                     
         [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
                     
@@ -2051,18 +2045,18 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         
                         [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(8, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
                         
-                        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+                        [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
                         
-                           [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
+                           [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
                         
                         
                         [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.Image_Private_Public.frame.origin.x+cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
                         
-                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
                         
                         
                         
-                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
                         
                         [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
                         
@@ -2078,18 +2072,18 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     {
                         [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(38, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
                         
-                        [cell_TwoDetails.ProgressBar_Total setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total.frame.origin.y, cell_TwoDetails.ProgressBar_Total.frame.size.width, cell_TwoDetails.ProgressBar_Total.frame.size.height)];
+                        [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
                         
-                           [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
+                           [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
                         
                         
                         [cell_TwoDetails.label_ChallengesTxt setFrame:CGRectMake(cell_TwoDetails.Image_Private_Public.frame.origin.x+cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.origin.y, cell_TwoDetails.label_ChallengesTxt.frame.size.width, cell_TwoDetails.label_ChallengesTxt.frame.size.height)];
                         
-                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
+                        [cell_TwoDetails.Label_Dayleft setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Label_Dayleft.frame.origin.y, cell_TwoDetails.Label_Dayleft.frame.size.width, cell_TwoDetails.Label_Dayleft.frame.size.height)];
                         
                         
                         
-                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total.frame.origin.x+cell_TwoDetails.ProgressBar_Total.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
                         
                         [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
                         

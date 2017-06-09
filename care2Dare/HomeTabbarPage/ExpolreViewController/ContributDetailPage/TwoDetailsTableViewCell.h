@@ -18,6 +18,7 @@
 @property(nonatomic,weak)IBOutlet UILabel * label_Desc;
 @property(nonatomic,weak)IBOutlet UILabel * label_Mores;
 @property(nonatomic,weak)IBOutlet UIProgressView * ProgressBar_Total;
+@property(nonatomic,weak)IBOutlet UIView * ProgressBar_Total_View;
 @property(nonatomic,weak)IBOutlet UIImageView * image_ProfileComment;
 @property(nonatomic,weak)IBOutlet UILabel * Label_CommentDesc;
 @property(nonatomic,weak)IBOutlet UILabel * label_CommentHeader;
