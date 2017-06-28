@@ -228,7 +228,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     if (![Str_budgeCount isEqualToString:@""] && ![Str_budgeCount isEqualToString:@"0"] )
                     {
        
-                item4.badgeValue=Str_budgeCount;
+   //             item4.badgeValue=Str_budgeCount;
                 item1.badgeValue=Str_budgeCount;
                 [defaults setObject:Str_budgeCount forKey:@"budge"];
                 [defaults synchronize];
@@ -239,7 +239,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         [defaults setObject:@"0" forKey:@"budge"];
                    
                     [defaults synchronize];
-        item4.badgeValue=nil;
+  //      item4.badgeValue=nil;
         item1.badgeValue=nil;
                                         
                 }
