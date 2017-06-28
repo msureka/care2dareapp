@@ -416,11 +416,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysg-UW-hhw">
-                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="33.07%" height="11.33%"/>
+                                <frame key="frameInset" minX="0.0%" minY="0.0%" width="33.33%" height="11.33%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="exploreworld.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ecq-wW-SsU">
-                                        <frame key="frameInset" minX="38.71%" minY="38.57%" width="23.39%" height="42.86%"/>
+                                        <frame key="frameInset" minX="38.40%" minY="38.57%" width="24.00%" height="42.86%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -454,7 +454,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8D-JZ-uuN">
-                                <frame key="frameInset" minX="33.07%" minY="0.0%" width="33.33%" height="11.33%"/>
+                                <frame key="frameInset" minX="33.33%" minY="0.0%" width="33.33%" height="11.33%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="favouriteexplore1.png" translatesAutoresizingMaskIntoConstraints="NO" id="yul-91-xlv">
@@ -800,7 +800,7 @@
                                             <action selector="DoneButton:" destination="DiZ-oB-J0v" eventType="touchUpInside" id="9bJ-ba-zyD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Raised:$424" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4l-qs-DJT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Raised:$424" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="g4l-qs-DJT">
                                         <frame key="frameInset" minX="13.87%" minY="40.00%" width="72.00%" height="40.00%"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1792,7 +1792,7 @@
                                             <constraint firstAttribute="bottom" secondItem="1vp-JS-Ffg" secondAttribute="bottom" constant="49" id="M5C-Jq-Zkn"/>
                                             <constraint firstAttribute="trailing" secondItem="Mrw-1r-h7G" secondAttribute="trailing" constant="56" id="MrS-cS-AtS"/>
                                             <constraint firstItem="9b2-L9-2ZI" firstAttribute="top" secondItem="GSW-6m-nHf" secondAttribute="bottom" constant="8" symbolic="YES" id="OrB-b1-vo2"/>
-                                            <constraint firstItem="emk-Ke-9r0" firstAttribute="top" secondItem="6S3-Jg-Afl" secondAttribute="top" constant="73" id="P6n-8V-BxG"/>
+                                            <constraint firstItem="emk-Ke-9r0" firstAttribute="top" secondItem="6S3-Jg-Afl" secondAttribute="top" constant="42" id="P6n-8V-BxG"/>
                                             <constraint firstItem="9b2-L9-2ZI" firstAttribute="top" secondItem="iKw-vA-LL4" secondAttribute="bottom" constant="39" id="Re0-hY-mm5"/>
                                             <constraint firstItem="6Rk-2G-85n" firstAttribute="top" secondItem="5tU-0G-Ow0" secondAttribute="bottom" constant="8" symbolic="YES" id="S5g-W4-M4v"/>
                                             <constraint firstItem="FrV-l9-wmT" firstAttribute="baseline" secondItem="slf-mG-jAg" secondAttribute="firstBaseline" constant="-31" id="T6t-YT-4hO"/>
@@ -1815,7 +1815,7 @@
                                             <constraint firstItem="Mrw-1r-h7G" firstAttribute="leading" secondItem="iKw-vA-LL4" secondAttribute="trailing" constant="68" id="dQL-KA-fFc"/>
                                             <constraint firstItem="iKw-vA-LL4" firstAttribute="centerY" secondItem="48s-TP-LAF" secondAttribute="centerY" id="dsm-m7-Ub0"/>
                                             <constraint firstItem="48s-TP-LAF" firstAttribute="leading" secondItem="emk-Ke-9r0" secondAttribute="trailing" constant="86" id="eKc-y2-tJh"/>
-                                            <constraint firstItem="emk-Ke-9r0" firstAttribute="bottom" secondItem="48s-TP-LAF" secondAttribute="bottom" constant="32" id="eZE-rs-Fyl"/>
+                                            <constraint firstItem="emk-Ke-9r0" firstAttribute="bottom" secondItem="48s-TP-LAF" secondAttribute="bottom" constant="1" id="eZE-rs-Fyl"/>
                                             <constraint firstItem="1vp-JS-Ffg" firstAttribute="baseline" secondItem="slf-mG-jAg" secondAttribute="baseline" constant="-31" id="ey5-G2-qTN"/>
                                             <constraint firstItem="6Rk-2G-85n" firstAttribute="trailing" secondItem="c3q-km-Cke" secondAttribute="trailing" id="gGU-7f-puz"/>
                                             <constraint firstItem="P38-8Q-kiS" firstAttribute="top" secondItem="xcn-Kj-vJN" secondAttribute="top" id="iMI-CY-bkd"/>
@@ -2146,7 +2146,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fXq-87-8Hl">
-                                <frame key="frameInset" minX="0.0%" minY="10.68%" width="100.00%" height="88.03%"/>
+                                <frame key="frameInset" minX="0.0%" minY="11.65%" width="100.00%" height="87.06%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -2158,37 +2158,51 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sachin Mokashi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-eN-0Wv">
-                                                    <frame key="frameInset" minX="8" minY="105" width="359" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <frame key="frameInset" minX="2.13%" minY="75.00%" width="95.73%" height="17.14%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="20"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DefaultImg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="SAR-wE-4sf">
-                                                    <frame key="frameInset" minX="142" minY="8" width="90" height="90"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <frame key="frameInset" minX="37.87%" minY="5.71%" width="24.00%" height="64.29%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbi-nV-v2x">
-                                                    <frame key="frameInset" minX="8" minY="30" width="106" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbi-nV-v2x">
+                                                    <frame key="frameInset" minX="2.13%" minY="21.43%" width="28.27%" height="22.14%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="20"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edj-Qu-Kc5">
-                                                    <frame key="frameInset" minX="8" minY="60" width="106" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edj-Qu-Kc5">
+                                                    <frame key="frameInset" minX="2.13%" minY="42.86%" width="28.27%" height="17.86%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="15"/>
                                                     <color key="textColor" red="0.72941176470000002" green="0.73725490199999999" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profilefriends.png" translatesAutoresizingMaskIntoConstraints="NO" id="K2l-vn-bEj">
+                                                    <frame key="frameInset" minX="74.93%" minY="25.71%" width="9.33%" height="25.00%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-vJ-Tvd">
+                                                    <frame key="frameInset" minX="81.60%" minY="36.43%" width="7.47%" height="20.00%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.90980392156862744" green="0.16078431372549018" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="Image_FriendCountImg" destination="K2l-vn-bEj" id="kb8-sg-pSG"/>
                                             <outlet property="Image_ProfileImg" destination="SAR-wE-4sf" id="UpL-Ix-xL6"/>
                                             <outlet property="Label_Friends" destination="wbi-nV-v2x" id="rwl-bG-aJa"/>
                                             <outlet property="Label_Friends22" destination="Edj-Qu-Kc5" id="OUv-A1-8st"/>
+                                            <outlet property="Label_NewfriendCount" destination="wLO-vJ-Tvd" id="LTq-Sk-K3g"/>
                                             <outlet property="Name_profile" destination="ayB-eN-0Wv" id="8hL-Yw-t4X"/>
                                         </connections>
                                     </tableViewCell>
@@ -2199,7 +2213,7 @@
                                             <frame key="frameInset" width="375" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You have raised: $2000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTb-aC-uF5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You have raised: $0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTb-aC-uF5">
                                                     <frame key="frameInset" minX="2.13%" minY="10.19%" width="95.73%" height="33.33%"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="24"/>
@@ -2223,32 +2237,38 @@
                                             <outlet property="label_raisedAmt" destination="MTb-aC-uF5" id="4PG-Nn-Yhh"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellC" rowHeight="97" id="GAr-rG-kcP" customClass="CompeteChallengesTableViewCell">
-                                        <rect key="frame" x="0.0" y="276" width="375" height="97"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellC" rowHeight="107" id="GAr-rG-kcP" customClass="CompeteChallengesTableViewCell">
+                                        <rect key="frame" x="0.0" y="276" width="375" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GAr-rG-kcP" id="5hg-c9-Nji">
-                                            <frame key="frameInset" width="375" height="97"/>
+                                            <frame key="frameInset" width="375" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Complete Challenges" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZE2-XG-sZf">
-                                                    <frame key="frameInset" minX="2.13%" minY="0.0%" width="95.73%" height="31.96%"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed Challenges" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZE2-XG-sZf">
+                                                    <frame key="frameInset" minX="2.13%" minY="7.48%" width="95.73%" height="28.97%"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="17"/>
                                                     <color key="textColor" red="0.72941176470588232" green="0.73725490196078436" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="raised_hand.png" translatesAutoresizingMaskIntoConstraints="NO" id="YuN-VY-u7p">
-                                                    <frame key="frameInset" minX="37.60%" minY="36.08%" width="11.20%" height="43.30%"/>
+                                                    <frame key="frameInset" minX="39.47%" minY="47.66%" width="11.20%" height="39.25%"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4757" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKc-Co-cWE">
-                                                    <frame key="frameInset" minX="47.20%" minY="41.24%" width="17.60%" height="32.99%"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKc-Co-cWE">
+                                                    <frame key="frameInset" minX="49.07%" minY="52.34%" width="11.47%" height="29.91%"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.26274509800000001" green="0.73725490199999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Semibold" family="San Francisco Display" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFe-7z-OFp">
+                                                    <frame key="frameInset" minX="0.0%" minY="39.25%" width="100.00%" height="0.94%"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -2256,7 +2276,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellPI" rowHeight="94" id="dKA-La-CW7" customClass="ProfileCompletechallengesimageTableViewCell">
-                                        <rect key="frame" x="0.0" y="373" width="375" height="94"/>
+                                        <rect key="frame" x="0.0" y="383" width="375" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dKA-La-CW7" id="dRZ-iw-dGD">
                                             <frame key="frameInset" width="375" height="94"/>
@@ -2304,7 +2324,7 @@
                     <connections>
                         <outlet property="Button_setting" destination="cgX-7G-oPT" id="hHp-sl-KH5"/>
                         <outlet property="Tableview_Profile" destination="fXq-87-8Hl" id="BFc-md-2y9"/>
-                        <outlet property="view_Topheader" destination="ftI-Iq-LCc" id="rrT-GI-6UM"/>
+                        <outlet property="view_Topheader" destination="ftI-Iq-LCc" id="TjG-6G-eZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPH-8W-XN6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2661,7 +2681,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RTG-md-wzo">
-                                <frame key="frameInset" minX="0.0%" minY="15.70%" width="100.00%" height="84.30%"/>
+                                <frame key="frameInset" minX="0.0%" minY="17.31%" width="100.00%" height="82.69%"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4259,6 +4279,7 @@
         <image name="privateinplay.png" width="32" height="44"/>
         <image name="profile.png" width="23" height="30"/>
         <image name="profile_circle.png" width="54" height="54"/>
+        <image name="profilefriends.png" width="23" height="30"/>
         <image name="raiseblue.png" width="32" height="29"/>
         <image name="raised_circle.png" width="54" height="54"/>
         <image name="raised_hand.png" width="60" height="76"/>

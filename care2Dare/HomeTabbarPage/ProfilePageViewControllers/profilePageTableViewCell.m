@@ -9,10 +9,9 @@
 #import "profilePageTableViewCell.h"
 
 @implementation profilePageTableViewCell
-@synthesize Label_Friends,Label_Challenges,Image_ProfileImg;
+@synthesize Label_Friends,Image_ProfileImg;
 - (void)awakeFromNib {
-     Image_ProfileImg.clipsToBounds = YES;
-    Image_ProfileImg.layer.cornerRadius =Image_ProfileImg.frame.size.width / 2;
+     
    
     
 }

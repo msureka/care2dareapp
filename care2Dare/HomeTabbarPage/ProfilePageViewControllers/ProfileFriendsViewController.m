@@ -343,7 +343,7 @@
         Label1.backgroundColor=[UIColor whiteColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"New Request";
+        Label1.text=@"New Requests";
         [sectionView addSubview:Label1];
         
         CALayer*  borderBottom_topheder = [CALayer layer];
@@ -364,7 +364,7 @@
         Label1.backgroundColor=[UIColor whiteColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
-        Label1.text=@"Add Request";
+        Label1.text=@"Friends";
         [sectionView addSubview:Label1];
         
         CALayer*  borderBottom_topheder = [CALayer layer];

@@ -10,7 +10,7 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
-#import "WatchVedioScrollViewController.h"
+
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
 @interface ProfileNotificationViewController ()
@@ -28,6 +28,8 @@
     
     NSArray *SearchCrickArray_challenge,*SearchCrickArray_Contribute,*SearchCrickArray_vedio,*Array_Public1,*Array_Private1,*Array_IcomingPlg1,*Array_OutgoingPlg1;
     UISearchBar *searchbar;
+    NSString *str_ChallengeidVal,*videoid1,*str_Userid2val1;
+    MPMoviePlayerViewController * movieController;
 }
 @end
 
@@ -52,7 +54,7 @@
      [searchbar setShowsCancelButton:NO animated:YES];
       Tableview_Notif.tableHeaderView=searchbar;
     
-
+ 
     
     transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0,114,self.view.frame.size.width,self.view.frame.size.height-70)];
     transparancyTuchView.backgroundColor=[UIColor whiteColor];
@@ -113,6 +115,7 @@ flag_challenge=@"no";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [Tableview_Notif setContentOffset:CGPointMake(0, 44)];
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
     {
         [self ClienserverCommAll];
@@ -1852,30 +1855,131 @@ if (indexPath.section==0)
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
         
-    
         
-//        NSLog(@"indextuches1Friendss==:==%ld", (long)button.tag);
+        str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengeid"]];
         
-        //    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
+        str_Userid2val1=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row]valueForKey:@"byuserid"]];
         
-        WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
-        
-        set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengeid"]];
-        
-        set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row]valueForKey:@"byuserid"]];
-        
-        //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
-        
-        set.videoid1=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"videoid"]];
-        
-        set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengetitle"]];
-        set.str_image_Data=cell_VedioNoti.image_profile2.image;
-         set.indexVedioindex=indexPath.row;
-        [self.navigationController pushViewController:set animated:YES];
-        
+        videoid1=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"videoid"]];
+      
+        NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"videourl"]]];
+        movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVedio];
+        [self presentMoviePlayerViewControllerAnimated:movieController];
+        [movieController.moviePlayer prepareToPlay];
+        [movieController.moviePlayer play];
+        // movieController.moviePlayer.shouldAutoplay =YES;
+        [self ClienserverComm_watchView];
     }
     
 }
+-(void)ClienserverComm_watchView
+{
+  
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid1";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+        NSString *userid2= @"userid2";
+        
+        NSString *challengeid= @"challengeid";
+        
+        NSString *vedioids= @"videoid";
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val1,challengeid,str_ChallengeidVal,vedioids,videoid1];
+
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"watchedvideo"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     //    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                     
+                                                     NSLog(@"Array_WorldExp ResultString %@",ResultString);
+                                                     
+                                                     
+                                                     
+                                                     
+                                                 }
+                                                 
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                                 
+                                                 
+                                             }
+                                             else if(error)
+                                             {
+                                                 
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.view endEditing:YES];

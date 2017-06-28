@@ -61,15 +61,12 @@
     
    
     
-     cellChecking=@"public";
-    
-    
-    
-    
+    label_public.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
+    label_private.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     
     Button_Public.clipsToBounds=YES;
     Button_Private.clipsToBounds=YES;
-  
+    
     
     Image_ButtonPrivate.clipsToBounds=YES;
     Image_ButtinPublic.clipsToBounds=YES;
@@ -81,21 +78,12 @@
     
     [Image_ButtinPublic setImage:[UIImage imageNamed:@"exploreworld.png"]];
     [Image_ButtonPrivate setImage:[UIImage imageNamed:@"privateinplay.png"]];
-  
-    label_public.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
-     label_private.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
-    
-    
-    borderBottom_Public.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
-    borderBottom_Public.frame = CGRectMake(0, Button_Public.frame.size.height-2.5, Button_Public.frame.size.width, 2.5);
-    [Button_Public.layer addSublayer:borderBottom_Public];
     
     
     
     
-    borderBottom_Private.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
-    borderBottom_Private.frame = CGRectMake(0, Button_Private.frame.size.height-1, Button_Private.frame.size.width, 1);
-    [Button_Private.layer addSublayer:borderBottom_Private];
+    Button_Public.tag=100;
+    cellChecking=@"public";
     
     
     
@@ -125,6 +113,18 @@
     [Tableview_inplay addSubview:self.refreshControl];
     [self ClienserverCommAll];
     
+}
+-(void)viewDidLayoutSubviews
+{
+    
+    borderBottom_Public.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
+    borderBottom_Public.frame = CGRectMake(0, Button_Public.frame.size.height-2.5, Button_Public.frame.size.width, 2.5);
+    [Button_Public.layer addSublayer:borderBottom_Public];
+    
+    
+    borderBottom_Private.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_Private.frame = CGRectMake(0, Button_Private.frame.size.height-1, Button_Private.frame.size.width, 1);
+    [Button_Private.layer addSublayer:borderBottom_Private];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -178,7 +178,9 @@
     
     Button_Public.tag=100;
     cellChecking=@"public";
+    [Tableview_inplay reloadData];
     [self ClienserverCommAll];
+    
 
     
 }
@@ -217,6 +219,7 @@
     [Button_Public.layer addSublayer:borderBottom_Public];
     cellChecking=@"private";
     Button_Private.tag=101;
+     [Tableview_inplay reloadData];
     [self ClienserverCommAll];
   
     

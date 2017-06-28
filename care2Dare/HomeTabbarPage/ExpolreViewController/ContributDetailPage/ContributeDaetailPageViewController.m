@@ -55,11 +55,13 @@
     UIScrollView * scrollView;
     CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH;
     CGRect scrollFrame;
-     MPMoviePlayerViewController * movieController;
+    
     NSNumber *Vedio_Height,*Vedio_Width;
     UIImage *FrameImage;
     UIImagePickerController * picker1;
     NSString *index_friendReq,*str_ChallengeidVal,*videoid1,*str_Userid2val1;;
+    MPMoviePlayerViewController * movieController;
+    
     CGFloat XpostionNewSymbol,YpostionNewSymbol,WpostionNewSymbol,HpostionNewSymbol;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
@@ -95,7 +97,25 @@
     borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
     [view_Topheader.layer addSublayer:borderBottom_topheder];
      NSLog(@"AllArrayData=%@",AllArrayData);;
-    Raised_amount.text=[NSString stringWithFormat:@"%@%@",@"Raised: $",[[AllArrayData objectAtIndex:0] valueForKey:@"backamount"]];
+    
+    if ([[[AllArrayData objectAtIndex:0] valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
+    {
+        if ([[[AllArrayData objectAtIndex:0] valueForKey:@"payperchallenger"] isEqualToString:@"0"])
+        {
+             Raised_amount.text=[NSString stringWithFormat:@"%@%@",@"Raised: $",[[AllArrayData objectAtIndex:0] valueForKey:@"backamount"]];
+        }
+        else
+        {
+          Raised_amount.text=[NSString stringWithFormat:@"%@%@%@%@",@"Raised: $",[[AllArrayData objectAtIndex:0] valueForKey:@"backamount"],@" / $",[[AllArrayData objectAtIndex:0] valueForKey:@"payperchallenger"]];
+        }
+     
+    }
+    else
+    {
+       Raised_amount.text=[NSString stringWithFormat:@"%@%@",@"Raised: $",[[AllArrayData objectAtIndex:0] valueForKey:@"backamount"]];
+    }
+    
+   
     
       [Button_TotalPoints setTitle:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"backers"]] forState:UIControlStateNormal];
     

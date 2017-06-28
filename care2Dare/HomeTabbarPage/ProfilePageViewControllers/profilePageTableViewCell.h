@@ -11,14 +11,12 @@
 @interface profilePageTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *Image_ProfileImg;
-@property (strong, nonatomic) IBOutlet UILabel *Label_Challenges;
 @property (strong, nonatomic) IBOutlet UILabel *Label_Friends;
 @property (strong, nonatomic) IBOutlet UILabel *Name_profile;
 
-@property (strong, nonatomic) IBOutlet UILabel *Label_Challenges11;
 @property (strong, nonatomic) IBOutlet UILabel *Label_Friends22;
-
-
+@property (strong, nonatomic) IBOutlet UIImageView *Image_FriendCountImg;
+@property (strong, nonatomic) IBOutlet UILabel *Label_NewfriendCount;
 
 
 

@@ -22,7 +22,7 @@
 {
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
     UIImage *chosenImage;
-    NSString *cellChecking,*Str_Frends,*str_challenges,*Str_name,*Str_profileurl,*SelectGallery;
+    NSString *cellChecking,*Str_Frends,*str_challenges,*Str_name,*Str_profileurl,*SelectGallery,*str_newfriendCount;
     UIView *sectionView;
     
     UIImageView *Image_ButtinPublic,*Image_ButtonPrivate;
@@ -51,7 +51,7 @@
    
     
     
-    
+    str_newfriendCount=[defaults valueForKey:@"friendreqs"];
    str_challenges=[defaults valueForKey:@"challenges"];
     Str_Frends=[defaults valueForKey:@"friends"];
     Str_name=[defaults valueForKey:@"name"];
@@ -62,7 +62,9 @@
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     
-   
+    borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
+    [view_Topheader.layer addSublayer:borderBottom_topheder];
     
     
     
@@ -96,12 +98,14 @@
     
 }
 
-- (void) viewDidLayoutSubviews {
+- (void) viewDidLayoutSubviews
+{
     [super viewDidLayoutSubviews];
-    
     borderBottom_topheder.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_topheder.frame = CGRectMake(0, view_Topheader.frame.size.height-1, view_Topheader.frame.size.width,1);
     [view_Topheader.layer addSublayer:borderBottom_topheder];
+
+    
 
 }
 -(void)PulltoRefershtable
@@ -154,7 +158,7 @@
     {
         
         
-        return 1;
+        return 0;
         
     }
         
@@ -185,18 +189,34 @@ return 1;
             
       
            
+            [cell_Profile.Image_ProfileImg setFrame:CGRectMake(cell_Profile.Image_ProfileImg.frame.origin.x, cell_Profile.Image_ProfileImg.frame.origin.y, cell_Profile.Image_ProfileImg.frame.size.width, cell_Profile.Image_ProfileImg.frame.size.width)];
             
+            [cell_Profile.Label_NewfriendCount setFrame:CGRectMake(cell_Profile.Label_NewfriendCount.frame.origin.x, cell_Profile.Label_NewfriendCount.frame.origin.y, cell_Profile.Label_NewfriendCount.frame.size.height, cell_Profile.Label_NewfriendCount.frame.size.height)];
             
             
             
             cell_Profile.Label_Friends22.userInteractionEnabled=YES;
-             cell_Profile.Label_Challenges11.userInteractionEnabled=YES;
+            cell_Profile.Label_Friends.userInteractionEnabled=YES;
+            cell_Profile.Label_NewfriendCount.userInteractionEnabled=YES;
+            cell_Profile.Image_FriendCountImg.userInteractionEnabled=YES;
             
-            
+            cell_Profile.Image_ProfileImg.clipsToBounds=YES;
+            cell_Profile.Image_ProfileImg.layer.cornerRadius=cell_Profile.Image_ProfileImg.frame.size.width/2;
             
             
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
             [cell_Profile.Label_Friends22 addGestureRecognizer:ViewTap11];
+            
+            UITapGestureRecognizer *ViewTap111 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
+            [cell_Profile.Label_Friends addGestureRecognizer:ViewTap111];
+            
+            
+            UITapGestureRecognizer *ViewTap1122 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
+            [cell_Profile.Image_FriendCountImg addGestureRecognizer:ViewTap1122];
+            
+            
+            UITapGestureRecognizer *ViewTap1133 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
+            [cell_Profile.Label_NewfriendCount addGestureRecognizer:ViewTap1133];
             
           
             
@@ -231,14 +251,30 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
 //             [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
             
             
-            UITapGestureRecognizer *ViewTap22 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Challenges11:)];
-            [cell_Profile.Label_Challenges11 addGestureRecognizer:ViewTap22];
+          
             
             
                 cell_Profile.Name_profile.text=Str_name;
-                cell_Profile.Label_Challenges.text=str_challenges;
+              ;
+             cell_Profile.Label_NewfriendCount.text=str_newfriendCount;
+            cell_Profile.Label_NewfriendCount.clipsToBounds=YES;
+            cell_Profile.Label_NewfriendCount.layer.cornerRadius=cell_Profile.Label_NewfriendCount.frame.size.height/2;
+            if ([str_newfriendCount isEqualToString:@"0"])
+            {
+                cell_Profile.Label_NewfriendCount.hidden=YES;
+                cell_Profile.Image_FriendCountImg.hidden=YES;
+            }
+            else
+            {
+                cell_Profile.Label_NewfriendCount.hidden=NO;
+                cell_Profile.Image_FriendCountImg.hidden=NO;
+            }
+           
+
+            
+            
                 cell_Profile.Label_Friends.text=Str_Frends;
- 
+            
             
             return cell_Profile;
             
@@ -342,7 +378,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
     }
     if (indexPath.section==2)
     {
-        return 97;
+        return 107;
     }
     if (indexPath.section==3)
     {
@@ -479,17 +515,16 @@ AccountSettViewController * set=[self.storyboard instantiateViewControllerWithId
             {
         str_challenges=[[Array_Profile objectAtIndex:0]valueForKey:@"challenges"];
         Str_Frends=[[Array_Profile objectAtIndex:0]valueForKey:@"friends"];
-                
+          str_newfriendCount=[[Array_Profile objectAtIndex:0]valueForKey:@"friendreqs"];
                 Str_name=[[Array_Profile objectAtIndex:0]valueForKey:@"name"];
                 
                 Str_profileurl=[[Array_Profile objectAtIndex:0]valueForKey:@"profileimage"];
 
-                
-                
                 [defaults setObject:str_challenges forKey:@"challenges"];
                
+                [defaults setObject:Str_Frends forKey:@"friendreqs"];
                 
-                [defaults setObject:Str_Frends forKey:@"friends"];
+                 [defaults setObject:str_newfriendCount forKey:@"friends"];
                 
                 [defaults setObject:Str_name forKey:@"name"];
                 

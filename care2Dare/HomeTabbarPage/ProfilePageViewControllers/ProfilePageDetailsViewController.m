@@ -543,20 +543,20 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
             
             
             cell_Profile.Label_Friends22.userInteractionEnabled=YES;
-            cell_Profile.Label_Challenges11.userInteractionEnabled=YES;
+           
             
             UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Friends22:)];
             [cell_Profile.Label_Friends22 addGestureRecognizer:ViewTap11];
             
             
             UITapGestureRecognizer *ViewTap22 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ViewTapTapped_Label_Challenges11:)];
-            [cell_Profile.Label_Challenges11 addGestureRecognizer:ViewTap22];
+           
             
             
             cell_Profile.Name_profile.text=user_name;
             
             
-            cell_Profile.Label_Challenges.text= [[Array_Profile objectAtIndex:0] valueForKey:@"challenges"];
+           
             cell_Profile.Label_Friends.text=[[Array_Profile objectAtIndex:0] valueForKey:@"friends"];
             
             
