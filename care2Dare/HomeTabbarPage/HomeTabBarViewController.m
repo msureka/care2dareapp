@@ -46,12 +46,12 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
 
     
-    item0.selectedImage = [[UIImage imageNamed:@"watch.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item0.image = [[UIImage imageNamed:@"watch1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.selectedImage = [[UIImage imageNamed:@"explore.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.image = [[UIImage imageNamed:@"explore1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
    
     
-    item1.selectedImage = [[UIImage imageNamed:@"explore.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item1.image = [[UIImage imageNamed:@"explore1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.selectedImage = [[UIImage imageNamed:@"activitytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.image = [[UIImage imageNamed:@"activitytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     item2.selectedImage = [[UIImage imageNamed:@"create.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -59,8 +59,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     
     
-    item3.selectedImage = [[UIImage imageNamed:@"favourites.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item3.image = [[UIImage imageNamed:@"favourites1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.selectedImage = [[UIImage imageNamed:@"inplaytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.image = [[UIImage imageNamed:@"inplaytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
     item4.selectedImage = [[UIImage imageNamed:@"profile.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -69,10 +69,10 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
 
 //    
-    item0.title=@"WATCH";
-    item1.title=@"EXPLORE";
+    item0.title=@"EXPLORE";
+    item1.title=@"ACTIVITY";
     item2.title=@"";
-    item3.title=@"ACTIVITY";
+    item3.title=@"IN-PLAY";
     item4.title=@"PROFILE";
     
     [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -119,10 +119,10 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 //    }
 //    else
 //    {
-        self.selectedIndex=1;
+        self.selectedIndex=0;
 //    }
     
-    [defaults setObject:@"1" forKey:@"tabchk"];
+    [defaults setObject:@"0" forKey:@"tabchk"];
     [defaults synchronize];
     
 
@@ -229,6 +229,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                     {
        
                 item4.badgeValue=Str_budgeCount;
+                item1.badgeValue=Str_budgeCount;
                 [defaults setObject:Str_budgeCount forKey:@"budge"];
                 [defaults synchronize];
 
@@ -236,9 +237,10 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                     else
                 {
         [defaults setObject:@"0" forKey:@"budge"];
+                   
                     [defaults synchronize];
         item4.badgeValue=nil;
-                           
+        item1.badgeValue=nil;
                                         
                 }
             if (![str_challengecount isEqualToString:@""] && ![str_challengecount isEqualToString:@"0"] )

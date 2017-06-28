@@ -15,7 +15,8 @@
 #import "AcceptContributeDetailViewController.h"
 @interface ProfileNotificationViewController ()
 {
-    UIView *sectionView;
+
+        UIView *sectionView,*transparancyTuchView;
     NSString * SeachCondCheck,*CheckedTabbedButtons;
     CALayer*  borderBottom_challenges,*borderBottom_Contribution,*borderBottom_Vedios;
     NSUserDefaults * defaults;
@@ -26,21 +27,45 @@
     NSString *FlagSearchBar,*searchString,*flag_challenge,*flag_Contribute,*flag_Vedio;
     
     NSArray *SearchCrickArray_challenge,*SearchCrickArray_Contribute,*SearchCrickArray_vedio,*Array_Public1,*Array_Private1,*Array_IcomingPlg1,*Array_OutgoingPlg1;
+    UISearchBar *searchbar;
 }
 @end
 
 @implementation ProfileNotificationViewController
 
-@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Button_Search,Textfield_Search,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution;
+@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
-    Textfield_Search.hidden=YES;
+   
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     SeachCondCheck=@"no";
     CheckedTabbedButtons=@"Challenges";
-    Textfield_Search.delegate=self;
+   
+    
+    searchbar=[[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,44)];
+    searchbar.translucent=YES;
+    searchbar.delegate=self;
+    searchbar.searchBarStyle=UISearchBarStyleMinimal;
+    searchbar.showsCancelButton=YES;
+     [searchbar setShowsCancelButton:NO animated:YES];
+      Tableview_Notif.tableHeaderView=searchbar;
+    
+
+    
+    transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0,114,self.view.frame.size.width,self.view.frame.size.height-70)];
+    transparancyTuchView.backgroundColor=[UIColor whiteColor];
+    [transparancyTuchView setAlpha:0.5];
+    [self.view addSubview:transparancyTuchView];
+    transparancyTuchView.hidden=YES;
+    UITapGestureRecognizer * ViewTap51 =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(ViewTap51Tapped:)];
+    [transparancyTuchView addGestureRecognizer:ViewTap51];
+    
+    
+    
+    
      borderBottom_challenges= [CALayer layer];
      borderBottom_Vedios = [CALayer layer];
     
@@ -114,7 +139,7 @@ flag_challenge=@"no";
     [view_Topheader.layer addSublayer:borderBottom_topheder];
     
     
-    Textfield_Search.delegate=self;
+
     
     
   
@@ -599,69 +624,8 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
     
 }
 
--(IBAction)ButtonBack_Action:(id)sender
-{
-     Textfield_Search.text=@"";
-    if ([SeachCondCheck isEqualToString:@"yes"])
-    {
-        [Textfield_Search resignFirstResponder];
-        Lable_Titlenotif.hidden=NO;
-        Textfield_Search.hidden=YES;
-        Button_Search.hidden=NO;
-        SeachCondCheck=@"no";
-        
-        if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
-        {
-           [Array_Public removeAllObjects];
-            [Array_Private removeAllObjects];
-            [Array_AllData removeAllObjects];
-            [Array_Public addObjectsFromArray:Array_Public1];
-            [Array_Private addObjectsFromArray:Array_Private1];
-            [Array_AllData addObjectsFromArray:SearchCrickArray_challenge];
-                
-                
-            }
-        if([CheckedTabbedButtons isEqualToString:@"Contribution"])
-        {
-                
-        [Array_IcomingPlg removeAllObjects];
-        [Array_OutgoingPlg removeAllObjects];
-        [Array_AllData_contribution removeAllObjects];
-        [Array_IcomingPlg addObjectsFromArray:Array_IcomingPlg1];
-        [Array_OutgoingPlg addObjectsFromArray:Array_OutgoingPlg1];
-        [Array_AllData_contribution addObjectsFromArray:SearchCrickArray_Contribute];
-            
-        }
-        
-        if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
-        {
-            
-            
-        [Array_AllData_Videos removeAllObjects];
-                
-        [Array_AllData_Videos addObjectsFromArray:SearchCrickArray_vedio];
-                
-                
-            }
-        [Tableview_Notif reloadData];
 
-    }
-    else
-    {
-        [Textfield_Search resignFirstResponder];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-}
--(IBAction)ButtonSearch_Action:(id)sender
-{
-    [Textfield_Search becomeFirstResponder];
-    SeachCondCheck=@"yes";
-    Lable_Titlenotif.hidden=YES;
-    Textfield_Search.hidden=NO;
-    Button_Search.hidden=YES;
-    
-}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
@@ -1914,14 +1878,14 @@ if (indexPath.section==0)
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [Textfield_Search resignFirstResponder];
+    [self.view endEditing:YES];
     return YES;
 }
 -(IBAction)ButtonChallenges_Action:(id)sender
 {
     
     CheckedTabbedButtons=@"Challenges";
-   Textfield_Search.text=@"";
+   searchbar.text=@"";
     searchString=@"";
     [Button_Challenges setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -1974,7 +1938,7 @@ if (indexPath.section==0)
 -(IBAction)ButtonContribution_Action:(id)sender
 {
         CheckedTabbedButtons=@"Contribution";
-     Textfield_Search.text=@"";
+   searchbar.text=@"";
  searchString=@"";
     [Button_Contribution setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -2032,7 +1996,7 @@ if (indexPath.section==0)
     
   CheckedTabbedButtons=@"Vedio";
     searchString=@"";
-     Textfield_Search.text=@"";
+    searchbar.text=@"";
     [Button_Videos setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Contribution setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Challenges setTitleColor:[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1] forState:UIControlStateNormal];
@@ -2086,27 +2050,78 @@ if (indexPath.section==0)
 
 
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-   FlagSearchBar=@"yes";
-//    transparancyTuchView.hidden=NO;
     
+    
+    transparancyTuchView.hidden=YES;
+    [self.view endEditing:YES];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-//    transparancyTuchView.hidden=YES;
+    
+    transparancyTuchView.hidden=NO;
+    
+    [searchBar setShowsCancelButton:YES animated:YES];
 }
 
-- (IBAction)SearchEditing_Action:(id)sender
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    
+    transparancyTuchView.hidden=YES;
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    
+    
+    transparancyTuchView.hidden=YES;
+    [self.view endEditing:YES];
+    searchBar.text=@"";
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [Tableview_Notif setContentOffset:CGPointMake(0, 44) animated:YES];
+    [searchbar resignFirstResponder];
+    if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+    {
+        [Array_Public removeAllObjects];
+        [Array_Private removeAllObjects];
+        [Array_AllData removeAllObjects];
+        [Array_Public addObjectsFromArray:Array_Public1];
+        [Array_Private addObjectsFromArray:Array_Private1];
+        [Array_AllData addObjectsFromArray:SearchCrickArray_challenge];
+
+        [Tableview_Notif reloadData];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Contribution"])
+    {
+        [Array_IcomingPlg removeAllObjects];
+        [Array_OutgoingPlg removeAllObjects];
+        [Array_AllData_contribution removeAllObjects];
+        [Array_IcomingPlg addObjectsFromArray:Array_IcomingPlg1];
+        [Array_OutgoingPlg addObjectsFromArray:Array_OutgoingPlg1];
+        [Array_AllData_contribution addObjectsFromArray:SearchCrickArray_Contribute];
+            [Tableview_Notif reloadData];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
+    {
+        [Array_AllData_Videos removeAllObjects];
+        
+        [Array_AllData_Videos addObjectsFromArray:SearchCrickArray_vedio];
+            [Tableview_Notif reloadData];
+    }
+}
+//- (IBAction)SearchEditing_Action:(id)sender
+//{
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
     {
-        if (Textfield_Search.text.length==0)
+        if (searchText.length==0)
         {
                     FlagSearchBar=@"no";
                     searchString=@"";
-                    //transparancyTuchView.hidden=NO;
+                    transparancyTuchView.hidden=NO;
                     [Array_Public removeAllObjects];
                     [Array_Private removeAllObjects];
                     [Array_AllData removeAllObjects];
@@ -2120,7 +2135,7 @@ if (indexPath.section==0)
             
         {
                     FlagSearchBar=@"yes";
-                    //transparancyTuchView.hidden=YES;
+                    transparancyTuchView.hidden=YES;
             
                     [Array_Public removeAllObjects];
                     [Array_Private removeAllObjects];
@@ -2130,11 +2145,11 @@ if (indexPath.section==0)
                     {
                         NSString * string=[book objectForKey:@"byname"];
             
-                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+                        NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
             
                         if (r.location !=NSNotFound )
                         {
-                            searchString=Textfield_Search.text;
+                            searchString=searchText;
                             [Array_AllData addObject:book];
             
                         }
@@ -2165,11 +2180,11 @@ if (indexPath.section==0)
     
     if([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
-        if (Textfield_Search.text.length==0)
+        if (searchText.length==0)
         {
                     FlagSearchBar=@"no";
                     searchString=@"";
-                   // transparancyTuchView.hidden=NO;
+                    transparancyTuchView.hidden=NO;
                     [Array_IcomingPlg removeAllObjects];
                     [Array_OutgoingPlg removeAllObjects];
                     [Array_AllData_contribution removeAllObjects];
@@ -2183,7 +2198,7 @@ if (indexPath.section==0)
             
         {
                     FlagSearchBar=@"yes";
-                  //  transparancyTuchView.hidden=YES;
+                    transparancyTuchView.hidden=YES;
             
                     [Array_IcomingPlg removeAllObjects];
                     [Array_OutgoingPlg removeAllObjects];
@@ -2193,11 +2208,11 @@ if (indexPath.section==0)
                     {
                         NSString * string=[book objectForKey:@"byname"];
             
-                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+                        NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
             
                         if (r.location !=NSNotFound )
                         {
-                            searchString=Textfield_Search.text;
+                            searchString=searchText;
                             [Array_AllData_contribution addObject:book];
             
                         }
@@ -2235,11 +2250,11 @@ if (indexPath.section==0)
     
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
-        if (Textfield_Search.text.length==0)
+        if (searchText.length==0)
         {
                     FlagSearchBar=@"no";
                     searchString=@"";
-                   // transparancyTuchView.hidden=NO;
+                    transparancyTuchView.hidden=NO;
             
             [Array_AllData_Videos removeAllObjects];
             
@@ -2251,7 +2266,7 @@ if (indexPath.section==0)
             
         {
                     FlagSearchBar=@"yes";
-                  //  transparancyTuchView.hidden=YES;
+                    transparancyTuchView.hidden=YES;
             
             
                     [Array_AllData_Videos removeAllObjects];
@@ -2260,11 +2275,11 @@ if (indexPath.section==0)
                     {
                         NSString * string=[book objectForKey:@"byname"];
             
-                        NSRange r=[string rangeOfString:Textfield_Search.text options:NSCaseInsensitiveSearch];
+                        NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
             
                         if (r.location !=NSNotFound )
                         {
-                            searchString=Textfield_Search.text;
+                            searchString=searchText;
                             [Array_AllData_Videos addObject:book];
             
                         }
@@ -2279,5 +2294,9 @@ if (indexPath.section==0)
     }
     [Tableview_Notif reloadData];
 }
-    
+- (void)ViewTap51Tapped:(UITapGestureRecognizer *)recognizer
+{
+    transparancyTuchView.hidden=YES;
+    [self.view endEditing:YES];
+}
 @end

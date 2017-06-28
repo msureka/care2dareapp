@@ -29,12 +29,12 @@
 {
     UIView *sectionView,*transperentViewIndicator,*whiteView1,*transperentViewIndicatorcc,*whiteView1cc;
 ;
-   
+    CALayer *Bottomborder_Cell2;
     UIButton *Button_Contribute,*Button_FavouriteTap,*Image_Share;;
     CGRect textRect;
     NSUserDefaults *defaults;
     NSDictionary *urlplist;
-    NSString * CheckFavInserted,*chattype;
+    NSString * CheckFavInserted,*chattype,*Str_Tapped_Comments_Vedio,*str_Userid2val;
     UIImage *chosenImage;
     CGFloat HeightText0;
     CGRect TextViewCord,BackTextViewCord;
@@ -42,7 +42,7 @@
     CGFloat hh,ww,xx,yy,th,tw,xt,yt,bty,btw,bth,btx,Bluesch,Bluescw,Bluescy,Bluescx,textBluex,textBluey,textBluew,textBlueh,hhone,wwone,xxone,yyone;
     NSURLSessionDataTask *dataTaskupload;
        NSString * flag1,*String_Comment,*encodedImage,*imageUserheight,*imageUserWidth,*ImageNSdata,*TagId_plist,*strCameraVedio,*mediatypeVal,*ImageNSdataThumb,*encodedImageThumb,*str_TappedLabel,*str_LabelCoordinates,*str_falgUiprogressView;
-    NSMutableArray * Array_Comment1,*Array_Comment,*Array_RecodVid,*Array_showrecordvid;
+    NSMutableArray * Array_Comment1,*Array_Comment,*Array_RecodVid,*Array_showrecordvid,*Array_likes;
     NSData *imageData;
     NSArray *previousArray;
     CALayer *upperBorder,*upperBorder1;
@@ -51,7 +51,7 @@
     UIActivityIndicatorView *indicatorAlert,*indicatorAlertcc;
     UILabel * Label_confirm,*Label_confirm1,*Label_confirm1cc;
    
-    UIImageView * Imagepro;
+    
     UIScrollView * scrollView;
     CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH;
     CGRect scrollFrame;
@@ -59,7 +59,7 @@
     NSNumber *Vedio_Height,*Vedio_Width;
     UIImage *FrameImage;
     UIImagePickerController * picker1;
-    UIImageView *image_newSymbolstatus;
+    NSString *index_friendReq,*str_ChallengeidVal,*videoid1,*str_Userid2val1;;
     CGFloat XpostionNewSymbol,YpostionNewSymbol,WpostionNewSymbol,HpostionNewSymbol;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
@@ -73,9 +73,9 @@
 
 
 @implementation ContributeDaetailPageViewController
-@synthesize cell_TwoDetails,cell_OneImageVid,cell_ThreeComments,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,cell_recordvid;
+@synthesize cell_TwoDetails,cell_OneImageVid,cell_ThreeComments,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,Cell_List;
 @synthesize TextViews,BackTextViews;
-@synthesize textOne,ViewTextViewOne,Tableview_ContriBute;
+@synthesize textOne,ViewTextViewOne,Tableview_ContriBute,cell_Vediolist;
 
 
 - (void)viewDidLoad {
@@ -84,8 +84,10 @@
      previousArray  = [[NSArray alloc]init];
     upperBorder = [CALayer layer];
       upperBorder1 = [CALayer layer];
+   
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+
 
     CheckFavInserted=[[AllArrayData objectAtIndex:0]valueForKey:@"favourite"];
    CALayer * borderBottom_topheder = [CALayer layer];
@@ -104,7 +106,7 @@
 
 
 
-
+Str_Tapped_Comments_Vedio=@"Vedio";
     
     
     textOne.clipsToBounds=YES;
@@ -122,7 +124,22 @@
     xx=textOne.frame.origin.x;
     yy=textOne.frame.origin.y;
     
+    th=Tableview_ContriBute.frame.size.height;
+    tw=Tableview_ContriBute.frame.size.width;
+    xt=Tableview_ContriBute.frame.origin.x;
+    yt=Tableview_ContriBute.frame.origin.y;
     
+    bth=_BlackViewOne.frame.size.height;
+    btw=_BlackViewOne.frame.size.width;
+    btx=_BlackViewOne.frame.origin.x;
+    bty=_BlackViewOne.frame.origin.y;
+    
+    Bluesch=_BlackViewOne.frame.size.height;
+    Bluescw=_BlackViewOne.frame.size.width;
+    Bluescx=_BlackViewOne.frame.origin.x;
+    Bluescy=_BlackViewOne.frame.origin.y;
+     _textOneBlue.hidden=YES;
+    [Tableview_ContriBute setFrame:CGRectMake(0,yt, tw, th+_BlackViewOne.frame.size.height)];
     
     if ([[UIScreen mainScreen]bounds].size.width==320 && [[UIScreen mainScreen]bounds].size.height==568)
     {
@@ -146,22 +163,7 @@
     
     
     
-    th=Tableview_ContriBute.frame.size.height;
-    tw=Tableview_ContriBute.frame.size.width;
-    xt=Tableview_ContriBute.frame.origin.x;
-    yt=Tableview_ContriBute.frame.origin.y;
-    
-    bth=_BlackViewOne.frame.size.height;
-    btw=_BlackViewOne.frame.size.width;
-    btx=_BlackViewOne.frame.origin.x;
-    bty=_BlackViewOne.frame.origin.y;
-    
-    Bluesch=_BlackViewOne.frame.size.height;
-    Bluescw=_BlackViewOne.frame.size.width;
-    Bluescx=_BlackViewOne.frame.origin.x;
-    Bluescy=_BlackViewOne.frame.origin.y;
-    
-    
+   
     
     
     //    CGRect previousRect = CGRectZero;
@@ -366,8 +368,8 @@
         str_TappedLabel=@"no";
     str_LabelCoordinates=@"no";
     
-    [self chatCommunication];
     [self Communication_showrecordVid];
+    [self chatCommunication];
     
     
     
@@ -1799,22 +1801,30 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     {
         return 1;
     }
+    
     if ( section==2)
     {
             
-    if (Array_showrecordvid.count==0)
-    {
-                return 0;
-    }
-        else
-        {
+//    if (Array_showrecordvid.count==0)
+//    {
+//                return 0;
+//    }
+//        else
+//        {
           return 1;
-        }
+     //   }
 
     }
     if (section==3)
     {
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
+        {
+            return Array_showrecordvid.count;
+        }
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
+        {
         return Array_Comment1.count;
+        }
     }
     
     return 0;
@@ -1881,7 +1891,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         case 1:
             
         {
-                            cell_TwoDetails = (TwoDetailsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:celltwo forIndexPath:indexPath];
+    cell_TwoDetails = (TwoDetailsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:celltwo forIndexPath:indexPath];
             
             
             
@@ -2248,6 +2258,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             {
                 cell_TwoDetails.Label_CommentDesc.hidden=YES;
                 cell_TwoDetails.label_CommentHeader.hidden=NO;
+               
+                
                 cell_TwoDetails.image_ProfileComment.hidden=YES;
                 
                 cell_TwoDetails.Label_Dayleft.hidden=YES;
@@ -2288,8 +2300,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                
                 }
     
-                
-   
+            
+           
+            
             
                 return cell_TwoDetails;
                 
@@ -2299,132 +2312,176 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             break;
         case 2:
         {
+            Cell_List = (ListofVedioCommentsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"CellList" forIndexPath:indexPath];
             
-            
-            
-            cell_recordvid = [[[NSBundle mainBundle]loadNibNamed:@"RecordedVidTableViewCell" owner:self options:nil] objectAtIndex:0];
-            
-            
-            
-            if (cell_recordvid == nil)
+            if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
             {
-                
-                cell_recordvid = [[RecordedVidTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdR1];
-                
-                
-            }
-            
-            if (Array_showrecordvid.count==0)
-            {
-                cell_recordvid.LAbel_Result.hidden=NO;
-                cell_recordvid.myscrollView.hidden=YES;
+                [Cell_List.Image_comments setImage:[UIImage imageNamed:@"commentsblue.png"]];
+                [Cell_List.label_Comments setTextColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
+                [Cell_List.Image_vedio setImage:[UIImage imageNamed:@"videosgrey.png"]];
+                [Cell_List.label_Vedio setTextColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1]];
             }
             else
             {
-             cell_recordvid.LAbel_Result.hidden=YES;
-                cell_recordvid.myscrollView.hidden=NO;
-                
-                
-                for (int i=0; i<Array_showrecordvid.count; i++)
-                {
-                    
-                     Imagepro = [[UIImageView alloc] initWithFrame:CGRectMake(Xpostion, Ypostion, Xwidth, Yheight)];
-                    image_newSymbolstatus=[[UIImageView alloc]initWithFrame:CGRectMake((Imagepro.frame.origin.x+Imagepro.frame.size.width)-16, YpostionNewSymbol, WpostionNewSymbol, HpostionNewSymbol)];
-                    
-                    
-                    image_newSymbolstatus.contentMode=UIViewContentModeScaleAspectFill;
-                    
-                    image_newSymbolstatus.userInteractionEnabled=YES;
-                    
-                     [image_newSymbolstatus setTag:i];
-                    [image_newSymbolstatus setImage:[UIImage imageNamed:@"new.png"]];
-                    Imagepro.contentMode=UIViewContentModeScaleAspectFill;
-                    
-                    Imagepro.userInteractionEnabled=YES;
-                    
-                    [Imagepro setTag:i];
-                    
-                    
-                    UITapGestureRecognizer * ImageTap =[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                               action:@selector(ImageTapped_profile:)];
-                    [Imagepro addGestureRecognizer:ImageTap];
-                    
-                    
-                    Imagepro.clipsToBounds=YES;
-                    Imagepro.layer.cornerRadius=9.0f;
-                    
-                 
-                    [cell_recordvid.myscrollView addSubview:Imagepro];
-                       [cell_recordvid.myscrollView addSubview:image_newSymbolstatus];
-                    
-                    Imagepro.backgroundColor=[UIColor redColor];
-                    //                name = "Er Sachin Mokashi";
-                    //                profileimage = "https://graph.facebook.com/1280357812049167/picture?type=large";
-                    //                recorddate = "2017-04-05 06:55:53";
-                    //                "registration_status" = ACTIVE;
-                    //                useridvideo = 20170307091520wFL3;
-                    //                videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ-thumbnail.jpg";
-                    
-                    
-                    NSURL * url=[[Array_showrecordvid objectAtIndex:i]valueForKey:@"thumbnailurl"];
-                    
-                    
-                    
-                    [Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
-                    
-                    
-                    if ([[[Array_showrecordvid objectAtIndex:i]valueForKey:@"newstatus"] isEqualToString:@"yes"])
-                    {
-                        image_newSymbolstatus.hidden=NO;
-                    }
-                    else
-                    {
-                       image_newSymbolstatus.hidden=YES;
-                    }
-                    
-                    
-                    Xpostion+=Xwidth+20;
-//                    XpostionNewSymbol+=WpostionNewSymbol;
-                    
-                    ScrollContentSize+=Xwidth;
-                    cell_recordvid.myscrollView.contentSize=CGSizeMake(Xpostion, 88);
-                }
-                
-                XpostionNewSymbol=40;
-                YpostionNewSymbol=0;
-                WpostionNewSymbol=20;
-                HpostionNewSymbol=20;
-                
-                Xpostion=12;
-                Ypostion=8;
-                Xwidth=60;
-                Yheight=60;
-                ScrollContentSize=0;
-                Xpostion_label=12;
-                Ypostion_label=67;
-                Xwidth_label=60;
-                Yheight_label=20;
-                
+                [Cell_List.Image_comments setImage:[UIImage imageNamed:@"commentsgrey.png"]];
+                [Cell_List.label_Comments setTextColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1]];
+
+                [Cell_List.Image_vedio setImage:[UIImage imageNamed:@"videosblue.png"]];
+                [Cell_List.label_Vedio setTextColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
             }
             
             
-            //            if (Array_Challengers==0)
-            //            {
-            //                cell_one.Label_Noresult.hidden=NO;
-            //            }
-            //            else
-            //            {
-            //                cell_one.Label_Noresult.hidden=YES;
-            //            }
-            
-            return cell_recordvid;
+
             
             
+            
+            
+            UITapGestureRecognizer * Imagecom =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_tapcomment:)];
+            [Cell_List.Image_comments addGestureRecognizer:Imagecom];
+            
+            UITapGestureRecognizer * Labelcom =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_tapcomment:)];
+            [Cell_List.label_Comments addGestureRecognizer:Labelcom];
+            
+            
+            UITapGestureRecognizer * imagevid =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_tapvedio:)];
+            [Cell_List.Image_vedio addGestureRecognizer:imagevid];
+            
+            
+            UITapGestureRecognizer * LabelVid =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_tapvedio:)];
+            [Cell_List.label_Vedio addGestureRecognizer:LabelVid];
+
+           
+            return Cell_List;
         }
+//        {
+//            
+//            
+//            
+//            cell_recordvid = [[[NSBundle mainBundle]loadNibNamed:@"RecordedVidTableViewCell" owner:self options:nil] objectAtIndex:0];
+//            
+//            
+//            
+//            if (cell_recordvid == nil)
+//            {
+//                
+//                cell_recordvid = [[RecordedVidTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdR1];
+//                
+//                
+//            }
+//            
+//            if (Array_showrecordvid.count==0)
+//            {
+//                cell_recordvid.LAbel_Result.hidden=NO;
+//                cell_recordvid.myscrollView.hidden=YES;
+//            }
+//            else
+//            {
+//             cell_recordvid.LAbel_Result.hidden=YES;
+//                cell_recordvid.myscrollView.hidden=NO;
+//                
+//                
+//                for (int i=0; i<Array_showrecordvid.count; i++)
+//                {
+//                    
+//                     Imagepro = [[UIImageView alloc] initWithFrame:CGRectMake(Xpostion, Ypostion, Xwidth, Yheight)];
+//                    image_newSymbolstatus=[[UIImageView alloc]initWithFrame:CGRectMake((Imagepro.frame.origin.x+Imagepro.frame.size.width)-16, YpostionNewSymbol, WpostionNewSymbol, HpostionNewSymbol)];
+//                    
+//                    
+//                    image_newSymbolstatus.contentMode=UIViewContentModeScaleAspectFill;
+//                    
+//                    image_newSymbolstatus.userInteractionEnabled=YES;
+//                    
+//                     [image_newSymbolstatus setTag:i];
+//                    [image_newSymbolstatus setImage:[UIImage imageNamed:@"new.png"]];
+//                    Imagepro.contentMode=UIViewContentModeScaleAspectFill;
+//                    
+//                    Imagepro.userInteractionEnabled=YES;
+//                    
+//                    [Imagepro setTag:i];
+//                    
+//                    
+//                    UITapGestureRecognizer * ImageTap =[[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                                               action:@selector(ImageTapped_profile:)];
+//                    [Imagepro addGestureRecognizer:ImageTap];
+//                    
+//                    
+//                    Imagepro.clipsToBounds=YES;
+//                    Imagepro.layer.cornerRadius=9.0f;
+//                    
+//                 
+//                    [cell_recordvid.myscrollView addSubview:Imagepro];
+//                       [cell_recordvid.myscrollView addSubview:image_newSymbolstatus];
+//                    
+//                    Imagepro.backgroundColor=[UIColor redColor];
+//                    //                name = "Er Sachin Mokashi";
+//                    //                profileimage = "https://graph.facebook.com/1280357812049167/picture?type=large";
+//                    //                recorddate = "2017-04-05 06:55:53";
+//                    //                "registration_status" = ACTIVE;
+//                    //                useridvideo = 20170307091520wFL3;
+//                    //                videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ-thumbnail.jpg";
+//                    
+//                    
+//                    NSURL * url=[[Array_showrecordvid objectAtIndex:i]valueForKey:@"thumbnailurl"];
+//                    
+//                    
+//                    
+//                    [Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+//                    
+//                    
+//                    if ([[[Array_showrecordvid objectAtIndex:i]valueForKey:@"newstatus"] isEqualToString:@"yes"])
+//                    {
+//                        image_newSymbolstatus.hidden=NO;
+//                    }
+//                    else
+//                    {
+//                       image_newSymbolstatus.hidden=YES;
+//                    }
+//                    
+//                    
+//                    Xpostion+=Xwidth+20;
+////                    XpostionNewSymbol+=WpostionNewSymbol;
+//                    
+//                    ScrollContentSize+=Xwidth;
+//                    cell_recordvid.myscrollView.contentSize=CGSizeMake(Xpostion, 88);
+//                }
+//                
+//                XpostionNewSymbol=40;
+//                YpostionNewSymbol=0;
+//                WpostionNewSymbol=20;
+//                HpostionNewSymbol=20;
+//                
+//                Xpostion=12;
+//                Ypostion=8;
+//                Xwidth=60;
+//                Yheight=60;
+//                ScrollContentSize=0;
+//                Xpostion_label=12;
+//                Ypostion_label=67;
+//                Xwidth_label=60;
+//                Yheight_label=20;
+//                
+//            }
+//            
+//            
+//            //            if (Array_Challengers==0)
+//            //            {
+//            //                cell_one.Label_Noresult.hidden=NO;
+//            //            }
+//            //            else
+//            //            {
+//            //                cell_one.Label_Noresult.hidden=YES;
+//            //            }
+//            
+//            return cell_recordvid;
+//            
+//            
+//        }
             break;
         case 3:
-            
         {
+            
+            if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
+            {
             
             UILabel *label = nil;
             UILabel *label1 = nil;
@@ -2710,6 +2767,211 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             
         }
             
+            if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
+            {
+               cell_Vediolist = (VediosListsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"CellVidLis" forIndexPath:indexPath];
+                
+                if (Array_showrecordvid.count-1==indexPath.row)
+                {
+                    Bottomborder_Cell2 = [CALayer layer];
+                    Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
+                    Bottomborder_Cell2.frame = CGRectMake(0, cell_Vediolist.frame.size.height-1, cell_Vediolist.frame.size.width, 1);
+                    [cell_Vediolist.layer addSublayer:Bottomborder_Cell2];
+                }
+                else
+                {
+                    Bottomborder_Cell2 = [CALayer layer];
+                    Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+                    Bottomborder_Cell2.frame = CGRectMake(0, cell_Vediolist.frame.size.height-1, cell_Vediolist.frame.size.width, 1);
+                    [cell_Vediolist.layer addSublayer:Bottomborder_Cell2];
+                }
+
+                
+                
+                
+        [cell_Vediolist.Imagepro setFrame:CGRectMake(cell_Vediolist.Imagepro.frame.origin.x, cell_Vediolist.Imagepro.frame.origin.y, cell_Vediolist.Imagepro.frame.size.width, cell_Vediolist.Imagepro.frame.size.width)];
+                
+           [cell_Vediolist.Image_playButton setFrame:CGRectMake(cell_Vediolist.Image_playButton.frame.origin.x, cell_Vediolist.Image_playButton.frame.origin.y, cell_Vediolist.Image_playButton.frame.size.width, cell_Vediolist.Image_playButton.frame.size.width)];
+            
+                [cell_Vediolist.ImageRight_RightProfile setFrame:CGRectMake(cell_Vediolist.ImageRight_RightProfile.frame.origin.x, cell_Vediolist.ImageRight_RightProfile.frame.origin.y, cell_Vediolist.ImageRight_RightProfile.frame.size.width, cell_Vediolist.ImageRight_RightProfile.frame.size.width)];
+                
+                
+                
+                 [cell_Vediolist.ImageRight_Likes setFrame:CGRectMake(cell_Vediolist.ImageRight_Likes.frame.origin.x, cell_Vediolist.ImageRight_Likes.frame.origin.y, cell_Vediolist.ImageRight_Likes.frame.size.width, cell_Vediolist.ImageRight_Likes.frame.size.width)];
+                
+                
+                
+                 [cell_Vediolist.ImageRight_FriendStatus setFrame:CGRectMake(cell_Vediolist.ImageRight_FriendStatus.frame.origin.x, cell_Vediolist.ImageRight_FriendStatus.frame.origin.y, cell_Vediolist.ImageRight_FriendStatus.frame.size.width, cell_Vediolist.ImageRight_FriendStatus.frame.size.width)];
+                
+                
+                cell_Vediolist.ImageRight_RightProfile.clipsToBounds=YES;
+                cell_Vediolist.ImageRight_RightProfile.layer.cornerRadius=cell_Vediolist.ImageRight_RightProfile.frame.size.height/2;
+                
+            cell_Vediolist.image_newSymbolstatus.contentMode=UIViewContentModeScaleAspectFill;
+                    
+            cell_Vediolist.image_newSymbolstatus.userInteractionEnabled=YES;
+                    
+            [cell_Vediolist.image_newSymbolstatus setTag:indexPath.row];
+                
+        [cell_Vediolist.image_newSymbolstatus setImage:[UIImage imageNamed:@"new.png"]];
+                cell_Vediolist.Imagepro.contentMode=UIViewContentModeScaleAspectFill;
+                    
+            cell_Vediolist.Imagepro.userInteractionEnabled=YES;
+                    
+            [cell_Vediolist.Imagepro setTag:indexPath.row];
+                    
+
+                cell_Vediolist.Image_playButton.userInteractionEnabled=YES;
+                
+                [cell_Vediolist.Image_playButton setTag:indexPath.row];
+                [cell_Vediolist.Imagepro setTag:indexPath.row];
+                
+            UITapGestureRecognizer * ImageTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profile:)];
+                [cell_Vediolist.Imagepro addGestureRecognizer:ImageTap];
+                
+                UITapGestureRecognizer * ImageTapPlay =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profile:)];
+                [cell_Vediolist.Image_playButton addGestureRecognizer:ImageTapPlay];
+                
+                    
+        cell_Vediolist.Imagepro.clipsToBounds=YES;
+        cell_Vediolist.Imagepro.layer.cornerRadius=9.0f;
+                    
+                
+                
+                
+                
+                cell_Vediolist.ImageRight_Likes.userInteractionEnabled=YES;
+                
+                [cell_Vediolist.ImageRight_Likes setTag:indexPath.row];
+                
+                UITapGestureRecognizer * ImageTapLiuke =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profileLikeVedio:)];
+                [cell_Vediolist.ImageRight_Likes addGestureRecognizer:ImageTapLiuke];
+                
+               
+
+              
+                    
+                NSURL * url=[[Array_showrecordvid objectAtIndex:indexPath.row]valueForKey:@"thumbnailurl"];
+                    
+                    [cell_Vediolist.Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                
+                
+                
+                NSDictionary * dic_value=[Array_showrecordvid objectAtIndex:indexPath.row];
+                
+                cell_Vediolist.Label_DaysAgo.text=[NSString stringWithFormat:@"%@",[dic_value valueForKey:@"posttime"]];
+                
+                cell_Vediolist.Label_totalreviews.text=[NSString stringWithFormat:@"%@",[dic_value valueForKey:@"totalviews"]];
+                
+              
+                
+              
+                
+                NSURL *urlRight=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
+                [cell_Vediolist.ImageRight_RightProfile sd_setImageWithURL:urlRight placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                
+                
+                
+                
+                cell_Vediolist.ImageRight_RightProfile.tag=indexPath.row;
+                cell_Vediolist.ImageRight_RightProfile.userInteractionEnabled=YES;
+                
+                UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
+                [cell_Vediolist.ImageRight_RightProfile addGestureRecognizer:image_SecProfileTapped];
+                
+                
+                
+                UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0];
+                NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+                NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"Posted by " attributes: arialDict];
+                
+                UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16.0];
+                NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+                NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:[dic_value valueForKey:@"name"]  attributes:verdanaDict];
+                
+                
+                [aAttrString appendAttributedString:vAttrString];
+                
+                
+                cell_Vediolist.Label_ChallengeName.attributedText = aAttrString;
+                
+                 cell_Vediolist.Label_likes.text=[dic_value valueForKey:@"totallikes"];
+                
+                if ([[dic_value valueForKey:@"likestatus"] isEqualToString:@"yes"])
+                {
+                
+            [cell_Vediolist.ImageRight_Likes setImage:[UIImage imageNamed:@"filllike.png"]];
+                    
+                }
+                if ([[dic_value valueForKey:@"likestatus"] isEqualToString:@"no"])
+                {
+            [cell_Vediolist.ImageRight_Likes setImage:[UIImage imageNamed:@"emptylike.png"]];
+                }
+                
+               
+                
+                
+        if ([[[Array_showrecordvid objectAtIndex:indexPath.row]valueForKey:@"newstatus"] isEqualToString:@"yes"])
+                                        {
+                                            cell_Vediolist.image_newSymbolstatus.hidden=NO;
+                                        }
+                                        else
+                                        {
+                                           cell_Vediolist.image_newSymbolstatus.hidden=YES;
+                                        }
+                
+                cell_Vediolist.ImageRight_FriendStatus.userInteractionEnabled=YES;
+                [cell_Vediolist.ImageRight_FriendStatus setTag:indexPath.row];
+                cell_Vediolist.Label_subscribe.userInteractionEnabled=YES;
+                [cell_Vediolist.Label_subscribe setTag:indexPath.row];
+   
+              
+                if ([[defaults valueForKey:@"userid"] isEqualToString:[dic_value valueForKey:@"useridvideo"]])
+                {
+                    cell_Vediolist.ImageRight_FriendStatus.hidden=YES;
+                    cell_Vediolist.Label_subscribe.hidden=YES;
+                }
+                else
+                {
+                    
+                    if ([[dic_value valueForKey:@"friendstatus"] isEqualToString:@"no"])
+                    {
+                        cell_Vediolist.ImageRight_FriendStatus.hidden=NO;
+                         cell_Vediolist.Label_subscribe.hidden=NO;
+                        [cell_Vediolist.ImageRight_FriendStatus setImage:[UIImage imageNamed:@"addfriend.png"]];
+                        
+                        
+                        
+                        UITapGestureRecognizer * ImageTapFriendstatus =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profileFriendStatus:)];
+                        [cell_Vediolist.ImageRight_FriendStatus addGestureRecognizer:ImageTapFriendstatus];
+                        
+                UITapGestureRecognizer * ImageTapFriendsubscribe =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profileFriendStatus:)];
+                [cell_Vediolist.Label_subscribe addGestureRecognizer:ImageTapFriendsubscribe];
+                        
+                        
+                    }
+                    
+                    
+                    if ([[dic_value valueForKey:@"friendstatus"] isEqualToString:@"yes"])
+                    {
+                        cell_Vediolist.ImageRight_FriendStatus.hidden=NO;
+                        cell_Vediolist.Label_subscribe.hidden=YES;
+                        [cell_Vediolist.ImageRight_FriendStatus setImage:[UIImage imageNamed:@"addfriend1.png"]];
+                        
+                    }
+                    if ([[dic_value valueForKey:@"friendstatus"] isEqualToString:@"waiting"])
+                    {
+                        cell_Vediolist.ImageRight_FriendStatus.hidden=NO;
+                         cell_Vediolist.Label_subscribe.hidden=YES;
+                        [cell_Vediolist.ImageRight_FriendStatus setImage:[UIImage imageNamed:@"friendrequested.png"]];
+                        
+                    }
+                }
+                    
+                
+                return cell_Vediolist;
+            }
+    }
             break;
 
         
@@ -2798,20 +3060,25 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     }
     if (indexPath.section==2)
     {
-        if (Array_showrecordvid.count==0)
-        {
-            return 0;
-        }
-        else
-        {
-          return 88;
-        }
+//        if (Array_showrecordvid.count==0)
+//        {
+//            return 0;
+//        }
+//        else
+//        {
+          return 70;
+     //   }
         
     }
 
     if (indexPath.section==3)
     {
-        
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
+        {
+          return 127;
+        }
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
+        {
             if ([[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"messagetype"] isEqualToString:@"TEXT"])
             {
                 NSString *text = [[Array_Comment1 objectAtIndex:indexPath.row] valueForKey:@"message"];
@@ -2830,7 +3097,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             }
         }
     
-
+    }
         return 0;
     
 }
@@ -2994,7 +3261,15 @@ if (section==1)
         
         
       UILabel * label_Comment=[[UILabel alloc]initWithFrame:CGRectMake(16,0, self.view.frame.size.width-32,30)];
+        
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
+        {
+            label_Comment.text=@"Challenger Videos";;
+        }
+        if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
+        {
         label_Comment.text=@"Comments";
+        }
         label_Comment.textColor=[UIColor lightGrayColor];
               label_Comment.tag=section;
         label_Comment.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:16.0];
@@ -3071,14 +3346,14 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     if (section==2 )
     {
         
-    if (Array_showrecordvid.count==0)
-    {
+//    if (Array_showrecordvid.count==0)
+//    {
         return 0;
-    }
-    else
-    {
-          return 38;
-    }
+//    }
+//    else
+//    {
+//          return 38;
+//    }
     }
     
     if (section==3)
@@ -3431,6 +3706,29 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     UIGraphicsEndImageContext();
     return newImage;
 }
+-(void)Image_tapcomment:(UIGestureRecognizer *)reconizer
+{
+    
+//    Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
+    [Tableview_ContriBute setFrame: CGRectMake(0,yt, tw, th)];
+     _textOneBlue.hidden=NO;
+ Str_Tapped_Comments_Vedio=@"Comment";
+  
+    [Tableview_ContriBute reloadData];
+      [self chatCommunication];
+    
+}
+-(void)Image_tapvedio:(UIGestureRecognizer *)reconizer
+{
+
+//Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th+_BlackViewOne.frame.size.height);
+    [Tableview_ContriBute setFrame:CGRectMake(0,yt, tw, th+_BlackViewOne.frame.size.height-30)];
+    _textOneBlue.hidden=YES;
+ Str_Tapped_Comments_Vedio=@"Vedio";
+   
+    [Tableview_ContriBute reloadData];
+      [self Communication_showrecordVid];
+}
 -(void)label_Desc_Tapped_ActionDetails:(UIGestureRecognizer *)reconizer
 {
    
@@ -3556,24 +3854,300 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     
     
 }
+-(void)ImageTapped_profileLikeVedio:(UIGestureRecognizer *)reconizer
+{
+    
+    UIImageView *imageView = (UIImageView *)reconizer.view;
+    str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"useridvideo"]];
+    
+    
+    
+    
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+    
+        
+        NSString *userid1= @"userid1";
+        NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        NSString *userid2= @"userid2";
+        
+        
+         NSString *vedioid= @"videoid";
+        
+        NSString *vedioidval=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videoid"]];
+        
+        
+        NSString *challengeid= @"challengeid";
+        
+        NSString *challengeidval=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid1,useridval1,userid2,str_Userid2val,vedioid,vedioidval,challengeid,challengeidval];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"like"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                        Array_likes=[[NSMutableArray alloc]init];
+                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                Array_likes=[objSBJsonParser objectWithData:data];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                     
+                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+                                                     
+                                                   
+                                                     
+                                                     if (Array_likes.count !=0)
+                                                     {
+                                                         
+                NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+                NSDictionary *oldDict = (NSDictionary *)[Array_showrecordvid objectAtIndex:(long)imageView.tag];
+                        [newDict addEntriesFromDictionary:oldDict];
+            [newDict setObject:[[Array_likes objectAtIndex:0]valueForKey:@"totallikes"] forKey:@"totallikes"];
+         [newDict setObject:[[Array_likes objectAtIndex:0]valueForKey:@"status"] forKey:@"likestatus"];
+            [Array_showrecordvid replaceObjectAtIndex:(long)imageView.tag withObject:newDict];
+                                                         
+                                                         
+// NSArray *indexPathArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]];
+// [tblview reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+                                                         
+                NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:(long)imageView.tag inSection:3];
+                NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
+    [Tableview_ContriBute reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
+                          //  [Tableview_ContriBute reloadData];
+                                                     }
+
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+-(void)ImageTapped_profileFriendStatus:(UIGestureRecognizer *)reconizer
+{
+    
+    UIImageView *imageView = (UIImageView *)reconizer.view;
+     str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"useridvideo"]];
+ 
+    
+   
+    
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid1";
+        NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        NSString *userid2= @"userid2";
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridval1,userid2,str_Userid2val];
+       
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"addfriend"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                 //    Array_VediosData=[[NSMutableArray alloc]init];
+                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                    // Array_VediosData=[objSBJsonParser objectWithData:data];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+  
+                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+                                                     
+                                        if ([ResultString isEqualToString:@"requested"])
+                                            {
+                                                        // [self Communication_showrecordVid];
+
+                                                
+            for (int i=0; i<Array_showrecordvid.count; i++)
+            {
+            if([[[Array_showrecordvid objectAtIndex:i] valueForKey:@"useridvideo"] isEqualToString:str_Userid2val])
+            {
+                                        
+                    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+                    NSDictionary *oldDict = (NSDictionary *)[Array_showrecordvid objectAtIndex:i];
+                        [newDict addEntriesFromDictionary:oldDict];
+                    [newDict setObject:@"waiting" forKey:@"friendstatus"];
+            [Array_showrecordvid replaceObjectAtIndex:i withObject:newDict];
+                }
+            }
+                                                         
+                            [Tableview_ContriBute reloadData];
+                                                     }
+                                                     if ([ResultString isEqualToString:@"alredyrequested"])
+                                                     {
+                                                        // Str_friendReq=@"";
+                                                        //[Tableview_ContriBute reloadData];
+                                                        // [self Communication_showrecordVid];
+                                                         
+                                                         
+                                                         
+                                                     }
+                                                     
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+
+
+
+
 -(void)ImageTapped_profile:(UIGestureRecognizer *)reconizer
 {
-//    WatchVediosViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVediosViewController"];
-     WatchVedioScrollViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"WatchVedioScrollViewController"];
-    
+
+
     UIGestureRecognizer *recognizer = (UIGestureRecognizer*)reconizer;
     UIImageView *imageView = (UIImageView *)recognizer.view;
     
-   
-    set.str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"challengeid"]];
+   str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"challengeid"]];
+str_Userid2val1=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo"]];
+videoid1=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videoid"]];
+
     
-    set.str_Userid2val=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"useridvideo"]];
-       set.videoid1=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videoid"]];
- //   set.Str_urlVedio=[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag]valueForKey:@"videourl"]];
-    
-      set.str_challengeTitle=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"title"]];
-    set.str_image_Data=imageView.image;
-    [self.navigationController pushViewController:set animated:YES];
+    NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videourl"]]];
+    movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVedio];
+    [self presentMoviePlayerViewControllerAnimated:movieController];
+    [movieController.moviePlayer prepareToPlay];
+    [movieController.moviePlayer play];
+   // movieController.moviePlayer.shouldAutoplay =YES;
+     [self ClienserverComm_watchView];
+  
 }
 -(void)ImageTap_playButtonAction:(UIGestureRecognizer *)reconizer
 {
@@ -3845,4 +4419,114 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
     
     
 }
+-(void)ClienserverComm_watchView
+{
+    [self.view endEditing:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid1";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+        NSString *userid2= @"userid2";
+        
+        NSString *challengeid= @"challengeid";
+        
+        NSString *vedioids= @"videoid";
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid1,useridVal1,userid2,str_Userid2val1,challengeid,str_ChallengeidVal,vedioids,videoid1];
+        
+        
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"watchedvideo"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     //    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                     
+                                                     NSLog(@"Array_WorldExp ResultString %@",ResultString);
+                                                     
+                                                     
+                                                     
+                                                     
+                                                 }
+                                                 
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                                 
+                                                 
+                                             }
+                                             else if(error)
+                                             {
+                                                 
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+
 @end

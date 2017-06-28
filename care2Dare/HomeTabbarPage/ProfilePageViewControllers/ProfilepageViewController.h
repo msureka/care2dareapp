@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "profilePageTableViewCell.h"
-#import "PublicTableViewCell.h"
-#import "PrivateTableViewCell.h"
+#import "DonateCharityTableViewCell.h"
+#import "ProfileCompletechallengesimageTableViewCell.h"
+#import "CompeteChallengesTableViewCell.h"
 
 @interface ProfilepageViewController : UIViewController<UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 //@property(nonatomic,weak)IBOutlet UIImageView * image_ExpWorld;
@@ -17,19 +18,21 @@
 
 @property(nonatomic,weak)IBOutlet UIView * view_Topheader;
 @property(nonatomic,weak)IBOutlet UIButton * Button_setting;
-@property(nonatomic,weak)IBOutlet UIButton * Button_SetValues;
+
 //
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Profile;
 
 
 @property(nonatomic,strong)profilePageTableViewCell * cell_Profile;
-@property(nonatomic,strong)PublicTableViewCell * cell_Public;
-@property(nonatomic,strong)PrivateTableViewCell * cell_Private;
+@property(nonatomic,strong)DonateCharityTableViewCell * cell_donate;
+@property(nonatomic,strong)CompeteChallengesTableViewCell * cell_complete;
+@property(nonatomic,strong)ProfileCompletechallengesimageTableViewCell * cell_Profileimages;
+
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
--(IBAction)NotificationButton_Action:(id)sender;
+
 -(IBAction)SettingButton_Action:(id)sender;
 
-@property(nonatomic,weak)IBOutlet UIView * view_CreateChallenges;
+
 
 //@property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;
 //@property(nonatomic,strong)FriendExpTableViewCell * cell_FriendExp;

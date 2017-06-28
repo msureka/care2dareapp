@@ -18,23 +18,23 @@
 
 @interface ExplorePageViewController ()<UISearchBarDelegate>
 {
-    CALayer *borderBottom_world,*borderBottom_ExpFrnd;
+    CALayer *borderBottom_world,*borderBottom_ExpFrnd,*borderBottom_ExpFavourite;
     NSString * cellChecking;
     UIView *sectionView,*transparancyTuchView;
     UISearchBar *searchbar;
      NSDictionary *urlplist;
      NSUserDefaults *defaults;
-    NSMutableArray * Array_WorldExp,* Array_FriendExp;;
-    NSArray *SearchCrickArray_worldExp,*SearchCrickArray_FriendExp;
+    NSMutableArray * Array_WorldExp,* Array_FriendExp,* Array_Faourite;;
+    NSArray *SearchCrickArray_worldExp,*SearchCrickArray_FriendExp,*SearchCrickArray_Faourite;
     CALayer *bootomBorder_Cell;
-    NSURLSessionDataTask *dataTaskExp,*dataTaskWld;
+    NSURLSessionDataTask *dataTaskExp,*dataTaskWld,*dataTaskFav;
     NSInteger Array_WorldCount,modvalues;
     
 }
 @end
-
+//favouriteexplore1.png
 @implementation ExplorePageViewController
-@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp,Label_JsonResult;
+@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp,Label_JsonResult,image_ExpFavourite,cell_Favorite,View_ExpFavourite;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,12 +58,16 @@
         [searchbar setShowsCancelButton:NO animated:YES];
     
     SearchCrickArray_worldExp=[[NSArray alloc]init];
-    
+    SearchCrickArray_Faourite=[[NSArray alloc]init];
     Tableview_Explore.tableHeaderView=searchbar;
     
      borderBottom_world = [CALayer layer];
      borderBottom_ExpFrnd = [CALayer layer];
+    borderBottom_ExpFavourite = [CALayer layer];
     Label_JsonResult.hidden=YES;
+    
+    
+    
     
     UITapGestureRecognizer *ViewTap11 =[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(ViewTapTapped_Expworld:)];
@@ -74,6 +78,14 @@
                                                                                action:@selector(ViewTapTapped_Expfriend:)];
     [View_ExpFriend addGestureRecognizer:ViewTap22];
     // [image_ExpFriend addGestureRecognizer:ViewTap22];
+    
+    
+    
+    
+    UITapGestureRecognizer *ViewTap33 =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                               action:@selector(ViewTapTapped_Expfavourite:)];
+    [View_ExpFavourite addGestureRecognizer:ViewTap33];
+    
     
     
     
@@ -120,10 +132,18 @@
 {
     [super viewDidLayoutSubviews];
     view_ExpWorld.clipsToBounds=YES;
+     View_ExpFriend.clipsToBounds=YES;
+     View_ExpFavourite.clipsToBounds=YES;
+    
     image_ExpWorld.clipsToBounds=YES;
     image_ExpFriend.clipsToBounds=YES;
+    image_ExpFavourite.clipsToBounds=YES;
+    
+    
+    
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld.png"]];
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
+    [image_ExpFavourite setImage:[UIImage imageNamed:@"favouriteexplore.png"]];
     
     
     borderBottom_world.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
@@ -132,13 +152,24 @@
     
     
     
-    View_ExpFriend.clipsToBounds=YES;
+   
     
     
    
     borderBottom_ExpFrnd.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
+    
+    
+    
+    
+    
+    
+    
+    borderBottom_ExpFavourite.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFavourite.frame = CGRectMake(0, View_ExpFavourite.frame.size.height-1, View_ExpFavourite.frame.size.width, 1);
+    [View_ExpFavourite.layer addSublayer:borderBottom_ExpFavourite];
+    
 }
 -(void)PulltoRefershtable
 {
@@ -150,7 +181,10 @@
     {
      [self ClienserverComm_FriendExp];
     }
-    
+    if ([cellChecking isEqualToString:@"Favourite"])
+    {
+        [self ClienserverComm_Favourite];
+    }
     [Tableview_Explore reloadData];
     [self.refreshControl endRefreshing];
     
@@ -445,6 +479,147 @@
     }
    
 }
+-(void)ClienserverComm_Favourite
+{
+    [self.view endEditing:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid= @"userid";
+        NSString *useridVal =[defaults valueForKey:@"userid"];
+        
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"favourite-show"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        dataTaskFav =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                      {
+                          if(data)
+                          {
+                              NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                              NSInteger statusCode = httpResponse.statusCode;
+                              if(statusCode == 200)
+                              {
+                                  
+                                  Array_Faourite=[[NSMutableArray alloc]init];
+                                  
+                                  SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                  Array_Faourite=[objSBJsonParser objectWithData:data];
+                                  SearchCrickArray_Faourite=[objSBJsonParser objectWithData:data];
+                                  
+                                  NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                  //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+                                  
+                                  ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                  ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                  
+                                  NSLog(@"Array_Faourite %@",Array_Faourite);
+                                  
+                                  
+                                  NSLog(@"Array_WorldExp ResultString %@",ResultString);
+                                  if ([ResultString isEqualToString:@"nouserid"])
+                                  {
+                                      
+                                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                                      
+                                      UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                         style:UIAlertActionStyleDefault
+                                                                                       handler:nil];
+                                      [alertController addAction:actionOk];
+                                      [self presentViewController:alertController animated:YES completion:nil];
+                                      
+                                      
+                                  }
+                                  
+                                  
+                                  if ([ResultString isEqualToString:@"nochallenges"])
+                                  {
+                                      
+                                      
+                                      
+                                      
+                                  }
+                                  if (Array_Faourite.count !=0)
+                                  {
+                                      Label_JsonResult.hidden=YES;
+                                      [Tableview_Explore reloadData];
+                                  }
+                                  else
+                                  {
+                                      Label_JsonResult.text=@"All the challenges which you tag as favourite will be shown here.";
+                                      Label_JsonResult.hidden=NO;
+                                      
+                                  }
+                                  
+                                  
+                              }
+                              
+                              else
+                              {
+                                  NSLog(@" error login1 ---%ld",(long)statusCode);
+                                  
+                              }
+                              
+                              
+                          }
+                          else if(error)
+                          {
+                              
+                              NSLog(@"error login2.......%@",error.description);
+                          }
+                          
+                          
+                      }];
+        [dataTaskFav resume];
+    }
+    
+}
 -(void)viewWillAppear:(BOOL)animated
 
 {
@@ -458,7 +633,11 @@
     {
         [self ClienserverComm_FriendExp];
     }
-    
+    if ([cellChecking isEqualToString:@"Favourite"])
+    {
+        [self ClienserverComm_Favourite];
+    }
+
 }
 - (void)ViewTap51Tapped:(UITapGestureRecognizer *)recognizer
 {
@@ -472,12 +651,19 @@
 {
     [dataTaskExp cancel];
  cellChecking=@"WorldExp";
+    
      Label_JsonResult.hidden=YES;
     view_ExpWorld.clipsToBounds=YES;
+    View_ExpFriend.clipsToBounds=YES;
+    View_ExpFavourite.clipsToBounds=YES;
+    
     image_ExpWorld.clipsToBounds=YES;
+    image_ExpFriend.clipsToBounds=YES;
+    image_ExpFavourite.clipsToBounds=YES;
+    
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld.png"]];
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
-
+    [image_ExpFavourite setImage:[UIImage imageNamed:@"favouriteexplore.png"]];
     
     borderBottom_world.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-2.5, view_ExpWorld.frame.size.width, 2.5);
@@ -485,13 +671,18 @@
     
     
     
-    View_ExpFriend.clipsToBounds=YES;
-    image_ExpFriend.clipsToBounds=YES;
-    
     
     borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
+    
+    
+    borderBottom_ExpFavourite.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFavourite.frame = CGRectMake(0, View_ExpFavourite.frame.size.height-1, View_ExpFavourite.frame.size.width, 1);
+    [View_ExpFavourite.layer addSublayer:borderBottom_ExpFavourite];
+    
+    
+    
      [self ClienserverComm_worldExp];
     if (Array_WorldExp.count==0)
     {
@@ -508,10 +699,16 @@
     cellChecking=@"FriendExp";
     [dataTaskWld cancel];
     view_ExpWorld.clipsToBounds=YES;
+    View_ExpFriend.clipsToBounds=YES;
+    View_ExpFavourite.clipsToBounds=YES;
+    
     image_ExpWorld.clipsToBounds=YES;
+    image_ExpFriend.clipsToBounds=YES;
+    image_ExpFavourite.clipsToBounds=YES;
      Label_JsonResult.hidden=YES;
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld1.png"]];
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends.png"]];
+    [image_ExpFavourite setImage:[UIImage imageNamed:@"favouriteexplore.png"]];
 
     borderBottom_world.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-1, view_ExpWorld.frame.size.width, 1);
@@ -519,15 +716,68 @@
     
     
     
-    View_ExpFriend.clipsToBounds=YES;
-    image_ExpFriend.clipsToBounds=YES;
+    
     
 
     borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
     borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-2.5, View_ExpFriend.frame.size.width, 2.5);
     [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
+    
+    borderBottom_ExpFavourite.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFavourite.frame = CGRectMake(0, View_ExpFavourite.frame.size.height-1, View_ExpFavourite.frame.size.width, 1);
+    [View_ExpFavourite.layer addSublayer:borderBottom_ExpFavourite];
+
+    
      [self ClienserverComm_FriendExp];
     if (Array_FriendExp.count==0)
+    {
+        Label_JsonResult.hidden=NO;
+    }
+    else
+    {
+        Label_JsonResult.hidden=YES;
+    }
+    
+    [Tableview_Explore reloadData];
+}
+-(void)ViewTapTapped_Expfavourite:(UITapGestureRecognizer *)recognizer
+{
+    cellChecking=@"Favourite";
+    [dataTaskWld cancel];
+    
+    view_ExpWorld.clipsToBounds=YES;
+    View_ExpFriend.clipsToBounds=YES;
+    View_ExpFavourite.clipsToBounds=YES;
+    
+    image_ExpWorld.clipsToBounds=YES;
+    image_ExpFriend.clipsToBounds=YES;
+    image_ExpFavourite.clipsToBounds=YES;
+    
+    
+    
+    [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld1.png"]];
+    [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends1.png"]];
+    [image_ExpFavourite setImage:[UIImage imageNamed:@"favouriteexplore1.png"]];
+    
+    
+    
+    
+    borderBottom_world.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom_world.frame = CGRectMake(0, view_ExpWorld.frame.size.height-1, view_ExpWorld.frame.size.width, 1);
+    [view_ExpWorld.layer addSublayer:borderBottom_world];
+
+        borderBottom_ExpFrnd.backgroundColor =[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor;
+    borderBottom_ExpFrnd.frame = CGRectMake(0, View_ExpFriend.frame.size.height-1, View_ExpFriend.frame.size.width, 1);
+    [View_ExpFriend.layer addSublayer:borderBottom_ExpFrnd];
+    
+    
+    borderBottom_ExpFavourite.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
+    borderBottom_ExpFavourite.frame = CGRectMake(0, View_ExpFavourite.frame.size.height-2.5, View_ExpFavourite.frame.size.width, 2.5);
+    [View_ExpFavourite.layer addSublayer:borderBottom_ExpFavourite];
+    
+    [self ClienserverComm_Favourite];
+    
+    if (Array_Faourite.count==0)
     {
         Label_JsonResult.hidden=NO;
     }
@@ -557,7 +807,10 @@
         {
             return Array_FriendExp.count;
         }
-    
+        else if ([cellChecking isEqualToString:@"Favourite"])
+        {
+            return Array_Faourite.count;
+        }
     return 0;
 }
 
@@ -568,6 +821,7 @@
 
     static NSString *cellIdW1=@"CellW1";
     static NSString *cellIdF1=@"CellF1";
+   static NSString *cellIdF11=@"CellF";
    
     
         if ([cellChecking isEqualToString:@"WorldExp"])
@@ -1224,6 +1478,96 @@
                 
       
     }
+    if ([cellChecking isEqualToString:@"Favourite"])
+    {
+        
+        cell_Favorite = [[[NSBundle mainBundle]loadNibNamed:@"FavriteTableViewCell" owner:self options:nil] objectAtIndex:0];
+        
+        
+        if (cell_Favorite == nil)
+        {
+            
+            cell_Favorite = [[FavriteTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdF11];
+        }
+        
+        bootomBorder_Cell = [CALayer layer];
+        bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+        bootomBorder_Cell.frame = CGRectMake(0, cell_Favorite.frame.size.height-1, cell_Favorite.frame.size.width, 1);
+        [cell_Favorite.layer addSublayer:bootomBorder_Cell];
+        
+        NSDictionary * dic_worldexp=[Array_Faourite objectAtIndex:indexPath.row];
+        cell_Favorite.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
+        cell_Favorite.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
+        cell_Favorite.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+        NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+        
+        
+        CGRect textRect = [text boundingRectWithSize:cell_Favorite.Label_Titile.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell_Favorite.Label_Titile.font} context:nil];
+        
+        int numberOfLines = textRect.size.height / cell_Favorite.Label_Titile.font.pointSize;;
+        if (numberOfLines==1)
+        {
+            [cell_Favorite.Label_Titile setFrame:CGRectMake(cell_Favorite.Label_Titile.frame.origin.x, cell_Favorite.Label_Titile.frame.origin.y, cell_Favorite.Label_Titile.frame.size.width, cell_Favorite.Label_Titile.frame.size.height/2)];
+        }
+        
+        
+        
+        NSLog(@"number of lines=%d",numberOfLines);
+        
+        cell_Favorite.Label_Time.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"createtime"]];
+        // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"challengeid"];
+        // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"challengerdetails"];
+        
+        //cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"mediatype"];
+        // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"mediaurl"];
+        // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"noofchallengers"];
+        // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"payperchallenger"];
+        
+        
+        if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+        {
+            cell_Favorite.Image_PalyBuutton.hidden=YES;
+            
+            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+            
+            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            
+            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+            
+            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            cell_Favorite.Image_PalyBuutton.hidden=NO;
+            
+            
+        }
+        
+        
+        
+        UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+        NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+        NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:[dic_worldexp valueForKey:@"usersname"] attributes: arialDict];
+        
+        UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-SemiBold" size:14.0];
+        NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+        NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString: @" Challenges " attributes:verdanaDict];
+        
+        
+        UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+        NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
+        NSMutableAttributedString *cAttrString = [[NSMutableAttributedString alloc]initWithString:[dic_worldexp valueForKey:@"challengerdetails"] attributes:verdanaDict2];
+        
+        [aAttrString appendAttributedString:vAttrString];
+        [aAttrString appendAttributedString:cAttrString];
+        
+        
+        cell_Favorite.Label_Changename.attributedText = aAttrString;
+        
+        return cell_Favorite;
+        
+        
+    }
    // return nil;
     abort();
 }
@@ -1242,13 +1586,16 @@
   
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-        return 125;
+            return 125;
         }
         if ([cellChecking isEqualToString:@"FriendExp"])
         {
             return 140;
         }
-  
+        if ([cellChecking isEqualToString:@"Favourite"])
+        {
+            return 100;
+        }
   
     return 0;
 }
@@ -1308,14 +1655,14 @@
     ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
     AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
     NSDictionary *  didselectDic;
-
+    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
     if ([cellChecking isEqualToString:@"FriendExp"])
     {
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
         cell_FriendExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
 //         set.ProfileImgeData =cell_FriendExp.Image_Profile.image;
 //        set2.ProfileImgeData =cell_FriendExp.Image_Profile.image;
-        NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+    
         [Array_new addObject:didselectDic];
         if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"] || [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""])
         {
@@ -1335,7 +1682,33 @@
         
         NSLog(@"Array_new11=%@",Array_new);;
     }
+    if ([cellChecking isEqualToString:@"Favourite"])
+    {
+      
+        didselectDic=[Array_Faourite  objectAtIndex:indexPath.row];
+        cell_Favorite = [Tableview_Explore cellForRowAtIndexPath:indexPath];
+        //  set.ProfileImgeData =cell_Favorite.Image_Profile.image;
+        [Array_new addObject:didselectDic];
+        if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"] || [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""])
+        {
+            
+            set.AllArrayData =Array_new;
+            [self.navigationController pushViewController:set animated:YES];
+            
+        }
+        else
+        {
+            
+            set2.AllArrayData =Array_new;
+            [self.navigationController pushViewController:set2 animated:YES];
+        }
 
+        
+    }
+    
+    
+   
+  
     
     
 }
@@ -1462,6 +1835,48 @@
     }
  
     
+    if ([cellChecking isEqualToString:@"Favourite"])
+    {
+        
+        
+        
+        if (searchText.length==0)
+        {
+            transparancyTuchView.hidden=NO;
+            [Array_Faourite removeAllObjects];
+            [Array_Faourite addObjectsFromArray:SearchCrickArray_Faourite];
+            
+        }
+        else
+            
+        {
+            transparancyTuchView.hidden=YES;
+            
+            [Array_Faourite removeAllObjects];
+            
+            for (NSDictionary *book in SearchCrickArray_Faourite)
+            {
+                NSString * string=[book objectForKey:@"title"];
+                NSString * string1=[book objectForKey:@"usersname"];
+                NSString * string2=[book objectForKey:@"challengersname"];
+                
+                NSRange r=[string rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                NSRange r1=[string1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                NSRange r2=[string2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                
+                if (r.location !=NSNotFound || r1.location !=NSNotFound || r2.location !=NSNotFound)
+                {
+                    
+                    
+                    [Array_Faourite addObject:book];
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
     
  
     [searchBar setShowsCancelButton:YES animated:YES];

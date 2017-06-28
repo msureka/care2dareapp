@@ -74,5 +74,7 @@
 	<string>http://www.care2dareapp.com/app/changepassword.php</string>
 	<key>suggested</key>
 	<string>http://www.care2dareapp.com/app/suggested.php</string>
+	<key>like</key>
+	<string>http://www.care2dareapp.com/app/like.php</string>
 </dict>
 </plist>

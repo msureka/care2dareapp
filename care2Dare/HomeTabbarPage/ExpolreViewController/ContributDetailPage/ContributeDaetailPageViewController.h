@@ -20,6 +20,8 @@
 #import "UIImageView+MHFacebookImageViewer.h"
 #import "Base64.h"
 #import "RecordedVidTableViewCell.h"
+#import "ListofVedioCommentsTableViewCell.h"
+#import "VediosListsTableViewCell.h"
 @interface ContributeDaetailPageViewController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 {
     
@@ -55,7 +57,10 @@
 @property(nonatomic,strong)OneImageVedioTableViewCell * cell_OneImageVid;
 @property(nonatomic,strong)TwoDetailsTableViewCell* cell_TwoDetails;
 @property(nonatomic,strong)CommentsTableViewCell * cell_ThreeComments;
-@property(nonatomic,strong)RecordedVidTableViewCell * cell_recordvid;
+@property(nonatomic,strong)VediosListsTableViewCell * cell_Vediolist;
+//@property(nonatomic,strong)RecordedVidTableViewCell * cell_recordvid;
+@property(nonatomic,strong) ListofVedioCommentsTableViewCell * Cell_List;
+
 @property(nonatomic,strong)NSMutableArray * AllArrayData;
 //@property(nonatomic,retain)UIImageView * ProfileImgeData;
 //@property(nonatomic,retain)UIImage * ProfileImgeData;
