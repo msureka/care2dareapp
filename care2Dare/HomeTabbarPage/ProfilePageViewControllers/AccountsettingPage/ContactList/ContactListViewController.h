@@ -18,4 +18,5 @@
 @property(strong,nonatomic)ContactAddTableViewCell *cell_contactAdd;
 @property(strong,nonatomic)IBOutlet UISearchBar *searchbar;
 -(IBAction)Button_Back:(id)sender;
+@property(strong,nonatomic)IBOutlet UIActivityIndicatorView *indcator;
 @end

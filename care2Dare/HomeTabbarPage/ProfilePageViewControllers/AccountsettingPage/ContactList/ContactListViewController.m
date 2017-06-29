@@ -14,10 +14,11 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-@interface ContactListViewController ()
+@interface ContactListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSString * name,*phoneNumber,*emailAddress;
     NSMutableArray * Array_name,*Array_Email,*Array_Phone,*Array_AllData,*contactlists;
+    NSMutableArray * Array_name1,*Array_Email1,*Array_Phone1;
     CNContactStore *store;
     NSDictionary *urlplist;
     NSUserDefaults * defaults;
@@ -31,7 +32,7 @@
 @end
 
 @implementation ContactListViewController
-@synthesize cell_contact,tableview_contact,cell_contactAdd,searchbar;
+@synthesize cell_contact,cell_contactAdd,searchbar,indcator;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -41,14 +42,21 @@
     Array_Email=[[NSMutableArray alloc]init];
     Array_Phone=[[NSMutableArray alloc]init];
     contactlists=[[NSMutableArray alloc]init];
+    
+    
     Array_searchFriend1=[[NSMutableArray alloc]init];
     borderBottom_SectionView0 = [CALayer layer];
     borderBottom_SectionView1 = [CALayer layer];
     Bottomborder_Cell2 = [CALayer layer];
     searchbar.showsCancelButton=NO;
+
+    [indcator startAnimating];
+    indcator.hidden=NO;
+   
     store = [[CNContactStore alloc] init];
     [self contactListData];
 }
+
 -(IBAction)Button_Back:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -177,13 +185,25 @@
     }
     if (Array_name.count!=0)
     {
+        for (int i=0; i<Array_name.count; i++)
+        {
+            
+        }
+        Array_name1=[[NSMutableArray alloc]init];
+        Array_Email1=[[NSMutableArray alloc]init];
+        Array_Phone1=[[NSMutableArray alloc]init];
+        
         [self ContactCommunication];
+        
     }
     else
     {
         [self contactListData];
     }
     NSLog(@"Contacts = %@",contactlists);
+    // [contactlists removeObjectsInRange:NSMakeRange(0, 10)];
+    // [contactlists subarrayWithRange:NSMakeRange(0, 5)];
+    //    NSLog(@"Contacts = %@",[contactlists subarrayWithRange:NSMakeRange(0,10)]);
     NSLog(@"Array_Phone = %@",Array_Phone);
     NSLog(@"Array_Email = %@",Array_Email);
     NSLog(@"Array_name = %@",Array_name);
@@ -330,6 +350,7 @@
         {
             return 67;
         }
+        
     }
     
     return 0;
@@ -344,7 +365,7 @@
     {
         case 0:
         {
-            cell_contactAdd = (ContactAddTableViewCell *)[tableview_contact dequeueReusableCellWithIdentifier:celltwo forIndexPath:indexPath];
+            cell_contactAdd = (ContactAddTableViewCell *)[tableView dequeueReusableCellWithIdentifier:celltwo forIndexPath:indexPath];
             if (ArryMerge_twitterlistSection0.count-1==indexPath.row)
             {
                 Bottomborder_Cell2 = [CALayer layer];
@@ -382,25 +403,25 @@
             
         case 1:
         {
-            cell_contact = (ContactTableViewCell *)[tableview_contact dequeueReusableCellWithIdentifier:cellone forIndexPath:indexPath];
+            cell_contact = (ContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellone forIndexPath:indexPath];
             
-            if (ArryMerge_twitterlistSection1.count-1==indexPath.row)
-            {
-                Bottomborder_Cell2 = [CALayer layer];
-                Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_contact.frame.size.height-1, cell_contact.frame.size.width, 1);
-                [cell_contact.layer addSublayer:Bottomborder_Cell2];
-            }
-            else
-            {
-                
-                Bottomborder_Cell2 = [CALayer layer];
-                Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_contact.frame.size.height-1,cell_contact.frame.size.width, 1);
-                [cell_contact.layer addSublayer:Bottomborder_Cell2];
-                
-                
-            }
+//            if (ArryMerge_twitterlistSection1.count-1==indexPath.row)
+//            {
+//                Bottomborder_Cell2 = [CALayer layer];
+//                Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
+//                Bottomborder_Cell2.frame = CGRectMake(0, cell_contact.frame.size.height-1, cell_contact.frame.size.width, 1);
+//                [cell_contact.layer addSublayer:Bottomborder_Cell2];
+//            }
+//            else
+//            {
+//                
+//                Bottomborder_Cell2 = [CALayer layer];
+//                Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+//                Bottomborder_Cell2.frame = CGRectMake(0, cell_contact.frame.size.height-1,cell_contact.frame.size.width, 1);
+//                [cell_contact.layer addSublayer:Bottomborder_Cell2];
+//                
+//                
+//            }
             
             
             cell_contact.button_invite.tag=indexPath.row;
@@ -408,25 +429,27 @@
             cell_contact.label_one.text=[dictVal valueForKey:@"name"];
             if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                [cell_contact.button_invite addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
+               // [cell_contact.button_invite addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
                 cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
                 cell_contact.label_three.hidden=YES;
             }
             if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                [cell_contact.button_invite addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+               // [cell_contact.button_invite addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
                 cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
                 cell_contact.label_three.hidden=YES;
             }
             if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
+               // [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
                 cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
                 cell_contact.label_three.text=[dictVal valueForKey:@"friendemail"];
                 cell_contact.label_three.hidden=NO;
             }
             //cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
             // cell_contact.label_three.text=[dictVal valueForKey:@"friendmobileno"];
+            
+            [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
             
             cell_contact.button_invite.clipsToBounds=YES;
             cell_contact.button_invite.layer.cornerRadius=7.0f;
@@ -562,11 +585,28 @@
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
         NSString *namestr= @"name";
-        NSString *namestrval =[Array_name componentsJoinedByString:@","];;
         NSString *emailstr= @"email";
-        NSString *emailstrval =[Array_Email componentsJoinedByString:@","];;
         NSString *mobilenumber= @"mobileno";
-        NSString *mobilenumberval =[Array_Phone componentsJoinedByString:@","];;
+        NSString *namestrval,*emailstrval,*mobilenumberval;
+        if (Array_name.count !=0)
+        {
+            if (Array_name.count<=100)
+            {
+                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,[Array_name count])] componentsJoinedByString:@","];;
+                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,[Array_Email count])] componentsJoinedByString:@","];;
+                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,[Array_Phone count])] componentsJoinedByString:@","];;
+            }
+            else
+            {
+                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
+                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
+                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
+            }
+        }
+        
+        
+        
+        
         
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[urlplist valueForKey:@"invite_contacts"]]];
         [req setHTTPMethod:@"POST"];
@@ -574,7 +614,7 @@
         NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
         
         NSData *postData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
         [req addValue:postLength forHTTPHeaderField:@"Content-Length"];
         [req setHTTPBody:postData];
         NSURLSession *session = [NSURLSession sharedSession];
@@ -592,6 +632,90 @@
                                                             SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
                                                             Array_AllData=[objSBJsonParser objectWithData:data];
                                                             
+                                                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                            
+                                                                                    
+                                                            
+                                                                                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                                
+                                                                                                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                                
+                                                                                                                     NSLog(@"ResultString %@",ResultString);
+     
+                                                            
+                                                            if (Array_AllData.count !=0)
+                                                            {
+                                                                if (Array_name.count>=100)
+                                                                {
+                                                                    [Array_name removeObjectsInRange:NSMakeRange(0, 99)];
+                                                                    [Array_Email removeObjectsInRange:NSMakeRange(0, 99)];
+                                                                    [Array_Phone removeObjectsInRange:NSMakeRange(0, 99)];
+                                                                    
+                                                                }
+                                                                else
+                                                                {
+                                                                    [Array_name removeObjectsInRange:NSMakeRange(0, [Array_name count])];
+                                                                    [Array_Email removeObjectsInRange:NSMakeRange(0,[Array_Email count])];
+                                                                    [Array_Phone removeObjectsInRange:NSMakeRange(0, [Array_Phone count])];
+                                                                    
+                                                                }
+                                                                
+                                                               
+                                                                
+                                                                
+                                                                
+                                                                
+                                                       
+                                                                
+                                                                if (Array_name.count !=0)
+                                                                {
+                                                                    [self ContactCommunication];
+                                                                }
+                                                                else
+                                                                {
+                                                                    
+                                                                    
+                                                                    ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
+                                                                    ArryMerge_twitterlistSection1=[[NSMutableArray alloc]init];
+                                                                    Array_Add=[[NSArray alloc]init];
+                                                                    array_invite=[[NSArray alloc]init];
+                                                                    
+                                                                    
+                                                                    for (int i=0; i<Array_AllData.count; i++)
+                                                                    {
+                                                                        if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
+                                                                        {
+                                                                            [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
+                                                                            
+                                                                        }
+                                                                        else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
+                                                                        {
+                                                                            [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
+                                                                    Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                   [_tableview_contact reloadData];
+
+                                    indcator.hidden=YES;
+                                    [indcator stopAnimating];
+                                                                                                        }
+                                                                
+                                                                
+                                                                
+ 
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                    //[self ContactCommunication];
+                            NSLog(@" error login1 ---%ld",(long)statusCode);
+    
                                                         }
                                                         
                                                     }
@@ -601,150 +725,262 @@
         [task resume];
         
     }
-    //        NSString *userid= @"userid";
-    //        NSString *useridVal =[defaults valueForKey:@"userid"];
-    //        NSString *namestr= @"name";
-    //        NSString *namestrval =[Array_name componentsJoinedByString:@","];;
-    //        NSString *emailstr= @"email";
-    //        NSString *emailstrval =[Array_Email componentsJoinedByString:@","];;
-    //        NSString *mobilenumber= @"mobileno";
-    //        NSString *mobilenumberval =[Array_Phone componentsJoinedByString:@","];;
-    //
-    //    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
-    //
-    //#pragma mark - swipe sesion
-    //
-    //        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-    //
-    //        NSURL *url;
-    //        NSString *  urlStrLivecount=[urlplist valueForKey:@"invite_contacts"];;
-    //        url =[NSURL URLWithString:urlStrLivecount];
-    //
-    //        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    //
-    //        [request setHTTPMethod:@"POST"];//Web API Method
-    //
-    //        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    //
-    //        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
-    //
-    //
-    //
-    //        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-    //                                         {
-    //                                             if(data)
-    //                                             {
-    //                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    //                                                 NSInteger statusCode = httpResponse.statusCode;
-    //                                                 if(statusCode == 200)
-    //                                                 {
-    //
-    //                                Array_AllData=[[NSMutableArray alloc]init];
-    //                            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-    //                            Array_AllData=[objSBJsonParser objectWithData:data];
-    //
-    //                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    //
-    //                                                     //Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
-    //
-    //                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    //
-    //                                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-    //
-    //                                                     NSLog(@"Array_AllData %@",Array_AllData);
-    //
-    //
-    //                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
-    //
-    //
-    //                                if (Array_AllData.count !=0)
-    //                                    {
-    //                                    ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
-    //                                    ArryMerge_twitterlistSection1=[[NSMutableArray alloc]init];
-    //                            Array_Add=[[NSArray alloc]init];
-    //                            array_invite=[[NSArray alloc]init];
-    //
-    ////                                                             [tableview_twitter setHidden:YES];
-    ////                                                             indicator.hidden=YES;
-    ////                                                             [indicator stopAnimating];
-    ////                                                             Lable_JSONResult.hidden=NO;
-    ////
-    //                                         for (int i=0; i<Array_AllData.count; i++)
-    //                                            {
-    //                                    if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
-    //                                                {
-    //                                    [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
-    //
-    //                                            }
-    //                        else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
-    //                                {
-    //                                [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
-    //                                }
-    //
-    //                                        }
-    //                                        array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
-    //                                        Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
-    //                                    [tableview_contact reloadData];
-    //
-    //                                    }
-    //
-    //
-    //                                if ([ResultString isEqualToString:@"phoneNumber"])
-    //                                    {
-    //
-    //                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //                                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-    //                                    style:UIAlertActionStyleDefault handler:nil];
-    //                                    [alertController addAction:actionOk];
-    //                                [self presentViewController:alertController animated:YES completion:nil];
-    //
-    //
-    //                                                     }
-    //                                                 }
-    //
-    //                                                 else
-    //                                                 {
-    //                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
-    //
-    //                                                 }
-    //
-    //                                             }
-    //                                             else if(error)
-    //                                             {
-    //
-    //                                                 NSLog(@"error login2.......%@",error.description);
-    //
-    //                                             }
-    //                                         }];
-    //        [dataTask resume];
-    //    }
     
+        
+//        
+//            NSString *userid= @"userid";
+//            NSString *useridVal =[defaults valueForKey:@"userid"];
+//            NSString *namestr= @"name";
+//            NSString *namestrval =[Array_name componentsJoinedByString:@","];;
+//            NSString *emailstr= @"email";
+//            NSString *emailstrval =[Array_Email componentsJoinedByString:@","];;
+//            NSString *mobilenumber= @"mobileno";
+//            NSString *mobilenumberval =[Array_Phone componentsJoinedByString:@","];;
+//    
+//        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
+//    
+//    #pragma mark - swipe sesion
+//    
+//            NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+//    
+//            NSURL *url;
+//            NSString *  urlStrLivecount=[urlplist valueForKey:@"invite_contacts"];;
+//            url =[NSURL URLWithString:urlStrLivecount];
+//    
+//            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    
+//            [request setHTTPMethod:@"POST"];//Web API Method
+//    
+//            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    
+//            request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    
+//    
+//            NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+//                                             {
+//                                                 if(data)
+//                                                 {
+//                                                     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//                                                     NSInteger statusCode = httpResponse.statusCode;
+//                                                     if(statusCode == 200)
+//                                                     {
+//    
+//                                    Array_AllData=[[NSMutableArray alloc]init];
+//                                SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                Array_AllData=[objSBJsonParser objectWithData:data];
+//    
+//                                NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+//    
+//                                                         //Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+//    
+//                            ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//    
+//                                    ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+//    
+//                                                         NSLog(@"Array_AllData %@",Array_AllData);
+//    
+//    
+//                                                         NSLog(@"Array_AllData ResultString %@",ResultString);
+//    
+//    
+//                                    if (Array_AllData.count !=0)
+//                                        {
+//                                        ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
+//                                        ArryMerge_twitterlistSection1=[[NSMutableArray alloc]init];
+//                                Array_Add=[[NSArray alloc]init];
+//                                array_invite=[[NSArray alloc]init];
+//    
+//    //                                                             [tableview_twitter setHidden:YES];
+//    //                                                             indicator.hidden=YES;
+//    //                                                             [indicator stopAnimating];
+//    //                                                             Lable_JSONResult.hidden=NO;
+//    //
+//                                             for (int i=0; i<Array_AllData.count; i++)
+//                                                {
+//                                        if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
+//                                                    {
+//                                        [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
+//    
+//                                                }
+//                            else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
+//                                    {
+//                                    [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
+//                                    }
+//    
+//                                            }
+//                                            array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
+//                                            Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
+//                                            [indcator stopAnimating];
+//                                        [_tableview_contact reloadData];
+//    
+//                                        }
+//    
+//    
+//                                    if ([ResultString isEqualToString:@"phoneNumber"])
+//                                        {
+//    
+//                                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+//    
+//                                    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+//                                        style:UIAlertActionStyleDefault handler:nil];
+//                                        [alertController addAction:actionOk];
+//                                    [self presentViewController:alertController animated:YES completion:nil];
+//    
+//    
+//                                                         }
+//                                                     }
+//    
+//                                                     else
+//                                                     {
+//                                                         NSLog(@" error login1 ---%ld",(long)statusCode);
+//    
+//                                                     }
+//    
+//                                                 }
+//                                                 else if(error)
+//                                                 {
+//    
+//                                                     NSLog(@"error login2.......%@",error.description);
+//    
+//                                                 }
+//                                             }];
+//            [dataTask resume];
+//        }
+//    
 }
 -(void)InviteUser:(UIButton *)sender
 {
     
-    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Address",@"Phone Number",nil];
-    popup.tag = 707;
-    [popup showInView:self.view];
+    
+    
+    NSDictionary * dictVal=[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag];
+    
+    if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+    {
+        
+        if (![MFMailComposeViewController canSendMail])
+        {
+            NSLog(@"Mail services are not available");
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please configure your mailbox in order to invite a friend." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:actionOk];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+        }
+        else
+        {
+            MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+            mailCont.mailComposeDelegate = self;
+            [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
+            
+            [mailCont setSubject:@"Download Play:Date"];
+            [mailCont setMessageBody:@"Hey, \n\n Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone! \n\n Thanks!" isHTML:NO];
+            
+            [self presentViewController:mailCont animated:YES completion:nil];
+            
+        }
+        
+        
+        
+    }
+    if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+        
+    {
+        if([MFMessageComposeViewController canSendText]) {
+            MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init]; // Create message VC
+            messageController.messageComposeDelegate = self; // Set delegate to current instance
+            
+            NSMutableArray *recipients = [[NSMutableArray alloc] init]; // Create an array to hold the recipients
+            [recipients addObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendmobileno"]]; // Append example phone number to array
+            messageController.recipients = recipients; // Set the recipients of the message to the created array
+            
+            
+            
+            messageController.body = @"Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone!"; // Set initial text to example message
+            
+            dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
+                [self presentViewController:messageController animated:YES completion:NULL];
+            });
+        }
+    }
+    
+    if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+    {
+        UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Address",@"Phone Number",nil];
+        popup.tag = sender.tag;
+        [popup showInView:self.view];
+        
+        
+    }
+    
+    
+    
     
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ((long)actionSheet.tag == 707)
+    //    if ((long)actionSheet.tag == 707)
+    //    {
+    NSLog(@"INDEX==%ld",(long)buttonIndex);
+    
+    if (buttonIndex== 0)
     {
-        NSLog(@"INDEX==%ld",(long)buttonIndex);
-        
-        if (buttonIndex== 0)
+        if (![MFMailComposeViewController canSendMail])
         {
-            [self sendEmail:nil];
+            NSLog(@"Mail services are not available");
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please configure your mailbox in order to invite a friend." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:actionOk];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            return;
         }
-        else  if (buttonIndex== 1)
+        else
         {
-            [self sendMessage:nil];
+            MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+            mailCont.mailComposeDelegate = self;
+            [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:(long)actionSheet.tag]valueForKey:@"friendemail"]]];
+            
+            [mailCont setSubject:@"Download Play:Date"];
+            [mailCont setMessageBody:@"Hey, \n\n Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone! \n\n Thanks!" isHTML:NO];
+            
+            [self presentViewController:mailCont animated:YES completion:nil];
+            
+        }
+        
+        
+    }
+    else  if (buttonIndex== 1)
+    {
+        if([MFMessageComposeViewController canSendText]) {
+            MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init]; // Create message VC
+            messageController.messageComposeDelegate = self; // Set delegate to current instance
+            
+            NSMutableArray *recipients = [[NSMutableArray alloc] init]; // Create an array to hold the recipients
+            [recipients addObject:[[ArryMerge_twitterlistSection1 objectAtIndex:(long)actionSheet.tag]valueForKey:@"friendmobileno"]]; // Append example phone number to array
+            messageController.recipients = recipients; // Set the recipients of the message to the created array
+            
+            
+            
+            messageController.body = @"Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone!"; // Set initial text to example message
+            
+            dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
+                [self presentViewController:messageController animated:YES completion:NULL];
+            });
         }
     }
-    
 }
 
 -(void)sendEmail:(UIButton *)sender
@@ -950,7 +1186,7 @@
     
     
     
-    [tableview_contact reloadData];
+    [_tableview_contact reloadData];
     
     
     
