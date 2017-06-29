@@ -12,10 +12,12 @@
 #import "SBJsonParser.h"
 #import "UIImageView+WebCache.h"
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/ABAddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 @interface ContactListViewController ()
 {
     NSString * name,*phoneNumber,*emailAddress;
-    NSMutableArray * Array_name,*Array_Email,*Array_Phone,*Array_AllData;
+    NSMutableArray * Array_name,*Array_Email,*Array_Phone,*Array_AllData,*contactlists;
     CNContactStore *store;
     NSDictionary *urlplist;
     NSUserDefaults * defaults;
@@ -23,7 +25,7 @@
     CALayer *Bottomborder_Cell2;
     NSMutableArray *ArryMerge_twitterlistSection0,*ArryMerge_twitterlistSection1;
     UIView *sectionView;
-      NSArray * Array_Add,*array_invite;
+    NSArray * Array_Add,*array_invite;
     NSMutableArray * Array_searchFriend1;
 }
 @end
@@ -38,11 +40,12 @@
     Array_name=[[NSMutableArray alloc]init];
     Array_Email=[[NSMutableArray alloc]init];
     Array_Phone=[[NSMutableArray alloc]init];
-     Array_searchFriend1=[[NSMutableArray alloc]init];
+    contactlists=[[NSMutableArray alloc]init];
+    Array_searchFriend1=[[NSMutableArray alloc]init];
     borderBottom_SectionView0 = [CALayer layer];
     borderBottom_SectionView1 = [CALayer layer];
     Bottomborder_Cell2 = [CALayer layer];
-  searchbar.showsCancelButton=NO;
+    searchbar.showsCancelButton=NO;
     store = [[CNContactStore alloc] init];
     [self contactListData];
 }
@@ -56,104 +59,237 @@
 }
 -(void)contactListData
 {
+    
+    
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    
+    __block BOOL accessGranted = NO;
+    
+    if (&ABAddressBookRequestAccessWithCompletion != NULL) { // We are on iOS 6
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            accessGranted = granted;
+            dispatch_semaphore_signal(semaphore);
+        });
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        //        dispatch_release(semaphore);
+    }
+    
+    else { // We are on iOS 5 or Older
+        accessGranted = YES;
+        [self getContactsWithAddressBook:addressBook];
+    }
+    
+    if (accessGranted) {
+        [self getContactsWithAddressBook:addressBook];
+    }
+    
+}
+- (void)getContactsWithAddressBook:(ABAddressBookRef )addressBook
+{
+    
+    contactlists = [[NSMutableArray alloc] init];
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
+    
+    for (int i=0;i < nPeople;i++) {
+        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+        
+        ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
+        
+        //For username and surname
+        ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
+        
+        CFStringRef firstName, lastName;
+        firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        // [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+        if (firstName !=nil || lastName==nil)
+        {
+            [dOfPerson setObject:[NSString stringWithFormat:@"%@", firstName] forKey:@"name"];
+        }
+        else if (firstName ==nil || lastName !=nil)
+        {
+            [dOfPerson setObject:[NSString stringWithFormat:@"%@", lastName] forKey:@"name"];
+        }
+        else if (firstName !=nil || lastName !=nil)
+        {
+            [dOfPerson setObject:[NSString stringWithFormat:@"%@%@", firstName, lastName] forKey:@"name"];
+        }
+        // For getting the user image.
+        UIImage *contactImage;
+        if(ABPersonHasImageData(ref)){
+            contactImage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageData(ref)];
+        }
+        
+        //For Email ids
+        ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
+        if(ABMultiValueGetCount(eMail) > 0) {
+            [dOfPerson setObject:(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
+            
+        }
+        
+        //For Phone number
+        NSString* mobileLabel;
+        
+        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
+            mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, i);
+            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
+            {
+                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
+            }
+            
+            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
+            {
+                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
+                break ;
+            }
+            
+        }
+        if (dOfPerson.count>=2)
+        {
+            if ([dOfPerson objectForKey:@"name"] &&  [dOfPerson valueForKey:@"name"] !=nil)
+            {
+                [Array_name addObject:[dOfPerson valueForKey:@"name"]];
+                if ([dOfPerson valueForKey:@"email"]==nil)
+                {
+                    [Array_Email addObject:@""];
+                }
+                else
+                {
+                    [Array_Email addObject:[dOfPerson valueForKey:@"email"]];
+                }
+                if ([dOfPerson valueForKey:@"Phone"]==nil)
+                {
+                    [Array_Phone addObject:@""];
+                }
+                else
+                {
+                    [Array_Phone addObject:[dOfPerson valueForKey:@"Phone"]];
+                }
+                [contactlists addObject:dOfPerson];
+            }
+            
+        }
+        
+    }
+    if (Array_name.count!=0)
+    {
+        [self ContactCommunication];
+    }
+    else
+    {
+        [self contactListData];
+    }
+    NSLog(@"Contacts = %@",contactlists);
+    NSLog(@"Array_Phone = %@",Array_Phone);
+    NSLog(@"Array_Email = %@",Array_Email);
+    NSLog(@"Array_name = %@",Array_name);
+}
+
+
+-(void)contactListData11
+{
     [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error)
      {
-        if (granted == YES)
-        {
-            //keys with fetching properties
-            NSArray *keys = @[CNContactFamilyNameKey,CNContactEmailAddressesKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey];
-            NSString *containerId = store.defaultContainerIdentifier;
-            NSPredicate *predicate = [CNContact predicateForContactsInContainerWithIdentifier:containerId];
-            NSError *error;
-            NSArray *cnContacts = [store unifiedContactsMatchingPredicate:predicate keysToFetch:keys error:&error];
-            if (error)
-            {
-                NSLog(@"error fetching contacts %@", error);
-            } else
-            {
-                for (CNContact *contact in cnContacts)
-                {
-                    NSLog(@"Contacts123== %@",contact);
-                    NSLog(@"Name== %@%@%@", contact.givenName,@" ",contact.familyName);
-                    name=[NSString stringWithFormat:@"%@%@%@", contact.givenName,@" ",contact.familyName];
-                    
-                    for (CNLabeledValue * label in contact.emailAddresses)
-                    {
-                        NSString *Email = label.value;
-                        if ([Email length] > 0)
-                        {
-                            emailAddress=[NSString stringWithFormat:@"%@",Email];
-                            
-                            
-                            NSLog(@"Email==%@", Email);
-                        }
-                    }
-                    
-                    for (CNLabeledValue *label in contact.phoneNumbers)
-                    {
-                        NSString *phone = [label.value stringValue];
-                        if ([phone length] > 0)
-                        {
-                            phoneNumber=[NSString stringWithFormat:@"%@",phone];
-                            NSLog(@"phone=== %@", phone);
-                        }
-                    }
-                    
-                   // NSMutableDictionary *Contact_dict = [[NSMutableDictionary alloc] init];
-                    if ((name !=nil && ![name isEqualToString:@" "]) && ((emailAddress !=nil && ![emailAddress isEqualToString:@""])||(phoneNumber !=nil && ![phoneNumber isEqualToString:@""])))
-                    {
-                   // [Contact_dict setObject:name forKey:@"name"];
-                        [Array_name addObject:name];
-                    
-                    if (phoneNumber !=nil && ![phoneNumber isEqualToString:@""])
-                    {
-                       // [Contact_dict setObject:phoneNumber forKey:@"phone"];
-                        phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                        
-                        phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-                         [Array_Phone addObject:phoneNumber];
-                    }
-                    else
-                    {
-                        //[Contact_dict setObject:@"" forKey:@"phone"];
-                         [Array_Phone addObject:@""];
-                    }
-                    if (emailAddress !=nil && ![emailAddress isEqualToString:@""])
-                    {
-                        //[Contact_dict setObject:emailAddress forKey:@"email"];
-                        [Array_Email addObject:emailAddress];
-                    }
-                    else
-                    {
-                     //[Contact_dict setObject:@"" forKey:@"email"];
-                        [Array_Email addObject:@""];
-                    }
-                    
-                    
-//                    if ((emailAddress !=nil && ![emailAddress isEqualToString:@""]) || (phoneNumber !=nil && ![phoneNumber isEqualToString:@""]) )
-//                    {
-//                         [Array_contatList addObject:Contact_dict];
-//                    }
-                   
-                        
-                    }
-                    name=nil;
-                    emailAddress=nil;
-                    phoneNumber=nil;
-                }
-                
-                NSLog(@"Array_Email==%@", Array_Email);
-                NSLog(@"Array_Phone==%@", Array_Phone);
-                NSLog(@"Array_name==%@", Array_name);
-                if (Array_name.count!=0)
-                {
-                    [self ContactCommunication];
-                }
-            }
-        }        
-    }];
+         if (granted == YES)
+         {
+             //keys with fetching properties
+             NSArray *keys = @[CNContactFamilyNameKey,CNContactEmailAddressesKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey];
+             NSString *containerId = store.defaultContainerIdentifier;
+             NSPredicate *predicate = [CNContact predicateForContactsInContainerWithIdentifier:containerId];
+             NSError *error;
+             NSArray *cnContacts = [store unifiedContactsMatchingPredicate:predicate keysToFetch:keys error:&error];
+             if (error)
+             {
+                 NSLog(@"error fetching contacts %@", error);
+             } else
+             {
+                 for (CNContact *contact in cnContacts)
+                 {
+                     NSLog(@"Contacts123== %@",contact);
+                     NSLog(@"Name== %@%@%@", contact.givenName,@" ",contact.familyName);
+                     name=[NSString stringWithFormat:@"%@%@%@", contact.givenName,@" ",contact.familyName];
+                     
+                     for (CNLabeledValue * label in contact.emailAddresses)
+                     {
+                         NSString *Email = label.value;
+                         if ([Email length] > 0)
+                         {
+                             emailAddress=[NSString stringWithFormat:@"%@",Email];
+                             
+                             
+                             NSLog(@"Email==%@", Email);
+                         }
+                     }
+                     
+                     for (CNLabeledValue *label in contact.phoneNumbers)
+                     {
+                         NSString *phone = [label.value stringValue];
+                         if ([phone length] > 0)
+                         {
+                             phoneNumber=[NSString stringWithFormat:@"%@",phone];
+                             NSLog(@"phone=== %@", phone);
+                         }
+                     }
+                     
+                     // NSMutableDictionary *Contact_dict = [[NSMutableDictionary alloc] init];
+                     if ((name !=nil && ![name isEqualToString:@" "]) && ((emailAddress !=nil && ![emailAddress isEqualToString:@""])||(phoneNumber !=nil && ![phoneNumber isEqualToString:@""])))
+                     {
+                         // [Contact_dict setObject:name forKey:@"name"];
+                         [Array_name addObject:name];
+                         
+                         if (phoneNumber !=nil && ![phoneNumber isEqualToString:@""])
+                         {
+                             // [Contact_dict setObject:phoneNumber forKey:@"phone"];
+                             phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                             
+                             phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+                             [Array_Phone addObject:phoneNumber];
+                         }
+                         else
+                         {
+                             //[Contact_dict setObject:@"" forKey:@"phone"];
+                             [Array_Phone addObject:@""];
+                         }
+                         if (emailAddress !=nil && ![emailAddress isEqualToString:@""])
+                         {
+                             //[Contact_dict setObject:emailAddress forKey:@"email"];
+                             [Array_Email addObject:emailAddress];
+                         }
+                         else
+                         {
+                             //[Contact_dict setObject:@"" forKey:@"email"];
+                             [Array_Email addObject:@""];
+                         }
+                         
+                         
+                         //                    if ((emailAddress !=nil && ![emailAddress isEqualToString:@""]) || (phoneNumber !=nil && ![phoneNumber isEqualToString:@""]) )
+                         //                    {
+                         //                         [Array_contatList addObject:Contact_dict];
+                         //                    }
+                         
+                         
+                     }
+                     name=nil;
+                     emailAddress=nil;
+                     phoneNumber=nil;
+                 }
+                 
+                 NSLog(@"Array_Email==%@", Array_Email);
+                 NSLog(@"Array_Phone==%@", Array_Phone);
+                 NSLog(@"Array_name==%@", Array_name);
+                 if (Array_name.count!=0)
+                 {
+                     [self ContactCommunication];
+                 }
+             }
+         }
+     }];
     
-   }
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
@@ -169,7 +305,7 @@
     
     return 0;
     
-   
+    
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,18 +317,18 @@
     if (indexPath.section==1)
     {
         NSDictionary * dictVal=[ArryMerge_twitterlistSection1 objectAtIndex:indexPath.row];
-       
+        
         if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
         {
             return 47;
         }
         if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
         {
-           return 47;
+            return 47;
         }
         if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
         {
-         return 67;
+            return 67;
         }
     }
     
@@ -240,7 +376,7 @@
             
             return cell_contactAdd;
             
-  
+            
         }
             break;
             
@@ -265,39 +401,39 @@
                 
                 
             }
-
+            
             
             cell_contact.button_invite.tag=indexPath.row;
             NSDictionary * dictVal=[ArryMerge_twitterlistSection1 objectAtIndex:indexPath.row];
             cell_contact.label_one.text=[dictVal valueForKey:@"name"];
             if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                 [cell_contact.button_invite addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
-            cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
+                [cell_contact.button_invite addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
+                cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
                 cell_contact.label_three.hidden=YES;
             }
             if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                 [cell_contact.button_invite addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+                [cell_contact.button_invite addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
                 cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
                 cell_contact.label_three.hidden=YES;
             }
             if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
-                 [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
-                 cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
+                [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
+                cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
                 cell_contact.label_three.text=[dictVal valueForKey:@"friendemail"];
                 cell_contact.label_three.hidden=NO;
             }
             //cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
-           // cell_contact.label_three.text=[dictVal valueForKey:@"friendmobileno"];
+            // cell_contact.label_three.text=[dictVal valueForKey:@"friendmobileno"];
             
             cell_contact.button_invite.clipsToBounds=YES;
             cell_contact.button_invite.layer.cornerRadius=7.0f;
-           
+            
             return cell_contact;
             
-  
+            
         }
             break;
     }
@@ -396,7 +532,7 @@
 }
 -(void)ContactCommunication
 {
- 
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -423,7 +559,6 @@
     else
     {
         
-        
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
         NSString *namestr= @"name";
@@ -433,115 +568,157 @@
         NSString *mobilenumber= @"mobileno";
         NSString *mobilenumberval =[Array_Phone componentsJoinedByString:@","];;
         
-    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[urlplist valueForKey:@"invite_contacts"]]];
+        [req setHTTPMethod:@"POST"];
         
-#pragma mark - swipe sesion
+        NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
         
-        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-        
-        NSURL *url;
-        NSString *  urlStrLivecount=[urlplist valueForKey:@"invite_contacts"];;
-        url =[NSURL URLWithString:urlStrLivecount];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        [request setHTTPMethod:@"POST"];//Web API Method
-        
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        
-        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *postData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        [req addValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [req setHTTPBody:postData];
+        NSURLSession *session = [NSURLSession sharedSession];
         
         
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:req
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    if(data)
+                                                    {
+                                                        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                        NSInteger statusCode = httpResponse.statusCode;
+                                                        if(statusCode == 200)
+                                                        {
+                                                            Array_AllData=[[NSMutableArray alloc]init];
+                                                            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                            Array_AllData=[objSBJsonParser objectWithData:data];
+                                                            
+                                                        }
+                                                        
+                                                    }
+                                                }];
         
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                         {
-                                             if(data)
-                                             {
-                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                                 NSInteger statusCode = httpResponse.statusCode;
-                                                 if(statusCode == 200)
-                                                 {
-                                                     
-                                Array_AllData=[[NSMutableArray alloc]init];
-                            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                            Array_AllData=[objSBJsonParser objectWithData:data];
-                                                     
-                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                     
-                                                     //Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
-                                                     
-                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                     
-                                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                     
-                                                     NSLog(@"Array_AllData %@",Array_AllData);
-                                                     
-                                                     
-                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
-                                                     
-                                                     
-                                if (Array_AllData.count !=0)
-                                    {
-                                    ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
-                                    ArryMerge_twitterlistSection1=[[NSMutableArray alloc]init];
-                            Array_Add=[[NSArray alloc]init];
-                            array_invite=[[NSArray alloc]init];
-                                        
-//                                                             [tableview_twitter setHidden:YES];
-//                                                             indicator.hidden=YES;
-//                                                             [indicator stopAnimating];
-//                                                             Lable_JSONResult.hidden=NO;
-//
-                                         for (int i=0; i<Array_AllData.count; i++)
-                                            {
-                                    if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
-                                                {
-                                    [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
-                                        
-                                            }
-                        else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
-                                {
-                                [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
-                                }
-                                                
-                                        }
-                                        array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
-                                        Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
-                                    [tableview_contact reloadData];
-                                        
-                                    }
-                                                     
-                                                     
-                                if ([ResultString isEqualToString:@"phoneNumber"])
-                                    {
-                                                      
-                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                    style:UIAlertActionStyleDefault handler:nil];
-                                    [alertController addAction:actionOk];
-                                [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                                                         
-                                                     }
-                                                 }
-                                                 
-                                                 else
-                                                 {
-                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                     
-                                                 }
-                                                 
-                                             }
-                                             else if(error)
-                                             {
-                                                 
-                                                 NSLog(@"error login2.......%@",error.description);
-                                                 
-                                             }
-                                         }];
-        [dataTask resume];
+        
+        [task resume];
+        
     }
+    //        NSString *userid= @"userid";
+    //        NSString *useridVal =[defaults valueForKey:@"userid"];
+    //        NSString *namestr= @"name";
+    //        NSString *namestrval =[Array_name componentsJoinedByString:@","];;
+    //        NSString *emailstr= @"email";
+    //        NSString *emailstrval =[Array_Email componentsJoinedByString:@","];;
+    //        NSString *mobilenumber= @"mobileno";
+    //        NSString *mobilenumberval =[Array_Phone componentsJoinedByString:@","];;
+    //
+    //    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
+    //
+    //#pragma mark - swipe sesion
+    //
+    //        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    //
+    //        NSURL *url;
+    //        NSString *  urlStrLivecount=[urlplist valueForKey:@"invite_contacts"];;
+    //        url =[NSURL URLWithString:urlStrLivecount];
+    //
+    //        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    //
+    //        [request setHTTPMethod:@"POST"];//Web API Method
+    //
+    //        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    //
+    //        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+    //
+    //
+    //
+    //        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+    //                                         {
+    //                                             if(data)
+    //                                             {
+    //                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    //                                                 NSInteger statusCode = httpResponse.statusCode;
+    //                                                 if(statusCode == 200)
+    //                                                 {
+    //
+    //                                Array_AllData=[[NSMutableArray alloc]init];
+    //                            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+    //                            Array_AllData=[objSBJsonParser objectWithData:data];
+    //
+    //                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    //
+    //                                                     //Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+    //
+    //                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    //
+    //                                ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    //
+    //                                                     NSLog(@"Array_AllData %@",Array_AllData);
+    //
+    //
+    //                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+    //
+    //
+    //                                if (Array_AllData.count !=0)
+    //                                    {
+    //                                    ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
+    //                                    ArryMerge_twitterlistSection1=[[NSMutableArray alloc]init];
+    //                            Array_Add=[[NSArray alloc]init];
+    //                            array_invite=[[NSArray alloc]init];
+    //
+    ////                                                             [tableview_twitter setHidden:YES];
+    ////                                                             indicator.hidden=YES;
+    ////                                                             [indicator stopAnimating];
+    ////                                                             Lable_JSONResult.hidden=NO;
+    ////
+    //                                         for (int i=0; i<Array_AllData.count; i++)
+    //                                            {
+    //                                    if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
+    //                                                {
+    //                                    [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
+    //
+    //                                            }
+    //                        else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
+    //                                {
+    //                                [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
+    //                                }
+    //
+    //                                        }
+    //                                        array_invite=[ArryMerge_twitterlistSection1 mutableCopy];
+    //                                        Array_Add=[ArryMerge_twitterlistSection0 mutableCopy];
+    //                                    [tableview_contact reloadData];
+    //
+    //                                    }
+    //
+    //
+    //                                if ([ResultString isEqualToString:@"phoneNumber"])
+    //                                    {
+    //
+    //                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+    //
+    //                                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+    //                                    style:UIAlertActionStyleDefault handler:nil];
+    //                                    [alertController addAction:actionOk];
+    //                                [self presentViewController:alertController animated:YES completion:nil];
+    //
+    //
+    //                                                     }
+    //                                                 }
+    //
+    //                                                 else
+    //                                                 {
+    //                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+    //
+    //                                                 }
+    //
+    //                                             }
+    //                                             else if(error)
+    //                                             {
+    //
+    //                                                 NSLog(@"error login2.......%@",error.description);
+    //
+    //                                             }
+    //                                         }];
+    //        [dataTask resume];
+    //    }
     
 }
 -(void)InviteUser:(UIButton *)sender
@@ -564,7 +741,7 @@
         }
         else  if (buttonIndex== 1)
         {
-           [self sendMessage:nil];
+            [self sendMessage:nil];
         }
     }
     
@@ -575,20 +752,20 @@
     if (![MFMailComposeViewController canSendMail])
     {
         NSLog(@"Mail services are not available");
-            
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please configure your mailbox in order to invite a friend." preferredStyle:UIAlertControllerStyleAlert];
-            
+        
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:nil];
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
         [alertController addAction:actionOk];
-            
+        
         [self presentViewController:alertController animated:YES completion:nil];
         
         return;
-        }
-        else
-        {
+    }
+    else
+    {
         MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
         mailCont.mailComposeDelegate = self;
         [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
@@ -596,8 +773,8 @@
         [mailCont setMessageBody:@"Hey,\n\nChallenge your friends to a dare and help contribute to the society! \n\nVisit http://www.care2dare.com to download it on your mobile phone!\n\nThanks!" isHTML:NO];
         [self presentViewController:mailCont animated:YES completion:nil];
         
-        }
-        
+    }
+    
     
 }
 -(void)sendMessage:(UIButton *)sender
@@ -613,7 +790,7 @@
         messageController.body = @"Challenge your friends to a dare and help contribute to the society! Visit http://www.care2dare.com to download it on your mobile phone!"; // Set initial text to example message
         
         dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
-        [self presentViewController:messageController animated:YES completion:NULL];
+            [self presentViewController:messageController animated:YES completion:NULL];
         });
     }
 }
@@ -815,8 +992,8 @@
             
         case MessageComposeResultFailed:
         {
-//            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [warningAlert show];
+            //            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            //            [warningAlert show];
             break;
         }
             
