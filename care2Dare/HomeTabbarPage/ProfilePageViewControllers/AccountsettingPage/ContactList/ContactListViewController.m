@@ -114,17 +114,17 @@
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         // [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
-        if (firstName !=nil || lastName==nil)
+        if (firstName !=nil && lastName==nil)
         {
             [dOfPerson setObject:[NSString stringWithFormat:@"%@", firstName] forKey:@"name"];
         }
-        else if (firstName ==nil || lastName !=nil)
+        else if (firstName ==nil && lastName !=nil)
         {
             [dOfPerson setObject:[NSString stringWithFormat:@"%@", lastName] forKey:@"name"];
         }
-        else if (firstName !=nil || lastName !=nil)
+        else if (firstName !=nil && lastName !=nil)
         {
-            [dOfPerson setObject:[NSString stringWithFormat:@"%@%@", firstName, lastName] forKey:@"name"];
+            [dOfPerson setObject:[NSString stringWithFormat:@"%@%@%@", firstName,@" " ,lastName] forKey:@"name"];
         }
         // For getting the user image.
         UIImage *contactImage;
@@ -598,9 +598,9 @@
             }
             else
             {
-                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
-                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
-                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,99)] componentsJoinedByString:@","];;
+                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,100)] componentsJoinedByString:@","];;
+                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,100)] componentsJoinedByString:@","];;
+                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,100)] componentsJoinedByString:@","];;
             }
         }
         
@@ -647,9 +647,9 @@
                                                             {
                                                                 if (Array_name.count>=100)
                                                                 {
-                                                                    [Array_name removeObjectsInRange:NSMakeRange(0, 99)];
-                                                                    [Array_Email removeObjectsInRange:NSMakeRange(0, 99)];
-                                                                    [Array_Phone removeObjectsInRange:NSMakeRange(0, 99)];
+                                                                    [Array_name removeObjectsInRange:NSMakeRange(0, 100)];
+                                                                    [Array_Email removeObjectsInRange:NSMakeRange(0, 100)];
+                                                                    [Array_Phone removeObjectsInRange:NSMakeRange(0, 100)];
                                                                     
                                                                 }
                                                                 else
