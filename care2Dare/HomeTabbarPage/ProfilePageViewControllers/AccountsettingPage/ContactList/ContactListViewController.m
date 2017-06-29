@@ -50,9 +50,9 @@
     Bottomborder_Cell2 = [CALayer layer];
     searchbar.showsCancelButton=NO;
 
-    [indcator startAnimating];
+  //  [indcator startAnimating];
     indcator.hidden=NO;
-   
+    [_tableview_contact setHidden:YES];
     store = [[CNContactStore alloc] init];
     [self contactListData];
 }
@@ -664,15 +664,13 @@
                                                                 
                                                                 
                                                                 
-                                                                
-                                                       
-                                                                
                                                                 if (Array_name.count !=0)
                                                                 {
-                                                                    [self ContactCommunication];
+                                        [self ContactCommunication];
                                                                 }
                                                                 else
                                                                 {
+                                                                    
                                                                     
                                                                     
                                                                     ArryMerge_twitterlistSection0=[[NSMutableArray alloc]init];
@@ -700,13 +698,20 @@
                                                                     
                                                                     
                                                                     
-                                   [_tableview_contact reloadData];
+                                    [_tableview_contact reloadData];
+                                                                    
+                                                                   indcator.hidden=YES;
+                                                [_tableview_contact setHidden:NO];
+                                                                    
+                                            [indcator stopAnimating];
+            NSIndexPath *myIP = [NSIndexPath indexPathForRow:[ArryMerge_twitterlistSection1 count]-1 inSection:1] ;
+                                                                    
+            [_tableview_contact scrollToRowAtIndexPath:myIP atScrollPosition:NULL animated:NO];
+                                                                    
 
-                                    indcator.hidden=YES;
-                                    [indcator stopAnimating];
-                                                                                                        }
+
                                                                 
-                                                                
+                                                                }
                                                                 
  
                                                             }

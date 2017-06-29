@@ -409,7 +409,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     Label_Donate.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     Label_Raised.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     
-    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
+    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count);
     
     if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
     {
@@ -498,7 +498,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     {
         
         _Label_totalAmount.hidden=NO;
-        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count+1)];
+        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
         _Label_ChallengesName.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:20];
         _Label_ChallengesName.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
         
@@ -717,7 +717,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 NSString *noofchallengers= @"noofchallengers";
                 NSString *noofchallengersVal;
                 
-                noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count+1];
+                noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count];
                 
                 
                 NSString *challengerslist= @"challengerslist";
@@ -953,7 +953,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         NSString *noofchallengers= @"noofchallengers";
         NSString *noofchallengersVal;
        
-    noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count+1];
+    noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count];
         
         
         NSString *challengerslist= @"challengerslist";
@@ -1150,7 +1150,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
     {
         
     
-    _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count+1)];
+    _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
     CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
     
     if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)

@@ -1773,7 +1773,7 @@
                                                 <rect key="frame" x="171" y="42" width="34" height="32"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrw-1r-h7G">
-                                                <rect key="frame" x="277" y="41" width="42" height="33"/>
+                                                <rect key="frame" x="290" y="41" width="42" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="42" id="K2U-RV-gg3"/>
                                                     <constraint firstAttribute="height" constant="33" id="NY0-PF-419"/>
@@ -1820,7 +1820,7 @@
                                             <constraint firstItem="nj2-QO-18q" firstAttribute="top" secondItem="9b2-L9-2ZI" secondAttribute="bottom" constant="24" id="Jv4-gY-ipo"/>
                                             <constraint firstItem="GSW-6m-nHf" firstAttribute="centerX" secondItem="iKw-vA-LL4" secondAttribute="centerX" id="LNe-i5-4M6"/>
                                             <constraint firstAttribute="bottom" secondItem="1vp-JS-Ffg" secondAttribute="bottom" constant="49" id="M5C-Jq-Zkn"/>
-                                            <constraint firstAttribute="trailing" secondItem="Mrw-1r-h7G" secondAttribute="trailing" constant="56" id="MrS-cS-AtS"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mrw-1r-h7G" secondAttribute="trailing" constant="43" id="MrS-cS-AtS"/>
                                             <constraint firstItem="9b2-L9-2ZI" firstAttribute="top" secondItem="GSW-6m-nHf" secondAttribute="bottom" constant="8" symbolic="YES" id="OrB-b1-vo2"/>
                                             <constraint firstItem="emk-Ke-9r0" firstAttribute="top" secondItem="6S3-Jg-Afl" secondAttribute="top" constant="42" id="P6n-8V-BxG"/>
                                             <constraint firstItem="9b2-L9-2ZI" firstAttribute="top" secondItem="iKw-vA-LL4" secondAttribute="bottom" constant="39" id="Re0-hY-mm5"/>
@@ -1842,7 +1842,7 @@
                                             <constraint firstItem="FrV-l9-wmT" firstAttribute="baseline" secondItem="1vp-JS-Ffg" secondAttribute="firstBaseline" id="ce6-xt-DZF"/>
                                             <constraint firstItem="Ej6-6O-Urt" firstAttribute="firstBaseline" secondItem="qQ5-xS-VKt" secondAttribute="firstBaseline" id="dE5-Zo-nmb"/>
                                             <constraint firstItem="GSW-6m-nHf" firstAttribute="centerX" secondItem="48s-TP-LAF" secondAttribute="centerX" id="dJ9-Sz-s0a"/>
-                                            <constraint firstItem="Mrw-1r-h7G" firstAttribute="leading" secondItem="iKw-vA-LL4" secondAttribute="trailing" constant="68" id="dQL-KA-fFc"/>
+                                            <constraint firstItem="Mrw-1r-h7G" firstAttribute="leading" secondItem="iKw-vA-LL4" secondAttribute="trailing" constant="81" id="dQL-KA-fFc"/>
                                             <constraint firstItem="iKw-vA-LL4" firstAttribute="centerY" secondItem="48s-TP-LAF" secondAttribute="centerY" id="dsm-m7-Ub0"/>
                                             <constraint firstItem="48s-TP-LAF" firstAttribute="leading" secondItem="emk-Ke-9r0" secondAttribute="trailing" constant="86" id="eKc-y2-tJh"/>
                                             <constraint firstItem="emk-Ke-9r0" firstAttribute="bottom" secondItem="48s-TP-LAF" secondAttribute="bottom" constant="1" id="eZE-rs-Fyl"/>
@@ -1858,7 +1858,7 @@
                                             <constraint firstItem="5tU-0G-Ow0" firstAttribute="top" secondItem="nj2-QO-18q" secondAttribute="bottom" constant="2" id="nz8-Ht-QWi"/>
                                             <constraint firstItem="Yta-I8-yl3" firstAttribute="leading" secondItem="xDc-lb-b0O" secondAttribute="trailing" constant="34" id="p6v-OO-l2b"/>
                                             <constraint firstItem="6Rk-2G-85n" firstAttribute="leading" secondItem="6S3-Jg-Afl" secondAttribute="leading" id="pt1-oD-qwW"/>
-                                            <constraint firstItem="Mrw-1r-h7G" firstAttribute="leading" secondItem="GSW-6m-nHf" secondAttribute="trailing" constant="41" id="pzf-kZ-CAz"/>
+                                            <constraint firstItem="Mrw-1r-h7G" firstAttribute="leading" secondItem="GSW-6m-nHf" secondAttribute="trailing" constant="54" id="pzf-kZ-CAz"/>
                                             <constraint firstItem="9b2-L9-2ZI" firstAttribute="centerX" secondItem="6Rk-2G-85n" secondAttribute="centerX" id="qLd-rr-6iA"/>
                                             <constraint firstItem="NX4-Ac-OmC" firstAttribute="leading" secondItem="PRH-fy-2gR" secondAttribute="trailing" id="qdF-Ky-UCA"/>
                                             <constraint firstAttribute="trailing" secondItem="krg-Lp-Pak" secondAttribute="trailing" constant="10" id="qqx-2R-cFH"/>
@@ -3569,13 +3569,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOa-LQ-Z80">
-                                                    <rect key="frame" x="261" y="30" width="106" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="20"/>
-                                                    <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sachin Mokashi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaI-dn-Rgd">
                                                     <rect key="frame" x="8" y="105" width="359" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3588,13 +3581,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="20"/>
                                                     <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="challenges" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ueD-Yx-QEm">
-                                                    <rect key="frame" x="261" y="60" width="106" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="15"/>
-                                                    <color key="textColor" red="0.72941176470000002" green="0.73725490199999999" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFR-2v-2ZP">
@@ -3613,8 +3599,6 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="Image_ProfileImg" destination="3pg-UI-Bqb" id="nro-dG-EaP"/>
-                                            <outlet property="Label_Challenges" destination="xOa-LQ-Z80" id="oqT-QS-P5k"/>
-                                            <outlet property="Label_Challenges11" destination="ueD-Yx-QEm" id="n5b-BV-hxE"/>
                                             <outlet property="Label_Friends" destination="D1f-9S-5bE" id="eRC-Qt-Si4"/>
                                             <outlet property="Label_Friends22" destination="tFR-2v-2ZP" id="kFE-mD-bcA"/>
                                             <outlet property="Name_profile" destination="UaI-dn-Rgd" id="usL-Xt-IGD"/>
@@ -3856,6 +3840,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8LF-4w-4Gi">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ImM-hb-JKm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -3989,11 +3978,6 @@
                                     <outlet property="delegate" destination="xj1-ru-ZCf" id="YVl-WE-ieh"/>
                                 </connections>
                             </searchBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8LF-4w-4Gi">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -4005,7 +3989,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Yj-4Z-M3R" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="356" y="-3.1484257871064472"/>
+            <point key="canvasLocation" x="-170" y="125"/>
         </scene>
         <!--Twitter List View Controller-->
         <scene sceneID="0PP-pP-146">

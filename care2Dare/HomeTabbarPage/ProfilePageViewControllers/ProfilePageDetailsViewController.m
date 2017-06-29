@@ -531,7 +531,8 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
             cell_Profile = (profilePageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:mycellid2 forIndexPath:indexPath];
             
             
-            
+            cell_Profile.Image_ProfileImg.clipsToBounds=YES;
+            cell_Profile.Image_ProfileImg.layer.cornerRadius=cell_Profile.Image_ProfileImg.frame.size.height/2;
             
            
         //cell_Profile.Image_ProfileImg.image=Images_data.image;
