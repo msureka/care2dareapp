@@ -385,6 +385,7 @@
             }
             
             NSDictionary * dictVal=[ArryMerge_twitterlistSection0 objectAtIndex:indexPath.row];
+            NSLog(@"Sachin error==%@",dictVal);
             cell_contactAdd.Button_Add.tag=indexPath.row;
             cell_contactAdd.label_fbname.text=[dictVal valueForKey:@"name"];
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
@@ -587,24 +588,68 @@
         NSString *namestr= @"name";
         NSString *emailstr= @"email";
         NSString *mobilenumber= @"mobileno";
-        NSString *namestrval,*emailstrval,*mobilenumberval,*escapedNameString;
+        NSString *namestrval,*emailstrval,*mobilenumberval,*escapedMobileNoString,*escapedEmailString,*escapedNameString;
+        
+        NSCharacterSet *notAllowedCharsMobile = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890,"] invertedSet];
+        
+        NSCharacterSet *notAllowedCharsEmail = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,-@._"] invertedSet];
+
+        NSCharacterSet *notAllowedCharsName = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890, "] invertedSet];
+
         if (Array_name.count !=0)
         {
-            if (Array_name.count<=180)
+            if (Array_name.count<=500)
             {
                 namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,[Array_name count])] componentsJoinedByString:@","];;
+
                 emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,[Array_Email count])] componentsJoinedByString:@","];;
-                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,[Array_Phone count])] componentsJoinedByString:@","];;
+
+                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,[Array_Phone count])] componentsJoinedByString:@","];
+                
+ //               namestrval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_name subarrayWithRange:NSMakeRange(0,[Array_name count])] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+                
+                
+   //             NSString *unfilteredString = @"!@#$%^&*()_+|abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                
+                escapedMobileNoString = [[mobilenumberval  componentsSeparatedByCharactersInSet:notAllowedCharsMobile] componentsJoinedByString:@""];
+
+                escapedEmailString = [[emailstrval  componentsSeparatedByCharactersInSet:notAllowedCharsEmail] componentsJoinedByString:@""];
+
+                escapedNameString = [[namestrval  componentsSeparatedByCharactersInSet:notAllowedCharsName] componentsJoinedByString:@""];
+
+                
+                //          NSLog (@"Result: %@", resultString);
+                
+  //              emailstrval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_Email subarrayWithRange:NSMakeRange(0,[Array_Email count])] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+                
+                
+    //            mobilenumberval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_Phone subarrayWithRange:NSMakeRange(0,[Array_Phone count])] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
             }
             else
             {
                 
-                NSArray * arrayCount1=[[NSArray alloc]init];
-                arrayCount1 =[Array_name subarrayWithRange:NSMakeRange(0,180)];
-                NSLog(@"Arra counts===%lu",(unsigned long)arrayCount1.count);
-                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,180)] componentsJoinedByString:@","];;
-                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,180)] componentsJoinedByString:@","];;
-                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,180)] componentsJoinedByString:@","];;
+                
+                namestrval =[[Array_name subarrayWithRange:NSMakeRange(0,500)] componentsJoinedByString:@","];;
+                
+                emailstrval=[[Array_Email subarrayWithRange:NSMakeRange(0,500)] componentsJoinedByString:@","];;
+                
+                mobilenumberval=[[Array_Phone subarrayWithRange:NSMakeRange(0,500)] componentsJoinedByString:@","];
+
+                
+//                namestrval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_name subarrayWithRange:NSMakeRange(0,100)] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+                
+                escapedMobileNoString = [[mobilenumberval  componentsSeparatedByCharactersInSet:notAllowedCharsMobile] componentsJoinedByString:@""];
+
+                escapedEmailString = [[emailstrval  componentsSeparatedByCharactersInSet:notAllowedCharsEmail] componentsJoinedByString:@""];
+                
+                escapedNameString = [[namestrval  componentsSeparatedByCharactersInSet:notAllowedCharsName] componentsJoinedByString:@""];
+
+
+                
+  //               emailstrval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_Email subarrayWithRange:NSMakeRange(0,500)] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+                
+                
+ //                mobilenumberval= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[[Array_Phone subarrayWithRange:NSMakeRange(0,500)] componentsJoinedByString:@","], NULL, (CFStringRef)@"!*'\();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
                 
                 
             }
@@ -617,7 +662,7 @@
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[urlplist valueForKey:@"invite_contacts"]]];
         [req setHTTPMethod:@"POST"];
         
-        NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,namestrval,emailstr,emailstrval,mobilenumber,mobilenumberval];
+        NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,escapedNameString,emailstr,escapedEmailString,mobilenumber,escapedMobileNoString];
         
         NSData *postData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
@@ -651,11 +696,11 @@
                                                             
                         if ([ResultString isEqualToString:@"done"])
                                 {
-                            if (Array_name.count>=180)
+                            if (Array_name.count>=500)
                                                 {
-                            [Array_name removeObjectsInRange:NSMakeRange(0, 180)];
-                            [Array_Email removeObjectsInRange:NSMakeRange(0, 180)];
-                            [Array_Phone removeObjectsInRange:NSMakeRange(0, 180)];
+                            [Array_name removeObjectsInRange:NSMakeRange(0, 500)];
+                            [Array_Email removeObjectsInRange:NSMakeRange(0, 500)];
+                            [Array_Phone removeObjectsInRange:NSMakeRange(0, 500)];
                                                                     
                                             }
                                             else
@@ -954,6 +999,8 @@
     
      for (int i=0; i<Array_AllData.count; i++)
                 {
+                    NSLog(@"SHOW PHP ERROR==%@",[Array_AllData objectAtIndex:i]);
+                    
                     if ([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"INVITE"])
                                 {
                 [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
