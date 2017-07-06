@@ -39,7 +39,7 @@
 @property(nonatomic,weak)IBOutlet UIImageView *  Image_LoginFb;
 @property(nonatomic,weak)IBOutlet UIImageView *  Image_LoginTw;
 
-
+-(IBAction)SignUpView:(id)sender;
 
 
 

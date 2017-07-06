@@ -29,7 +29,7 @@
 -(IBAction)LoginWithTwitterAction:(id)sender;
 -(IBAction)LoginButtonAction:(id)sender;
 - (IBAction)Textfelds_Actions:(id)sender;
-
+@property(nonatomic,strong)NSString * chkview;
 @property(nonatomic,weak)IBOutlet UIImageView *  Image_LoginFb;
 @property(nonatomic,weak)IBOutlet UIImageView *  Image_LoginTw;
 

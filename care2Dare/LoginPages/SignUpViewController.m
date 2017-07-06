@@ -17,6 +17,7 @@
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
 #import "FRHyperLabel.h"
+#import "LoginWithEmailViewController.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface SignUpViewController ()
 {
@@ -30,7 +31,7 @@
 @end
 
 @implementation SignUpViewController
-@synthesize Label_TitleName,textfield_name,textfield_password,textfield_Dob,Button_signip,view_LoginFB,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw,Image_LoginTw,Image_LoginFb;;
+@synthesize Label_TitleName,textfield_name,textfield_password,textfield_Dob,Button_signip,view_LoginFB,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw,Image_LoginTw,Image_LoginFb,chkview;;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -184,7 +185,11 @@
 }
 -(IBAction)SignUpViewBack:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:NO];
+  //  [self.navigationController popViewControllerAnimated:NO];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    LoginWithEmailViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginWithEmailViewController"];
+    [self.navigationController pushViewController:set animated:NO];
 }
 -(IBAction)LoginWithFbAction:(id)sender
 {

@@ -1400,7 +1400,7 @@ UIAlertController *alertController = [UIAlertController alertControllerWithTitle
              
               [pcker1.view hideActivityViewWithAfterDelay:1];
              
-            [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+            [self dismissViewControllerAnimated:YES completion:NULL];
              
              
          }

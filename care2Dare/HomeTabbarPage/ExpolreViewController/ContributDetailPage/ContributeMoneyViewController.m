@@ -40,7 +40,7 @@
     [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
     
-    Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%@%@",@"x",total_players,@" players"];
+    Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue]-1,@" players"];
     [textfield_Ammounts becomeFirstResponder];
 }
 
@@ -249,7 +249,7 @@ NSLog(@"error login2.......%@",error.description);
 }
 -(IBAction)textfield_Ammounts_Actions:(id)sender
 {
-     chllengerAmt=[textfield_Ammounts.text integerValue]*[total_players integerValue];
+     chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]-1);
     if (textfield_Ammounts.text.length==0)
     {
         textfield_Ammounts.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
