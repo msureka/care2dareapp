@@ -165,9 +165,11 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 if (indexPath.row == Array_Title2.count-1)
                 {
                     Twocell2.switchOutlet.hidden=NO;
+                     [Twocell2.switchOutlet setOn:NO animated:YES];;
                 }
                 else
                 {
+                    // [Twocell2.switchOutlet setOn:YES animated:YES];;
                     Twocell2.switchOutlet.hidden=YES;
                 }
                 

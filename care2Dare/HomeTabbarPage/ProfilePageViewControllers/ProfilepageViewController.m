@@ -188,7 +188,8 @@ return 1;
             
             
       
-           
+            cell_Profile.Label_NewfriendCount.hidden=YES;
+            cell_Profile.Image_FriendCountImg.hidden=YES;
             [cell_Profile.Image_ProfileImg setFrame:CGRectMake(cell_Profile.Image_ProfileImg.frame.origin.x, cell_Profile.Image_ProfileImg.frame.origin.y, cell_Profile.Image_ProfileImg.frame.size.width, cell_Profile.Image_ProfileImg.frame.size.width)];
             
             [cell_Profile.Label_NewfriendCount setFrame:CGRectMake(cell_Profile.Label_NewfriendCount.frame.origin.x, cell_Profile.Label_NewfriendCount.frame.origin.y, cell_Profile.Label_NewfriendCount.frame.size.height, cell_Profile.Label_NewfriendCount.frame.size.height)];

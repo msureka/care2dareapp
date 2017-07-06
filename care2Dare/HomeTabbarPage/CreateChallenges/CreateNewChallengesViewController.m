@@ -101,8 +101,8 @@
     Label_Currentsdays.text=[NSString stringWithFormat:@"%.f%@%@",slider_Days.value,@" ",@"day"];
     float width = slider_Days.frame.size.width;
     pixelsPerValue = width / (slider_Days.maximumValue - slider_Days.minimumValue);
-    leftAdjust = slider_Days.frame.origin.x-20;
-    
+    leftAdjust = slider_Days.frame.origin.x-Label_Currentsdays.frame.size.width;
+    NSLog(@"changedLabel_Curreviedid==%f",Label_Currentsdays.frame.origin.x);
     //    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 1.5f);
     //    slider_Days.transform = transform;
     
@@ -477,11 +477,18 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         Label_Currentsdays.text=[NSString stringWithFormat:@"%.f%@%@",slider_Days.value,@" ",@"days"];
     }
     NSLog(@"changed==%f",slider_Days.value);
+//    
+//    CGRect frame = Label_Currentsdays.frame;
+//    frame.origin.x = leftAdjust + (5 * slider_Days.value)+33;
+//    Label_Currentsdays.frame = frame;
+    CGRect trackRect = [slider_Days trackRectForBounds:slider_Days.bounds];
     
-    CGRect frame = Label_Currentsdays.frame;
-    frame.origin.x = leftAdjust + (9 * slider_Days.value);
-    Label_Currentsdays.frame = frame;
+    CGRect thumbRect = [slider_Days thumbRectForBounds:slider_Days.bounds
+                                             trackRect:trackRect
+                                                 value:slider_Days.value];
     
+    Label_Currentsdays.center = CGPointMake(15+thumbRect.origin.x + slider_Days.frame.origin.x, slider_Days.frame.origin.y-10);
+    NSLog(@"changedLabel_Currentsdays==%f",Label_Currentsdays.frame.origin.x);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -697,7 +704,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 
                 
                 NSString *title= @"title";
-                NSString *titleVal =_Textview_Desc.text;
+                NSString *titleVal =(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)_Textview_Desc.text,NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));;
                 
                 NSString *challengetype= @"challengetype";
                 NSString *contributiontype= @"contributiontype";

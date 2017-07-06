@@ -407,7 +407,7 @@
         
         Button_Deny=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width/2,38)];
         [Button_Deny setTitle:@"DENY" forState:UIControlStateNormal];
-        Button_Deny.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+        Button_Deny.backgroundColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
         Button_Deny.tag=section;
         Button_Deny.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
         [Button_Deny addTarget:self action:@selector(Deny_Contribute_MoneyAction:)

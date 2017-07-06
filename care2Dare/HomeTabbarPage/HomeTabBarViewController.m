@@ -50,8 +50,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     item0.image = [[UIImage imageNamed:@"explore1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
    
     
-    item1.selectedImage = [[UIImage imageNamed:@"activitytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item1.image = [[UIImage imageNamed:@"activitytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.selectedImage = [[UIImage imageNamed:@"activitytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.image = [[UIImage imageNamed:@"activitytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     item2.selectedImage = [[UIImage imageNamed:@"create.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -59,8 +59,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
     
     
-    item3.selectedImage = [[UIImage imageNamed:@"inplaytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item3.image = [[UIImage imageNamed:@"inplaytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.selectedImage = [[UIImage imageNamed:@"inplaytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.image = [[UIImage imageNamed:@"inplaytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
     item4.selectedImage = [[UIImage imageNamed:@"profile.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -70,9 +70,9 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
 //    
     item0.title=@"EXPLORE";
-    item1.title=@"ACTIVITY";
+    item3.title=@"ACTIVITY";
     item2.title=@"";
-    item3.title=@"IN-PLAY";
+    item1.title=@"IN-PLAY";
     item4.title=@"PROFILE";
     
     [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:

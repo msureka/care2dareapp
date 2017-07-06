@@ -44,7 +44,8 @@
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     SeachCondCheck=@"no";
     CheckedTabbedButtons=@"Challenges";
-   
+    
+  
     
     searchbar=[[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,44)];
     searchbar.translucent=YES;
@@ -108,9 +109,60 @@ flag_challenge=@"no";
     }
     
    
-
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
     
     [self ClienserverCommAll];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    
+[[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdatedBudge" object:nil];
+}
+- (void)Refresh_UpdatedBudge
+{
+    if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+    {
+        [self ClienserverCommAll];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Contribution"])
+    {
+        
+        [self ClienserverComm_Contribution];
+    }
+    if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
+    {
+        
+        
+        [self ClienserverComm_Vedios];
+        
+    }
+    
+    
+    if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Challenges.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Challenges.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"contributioncount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Contribution.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Contribution.hidden=NO;
+    }
+    if ([[defaults valueForKey:@"videocount"] isEqualToString:@"0"])
+    {
+        _ImageRed_Videos.hidden=YES;
+    }
+    else
+    {
+        _ImageRed_Videos.hidden=NO;
+    }
+ 
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -132,6 +184,7 @@ flag_challenge=@"no";
         [self ClienserverComm_Vedios];
         
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
 }
 - (void) viewDidLayoutSubviews
 {

@@ -492,6 +492,11 @@
 		9AF9DBFC1E9B608A00A652D9 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF21E9B608A00A652D9 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */; };
+		D7E49CB41F0E08F700D87218 /* LoginWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */; };
+		D7E49CB81F0E140600D87218 /* c2dlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB51F0E140600D87218 /* c2dlogo.png */; };
+		D7E49CB91F0E140600D87218 /* c2dlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */; };
+		D7E49CBA1F0E140600D87218 /* c2dlogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */; };
+		D7E49CBC1F0E141100D87218 /* icons8-Email Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1148,6 +1153,12 @@
 		9AF9DBF31E9B608A00A652D9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cash in Hand Filled-100.png"; sourceTree = "<group>"; };
+		D7E49CB21F0E08F700D87218 /* LoginWithEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWithEmailViewController.h; sourceTree = "<group>"; };
+		D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWithEmailViewController.m; sourceTree = "<group>"; };
+		D7E49CB51F0E140600D87218 /* c2dlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c2dlogo.png; sourceTree = "<group>"; };
+		D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@2x.png"; sourceTree = "<group>"; };
+		D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@3x.png"; sourceTree = "<group>"; };
+		D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Email Filled-100.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2131,6 +2142,8 @@
 				9A5B66D91ED4464200AB9BF0 /* FRHyperLabel */,
 				9ABB5DA81E693EF500482105 /* LoginPageViewController.h */,
 				9ABB5DA91E693EF500482105 /* LoginPageViewController.m */,
+				D7E49CB21F0E08F700D87218 /* LoginWithEmailViewController.h */,
+				D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */,
 				9ABB5DB81E6953CC00482105 /* SignUpViewController.h */,
 				9ABB5DB91E6953CC00482105 /* SignUpViewController.m */,
 				9A19B4021E6ECA6400262BC1 /* MainnavigationViewController.h */,
@@ -2176,6 +2189,10 @@
 				9AED21F51E6A8C6A0004A8D0 /* TabbarImg */,
 				9AED222F1E6A9D900004A8D0 /* exploreimages */,
 				9ABB5DAE1E6945D300482105 /* facebook@3x.png */,
+				D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */,
+				D7E49CB51F0E140600D87218 /* c2dlogo.png */,
+				D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */,
+				D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */,
 				9ABB5DAF1E6945D300482105 /* twitter.png */,
 				9ABB5DAC1E6945D300482105 /* facebook.png */,
 				9A66DA0A1E8D16F80035B081 /* DefaultImg.jpg */,
@@ -2544,7 +2561,6 @@
 				TargetAttributes = {
 					9ABB5D5D1E69335600482105 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = BARZUNFUBS;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2613,6 +2629,7 @@
 				9A62705F1EA0A0B6003C85E4 /* High Volume Filled-100.png in Resources */,
 				9AED22901E6AE3300004A8D0 /* UrlName.plist in Resources */,
 				9A6E39F21E7AB64800B4AD5B /* topname.png in Resources */,
+				D7E49CBA1F0E140600D87218 /* c2dlogo@3x.png in Resources */,
 				9A7864F01ED31541006503D4 /* worldicon_challenge.png in Resources */,
 				9AED222A1E6A8C6A0004A8D0 /* watch@2x.png in Resources */,
 				9A45BA2B1E8E310900BAC5E8 /* friendrequested.png in Resources */,
@@ -2670,6 +2687,7 @@
 				9AED22491E6AA61A0004A8D0 /* explore_friends1.png in Resources */,
 				9A19B3BD1E6E907D00262BC1 /* setting_contacts.png in Resources */,
 				9A38F5B31E9666BC00EADE7F /* fullscreen.png in Resources */,
+				D7E49CB81F0E140600D87218 /* c2dlogo.png in Resources */,
 				9AED22131E6A8C6A0004A8D0 /* create@3x.png in Resources */,
 				9A38F5B11E9666BC00EADE7F /* comments@2x.png in Resources */,
 				9A7864EE1ED31541006503D4 /* privateicon_challenge@2x.png in Resources */,
@@ -2699,6 +2717,7 @@
 				9A4355141E696F9A00ED8FD5 /* FacebookSDKStrings.bundle in Resources */,
 				9A38F5BD1E9666BC00EADE7F /* stats@2x.png in Resources */,
 				9A6E39FE1E7ABA6700B4AD5B /* raised_hand@2x.png in Resources */,
+				D7E49CBC1F0E141100D87218 /* icons8-Email Filled-100.png in Resources */,
 				9A0605B61E6D66D900FF4229 /* profile_world@2x.png in Resources */,
 				9A4A79231F010EA500E9897E /* activitytab@2x.png in Resources */,
 				9A66DA0B1E8D16F80035B081 /* DefaultImg.jpg in Resources */,
@@ -2776,6 +2795,7 @@
 				9ABB5DB71E6945D300482105 /* twitter@3x.png in Resources */,
 				9A38F5C31E9666BC00EADE7F /* whitearrow@2x.png in Resources */,
 				9A6E39E91E7AB64800B4AD5B /* raised.png in Resources */,
+				D7E49CB91F0E140600D87218 /* c2dlogo@2x.png in Resources */,
 				9A45BA291E8E310900BAC5E8 /* addfriend@2x.png in Resources */,
 				9A4A79391F0113D400E9897E /* favouriteexplore1@2x.png in Resources */,
 				9A38F5B21E9666BC00EADE7F /* comments@3x.png in Resources */,
@@ -3006,6 +3026,7 @@
 				9AED228A1E6AE27B0004A8D0 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				9A0605DB1E6D822000FF4229 /* FavriteTableViewCell.m in Sources */,
 				9AF9DBDE1E9B4BD600A652D9 /* WatchPageViewController.m in Sources */,
+				D7E49CB41F0E08F700D87218 /* LoginWithEmailViewController.m in Sources */,
 				9A64C8811E713B46008115FF /* CreateChallengesViewController.m in Sources */,
 				9AA645C11E7BAE0500E49B65 /* ContributeMoneyViewController.m in Sources */,
 				9AF9DBF61E9B608A00A652D9 /* AFHTTPRequestOperation.m in Sources */,
@@ -3240,7 +3261,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = care2Dare/care2Dare.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BARZUNFUBS;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/care2Dare/Frameworks/FacebookSDK",
@@ -3260,7 +3281,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = care2Dare/care2Dare.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BARZUNFUBS;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/care2Dare/Frameworks/FacebookSDK",

@@ -182,7 +182,7 @@
             else
             {
                 
-                //commented by uday
+                
                 
                
                 NSMutableAttributedString *mutableAttributedStringfname = [[NSMutableAttributedString alloc] initWithString:textfname];
@@ -272,7 +272,7 @@
             else
             {
                 
-                //commented by uday
+                
                 
                 
                 NSMutableAttributedString *mutableAttributedStringfname = [[NSMutableAttributedString alloc] initWithString:textfname];

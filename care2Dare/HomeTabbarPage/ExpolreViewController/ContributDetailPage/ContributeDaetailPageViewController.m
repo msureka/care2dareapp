@@ -53,7 +53,7 @@
    
     
     UIScrollView * scrollView;
-    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH;
+    CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH,keyboradHeight;
     CGRect scrollFrame;
     
     NSNumber *Vedio_Height,*Vedio_Width;
@@ -90,6 +90,13 @@
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
+    
+    Tableview_ContriBute.userInteractionEnabled=YES;
+    UITapGestureRecognizer *TabGestureTablviewTuch =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                            action:@selector(Tablview_Tuched:)];
+    
+    
+    [Tableview_ContriBute addGestureRecognizer:TabGestureTablviewTuch];
 
     CheckFavInserted=[[AllArrayData objectAtIndex:0]valueForKey:@"favourite"];
    CALayer * borderBottom_topheder = [CALayer layer];
@@ -124,7 +131,9 @@
     [Image_TotalLikes addGestureRecognizer:Image_TotalLikes_Tapped];
     
 
-
+//    CGRect tableViewFrame = self.Tableview_ContriBute.frame;
+//    tableViewFrame.size.height = self.Tableview_ContriBute.frame.size.height-8;
+//    self.Tableview_ContriBute.frame = tableViewFrame;
 
 Str_Tapped_Comments_Vedio=@"Vedio";
     
@@ -139,7 +148,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
      flag1=@"yes";
     
     
-    hh=textOne.frame.size.height;
+    hh=textOne.frame.size.height+5;
     ww=textOne.frame.size.width;
     xx=textOne.frame.origin.x;
     yy=textOne.frame.origin.y;
@@ -565,7 +574,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
 
 -(void)chatCommunication
 {
-    [self.view endEditing:YES];
+    //[self.view endEditing:YES];
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -822,10 +831,12 @@ Str_Tapped_Comments_Vedio=@"Vedio";
 
 - (void)subscribeToKeyboard {
     [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
-        if (isShowing) {
+        if (isShowing)
+        {
             
             self.tabBarBottomSpace.constant = CGRectGetHeight(keyboardRect);
-            
+            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textBlueh+CGRectGetHeight(keyboardRect)));
+            keyboradHeight=(textBlueh+CGRectGetHeight(keyboardRect));
             if(Array_Comment1.count>=1)
             {
 
@@ -837,10 +848,12 @@ Str_Tapped_Comments_Vedio=@"Vedio";
             
             
             
-        } else {
+        } else
+        {
             
             self.tabBarBottomSpace.constant = 0.0f;
-            
+            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
+            keyboradHeight=0.0f;
         }
         [self.view layoutIfNeeded];
     } completion:nil];}
@@ -866,18 +879,18 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     ViewTextViewOne.frame = CGRectMake(xx, yy, ww,36);
     self.sendButton.enabled=NO;
     self.sendButton.backgroundColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
-//    Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(TextViews.contentSize.height+220));
-    
-    Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-_BlackViewOne.frame.size.height+90);
-    self.ImageGalButton.userInteractionEnabled = YES;  // uday
-    
+   
+    self.ImageGalButton.userInteractionEnabled = YES;
+//    Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-_BlackViewOne.frame.size.height+90);
+    self.ImageGalButton.userInteractionEnabled = YES;
+     Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-keyboradHeight);
 }
 
 
 -(void)sendComment
 {
     
-    [self.view endEditing:YES];
+  //  [self.view endEditing:YES];
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -913,7 +926,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
         NSString *challengeidval =[[AllArrayData objectAtIndex:0] valueForKey:@"challengeid"];
         
         NSString *messege= @"message";
-        NSString *messegeval =textOne.text;
+        NSString *messegeval =(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)textOne.text,NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));;;
         
         NSString *chattypes= @"chattype";
         
@@ -3280,7 +3293,7 @@ if (section==1)
     [sectionView.layer addSublayer:upperBorder];
         
         
-      UILabel * label_Comment=[[UILabel alloc]initWithFrame:CGRectMake(16,0, self.view.frame.size.width-32,30)];
+      UILabel * label_Comment=[[UILabel alloc]initWithFrame:CGRectMake(16,0, self.view.frame.size.width-32,40)];
         
         if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
         {
@@ -3294,7 +3307,7 @@ if (section==1)
               label_Comment.tag=section;
         label_Comment.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:16.0];
         
-       
+        label_Comment.backgroundColor=[UIColor clearColor];
         
         [sectionView addSubview:label_Comment];
       
@@ -3606,8 +3619,9 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
             
             self.BlackViewOne.frame = CGRectMake(0, bty - textView.contentSize.height+26, btw,bth+textView.contentSize.height);
             ViewTextViewOne.frame = CGRectMake(xx, yy, ww,textOne.frame.size.height+2);
-            // tableView_Pay.frame = CGRectMake(0, yt - textView.contentSize.height+38, tw, th);
-            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+182));
+          
+           // Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+182));
+            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+(keyboradHeight-hh)));
             flag1=@"no";
         }
         else
@@ -3630,8 +3644,8 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         self.textOne.frame = CGRectMake(xx, yy, ww,textView.contentSize.height+10);
         ViewTextViewOne.frame = CGRectMake(xx, yy, ww,textView.contentSize.height);
-        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+184));
-        
+      //  Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+184));
+            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+(keyboradHeight-hh)));
         [self.textOne layoutIfNeeded];
         NSLog(@"BlueView==%f",_textOneBlue.frame.size.height);
         NSLog(@"BlueView==%f",_textOneBlue.frame.size.width);
@@ -3659,15 +3673,15 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (_BlackViewOne.frame.size.height > bth)
-    {
-        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-_BlackViewOne.frame.size.height+90);
-    }
-    else
-    {
-        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
-        
-    }
+//    if (_BlackViewOne.frame.size.height > bth)
+//    {
+//        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-_BlackViewOne.frame.size.height+90);
+//    }
+//    else
+//    {
+//        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
+//        
+//    }
     [self.view endEditing:YES];
     
     
@@ -3677,16 +3691,16 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     
     [textOne becomeFirstResponder];
     
-    if (textView.text.length!=0)
-    {
-        Tableview_ContriBute.frame = CGRectMake(0,yt, self.view.frame.size.width, th-_BlackViewOne.frame.size.height-125);
-        
-    }
-    else
-    {
-        
-        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+190));
-    }
+//    if (textView.text.length!=0)
+//    {
+//        Tableview_ContriBute.frame = CGRectMake(0,yt, self.view.frame.size.width, th-_BlackViewOne.frame.size.height-125);
+//        
+//    }
+//    else
+//    {
+//        
+//        Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+190));
+//    }
     
     if(Array_Comment1.count>=1)
     {
@@ -3728,13 +3742,15 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
 }
 -(void)Image_tapcomment:(UIGestureRecognizer *)reconizer
 {
-    
+   
 //    Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
     [Tableview_ContriBute setFrame: CGRectMake(0,yt, tw, th)];
      _textOneBlue.hidden=NO;
  Str_Tapped_Comments_Vedio=@"Comment";
   
     [Tableview_ContriBute reloadData];
+//     [Tableview_ContriBute scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:Array_Comment1.count-1 inSection:3] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    [textOne becomeFirstResponder];
       [self chatCommunication];
     
 }
@@ -4548,5 +4564,8 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
     }
     
 }
-
+-(void)Tablview_Tuched:(UIGestureRecognizer *)reconizer
+{
+    [self.view endEditing:YES];
+}
 @end

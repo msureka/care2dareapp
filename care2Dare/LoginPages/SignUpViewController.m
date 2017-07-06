@@ -30,7 +30,7 @@
 @end
 
 @implementation SignUpViewController
-@synthesize Label_TitleName,textfield_name,textfield_password,textfield_Dob,Button_signip,view_LoginFB,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw;
+@synthesize Label_TitleName,textfield_name,textfield_password,textfield_Dob,Button_signip,view_LoginFB,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw,Image_LoginTw,Image_LoginFb;;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -93,6 +93,26 @@
     
     borderLeftTw.frame = CGRectMake(0, 0, 1.0, Button_LoginTw.frame.size.height);
     [Button_LoginTw.layer addSublayer:borderLeftTw];
+    
+    
+    
+    
+    
+    Image_LoginFb.userInteractionEnabled=YES;
+    Image_LoginTw.userInteractionEnabled=YES;;
+    
+    
+    UITapGestureRecognizer *tapFb = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TappedFb:)]; // this is the current problem like a lot of people out there...
+    [Image_LoginFb addGestureRecognizer:tapFb];
+    
+    UITapGestureRecognizer *tapTW = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TappedTwitter:)]; // this is the current problem like a lot of people out there...
+    [Image_LoginTw addGestureRecognizer:tapTW];
+    
+    
+    
+    
+    
+    
     
 //    UIFont *arialFont = [UIFont fontWithName:@"San Francisco Display" size:14.0];
 //    NSDictionary *arialDict = [NSDictionary dictionaryWithObject: arialFont forKey:NSFontAttributeName];
@@ -328,6 +348,14 @@
              NSLog(@"error: %@", [error localizedDescription]);
          }
      }];
+}
+- (void) TappedFb: (UIGestureRecognizer *) gesture
+{
+    [self LoginWithFbAction:nil];
+}
+- (void) TappedTwitter: (UIGestureRecognizer *) gesture
+{
+    [self LoginWithTwitterAction:nil];
 }
 -(IBAction)LoginButtonAction:(id)sender
 {
