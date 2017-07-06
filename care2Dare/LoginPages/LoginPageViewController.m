@@ -17,6 +17,7 @@
 #import "SBJsonParser.h"
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
+#import "LoginWithEmailViewController.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface LoginPageViewController ()
 {
@@ -31,7 +32,7 @@
 @end
 
 @implementation LoginPageViewController
-@synthesize Label_TitleName,textfield_uname,textfield_password,Button_Login,view_LoginFB,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw;
+@synthesize Label_TitleName,view_LoginFB,View_LoginEmail,View_LoginTW,Label_TermsAndCon,Button_LoginFb,Button_LoginTw,Button_Email,Image_Email,Image_LoginFb,Image_LoginTw;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -45,21 +46,22 @@
 //    
 //    
 //    Label_TitleName.attributedText = attString;
-    CALayer *borderBottom_uname = [CALayer layer];
-    borderBottom_uname.backgroundColor = [UIColor whiteColor].CGColor;
-    borderBottom_uname.frame = CGRectMake(0, textfield_uname.frame.size.height-0.8, textfield_uname.frame.size.width,0.5f);
-    [textfield_uname.layer addSublayer:borderBottom_uname];
-    
-    CALayer *borderBottom_passeord = [CALayer layer];
-    borderBottom_passeord.backgroundColor = [UIColor whiteColor].CGColor;
-    borderBottom_passeord.frame = CGRectMake(0, textfield_password.frame.size.height-0.8, textfield_password.frame.size.width,0.5f);
-    [textfield_password.layer addSublayer:borderBottom_passeord];
+ 
+    Image_Email.userInteractionEnabled=YES;
+    Image_LoginFb.userInteractionEnabled=YES;
+    Image_LoginTw.userInteractionEnabled=YES;;
     
     
-    Button_Login.clipsToBounds=YES;
-    Button_Login.layer.cornerRadius=5.0f;
-    Button_Login.layer.borderColor=[UIColor whiteColor].CGColor;
-    Button_Login.layer.borderWidth=0.5;
+    
+    
+    UITapGestureRecognizer *tapEmail = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TappedEmail:)]; // this is the current problem like a lot of people out there...
+    [Image_Email addGestureRecognizer:tapEmail];
+    
+    UITapGestureRecognizer *tapFb = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TappedFb:)]; // this is the current problem like a lot of people out there...
+    [Image_LoginFb addGestureRecognizer:tapFb];
+    
+    UITapGestureRecognizer *tapTW = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TappedTwitter:)]; // this is the current problem like a lot of people out there...
+    [Image_LoginTw addGestureRecognizer:tapTW];
     
     view_LoginFB.clipsToBounds=YES;
     view_LoginFB.layer.cornerRadius=5.0f;
@@ -70,6 +72,15 @@
     View_LoginTW.layer.cornerRadius=5.0f;
     View_LoginTW.layer.borderColor=[UIColor whiteColor].CGColor;
     View_LoginTW.layer.borderWidth=1.0f;
+    
+    
+    View_LoginEmail.clipsToBounds=YES;
+    View_LoginEmail.layer.cornerRadius=5.0f;
+    View_LoginEmail.layer.borderColor=[UIColor whiteColor].CGColor;
+    View_LoginEmail.layer.borderWidth=1.0f;
+    
+   
+    
     
     CALayer *borderLeftFb = [CALayer layer];
     borderLeftFb.backgroundColor = [UIColor whiteColor].CGColor;
@@ -82,6 +93,13 @@
     
     borderLeftTw.frame = CGRectMake(0, 0, 1.0, Button_LoginTw.frame.size.height);
     [Button_LoginTw.layer addSublayer:borderLeftTw];
+    
+    
+    CALayer *borderLeftemail = [CALayer layer];
+    borderLeftemail.backgroundColor = [UIColor whiteColor].CGColor;
+    
+    borderLeftemail.frame = CGRectMake(0, 0, 1.0, Button_Email.frame.size.height);
+    [Button_Email.layer addSublayer:borderLeftemail];
     
     
     
@@ -141,9 +159,7 @@
     
     //Step 3: Add link substrings
     
-    [label setLinksForSubstrings:@[@"Terms of Service", @"Privacy Policy"] withLinkHandler:handler];
-        [Button_Login setTitleColor:Buttonlogincolor forState:UIControlStateNormal];
-      Button_Login.enabled=NO;
+ 
 }
 
 -(IBAction)SignUpView:(id)sender
@@ -151,195 +167,14 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     SignUpViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"SignUpViewController"];
+    set.chkview=@"Main";
     [self.navigationController pushViewController:set animated:NO];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
--(IBAction)ForgetPasswordAction:(id)sender
-{
-    
-    UIAlertView *av = [[UIAlertView alloc]initWithTitle:@"Forgot Password" message:@"To send your password, please enter your registered email address." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send", nil];
-    av.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [av textFieldAtIndex:0].delegate = self;
-    [av show];
-    NSLog(@"dddd=%@",av);
 
-    
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag==100)
-    {
-        exit(0);
-    }
-    else
-    {
-        if (buttonIndex==1)
-        {
-            if ([[alertView textFieldAtIndex:0].text isEqualToString:@""])
-            {
-                
-            }
-            else
-            {
-                String_Forgot=[alertView textFieldAtIndex:0].text;
-                [self ForgetPasswordCommunication];
-                NSLog(@"%@", [alertView textFieldAtIndex:0].text);
-            }
-        }
-        
-    }
-}
--(void)ForgetPasswordCommunication
-{
-    
-    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
-    
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
-    
-    
-    
-    if ([emailTest evaluateWithObject:String_Forgot] == NO)
-        
-    {
-        
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"This seems to be incorrect. Please enter a valid email address and try again." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-        
-         [self.view endEditing:YES];
-    }
-    
-    else
-    {
-        
-        [self.view endEditing:YES];
-        [self.view showActivityViewWithLabel:@"Loading"];
-        NSString *email= @"email";
-       
-        
-        
-        
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",email,String_Forgot];
-        
-        
-        
-#pragma mark - swipe sesion
-        
-        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-        
-        NSURL *url;
-        NSString *  urlStrLivecount=[urlplist valueForKey:@"forgotpassword"];;
-        url =[NSURL URLWithString:urlStrLivecount];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        [request setHTTPMethod:@"POST"];//Web API Method
-        
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        
-        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
-        
-        
-        
-        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                         {
-                                             if(data)
-                                             {
-                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                                 NSInteger statusCode = httpResponse.statusCode;
-                                                 if(statusCode == 200)
-                                                 {
-                               
-                    NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                    
-                                                     
-        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                     
-        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                     
-            
-            if ([ResultString isEqualToString:@"noemail"])
-                {
-                [self.view hideActivityViewWithAfterDelay:0];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The email address you have entered is not registered in our system or your account has been deactivated. Please try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                style:UIAlertActionStyleDefault handler:nil];
-                        [alertController addAction:actionOk];
-            [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                                                         
-                }
-            if ([ResultString isEqualToString:@"facebooklogin"])
-                {
-                        [self.view hideActivityViewWithAfterDelay:0];
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You have registered with us via Facebook. Please use the Login with Facebook feature." preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-            style:UIAlertActionStyleDefault handler:nil];
-            [alertController addAction:actionOk];
-            [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                    }
-                                                     
-                if ([ResultString isEqualToString:@"twitterlogin"])
-                    {
-                    [self.view hideActivityViewWithAfterDelay:0];
-                      UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You have registered with us via Twitter. Please use the Login with Twitter feature." preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
-                        handler:nil];
-                        
-                        [alertController addAction:actionOk];
-                        [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                                                         
-                    }
-                                                     
-            if ([ResultString isEqualToString:@"sent"])
-                {
-            [self.view hideActivityViewWithAfterDelay:0];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Password Sent" message:@"Your password has been sent to your registered email address. Thank-you!" preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
-                                                         
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                  }
-                                                    
-                      [self.view hideActivityViewWithAfterDelay:0];
-                                                     
-            }
-                                                 
-                        else
-                        {
-                        NSLog(@" error login1 ---%ld",(long)statusCode);
-                    [self.view hideActivityViewWithAfterDelay:0];
-                                                 }
-                                                 
-                                                 
-                                             }
-                        else if(error)
-                    {
-                [self.view hideActivityViewWithAfterDelay:0];
-                NSLog(@"error login2.......%@",error.description);
-                                             }
-                                             
-                                             
-                                         }];
-        [dataTask resume];
-    }
-}
 -(IBAction)LoginWithFbAction:(id)sender
 {
       [self.view endEditing:YES];
@@ -521,224 +356,7 @@
      }];
     
 }
--(IBAction)LoginButtonAction:(id)sender
-{
-    
-    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
-    
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
-    
-    
-    
-    if ([emailTest evaluateWithObject:textfield_uname.text] == NO)
-        
-    {
-        
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Invalid email address.Please try again" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-        
-        [textfield_uname becomeFirstResponder];
-    }
-    
-    else
-    {
-    
-    [self.view endEditing:YES];
-    [self.view showActivityViewWithLabel:@"Loading"];
-    NSString *email= @"email";
-    NSString *emailVal =textfield_uname.text;
-    
-    
-    NSString *password= @"password";
-    NSString *passwordVal =textfield_password.text;
-    
-    NSString *city= @"city";
-    NSString *cityVal =[defaults valueForKey:@"Cityname"];;
-    
-    NSString *country= @"country";
-    NSString *countryVal =[defaults valueForKey:@"Countryname"];
-    
-    NSString *devicetoken= @"devicetoken";
-    NSString *devicetokenVal =@"123";
-    
-    NSString *regType= @"regtype";
-    NSString *regTypeVal =@"LOGINEMAIL";
-    
-    NSString *Platform= @"platform";
-    NSString *PlatformVal =@"ios";
-    
-    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",email,emailVal,password,passwordVal,regType,regTypeVal,city,cityVal,country,countryVal,devicetoken,devicetokenVal,Platform,PlatformVal];
-    
-    
-    
-#pragma mark - swipe sesion
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-    
-    NSURL *url;
-    NSString *  urlStrLivecount=[urlplist valueForKey:@"loginsignup"];;
-    url =[NSURL URLWithString:urlStrLivecount];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    [request setHTTPMethod:@"POST"];//Web API Method
-    
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
-    
-    
-    
-    NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-       {
-           if(data)
-              {
-          NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-             NSInteger statusCode = httpResponse.statusCode;
-                if(statusCode == 200)
-     {
-                                                 
-                        array_login=[[NSMutableArray alloc]init];
-                                                 SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                                                 array_login=[objSBJsonParser objectWithData:data];
-                                                 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                 //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
-                                                 
-                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                 
-                                                 NSLog(@"array_loginarray_login %@",array_login);
-                                                 
-                                                 
-                                                 NSLog(@"array_login ResultString %@",ResultString);
-                        if ([ResultString isEqualToString:@"loginerror"])
-                                                 {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Incorrect Login" message:@"Please enter your registered email address and password and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                 }
-                    if ([ResultString isEqualToString:@"deactive"])
-                                                 {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account has been deactivated." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                 }
-                                                 
-                                                 if ([ResultString isEqualToString:@"nullerror"])
-                                                 {
-                                                     [self.view hideActivityViewWithAfterDelay:0];
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not retrieve one of the Account Ids. Please login and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                     
-                                                     
-                                                 }
-                                    if(array_login.count !=0)
-                                    {
-                                        
-                                      
-                                        
-                [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"challenges"]] forKey:@"challenges"];
-                                        
-            
-                                        
-                [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"email"]] forKey:@"email"];
-                                        
-            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"friends"]] forKey:@"friends"];
-                                        
-            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"name"]] forKey:@"name"];
-                                        
-                                        
-            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"profileimage"]] forKey:@"profileimage"];
-                                        
-        [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
-                                        
-              [defaults setObject:@"EMAIL" forKey:@"SettingLogin"];
-         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
-            [defaults setObject:@"yes" forKey:@"LoginView"];
-            [defaults synchronize];
-                                        
-                                        
-                                        
-                                        
-                                    [self.view hideActivityViewWithAfterDelay:0];
-            TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
-                                        
-                                        //                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                        //                        HomeTabBarViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"HomeTabBarViewController"];
-            [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-                                                     
-                                                 }
-                                                 
-                                                 
-                                                 
-                                             }
-                                             
-                                             else
-                                             {
-                                                 NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                 [self.view hideActivityViewWithAfterDelay:0];
-                                             }
-                                             
-                                             
-                                         }
-                                         else if(error)
-                                         {
-                                             [self.view hideActivityViewWithAfterDelay:0];
-                                             NSLog(@"error login2.......%@",error.description);
-                                         }
-                                         
-                                         
-                                     }];
-    [dataTask resume];
-    }
-}
 
-- (IBAction)usernameTxtAction:(id)sender
-{
-    UITextField *textField = (UITextField*)sender;
- 
-    
-    
-if(textfield_uname.text.length !=0 && textfield_password.text.length !=0 )
-{
-    Button_Login.enabled=YES;
-    [Button_Login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-}
-else
-{
-  Button_Login.enabled=NO;
-    [Button_Login setTitleColor:Buttonlogincolor forState:UIControlStateNormal];
-}
-     NSLog(@"sendertag %ld",(long)textField.tag);
-}
 -(void)TwitterFriendsList
 {
     
@@ -788,7 +406,18 @@ else
 
 }
 
-
+- (void)TappedEmail:(UIGestureRecognizer *)gesture
+{
+    [self LoginWithEmailAction:nil];
+}
+- (void)TappedFb:(UIGestureRecognizer *)gesture
+{
+    [self LoginWithFbAction:nil];
+}
+- (void)TappedTwitter:(UIGestureRecognizer *)gesture
+{
+    [self LoginWithTwitterAction:nil];
+}
 -(void)FbTwittercommunicationServer
 {
     
@@ -1012,6 +641,18 @@ else
     [dataTask resume];
     
 }
+-(IBAction)LoginWithEmailAction:(id)sender
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    LoginWithEmailViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginWithEmailViewController"];
+  
+    [self.navigationController pushViewController:set animated:NO];
+}
+
+
+
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     

@@ -17,4 +17,6 @@
 @property(strong,nonatomic)IBOutlet UILabel * Label_Titile;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Backer;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Raised;
+@property(strong,nonatomic)IBOutlet UILabel * Label_Mypleges;
+
 @end

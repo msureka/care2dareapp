@@ -442,6 +442,7 @@
                 
                 
                 cell_Public.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
+                 cell_Public.Label_Mypleges.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"mypledge"]];
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
                 cell_Public.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
@@ -506,7 +507,7 @@
                 [aAttrString appendAttributedString:vAttrString];
                 [aAttrString appendAttributedString:cAttrString];
                 
-                
+               
                 cell_Public.Label_Changename.attributedText = aAttrString;
                 
                 
@@ -545,7 +546,12 @@
                 
                 
                 cell_Private.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
+                
+                 cell_Private.Label_Mypleges.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"mypledge"]];
+                
                 cell_Private.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
+                
+                
                 cell_Private.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 
