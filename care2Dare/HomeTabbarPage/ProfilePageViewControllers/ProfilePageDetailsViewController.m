@@ -592,6 +592,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                 
                 NSDictionary * dic_worldexp=[Array_Public objectAtIndex:indexPath.row];
                 cell_Public.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
+             cell_Public.Label_Mypleges.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"mypledge"]];
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
                 cell_Public.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
