@@ -39,8 +39,15 @@
     
     [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+    if (([total_players integerValue]-1)>=2)
+    {
+        Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue]-1,@" players"];
+    }
+    else
+    {
+        Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue],@" players"];
+    }
     
-    Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue]-1,@" players"];
     [textfield_Ammounts becomeFirstResponder];
 }
 
@@ -125,13 +132,24 @@
         NSString *challengrid= @"challengeid";
        
         NSString *challengerPlayers= @"noofchallengers";
+        NSString * challengerplayerVal;
+        if (([total_players integerValue]-1)>=2)
+        {
+            challengerplayerVal=[NSString stringWithFormat:@"%d",[total_players integerValue]-1];
+        }
+        else
+        {
+         challengerplayerVal=[NSString stringWithFormat:@"%d",[total_players integerValue]];
+        }
+        
+        
        
         NSString *chllengerAmount= @"payperchallenger";
      
         
         
         
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,challengrid,challengerID,challengerPlayers,total_players,chllengerAmount,textfield_Ammounts.text];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,challengrid,challengerID,challengerPlayers,challengerplayerVal,chllengerAmount,textfield_Ammounts.text];
         
         
         
@@ -249,8 +267,16 @@ NSLog(@"error login2.......%@",error.description);
 }
 -(IBAction)textfield_Ammounts_Actions:(id)sender
 {
+    
+    if (([total_players integerValue]-1)>=2)
+    {
      chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]-1);
-    if (textfield_Ammounts.text.length==0)
+    }
+    else
+    {
+      chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]);
+    }
+    if (textfield_Ammounts.text.length==0 || chllengerAmt==0)
     {
         textfield_Ammounts.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
         Button_Contribute_Send.enabled=NO;

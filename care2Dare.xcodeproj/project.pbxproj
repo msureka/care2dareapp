@@ -2351,9 +2351,9 @@
 				9AED22561E6AB7D80004A8D0 /* WorldExpTableViewCell.h */,
 				9AED22571E6AB7D80004A8D0 /* WorldExpTableViewCell.m */,
 				9AED22581E6AB7D80004A8D0 /* WorldExpTableViewCell.xib */,
-				9AED225E1E6AB80B0004A8D0 /* FriendExpTableViewCell.h */,
 				9AED22601E6AB80B0004A8D0 /* FriendExpTableViewCell.xib */,
 				9AED225F1E6AB80B0004A8D0 /* FriendExpTableViewCell.m */,
+				9AED225E1E6AB80B0004A8D0 /* FriendExpTableViewCell.h */,
 			);
 			path = ExpolreViewController;
 			sourceTree = "<group>";

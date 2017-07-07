@@ -583,8 +583,8 @@
     else
     {
         
-        NSString *userid= @"fbid";
-        NSString *useridVal =[defaults valueForKey:@"fid"];
+        NSString *userid= @"userid";
+        NSString *useridVal =[defaults valueForKey:@"userid"];
         NSString *namestr= @"name";
         NSString *emailstr= @"email";
         NSString *mobilenumber= @"mobileno";

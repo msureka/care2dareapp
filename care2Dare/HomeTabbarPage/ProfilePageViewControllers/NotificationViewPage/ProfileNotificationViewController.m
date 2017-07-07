@@ -13,6 +13,7 @@
 
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
+#import "RaisedContributeViewController.h"
 @interface ProfileNotificationViewController ()
 {
 
@@ -1902,7 +1903,36 @@ if (indexPath.section==0)
             }
     if([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
- 
+        
+        NSDictionary *  didselectDic;
+        RaisedContributeViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"RaisedContributeViewController"];
+        
+        if (indexPath.section==0)
+        {
+         didselectDic=[Array_IcomingPlg  objectAtIndex:indexPath.row];
+       
+//[Array_OutgoingPlg
+        
+        
+        
+        set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challengeid"]];
+        
+        set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"totalamount"]];
+        
+        set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
+        }
+        if (indexPath.section==1)
+        {
+            didselectDic=[Array_OutgoingPlg  objectAtIndex:indexPath.row];
+            
+            set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challengeid"]];
+            
+            set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"totalamount"]];
+            
+            set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
+        }
+        
+        [self.navigationController pushViewController:set animated:YES];
     }
     
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])

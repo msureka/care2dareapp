@@ -64,7 +64,7 @@
     Array_Title1=[[NSArray alloc]initWithObjects:@"Facebook Friends",@"Twitter Friends",@"Contacts", nil];
 Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_twitter.png",@"setting_contacts.png", nil];
  
-    Array_Title2=[[NSArray alloc]initWithObjects:@"Edit Profile",@"Change Password",@"Block Users",@"Push Notification Settings",@"Only Friends can dare me",nil];
+    Array_Title2=[[NSArray alloc]initWithObjects:@"Edit Profile",@"Change Password",@"Block Users",@"Donation History",@"Push Notification Settings",@"Only Friends can dare me",nil];
     
     
     

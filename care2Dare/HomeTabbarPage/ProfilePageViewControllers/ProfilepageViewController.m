@@ -260,7 +260,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
              cell_Profile.Label_NewfriendCount.text=str_newfriendCount;
             cell_Profile.Label_NewfriendCount.clipsToBounds=YES;
             cell_Profile.Label_NewfriendCount.layer.cornerRadius=cell_Profile.Label_NewfriendCount.frame.size.height/2;
-            if ([str_newfriendCount isEqualToString:@"0"])
+            if ([str_newfriendCount isEqualToString:@"0"] || str_newfriendCount==nil)
             {
                 cell_Profile.Label_NewfriendCount.hidden=YES;
                 cell_Profile.Image_FriendCountImg.hidden=YES;
