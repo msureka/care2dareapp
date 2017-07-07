@@ -51,7 +51,7 @@
    
     
     
-    str_newfriendCount=[defaults valueForKey:@"friendreqs"];
+  //  str_newfriendCount=[defaults valueForKey:@"friendreqs"];
    str_challenges=[defaults valueForKey:@"challenges"];
     Str_Frends=[defaults valueForKey:@"friends"];
     Str_name=[defaults valueForKey:@"name"];
