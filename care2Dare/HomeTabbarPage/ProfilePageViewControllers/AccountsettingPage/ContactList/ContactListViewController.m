@@ -185,14 +185,7 @@
     }
     if (Array_name.count!=0)
     {
-        for (int i=0; i<Array_name.count; i++)
-        {
-            
-        }
-        Array_name1=[[NSMutableArray alloc]init];
-        Array_Email1=[[NSMutableArray alloc]init];
-        Array_Phone1=[[NSMutableArray alloc]init];
-        
+       
         [self ContactCommunication];
         
     }
@@ -209,107 +202,6 @@
     NSLog(@"Array_name = %@",Array_name);
 }
 
-
--(void)contactListData11
-{
-    [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error)
-     {
-         if (granted == YES)
-         {
-             //keys with fetching properties
-             NSArray *keys = @[CNContactFamilyNameKey,CNContactEmailAddressesKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey];
-             NSString *containerId = store.defaultContainerIdentifier;
-             NSPredicate *predicate = [CNContact predicateForContactsInContainerWithIdentifier:containerId];
-             NSError *error;
-             NSArray *cnContacts = [store unifiedContactsMatchingPredicate:predicate keysToFetch:keys error:&error];
-             if (error)
-             {
-                 NSLog(@"error fetching contacts %@", error);
-             } else
-             {
-                 for (CNContact *contact in cnContacts)
-                 {
-                     NSLog(@"Contacts123== %@",contact);
-                     NSLog(@"Name== %@%@%@", contact.givenName,@" ",contact.familyName);
-                     name=[NSString stringWithFormat:@"%@%@%@", contact.givenName,@" ",contact.familyName];
-                     
-                     for (CNLabeledValue * label in contact.emailAddresses)
-                     {
-                         NSString *Email = label.value;
-                         if ([Email length] > 0)
-                         {
-                             emailAddress=[NSString stringWithFormat:@"%@",Email];
-                             
-                             
-                             NSLog(@"Email==%@", Email);
-                         }
-                     }
-                     
-                     for (CNLabeledValue *label in contact.phoneNumbers)
-                     {
-                         NSString *phone = [label.value stringValue];
-                         if ([phone length] > 0)
-                         {
-                             phoneNumber=[NSString stringWithFormat:@"%@",phone];
-                             NSLog(@"phone=== %@", phone);
-                         }
-                     }
-                     
-                     // NSMutableDictionary *Contact_dict = [[NSMutableDictionary alloc] init];
-                     if ((name !=nil && ![name isEqualToString:@" "]) && ((emailAddress !=nil && ![emailAddress isEqualToString:@""])||(phoneNumber !=nil && ![phoneNumber isEqualToString:@""])))
-                     {
-                         // [Contact_dict setObject:name forKey:@"name"];
-                         [Array_name addObject:name];
-                         
-                         if (phoneNumber !=nil && ![phoneNumber isEqualToString:@""])
-                         {
-                             // [Contact_dict setObject:phoneNumber forKey:@"phone"];
-                             phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                             
-                             phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-                             [Array_Phone addObject:phoneNumber];
-                         }
-                         else
-                         {
-                             //[Contact_dict setObject:@"" forKey:@"phone"];
-                             [Array_Phone addObject:@""];
-                         }
-                         if (emailAddress !=nil && ![emailAddress isEqualToString:@""])
-                         {
-                             //[Contact_dict setObject:emailAddress forKey:@"email"];
-                             [Array_Email addObject:emailAddress];
-                         }
-                         else
-                         {
-                             //[Contact_dict setObject:@"" forKey:@"email"];
-                             [Array_Email addObject:@""];
-                         }
-                         
-                         
-                         //                    if ((emailAddress !=nil && ![emailAddress isEqualToString:@""]) || (phoneNumber !=nil && ![phoneNumber isEqualToString:@""]) )
-                         //                    {
-                         //                         [Array_contatList addObject:Contact_dict];
-                         //                    }
-                         
-                         
-                     }
-                     name=nil;
-                     emailAddress=nil;
-                     phoneNumber=nil;
-                 }
-                 
-                 NSLog(@"Array_Email==%@", Array_Email);
-                 NSLog(@"Array_Phone==%@", Array_Phone);
-                 NSLog(@"Array_name==%@", Array_name);
-                 if (Array_name.count!=0)
-                 {
-                     [self ContactCommunication];
-                 }
-             }
-         }
-     }];
-    
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
