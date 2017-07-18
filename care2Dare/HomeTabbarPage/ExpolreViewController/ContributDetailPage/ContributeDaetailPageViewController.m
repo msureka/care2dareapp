@@ -852,8 +852,20 @@ Str_Tapped_Comments_Vedio=@"Vedio";
         {
             
             self.tabBarBottomSpace.constant = 0.0f;
-            Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
             keyboradHeight=0.0f;
+            if ([Str_Tapped_Comments_Vedio isEqualToString:@"Vedio"])
+            {
+                 [Tableview_ContriBute setFrame:CGRectMake(0,yt, tw, th+_BlackViewOne.frame.size.height-30)];
+            }
+            else
+            {
+              Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th);
+            }
+           
+           
+            
+           
+            
         }
         [self.view layoutIfNeeded];
     } completion:nil];}
@@ -1756,6 +1768,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                     [alertController addAction:actionOk];
             [self presentViewController:alertController animated:YES completion:nil];
                     transperentViewIndicator.hidden=YES;
+                                                         
+                                                     }
+                                                     
+                                                     
+                    if ([ResultString isEqualToString:@"challengeover"])
+                            {
+                            transperentViewIndicator.hidden=YES;
+ UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The challenge you wish to record to is now over! Thank-you." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+            {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }];
+                                                         
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
                                                          
                                                      }
                                          

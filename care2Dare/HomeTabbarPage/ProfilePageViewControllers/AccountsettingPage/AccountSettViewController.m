@@ -24,6 +24,7 @@
 #import "TwitterListViewController.h"
 #import "UIView+RNActivityView.h"
 #import "ChangePasswordViewController.h"
+#import "DonationHistroyViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
@@ -539,13 +540,17 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         }
         if (indexPath.row==2)
         {
-            
+           
     
       
         }
         if (indexPath.row==3)
         {
-       
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            DonationHistroyViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"DonationHistroyViewController"];
+            
+            [self.navigationController pushViewController:set animated:YES];
          
         }
         

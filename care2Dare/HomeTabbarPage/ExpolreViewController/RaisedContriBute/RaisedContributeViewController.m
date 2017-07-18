@@ -116,17 +116,23 @@
     UITapGestureRecognizer * Label_Pay_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Pay_Action:)];
     [Label_PayTopheader addGestureRecognizer:Label_Pay_Tapped];
     
+    Image_PayTopheader.hidden=YES;
+    Label_PayTopheader.hidden=YES;
     
     [self Communicaion_Raised];
   
 }
 -(void)Image_Pay_Action:(UIGestureRecognizer *)reconizer
 {
-    ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
-    set.total_players=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Challengers.count ];
-    
-    set.challengerID=Str_Channel_Id;
-    [self.navigationController pushViewController:set animated:YES];
+    if (Array_Challengers.count !=0)
+    {
+        ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
+        set.total_players=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Challengers.count ];
+        
+        set.challengerID=Str_Channel_Id;
+        [self.navigationController pushViewController:set animated:YES];
+    }
+   
 }
 -(void)Communicaion_Raised
 {
@@ -204,6 +210,7 @@
         {
             indicator.hidden=YES;
             Tableview_Raised.hidden=NO;
+            
             Array_Backer=[[NSMutableArray alloc]init];
             Array_Challengers=[[NSMutableArray alloc]init];
             for (int i=0; i<Array_raised.count; i++)
@@ -218,7 +225,16 @@
                 }
                 
             }
-
+            if (Array_Challengers.count !=0)
+            {
+                Image_PayTopheader.hidden=NO;
+                Label_PayTopheader.hidden=NO;
+            }
+            else
+            {
+                Image_PayTopheader.hidden=YES;
+                Label_PayTopheader.hidden=YES;
+            }
             [Tableview_Raised reloadData];
             NSLog(@"Backers Array==%@",Array_Backer);
              NSLog(@"Challengers Array==%@",Array_Challengers);

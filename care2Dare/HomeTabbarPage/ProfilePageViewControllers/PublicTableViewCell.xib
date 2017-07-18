@@ -112,24 +112,63 @@
                         <color key="textColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMt-JB-Owh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SA7-vW-A7U">
+                                <rect key="frame" x="0.0" y="93" width="375" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.73725490199999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RECORD CHALLENGE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkM-Fw-JSI">
+                                <rect key="frame" x="84" y="93" width="291" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.73725490199999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="24h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSW-mu-Rb3">
+                                <rect key="frame" x="41" y="103" width="41" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-Time-96.png" translatesAutoresizingMaskIntoConstraints="NO" id="L3L-q5-bxf">
+                                <rect key="frame" x="8" y="103" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Image_NewFrnd" destination="JqK-01-8Yc" id="AwP-5c-bTT"/>
                 <outlet property="Image_PalyBuutton" destination="eNX-kZ-KxA" id="dWb-j2-rxc"/>
                 <outlet property="Image_Profile" destination="SEw-o2-3Uk" id="ndK-XL-2Pf"/>
+                <outlet property="Image_record" destination="L3L-q5-bxf" id="1rc-tZ-2om"/>
                 <outlet property="Label_Backer" destination="8Gy-5C-JQM" id="poS-Ve-8NL"/>
                 <outlet property="Label_Changename" destination="TlD-sK-6q3" id="nC4-1G-4p8"/>
                 <outlet property="Label_Mypleges" destination="zqt-QF-UBj" id="weh-f7-I6c"/>
                 <outlet property="Label_Raised" destination="tRQ-bo-YPu" id="kL7-j4-R14"/>
                 <outlet property="Label_Time" destination="x7N-IK-vcs" id="Kgu-Ch-lXA"/>
                 <outlet property="Label_Titile" destination="2XW-ne-Euk" id="p56-0J-wmq"/>
+                <outlet property="View_record" destination="kMt-JB-Owh" id="6bo-Pt-zEe"/>
+                <outlet property="label_record" destination="zSW-mu-Rb3" id="5Qz-tL-WL3"/>
             </connections>
-            <point key="canvasLocation" x="58.5" y="64"/>
+            <point key="canvasLocation" x="55.5" y="62"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="10154143609282724.jpg" width="1936" height="1936"/>
+        <image name="icons8-Time-96.png" width="96" height="96"/>
         <image name="mypledge.png" width="207" height="101"/>
         <image name="new.png" width="59" height="59"/>
         <image name="playbutton.png" width="84" height="84"/>

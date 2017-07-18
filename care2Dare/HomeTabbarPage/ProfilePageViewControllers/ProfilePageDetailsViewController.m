@@ -596,6 +596,9 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
                 cell_Public.Label_Titile.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
                 NSString *text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"title"]];
+            
+            cell_Public.View_record.hidden=YES;
+            
             if ([[dic_worldexp valueForKey:@"userprofileaccepted"]isEqualToString:@"yes"])
             {
                 cell_Public.Image_NewFrnd.hidden=YES;

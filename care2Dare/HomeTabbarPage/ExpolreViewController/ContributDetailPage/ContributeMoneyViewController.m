@@ -39,13 +39,21 @@
     
     [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
-    if (([total_players integerValue]-1)>=2)
+    if (([total_players integerValue])>=2)
     {
-        Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue]-1,@" players"];
+        if (([total_players integerValue]-1)==1)
+        {
+          Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",[total_players integerValue]-1,@" player"];
+        }
+        else
+        {
+       Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",[total_players integerValue]-1,@" players"];
+        }
     }
     else
     {
-        Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%d%@",@"x",[total_players integerValue],@" players"];
+      
+        Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",(long)[total_players integerValue],@" player"];
     }
     
     [textfield_Ammounts becomeFirstResponder];
@@ -133,13 +141,13 @@
        
         NSString *challengerPlayers= @"noofchallengers";
         NSString * challengerplayerVal;
-        if (([total_players integerValue]-1)>=2)
+        if (([total_players integerValue])>=2)
         {
-            challengerplayerVal=[NSString stringWithFormat:@"%d",[total_players integerValue]-1];
+            challengerplayerVal=[NSString stringWithFormat:@"%ld",[total_players integerValue]-1];
         }
         else
         {
-         challengerplayerVal=[NSString stringWithFormat:@"%d",[total_players integerValue]];
+         challengerplayerVal=[NSString stringWithFormat:@"%ld",(long)[total_players integerValue]];
         }
         
         
@@ -242,7 +250,19 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withStri
              [alertController addAction:actionOk];             [self presentViewController:alertController animated:YES completion:nil];
              
          }
-
+         if ([ResultString isEqualToString:@"challengeover"])
+         {
+             [self.view hideActivityViewWithAfterDelay:0];
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"The challenge you wish to donate to is now over! Thank-you." preferredStyle:UIAlertControllerStyleAlert];
+             
+             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                        {
+                                            [self.navigationController popToRootViewControllerAnimated:YES];
+                                        }];
+             
+             [alertController addAction:actionOk];             [self presentViewController:alertController animated:YES completion:nil];
+             
+         }
 
      }
         
@@ -268,7 +288,7 @@ NSLog(@"error login2.......%@",error.description);
 -(IBAction)textfield_Ammounts_Actions:(id)sender
 {
     
-    if (([total_players integerValue]-1)>=2)
+    if (([total_players integerValue])>=2)
     {
      chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]-1);
     }

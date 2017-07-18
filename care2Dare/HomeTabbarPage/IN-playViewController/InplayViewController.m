@@ -426,6 +426,17 @@
                 
                 NSDictionary * dic_worldexp=[Array_Public objectAtIndex:indexPath.row];
                 
+                 [cell_Public.View_record setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.5f]];
+              
+                if ([[dic_worldexp valueForKey:@"showrecordingleft"]isEqualToString:@"yes"])
+                {
+                     cell_Public.View_record.hidden=NO;
+                    cell_Public.label_record.text=[dic_worldexp valueForKey:@"recordingtimeleft"];
+                }
+                else
+                {
+                  cell_Public.View_record.hidden=YES;
+                }
                 
                 if ([[dic_worldexp valueForKey:@"accepted"]isEqualToString:@"yes"])
                 {
@@ -438,9 +449,11 @@
                 }
                 
                 
+//                [cell_Public.View_record setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.1]];
                 
                 
                 
+              
                 cell_Public.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
                  cell_Public.Label_Mypleges.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"mypledge"]];
                 cell_Public.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
@@ -527,6 +540,10 @@
                     cell_Private = [[PrivateTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId2];
                 }
                 
+                Bottomborder_Cell2 = [CALayer layer];
+                Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_Private.frame.size.height-1, cell_Private.frame.size.width, 1);
+                [cell_Private.layer addSublayer:Bottomborder_Cell2];
                 
                 NSDictionary * dic_worldexp=[Array_Private objectAtIndex:indexPath.row];
                 
@@ -540,7 +557,18 @@
                     cell_Private.Image_NewFrnd.hidden=NO;
                 }
                 
+                [cell_Private.View_record setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.5f]];
                 
+                if ([[dic_worldexp valueForKey:@"showrecordingleft"]isEqualToString:@"yes"])
+                {
+                    cell_Private.View_record.hidden=NO;
+                    cell_Private.label_record.text=[dic_worldexp valueForKey:@"recordingtimeleft"];
+                }
+                else
+                {
+                    cell_Private.View_record.hidden=YES;
+                }
+
                 
                 
                 

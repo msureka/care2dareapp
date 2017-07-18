@@ -492,11 +492,14 @@
 		9AF9DBFC1E9B608A00A652D9 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF21E9B608A00A652D9 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */; };
+		D7C3BA561F1CBECE00BC05C9 /* DonationHistroyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */; };
 		D7E49CB41F0E08F700D87218 /* LoginWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */; };
 		D7E49CB81F0E140600D87218 /* c2dlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB51F0E140600D87218 /* c2dlogo.png */; };
 		D7E49CB91F0E140600D87218 /* c2dlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */; };
 		D7E49CBA1F0E140600D87218 /* c2dlogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */; };
 		D7E49CBC1F0E141100D87218 /* icons8-Email Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */; };
+		D7F4E3B41F1DF41B00F49012 /* icons8-Time-96.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F4E3B21F1DF41B00F49012 /* icons8-Time-96.png */; };
+		D7F4E3B51F1DF41B00F49012 /* icons8-Timer-104.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F4E3B31F1DF41B00F49012 /* icons8-Timer-104.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1153,12 +1156,16 @@
 		9AF9DBF31E9B608A00A652D9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cash in Hand Filled-100.png"; sourceTree = "<group>"; };
+		D7C3BA541F1CBECE00BC05C9 /* DonationHistroyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationHistroyViewController.h; sourceTree = "<group>"; };
+		D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationHistroyViewController.m; sourceTree = "<group>"; };
 		D7E49CB21F0E08F700D87218 /* LoginWithEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWithEmailViewController.h; sourceTree = "<group>"; };
 		D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWithEmailViewController.m; sourceTree = "<group>"; };
 		D7E49CB51F0E140600D87218 /* c2dlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c2dlogo.png; sourceTree = "<group>"; };
 		D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@2x.png"; sourceTree = "<group>"; };
 		D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@3x.png"; sourceTree = "<group>"; };
 		D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Email Filled-100.png"; sourceTree = "<group>"; };
+		D7F4E3B21F1DF41B00F49012 /* icons8-Time-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Time-96.png"; sourceTree = "<group>"; };
+		D7F4E3B31F1DF41B00F49012 /* icons8-Timer-104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Timer-104.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1294,6 +1301,7 @@
 		9A19B3A31E6E803000262BC1 /* AccountsettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				D7C3BA531F1CBE6B00BC05C9 /* DonationHistroy */,
 				9A822FCF1ED5972A001149DC /* ChangePassword */,
 				9A2F080B1ECC106400C46DF9 /* ContactList */,
 				9A2F080C1ECC106400C46DF9 /* FacebookList */,
@@ -2155,6 +2163,8 @@
 		9ABB5DAB1E6945D300482105 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D7F4E3B21F1DF41B00F49012 /* icons8-Time-96.png */,
+				D7F4E3B31F1DF41B00F49012 /* icons8-Timer-104.png */,
 				9AEA1DA91F02908B00C4A791 /* likeimages */,
 				9AF3D2B41F026906001B9191 /* videoscommentsandprofileimages */,
 				9A4A793D1F013C4500E9897E /* privateinplay */,
@@ -2493,6 +2503,15 @@
 			path = payicon;
 			sourceTree = "<group>";
 		};
+		D7C3BA531F1CBE6B00BC05C9 /* DonationHistroy */ = {
+			isa = PBXGroup;
+			children = (
+				D7C3BA541F1CBECE00BC05C9 /* DonationHistroyViewController.h */,
+				D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */,
+			);
+			name = DonationHistroy;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2610,6 +2629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A19B3CB1E6E928C00262BC1 /* graybackarrow@2x.png in Resources */,
+				D7F4E3B41F1DF41B00F49012 /* icons8-Time-96.png in Resources */,
 				9A6E39FC1E7ABA6700B4AD5B /* raised_circle.png in Resources */,
 				9A38F5931E96641700EADE7F /* WatchVedioShareTableViewCell.xib in Resources */,
 				9A6E3A001E7ABA6700B4AD5B /* raised_hand@3x.png in Resources */,
@@ -2745,6 +2765,7 @@
 				9A4A79291F010EA500E9897E /* inplaytab@2x.png in Resources */,
 				9A38F5C21E9666BC00EADE7F /* whitearrow.png in Resources */,
 				9AA9B53E1E700AC700C6EF37 /* help.png in Resources */,
+				D7F4E3B51F1DF41B00F49012 /* icons8-Timer-104.png in Resources */,
 				9A38F5AF1E9666BC00EADE7F /* 3dots@3x.png in Resources */,
 				9AED224E1E6AA61A0004A8D0 /* exploreworld1@3x.png in Resources */,
 				9AF3D2CB1F026906001B9191 /* profilefriends@2x.png in Resources */,
@@ -3002,6 +3023,7 @@
 				9AA9B4FC1E6FC86400C6EF37 /* ProfileNotificationViewController.m in Sources */,
 				9AA9B5161E6FDD4200C6EF37 /* VedioNotiTableViewCell.m in Sources */,
 				9A64C8581E711475008115FF /* UIViewController+KeyboardAnimation.m in Sources */,
+				D7C3BA561F1CBECE00BC05C9 /* DonationHistroyViewController.m in Sources */,
 				9A19B3F21E6EB01900262BC1 /* SDWebImageCompat.m in Sources */,
 				9A64C87D1E7137E5008115FF /* LCNContactView.m in Sources */,
 				9A5B66DC1ED4464200AB9BF0 /* FRHyperLabel.m in Sources */,

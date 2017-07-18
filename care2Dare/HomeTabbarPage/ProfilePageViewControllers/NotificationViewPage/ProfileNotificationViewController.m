@@ -1917,7 +1917,7 @@ if (indexPath.section==0)
         
         set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challengeid"]];
         
-        set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"totalamount"]];
+        set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"backamount"]];
         
         set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
         }
@@ -1927,7 +1927,7 @@ if (indexPath.section==0)
             
             set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challengeid"]];
             
-            set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"totalamount"]];
+            set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"backamount"]];
             
             set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
         }
