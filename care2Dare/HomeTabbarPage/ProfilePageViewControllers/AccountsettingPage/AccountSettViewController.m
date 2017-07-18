@@ -967,7 +967,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
             //        message.tag=100;
             //        [message show];
             
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Play:Date." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2Dare." preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                style:UIAlertActionStyleDefault
@@ -1143,7 +1143,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                                 
                             [self.view hideActivityViewWithAfterDelay:0];
                                 [self.view hideActivityViewWithAfterDelay:0];
-                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You already have another account with us linked to Facebook. Please login through that or delete that account." preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"You already have another account linked with us. Please login through that or delete that account." preferredStyle:UIAlertControllerStyleAlert];
                                 
                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                    style:UIAlertActionStyleDefault

@@ -97,109 +97,137 @@
 }
 - (void)getContactsWithAddressBook:(ABAddressBookRef )addressBook
 {
+    // ABAddressBookRef addressBook = ABAddressBookCreate();
+    CFArrayRef allSources = ABAddressBookCopyArrayOfAllPeople( addressBook );
     
-    contactlists = [[NSMutableArray alloc] init];
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
-    CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
     
-    for (int i=0;i < nPeople;i++) {
-        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+    
+    NSArray * allContacts=[[NSArray alloc]init];
+    
+    allContacts = (__bridge_transfer NSArray
+                   *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+    
+    ABRecordRef *person;
+    
+    
+    NSLog(@"Address Count==%ld",ABAddressBookGetPersonCount( addressBook ));
+    for (CFIndex k = 0; k < ABAddressBookGetPersonCount( addressBook ); k++)
+    {
         
-        ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
-        //For username and surname
-        ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
+        ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[k];
+        NSString * email;
         
-        CFStringRef firstName, lastName;
-        firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        // [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+        ABMutableMultiValueRef eMail  = ABRecordCopyValue(contactPerson, kABPersonEmailProperty);
+        if(ABMultiValueGetCount(eMail) > 0)
+        {
+            email=(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0);
+            
+        }
+        NSLog(@"Email222===%@",email);
+        
+        NSString * fullName;
+        NSString *firstName = (__bridge_transfer NSString
+                               *)ABRecordCopyValue(contactPerson, kABPersonFirstNameProperty);
+        NSString *lastName =  (__bridge_transfer NSString
+                               *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
+        
+        NSLog(@"%lu first Name=%@",k,firstName);
+        NSLog(@"%lu last name=%@",k,lastName);
+        
+        ABRecordRef aSource = CFArrayGetValueAtIndex(allSources,k);
+        ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(aSource, kABPersonPhoneProperty));
+        
         if (firstName !=nil && lastName==nil)
         {
-            [dOfPerson setObject:[NSString stringWithFormat:@"%@", firstName] forKey:@"name"];
+            fullName=[NSString stringWithFormat:@"%@", firstName] ;
         }
         else if (firstName ==nil && lastName !=nil)
         {
-            [dOfPerson setObject:[NSString stringWithFormat:@"%@", lastName] forKey:@"name"];
+            fullName=[NSString stringWithFormat:@"%@", lastName];
         }
         else if (firstName !=nil && lastName !=nil)
         {
-            [dOfPerson setObject:[NSString stringWithFormat:@"%@%@%@", firstName,@" " ,lastName] forKey:@"name"];
-        }
-        // For getting the user image.
-        UIImage *contactImage;
-        if(ABPersonHasImageData(ref)){
-            contactImage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageData(ref)];
+            fullName=[NSString stringWithFormat:@"%@%@%@", firstName,@" ", lastName];
         }
         
-        //For Email ids
-        ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
-        if(ABMultiValueGetCount(eMail) > 0) {
-            [dOfPerson setObject:(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
-            
-        }
+        //
         
-        //For Phone number
         NSString* mobileLabel;
+        NSString* basic_mobile;
+        NSString* work_mobile;
+        NSString* home_mobile;
+        NSString* strOtherMobile;
+        NSString* phonelabels;
+        NSString* mobileLabel33;
         
-        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-            mobileLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(phones, i);
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
-                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
-            }
-            
-            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
-                [dOfPerson setObject:(__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
-                break ;
-            }
-            
-        }
-        if (dOfPerson.count>=2)
+        
+        
+        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++)
         {
-            if ([dOfPerson objectForKey:@"name"] &&  [dOfPerson valueForKey:@"name"] !=nil)
+            
+            
+            phonelabels = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i);
+            
+            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(phones, i);
+            
+            NSString *phoneLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
+            
+            NSLog(@"%@  -sachin- %@ )", phonelabels, phoneLabel1);
+            if (fullName !=nil)
             {
-                [Array_name addObject:[dOfPerson valueForKey:@"name"]];
-                if ([dOfPerson valueForKey:@"email"]==nil)
+                if (phonelabels !=nil)
                 {
-                    [Array_Email addObject:@""];
+                    if ([Array_Phone containsObject:phonelabels])
+                    {
+                        
+                    }
+                    else
+                    {
+                        [Array_name addObject:fullName];
+                        [Array_Phone addObject:phonelabels];
+                        [Array_Email addObject:@""];
+                    }
                 }
-                else
-                {
-                    [Array_Email addObject:[dOfPerson valueForKey:@"email"]];
-                }
-                if ([dOfPerson valueForKey:@"Phone"]==nil)
-                {
-                    [Array_Phone addObject:@""];
-                }
-                else
-                {
-                    [Array_Phone addObject:[dOfPerson valueForKey:@"Phone"]];
-                }
-                [contactlists addObject:dOfPerson];
             }
+        }
+        if (fullName !=nil)
+        {
+            
+            if (email !=nil)
+            {
+                if ([Array_Email containsObject:email])
+                {
+                    
+                }
+                else
+                {
+                    [Array_name addObject:fullName];
+                    [Array_Email addObject:email];
+                    [Array_Phone addObject:@""];
+                    
+                }
+            }
+            
             
         }
         
     }
-    if (Array_name.count!=0)
+    
+    
+    NSLog(@"Array_Phone = %@",Array_Phone);
+    NSLog(@"Array_Email = %@",Array_Email);
+    NSLog(@"Array_name = %@",Array_name);
+    if (Array_name.count !=0)
     {
-       
         [self ContactCommunication];
-        
     }
     else
     {
         [self contactListData];
+        
     }
-    NSLog(@"Contacts = %@",contactlists);
-    // [contactlists removeObjectsInRange:NSMakeRange(0, 10)];
-    // [contactlists subarrayWithRange:NSMakeRange(0, 5)];
-    //    NSLog(@"Contacts = %@",[contactlists subarrayWithRange:NSMakeRange(0,10)]);
-    NSLog(@"Array_Phone = %@",Array_Phone);
-    NSLog(@"Array_Email = %@",Array_Email);
-    NSLog(@"Array_name = %@",Array_name);
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -512,7 +540,7 @@
         NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,escapedNameString,emailstr,escapedEmailString,mobilenumber,escapedMobileNoString];
         
         NSData *postData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-        NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
         [req addValue:postLength forHTTPHeaderField:@"Content-Length"];
         [req setHTTPBody:postData];
         NSURLSession *session = [NSURLSession sharedSession];
@@ -1221,8 +1249,8 @@
             mailCont.mailComposeDelegate = self;
             [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
             
-            [mailCont setSubject:@"Download Play:Date"];
-            [mailCont setMessageBody:@"Hey, \n\n Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone! \n\n Thanks!" isHTML:NO];
+            [mailCont setSubject:@"Download Care2Dare"];
+            [mailCont setMessageBody:@"Hey, \n\n Care2Dare is a great app to Challenge your friends to a dare, or for raising money for completing a specific challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
             
             [self presentViewController:mailCont animated:YES completion:nil];
             
@@ -1244,7 +1272,7 @@
             
             
             
-            messageController.body = @"Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone!"; // Set initial text to example message
+            messageController.body = @"Challenge your friends to a dare, or raise money for completing a challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
             
             dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
                 [self presentViewController:messageController animated:YES completion:NULL];
@@ -1294,8 +1322,8 @@
             mailCont.mailComposeDelegate = self;
             [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:(long)actionSheet.tag]valueForKey:@"friendemail"]]];
             
-            [mailCont setSubject:@"Download Play:Date"];
-            [mailCont setMessageBody:@"Hey, \n\n Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone! \n\n Thanks!" isHTML:NO];
+            [mailCont setSubject:@"Download Care2Dare"];
+            [mailCont setMessageBody:@"Hey, \n\n Care2Dare is a great app to Challenge your friends to a dare, or for raising money for completing a specific challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
             
             [self presentViewController:mailCont animated:YES completion:nil];
             
@@ -1315,7 +1343,7 @@
             
             
             
-            messageController.body = @"Play:Date is a great app to find friends for your children. I have been using it since a while, and it would be great if you could download it! \n\n Visit http://www.play-date.ae to download it on your mobile phone!"; // Set initial text to example message
+            messageController.body = @"Challenge your friends to a dare, or raise money for completing a challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
             
             dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
                 [self presentViewController:messageController animated:YES completion:NULL];
