@@ -25,5 +25,10 @@
 @property(nonatomic,strong)PledgeTableViewCell * cell_Pledge;
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 @property(nonatomic,strong)IBOutlet UIView * HeadTopView;
+
+@property(nonatomic,strong)IBOutlet UIActivityIndicatorView * indicator;
+@property(nonatomic,strong)IBOutlet UILabel * label_TotalDonate;
+
+
 - (IBAction)DoneButton:(id)sender;
 @end

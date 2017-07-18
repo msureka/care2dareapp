@@ -646,29 +646,29 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     [self startCameraControllerFromViewController: self
                                     usingDelegate: self];
 }
--(IBAction)ButtonCreateChallenges_Action:(id)sender
+-(void)createChallengesComm
 {
     
     [self.view endEditing:YES];
     
     if ([challengetypeVal isEqualToString:@"PRIVATE"])
     {
-    if (Array_Names.count==0)
-    {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add friends" message:@"Please add your friends who you would like to challenge. In Private Challenge, it is mandatory to add a friend." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                   {
-                InviteSprintTagUserViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"InviteSprintTagUserViewController"];
-                                       
-                [self.navigationController pushViewController:set animated:YES];
-                                       
-                                   }];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
- 
-    }
+        if (Array_Names.count==0)
+        {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add friends" message:@"Please add your friends who you would like to challenge. In Private Challenge, it is mandatory to add a friend." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                           InviteSprintTagUserViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"InviteSprintTagUserViewController"];
+                                           
+                                           [self.navigationController pushViewController:set animated:YES];
+                                           
+                                       }];
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+        }
         else
         {
             Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
@@ -696,7 +696,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
             }
             else
             {
-               // [self.view showActivityViewWithLabel:@"Loading"];
+                // [self.view showActivityViewWithLabel:@"Loading"];
                 transperentViewIndicator11.hidden=NO;
                 Label_confirm11.text=@"0 %";
                 NSString *userid= @"userid";
@@ -758,149 +758,149 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                 
                 
                 dataTaskupload =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                                 {
-                                                     if(data)
-                                                     {
-                                                         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                                         NSInteger statusCode = httpResponse.statusCode;
-                                                         if(statusCode == 200)
-                                                         {
-                                                             
-                                                             array_CreateChallenges=[[NSMutableArray alloc]init];
-                                                             SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                                                             array_CreateChallenges=[objSBJsonParser objectWithData:data];
-                                                             NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                             //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
-                                                             
-                                                             ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                             ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                             
-                                                             NSLog(@"array_CreateChallenges %@",array_CreateChallenges);
-                                                             
-                                                             
-                                                             NSLog(@"array_CreateChallenges ResultString %@",ResultString);
-                                                             if ([ResultString isEqualToString:@"nouserid"])
-                                                             {
-                                                               transperentViewIndicator11.hidden=YES;;
-                                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 
-                                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                                    style:UIAlertActionStyleDefault
-                                                                                                                  handler:nil];
-                                                                 [alertController addAction:actionOk];
-                                                                 [self presentViewController:alertController animated:YES completion:nil];
-                                                                 
-                                                                 
-                                                             }
-                                                             if ([ResultString isEqualToString:@"nomedia"])
-                                                             {
-                                                                 transperentViewIndicator11.hidden=YES;;
-                                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 
-                                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                                    style:UIAlertActionStyleDefault
-                                                                                                                  handler:nil];
-                                                                 [alertController addAction:actionOk];
-                                                                 [self presentViewController:alertController animated:YES completion:nil];
-                                                                 
-                                                                 
-                                                             }
-                                                             
-                                                             if ([ResultString isEqualToString:@"nullerror"])
-                                                             {
-                                                                 transperentViewIndicator11.hidden=YES;
-                                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 
-                                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                                    style:UIAlertActionStyleDefault
-                                                                                                                  handler:nil];
-                                                                 [alertController addAction:actionOk];
-                                                                 [self presentViewController:alertController animated:YES completion:nil];
-                                                                 
-                                                                 
-                                                                 
-                                                                 
-                                                             }
-                                                             if ([ResultString isEqualToString:@"imageerror"])
-                                                             {
-                                                                 transperentViewIndicator11.hidden=YES;
-                                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 
-                                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                                    style:UIAlertActionStyleDefault
-                                                                                                                  handler:nil];
-                                                                 [alertController addAction:actionOk];
-                                                                 [self presentViewController:alertController animated:YES completion:nil];
-                                                                 
-                                                                 
-                                                                 
-                                                                 
-                                                             }
-                                                             if ([ResultString isEqualToString:@"inserterror"])
-                                                             {
-                                                               transperentViewIndicator11.hidden=YES;
-                                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 
-                                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                                    style:UIAlertActionStyleDefault
-                                                                                                                  handler:nil];
-                                                                 [alertController addAction:actionOk];
-                                                                 [self presentViewController:alertController animated:YES completion:nil];
-                                                                 
-                                                                 
-                                                                 
-                                                                 
-                                                             }
-                                                             
-                                                             if ([ResultString isEqualToString:@"done"])
-                                                             {
-                                                                 transperentViewIndicator11.hidden=YES;
-                                                                 //                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
-                                                                 //
-                                                                 //                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                 //                                                                                                        style:UIAlertActionStyleDefault
-                                                                 //                                                                                                      handler:nil];
-                                                                 //                                                     [alertController addAction:actionOk];
-                                                                 //                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                                 [defaults setObject:@"no" forKey:@"falg"];
-                                                                 [defaults setObject:@"" forKey:@"usernames"];
-                                                                 [defaults setObject:@"" forKey:@"userids"];
-                                                                 [defaults synchronize];
-                                                                 
-                                                                 [self dismissViewControllerAnimated:YES completion:nil];
-                                                                 
-                                                                 
-                                                             }
-                                                             
-                                                             
-                                                             
-                                                         }
-                                                         
-                                                         else
-                                                         {
-                                                             NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                        transperentViewIndicator11.hidden=YES;
-                                                         }
-                                                         
-                                                         
-                                                     }
-                                                     else if(error)
-                                                     {
-                                                       
-                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                            style:UIAlertActionStyleDefault handler:nil];
-                                                         [alertController addAction:actionOk];
-                                                         [self presentViewController:alertController animated:YES completion:nil];
-                                                         
-                                                         transperentViewIndicator11.hidden=YES;
-
-                                                         NSLog(@"error login2.......%@",error.description);
-                                                     }
-                                                     
-                                                     
-                                                 }];
+                                 {
+                                     if(data)
+                                     {
+                                         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                         NSInteger statusCode = httpResponse.statusCode;
+                                         if(statusCode == 200)
+                                         {
+                                             
+                                             array_CreateChallenges=[[NSMutableArray alloc]init];
+                                             SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                             array_CreateChallenges=[objSBJsonParser objectWithData:data];
+                                             NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                             //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+                                             
+                                             ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                             ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                             
+                                             NSLog(@"array_CreateChallenges %@",array_CreateChallenges);
+                                             
+                                             
+                                             NSLog(@"array_CreateChallenges ResultString %@",ResultString);
+                                             if ([ResultString isEqualToString:@"nouserid"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;;
+                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                                                 
+                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                    style:UIAlertActionStyleDefault
+                                                                                                  handler:nil];
+                                                 [alertController addAction:actionOk];
+                                                 [self presentViewController:alertController animated:YES completion:nil];
+                                                 
+                                                 
+                                             }
+                                             if ([ResultString isEqualToString:@"nomedia"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;;
+                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                 
+                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                    style:UIAlertActionStyleDefault
+                                                                                                  handler:nil];
+                                                 [alertController addAction:actionOk];
+                                                 [self presentViewController:alertController animated:YES completion:nil];
+                                                 
+                                                 
+                                             }
+                                             
+                                             if ([ResultString isEqualToString:@"nullerror"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;
+                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                 
+                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                    style:UIAlertActionStyleDefault
+                                                                                                  handler:nil];
+                                                 [alertController addAction:actionOk];
+                                                 [self presentViewController:alertController animated:YES completion:nil];
+                                                 
+                                                 
+                                                 
+                                                 
+                                             }
+                                             if ([ResultString isEqualToString:@"imageerror"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;
+                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                 
+                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                    style:UIAlertActionStyleDefault
+                                                                                                  handler:nil];
+                                                 [alertController addAction:actionOk];
+                                                 [self presentViewController:alertController animated:YES completion:nil];
+                                                 
+                                                 
+                                                 
+                                                 
+                                             }
+                                             if ([ResultString isEqualToString:@"inserterror"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;
+                                                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                 
+                                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                    style:UIAlertActionStyleDefault
+                                                                                                  handler:nil];
+                                                 [alertController addAction:actionOk];
+                                                 [self presentViewController:alertController animated:YES completion:nil];
+                                                 
+                                                 
+                                                 
+                                                 
+                                             }
+                                             
+                                             if ([ResultString isEqualToString:@"done"])
+                                             {
+                                                 transperentViewIndicator11.hidden=YES;
+                                                 //                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
+                                                 //
+                                                 //                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                 //                                                                                                        style:UIAlertActionStyleDefault
+                                                 //                                                                                                      handler:nil];
+                                                 //                                                     [alertController addAction:actionOk];
+                                                 //                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                                 [defaults setObject:@"no" forKey:@"falg"];
+                                                 [defaults setObject:@"" forKey:@"usernames"];
+                                                 [defaults setObject:@"" forKey:@"userids"];
+                                                 [defaults synchronize];
+                                                 
+                                                 [self dismissViewControllerAnimated:YES completion:nil];
+                                                 
+                                                 
+                                             }
+                                             
+                                             
+                                             
+                                         }
+                                         
+                                         else
+                                         {
+                                             NSLog(@" error login1 ---%ld",(long)statusCode);
+                                             transperentViewIndicator11.hidden=YES;
+                                         }
+                                         
+                                         
+                                     }
+                                     else if(error)
+                                     {
+                                         
+                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
+                                         
+                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                            style:UIAlertActionStyleDefault handler:nil];
+                                         [alertController addAction:actionOk];
+                                         [self presentViewController:alertController animated:YES completion:nil];
+                                         
+                                         transperentViewIndicator11.hidden=YES;
+                                         
+                                         NSLog(@"error login2.......%@",error.description);
+                                     }
+                                     
+                                     
+                                 }];
                 [dataTaskupload resume];
             }
             
@@ -910,238 +910,263 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
     else
     {
-    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    if (networkStatus == NotReachable)
-    {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                   {
-                                       exit(0);
-                                   }];
-        
-        [alertController addAction:actionOk];
-        
-        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        alertWindow.rootViewController = [[UIViewController alloc] init];
-        alertWindow.windowLevel = UIWindowLevelAlert + 1;
-        [alertWindow makeKeyAndVisible];
-        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-        
-        
-    }
-    else
-    {
-         transperentViewIndicator11.hidden=NO;
-          Label_confirm11.text=@"0 %";
-        NSString *userid= @"userid";
-        NSString *useridVal =[defaults valueForKey:@"userid"];
-        
-        
-        NSString *title= @"title";
-        NSString *titleVal =_Textview_Desc.text;
-        
-        NSString *challengetype= @"challengetype";
-        NSString *contributiontype= @"contributiontype";
-        
-        
-        NSString *mediatype= @"mediatype";
-        
-        
-        NSString *enddays= @"enddays";
-        NSString *enddaysVal =[NSString stringWithFormat:@"%.f",slider_Days.value];
-        
-        NSString *payperchallenger= @"payperchallenger";
-        NSString *payperchallengerVal =_Textfield_Amount.text;
-        
-        NSString *noofchallengers= @"noofchallengers";
-        NSString *noofchallengersVal;
-       
-    noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count];
-        
-        
-        NSString *challengerslist= @"challengerslist";
-        //
-        
-        NSString *media= @"media";
-        
-        NSString *mediaimagethumb=@"mediathumbnail";
-
-        
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,contributiontype,challengetypeValDonate,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
-        
-        
-        
+        Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+        if (networkStatus == NotReachable)
+        {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                           exit(0);
+                                       }];
+            
+            [alertController addAction:actionOk];
+            
+            UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            alertWindow.rootViewController = [[UIViewController alloc] init];
+            alertWindow.windowLevel = UIWindowLevelAlert + 1;
+            [alertWindow makeKeyAndVisible];
+            [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+            
+            
+        }
+        else
+        {
+            transperentViewIndicator11.hidden=NO;
+            Label_confirm11.text=@"0 %";
+            NSString *userid= @"userid";
+            NSString *useridVal =[defaults valueForKey:@"userid"];
+            
+            
+            NSString *title= @"title";
+            NSString *titleVal =_Textview_Desc.text;
+            
+            NSString *challengetype= @"challengetype";
+            NSString *contributiontype= @"contributiontype";
+            
+            
+            NSString *mediatype= @"mediatype";
+            
+            
+            NSString *enddays= @"enddays";
+            NSString *enddaysVal =[NSString stringWithFormat:@"%.f",slider_Days.value];
+            
+            NSString *payperchallenger= @"payperchallenger";
+            NSString *payperchallengerVal =_Textfield_Amount.text;
+            
+            NSString *noofchallengers= @"noofchallengers";
+            NSString *noofchallengersVal;
+            
+            noofchallengersVal=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Names.count];
+            
+            
+            NSString *challengerslist= @"challengerslist";
+            //
+            
+            NSString *media= @"media";
+            
+            NSString *mediaimagethumb=@"mediathumbnail";
+            
+            
+            NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,title,titleVal,challengetype,challengetypeVal,contributiontype,challengetypeValDonate,mediatype,mediatypeVal,enddays,enddaysVal,payperchallenger,payperchallengerVal,noofchallengers,noofchallengersVal,challengerslist,_String_Cont_UserId,media,encodedImage,mediaimagethumb,encodedImageThumb];
+            
+            
+            
 #pragma mark - swipe sesion
-        
-        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue: [NSOperationQueue mainQueue]];
-        
-        NSURL *url;
-        NSString *  urlStrLivecount=[urlplist valueForKey:@"createchallenge"];;
-        url =[NSURL URLWithString:urlStrLivecount];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        [request setHTTPMethod:@"POST"];//Web API Method
-        
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        
-        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
-        
-        
-        
-        dataTaskupload =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+            
+            NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue: [NSOperationQueue mainQueue]];
+            
+            NSURL *url;
+            NSString *  urlStrLivecount=[urlplist valueForKey:@"createchallenge"];;
+            url =[NSURL URLWithString:urlStrLivecount];
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            
+            [request setHTTPMethod:@"POST"];//Web API Method
+            
+            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            
+            request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+            
+            
+            
+            dataTaskupload =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                             {
+                                 if(data)
+                                 {
+                                     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                     NSInteger statusCode = httpResponse.statusCode;
+                                     if(statusCode == 200)
+                                     {
+                                         
+                                         array_CreateChallenges=[[NSMutableArray alloc]init];
+                                         SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                         array_CreateChallenges=[objSBJsonParser objectWithData:data];
+                                         NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                         //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
+                                         
+                                         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                         
+                                         NSLog(@"array_CreateChallenges %@",array_CreateChallenges);
+                                         
+                                         
+                                         NSLog(@"array_CreateChallenges ResultString %@",ResultString);
+                                         if ([ResultString isEqualToString:@"nouserid"])
                                          {
-                                         if(data)
-                                         {
-                                             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                             NSInteger statusCode = httpResponse.statusCode;
-                                             if(statusCode == 200)
-                                             {
-                                                 
-                                                 array_CreateChallenges=[[NSMutableArray alloc]init];
-                                                 SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                                                 array_CreateChallenges=[objSBJsonParser objectWithData:data];
-                                                 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                 //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
-                                                 
-                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                 
-                                                 NSLog(@"array_CreateChallenges %@",array_CreateChallenges);
-                                                 
-                                                 
-                                                 NSLog(@"array_CreateChallenges ResultString %@",ResultString);
-                                                 if ([ResultString isEqualToString:@"nouserid"])
-                                                 {
-                                                     transperentViewIndicator11.hidden=YES;
-UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                 }
-                                                 if ([ResultString isEqualToString:@"nomedia"])
-                                                 {
-                                                      transperentViewIndicator11.hidden=YES;
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                 }
-                                                 
-                                    if ([ResultString isEqualToString:@"nullerror"])
-                                        {
-                                        transperentViewIndicator11.hidden=YES;
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                     
-                                                     
-                                                 }
-                                                 if ([ResultString isEqualToString:@"imageerror"])
-                                                 {
-                                                     transperentViewIndicator11.hidden=YES;
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                     
-                                                     
-                                                 }
-                                                 if ([ResultString isEqualToString:@"inserterror"])
-                                                 {
-                                                     transperentViewIndicator11.hidden=YES;
-                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
-                                                     
-                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                        style:UIAlertActionStyleDefault
-                                                                                                      handler:nil];
-                                                     [alertController addAction:actionOk];
-                                                     [self presentViewController:alertController animated:YES completion:nil];
-                                                     
-                                                     
-                                                     
-                                                     
-                                                 }
-                                                 
-                                                 if ([ResultString isEqualToString:@"done"])
-                                                 {
-                                                      transperentViewIndicator11.hidden=YES;
-//                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
-//                                                     
-//                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-//                                                                                                        style:UIAlertActionStyleDefault
-//                                                                                                      handler:nil];
-//                                                     [alertController addAction:actionOk];
-//                                                     [self presentViewController:alertController animated:YES completion:nil];
-                            [defaults setObject:@"no" forKey:@"falg"];
-                [defaults setObject:@"" forKey:@"usernames"];
-                [defaults setObject:@"" forKey:@"userids"];
-                [defaults synchronize];
-                                                     
-                             [self dismissViewControllerAnimated:YES completion:nil];
-                                                     
-                                                     
-                                                 }
-                                                 
-                                                 
-                                                 
-                                             }
-                                             
-                                             else
-                                             {
-                                                 NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                 transperentViewIndicator11.hidden=YES;
-                                             }
-                                             
-                                             
-                                         }
-                                         else if(error)
-                                         {
-                                           transperentViewIndicator11.hidden=YES;
-                                            
-                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
+                                             transperentViewIndicator11.hidden=YES;
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                              
                                              UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                style:UIAlertActionStyleDefault handler:nil];
+                                                                                                style:UIAlertActionStyleDefault
+                                                                                              handler:nil];
                                              [alertController addAction:actionOk];
                                              [self presentViewController:alertController animated:YES completion:nil];
                                              
-                                             transperentViewIndicator11.hidden=YES;
-                                             NSLog(@"error login2.......%@",error.description);
+                                             
                                          }
+                                         if ([ResultString isEqualToString:@"nomedia"])
+                                         {
+                                             transperentViewIndicator11.hidden=YES;
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please insert an image or video and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                style:UIAlertActionStyleDefault
+                                                                                              handler:nil];
+                                             [alertController addAction:actionOk];
+                                             [self presentViewController:alertController animated:YES completion:nil];
                                              
                                              
-                                         }];
-        [dataTaskupload resume];
+                                         }
+                                         
+                                         if ([ResultString isEqualToString:@"nullerror"])
+                                         {
+                                             transperentViewIndicator11.hidden=YES;
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Please enter all details and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                style:UIAlertActionStyleDefault
+                                                                                              handler:nil];
+                                             [alertController addAction:actionOk];
+                                             [self presentViewController:alertController animated:YES completion:nil];
+                                             
+                                             
+                                             
+                                             
+                                         }
+                                         if ([ResultString isEqualToString:@"imageerror"])
+                                         {
+                                             transperentViewIndicator11.hidden=YES;
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in uploading your media. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                style:UIAlertActionStyleDefault
+                                                                                              handler:nil];
+                                             [alertController addAction:actionOk];
+                                             [self presentViewController:alertController animated:YES completion:nil];
+                                             
+                                             
+                                             
+                                             
+                                         }
+                                         if ([ResultString isEqualToString:@"inserterror"])
+                                         {
+                                             transperentViewIndicator11.hidden=YES;
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"There was an error in creating your challenge. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                             
+                                             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                style:UIAlertActionStyleDefault
+                                                                                              handler:nil];
+                                             [alertController addAction:actionOk];
+                                             [self presentViewController:alertController animated:YES completion:nil];
+                                             
+                                             
+                                             
+                                             
+                                         }
+                                         
+                                         if ([ResultString isEqualToString:@"done"])
+                                         {
+                                             transperentViewIndicator11.hidden=YES;
+                                             //                                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challege Created!" message:@"Your challenge has been successfully created. You may see it in your profile." preferredStyle:UIAlertControllerStyleAlert];
+                                             //
+                                             //                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                             //                                                                                                        style:UIAlertActionStyleDefault
+                                             //                                                                                                      handler:nil];
+                                             //                                                     [alertController addAction:actionOk];
+                                             //                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                             [defaults setObject:@"no" forKey:@"falg"];
+                                             [defaults setObject:@"" forKey:@"usernames"];
+                                             [defaults setObject:@"" forKey:@"userids"];
+                                             [defaults synchronize];
+                                             
+                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                             
+                                             
+                                         }
+                                         
+                                         
+                                         
+                                     }
+                                     
+                                     else
+                                     {
+                                         NSLog(@" error login1 ---%ld",(long)statusCode);
+                                         transperentViewIndicator11.hidden=YES;
+                                     }
+                                     
+                                     
+                                 }
+                                 else if(error)
+                                 {
+                                     transperentViewIndicator11.hidden=YES;
+                                     
+                                     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"server connection timeout." preferredStyle:UIAlertControllerStyleAlert];
+                                     
+                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                        style:UIAlertActionStyleDefault handler:nil];
+                                     [alertController addAction:actionOk];
+                                     [self presentViewController:alertController animated:YES completion:nil];
+                                     
+                                     transperentViewIndicator11.hidden=YES;
+                                     NSLog(@"error login2.......%@",error.description);
+                                 }
+                                 
+                                 
+                             }];
+            [dataTaskupload resume];
+        }
+        
+        
     }
     
+}
+-(IBAction)ButtonCreateChallenges_Action:(id)sender
+{
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert];
     
-    }
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
+                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                   
+                               }];
+    
+    UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
+                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                   [self createChallengesComm];
+                               }];
+    
+    [alertController addAction:actionOk];
+    
+    [alertController addAction:actionOk1];
+    [self presentViewController:alertController animated:YES completion:nil];
+ 
+  
     
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField;

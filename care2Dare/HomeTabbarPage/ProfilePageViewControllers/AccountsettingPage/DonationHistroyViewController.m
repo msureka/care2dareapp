@@ -23,6 +23,7 @@
     NSDictionary *urlplist;
     NSUserDefaults * defaults;
     NSURLSessionDataTask *dataTaskPleg;
+    NSInteger TotalDonationCounts;
 }
 @end
 
@@ -39,6 +40,13 @@
     borderBottom.frame = CGRectMake(0, HeadTopView.frame.size.height - 1, HeadTopView.frame.size.width, 1);
     [HeadTopView.layer addSublayer:borderBottom];
     
+    
+    CALayer *borderBottom1 = [CALayer layer];
+    borderBottom1.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+    borderBottom1.frame = CGRectMake(0, 0, _label_TotalDonate.frame.size.width, 1);
+    [_label_TotalDonate.layer addSublayer:borderBottom1];
+  
+    TotalDonationCounts=0;
     
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -85,14 +93,17 @@
     
     [self ClienserverComm_Pledges];
     // [self ClienserverComm_Favourite];
-    
-    
+    Label_JsonResult.hidden=YES;
+    _label_TotalDonate.hidden=YES;
+    [_indicator startAnimating];
+    _indicator.hidden=NO;
+    Tableview_Favorites.hidden=YES;
 }
 - (void) viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     
-   
+
     
     view_ExpPledges .clipsToBounds=YES;
     View_ExpFavorite.clipsToBounds=YES;
@@ -201,7 +212,8 @@
                                    NSLog(@"Array_WorldExp ResultString %@",ResultString);
                                    if ([ResultString isEqualToString:@"nouserid"])
                                    {
-                                       
+                                       [_indicator stopAnimating];
+                                       _indicator.hidden=YES;
                                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                        
                                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -217,19 +229,33 @@
                                    if ([ResultString isEqualToString:@"done"])
                                    {
                                        
-                                       
+                                       [_indicator stopAnimating];
+                                       _indicator.hidden=YES;
                                        
                                        
                                    }
                                    if (Array_Plaeges.count !=0)
                                    {
+                                       TotalDonationCounts=0;
+                                       [_indicator stopAnimating];
+                                       _indicator.hidden=YES;
+                                      
+                                        Tableview_Favorites.hidden=NO;
                                        Label_JsonResult.hidden=YES;
                                        [Tableview_Favorites reloadData];
+                                       for (int i=0; i<Array_Plaeges.count; i++)
+                                       {
+                                           TotalDonationCounts+=[[[Array_Plaeges objectAtIndex:i]valueForKey:@"mypledge"]integerValue];
+                                           
+                                       }
+                                        _label_TotalDonate.hidden=NO;
+                                       _label_TotalDonate.text=[NSString stringWithFormat:@"%@%ld",@"Total Donated: $",(long)TotalDonationCounts];
                                    }
                                    else
                                    {
-                                       Label_JsonResult.text=@"All the challenges in which you have contributed will be shown here.";
+                                       
                                        Label_JsonResult.hidden=NO;
+                                        Tableview_Favorites.hidden=YES;
                                    }
                                    
                                    
@@ -238,14 +264,16 @@
                                else
                                {
                                    NSLog(@" error login1 ---%ld",(long)statusCode);
-                                   
+                                   [_indicator stopAnimating];
+                                   _indicator.hidden=YES;
                                }
                                
                                
                            }
                            else if(error)
                            {
-                               
+                               [_indicator stopAnimating];
+                               _indicator.hidden=YES;
                                NSLog(@"error login2.......%@",error.description);
                            }
                            

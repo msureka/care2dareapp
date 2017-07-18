@@ -27,7 +27,7 @@
 #import "DonationHistroyViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
-    NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images;
+    NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images,*Array_TitleNotif;
     UIView *sectionView;
     NSUserDefaults *defaults;
     
@@ -61,11 +61,11 @@
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
     
-  
+  Array_TitleNotif=[[NSArray alloc]initWithObjects:@"Messages",@"Alerts",@"Challenge notification", nil];
     Array_Title1=[[NSArray alloc]initWithObjects:@"Facebook Friends",@"Twitter Friends",@"Contacts", nil];
 Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_twitter.png",@"setting_contacts.png", nil];
  
-    Array_Title2=[[NSArray alloc]initWithObjects:@"Edit Profile",@"Change Password",@"Block Users",@"Donation History",@"Push Notification Settings",@"Only Friends can dare me",nil];
+    Array_Title2=[[NSArray alloc]initWithObjects:@"Edit Profile",@"Change Password",@"Block Users",@"Donation History",@"Only Friends can dare me",nil];
     
     
     
@@ -105,7 +105,13 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         {
             return Array_Title2.count;;
         }
-        if (section==2)
+    if (section==2)
+    {
+        
+        return Array_TitleNotif.count;
+    }
+
+        if (section==3)
         {
             
           return Array_Title3.count;;
@@ -195,10 +201,22 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 
             }
                 break;
+              case 2:
+            {
+                AccTwoTableViewCell *Twocell22 = (AccTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId2 forIndexPath:indexPath];
+                Twocell22.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
+                Twocell22.layer.borderWidth=1.0f;
                 
+                Twocell22.LabelVal.text=[Array_TitleNotif objectAtIndex:indexPath.row];
+               
+                    Twocell22.switchOutlet.hidden=NO;
                 
+               
+                return Twocell22;
                 
-                case 2:
+            }
+                break;
+                case 3:
                 
             {
                 
@@ -234,7 +252,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-        return 4;
+        return 5;
     
     
 }
@@ -304,6 +322,22 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
+        Label1.text=@"Push Notification";
+        [sectionView addSubview:Label1];
+        sectionView.tag=section;
+        
+        
+    }
+    if (section==3)
+    {
+        
+        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,44)];
+        [sectionView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        
+        UILabel * Label1=[[UILabel alloc]initWithFrame:CGRectMake(20,15, self.view.frame.size.width-40, sectionView.frame.size.height-5)];
+        Label1.backgroundColor=[UIColor clearColor];
+        Label1.textColor=[UIColor lightGrayColor];
+        Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:15.0f];
         Label1.text=@"Support";
         [sectionView addSubview:Label1];
         sectionView.tag=section;
@@ -311,7 +345,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         
     }
     
-    if (section==3)
+    if (section==4)
     {
         NSString * appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         NSString * appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
@@ -556,7 +590,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
         
         
     }
-    if (indexPath.section == 2)
+    if (indexPath.section == 3)
     {
         if (indexPath.row==0)
         {

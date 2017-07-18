@@ -370,11 +370,11 @@
         NSLog(@"Dynamic label height====%f",height);
         if(height <=30)
         {
-            return 225+size.height+10;
+            return 225+size.height+12;
         }
         else
         {
-            return 225+size.height+40;
+            return 225+size.height+42;
         }
         
     }
