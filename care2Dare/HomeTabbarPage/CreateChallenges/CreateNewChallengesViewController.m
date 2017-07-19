@@ -404,6 +404,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 - (void)LabelTap_DonateTapped:(UITapGestureRecognizer *)recognizer
 {
     challengetypeValDonate=@"DONATE";
+    
+    
     [Image_Raised setImage:[UIImage imageNamed:@"raisegrey.png"]];
     [Image_Donate setImage:[UIImage imageNamed:@"donateblue.png"]];
     Label_Donate.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
@@ -1146,8 +1148,43 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 -(IBAction)ButtonCreateChallenges_Action:(id)sender
 {
+    //challengetypeValDonate=@"DONATE";
+    
+   // challengetypeValDonate=@"RAISE";
+    if([challengetypeValDonate isEqualToString:@"RAISE"])
+    {
+     
+       [self ButtonCreateChallengesActions];
+      
+    }
+    else
+    {
+        if (Array_Names.count ==0)
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"If you choose to \"Donate\", you need to challenge and add atleast one other friend in order to create this challenge." preferredStyle:UIAlertControllerStyleAlert ];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Add friends"
+                    style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                {
+                        InviteSprintTagUserViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"InviteSprintTagUserViewController"];
+                        [self.navigationController pushViewController:set animated:YES];
+                            }];
+            
 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        else
+        {
+          [self ButtonCreateChallengesActions];
+        }
+    }
+    
+}
+-(void)ButtonCreateChallengesActions
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert ];
     
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
@@ -1156,19 +1193,17 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                }];
     
     UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
-                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                               {
-                                   [self createChallengesComm];
-                               }];
+                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                {
+                                    [self createChallengesComm];
+                                }];
     
     [alertController addAction:actionOk];
     
     [alertController addAction:actionOk1];
     [self presentViewController:alertController animated:YES completion:nil];
- 
-  
-    
 }
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 {
     [self.startScreenScrollView setContentOffset:CGPointMake(0,(textField.frame.origin.y-250)-(textField.frame.size.height)) animated:YES];

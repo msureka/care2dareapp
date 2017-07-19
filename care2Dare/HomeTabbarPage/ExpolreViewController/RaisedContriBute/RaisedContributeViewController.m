@@ -31,7 +31,7 @@
 
 
 @implementation RaisedContributeViewController
-@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader,Str_Raised_StartDateTime,Label_Resultserver,indicatorView;
+@synthesize view_Topheader,Label_RaisedAmt,cell_one,cell_two,cell_Four,cell_three,Tableview_Raised,Str_Channel_Id,Str_Raised_Amount,Label_PayTopheader,Image_PayTopheader,Str_Raised_StartDateTime,Label_Resultserver,indicatorView,Str_DonateRaisedType,Str_ChallengecompleteType;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -116,6 +116,8 @@
     UITapGestureRecognizer * Label_Pay_Tapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Image_Pay_Action:)];
     [Label_PayTopheader addGestureRecognizer:Label_Pay_Tapped];
     
+    
+    
     Image_PayTopheader.hidden=YES;
     Label_PayTopheader.hidden=YES;
     
@@ -128,7 +130,7 @@
     {
         ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
         set.total_players=[NSString stringWithFormat:@"%lu",(unsigned long)Array_Challengers.count ];
-        
+        set.Str_DonateRaisedTypePlayer=Str_DonateRaisedType;
         set.challengerID=Str_Channel_Id;
         [self.navigationController pushViewController:set animated:YES];
     }
@@ -227,8 +229,18 @@
             }
             if (Array_Challengers.count !=0)
             {
-                Image_PayTopheader.hidden=NO;
-                Label_PayTopheader.hidden=NO;
+                
+                if ([Str_ChallengecompleteType isEqualToString:@"COMPLETE"])
+                {
+                    Image_PayTopheader.hidden=YES;
+                    Label_PayTopheader.hidden=YES;
+                }
+                else
+                {
+                    Image_PayTopheader.hidden=NO;
+                    Label_PayTopheader.hidden=NO;
+                }
+
             }
             else
             {

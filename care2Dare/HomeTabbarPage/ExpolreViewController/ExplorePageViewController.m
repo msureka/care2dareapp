@@ -897,6 +897,10 @@
                         self.pieView.hidden=NO;
                         self.pieView1.hidden=NO;
                         self.pieView2.hidden=NO;
+                        
+                       
+                        
+                        
                     }
                     if (modvalues==1)
                     {

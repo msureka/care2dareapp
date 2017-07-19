@@ -57,4 +57,6 @@
 @property(strong,nonatomic)NSString * Str_Channel_Id;
 @property(strong,nonatomic)NSString * Str_Raised_Amount;
 @property(strong,nonatomic)NSString * Str_Raised_StartDateTime;
+@property(strong,nonatomic)NSString * Str_DonateRaisedType;
+@property(strong,nonatomic)NSString * Str_ChallengecompleteType;
 @end

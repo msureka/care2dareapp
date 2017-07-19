@@ -13,4 +13,10 @@
 @property(strong,nonatomic)IBOutlet UIImageView * image2;
 @property(strong,nonatomic)IBOutlet UIImageView * image3;
 @property(strong,nonatomic)IBOutlet UIImageView * image4;
+
+@property(strong,nonatomic)IBOutlet UIImageView * image1play;
+@property(strong,nonatomic)IBOutlet UIImageView * image2play;
+@property(strong,nonatomic)IBOutlet UIImageView * image3play;
+@property(strong,nonatomic)IBOutlet UIImageView * image4play;
+
 @end

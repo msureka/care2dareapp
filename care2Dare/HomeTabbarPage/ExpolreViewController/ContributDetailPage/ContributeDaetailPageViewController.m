@@ -1844,7 +1844,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
     
     set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"createdate"]];
     
+    set.Str_ChallengecompleteType=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challenge_status"]];
     
+    set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"]];
     [self.navigationController pushViewController:set animated:YES];
 }
 
@@ -3200,7 +3202,8 @@ if (section==1)
     
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
     {
-        if ([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]])
+        
+        if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
         {
             [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
             //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
@@ -3210,22 +3213,55 @@ if (section==1)
         }
         else
         {
-        [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
-        Button_Contribute.backgroundColor=[UIColor clearColor];
-        
-        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
-                    forControlEvents:UIControlEventTouchUpInside];
+            
+            [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
+            Button_Contribute.backgroundColor=[UIColor clearColor];
+            
+            [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
+                        forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
         }
+        
+//        if ([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]])
+//        {
+//            [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
+//            //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
+//            
+//            [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
+//                        forControlEvents:UIControlEventTouchUpInside];
+//        }
+//        else
+//        {
+//        [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
+//        Button_Contribute.backgroundColor=[UIColor clearColor];
+//        
+//        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
+//                    forControlEvents:UIControlEventTouchUpInside];
+//        }
     }
     else
     {
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
     {
+        if ([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]])
+        {
+            
+            [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
+            Button_Contribute.backgroundColor=[UIColor clearColor];
+            
+            [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
+                        forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
 //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
         
         [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
                     forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     else
     {
@@ -3279,10 +3315,18 @@ if (section==1)
     
     sectionView.tag=section;
 
+    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"challenge_status"] isEqualToString:@"COMPLETE"] )
+    
+    {
+          Button_Contribute.enabled=NO;
+        Button_Contribute.alpha=0.8f;
+        Button_FavouriteTap.hidden=YES;
+        Image_Share.hidden=YES;
+       [Button_Contribute setTitle:@"CHALLENGE OVER" forState:UIControlStateNormal];
+    }
     
     
-        
-        
+    
     }
     if (section==2)
     {
@@ -3384,7 +3428,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
 ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
     set.total_players=[[AllArrayData objectAtIndex:0]valueForKey:@"noofchallengers"];
-    
+    set.Str_DonateRaisedTypePlayer=[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"]];
     set.challengerID=[[AllArrayData objectAtIndex:0]valueForKey:@"challengeid"];
     [self.navigationController pushViewController:set animated:YES];
 }

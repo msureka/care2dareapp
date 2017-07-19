@@ -19,7 +19,7 @@
 @end
 
 @implementation ContributeMoneyViewController
-@synthesize view_Topheader,Label_ContributePlayes,BottomView,Button_back,Button_Help,Button_Contribute_Send,textfield_Ammounts,total_players,Label_TotalContribute,challengerID;
+@synthesize view_Topheader,Label_ContributePlayes,BottomView,Button_back,Button_Help,Button_Contribute_Send,textfield_Ammounts,total_players,Label_TotalContribute,challengerID,Str_DonateRaisedTypePlayer;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -39,6 +39,19 @@
     
     [Button_Contribute_Send setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     Button_Contribute_Send.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+    if ([Str_DonateRaisedTypePlayer isEqualToString:@"RAISE"])
+    {
+        if ([total_players integerValue]==1)
+        {
+            Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",[total_players integerValue],@" player"];
+        }
+        else
+        {
+            Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",[total_players integerValue],@" players"];
+        }
+    }
+    else
+    {
     if (([total_players integerValue])>=2)
     {
         if (([total_players integerValue]-1)==1)
@@ -55,7 +68,7 @@
       
         Label_ContributePlayes.text=[NSString stringWithFormat:@"%@%ld%@",@"x",(long)[total_players integerValue],@" player"];
     }
-    
+    }
     [textfield_Ammounts becomeFirstResponder];
 }
 
@@ -141,6 +154,12 @@
        
         NSString *challengerPlayers= @"noofchallengers";
         NSString * challengerplayerVal;
+        if ([Str_DonateRaisedTypePlayer isEqualToString:@"RAISE"])
+        {
+             challengerplayerVal=[NSString stringWithFormat:@"%ld",(long)[total_players integerValue]];
+        }
+        else
+        {
         if (([total_players integerValue])>=2)
         {
             challengerplayerVal=[NSString stringWithFormat:@"%ld",[total_players integerValue]-1];
@@ -149,7 +168,7 @@
         {
          challengerplayerVal=[NSString stringWithFormat:@"%ld",(long)[total_players integerValue]];
         }
-        
+        }
         
        
         NSString *chllengerAmount= @"payperchallenger";
@@ -287,7 +306,12 @@ NSLog(@"error login2.......%@",error.description);
 }
 -(IBAction)textfield_Ammounts_Actions:(id)sender
 {
-    
+    if ([Str_DonateRaisedTypePlayer isEqualToString:@"RAISE"])
+    {
+        chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]);
+    }
+    else
+    {
     if (([total_players integerValue])>=2)
     {
      chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]-1);
@@ -295,6 +319,7 @@ NSLog(@"error login2.......%@",error.description);
     else
     {
       chllengerAmt=[textfield_Ammounts.text integerValue]*([total_players integerValue]);
+    }
     }
     if (textfield_Ammounts.text.length==0 || chllengerAmt==0)
     {

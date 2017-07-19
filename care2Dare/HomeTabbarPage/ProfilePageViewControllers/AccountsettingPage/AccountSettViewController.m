@@ -920,6 +920,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                   nameFb=[Array_sinupFb valueForKey:@"name"];
                   emailFb=[Array_sinupFb valueForKey:@"email"];
                   Fbid= [session userID];
+                  [defaults setObject:Fbid forKey:@"twitterid"];
                   [defaults setObject:Fbid forKey:@"twitterids"];
                   [defaults synchronize];
                   regTypeVal =@"TWITTER";

@@ -1904,6 +1904,7 @@ if (indexPath.section==0)
     if([CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
         
+       
         NSDictionary *  didselectDic;
         RaisedContributeViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"RaisedContributeViewController"];
         
@@ -1920,6 +1921,12 @@ if (indexPath.section==0)
         set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"backamount"]];
         
         set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
+            
+            
+            set.Str_ChallengecompleteType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challenge_status"]];
+            
+            set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"contributiontype"]];
+            
         }
         if (indexPath.section==1)
         {
@@ -1930,6 +1937,10 @@ if (indexPath.section==0)
             set.Str_Raised_Amount=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"backamount"]];
             
             set.Str_Raised_StartDateTime=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"createdate"]];
+            
+            set.Str_ChallengecompleteType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challenge_status"]];
+            
+            set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"contributiontype"]];
         }
         
         [self.navigationController pushViewController:set animated:YES];

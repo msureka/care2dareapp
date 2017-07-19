@@ -1748,7 +1748,7 @@
         <scene sceneID="8AP-Qd-tIh">
             <objects>
                 <navigationController storyboardIdentifier="CreateChallengesViewController" navigationBarHidden="YES" id="WK1-TI-xZZ" customClass="CreateChallengesViewController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PcT-ob-gX6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PcT-ob-gX6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2253,7 +2253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D8B-Mw-lzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1647" y="-2205"/>
+            <point key="canvasLocation" x="1886" y="-2207"/>
         </scene>
         <!--IN-PLAY-->
         <scene sceneID="UMA-hF-8zp">
@@ -2535,6 +2535,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.72941176470000002" green="0.73725490199999999" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="uHM-A4-acZ">
+                                                    <rect key="frame" x="35" y="35" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKI-cX-Y49">
                                                     <rect key="frame" x="94" y="0.0" width="94" height="94"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2545,18 +2550,37 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.26274509800000001" green="0.73725490199999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ts0-0f-C6U">
+                                                    <rect key="frame" x="317" y="35" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ym-8K-Qlm">
                                                     <rect key="frame" x="188" y="0.0" width="94" height="94"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="0.56470588239999997" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="zYY-ij-fjh">
+                                                    <rect key="frame" x="223" y="35" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="kLd-vu-NTg">
+                                                    <rect key="frame" x="129" y="35" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="image1" destination="WI7-UM-LzQ" id="W58-rh-OHd"/>
+                                            <outlet property="image1play" destination="uHM-A4-acZ" id="kT4-8b-BUI"/>
                                             <outlet property="image2" destination="HKI-cX-Y49" id="urR-JB-2Mv"/>
+                                            <outlet property="image2play" destination="kLd-vu-NTg" id="IMa-AU-aa4"/>
                                             <outlet property="image3" destination="9Ym-8K-Qlm" id="0t2-qn-7ez"/>
+                                            <outlet property="image3play" destination="zYY-ij-fjh" id="eMn-qk-Ruz"/>
                                             <outlet property="image4" destination="53z-bI-qoq" id="uwF-W4-YsP"/>
+                                            <outlet property="image4play" destination="Ts0-0f-C6U" id="AOP-WB-rmw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3599,7 +3623,7 @@
         <scene sceneID="SNv-3Q-sid">
             <objects>
                 <navigationController storyboardIdentifier="TabNavigationViewController" navigationBarHidden="YES" id="vDh-Yl-EQe" customClass="TabNavigationViewController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m56-Nk-by1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="m56-Nk-by1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

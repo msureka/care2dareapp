@@ -37,6 +37,7 @@
 @property (nonatomic,strong)MDPieView *pieView;
 @property (nonatomic,strong)MDPieView1 *pieView1;
 @property (nonatomic,strong)MDPieView2 *pieView2;
+
 //-(IBAction)SignUpView:(id)sender;
 //
 //-(IBAction)ForgetPasswordAction:(id)sender;

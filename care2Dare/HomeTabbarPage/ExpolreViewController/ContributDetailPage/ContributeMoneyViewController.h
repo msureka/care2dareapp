@@ -22,7 +22,7 @@
 -(IBAction)Button_Help_Action:(id)sender;
 -(IBAction)Button_Contribute_Send_Action:(id)sender;
 -(IBAction)textfield_Ammounts_Actions:(id)sender;
-@property(nonatomic,strong)NSString *total_players,*challengerID;
+@property(nonatomic,strong)NSString *total_players,*challengerID,*Str_DonateRaisedTypePlayer;
 @property(nonatomic,weak)IBOutlet UIView * BottomView;
 @property(nonatomic,weak)IBOutlet UIView * view_Topheader;
 

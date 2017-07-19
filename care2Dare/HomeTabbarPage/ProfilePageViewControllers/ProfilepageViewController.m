@@ -27,11 +27,11 @@
     
     UIImageView *Image_ButtinPublic,*Image_ButtonPrivate;
     NSUserDefaults * defaults;
-    NSMutableArray * Array_AllData,* Array_Public,*Array_Private,*Array_Profile;
+    NSMutableArray * Array_AllData,* Array_Public,*Array_Private,*Array_Profile,* Array_ShowCompleted;
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
-    NSString * ImageNSdata,*encodedImage;
-    
+    NSString * ImageNSdata,*encodedImage,* totalRaisedCount;
+    NSInteger Array_WorldCount,modvalues;
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @end
@@ -48,7 +48,7 @@
     
     SelectGallery=@"no";
     
-   
+   totalRaisedCount=@"0";
     
     
   //  str_newfriendCount=[defaults valueForKey:@"friendreqs"];
@@ -95,6 +95,8 @@
     [_Tableview_Profile addSubview:self.refreshControl];
     
 [self ClientserverCommprofile];
+    [self Communication_totalraisedcount];
+     [self Communication_showcompletedRaised];
     
 }
 
@@ -158,7 +160,7 @@
     {
         
         
-        return 0;
+        return Array_WorldCount;
         
     }
         
@@ -289,7 +291,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
             
             cell_donate.Button_donate.clipsToBounds=YES;
             cell_donate.Button_donate.layer.cornerRadius=cell_donate.Button_donate.frame.size.height/2;
-            
+            cell_donate.label_raisedAmt.text=[NSString stringWithFormat:@"%@%@",@"You have raised: $",totalRaisedCount];
             
             
             return cell_donate;
@@ -306,6 +308,16 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
             cell_complete.labelcount_challenges.clipsToBounds=YES;
             cell_complete.labelcount_challenges.layer.cornerRadius=cell_complete.labelcount_challenges.frame.size.height/2;
             
+            
+            NSString *text =[NSString stringWithFormat:@"%lu",(unsigned long)Array_ShowCompleted.count];//
+            
+            CGSize constraint = CGSizeMake(296,9999);
+            CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:16]
+                           constrainedToSize:constraint
+                               lineBreakMode:UILineBreakModeWordWrap];
+            [cell_complete.labelcount_challenges setFrame:CGRectMake(cell_complete.labelcount_challenges.frame.origin.x, cell_complete.labelcount_challenges.frame.origin.y, size.width+35, cell_complete.labelcount_challenges.frame.size.height)];
+            
+            cell_complete.labelcount_challenges.text=text;//[NSString stringWithFormat:@"%d",999999];
             return cell_complete;
             
             
@@ -317,13 +329,13 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
             cell_Profileimages = (ProfileCompletechallengesimageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellId4 forIndexPath:indexPath];
             
             
-            [cell_Profileimages.image1 setFrame:CGRectMake(0,0,self.view.frame.size.width/4, self.view.frame.size.width/4)];
+            [cell_Profileimages.image1 setFrame:CGRectMake(0,1,(self.view.frame.size.width/4)-1, (self.view.frame.size.width/4)-1)];
             
-            [cell_Profileimages.image2 setFrame:CGRectMake(cell_Profileimages.image1.frame.size.width,0,self.view.frame.size.width/4, self.view.frame.size.width/4)];
+            [cell_Profileimages.image2 setFrame:CGRectMake(cell_Profileimages.image1.frame.size.width+1,1,(self.view.frame.size.width/4)-1, (self.view.frame.size.width/4)-1)];
             
-            [cell_Profileimages.image3 setFrame:CGRectMake(cell_Profileimages.image2.frame.origin.x+cell_Profileimages.image2.frame.size.width,0,self.view.frame.size.width/4, self.view.frame.size.width/4)];
+            [cell_Profileimages.image3 setFrame:CGRectMake(cell_Profileimages.image2.frame.origin.x+cell_Profileimages.image2.frame.size.width+1,1,(self.view.frame.size.width/4)-1, (self.view.frame.size.width/4)-1)];
             
-            [cell_Profileimages.image4 setFrame:CGRectMake(cell_Profileimages.image3.frame.origin.x+cell_Profileimages.image3.frame.size.width,0,self.view.frame.size.width/4, self.view.frame.size.width/4)];
+            [cell_Profileimages.image4 setFrame:CGRectMake(cell_Profileimages.image3.frame.origin.x+cell_Profileimages.image3.frame.size.width+1,1,(self.view.frame.size.width/4)-1, (self.view.frame.size.width/4)-1)];
             
             NSLog(@"Image111===%f",cell_Profileimages.image1.frame.size.width);
              NSLog(@"Image111===%f",cell_Profileimages.image1.frame.size.height);
@@ -347,6 +359,252 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
             NSLog(@"image444===%f",cell_Profileimages.image4.frame.origin.x);
             NSLog(@"image444===%f",cell_Profileimages.image4.frame.origin.y);
             
+            
+            
+            
+            
+            
+              NSDictionary *dic_worldexp,*dic_worldexp2,*dic_worldexp1,*dic_worldexp3;
+            NSURL *url,*url1,*url2,*url3;
+            if (indexPath.row ==Array_WorldCount-1)
+            {
+                
+                
+                if (modvalues==0)
+                {
+                    dic_worldexp=[Array_ShowCompleted objectAtIndex:(indexPath.row)*4];
+                    dic_worldexp1=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+1];
+                    dic_worldexp2=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+2];
+                    dic_worldexp3=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+3];
+                    
+                    cell_Profileimages.image1.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2.tag=((indexPath.row)*4)+1;
+                    cell_Profileimages.image3.tag=((indexPath.row)*4)+2;
+                    cell_Profileimages.image4.tag=((indexPath.row)*4)+3;
+                    
+                    
+                    cell_Profileimages.image1play.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2play.tag=((indexPath.row)*4)+1;
+                    cell_Profileimages.image3play.tag=((indexPath.row)*4)+2;
+                    cell_Profileimages.image4play.tag=((indexPath.row)*4)+3;
+                    
+                    cell_Profileimages.image1.hidden=NO;
+                    cell_Profileimages.image2.hidden=NO;
+                    cell_Profileimages.image3.hidden=NO;
+                    cell_Profileimages.image4.hidden=NO;
+                    
+                  
+                }
+                if (modvalues==1)
+                {
+                    dic_worldexp=[Array_ShowCompleted objectAtIndex:(indexPath.row)*3];
+                    
+                    cell_Profileimages.image1.tag=((indexPath.row)*4);
+                    cell_Profileimages.image1play.tag=((indexPath.row)*4);
+                    
+                
+                    cell_Profileimages.image1.hidden=NO;
+                    cell_Profileimages.image2.hidden=YES;
+                    cell_Profileimages.image3.hidden=YES;
+                    cell_Profileimages.image4.hidden=YES;
+                    
+                    
+                }
+                if (modvalues==2)
+                {
+                    
+                    dic_worldexp=[Array_ShowCompleted objectAtIndex:(indexPath.row)*4];
+                    dic_worldexp1=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+1];
+                    
+                    cell_Profileimages.image1.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2.tag=((indexPath.row)*4)+1;
+                    cell_Profileimages.image1play.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2play.tag=((indexPath.row)*4)+1;
+                    
+                    
+                    
+                    cell_Profileimages.image1.hidden=NO;
+                    cell_Profileimages.image2.hidden=NO;
+                    cell_Profileimages.image3.hidden=YES;
+                    cell_Profileimages.image4.hidden=YES;
+                   
+                    
+                }
+                
+                if (modvalues==3)
+                {
+                    
+                    dic_worldexp=[Array_ShowCompleted objectAtIndex:(indexPath.row)*4];
+                    dic_worldexp1=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+1];
+                    dic_worldexp2=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+2];
+                   
+                    
+                    cell_Profileimages.image1.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2.tag=((indexPath.row)*4)+1;
+                    cell_Profileimages.image3.tag=((indexPath.row)*4)+2;
+                    
+                    cell_Profileimages.image1play.tag=((indexPath.row)*4);
+                    cell_Profileimages.image2play.tag=((indexPath.row)*4)+1;
+                    cell_Profileimages.image3play.tag=((indexPath.row)*4)+2;
+                    
+                    
+                    
+                    cell_Profileimages.image1.hidden=NO;
+                    cell_Profileimages.image2.hidden=NO;
+                    cell_Profileimages.image3.hidden=NO;
+                    cell_Profileimages.image4.hidden=YES;
+                    
+                    
+                }
+            }
+            else
+            {
+                
+                
+                
+                
+                
+                dic_worldexp=[Array_ShowCompleted objectAtIndex:(indexPath.row)*4];
+                dic_worldexp1=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+1];
+                dic_worldexp2=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+2];
+                dic_worldexp3=[Array_ShowCompleted objectAtIndex:((indexPath.row)*4)+3];
+                
+                cell_Profileimages.image1.tag=((indexPath.row)*4);
+                cell_Profileimages.image2.tag=((indexPath.row)*4)+1;
+                cell_Profileimages.image3.tag=((indexPath.row)*4)+2;
+                cell_Profileimages.image4.tag=((indexPath.row)*4)+3;
+                
+                cell_Profileimages.image1play.tag=((indexPath.row)*4);
+                cell_Profileimages.image2play.tag=((indexPath.row)*4)+1;
+                cell_Profileimages.image3play.tag=((indexPath.row)*4)+2;
+                cell_Profileimages.image4play.tag=((indexPath.row)*4)+3;
+                
+                cell_Profileimages.image1.hidden=NO;
+                cell_Profileimages.image2.hidden=NO;
+                cell_Profileimages.image3.hidden=NO;
+                cell_Profileimages.image4.hidden=NO;
+               }
+            
+//             url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+//             url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+//             url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+//             url3=[NSURL URLWithString:[dic_worldexp3 valueForKey:@"mediaurl"]];
+            
+            
+            if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+            {
+                
+                 cell_Profileimages.image1play.hidden=YES;
+                
+                url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                
+            }
+            else
+            {
+                
+                cell_Profileimages.image1play.hidden=NO;
+                
+                url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+                
+            }
+            
+            if ([[dic_worldexp1 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+            {
+                
+               cell_Profileimages.image2play.hidden=YES;
+                
+                url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+                
+            }
+            else
+            {
+                
+                cell_Profileimages.image2play.hidden=NO;
+                
+                url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
+                
+            }
+            if ([[dic_worldexp2 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+            {
+                
+               cell_Profileimages.image3play.hidden=YES;
+                
+                url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+                
+            }
+            else
+            {
+                
+                cell_Profileimages.image3play.hidden=NO;
+                
+                url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
+                
+            }
+            if ([[dic_worldexp3 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
+            {
+                
+                cell_Profileimages.image4play.hidden=YES;
+                
+                url3=[NSURL URLWithString:[dic_worldexp3 valueForKey:@"mediaurl"]];
+                
+            }
+            else
+            {
+                
+                cell_Profileimages.image4play.hidden=NO;
+                
+                url3=[NSURL URLWithString:[dic_worldexp3 valueForKey:@"mediathumbnailurl"]];
+                
+            }
+        
+            [cell_Profileimages.image1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            
+            [cell_Profileimages.image2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            
+            [cell_Profileimages.image3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            
+            [cell_Profileimages.image4 sd_setImageWithURL:url3 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            
+            
+            
+            cell_Profileimages.image1.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped1=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image1 addGestureRecognizer:ImageThumbnail_Tapped1];
+            
+            
+            cell_Profileimages.image2.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped2 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image2 addGestureRecognizer:ImageThumbnail_Tapped2];
+            
+           cell_Profileimages.image3.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped3 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image3 addGestureRecognizer:ImageThumbnail_Tapped3];
+            
+            cell_Profileimages.image4.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped4 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image4 addGestureRecognizer:ImageThumbnail_Tapped4];
+
+            
+            
+            cell_Profileimages.image1play.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped11=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image1play addGestureRecognizer:ImageThumbnail_Tapped11];
+            
+            
+            cell_Profileimages.image2play.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped22 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image2play addGestureRecognizer:ImageThumbnail_Tapped22];
+            
+            cell_Profileimages.image3play.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped33 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image3play addGestureRecognizer:ImageThumbnail_Tapped33];
+            
+            cell_Profileimages.image4play.userInteractionEnabled=YES;
+            UITapGestureRecognizer * ImageThumbnail_Tapped44 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageThumbnailVideo_Tapped1:)];
+            [cell_Profileimages.image4play addGestureRecognizer:ImageThumbnail_Tapped44];
+            
+            
+            
             return cell_Profileimages;
             
             
@@ -355,7 +613,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
         
     }
    // return nil;
-  abort();  
+  abort();
 }
 
 
@@ -420,7 +678,244 @@ AccountSettViewController * set=[self.storyboard instantiateViewControllerWithId
  //  [self performSegueWithIdentifier:@"sa" sender:self];
 }
 
-
+-(void)Communication_totalraisedcount
+{
+   
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid";
+        NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid1,useridval1];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"totalraisedcount"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+//                                                     Array_Profile=[[NSMutableArray alloc]init];
+//                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+//                                                     Array_Profile=[objSBJsonParser objectWithData:data];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+//                                                     NSLog(@"Array_AllData %@",Array_Public);
+//                                                     
+                                                     NSLog(@"Array_AllData ResultString %@",ResultString);
+                            if ([ResultString isEqualToString:@"nouserid"])
+                            {
+                                                         
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                            style:UIAlertActionStyleDefault handler:nil];
+                            [alertController addAction:actionOk];
+                                [self presentViewController:alertController animated:YES completion:nil];
+                                                     }
+                                                     
+                                                     totalRaisedCount=ResultString;
+                                                     [_Tableview_Profile reloadData];
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+-(void)Communication_showcompletedRaised
+{
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid";
+        NSString *useridval1= [defaults valueForKey:@"userid"];
+        
+        
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid1,useridval1];
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"showcompleted"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                    Array_ShowCompleted=[[NSMutableArray alloc]init];
+                                                     
+                            SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                            Array_ShowCompleted=[objSBJsonParser objectWithData:data];
+                                                     
+                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                        NSLog(@"Array_AllData %@",Array_ShowCompleted);
+                        NSLog(@"Array_AllData ResultString %@",ResultString);
+                                                     
+                                                     if (Array_ShowCompleted.count!=0)
+                                                     {
+                                                         float arraycount=Array_ShowCompleted.count;
+                                                         float newarraycount=arraycount/3.0;
+                                                         
+                                                         NSLog(@"Modddvalues==%f",ceil(newarraycount));
+                                                         
+                                                         Array_WorldCount= ceil(newarraycount);
+                                                         
+                                                         modvalues=(Array_ShowCompleted.count%3);
+                                                         NSLog(@"Modddvalues==%d",modvalues);
+                                                        [_Tableview_Profile reloadData];
+                                                     }
+                                if ([ResultString isEqualToString:@"nochallenges"])
+                                    {
+                                                         
+                        
+                                    }
+                        if ([ResultString isEqualToString:@"nouserid"])
+                                    {
+                                                         
+                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                            style:UIAlertActionStyleDefault handler:nil];
+                                                         [alertController addAction:actionOk];
+                                                         [self presentViewController:alertController animated:YES completion:nil];
+                                                     }
+                                                     
+                                                    
+                                                    
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                     
+                                                 }
+                                             }
+                                             else if(error)
+                                             {
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                             
+                                         }];
+        [dataTask resume];
+    }
+    
+}
 -(void)ClientserverCommprofile
 {
     [self.view endEditing:YES];
@@ -745,4 +1240,42 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     
 }
+- (void)ImageThumbnailVideo_Tapped1:(UITapGestureRecognizer *)sender12
+{
+    UIGestureRecognizer *rec = (UIGestureRecognizer*)sender12;
+    UIImageView *imageView = (UIImageView *)rec.view;
+    
+    NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
+    ContributeDaetailPageViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeDaetailPageViewController"];
+    
+    AcceptContributeDetailViewController * set2=[self.storyboard instantiateViewControllerWithIdentifier:@"AcceptContributeDetailViewController"];
+    
+    NSDictionary *  didselectDic;
+    NSMutableArray * Array_new=[[NSMutableArray alloc]init];
+    didselectDic=[Array_ShowCompleted  objectAtIndex:(long)imageView.tag];
+    [Array_new addObject:didselectDic];
+    
+    
+    if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"]|| [[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@""] )
+    {
+        
+        set.AllArrayData =Array_new;
+        [self.navigationController pushViewController:set animated:YES];
+        
+    }
+    else
+    {
+        
+        set2.AllArrayData =Array_new;
+        [self.navigationController pushViewController:set2 animated:YES];
+    }
+    
+    
+    
+    NSLog(@"Array_new11=%@",Array_new);;
+    
+    
+    
+}
+
 @end
