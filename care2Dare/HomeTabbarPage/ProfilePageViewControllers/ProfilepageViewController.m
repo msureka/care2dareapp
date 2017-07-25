@@ -496,7 +496,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
                  cell_Profileimages.image1play.hidden=YES;
                 
-                url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                 
             }
             else
@@ -513,7 +513,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
                cell_Profileimages.image2play.hidden=YES;
                 
-                url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+                url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
                 
             }
             else
@@ -529,7 +529,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
                cell_Profileimages.image3play.hidden=YES;
                 
-                url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+                url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
                 
             }
             else
@@ -545,7 +545,7 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
                 cell_Profileimages.image4play.hidden=YES;
                 
-                url3=[NSURL URLWithString:[dic_worldexp3 valueForKey:@"mediaurl"]];
+                url3=[NSURL URLWithString:[dic_worldexp3 valueForKey:@"mediathumbnailurl"]];
                 
             }
             else

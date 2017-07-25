@@ -30,7 +30,7 @@
 @end
 
 @implementation InplayViewController
-@synthesize Button_Public,Button_Private,Image_ButtinPublic,Image_ButtonPrivate,Tableview_inplay,cell_Public,cell_Private,label_public,label_private,view_CreateChallenges;
+@synthesize Button_Public,Button_Private,Image_ButtinPublic,Image_ButtonPrivate,Tableview_inplay,cell_Public,cell_Private,label_public,label_private,view_CreateChallenges,indicator;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,7 +38,8 @@
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    
+    indicator.hidden=NO;
+    [indicator startAnimating];
     view_CreateChallenges.hidden=YES;
 
 //    UITapGestureRecognizer *ViewTap111 =[[UITapGestureRecognizer alloc] initWithTarget:self
@@ -231,7 +232,7 @@
 
 -(void)ClienserverCommAll
 {
-    [self.view endEditing:YES];
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -293,9 +294,12 @@
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     Array_AllData=[[NSMutableArray alloc]init];
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                                                     Array_AllData=[objSBJsonParser objectWithData:data];
+                Array_AllData=[[NSMutableArray alloc]init];
+                Array_Public=[[NSMutableArray alloc]init];
+                Array_Private=[[NSMutableArray alloc]init];
+                                                     
+        SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+        Array_AllData=[objSBJsonParser objectWithData:data];
                                                      
                                                      NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      
@@ -311,17 +315,18 @@
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
                                                      
                                                      
-                                                     if (Array_AllData.count !=0)
-                                                     {
+                        if (Array_AllData.count !=0)
+                            {
                                                          
                                                          view_CreateChallenges.hidden=YES;
-                                                         Array_Public=[[NSMutableArray alloc]init];
-                                                         Array_Private=[[NSMutableArray alloc]init];
+                                                         indicator.hidden=YES;
+                                                         [indicator stopAnimating];
+                       
                                                          
-                                                         for (int i=0; i<Array_AllData.count; i++)
+                            for (int i=0; i<Array_AllData.count; i++)
                                                              
-                                                         {
-                                                             if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
+                                {
+                    if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
                                                              {
                                                                  [Array_Public addObject:[Array_AllData objectAtIndex:i]];
                                                                  
@@ -336,18 +341,21 @@
                                                              [self ViewTapTapped_Private:nil];
                                                              
                                                          }
-                                                         [Tableview_inplay reloadData];
-                                                         
+               
                                                      }
-                                                     
+                                                    [Tableview_inplay reloadData];
                                                      if ([ResultString isEqualToString:@"nochallenges"])
                                                      {
                                                             view_CreateChallenges.hidden=NO;
+                                                         indicator.hidden=YES;
+                                                         [indicator stopAnimating];
                                                      }
                                                      
                                                      if ([ResultString isEqualToString:@"nouserid"])
                                                      {
                                                          view_CreateChallenges.hidden=YES;
+                                                         indicator.hidden=YES;
+                                                         [indicator stopAnimating];
                                                          UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                          
                                                          UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
@@ -363,12 +371,16 @@
                                                  {
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
                                                        view_CreateChallenges.hidden=YES;
+                                                     indicator.hidden=YES;
+                                                     [indicator stopAnimating];
                                                  }
                                                  
                                              }
                                              else if(error)
                                              {
                                                   view_CreateChallenges.hidden=YES;
+                                                 indicator.hidden=YES;
+                                                 [indicator stopAnimating];
                                                  NSLog(@"error login2.......%@",error.description);
                                                  
                                              }
@@ -487,7 +499,7 @@
                 {
                     cell_Public.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
                     [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 }
@@ -610,7 +622,7 @@
                 {
                     cell_Private.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
                     [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 }

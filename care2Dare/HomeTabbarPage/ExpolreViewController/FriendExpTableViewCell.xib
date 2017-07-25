@@ -90,18 +90,28 @@
                         <rect key="frame" x="42" y="44" width="26" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You have no challenge.Please create challenge for Profile." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCP-2s-RRT">
+                        <rect key="frame" x="8" y="20" width="359" height="60"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
+                        <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Image_PalyBuutton" destination="d8A-Gt-qsI" id="UCJ-H5-ihF"/>
                 <outlet property="Image_Profile" destination="TBq-vH-sE0" id="izB-dg-thK"/>
                 <outlet property="Label_Backer" destination="kx3-xB-jj7" id="zA8-qT-Fv1"/>
+                <outlet property="Label_Backername" destination="O3q-VR-qNH" id="MWS-3b-aO4"/>
                 <outlet property="Label_Changename" destination="hbS-F1-dWo" id="0Sj-Hh-8uN"/>
                 <outlet property="Label_Raised" destination="YOy-1g-ltg" id="atG-Kw-NIm"/>
+                <outlet property="Label_Raisedname" destination="sPH-2g-K44" id="0uf-2y-tvT"/>
                 <outlet property="Label_Time" destination="s49-dJ-3gs" id="z6o-Nt-2ba"/>
                 <outlet property="Label_Titile" destination="xkv-6H-MBg" id="Lya-sD-eiN"/>
+                <outlet property="label_JsonResult" destination="eCP-2s-RRT" id="xrE-Ot-Fvw"/>
             </connections>
-            <point key="canvasLocation" x="77" y="-192"/>
+            <point key="canvasLocation" x="76.5" y="-192"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -40,8 +40,8 @@
 
 @property(nonatomic,weak)IBOutlet UITextView * Textview_Desc;
 
-
 @property(nonatomic,weak)IBOutlet UILabel * Label_ChallengesName;
+@property(nonatomic,weak)IBOutlet UILabel * Label_Raise_DonateTextheading;
 @property(nonatomic,weak)IBOutlet UILabel * Label_Public;
 @property(nonatomic,weak)IBOutlet UILabel * Label_Private;
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Public;

@@ -19,11 +19,6 @@
 @property(strong,nonatomic)IBOutlet UIImageView * Image_Profile3;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_PalyBuutton3;
 
-@property(strong,nonatomic)IBOutlet UILabel * Label_Changename;
-@property(strong,nonatomic)IBOutlet UILabel * Label_Time;
-@property(strong,nonatomic)IBOutlet UILabel * Label_Titile;
-@property(strong,nonatomic)IBOutlet UILabel * Label_Backer;
-@property(strong,nonatomic)IBOutlet UILabel * Label_Raised;
-
+@property(strong,nonatomic)IBOutlet UILabel * label_JsonResult;
 
 @end

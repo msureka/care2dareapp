@@ -55,7 +55,7 @@
 @end
 
 @implementation CreateNewChallengesViewController
-@synthesize Array_Names,Array_UserId,BackroundImg,Image_Play,Image_Donate,Image_Raised,Label_Donate,Label_Raised;
+@synthesize Array_Names,Array_UserId,BackroundImg,Image_Play,Image_Donate,Image_Raised,Label_Donate,Label_Raised,Label_Raise_DonateTextheading;
 @synthesize slider_Days,Label_Currentsdays;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,7 +81,7 @@
     
     challengetypeVal=@"PUBLIC";
     challengetypeValDonate=@"RAISE";
-    
+    Label_Raise_DonateTextheading.text=@"How much do you want to raise? (Optional)";
     
     
     Image_Play.hidden=YES;
@@ -392,19 +392,21 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
 
     challengetypeValDonate=@"RAISE";
-    
+    Label_Raise_DonateTextheading.text=@"How much do you want to raise?(Optional)";
     
     
     [Image_Raised setImage:[UIImage imageNamed:@"raiseblue.png"]];
     [Image_Donate setImage:[UIImage imageNamed:@"donategrey.png"]];
     Label_Raised.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     Label_Donate.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
+    
+       _Label_totalAmount.text=[NSString stringWithFormat:@"%@%@",@"total: $ ",_Textfield_Amount.text];
      _Label_totalAmount.hidden=YES;
 }
 - (void)LabelTap_DonateTapped:(UITapGestureRecognizer *)recognizer
 {
     challengetypeValDonate=@"DONATE";
-    
+    Label_Raise_DonateTextheading.text=@"Donation to each challenger";
     
     [Image_Raised setImage:[UIImage imageNamed:@"raisegrey.png"]];
     [Image_Donate setImage:[UIImage imageNamed:@"donateblue.png"]];
@@ -413,15 +415,17 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count);
     
-    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
-    {
-        _Label_totalAmount.hidden=YES;
-    }
-    else
-    {
+//    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
+//    {
+//        _Label_totalAmount.hidden=YES;
+//    }
+//    else
+//    {
+        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
+        
         _Label_totalAmount.hidden=NO;
         
-    }
+  //  }
    
 
     
@@ -506,8 +510,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     if (Array_Names.count !=0)
     {
         
-        _Label_totalAmount.hidden=NO;
-        _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
+        //_Label_totalAmount.hidden=NO;
+       // _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
         _Label_ChallengesName.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:20];
         _Label_ChallengesName.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
         
@@ -522,12 +526,16 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
             
             _Label_ChallengesName.text=[NSString stringWithFormat:@"%@%@%lu%@",[Array_Names objectAtIndex:0],@" & ",(unsigned long)Array_Names.count-1,@" more"];
         }
-        if (![_Textfield_Amount.text isEqualToString:@""])
+        if ([challengetypeValDonate isEqualToString:@"DONATE"])
         {
+            
+            _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
             _Label_totalAmount.hidden=NO;
         }
         else
         {
+            _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]];
+            
             _Label_totalAmount.hidden=YES;
         }
     }
@@ -548,14 +556,17 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         _Label_ChallengesName.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24];
         
         _Label_ChallengesName.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
-        _Textfield_Amount.text=@"";
-        _Textfield_Amount.placeholder=@"0";
-        if (![_Textfield_Amount.text isEqualToString:@""])
+        
+        if ([challengetypeValDonate isEqualToString:@"DONATE"])
         {
+
+            _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
             _Label_totalAmount.hidden=NO;
         }
         else
         {
+            _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]];
+
             _Label_totalAmount.hidden=YES;
         }
     }
@@ -1184,24 +1195,45 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 -(void)ButtonCreateChallengesActions
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert ];
     
-    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
-                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                               {
-                                   
-                               }];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
-                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                {
-                                    [self createChallengesComm];
-                                }];
     
-    [alertController addAction:actionOk];
     
-    [alertController addAction:actionOk1];
-    [self presentViewController:alertController animated:YES completion:nil];
+     NSArray *viewArray = [[[[[[[[[[[[alert view] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews];
+    
+    UILabel *alertTitle = viewArray[0];
+    alertTitle.textAlignment = NSTextAlignmentCenter;
+  
+    
+    UILabel *alertMessage = viewArray[1];
+    alertMessage.textAlignment = NSTextAlignmentLeft;
+    
+    viewArray=nil;
+    alertMessage=nil;
+    
+   
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                   {
+    
+                                   }];
+    
+        UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
+                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                    {
+                                        [self createChallengesComm];
+                                    }];
+    
+        [alert addAction:actionOk];
+    
+        [alert addAction:actionOk1];
+    
+    
+  
+    
+        [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
@@ -1218,17 +1250,17 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         
     
     _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
-    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
+//    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
     
-    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
-    {
-        _Label_totalAmount.hidden=YES;
-    }
-    else
-    {
+//    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
+//    {
+//        _Label_totalAmount.hidden=YES;
+//    }
+//    else
+//    {
         _Label_totalAmount.hidden=NO;
    
-    }
+   // }
     }
     else
     {
@@ -1624,14 +1656,15 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         BackroundImg.image = chosenImage;
         BackroundImg.contentMode=UIViewContentModeScaleAspectFill;
         
-        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.8);
         
-        imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
+    NSData * imageData1 = UIImageJPEGRepresentation(chosenImage, 0.3);
         
         // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
         ImageNSdata = [Base64 encode:imageData];
         
+        encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Base64 encode:imageData1],NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
         encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         

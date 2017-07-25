@@ -938,7 +938,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
          } else
          {
              NSLog(@"error: %@", [error localizedDescription]);
-             [self.view hideActivityViewWithAfterDelay:1];
+             [self.view hideActivityViewWithAfterDelay:0];
          }
      }];
     
@@ -1033,13 +1033,13 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                  NSLog(@"Process error=%@",error);
                  if (error)
                  {
-                     [self.view hideActivityViewWithAfterDelay:1];
+                     [self.view hideActivityViewWithAfterDelay:0];
                      
                      NSLog(@"Process error");
                  }
                  else if (result.isCancelled)
                  {
-                     [self.view hideActivityViewWithAfterDelay:1];
+                     [self.view hideActivityViewWithAfterDelay:0];
                      
                      NSLog(@"Cancelled");
                  }

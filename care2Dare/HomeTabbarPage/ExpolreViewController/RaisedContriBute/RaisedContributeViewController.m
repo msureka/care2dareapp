@@ -378,7 +378,8 @@
 //            borderBottomViewTap6.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
 //            borderBottomViewTap6.frame = CGRectMake(0, cell_one.myscrollView.frame.size.height - 1, cell_one.myscrollView.frame.size.width, 1);
 //            [cell_one.myscrollView.layer addSublayer:borderBottomViewTap6];
-            
+            [cell_one.myscrollView setShowsHorizontalScrollIndicator:NO];
+            [cell_one.myscrollView setShowsVerticalScrollIndicator:NO];
             for (int i=0; i<Array_Challengers.count; i++)
             {
                 

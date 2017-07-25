@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
+#import "SVPullToRefresh.h"
 #define BlueColor [UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor
 #define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
 #define GreenColor [UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0].CGColor
@@ -24,20 +25,28 @@
     UISearchBar *searchbar;
      NSDictionary *urlplist;
      NSUserDefaults *defaults;
-    NSMutableArray * Array_WorldExp,* Array_FriendExp,* Array_Faourite;;
+    NSMutableArray * Array_WorldExp,* Array_FriendExp,* Array_Faourite,*Array_WorldExp1;;
     NSArray *SearchCrickArray_worldExp,*SearchCrickArray_FriendExp,*SearchCrickArray_Faourite;
     CALayer *bootomBorder_Cell;
     NSURLSessionDataTask *dataTaskExp,*dataTaskWld,*dataTaskFav;
-    NSInteger Array_WorldCount,modvalues;
+    NSInteger Array_WorldCount,modvalues,pagescount;
+    NSString * ResultString_World,*ResultString_Fav,*ResultString_Profile;
+    NSString *flag_world,*flag_Fav,*flag_profile,*str_tablereload;
+    BOOL viewDidLoadCalled;
     
 }
 @end
 //favouriteexplore1.png
 @implementation ExplorePageViewController
-@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp,Label_JsonResult,image_ExpFavourite,cell_Favorite,View_ExpFavourite;
+@synthesize Tableview_Explore,View_ExpFriend,view_ExpWorld,image_ExpWorld,image_ExpFriend,cell_WorldExp,cell_FriendExp,image_ExpFavourite,cell_Favorite,View_ExpFavourite,indicator;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    viewDidLoadCalled = YES;
+    
+    
+    Array_WorldExp=[[NSMutableArray alloc]init];
+   
     
     self.percent = 0.1;
      self.percent1 = 0.1;
@@ -45,6 +54,12 @@
     
     
     cellChecking=@"WorldExp";
+    
+    flag_Fav=@"no";
+    flag_world=@"no";
+    flag_profile=@"no";
+str_tablereload=@"no";
+    
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -64,7 +79,9 @@
      borderBottom_world = [CALayer layer];
      borderBottom_ExpFrnd = [CALayer layer];
     borderBottom_ExpFavourite = [CALayer layer];
-    Label_JsonResult.hidden=YES;
+    indicator.hidden=NO;
+    [indicator startAnimating];
+    [Tableview_Explore setHidden:YES];
     
     
     
@@ -121,13 +138,48 @@
                             action:@selector(PulltoRefershtable)
                   forControlEvents:UIControlEventValueChanged];
    
-    [Tableview_Explore addSubview:self.refreshControl];
+   // [Tableview_Explore addSubview:self.refreshControl];
+    [Tableview_Explore reloadData];
+    
+    [Tableview_Explore addPullToRefreshWithActionHandler:^{
+        [self insertRowAtTop];
+    }];
+    
+    // setup infinite scrolling
+    [Tableview_Explore addInfiniteScrollingWithActionHandler:^{
+        [self insertRowAtBottom];
+    }];
+   
+    
     
     [self ClienserverComm_worldExp];
    // [self ClienserverComm_FriendExp];
     
 }
+- (void)insertRowAtTop {
+    
+       [self PulltoRefershtable];
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        
+        [Tableview_Explore.pullToRefreshView stopAnimating];
+    });
+}
 
+
+- (void)insertRowAtBottom {
+    
+    [self PulltoRefershtable1];
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        
+        [Tableview_Explore.infiniteScrollingView stopAnimating];
+    });
+}
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -173,25 +225,52 @@
 }
 -(void)PulltoRefershtable
 {
-    if ([cellChecking isEqualToString:@"WorldExp"])
-    {
-       [self ClienserverComm_worldExp];
-    }
-    if ([cellChecking isEqualToString:@"FriendExp"])
-    {
-     [self ClienserverComm_FriendExp];
-    }
-    if ([cellChecking isEqualToString:@"Favourite"])
-    {
-        [self ClienserverComm_Favourite];
-    }
-    [Tableview_Explore reloadData];
+//    if ([cellChecking isEqualToString:@"WorldExp"])
+//    {
+//       [self ClienserverComm_worldExp];
+//    }
+//    if ([cellChecking isEqualToString:@"FriendExp"])
+//    {
+//     [self ClienserverComm_FriendExp];
+//    }
+//    if ([cellChecking isEqualToString:@"Favourite"])
+//    {
+//        [self ClienserverComm_Favourite];
+//    }
+   
+    
+    
+    
+        
+        [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
+        if ([cellChecking isEqualToString:@"WorldExp"])
+        {
+            str_tablereload=@"no";
+            pagescount=0;
+            [Array_WorldExp removeAllObjects];
+            [Array_WorldExp1 removeAllObjects];
+//            flag_world=@"no";
+//            [Tableview_Explore reloadData];
+            Tableview_Explore.hidden=YES;
+            indicator.hidden=NO;
+            [indicator startAnimating];
+            [self ClienserverComm_worldExp];
+        }
+        if ([cellChecking isEqualToString:@"FriendExp"])
+        {
+            [self ClienserverComm_FriendExp];
+        }
+        if ([cellChecking isEqualToString:@"Favourite"])
+        {
+            [self ClienserverComm_Favourite];
+        }
+    
     [self.refreshControl endRefreshing];
     
 }
 -(void)ClienserverComm_FriendExp
 {
-    [self.view endEditing:YES];
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -264,20 +343,21 @@
                                                      
             SearchCrickArray_FriendExp=[objSBJsonParser objectWithData:data];
                                                      
-                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                        ResultString_Profile=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
                                                      
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                ResultString_Profile = [ResultString_Profile stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+            ResultString_Profile = [ResultString_Profile stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
                                                      NSLog(@"Array_FriendExp %@",Array_FriendExp);
                                                      
                                                      
-                                                     NSLog(@"Array_WorldExp ResultString %@",ResultString);
-                                                     if ([ResultString isEqualToString:@"nouserid"])
-                                                     {
+                                                     NSLog(@"Array_WorldExp ResultString %@",ResultString_Profile);
+                    if ([ResultString_Profile isEqualToString:@"nouserid"])
+                            {
                                                          
-                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                          
                                                          UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                                             style:UIAlertActionStyleDefault
@@ -286,40 +366,44 @@
                                                          [self presentViewController:alertController animated:YES completion:nil];
                                                          
                                                          
-                                                     }
+                        }
                                                      
                                                      
-                                                     if ([ResultString isEqualToString:@"done"])
-                                                     {
+                if ([ResultString_Profile isEqualToString:@"done"])
+                        {
                                                          
                                                          
                                                          
                                                          
-                                                     }
-                                        if (Array_FriendExp.count !=0)
-                                                     {
-                                Label_JsonResult.hidden=YES;           [Tableview_Explore reloadData];
-                                                     }
-                                                     else
-                                                     {
-                        Label_JsonResult.hidden=NO;
-                                    Label_JsonResult.text=@"All the active challenges of your friends will be shown here.";
-                                                     }
+                            }
+            flag_profile=@"yes";
+            [Tableview_Explore setHidden:NO];
+                                                     [indicator setHidden:YES];
+                                                     [indicator stopAnimating];
+                [Tableview_Explore reloadData];
+                
+            
+                               
                                                      
-                                                     
-                                                 }
+            }
                                                  
-                                                 else
-                                                 {
+                                else
+                                    {
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                     
-                                                 }
+                                        [indicator setHidden:YES];
+                                        [indicator stopAnimating];
+                                        [Tableview_Explore setHidden:NO];
+                                        [Tableview_Explore reloadData];
+                            }
                                                  
                                                  
                                              }
                                              else if(error)
                                              {
-                                                 
+                                                 [indicator setHidden:YES];
+                                                 [indicator stopAnimating];
+                                                  [Tableview_Explore reloadData];
+                                                 [Tableview_Explore setHidden:NO];
                                                  NSLog(@"error login2.......%@",error.description);
                                              }
                                              
@@ -331,7 +415,7 @@
 }
 -(void)ClienserverComm_worldExp
 {
-    [self.view endEditing:YES];
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -362,11 +446,12 @@
         
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
+        NSString *pages= @"pages";
+        NSString* pagesVal = [NSString stringWithFormat:@"%ld", (long)pagescount];
+     
         
         
-        
-        
-        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@",userid,useridVal];
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid,useridVal,pages,pagesVal];
         
         
         
@@ -375,7 +460,7 @@
         NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
         
         NSURL *url;
-        NSString *  urlStrLivecount=[urlplist valueForKey:@"explore_world"];;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"explore_world1"];;
         url =[NSURL URLWithString:urlStrLivecount];
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -397,46 +482,66 @@
                                                  if(statusCode == 200)
                                                  {
                                                      
-                                                     Array_WorldExp=[[NSMutableArray alloc]init];
-                                                     SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
-                            Array_WorldExp=[objSBJsonParser objectWithData:data];
+                        
                                                      
-                        SearchCrickArray_worldExp=[objSBJsonParser objectWithData:data];
+                        SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                        Array_WorldExp1=[[NSMutableArray alloc]init];
+                     Array_WorldExp1=[objSBJsonParser objectWithData:data];
                                                      
-                                                     NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                    SearchCrickArray_worldExp=[objSBJsonParser objectWithData:data];
+                                                     
+                    ResultString_World=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                                      //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
                                                      
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                                     ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                ResultString_World = [ResultString_World stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                    
+        ResultString_World = [ResultString_World stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
-                                                NSLog(@"Array_WorldExp %@",Array_WorldExp);
+            NSLog(@"Array_WorldExp %@",Array_WorldExp);
                                                      
                                                      
-                                                     NSLog(@"Array_WorldExp ResultString %@",ResultString);
-                                                     if ([ResultString isEqualToString:@"nouserid"])
-                                                     {
+                NSLog(@"Array_WorldExp ResultString %@",ResultString_World);
+                                      
+                            indicator.hidden=YES;
+                            [indicator stopAnimating];
+                            [Tableview_Explore setHidden:NO];
+                                                     
+                if ([ResultString_World isEqualToString:@"nouserid"])
+                                        {
                                                         
-                                                         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
                                                          
-                                                         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                            style:UIAlertActionStyleDefault
-                                                                                                          handler:nil];
-                                                         [alertController addAction:actionOk];
-                                                         [self presentViewController:alertController animated:YES completion:nil];
+                    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                handler:nil];
+                    [alertController addAction:actionOk];
+                    [self presentViewController:alertController animated:YES completion:nil];
                                                          
                                                          
                                                      }
                                                      
                                                      
-                                                     if ([ResultString isEqualToString:@"done"])
+                                                     if ([ResultString_World isEqualToString:@"done"])
                                                      {
                                                          
                                                   
                                                          
                                                          
                                                      }
-                        if (Array_WorldExp.count !=0)
+                                                     flag_world=@"yes";
+                        if (Array_WorldExp1.count !=0)
                     {
+                        NSUInteger count = Array_WorldCount;
+                        NSLog(@"chect containt object==%@",[Array_WorldExp valueForKeyPath:@"pages"]);
+                        if ([[Array_WorldExp valueForKeyPath:@"pages"] containsObject:[[Array_WorldExp1 objectAtIndex:Array_WorldExp1.count-1]valueForKey:@"pages"]])
+                        {
+                            
+                        }
+                        else
+                        {
+                        [Array_WorldExp addObjectsFromArray:Array_WorldExp1];
+                             pagescount=pagescount+1;
+                        }
+                        
                         float arraycount=Array_WorldExp.count;
                         float newarraycount=arraycount/3.0;
                         
@@ -445,32 +550,74 @@
                         Array_WorldCount= ceil(newarraycount);
                         
                          modvalues=(Array_WorldExp.count%3);
-                        NSLog(@"Modddvalues==%d",modvalues);
-                Label_JsonResult.hidden=YES;
-                [Tableview_Explore reloadData];
-                            }
+                        NSLog(@"Modddvalues==%ld",(long)modvalues);
+//                        if(Array_WorldExp1.count==3)
+//                        {
+                        
+                      //  }
+                         if ([str_tablereload isEqualToString:@"no"])
+                         {
+                             str_tablereload=@"yes";
+                             [Tableview_Explore reloadData];
+                             
+                         }
                         else
-                            {
-                                
-            Label_JsonResult.text=@"All the active challenges worldwide will be shown here.";
-                Label_JsonResult.hidden=NO;
-                                                     }
+                        {
+                       
+                        
+                        
+                        NSMutableArray *insertIndexPaths = [NSMutableArray array];
+                        for (NSUInteger item = count; item < Array_WorldCount; item++) {
+                            
+                            [insertIndexPaths addObject:[NSIndexPath indexPathForRow:item
+                                                                           inSection:0]];
+                        }
+                        
+        [Tableview_Explore beginUpdates];
+                            NSLog(@"inserindexpath==%@",insertIndexPaths);
+       [Tableview_Explore insertRowsAtIndexPaths:insertIndexPaths
+                                                withRowAnimation:UITableViewRowAnimationFade];
+                        [Tableview_Explore endUpdates];
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow: ([Tableview_Explore numberOfRowsInSection:([Tableview_Explore numberOfSections]-1)]-1) inSection: ([Tableview_Explore numberOfSections]-1)];
+                        [Tableview_Explore scrollToRowAtIndexPath:indexPath
+                                                atScrollPosition:UITableViewScrollPositionNone
+                                                        animated:YES];
+                        
+                        NSIndexPath *selected = [Tableview_Explore indexPathForSelectedRow];
+                        if (selected) {
+                           [Tableview_Explore deselectRowAtIndexPath:selected animated:YES];
+                       }
+                            
+                        }
+                       
+                            }
+                      
+         
+               [Tableview_Explore setHidden:NO];
+                                                     [indicator setHidden:YES];
+                                                     [indicator stopAnimating];
                                                      
+                                        //  [Tableview_Explore reloadData];
                                                      
                                                  }
-                                                 
+                                             
                                                  else
                                                  {
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                     
+                                                     [indicator setHidden:YES];
+                                                     [indicator stopAnimating];[Tableview_Explore reloadData];
+                                                     [Tableview_Explore setHidden:NO];
                                                  }
                                                  
                                                  
                                              }
                                              else if(error)
                                              {
-                                                
+                                                 [indicator setHidden:YES];
+                                                 [indicator stopAnimating];
                                                  NSLog(@"error login2.......%@",error.description);
+                                                  [Tableview_Explore reloadData];
+                                                 [Tableview_Explore setHidden:NO];
                                              }
                                              
                                              
@@ -481,7 +628,7 @@
 }
 -(void)ClienserverComm_Favourite
 {
-    [self.view endEditing:YES];
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -553,17 +700,17 @@
                                   Array_Faourite=[objSBJsonParser objectWithData:data];
                                   SearchCrickArray_Faourite=[objSBJsonParser objectWithData:data];
                                   
-                                  NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                  ResultString_Fav=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                   //        Array_LodingPro=[NSJSONSerialization JSONObjectWithData:webData_Swipe options:kNilOptions error:nil];
                                   
-                                  ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                                  ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                  ResultString_Fav = [ResultString_Fav stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                  ResultString_Fav = [ResultString_Fav stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                   
                                   NSLog(@"Array_Faourite %@",Array_Faourite);
                                   
                                   
-                                  NSLog(@"Array_WorldExp ResultString %@",ResultString);
-                                  if ([ResultString isEqualToString:@"nouserid"])
+                                  NSLog(@"Array_WorldExp ResultString %@",ResultString_Fav);
+                                  if ([ResultString_Fav isEqualToString:@"nouserid"])
                                   {
                                       
                                       UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Your account does not exist or seems to have been suspended. Please contact admin." preferredStyle:UIAlertControllerStyleAlert];
@@ -578,24 +725,13 @@
                                   }
                                   
                                   
-                                  if ([ResultString isEqualToString:@"nochallenges"])
-                                  {
-                                      
-                                      
-                                      
-                                      
-                                  }
-                                  if (Array_Faourite.count !=0)
-                                  {
-                                      Label_JsonResult.hidden=YES;
-                                      [Tableview_Explore reloadData];
-                                  }
-                                  else
-                                  {
-                                      Label_JsonResult.text=@"All the challenges which you tag as favourite will be shown here.";
-                                      Label_JsonResult.hidden=NO;
-                                      
-                                  }
+                                  flag_Fav=@"yes";
+                                
+                                   [Tableview_Explore reloadData];
+                                  [Tableview_Explore setHidden:NO];
+                                  [indicator setHidden:YES];
+                                  [indicator stopAnimating];
+                                  
                                   
                                   
                               }
@@ -603,7 +739,11 @@
                               else
                               {
                                   NSLog(@" error login1 ---%ld",(long)statusCode);
-                                  
+                                  [Tableview_Explore setHidden:NO];
+                                  [indicator setHidden:YES];
+                                  [indicator stopAnimating];
+                                  [Tableview_Explore reloadData];
+                                
                               }
                               
                               
@@ -612,6 +752,10 @@
                           {
                               
                               NSLog(@"error login2.......%@",error.description);
+                              [indicator setHidden:YES];
+                              [indicator stopAnimating];
+                              [Tableview_Explore setHidden:NO];
+                              [Tableview_Explore reloadData];
                           }
                           
                           
@@ -620,13 +764,30 @@
     }
     
 }
+
 -(void)viewWillAppear:(BOOL)animated
 
 {
     [super viewWillAppear:animated];
+    
+    
+        if (viewDidLoadCalled ==YES)
+        {
+            viewDidLoadCalled =NO;
+        }
+    else
+    {
+    
     [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
+        str_tablereload=@"no";
+        pagescount=0;
+        [Array_WorldExp removeAllObjects];
+        [Array_WorldExp1 removeAllObjects];
+        Tableview_Explore.hidden=YES;
+        indicator.hidden=NO;
+        [indicator startAnimating];
         [self ClienserverComm_worldExp];
     }
     if ([cellChecking isEqualToString:@"FriendExp"])
@@ -637,7 +798,7 @@
     {
         [self ClienserverComm_Favourite];
     }
-
+    }
 }
 - (void)ViewTap51Tapped:(UITapGestureRecognizer *)recognizer
 {
@@ -652,7 +813,7 @@
     [dataTaskExp cancel];
  cellChecking=@"WorldExp";
     
-     Label_JsonResult.hidden=YES;
+    
     view_ExpWorld.clipsToBounds=YES;
     View_ExpFriend.clipsToBounds=YES;
     View_ExpFavourite.clipsToBounds=YES;
@@ -686,11 +847,11 @@
      [self ClienserverComm_worldExp];
     if (Array_WorldExp.count==0)
     {
-            Label_JsonResult.hidden=NO;
+        
     }
     else
     {
-        Label_JsonResult.hidden=YES;
+        
     }
     [Tableview_Explore reloadData];
 }
@@ -705,7 +866,7 @@
     image_ExpWorld.clipsToBounds=YES;
     image_ExpFriend.clipsToBounds=YES;
     image_ExpFavourite.clipsToBounds=YES;
-     Label_JsonResult.hidden=YES;
+    
     [image_ExpWorld setImage:[UIImage imageNamed:@"exploreworld1.png"]];
     [image_ExpFriend setImage:[UIImage imageNamed:@"explore_friends.png"]];
     [image_ExpFavourite setImage:[UIImage imageNamed:@"favouriteexplore.png"]];
@@ -731,11 +892,11 @@
      [self ClienserverComm_FriendExp];
     if (Array_FriendExp.count==0)
     {
-        Label_JsonResult.hidden=NO;
+       
     }
     else
     {
-        Label_JsonResult.hidden=YES;
+        
     }
     
     [Tableview_Explore reloadData];
@@ -779,11 +940,11 @@
     
     if (Array_Faourite.count==0)
     {
-        Label_JsonResult.hidden=NO;
+       
     }
     else
     {
-        Label_JsonResult.hidden=YES;
+       
     }
     
     [Tableview_Explore reloadData];
@@ -801,15 +962,63 @@
 
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-            return Array_WorldCount;
+            if (Array_WorldExp.count==0)
+            {
+                if ([flag_world isEqualToString:@"no"])
+                {
+                    return 0;
+                }
+                else
+                {
+                  return 1;
+                }
+                
+            }
+            else
+            {
+               return Array_WorldCount;
+            }
+            
         }
         else if ([cellChecking isEqualToString:@"FriendExp"])
         {
+            if (Array_FriendExp.count==0)
+            {
+                if ([flag_profile isEqualToString:@"no"])
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+                
+            }
+            else
+            {
             return Array_FriendExp.count;
+            }
         }
         else if ([cellChecking isEqualToString:@"Favourite"])
         {
+            
+            if (Array_Faourite.count==0)
+            {
+                if ([flag_Fav isEqualToString:@"no"])
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+                
+            }
+            else
+            {
+            
             return Array_Faourite.count;
+            }
         }
     return 0;
 }
@@ -839,19 +1048,56 @@
                     
                 }
                 
-                
-//                bootomBorder_Cell = [CALayer layer];
-//                bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-//                bootomBorder_Cell.frame = CGRectMake(0, cell_WorldExp.frame.size.height-1, cell_WorldExp.frame.size.width, 1);
-//                [cell_WorldExp.layer addSublayer:bootomBorder_Cell];
-                
-                
-                
-                
-                
-               
-                
-               
+                if (Array_WorldExp.count==0)
+                {
+                 
+                    bootomBorder_Cell = [CALayer layer];
+                    bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
+                    bootomBorder_Cell.frame = CGRectMake(0, cell_WorldExp.frame.size.height-1, cell_WorldExp.frame.size.width, 1);
+                    [cell_WorldExp.layer addSublayer:bootomBorder_Cell];
+                    
+                    if ([ResultString_World isEqualToString:@"nochallenges"])
+                    {
+                         cell_WorldExp.label_JsonResult.text=@"All the active challenges worldwide will be shown here.";
+                    }
+                    else
+                    {
+                     cell_WorldExp.label_JsonResult.text=@"PHP server issues";
+                    }
+                    cell_WorldExp.Image_Profile.hidden=YES;
+                    cell_WorldExp.Image_PalyBuutton.hidden=YES;
+                    
+                    cell_WorldExp.Image_Profile2.hidden=YES;
+                    cell_WorldExp.Image_PalyBuutton2.hidden=YES;
+                    
+                    cell_WorldExp.Image_Profile3.hidden=YES;
+                    cell_WorldExp.Image_PalyBuutton3.hidden=YES;
+                    
+                    cell_WorldExp.label_JsonResult.hidden=NO;
+                    
+                }
+                else
+                {
+                    bootomBorder_Cell = [CALayer layer];
+                    bootomBorder_Cell.backgroundColor = [UIColor clearColor].CGColor;
+                    bootomBorder_Cell.frame = CGRectMake(0, cell_WorldExp.frame.size.height-1, cell_WorldExp.frame.size.width, 1);
+                    [cell_WorldExp.layer addSublayer:bootomBorder_Cell];
+                    cell_WorldExp.Image_Profile.hidden=NO;
+                    cell_WorldExp.Image_PalyBuutton.hidden=NO;
+                    
+                    cell_WorldExp.Image_Profile2.hidden=NO;
+                    cell_WorldExp.Image_PalyBuutton2.hidden=NO;
+                    
+                    cell_WorldExp.Image_Profile3.hidden=NO;
+                    cell_WorldExp.Image_PalyBuutton3.hidden=NO;
+                    
+                    cell_WorldExp.label_JsonResult.hidden=YES;
+
+                    
+                    
+                    
+                    
+                    
                 
                 self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView];
@@ -1042,7 +1288,7 @@
                 
                         cell_WorldExp.Image_PalyBuutton.hidden=YES;
                                     
-                            url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                            url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                 
                         [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                 
@@ -1055,7 +1301,7 @@
                                     // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
                                     self.percent =[per floatValue];
                                     NSLog(@"percentage==%f",progrssVal);
-                                    NSLog(@"percentage111==%f",[per floatValue]);
+                                    NSLog(@"percentagecellrowindex==%f",[per floatValue]);
                                     [self.pieView reloadViewWithPercent:self.percent];
                                 
                 
@@ -1079,7 +1325,7 @@
                             // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
                             self.percent =[per floatValue];
                             NSLog(@"percentage==%f",progrssVal);
-                            NSLog(@"percentage111==%f",[per floatValue]);
+                            NSLog(@"percentagecellrowindexelse==%f",[per floatValue]);
                             [self.pieView reloadViewWithPercent:self.percent];
                             
                                     }
@@ -1092,7 +1338,7 @@
                  
                 cell_WorldExp.Image_PalyBuutton2.hidden=YES;
                     
-               url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediaurl"]];
+               url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
                     
             [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                   
@@ -1108,7 +1354,7 @@
                     [self.pieView1 reloadViewWithPercent:self.percent1];
                     
                 }
-                else
+ else
                 {
                     
                 
@@ -1137,7 +1383,7 @@
                     cell_WorldExp.Image_PalyBuutton3.hidden=YES;
                     
                     
-                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediaurl"]];
+                        url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
                 
             [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                     
@@ -1149,7 +1395,7 @@
                     // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
                     self.percent2 =[per2 floatValue];
                     NSLog(@"percentage==%f",progrssVal2);
-                    NSLog(@"percentage111==%f",[per2 floatValue]);
+                    NSLog(@"percentage111Image==%f",[per2 floatValue]);
                     [self.pieView2 reloadViewWithPercent:self.percent2];
                     
                 }
@@ -1171,7 +1417,7 @@
                     // [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
                     self.percent2 =[per2 floatValue];
                     NSLog(@"percentage==%f",progrssVal2);
-                    NSLog(@"percentage111==%f",[per2 floatValue]);
+                    NSLog(@"percentage111mediatype==%f",[per2 floatValue]);
                     [self.pieView2 reloadViewWithPercent:self.percent2];
                    
             }
@@ -1386,7 +1632,7 @@
 //                
 //                cell_WorldExp.Label_Changename.attributedText = aAttrString;
                 
-            
+}
                 
   [cell_WorldExp setNeedsLayout];
                
@@ -1404,11 +1650,64 @@
                     
                     cell_FriendExp = [[FriendExpTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdF1];
                 }
+                
+                
+                
+                
+               
+              
                 bootomBorder_Cell = [CALayer layer];
                 bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
                 bootomBorder_Cell.frame = CGRectMake(0, cell_FriendExp.frame.size.height-1, cell_FriendExp.frame.size.width, 1);
                 [cell_FriendExp.layer addSublayer:bootomBorder_Cell];
-              
+                
+               
+                
+                
+                if (Array_FriendExp.count==0)
+                {
+                    cell_FriendExp.Image_Profile.hidden=YES;
+                    cell_FriendExp.Image_PalyBuutton.hidden=YES;;
+                    cell_FriendExp.Label_Changename.hidden=YES;;
+                    cell_FriendExp.Label_Time.hidden=YES;;
+                    cell_FriendExp.Label_Titile.hidden=YES;;
+                    cell_FriendExp.Label_Backer.hidden=YES;;
+                    cell_FriendExp.Label_Raised.hidden=YES;;
+                    cell_FriendExp.Label_Backername.hidden=YES;;
+                    cell_FriendExp.Label_Raisedname.hidden=YES;;
+                    cell_FriendExp.label_JsonResult.hidden=NO;;
+                    if ([ResultString_Profile isEqualToString:@"nochallenges"])
+                    {
+                        
+                        
+                        
+                        
+                        cell_FriendExp.label_JsonResult.text=@"All the active challenges of your friends will be shown here.";
+                    }
+                    else
+                    {
+                        cell_FriendExp.label_JsonResult.text=@"PHP server issues";
+                    }
+                }
+                else
+                {
+                
+                    
+                    cell_FriendExp.Image_Profile.hidden=NO;
+                    cell_FriendExp.Image_PalyBuutton.hidden=NO;;
+                    cell_FriendExp.Label_Changename.hidden=NO;;
+                    cell_FriendExp.Label_Time.hidden=NO;;
+                    cell_FriendExp.Label_Titile.hidden=NO;;
+                    cell_FriendExp.Label_Backer.hidden=NO;;
+                    cell_FriendExp.Label_Raised.hidden=NO;;
+                    cell_FriendExp.Label_Backername.hidden=NO;;
+                    cell_FriendExp.Label_Raisedname.hidden=NO;;
+                    cell_FriendExp.label_JsonResult.hidden=YES;;
+                    
+                
+                    
+                    
+                    
                 NSDictionary * dic_worldexp=[Array_FriendExp objectAtIndex:indexPath.row];
                 cell_FriendExp.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
                 cell_FriendExp.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
@@ -1442,7 +1741,7 @@
                 {
                     cell_FriendExp.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
                     [cell_FriendExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 }
@@ -1477,7 +1776,7 @@
                 
                 
                 cell_FriendExp.Label_Changename.attributedText = aAttrString;
-                
+                }
                 return cell_FriendExp;
                 
       
@@ -1494,11 +1793,52 @@
             cell_Favorite = [[FavriteTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdF11];
         }
         
+        
         bootomBorder_Cell = [CALayer layer];
         bootomBorder_Cell.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
         bootomBorder_Cell.frame = CGRectMake(0, cell_Favorite.frame.size.height-1, cell_Favorite.frame.size.width, 1);
         [cell_Favorite.layer addSublayer:bootomBorder_Cell];
         
+        
+        if (Array_FriendExp.count==0)
+        {
+            if ([ResultString_Fav isEqualToString:@"nochallenges"])
+            {
+                
+                cell_Favorite.label_JsonResult.text=@"All the challenges which you tag as favourite will be shown here.";
+            }
+            else
+            {
+                cell_Favorite.label_JsonResult.text=@"PHP server issues";
+            }
+            
+            
+            
+            
+             cell_Favorite.Image_Profile.hidden=YES;
+            cell_Favorite.Image_PalyBuutton.hidden=YES;
+            cell_Favorite.Label_Changename.hidden=YES;
+            cell_Favorite.Label_Time.hidden=YES;
+           cell_Favorite.Label_Titile.hidden=YES;
+           cell_Favorite.Label_Backer.hidden=YES;
+           cell_Favorite.Label_Raised.hidden=YES;
+           cell_Favorite.label_JsonResult.hidden=NO;
+            
+            
+        }
+        else
+        {
+            cell_Favorite.Image_Profile.hidden=NO;
+            cell_Favorite.Image_PalyBuutton.hidden=NO;
+            cell_Favorite.Label_Changename.hidden=NO;
+            cell_Favorite.Label_Time.hidden=NO;
+            cell_Favorite.Label_Titile.hidden=NO;
+            cell_Favorite.Label_Backer.hidden=NO;
+            cell_Favorite.Label_Raised.hidden=NO;
+            cell_Favorite.label_JsonResult.hidden=YES;
+        
+          
+            
         NSDictionary * dic_worldexp=[Array_Faourite objectAtIndex:indexPath.row];
         cell_Favorite.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
         cell_Favorite.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
@@ -1532,7 +1872,7 @@
         {
             cell_Favorite.Image_PalyBuutton.hidden=YES;
             
-            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
             [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
         }
@@ -1567,7 +1907,7 @@
         
         
         cell_Favorite.Label_Changename.attributedText = aAttrString;
-        
+        }
         return cell_Favorite;
         
         
@@ -1590,15 +1930,23 @@
   
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
+            
             return 125;
+            
         }
         if ([cellChecking isEqualToString:@"FriendExp"])
         {
-            return 140;
+            
+            return 140;;
+            
+           
         }
         if ([cellChecking isEqualToString:@"Favourite"])
         {
-            return 100;
+          
+               return 100;
+            
+            
         }
   
     return 0;
@@ -1913,5 +2261,36 @@
     }
 
 }
-
+-(void)PulltoRefershtable1
+{
+    [self ClienserverComm_worldExp];
+//    NSUInteger count = [Array_WorldExp count];
+//    
+//    
+//    
+//    [Array_WorldExp addObjectsFromArray:Array_WorldExp1];
+//    
+//    
+//    NSMutableArray *insertIndexPaths = [NSMutableArray array];
+//    for (NSUInteger item = count; item < Array_WorldExp.count; item++) {
+//        
+//        [insertIndexPaths addObject:[NSIndexPath indexPathForRow:item
+//                                                       inSection:0]];
+//    }
+//    
+//    [Tableview_Explore beginUpdates];
+//    [Tableview_Explore insertRowsAtIndexPaths:insertIndexPaths
+//                            withRowAnimation:UITableViewRowAnimationFade];
+//    [Tableview_Explore endUpdates];
+//    NSIndexPath* indexPath = [NSIndexPath indexPathForRow: ([Tableview_Explore numberOfRowsInSection:([Tableview_Explore numberOfSections]-1)]-1) inSection: ([Tableview_Explore numberOfSections]-1)];
+//    [Tableview_Explore scrollToRowAtIndexPath:indexPath
+//                            atScrollPosition:UITableViewScrollPositionNone
+//                                    animated:YES];
+//    
+//    NSIndexPath *selected = [Tableview_Explore indexPathForSelectedRow];
+//    if (selected) {
+//        [Tableview_Explore deselectRowAtIndexPath:selected animated:YES];
+//    }
+    
+}
 @end

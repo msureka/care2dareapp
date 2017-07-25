@@ -564,7 +564,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
         {
             cell_Pledge.Image_PalyBuutton.hidden=YES;
             
-            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
             [cell_Pledge.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
         }
@@ -655,7 +655,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
         {
             cell_Favorite.Image_PalyBuutton.hidden=YES;
             
-            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+            NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
             [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
         }

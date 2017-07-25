@@ -635,7 +635,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                 {
                     cell_Public.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediaurl"]];
+                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
                     [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 }

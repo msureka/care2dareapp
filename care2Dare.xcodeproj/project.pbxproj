@@ -493,6 +493,8 @@
 		9AF9DBFD1E9B608A00A652D9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF9DBF41E9B608A00A652D9 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9AFD24091EAF5A9A00A9E934 /* Cash in Hand Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */; };
 		D7C3BA561F1CBECE00BC05C9 /* DonationHistroyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */; };
+		D7E185B31F220D650001995E /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E185B01F220D650001995E /* UIScrollView+SVPullToRefresh.m */; };
+		D7E185B41F220D650001995E /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E185B21F220D650001995E /* UIScrollView+SVInfiniteScrolling.m */; };
 		D7E49CB41F0E08F700D87218 /* LoginWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */; };
 		D7E49CB81F0E140600D87218 /* c2dlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB51F0E140600D87218 /* c2dlogo.png */; };
 		D7E49CB91F0E140600D87218 /* c2dlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */; };
@@ -1158,6 +1160,11 @@
 		9AFD24051EAF5A9A00A9E934 /* Cash in Hand Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cash in Hand Filled-100.png"; sourceTree = "<group>"; };
 		D7C3BA541F1CBECE00BC05C9 /* DonationHistroyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationHistroyViewController.h; sourceTree = "<group>"; };
 		D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationHistroyViewController.m; sourceTree = "<group>"; };
+		D7E185AE1F220D650001995E /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		D7E185AF1F220D650001995E /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		D7E185B01F220D650001995E /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		D7E185B11F220D650001995E /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		D7E185B21F220D650001995E /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		D7E49CB21F0E08F700D87218 /* LoginWithEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWithEmailViewController.h; sourceTree = "<group>"; };
 		D7E49CB31F0E08F700D87218 /* LoginWithEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWithEmailViewController.m; sourceTree = "<group>"; };
 		D7E49CB51F0E140600D87218 /* c2dlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c2dlogo.png; sourceTree = "<group>"; };
@@ -1495,6 +1502,11 @@
 		9A43550A1E696F1200ED8FD5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D7E185AE1F220D650001995E /* SVPullToRefresh.h */,
+				D7E185AF1F220D650001995E /* UIScrollView+SVPullToRefresh.h */,
+				D7E185B01F220D650001995E /* UIScrollView+SVPullToRefresh.m */,
+				D7E185B11F220D650001995E /* UIScrollView+SVInfiniteScrolling.h */,
+				D7E185B21F220D650001995E /* UIScrollView+SVInfiniteScrolling.m */,
 				9AA66E051EC3159800DA5662 /* CircleProgressbar */,
 				9AA645AA1E8BB49500236B7A /* ChatText.plist */,
 				9A5727AF1E717D1D006A5F52 /* BaseEncoding */,
@@ -2361,9 +2373,9 @@
 				9AED22561E6AB7D80004A8D0 /* WorldExpTableViewCell.h */,
 				9AED22571E6AB7D80004A8D0 /* WorldExpTableViewCell.m */,
 				9AED22581E6AB7D80004A8D0 /* WorldExpTableViewCell.xib */,
-				9AED22601E6AB80B0004A8D0 /* FriendExpTableViewCell.xib */,
-				9AED225F1E6AB80B0004A8D0 /* FriendExpTableViewCell.m */,
 				9AED225E1E6AB80B0004A8D0 /* FriendExpTableViewCell.h */,
+				9AED225F1E6AB80B0004A8D0 /* FriendExpTableViewCell.m */,
+				9AED22601E6AB80B0004A8D0 /* FriendExpTableViewCell.xib */,
 			);
 			path = ExpolreViewController;
 			sourceTree = "<group>";
@@ -3028,6 +3040,7 @@
 				9A64C87D1E7137E5008115FF /* LCNContactView.m in Sources */,
 				9A5B66DC1ED4464200AB9BF0 /* FRHyperLabel.m in Sources */,
 				9AED22891E6AE27B0004A8D0 /* SBJsonStreamWriter.m in Sources */,
+				D7E185B31F220D650001995E /* UIScrollView+SVPullToRefresh.m in Sources */,
 				9A64C86C1E7133EB008115FF /* CLTokenView.m in Sources */,
 				9A0605D61E6D820900FF4229 /* PledgeTableViewCell.m in Sources */,
 				9A64C85F1E71333B008115FF /* InviteSprintUserTableViewCell.m in Sources */,
@@ -3085,6 +3098,7 @@
 				9A64C8691E7133EB008115FF /* CLBackspaceDetectingTextField.m in Sources */,
 				9A64C87B1E7137E5008115FF /* LCNContactModel.m in Sources */,
 				9A4528CB1F0233DA00771E3C /* CompeteChallengesTableViewCell.m in Sources */,
+				D7E185B41F220D650001995E /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				9AED228B1E6AE27B0004A8D0 /* SBJsonStreamWriterState.m in Sources */,
 				9A5D675E1EA4BD6F001176B3 /* StatsOneTableViewCell.m in Sources */,
 				9AA9B50E1E6FDD0900C6EF37 /* PlegeIncomingTableViewCell.m in Sources */,
@@ -3291,7 +3305,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = care2Dare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bba.dare2care;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3311,7 +3325,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = care2Dare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bba.dare2care;
 				PRODUCT_NAME = "$(TARGET_NAME)";

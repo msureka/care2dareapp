@@ -22,7 +22,7 @@
 @property(nonatomic,weak)IBOutlet UIView * View_ExpFriend;
 @property(nonatomic,weak)IBOutlet UIView * View_ExpFavourite;
 
-@property(nonatomic,weak)IBOutlet UILabel * Label_JsonResult;
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * indicator;
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Explore;
 

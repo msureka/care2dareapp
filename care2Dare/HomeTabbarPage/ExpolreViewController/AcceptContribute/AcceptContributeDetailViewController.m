@@ -198,7 +198,7 @@
             
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
-                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"]];
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
                   [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                 cell_OneImageVid.image_playButton.hidden=YES;
                  [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];

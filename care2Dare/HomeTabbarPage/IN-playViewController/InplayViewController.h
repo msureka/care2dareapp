@@ -24,5 +24,7 @@
 
 @property(nonatomic,strong) IBOutlet UILabel * label_public;
 @property(nonatomic,strong) IBOutlet UILabel * label_private;
-@property(nonatomic,weak)IBOutlet UIView * view_CreateChallenges;                     
+@property(nonatomic,weak)IBOutlet UIView * view_CreateChallenges;
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * indicator;
+
 @end
