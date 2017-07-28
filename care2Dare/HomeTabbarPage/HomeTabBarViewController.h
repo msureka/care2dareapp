@@ -10,6 +10,6 @@
 
 @interface HomeTabBarViewController : UITabBarController
 {
-    NSTimer *HomechatTimer;
+NSTimer *HomechatTimer;    
 }
 @end

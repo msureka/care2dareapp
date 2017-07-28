@@ -9,7 +9,10 @@
 #import "InplayViewController.h"
 #import "SBJsonParser.h"
 #import "Reachability.h"
+
 #import "UIImageView+WebCache.h"
+#import "UIView+WebCache.h"
+
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
 @interface InplayViewController ()
@@ -25,20 +28,22 @@
     NSMutableArray * Array_AllData,* Array_Public,*Array_Private,*Array_Profile;
     NSDictionary *urlplist;
     CALayer *Bottomborder_Cell2;
-    NSString * ImageNSdata,*encodedImage;
+    NSString * ImageNSdata,*encodedImage,* layout;
 }
 @end
 
 @implementation InplayViewController
-@synthesize Button_Public,Button_Private,Image_ButtinPublic,Image_ButtonPrivate,Tableview_inplay,cell_Public,cell_Private,label_public,label_private,view_CreateChallenges,indicator;
+@synthesize Button_Public,Button_Private,Image_ButtinPublic,Image_ButtonPrivate,Tableview_inplay,label_public,label_private,view_CreateChallenges,indicator;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     self.tabBarController.tabBar.hidden=NO;
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     indicator.hidden=NO;
+    layout=@"yes";
     [indicator startAnimating];
     view_CreateChallenges.hidden=YES;
 
@@ -112,11 +117,6 @@
                   forControlEvents:UIControlEventValueChanged];
     
     [Tableview_inplay addSubview:self.refreshControl];
-    [self ClienserverCommAll];
-    
-}
--(void)viewDidLayoutSubviews
-{
     
     borderBottom_Public.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
     borderBottom_Public.frame = CGRectMake(0, Button_Public.frame.size.height-2.5, Button_Public.frame.size.width, 2.5);
@@ -126,6 +126,24 @@
     borderBottom_Private.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom_Private.frame = CGRectMake(0, Button_Private.frame.size.height-1, Button_Private.frame.size.width, 1);
     [Button_Private.layer addSublayer:borderBottom_Private];
+    [self ClienserverCommAll];
+    
+}
+-(void)viewDidLayoutSubviews
+{
+    if ([layout isEqualToString:@"yes"])
+    {
+        layout=@"no";
+        borderBottom_Public.backgroundColor =[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
+        borderBottom_Public.frame = CGRectMake(0, Button_Public.frame.size.height-2.5, Button_Public.frame.size.width, 2.5);
+        [Button_Public.layer addSublayer:borderBottom_Public];
+        
+        
+        borderBottom_Private.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
+        borderBottom_Private.frame = CGRectMake(0, Button_Private.frame.size.height-1, Button_Private.frame.size.width, 1);
+        [Button_Private.layer addSublayer:borderBottom_Private];
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -225,9 +243,12 @@
   
     
 }
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [SDWebImageManager.sharedManager.imageCache clearMemory];
+    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:nil];
+   
 }
 
 -(void)ClienserverCommAll
@@ -418,7 +439,7 @@
             {
                 
                 
-                cell_Public = [[[NSBundle mainBundle]loadNibNamed:@"PublicTableViewCell" owner:self options:nil] objectAtIndex:0];
+                PublicTableViewCell *cell_Public = [[[NSBundle mainBundle]loadNibNamed:@"PublicTableViewCell" owner:self options:nil] objectAtIndex:0];
                 
                 
                 
@@ -494,26 +515,29 @@
                 // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"noofchallengers"];
                 // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"payperchallenger"];
                 
-                
+                 NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+        
                 if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
                 {
                     cell_Public.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
-                    
-                    [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            
+//                    [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 }
                 else
                 {
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                    
+                   
                     cell_Public.Image_PalyBuutton.hidden=NO;
                     
                     
                 }
+        [cell_Public.Image_Profile sd_setShowActivityIndicatorView:YES];
+                [cell_Public.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 
+                 [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
@@ -543,7 +567,7 @@
             {
                 
                 
-                cell_Private = [[[NSBundle mainBundle]loadNibNamed:@"PrivateTableViewCell" owner:self options:nil] objectAtIndex:0];
+                PrivateTableViewCell * cell_Private = [[[NSBundle mainBundle]loadNibNamed:@"PrivateTableViewCell" owner:self options:nil] objectAtIndex:0];
                 
                 
                 if (cell_Private == nil)
@@ -617,27 +641,29 @@
                 // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"noofchallengers"];
                 // cell_WorldExp.Label_Time.text=[dic_worldexp valueForKey:@"payperchallenger"];
                 
-                
+                NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                 if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
                 {
                     cell_Private.Image_PalyBuutton.hidden=YES;
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                    
+//                    [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
                 }
                 else
                 {
                     
-                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+//                    NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                  
                     cell_Private.Image_PalyBuutton.hidden=NO;
                     
                     
                 }
+                [cell_Private.Image_Profile sd_setShowActivityIndicatorView:YES];
+                [cell_Private.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 
-                
+                  [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
                 NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
@@ -697,7 +723,7 @@
         if ([[NSString stringWithFormat:@"%@",cellChecking] isEqualToString:@"public"])
         {
             didselectDic=[Array_Public  objectAtIndex:indexPath.row];
-            cell_Public = [Tableview_inplay cellForRowAtIndexPath:indexPath];
+//            cell_Public = [Tableview_inplay cellForRowAtIndexPath:indexPath];
             
             [Array_new addObject:didselectDic];
             if ([[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"accepted"] ]isEqualToString:@"yes"])
@@ -719,7 +745,7 @@
         if ([cellChecking isEqualToString:@"private"])
         {
             didselectDic=[Array_Private  objectAtIndex:indexPath.row];
-            cell_Private = [Tableview_inplay cellForRowAtIndexPath:indexPath];
+//            cell_Private = [Tableview_inplay cellForRowAtIndexPath:indexPath];
             [Array_new addObject:didselectDic];
             
             if ([[didselectDic valueForKey:@"accepted"]isEqualToString:@"yes"])

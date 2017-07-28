@@ -194,7 +194,7 @@
             [cell_OneImageVid.Image_ThreeDotsFlag addGestureRecognizer:FlagTapped];
            
             
-         
+           
             
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
@@ -202,6 +202,9 @@
                   [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
                 cell_OneImageVid.image_playButton.hidden=YES;
                  [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
+                
+               
+                
             }
             else
             {

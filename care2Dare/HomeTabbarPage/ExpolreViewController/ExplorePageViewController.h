@@ -26,10 +26,6 @@
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Explore;
 
-@property(nonatomic,strong)WorldExpTableViewCell * cell_WorldExp;
-@property(nonatomic,strong)FriendExpTableViewCell * cell_FriendExp;
-@property(nonatomic,strong)FavriteTableViewCell * cell_Favorite;
-
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 @property (nonatomic,assign) float percent;
 @property (nonatomic,assign) float percent1;

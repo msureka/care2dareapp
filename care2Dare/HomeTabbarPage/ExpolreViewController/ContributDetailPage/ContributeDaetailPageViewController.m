@@ -7,7 +7,10 @@
 //
 
 #import "ContributeDaetailPageViewController.h"
+
 #import "UIImageView+WebCache.h"
+#import "UIView+WebCache.h"
+
 #import "ContributeMoneyViewController.h"
 #import "RaisedContributeViewController.h"
 #import "SBJsonParser.h"
@@ -16,7 +19,7 @@
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
 #import "ProfilePageDetailsViewController.h"
-#import "WatchVediosViewController.h"
+
 #import "SDAVAssetExportSession.h"
 #import "WatchVedioScrollViewController.h"
 
@@ -75,13 +78,15 @@
 
 
 @implementation ContributeDaetailPageViewController
-@synthesize cell_TwoDetails,cell_OneImageVid,cell_ThreeComments,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,Cell_List;
+@synthesize cell_TwoDetails,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader;
 @synthesize TextViews,BackTextViews;
 @synthesize textOne,ViewTextViewOne,Tableview_ContriBute,cell_Vediolist;
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+
     defaults=[[NSUserDefaults alloc]init];
      previousArray  = [[NSArray alloc]init];
     upperBorder = [CALayer layer];
@@ -404,7 +409,8 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     
     
     
-    
+   
+   
     
     
 }
@@ -803,7 +809,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
     XpostionNewSymbol=40;
     YpostionNewSymbol=0;
     WpostionNewSymbol=20;
@@ -1852,7 +1858,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache clearMemory];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -1905,7 +1913,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             
         case 0:
         {
-            cell_OneImageVid = (OneImageVedioTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellone forIndexPath:indexPath];
+            OneImageVedioTableViewCell * cell_OneImageVid = (OneImageVedioTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellone forIndexPath:indexPath];
             
             
             
@@ -1924,21 +1932,22 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThreeDotsTapped_Action:)];
             [cell_OneImageVid.Image_Favourite addGestureRecognizer:FavouriteTapped];
 
-           
+            [cell_OneImageVid.Image_Backround sd_setShowActivityIndicatorView:YES];
+            [cell_OneImageVid.Image_Backround sd_setIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
      
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
                 [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
                 cell_OneImageVid.image_playButton.hidden=YES;
                 NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"]];
-                
-                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+               
+                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             }
             else
             {
                 NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
                 
-                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
              cell_OneImageVid.image_playButton.hidden=NO;
                 cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
     UITapGestureRecognizer * ImageTap_playButton =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTap_playButtonAction:)];
@@ -2074,7 +2083,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         NSURL *urlSec1=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersprofilepic2"]];
 
                     
-        [cell_TwoDetails.image_SecProfile1 sd_setImageWithURL:urlSec1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+        [cell_TwoDetails.image_SecProfile1 sd_setImageWithURL:urlSec1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     
         UITapGestureRecognizer *image_SecProfileTapped1 =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails1:)];
             
@@ -2099,11 +2108,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     
                     
         NSURL *urlSec1=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersprofilepic2"]];
-        [cell_TwoDetails.image_SecProfile1 sd_setImageWithURL:urlSec1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+        [cell_TwoDetails.image_SecProfile1 sd_setImageWithURL:urlSec1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     
         NSURL *urlSec2=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"challengersprofilepic3"]];
                     
-        [cell_TwoDetails.image_SecProfile2 sd_setImageWithURL:urlSec2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+        [cell_TwoDetails.image_SecProfile2 sd_setImageWithURL:urlSec2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     
                     
         cell_TwoDetails.image_SecProfile1.hidden=NO;
@@ -2185,11 +2194,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [cell_TwoDetails.image_SecProfile addGestureRecognizer:image_SecProfileTapped];
                 
         
-                [cell_TwoDetails.image_FristProfile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                [cell_TwoDetails.image_FristProfile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 
                 
                 
-                   [cell_TwoDetails.image_SecProfile sd_setImageWithURL:urlSec placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                   [cell_TwoDetails.image_SecProfile sd_setImageWithURL:urlSec placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 
                 
                 
@@ -2376,7 +2385,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             break;
         case 2:
         {
-            Cell_List = (ListofVedioCommentsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"CellList" forIndexPath:indexPath];
+            ListofVedioCommentsTableViewCell * Cell_List = (ListofVedioCommentsTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"CellList" forIndexPath:indexPath];
             
             if ([Str_Tapped_Comments_Vedio isEqualToString:@"Comment"])
             {
@@ -2556,7 +2565,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             
 
             
-            cell_ThreeComments = [Tableview_ContriBute dequeueReusableCellWithIdentifier:@"Cell"];
+            CommentsTableViewCell * cell_ThreeComments = [Tableview_ContriBute dequeueReusableCellWithIdentifier:@"Cell"];
            
             
             if (cell_ThreeComments == nil)
@@ -2686,7 +2695,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"useridsender"]])
                 {
                     NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
-                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
                  //   label.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
@@ -2722,7 +2731,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 else
                 {
                     NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
-                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
 //                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
                     label1.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:0.2];
@@ -2772,7 +2781,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 //Chat_UserImage.backgroundColor=[UIColor clearColor];
                 NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"imageurl"];
-                [Chat_UserImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                [Chat_UserImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 Chat_UserImage.clipsToBounds=YES;
                 Chat_UserImage.layer.cornerRadius=9.0f;
                 Chat_UserImage.contentMode=UIViewContentModeScaleAspectFit;
@@ -2787,7 +2796,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 {
                     
                     NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
-                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     [Chat_UserImage setFrame:CGRectMake(52,4,imgwidth,imgheight)];
                     Chat_UserImage.clipsToBounds=YES;
@@ -2805,7 +2814,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     
                     
                     NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
-                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [desc_Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
                     [Chat_UserImage setFrame:CGRectMake((self.view.frame.size.width-64)-imgwidth,4,imgwidth,imgheight)];
@@ -2917,7 +2926,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     
                 NSURL * url=[[Array_showrecordvid objectAtIndex:indexPath.row]valueForKey:@"thumbnailurl"];
                     
-                    [cell_Vediolist.Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [cell_Vediolist.Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 
                 
@@ -2932,7 +2941,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
               
                 
                 NSURL *urlRight=[NSURL URLWithString:[dic_value valueForKey:@"profileimage"]];
-                [cell_Vediolist.ImageRight_RightProfile sd_setImageWithURL:urlRight placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                [cell_Vediolist.ImageRight_RightProfile sd_setImageWithURL:urlRight placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 
                 
                 
@@ -3677,7 +3686,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     }
     
     
-    CGFloat y = CGRectGetMaxY(self.textOne.frame);
+   // CGFloat y = CGRectGetMaxY(self.textOne.frame);
     
     UITextPosition* pos = textOne.endOfDocument;
     

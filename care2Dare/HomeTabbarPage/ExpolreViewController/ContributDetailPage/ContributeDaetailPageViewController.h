@@ -54,12 +54,11 @@
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_ContriBute;
 @property(nonatomic,weak)IBOutlet UIView * view_Topheader;
-@property(nonatomic,strong)OneImageVedioTableViewCell * cell_OneImageVid;
+
 @property(nonatomic,strong)TwoDetailsTableViewCell* cell_TwoDetails;
-@property(nonatomic,strong)CommentsTableViewCell * cell_ThreeComments;
 @property(nonatomic,strong)VediosListsTableViewCell * cell_Vediolist;
 //@property(nonatomic,strong)RecordedVidTableViewCell * cell_recordvid;
-@property(nonatomic,strong) ListofVedioCommentsTableViewCell * Cell_List;
+//@property(nonatomic,strong) ListofVedioCommentsTableViewCell * Cell_List;
 
 @property(nonatomic,strong)NSMutableArray * AllArrayData;
 

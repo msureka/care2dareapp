@@ -127,8 +127,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
 
     [self communicationServer];
-    
-    NSTimer * HomechatTimer =  [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(communicationServer) userInfo:nil  repeats:YES];
+  
+   HomechatTimer =  [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(communicationServer) userInfo:nil  repeats:YES];
 }
 -(void)communicationServer
 {
@@ -305,7 +305,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  
 }
 
 - (void)viewWillLayoutSubviews

@@ -124,7 +124,7 @@
             email=(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0);
             
         }
-        NSLog(@"Email222===%@",email);
+       
         
         NSString * fullName;
         NSString *firstName = (__bridge_transfer NSString
@@ -153,13 +153,10 @@
         
         //
         
-        NSString* mobileLabel;
-        NSString* basic_mobile;
-        NSString* work_mobile;
-        NSString* home_mobile;
-        NSString* strOtherMobile;
+        
+     ;
         NSString* phonelabels;
-        NSString* mobileLabel33;
+        
         
         
         
@@ -215,9 +212,7 @@
     }
     
     
-    NSLog(@"Array_Phone = %@",Array_Phone);
-    NSLog(@"Array_Email = %@",Array_Email);
-    NSLog(@"Array_name = %@",Array_name);
+   
     if (Array_name.count !=0)
     {
         [self ContactCommunication];
@@ -382,7 +377,7 @@
             break;
     }
     
-    return nil;
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

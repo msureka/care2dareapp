@@ -11,8 +11,7 @@
 #import "PrivateTableViewCell.h"
 
 @interface InplayViewController : UIViewController
-@property(nonatomic,strong)PublicTableViewCell * cell_Public;
-@property(nonatomic,strong)PrivateTableViewCell * cell_Private;
+
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 @property(nonatomic,strong) IBOutlet UITableView * Tableview_inplay;

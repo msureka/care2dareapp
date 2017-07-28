@@ -124,12 +124,12 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 {
 	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr *)hostAddress);
 
-	Reachability* returnValue = NULL;
+	Reachability* returnValue = nil;
 
-	if (reachability != NULL)
+	if (reachability != nil)
 	{
 		returnValue = [[self alloc]init];
-		if (returnValue != NULL)
+		if (returnValue != nil)
 		{
 			returnValue->_reachabilityRef = reachability;
 			returnValue->_alwaysReturnLocalWiFiStatus = NO;

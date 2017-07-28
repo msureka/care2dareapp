@@ -115,7 +115,7 @@ flag_challenge=@"no";
     [self ClienserverCommAll];
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    
+    [super viewWillDisappear:YES];
 [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdatedBudge" object:nil];
 }
 - (void)Refresh_UpdatedBudge
@@ -676,9 +676,11 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
     
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache clearMemory];
 }
 
 

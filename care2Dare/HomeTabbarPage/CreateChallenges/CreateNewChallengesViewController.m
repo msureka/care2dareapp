@@ -49,9 +49,9 @@
     UIImagePickerController *cameraUI;
     UIButton *Button_close;
     int remainingCounts;
-    NSTimer *videoTimer;
+    //NSTimer *videoTimer;
 }
-@property (nonatomic, retain) NSTimer *videoTimer;
+//@property (nonatomic, retain) NSTimer *videoTimer;
 @end
 
 @implementation CreateNewChallengesViewController
@@ -413,7 +413,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     Label_Donate.textColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
     Label_Raised.textColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1];
     
-    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count);
+    //CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count);
     
 //    if ([_Textfield_Amount.text isEqualToString:@""] || calculate<=0)
 //    {
@@ -1653,22 +1653,101 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         encodedImageThumb=@"";
         //chosenImage = info[UIImagePickerControllerEditedImage];
         chosenImage = info[UIImagePickerControllerOriginalImage];
-        BackroundImg.image = chosenImage;
+       
+        
+       // NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.7);
+        
+        UIImageView * imageBackround=[[UIImageView alloc]initWithImage:chosenImage];
+        
+        float actualHeight = chosenImage.size.height;
+        float actualWidth = chosenImage.size.width;
+        float maxHeight = 1000.0;
+        float maxWidth = 1000.0;
+        float imgRatio = actualWidth/actualHeight;
+        float maxRatio = maxWidth/maxHeight;
+        float compressionQuality = 0.7;
+        
+        if (actualHeight > maxHeight || actualWidth > maxWidth){
+            if(imgRatio < maxRatio){
+                
+                imgRatio = maxHeight / actualHeight;
+                actualWidth = imgRatio * actualWidth;
+                actualHeight = maxHeight;
+            }
+            else if(imgRatio > maxRatio){
+                //adjust height according to maxWidth
+                imgRatio = maxWidth / actualWidth;
+                actualHeight = imgRatio * actualHeight;
+                actualWidth = maxWidth;
+            }
+            else{
+                actualHeight = maxHeight;
+                actualWidth = maxWidth;
+            }
+        }
+        NSLog(@"Actual height : %f and Width : %f",actualHeight,actualWidth);
+        CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+        UIGraphicsBeginImageContext(rect.size);
+        [imageBackround.image drawInRect:rect];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        NSData *imageDataback = UIImageJPEGRepresentation(img, compressionQuality);
+        UIGraphicsEndImageContext();
+        
+        NSLog(@"size of image in KB: %f ", imageDataback.length/1024.0);
+        
+       
+        
+        
+   // NSData * imageData1 = UIImageJPEGRepresentation(chosenImage, 0.3);
+        
+        float maxHeight1 = 500.0;
+        float maxWidth1 = 500.0;
+        float imgRatio1 = actualWidth/actualHeight;
+        float maxRatio1 = maxWidth1/maxHeight1;
+        float compressionQuality1 = 0.7;
+        
+        if (actualHeight > maxHeight1 || actualWidth > maxWidth1){
+            if(imgRatio1 < maxRatio1){
+                
+                imgRatio1 = maxHeight1 / actualHeight;
+                actualWidth = imgRatio1 * actualWidth;
+                actualHeight = maxHeight1;
+            }
+            else if(imgRatio1 > maxRatio1){
+                //adjust height according to maxWidth
+                imgRatio1 = maxWidth1 / actualWidth;
+                actualHeight = imgRatio1 * actualHeight;
+                actualWidth = maxWidth1;
+            }
+            else{
+                actualHeight = maxHeight1;
+                actualWidth = maxWidth1;
+            }
+        }
+        NSLog(@"Actual height : %f and Width : %f",actualHeight,actualWidth);
+        CGRect rect1 = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+        UIGraphicsBeginImageContext(rect1.size);
+        [imageBackround.image drawInRect:rect1];
+        UIImage *img1 = UIGraphicsGetImageFromCurrentImageContext();
+        NSData *imageDataback1 = UIImageJPEGRepresentation(img1, compressionQuality1);
+        UIGraphicsEndImageContext();
+         NSLog(@"size of image in KB: %f ", imageDataback1.length/1024.0);
+        BackroundImg.image = [UIImage imageWithData:imageDataback1];
         BackroundImg.contentMode=UIViewContentModeScaleAspectFill;
         
-        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.8);
+         ImageNSdataThumb = [Base64 encode:imageDataback1];
         
-    NSData * imageData1 = UIImageJPEGRepresentation(chosenImage, 0.3);
+                // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
-        // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        ImageNSdata = [Base64 encode:imageDataback];
         
-        ImageNSdata = [Base64 encode:imageData];
-        
-        encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Base64 encode:imageData1],NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+        encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
         encodedImage = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdata,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
-        
+        [self dataimage];
+   
+
         
         
         [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
@@ -1994,5 +2073,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 //    
 //     }
 
-
+-(void)dataimage
+{
+    NSLog(@"MainiMage height : %f and Width : %f",BackroundImg.image.size.height,BackroundImg.image.size.width);
+    
+}
 @end
