@@ -27,7 +27,7 @@
 #import "DonationHistroyViewController.h"
 @interface AccountSettViewController ()<UIAlertViewDelegate,MFMessageComposeViewControllerDelegate>
 {
-    NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images,*Array_TitleNotif;
+    NSArray *Array_Title1,*Array_Title2,*Array_Title3,*Array_Title4,*Array_Gender2,*Array_Images,*Array_TitleNotif,*Array_checknotifStatus;
     UIView *sectionView;
     NSUserDefaults *defaults;
     
@@ -41,17 +41,17 @@
     NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
     
     NSMutableArray *fb_friend_id;
-   
+    NSString * Str_Push_Challenge,*Str_Push_Contr,*Str_Push_Vedio,*Str_Push_Friend,*Str_Push_OnlyDare;
 }
 
 @end
 
 @implementation AccountSettViewController
-@synthesize onecell,Twocell2,Threecell3,HeadTopView;
+@synthesize onecell,Threecell3,HeadTopView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    defaults=[[NSUserDefaults alloc]init];
     CALayer *borderBottom = [CALayer layer];
     borderBottom.backgroundColor = [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1.0].CGColor;
     borderBottom.frame = CGRectMake(0, HeadTopView.frame.size.height - 1, HeadTopView.frame.size.width, 1);
@@ -60,8 +60,9 @@
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
+  
     
-  Array_TitleNotif=[[NSArray alloc]initWithObjects:@"Messages",@"Alerts",@"Challenge notification", nil];
+  Array_TitleNotif=[[NSArray alloc]initWithObjects:@"Challenges",@"Contributions",@"Videos",@"Friends", nil];
     Array_Title1=[[NSArray alloc]initWithObjects:@"Facebook Friends",@"Twitter Friends",@"Contacts", nil];
 Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_twitter.png",@"setting_contacts.png", nil];
  
@@ -70,15 +71,23 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     
     
     Array_Title3=[[NSArray alloc]initWithObjects:@"Report a Problem",@"Terms and Conditions",@"Privacy Policy",@"Log Out",@"Delete my account",nil];
-    
    
-    
-    
-    defaults=[[NSUserDefaults alloc]init];
+    Str_Push_Contr=[defaults valueForKey:@"pushcontributions"];
+    Str_Push_Friend=[defaults valueForKey:@"pushfriends"];
+    Str_Push_Vedio=[defaults valueForKey:@"pushvideos"];
+    Str_Push_Challenge=[defaults valueForKey:@"pushchallenges"];
+    Str_Push_OnlyDare=[defaults valueForKey:@"onlyfriendscandare"];
+   
+
+
     // Creating refresh control
 
-    [TableView_Setting reloadData];
-  
+   // [TableView_Setting reloadData];
+    [TableView_Setting beginUpdates];
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:TableView_Setting]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [TableView_Setting reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
+    [TableView_Setting endUpdates];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -147,7 +156,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
             case 0:
             {
 
-
+              
 
                 onecell = (AccOneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:Cellid1 forIndexPath:indexPath];
                 
@@ -164,7 +173,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
             case 1:
                 
             {
-                Twocell2 = (AccTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId2 forIndexPath:indexPath];
+                AccTwoTableViewCell * Twocell2 = (AccTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId2 forIndexPath:indexPath];
                 Twocell2.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
                 Twocell2.layer.borderWidth=1.0f;
                 
@@ -172,10 +181,21 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 if (indexPath.row == Array_Title2.count-1)
                 {
                     Twocell2.switchOutlet.hidden=NO;
-                     [Twocell2.switchOutlet setOn:NO animated:YES];;
+                    if ([Str_Push_OnlyDare isEqualToString:@"yes"])
+                    {
+                        [Twocell2.switchOutlet setOn:YES animated:YES];;
+                    }
+                    else
+                    {
+                      [Twocell2.switchOutlet setOn:NO animated:YES];;
+                    }
+                    
+                  [Twocell2.switchOutlet addTarget: self action: @selector(Swich_OnlyDare:) forControlEvents:UIControlEventValueChanged];
                 }
                 else
                 {
+                    
+                   
                     // [Twocell2.switchOutlet setOn:YES animated:YES];;
                     Twocell2.switchOutlet.hidden=YES;
                 }
@@ -208,9 +228,62 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 Twocell22.layer.borderWidth=1.0f;
                 
                 Twocell22.LabelVal.text=[Array_TitleNotif objectAtIndex:indexPath.row];
-               
-                    Twocell22.switchOutlet.hidden=NO;
                 
+                   // Twocell22.switchOutlet.hidden=YES;
+                Twocell22.switchOutlet.tag=indexPath.row;
+                 [Twocell22.switchOutlet addTarget: self action: @selector(Swich_PushNotification:) forControlEvents:UIControlEventValueChanged];
+                if (indexPath.row==0)
+                {
+                 
+                 
+                    if ([Str_Push_Challenge isEqualToString:@"no"])
+                    {
+                        [Twocell22.switchOutlet setOn:NO animated:YES];;
+                    }
+                    else
+                    {
+                        [Twocell22.switchOutlet setOn:YES animated:YES];;
+                    }
+                    
+                }
+                if (indexPath.row==1)
+                {
+                    
+                    if ([Str_Push_Contr isEqualToString:@"no"])
+                    {
+                        [Twocell22.switchOutlet setOn:NO animated:YES];;
+                    }
+                    else
+                    {
+                        [Twocell22.switchOutlet setOn:YES animated:YES];;
+                    }
+                }
+                if (indexPath.row==2)
+                {
+                     Twocell22.switchOutlet.hidden=NO;
+                    if ([Str_Push_Vedio isEqualToString:@"no"])
+                    {
+                        [Twocell22.switchOutlet setOn:NO animated:YES];;
+                    }
+                    else
+                    {
+                        [Twocell22.switchOutlet setOn:YES animated:YES];;
+                    }
+                }
+                if (indexPath.row==3)
+                {
+                    Twocell22.switchOutlet.hidden=NO;
+                    if ([Str_Push_Friend isEqualToString:@"no"])
+                    {
+                        [Twocell22.switchOutlet setOn:NO animated:YES];;
+                    }
+                    else
+                    {
+                        [Twocell22.switchOutlet setOn:YES animated:YES];;
+                    }
+                }
+                
+              
                
                 return Twocell22;
                 
@@ -828,7 +901,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
 }
 - (IBAction)DoneButton:(id)sender;
 {
-    
+[self clientServerCommunication_Savephp];
    // self.hidesBottomBarWhenPushed = NO;
     [self.navigationController popViewControllerAnimated:YES];
        // [self dismissViewControllerAnimated:YES completion:nil];
@@ -871,6 +944,110 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
             [defaults synchronize];
         }
     }
+    
+}
+-(void)clientServerCommunication_Savephp
+{
+        
+    NSString *userid= @"userid";
+    NSString *useridval =[defaults valueForKey:@"userid"];
+    
+       NSString *onlyfriendscandare=@"onlyfriendscandare";
+       NSString *pushchallenges=@"pushchallenges";
+       NSString *pushcontributions=@"pushcontributions";
+       NSString *pushvideos=@"pushvideos";
+       NSString *pushfriends=@"pushfriends";
+   
+
+    
+    
+    NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridval,onlyfriendscandare,Str_Push_OnlyDare,pushchallenges,Str_Push_Challenge,pushcontributions,Str_Push_Contr,pushvideos,Str_Push_Vedio,pushfriends,Str_Push_Friend];
+    
+    
+    
+#pragma mark - swipe sesion
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSURL *url;
+    NSString *  urlStrLivecount=[urlplist valueForKey:@"savesettings"];;
+    url =[NSURL URLWithString:urlStrLivecount];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];//Web API Method
+    
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+    NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                     {
+                                         
+                                         if(data)
+                                         {
+                                             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                             NSInteger statusCode = httpResponse.statusCode;
+                                             if(statusCode == 200)
+                                             {
+                                                 
+                                                 
+                                                 NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                 
+                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                 
+                                                 ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                 
+                                                 if ([ResultString isEqualToString:@"updated"])
+                                                 {
+                                        [defaults setObject:Str_Push_OnlyDare forKey:@"onlyfriendscandare"];
+                                                     
+                                        [defaults setObject:Str_Push_Challenge forKey:@"pushchallenges"];
+                                                     
+                                       [defaults setObject:Str_Push_Contr forKey:@"pushcontributions"];
+                                                     
+                                        [defaults setObject:Str_Push_Friend forKey:@"pushfriends"];
+                                                     
+                                        [defaults setObject:Str_Push_Vedio forKey:@"pushvideos"];
+                                                     
+                                                     
+                                                   [defaults synchronize];
+                                                     
+                                                 }
+                                                 else
+                                                 {
+                                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not update your settings. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                                     
+                                                     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                        style:UIAlertActionStyleDefault
+                                                                                                      handler:nil];
+                                                     [alertController addAction:actionOk];
+                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                                 }
+                                                
+                                                
+                                                 
+                                             }
+                                             
+                                             else
+                                             {
+                                                 NSLog(@" error login1 ---%ld",(long)statusCode);
+                                             
+                                             }
+                                             
+                                             
+                                         }
+                                         else if(error)
+                                         {
+                                             
+                                             NSLog(@"error login2.......%@",error.description);
+                                         }
+                                         
+                                         
+                                     }];
+    [dataTask resume];
     
 }
 -(void)loginWithTW
@@ -1234,4 +1411,51 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     [dataTask resume];
     
 }
+- (IBAction)Swich_OnlyDare:(id)sender
+{
+    UISwitch *SwichOnoff = (UISwitch *) sender;
+    NSLog(@"Swich Tag===%ld",(long)SwichOnoff.tag);
+    if (SwichOnoff.on)
+    {
+        Str_Push_OnlyDare=@"yes";
+    }
+    else
+    {
+        Str_Push_OnlyDare=@"yes";
+    }
+}
+- (IBAction)Swich_PushNotification:(id)sender
+{
+    NSString * changeString;
+    UISwitch *SwichOnoff = (UISwitch *) sender;
+    NSLog(@"Swich Tag===%ld",(long)SwichOnoff.tag);
+    if (SwichOnoff.on)
+    {
+        changeString=@"yes";
+    }
+    else
+    {
+     changeString=@"no";
+    }
+    if ((long)SwichOnoff.tag==0)
+    {
+        Str_Push_Challenge=changeString;
+    }
+    if ((long)SwichOnoff.tag==1)
+    {
+      Str_Push_Contr=changeString;
+    }
+    if((long)SwichOnoff.tag==2)
+    {
+      Str_Push_Vedio=changeString;
+    }
+    if ((long)SwichOnoff.tag==3)
+    {
+      Str_Push_Friend=changeString;
+    }
+}
+
+
+
+
 @end

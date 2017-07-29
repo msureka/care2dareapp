@@ -84,5 +84,7 @@
 	<string>http://www.care2dareapp.com/app/totalraisedcount.php</string>
 	<key>showcompleted</key>
 	<string>http://www.care2dareapp.com/app/showcompleted.php</string>
+	<key>savesettings</key>
+	<string>http://www.care2dareapp.com/app/savesettings.php</string>
 </dict>
 </plist>

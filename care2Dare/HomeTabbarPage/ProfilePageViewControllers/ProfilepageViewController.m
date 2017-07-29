@@ -32,6 +32,7 @@
     CALayer *Bottomborder_Cell2;
     NSString * ImageNSdata,*encodedImage,* totalRaisedCount;
     NSInteger Array_WorldCount,modvalues;
+   
 }
 - (void) displayImage:(UIImageView*)imageView withImage:(UIImage*)image;
 @end
@@ -56,7 +57,8 @@
     Str_Frends=[defaults valueForKey:@"friends"];
     Str_name=[defaults valueForKey:@"name"];
     Str_profileurl=[defaults valueForKey:@"profileimage"];
-    Str_profileurl=[[Array_Profile objectAtIndex:0]valueForKey:@"profileimage"];
+  
+   
     
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -97,7 +99,8 @@
 [self ClientserverCommprofile];
     [self Communication_totalraisedcount];
      [self Communication_showcompletedRaised];
-    
+    SDImageCache *cache = [SDImageCache sharedImageCache];
+    [cache removeImageForKey:Str_profileurl withCompletion:nil];
 }
 
 - (void) viewDidLayoutSubviews
@@ -113,7 +116,7 @@
 -(void)PulltoRefershtable
 {
     
-
+   
    [self ClientserverCommprofile];
   
     [_Tableview_Profile reloadData];
@@ -229,7 +232,10 @@ return 1;
             {
                 NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
-                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+               
+                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                
+
                  [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
                 
             }
@@ -243,7 +249,7 @@ return 1;
                 {
 NSURL *url=[NSURL URLWithString:Str_profileurl];
                     
-[cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+ [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 }
                 else
                 {

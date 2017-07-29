@@ -17,7 +17,6 @@
     IBOutlet UITableView * TableView_Setting;
 }
 @property(nonatomic,strong)AccOneTableViewCell *onecell;
-@property(nonatomic,strong)AccTwoTableViewCell *Twocell2;
 @property(nonatomic,strong)AccThreeTableViewCell *Threecell3;
 
 @property (nonatomic, retain) UIRefreshControl *refreshControl;

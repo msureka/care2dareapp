@@ -17,7 +17,7 @@
 #import "SBJsonParser.h"
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
-
+#import "Firebase.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface LoginWithEmailViewController ()
 {
@@ -384,7 +384,7 @@
         NSString *countryVal =[defaults valueForKey:@"Countryname"];
         
         NSString *devicetoken= @"devicetoken";
-        NSString *devicetokenVal =@"123";
+        NSString *devicetokenVal =[[FIRInstanceID instanceID] token];
         
         NSString *regType= @"regtype";
         NSString *regTypeVal =@"LOGINEMAIL";
@@ -482,6 +482,15 @@
                                                      {
                                                          
                                                          
+                                                         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"onlyfriendscandare"]] forKey:@"onlyfriendscandare"];
+                                                         
+                                                         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushchallenges"]] forKey:@"pushchallenges"];
+                                                         
+                                                         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushcontributions"]] forKey:@"pushcontributions"];
+                                                         
+                                                         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushfriends"]] forKey:@"pushfriends"];
+                                                         
+                                                         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushvideos"]] forKey:@"pushvideos"];
                                                          
                                                          [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"challenges"]] forKey:@"challenges"];
                                                          
@@ -836,7 +845,7 @@
     NSString *countryVal =[defaults valueForKey:@"Countryname"];
     
     NSString *devicetoken= @"devicetoken";
-    NSString *devicetokenVal =@"123";
+    NSString *devicetokenVal =[[FIRInstanceID instanceID] token];
     
     NSString *regType= @"regtype";
     
@@ -968,7 +977,15 @@
                                                      [self.view hideActivityViewWithAfterDelay:0];
                                                      
                                                      
+                                                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"onlyfriendscandare"]] forKey:@"onlyfriendscandare"];
                                                      
+                                                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushchallenges"]] forKey:@"pushchallenges"];
+                                                     
+                                                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushcontributions"]] forKey:@"pushcontributions"];
+                                                     
+                                                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushfriends"]] forKey:@"pushfriends"];
+                                                     
+                                                     [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushvideos"]] forKey:@"pushvideos"];
                                                      
                                                      
                                                      

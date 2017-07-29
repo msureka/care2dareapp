@@ -130,31 +130,8 @@ str_tablereload=@"no";
                                                                                 action:@selector(ViewTap51Tapped:)];
     [transparancyTuchView addGestureRecognizer:ViewTap51];
     
-    UIColor *bgRefreshColor = [UIColor whiteColor];
-    
-    // Creating refresh control
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    
-    [self.refreshControl setBackgroundColor:bgRefreshColor];
-    self.refreshControl = self.refreshControl;
-    
-    // Creating view for extending background color
-    CGRect frame = Tableview_Explore.bounds;
-    frame.origin.y = -frame.size.height;
-    UIView* bgView = [[UIView alloc] initWithFrame:frame];
-    bgView.backgroundColor = bgRefreshColor;
-    
-    // Adding the view below the refresh control
-    [Tableview_Explore insertSubview:bgView atIndex:0];
-    self.refreshControl = self.refreshControl;
-    
-    self.refreshControl.tintColor = [UIColor blackColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(PulltoRefershtable)
-                  forControlEvents:UIControlEventValueChanged];
-   
-   // [Tableview_Explore addSubview:self.refreshControl];
-    [Tableview_Explore reloadData];
+ 
+   // [Tableview_Explore reloadData];
     
     [Tableview_Explore addPullToRefreshWithActionHandler:^{
         [self insertRowAtTop];
@@ -175,7 +152,7 @@ str_tablereload=@"no";
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
        [self PulltoRefershtable];
-    int64_t delayInSeconds = 1.0;
+    int64_t delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         

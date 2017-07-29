@@ -1700,11 +1700,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
    // NSData * imageData1 = UIImageJPEGRepresentation(chosenImage, 0.3);
         
-        float maxHeight1 = 500.0;
-        float maxWidth1 = 500.0;
+        float maxHeight1 = 400.0;
+        float maxWidth1 = 400.0;
         float imgRatio1 = actualWidth/actualHeight;
         float maxRatio1 = maxWidth1/maxHeight1;
-        float compressionQuality1 = 0.7;
+        float compressionQuality1 = 0.5;
         
         if (actualHeight > maxHeight1 || actualWidth > maxWidth1){
             if(imgRatio1 < maxRatio1){

@@ -18,6 +18,7 @@
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
 #import "LoginWithEmailViewController.h"
+#import "Firebase.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface LoginPageViewController ()
 {
@@ -454,7 +455,7 @@
     NSString *countryVal =[defaults valueForKey:@"Countryname"];
     
     NSString *devicetoken= @"devicetoken";
-    NSString *devicetokenVal =@"123";
+    NSString *devicetokenVal =[[FIRInstanceID instanceID] token];
     
     NSString *regType= @"regtype";
   
@@ -466,6 +467,12 @@
    
     NSString *friendlist= @"friendlist";
     NSString *friendlistval =[NSString stringWithFormat:@"%@",Str_fb_friend_id];
+    
+    
+    
+    
+    
+    
     
     NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",fbid1,Fbid,email,emailFb,gender,genderfb,name,nameFb,password,passwordVal,Dob,DobVal,regType,regTypeVal,city,cityVal,country,countryVal,devicetoken,devicetokenVal,Platform,PlatformVal,imageurl,profile_picFb,nooffriends,Str_fb_friend_id_Count,friendlist,friendlistval];
     
@@ -587,7 +594,16 @@
                                         
                                         
                                         
+           
+            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"onlyfriendscandare"]] forKey:@"onlyfriendscandare"];
                                         
+            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushchallenges"]] forKey:@"pushchallenges"];
+                                        
+            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushcontributions"]] forKey:@"pushcontributions"];
+                                        
+            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushfriends"]] forKey:@"pushfriends"];
+                                        
+            [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"pushvideos"]] forKey:@"pushvideos"];
                                         
                                         
         [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"challenges"]] forKey:@"challenges"];

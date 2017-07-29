@@ -17,6 +17,10 @@
 #import "HomeTabBarViewController.h"
 #import "MainnavigationViewController.h"
 #import "TabNavigationViewController.h"
+
+//#import <FirebaseAuth/FirebaseAuth.h>
+#import "Firebase.h"
+@import UserNotifications;
 @interface AppDelegate ()<CLLocationManagerDelegate>
 {
     CLLocationManager *locationManager ;
@@ -56,6 +60,75 @@
     }
     else
     {
+        
+        
+         [FIRApp configure];
+        
+        
+        //--------------------------------------------------------------------------------------------------------
+        
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
+            
+            UIUserNotificationType allNotificationTypes =
+            
+            (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+            
+            UIUserNotificationSettings *settings =
+            
+            [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+            
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+            
+        } else {
+            
+            // iOS 10 or later
+            
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+            
+            // For iOS 10 display notification (sent via APNS)
+            
+            [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+            
+            UNAuthorizationOptions authOptions =
+            
+            UNAuthorizationOptionAlert
+            
+            | UNAuthorizationOptionSound
+            
+            | UNAuthorizationOptionBadge;
+            
+            [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                
+            }];
+            
+#endif
+            
+        }
+        
+        
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        
+//------------------------------token----------------------------
+        
+        NSString *token = [[FIRInstanceID instanceID] token];
+        
+        NSLog(@"registration token: %@", token);
+        
+        
+        
+        // Add observer to listen for the token refresh notification.
+        
+        [[NSNotificationCenter defaultCenter]
+         
+         addObserver:self selector:@selector(onTokenRefresh)
+         
+         name:kFIRInstanceIDTokenRefreshNotification object:nil];
+        
+        
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        
          [[FBSDKApplicationDelegate sharedInstance] application:application
                                         didFinishLaunchingWithOptions:launchOptions];
         
@@ -242,4 +315,38 @@
     }
     
 }
+- (void)onTokenRefresh {
+    
+    // Get the default token if the earlier default token was nil. If the we already
+    
+    // had a default token most likely this will be nil too. But that is OK we just
+    
+    // wait for another notification of this type.
+    
+    NSString *token = [[FIRInstanceID instanceID] token];
+    
+    NSLog(@"registration token1: %@", token);
+    
+    
+    
+    
+    // custom stuff as before.
+    
+}
+- (void)application:(UIApplication *)application
+
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+
+fetchCompletionHandler:
+
+(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // Handle your message. With swizzling enabled, no need to indicate
+    
+    // that a message was received.
+    
+}
+
+
+
 @end

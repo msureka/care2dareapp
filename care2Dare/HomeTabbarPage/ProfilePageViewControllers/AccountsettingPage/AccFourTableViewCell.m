@@ -17,7 +17,7 @@
     [self.switchOutlet setOn:YES animated:YES];
     
    
-    self.switchOutlet.transform = CGAffineTransformMakeScale(0.80, 0.80);
+    self.switchOutlet.transform = CGAffineTransformMakeScale(1, 1);
     
 }
 

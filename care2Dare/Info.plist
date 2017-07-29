@@ -36,6 +36,14 @@
 				<string>twitterkit-X287oIrcSqHX86y89JKTjnZLV</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1010388377208-8r3j7gnq6usd7c6atvr9jcbm6eatmapm</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>11</string>
@@ -92,6 +100,10 @@
 	<string>Permission for Microphone for recording Audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Permission to access Photo Library</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
