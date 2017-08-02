@@ -51,9 +51,11 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 @dynamic infiniteScrollingView;
 
-- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler {
-    
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler
+{
+   
     if(!self.infiniteScrollingView) {
+       
         SVInfiniteScrollingView *view = [[SVInfiniteScrollingView alloc] initWithFrame:CGRectMake(0, self.contentSize.height, self.bounds.size.width, SVInfiniteScrollingViewHeight)];
         view.infiniteScrollingHandler = actionHandler;
         view.scrollView = self;
@@ -126,7 +128,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
-        
+       
         // default styling values
         self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -283,18 +285,57 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         CGRect viewBounds = [self.activityIndicatorView bounds];
         CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
         [self.activityIndicatorView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
-        
+       NSUserDefaults *    defaults=[[NSUserDefaults alloc]init];
         switch (newState) {
             case SVInfiniteScrollingStateStopped:
-                [self.activityIndicatorView stopAnimating];
+                
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"WorldExp"])
+                {
+                    [self.activityIndicatorView stopAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"FriendExp"])
+                {
+                     [self.activityIndicatorView stopAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"Favourite"])
+                {
+                     [self.activityIndicatorView stopAnimating];
+                }
+                
+               
                 break;
                 
             case SVInfiniteScrollingStateTriggered:
-                [self.activityIndicatorView startAnimating];
+                
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"WorldExp"])
+                {
+                   [self.activityIndicatorView startAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"FriendExp"])
+                {
+                    [self.activityIndicatorView stopAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"Favourite"])
+                {
+                    [self.activityIndicatorView stopAnimating];
+                }
+                
                 break;
                 
             case SVInfiniteScrollingStateLoading:
-                [self.activityIndicatorView startAnimating];
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"WorldExp"])
+                {
+                    [self.activityIndicatorView startAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"FriendExp"])
+                {
+                    [self.activityIndicatorView stopAnimating];
+                }
+                if ([[defaults valueForKey:@"stop"] isEqualToString:@"Favourite"])
+                {
+                    [self.activityIndicatorView stopAnimating];
+                }
+                //[self.activityIndicatorView startAnimating];
                 break;
         }
     }

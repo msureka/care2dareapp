@@ -10,8 +10,8 @@
 #import "SBJsonParser.h"
 #import "Reachability.h"
 
-#import "UIImageView+WebCache.h"
-#import "UIView+WebCache.h"
+#import "AFNetworking.h"
+
 
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
@@ -246,8 +246,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [SDWebImageManager.sharedManager.imageCache clearMemory];
-    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:nil];
+  
    
 }
 
@@ -534,10 +533,8 @@
                     
                     
                 }
-        [cell_Public.Image_Profile sd_setShowActivityIndicatorView:YES];
-                [cell_Public.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 
-                 [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                 [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
@@ -660,10 +657,9 @@
                     
                     
                 }
-                [cell_Private.Image_Profile sd_setShowActivityIndicatorView:YES];
-                [cell_Private.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+             
                 
-                  [cell_Private.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                  [cell_Private.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
                 NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];

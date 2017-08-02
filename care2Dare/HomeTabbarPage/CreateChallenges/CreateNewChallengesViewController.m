@@ -455,7 +455,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 -(IBAction)ButtonBack_Action:(id)sender
 {
     [self.view endEditing:YES];
-    
+    [defaults setObject:@"no" forKey:@"ExpView_Update"];
     [defaults setObject:@"no" forKey:@"falg"];
     [defaults setObject:@"" forKey:@"usernames"];
     [defaults setObject:@"" forKey:@"userids"];
@@ -875,6 +875,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                                  //                                                                                                      handler:nil];
                                                  //                                                     [alertController addAction:actionOk];
                                                  //                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                                 [defaults setObject:@"yes" forKey:@"ExpView_Update"];
                                                  [defaults setObject:@"no" forKey:@"falg"];
                                                  [defaults setObject:@"" forKey:@"usernames"];
                                                  [defaults setObject:@"" forKey:@"userids"];
@@ -1111,6 +1112,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                                              //                                                                                                      handler:nil];
                                              //                                                     [alertController addAction:actionOk];
                                              //                                                     [self presentViewController:alertController animated:YES completion:nil];
+                                             
+                                              [defaults setObject:@"yes" forKey:@"ExpView_Update"];
                                              [defaults setObject:@"no" forKey:@"falg"];
                                              [defaults setObject:@"" forKey:@"usernames"];
                                              [defaults setObject:@"" forKey:@"userids"];
@@ -1791,7 +1794,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    [self.view endEditing:YES];
     NSLog(@"buttonIndex: %ld, cancelButtonIndex: %ld, firstOtherButtonIndex: %ld",
           (long)buttonIndex,
           (long)actionSheet.cancelButtonIndex,

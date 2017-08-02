@@ -26,7 +26,7 @@
 
 @property(nonatomic,weak)IBOutlet UITableView * Tableview_Explore;
 
-@property (nonatomic, retain) UIRefreshControl *refreshControl;
+//@property (nonatomic, retain) UIRefreshControl *refreshControl;
 @property (nonatomic,assign) float percent;
 @property (nonatomic,assign) float percent1;
 @property (nonatomic,assign) float percent2;

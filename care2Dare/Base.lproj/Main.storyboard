@@ -707,11 +707,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellOne" rowHeight="23" id="U1z-lZ-Xdo" customClass="OneImageVedioTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="23"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellOne" rowHeight="169" id="U1z-lZ-Xdo" customClass="OneImageVedioTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="169"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U1z-lZ-Xdo" id="hFh-QI-dLf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="23"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Pio-TS-R8G">
@@ -726,16 +726,22 @@
                                                     <rect key="frame" x="335" y="12" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="f7F-tH-0jm">
+                                                    <rect key="frame" x="169" y="98" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="Image_Backround" destination="Pio-TS-R8G" id="FJn-qh-d8M"/>
                                             <outlet property="Image_Favourite" destination="u1a-fI-cWf" id="Zs9-6h-3eh"/>
+                                            <outlet property="activityIndicator" destination="f7F-tH-0jm" id="j7y-0B-jZk"/>
                                             <outlet property="image_playButton" destination="1PT-7e-CqT" id="CP7-11-yuJ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellTwo" rowHeight="145" id="nfr-h0-GUU" customClass="TwoDetailsTableViewCell">
-                                        <rect key="frame" x="0.0" y="51" width="375" height="145"/>
+                                        <rect key="frame" x="0.0" y="197" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nfr-h0-GUU" id="svq-VG-dkb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
@@ -852,7 +858,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellComent" rowHeight="40" id="Dmd-Yb-i8R" customClass="CommentsTableViewCell">
-                                        <rect key="frame" x="0.0" y="196" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="342" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dmd-Yb-i8R" id="OPe-AD-eeY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -860,7 +866,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellList" rowHeight="70" id="AT3-WU-dJz" customClass="ListofVedioCommentsTableViewCell">
-                                        <rect key="frame" x="0.0" y="236" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="382" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AT3-WU-dJz" id="JzK-vb-vdO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -900,7 +906,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellVidLis" rowHeight="127" id="ODf-87-4Vh" customClass="VediosListsTableViewCell">
-                                        <rect key="frame" x="0.0" y="306" width="375" height="127"/>
+                                        <rect key="frame" x="0.0" y="452" width="375" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ODf-87-4Vh" id="HFk-zF-Hkn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
@@ -4114,7 +4120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fv1-YJ-4ak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4031" y="-1693"/>
+            <point key="canvasLocation" x="4020" y="-1812"/>
         </scene>
         <!--Watch Vedio Scroll View Controller-->
         <scene sceneID="5TG-wa-yPK">

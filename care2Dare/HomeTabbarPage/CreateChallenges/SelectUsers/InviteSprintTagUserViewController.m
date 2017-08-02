@@ -10,7 +10,7 @@
 #import "CLToken.h"
 #import "SBJsonParser.h"
 #import "InviteSprintUserTableViewCell.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "LCNContactPickerView.h"
 #import "UIViewController+KeyboardAnimation.h"
 @interface InviteSprintTagUserViewController ()<LCNContactPickerViewDelegate>
@@ -263,7 +263,7 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (!Proimage_View)
         Proimage_View = (UIImageView*)[cell viewWithTag:2];
     
-        [Proimage_View sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+        [Proimage_View setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
         if ([self.selectedUserid containsObject:nameTag])
         {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

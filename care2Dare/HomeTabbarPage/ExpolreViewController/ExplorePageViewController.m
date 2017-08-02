@@ -9,10 +9,8 @@
 #import "ExplorePageViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
-
-
-#import "UIImageView+WebCache.h"
-#import "UIView+WebCache.h"
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
@@ -36,6 +34,7 @@
     NSInteger Array_WorldCount,modvalues,pagescount;
     NSString * ResultString_World,*ResultString_Fav,*ResultString_Profile;
     NSString *flag_world,*flag_Fav,*flag_profile,*str_tablereload;
+    
     BOOL viewDidLoadCalled,ViewVillAppear,Tablesinglereload;
     
 }
@@ -67,7 +66,8 @@
      self.percent1 = 0.1;
      self.percent2 = 0.1;
     
-    
+    [defaults setObject:@"WorldExp" forKey:@"stop"];
+    [defaults synchronize];
     cellChecking=@"WorldExp";
     
     flag_Fav=@"no";
@@ -160,6 +160,16 @@ str_tablereload=@"no";
         [Tableview_Explore.pullToRefreshView stopAnimating];
     });
     }
+    
+
+    else if ([cellChecking isEqualToString:@"FriendExp"])
+    {
+       [Tableview_Explore.pullToRefreshView stopAnimating];
+    }
+    else if ([cellChecking isEqualToString:@"Favourite"])
+    {
+     [Tableview_Explore.pullToRefreshView stopAnimating];
+    }
 }
 
 
@@ -175,6 +185,16 @@ str_tablereload=@"no";
         [Tableview_Explore.infiniteScrollingView stopAnimating];
     });
     }
+    
+    else if ([cellChecking isEqualToString:@"FriendExp"])
+    {
+       [Tableview_Explore.infiniteScrollingView stopAnimating];
+    }
+    else if ([cellChecking isEqualToString:@"Favourite"])
+    {
+        [Tableview_Explore.infiniteScrollingView stopAnimating];
+    }
+
 }
 - (void) viewDidLayoutSubviews
 {
@@ -221,35 +241,26 @@ str_tablereload=@"no";
 }
 -(void)PulltoRefershtable
 {
-//    if ([cellChecking isEqualToString:@"WorldExp"])
-//    {
-//       [self ClienserverComm_worldExp];
-//    }
-//    if ([cellChecking isEqualToString:@"FriendExp"])
-//    {
-//     [self ClienserverComm_FriendExp];
-//    }
-//    if ([cellChecking isEqualToString:@"Favourite"])
-//    {
-//        [self ClienserverComm_Favourite];
-//    }
-   
+
     
+    int64_t delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        
+        [Tableview_Explore.infiniteScrollingView stopAnimating];
+    });
     
+  
    
         
-        [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
+      //  [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
             str_tablereload=@"no";
             pagescount=0;
             ViewVillAppear=YES;
-         //   [Tableview_Explore reloadData];
-            //        [Array_WorldExp removeAllObjects];
-            //        [Array_WorldExp1 removeAllObjects];
-            //        Tableview_Explore.hidden=YES;
-            //        indicator.hidden=NO;
-            //        [indicator startAnimating];
+        
             [self ClienserverComm_worldExp];
         }
         if ([cellChecking isEqualToString:@"FriendExp"])
@@ -261,7 +272,7 @@ str_tablereload=@"no";
             [self ClienserverComm_Favourite];
         }
     
-    [self.refreshControl endRefreshing];
+  
     
 }
 -(void)ClienserverComm_FriendExp
@@ -775,6 +786,14 @@ str_tablereload=@"no";
 {
     [super viewWillAppear:animated];
     
+    int64_t delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        
+        [Tableview_Explore.infiniteScrollingView stopAnimating];
+    });
+
     
         if (viewDidLoadCalled ==YES)
         {
@@ -783,26 +802,42 @@ str_tablereload=@"no";
     else
     {
     
-    [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
+   // [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
     if ([cellChecking isEqualToString:@"WorldExp"])
     {
-        str_tablereload=@"no";
-        pagescount=0;
-        ViewVillAppear=YES;
-     //[Tableview_Explore reloadData];
-//        [Array_WorldExp removeAllObjects];
-//        [Array_WorldExp1 removeAllObjects];
-//        Tableview_Explore.hidden=YES;
-//        indicator.hidden=NO;
-//        [indicator startAnimating];
-        [self ClienserverComm_worldExp];
+        
+        [defaults setObject:@"WorldExp" forKey:@"stop"];
+        
+        if ( [[defaults valueForKey:@"ExpView_Update"] isEqualToString:@"yes"])
+        {
+            [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
+            if ( [[defaults valueForKey:@"Accept"] isEqualToString:@"yes"])
+            {
+                [Array_WorldExp removeAllObjects];
+                [Tableview_Explore reloadData];
+              [defaults setObject:@"no" forKey:@"Accept"];
+            }
+           
+            str_tablereload=@"no";
+            pagescount=0;
+            ViewVillAppear=YES;
+            
+            [self ClienserverComm_worldExp];
+            
+            [defaults setObject:@"no" forKey:@"ExpView_Update"];
+            
+        }
+        [defaults synchronize];
     }
     if ([cellChecking isEqualToString:@"FriendExp"])
     {
+         [defaults setObject:@"FriendExp" forKey:@"stop"];
+        [defaults synchronize];
         [self ClienserverComm_FriendExp];
     }
     if ([cellChecking isEqualToString:@"Favourite"])
-    {
+    { [defaults setObject:@"Favourite" forKey:@"stop"];
+        [defaults synchronize];
         [self ClienserverComm_Favourite];
     }
     }
@@ -817,6 +852,8 @@ str_tablereload=@"no";
 
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
+    [defaults setObject:@"WorldExp" forKey:@"stop"];
+    [defaults synchronize];
     [dataTaskExp cancel];
  cellChecking=@"WorldExp";
     
@@ -851,7 +888,7 @@ str_tablereload=@"no";
     
     
     
-     [self ClienserverComm_worldExp];
+ //    [self ClienserverComm_worldExp];
     if (Array_WorldExp.count==0)
     {
         
@@ -864,6 +901,11 @@ str_tablereload=@"no";
 }
 - (void)ViewTapTapped_Expfriend:(UITapGestureRecognizer *)recognizer
 {
+    [defaults setObject:@"FriendExp" forKey:@"stop"];
+    [defaults synchronize];
+
+    [Tableview_Explore.infiniteScrollingView stopAnimating];
+    [Tableview_Explore.pullToRefreshView stopAnimating];
     cellChecking=@"FriendExp";
     [dataTaskWld cancel];
     view_ExpWorld.clipsToBounds=YES;
@@ -910,6 +952,11 @@ str_tablereload=@"no";
 }
 -(void)ViewTapTapped_Expfavourite:(UITapGestureRecognizer *)recognizer
 {
+    
+    [defaults setObject:@"Favourite" forKey:@"stop"];
+    [defaults synchronize];
+    [Tableview_Explore.infiniteScrollingView stopAnimating];
+    [Tableview_Explore.pullToRefreshView stopAnimating];
     cellChecking=@"Favourite";
     [dataTaskWld cancel];
     
@@ -959,8 +1006,7 @@ str_tablereload=@"no";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    [SDWebImageManager.sharedManager.imageCache clearMemory];
-    [SDWebImageManager.sharedManager.imageCache clearDiskOnCompletion:nil];
+  
    
 }
 
@@ -973,19 +1019,30 @@ str_tablereload=@"no";
         {
             if (Array_WorldExp.count==0)
             {
-                if ([flag_world isEqualToString:@"no"])
+                if ([flag_world isEqualToString:@"no"] ||[[defaults valueForKey:@"Accept"] isEqualToString:@"yes"])
                 {
                     return 0;
                 }
                 else
                 {
+                    
                   return 1;
                 }
                 
             }
             else
             {
+                if ( [[defaults valueForKey:@"Accept"] isEqualToString:@"yes"])
+                {
+                    [defaults setObject:@"no" forKey:@"Accept"];
+                    [defaults synchronize];
+                     return 0;
+                    
+                }
+                else
+                {
                return Array_WorldCount;
+                }
             }
             
         }
@@ -1071,10 +1128,7 @@ str_tablereload=@"no";
                     {
                          cell_WorldExp.label_JsonResult.text=@"All the active challenges worldwide will be shown here.";
                     }
-                    else
-                    {
-                     cell_WorldExp.label_JsonResult.text=@"PHP server issues";
-                    }
+                    
                     cell_WorldExp.Image_Profile.hidden=YES;
                     cell_WorldExp.Image_PalyBuutton.hidden=YES;
                     
@@ -1293,16 +1347,30 @@ str_tablereload=@"no";
                  NSURL *url,*url1,*url2;
                 
                 url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
-                    [cell_WorldExp.Image_Profile sd_setShowActivityIndicatorView:YES];
-                    [cell_WorldExp.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                   
+                    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+                    [cell_WorldExp.activityIndicator1 setHidden:NO];
+                    [cell_WorldExp.activityIndicator1 startAnimating];
                     
-                    [cell_WorldExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-//                    UIImage *newImage;
-//                    UIGraphicsBeginImageContext(CGSizeMake(cell_WorldExp.Image_Profile.frame.size.width,cell_WorldExp.Image_Profile.frame.size.height));
-//                    [cell_WorldExp.Image_Profile.image drawInRect:CGRectMake(0, 0,320.0f,580)];
-//                    newImage = UIGraphicsGetImageFromCurrentImageContext();
-//                    UIGraphicsEndImageContext();
-//                    [cell_WorldExp.Image_Profile setImage:newImage];
+                    [cell_WorldExp.Image_Profile setImageWithURLRequest:imageRequest
+                                                        placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                     {
+                         [cell_WorldExp.activityIndicator1 setHidden:YES];
+                         [cell_WorldExp.activityIndicator1 stopAnimating];
+                         
+                         cell_WorldExp.Image_Profile.image = image;
+                     }
+                                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                     {
+                         [cell_WorldExp.activityIndicator1 setHidden:YES];
+                         [cell_WorldExp.activityIndicator1 stopAnimating];
+                     }];
+                    
+                    
+                    
+//                    [cell_WorldExp.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+
                     
                     if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
                                 {
@@ -1355,9 +1423,26 @@ str_tablereload=@"no";
                     
                     url1=[NSURL URLWithString:[dic_worldexp1 valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_WorldExp.Image_Profile2 sd_setShowActivityIndicatorView:YES];
-                    [cell_WorldExp.Image_Profile2 sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                    [cell_WorldExp.Image_Profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                    NSURLRequest *imageRequest1 = [NSURLRequest requestWithURL:url1];
+                    [cell_WorldExp.activityIndicator2 setHidden:NO];
+                    [cell_WorldExp.activityIndicator2 startAnimating];
+                   
+                    [cell_WorldExp.Image_Profile2 setImageWithURLRequest:imageRequest1
+                                      placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                     {
+                         [cell_WorldExp.activityIndicator2 setHidden:YES];
+                         [cell_WorldExp.activityIndicator2 stopAnimating];
+                         
+                         cell_WorldExp.Image_Profile2.image = image;
+                     }
+                                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                     {
+                         [cell_WorldExp.activityIndicator2 setHidden:YES];
+                        [cell_WorldExp.activityIndicator2 stopAnimating];
+                     }];
+                    
+//                    [cell_WorldExp.Image_Profile2 setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                 if ( [[dic_worldexp1 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
                 {
@@ -1404,11 +1489,28 @@ str_tablereload=@"no";
                     
                     url2=[NSURL URLWithString:[dic_worldexp2 valueForKey:@"mediathumbnailurl"]];
                     
+                    NSURLRequest *imageRequest3 = [NSURLRequest requestWithURL:url2];
+                    [cell_WorldExp.activityIndicator3 setHidden:NO];
+                    [cell_WorldExp.activityIndicator3 startAnimating];
                     
+                    [cell_WorldExp.Image_Profile3 setImageWithURLRequest:imageRequest3
+                                                        placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                     {
+                         [cell_WorldExp.activityIndicator3 setHidden:YES];
+                         [cell_WorldExp.activityIndicator3 stopAnimating];
+                         
+                         cell_WorldExp.Image_Profile3.image = image;
+                     }
+                                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                     {
+                         [cell_WorldExp.activityIndicator3 setHidden:YES];
+                         [cell_WorldExp.activityIndicator3 stopAnimating];
+                     }];
+
+                
                   
-                    [cell_WorldExp.Image_Profile3 sd_setShowActivityIndicatorView:YES];
-                    [cell_WorldExp.Image_Profile3 sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                    [cell_WorldExp.Image_Profile3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+//                    [cell_WorldExp.Image_Profile3 setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
                 if ([[dic_worldexp2 valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
@@ -1506,10 +1608,7 @@ str_tablereload=@"no";
                         
                         cell_FriendExp.label_JsonResult.text=@"All the active challenges of your friends will be shown here.";
                     }
-                    else
-                    {
-                        cell_FriendExp.label_JsonResult.text=@"PHP server issues";
-                    }
+                  
                 }
                 else
                 {
@@ -1560,11 +1659,11 @@ str_tablereload=@"no";
                 
                 
                     NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
+                    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
                     
-                    [cell_FriendExp.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                    [cell_FriendExp.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     
-                    [cell_FriendExp.Image_Profile sd_setShowActivityIndicatorView:YES];
-                    [cell_FriendExp.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                   
                     
                     
                     
@@ -1629,17 +1728,14 @@ str_tablereload=@"no";
         [cell_Favorite.layer addSublayer:bootomBorder_Cell];
         
         
-        if (Array_FriendExp.count==0)
+        if (Array_Faourite.count==0)
         {
             if ([ResultString_Fav isEqualToString:@"nochallenges"])
             {
                 
                 cell_Favorite.label_JsonResult.text=@"All the challenges which you tag as favourite will be shown here.";
             }
-            else
-            {
-                cell_Favorite.label_JsonResult.text=@"PHP server issues";
-            }
+        
             
             
             
@@ -1701,10 +1797,9 @@ str_tablereload=@"no";
             
             NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
-            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+            [cell_Favorite.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
-            [cell_Favorite.Image_Profile sd_setShowActivityIndicatorView:YES];
-            [cell_Favorite.Image_Profile sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+           
             
             
         if ([[dic_worldexp valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])

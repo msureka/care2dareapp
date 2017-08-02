@@ -263,6 +263,10 @@ ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withStri
              
              UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                     {
+                                        [defaults setObject:@"yes" forKey:@"ExpView_Update"];
+                                        [defaults setObject:@"yes" forKey:@"Accept"];
+                                        [defaults synchronize];
+                                        
                 [self.navigationController popToRootViewControllerAnimated:YES];
                                 }];
              

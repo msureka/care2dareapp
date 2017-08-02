@@ -15,4 +15,6 @@
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Flag;
 @property(nonatomic,weak)IBOutlet UIImageView * Image_Favourite;
 
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * activityIndicator;
+
 @end

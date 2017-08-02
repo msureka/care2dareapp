@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lF5-HY-hnq">
@@ -54,6 +54,21 @@
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-F1-kCD">
+                        <rect key="frame" x="178" y="52" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </activityIndicatorView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-Wi-rTK">
+                        <rect key="frame" x="52" y="52" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </activityIndicatorView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eow-dj-sbj">
+                        <rect key="frame" x="303" y="52" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </activityIndicatorView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -63,6 +78,9 @@
                 <outlet property="Image_Profile" destination="lF5-HY-hnq" id="E5P-oc-Dlu"/>
                 <outlet property="Image_Profile2" destination="BwL-Az-vdd" id="VDy-Fr-qGS"/>
                 <outlet property="Image_Profile3" destination="1uv-UN-dhs" id="uQ3-Cs-er2"/>
+                <outlet property="activityIndicator1" destination="S3o-Wi-rTK" id="mrd-FZ-gob"/>
+                <outlet property="activityIndicator2" destination="ah6-F1-kCD" id="NPz-A2-fTG"/>
+                <outlet property="activityIndicator3" destination="eow-dj-sbj" id="VGe-Qc-3tE"/>
                 <outlet property="label_JsonResult" destination="T5p-bf-DXG" id="QXq-b3-eor"/>
             </connections>
             <point key="canvasLocation" x="-497.5" y="-136"/>

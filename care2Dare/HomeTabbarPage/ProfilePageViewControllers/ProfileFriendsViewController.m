@@ -9,7 +9,7 @@
 #import "ProfileFriendsViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 @interface ProfileFriendsViewController ()<UITextFieldDelegate>
 {
     UIView *sectionView;
@@ -92,8 +92,7 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+ 
 }
 
 -(IBAction)ButtonBack_Action:(id)sender
@@ -168,7 +167,7 @@
             
             NSURL *url=[NSURL URLWithString:[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendprofilepic"]];
             
-            [cell_req.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"] options:SDWebImageRefreshCached];
+            [cell_req.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"]];
             
         cell_req.Label_Name.text=[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
       NSString *textfname=[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
@@ -251,7 +250,7 @@
             
              cell_addreq.Image_GrayMinus.tag=indexPath.row;
             
-            [cell_addreq.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"] options:SDWebImageRefreshCached];
+            [cell_addreq.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"]];
             
             cell_addreq.Label_Name.text=[[Array_AddReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
             

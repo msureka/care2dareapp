@@ -7,7 +7,7 @@
 //
 
 #import "RaisedContributeViewController.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "SBJsonParser.h"
 #import "Reachability.h"
 #import "ContributeMoneyViewController.h"
@@ -425,7 +425,7 @@
               
                     
                     
-                    [Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                    [Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
               
                 
@@ -537,7 +537,7 @@
             
             
             NSURL * url=[dict valueForKey:@"backersprofilepic"];
-            [cell_Four.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            [cell_Four.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
             
             if([[dict valueForKey:@"backeruserid"]isEqualToString:[defaults valueForKey:@"userid"]])

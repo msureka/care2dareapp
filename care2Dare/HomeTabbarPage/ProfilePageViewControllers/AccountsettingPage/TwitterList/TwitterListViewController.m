@@ -11,7 +11,7 @@
 #import "SBJsonParser.h"
 #import <TwitterKit/TwitterKit.h>
 #import <Fabric/Fabric.h>
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 @interface TwitterListViewController ()
 {
     NSDictionary *urlplist;
@@ -222,9 +222,7 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
-}
+   }
 
 /*
 #pragma mark - Navigation
@@ -287,7 +285,7 @@
             [cell_twitter.image_profile_img setFrame:CGRectMake(cell_twitter.image_profile_img.frame.origin.x, cell_twitter.image_profile_img.frame.origin.y, cell_twitter.image_profile_img.frame.size.height, cell_twitter.image_profile_img.frame.size.height)];
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
             
-            [cell_twitter.image_profile_img sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_twitter.image_profile_img setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
              [cell_twitter.Button_invite addTarget:self action:@selector(AddUser:) forControlEvents:UIControlEventTouchUpInside];
             cell_twitter.label_fbname.text=[dictVal valueForKey:@"name"];
             cell_twitter.Button_invite.clipsToBounds=YES;
@@ -327,7 +325,7 @@
             
               [cell_twitter2.image_profile_img1 setFrame:CGRectMake(cell_twitter2.image_profile_img1.frame.origin.x, cell_twitter2.image_profile_img1.frame.origin.y, cell_twitter2.image_profile_img1.frame.size.height, cell_twitter2.image_profile_img1.frame.size.height)];
             
-            [cell_twitter2.image_profile_img1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_twitter2.image_profile_img1 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             
             [cell_twitter2.Button_invite1 addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];

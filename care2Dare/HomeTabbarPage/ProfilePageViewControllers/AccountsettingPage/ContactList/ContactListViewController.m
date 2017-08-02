@@ -10,7 +10,7 @@
 #import <Contacts/Contacts.h>
 #import "Reachability.h"
 #import "SBJsonParser.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -304,7 +304,7 @@
             cell_contactAdd.Button_Add.tag=indexPath.row;
             cell_contactAdd.label_fbname.text=[dictVal valueForKey:@"name"];
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
-            [cell_contactAdd.image_profile_img sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_contactAdd.image_profile_img setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             [cell_contactAdd.image_profile_img setFrame:CGRectMake(cell_contactAdd.image_profile_img.frame.origin.x, cell_contactAdd.image_profile_img.frame.origin.y, cell_contactAdd.image_profile_img.frame.size.height, cell_contactAdd.image_profile_img.frame.size.height)];
             [cell_contactAdd.Button_Add addTarget:self action:@selector(AddUser:) forControlEvents:UIControlEventTouchUpInside];

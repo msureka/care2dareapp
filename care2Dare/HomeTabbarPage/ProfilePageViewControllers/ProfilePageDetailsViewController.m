@@ -8,7 +8,7 @@
 
 #import "ProfilePageDetailsViewController.h"
 #import "AccountSettViewController.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "ProfileFriendsViewController.h"
 #import "ProfileChallengesViewController.h"
 #import "ProfileNotificationViewController.h"
@@ -384,8 +384,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+   
 }
 -(void)ClientserverCommunicatioAddfrnd
 {
@@ -538,7 +537,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
            
         //cell_Profile.Image_ProfileImg.image=Images_data.image;
         NSURL *url=[NSURL URLWithString:user_imageUrl];
-        [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+        [cell_Profile.Image_ProfileImg setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             
             [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
@@ -638,14 +637,14 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                     
                     NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                    [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 }
                 else
                 {
                     
                     NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Public.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                    [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     cell_Public.Image_PalyBuutton.hidden=NO;
                     
                     

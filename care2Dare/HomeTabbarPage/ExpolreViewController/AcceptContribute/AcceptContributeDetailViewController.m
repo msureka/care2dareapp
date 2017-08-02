@@ -22,7 +22,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "AFNetworking.h"
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -53,7 +53,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
-  
+    SDImageCache *cache = [SDImageCache sharedImageCache];
+    [cache removeImageForKey:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"] withCompletion:nil];
+    
+    [cache removeImageForKey:[[AllArrayData objectAtIndex:0]valueForKey:@"usersprofilepic"] withCompletion:nil];
+    
+
     upperBorder = [CALayer layer];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -194,12 +199,14 @@
             [cell_OneImageVid.Image_ThreeDotsFlag addGestureRecognizer:FlagTapped];
            
             
-           
+          
             
             if ([[[AllArrayData objectAtIndex:0]valueForKey:@"mediatype"] isEqualToString:@"IMAGE"])
             {
-                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
-                  [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"]];
+                
+                
+                  [cell_OneImageVid.Image_Backround setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 cell_OneImageVid.image_playButton.hidden=YES;
                  [self displayImage:cell_OneImageVid.Image_Backround withImage:cell_OneImageVid.Image_Backround.image];
                 
@@ -210,7 +217,7 @@
             {
                 NSURL *url=[NSURL URLWithString:[[AllArrayData objectAtIndex:0]valueForKey:@"mediathumbnailurl"]];
                 
-                [cell_OneImageVid.Image_Backround sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+                [cell_OneImageVid.Image_Backround setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 cell_OneImageVid.image_playButton.hidden=NO;
                 cell_OneImageVid.image_playButton.userInteractionEnabled=YES;
@@ -252,7 +259,7 @@
             [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0] range:range];
             cell_TwoDetails.Label_AddmoreChallenges.attributedText=attString;
 
-                [cell_TwoDetails.image_Profile sd_setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+                [cell_TwoDetails.image_Profile setImageWithURL:urlFirst placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             
             cell_TwoDetails.image_Profile.userInteractionEnabled=YES;
@@ -281,7 +288,7 @@
             NSLog(@"No of lines: %ld",(long)rHeight);
             if(height <=30)
             {
-        [cell_TwoDetails.label_DescTitle setFrame:CGRectMake(cell_TwoDetails.label_DescTitle.frame.origin.x,cell_TwoDetails.label_DescTitle.frame.origin.y, cell_TwoDetails.label_DescTitle.frame.size.width,size.height)];
+        [cell_TwoDetails.label_DescTitle setFrame:CGRectMake(cell_TwoDetails.label_DescTitle.frame.origin.x,cell_TwoDetails.label_DescTitle.frame.origin.y, cell_TwoDetails.label_DescTitle.frame.size.width,size.height+8)];
             }
             else if(height <=39)
             {
@@ -538,7 +545,10 @@
                                                      
             if ([ResultString isEqualToString:@"accepted"] || [ResultString isEqualToString:@"deleted"] )
                                                      {
-                                                         
+                                                         [defaults setObject:@"yes" forKey:@"ExpView_Update"];
+                                                          [defaults setObject:@"yes" forKey:@"Accept"];
+                                                         [defaults synchronize];
+
                     [self.navigationController popViewControllerAnimated:YES];
                                                          
                                                      }

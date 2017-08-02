@@ -18,7 +18,9 @@
 
 @property(strong,nonatomic)IBOutlet UIImageView * Image_Profile3;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_PalyBuutton3;
-
+@property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator1;
+@property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator2;
+@property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator3;
 @property(strong,nonatomic)IBOutlet UILabel * label_JsonResult;
 
 @end

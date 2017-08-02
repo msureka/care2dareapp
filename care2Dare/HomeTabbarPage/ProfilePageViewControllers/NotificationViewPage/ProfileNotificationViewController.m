@@ -9,7 +9,7 @@
 #import "ProfileNotificationViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 
 #import "ContributeDaetailPageViewController.h"
 #import "AcceptContributeDetailViewController.h"
@@ -679,8 +679,7 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+  
 }
 
 
@@ -904,8 +903,8 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 cell_PublicNoti.image_Playbutton2.hidden=YES;
             }
             
-            [cell_PublicNoti.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
-              [cell_PublicNoti.image_profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+            [cell_PublicNoti.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+              [cell_PublicNoti.image_profile2 setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             cell_PublicNoti.image_profile.layer.cornerRadius=9.0f;
             cell_PublicNoti.image_profile2.layer.cornerRadius=cell_PublicNoti.image_profile2.frame.size.height/2;
             
@@ -963,8 +962,8 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                  cell_PublicNoti.image_Playbutton2.hidden=YES;
             }
             
-            [cell_PublicNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
-            [cell_PublicNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+            [cell_PublicNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+            [cell_PublicNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             cell_PublicNoti.image_profile.layer.cornerRadius=cell_PublicNoti.image_profile.frame.size.height/2;
             cell_PublicNoti.image_profile2.layer.cornerRadius=9.0f;
@@ -1089,8 +1088,8 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 }
             
             
-                [cell_PrivateNoti.image_profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
-                [cell_PrivateNoti.image_profile2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                [cell_PrivateNoti.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                [cell_PrivateNoti.image_profile2 setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 cell_PrivateNoti.image_profile.layer.cornerRadius=9.0f;
                 cell_PrivateNoti.image_profile2.layer.cornerRadius=cell_PrivateNoti.image_profile2.frame.size.height/2;
                 
@@ -1148,8 +1147,8 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                     cell_PrivateNoti.image_Playbutton1.hidden=YES;
                 }
                 
-                [cell_PrivateNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
-                [cell_PrivateNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                [cell_PrivateNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                [cell_PrivateNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 cell_PrivateNoti.image_profile.layer.cornerRadius=cell_PrivateNoti.image_profile.frame.size.height/2;
                 cell_PrivateNoti.image_profile2.layer.cornerRadius=9.0f;
@@ -1301,8 +1300,8 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             
             
           
-                [cell_PlegeIncoNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
-                [cell_PlegeIncoNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                [cell_PlegeIncoNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                [cell_PlegeIncoNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 cell_PlegeIncoNoti.image_profile.layer.cornerRadius=cell_PlegeIncoNoti.image_profile.frame.size.height/2;
                 cell_PlegeIncoNoti.image_profile2.layer.cornerRadius=9.0f;
@@ -1403,8 +1402,8 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             cell_PlegeOutNoti.image_profile2.clipsToBounds=YES;
             
             
-            [cell_PlegeOutNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-            [cell_PlegeOutNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+            [cell_PlegeOutNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+            [cell_PlegeOutNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
             cell_PlegeOutNoti.image_profile.layer.cornerRadius=cell_PlegeOutNoti.image_profile.frame.size.height/2;
             cell_PlegeOutNoti.image_profile2.layer.cornerRadius=9.0f;
@@ -1539,8 +1538,8 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     cell_VedioNoti.image_profile2.clipsToBounds=YES;
     
     
-    [cell_VedioNoti.image_profile sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-    [cell_VedioNoti.image_profile2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+    [cell_VedioNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+    [cell_VedioNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
     
     cell_VedioNoti.image_profile.layer.cornerRadius=cell_VedioNoti.image_profile.frame.size.height/2;
     cell_VedioNoti.image_profile2.layer.cornerRadius=9.0f;

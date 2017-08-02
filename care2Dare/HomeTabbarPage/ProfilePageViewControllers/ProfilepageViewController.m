@@ -8,7 +8,7 @@
 
 #import "ProfilepageViewController.h"
 #import "AccountSettViewController.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "ProfileFriendsViewController.h"
 #import "ProfileChallengesViewController.h"
 #import "ProfileNotificationViewController.h"
@@ -99,8 +99,7 @@
 [self ClientserverCommprofile];
     [self Communication_totalraisedcount];
      [self Communication_showcompletedRaised];
-    SDImageCache *cache = [SDImageCache sharedImageCache];
-    [cache removeImageForKey:Str_profileurl withCompletion:nil];
+ 
 }
 
 - (void) viewDidLayoutSubviews
@@ -137,8 +136,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+  
   
 }
 
@@ -233,7 +231,7 @@ return 1;
                 NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
                
-                [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                [cell_Profile.Image_ProfileImg setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
 
                  [self displayImage:cell_Profile.Image_ProfileImg withImage:cell_Profile.Image_ProfileImg.image];
@@ -249,7 +247,7 @@ return 1;
                 {
 NSURL *url=[NSURL URLWithString:Str_profileurl];
                     
- [cell_Profile.Image_ProfileImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+ [cell_Profile.Image_ProfileImg setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 }
                 else
                 {
@@ -565,13 +563,13 @@ NSURL *url=[NSURL URLWithString:Str_profileurl];
                 
             }
         
-            [cell_Profileimages.image1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            [cell_Profileimages.image1 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
-            [cell_Profileimages.image2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            [cell_Profileimages.image2 setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
-            [cell_Profileimages.image3 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            [cell_Profileimages.image3 setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
-            [cell_Profileimages.image4 sd_setImageWithURL:url3 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
+            [cell_Profileimages.image4 setImageWithURL:url3 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
             
             

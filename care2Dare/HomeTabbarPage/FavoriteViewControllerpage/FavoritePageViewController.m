@@ -9,7 +9,7 @@
 #import "FavoritePageViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 #import "ContributeDaetailPageViewController.h"
 #define BlueColor [UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor
 #define GrayColor [UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor
@@ -410,8 +410,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+  
 }
 - (void)ViewTapTapped_Expworld:(UITapGestureRecognizer *)recognizer
 {
@@ -567,14 +566,14 @@ self.refreshControl.tintColor = [UIColor blackColor];
             
             NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
-            [cell_Pledge.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_Pledge.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
         }
         else
         {
             
             NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
-            [cell_Pledge.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_Pledge.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             cell_Pledge.Image_PalyBuutton.hidden=NO;
             
             
@@ -658,14 +657,14 @@ self.refreshControl.tintColor = [UIColor blackColor];
             
             NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
-            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_Favorite.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
         }
         else
         {
             
             NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
             
-            [cell_Favorite.Image_Profile sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+            [cell_Favorite.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             cell_Favorite.Image_PalyBuutton.hidden=NO;
             
             

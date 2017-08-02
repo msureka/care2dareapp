@@ -9,7 +9,7 @@
 #import "FacebookListViewController.h"
 #import "Reachability.h"
 #import "SBJsonParser.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 @interface FacebookListViewController ()
 {
     NSDictionary *urlplist;
@@ -176,8 +176,7 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearMemory];
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -221,7 +220,7 @@
  
     
    
-    [cell_fb.image_profile_img sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] options:SDWebImageRefreshCached];
+    [cell_fb.image_profile_img setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
     cell_fb.label_fbname.text=[dictVal valueForKey:@"name"];
     cell_fb.Button_invite.tag=indexPath.row;
     cell_fb.Button_invite.clipsToBounds=YES;

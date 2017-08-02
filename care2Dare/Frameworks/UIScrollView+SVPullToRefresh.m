@@ -209,7 +209,8 @@ static char UIScrollViewPullToRefreshView;
     }
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     
     for(id otherView in self.viewForState) {
         if([otherView isKindOfClass:[UIView class]])
