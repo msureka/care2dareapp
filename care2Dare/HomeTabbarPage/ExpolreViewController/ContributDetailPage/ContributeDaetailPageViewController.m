@@ -2472,129 +2472,6 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
            
             return Cell_List;
         }
-//        {
-//            
-//            
-//            
-//            cell_recordvid = [[[NSBundle mainBundle]loadNibNamed:@"RecordedVidTableViewCell" owner:self options:nil] objectAtIndex:0];
-//            
-//            
-//            
-//            if (cell_recordvid == nil)
-//            {
-//                
-//                cell_recordvid = [[RecordedVidTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdR1];
-//                
-//                
-//            }
-//            
-//            if (Array_showrecordvid.count==0)
-//            {
-//                cell_recordvid.LAbel_Result.hidden=NO;
-//                cell_recordvid.myscrollView.hidden=YES;
-//            }
-//            else
-//            {
-//             cell_recordvid.LAbel_Result.hidden=YES;
-//                cell_recordvid.myscrollView.hidden=NO;
-//                
-//                
-//                for (int i=0; i<Array_showrecordvid.count; i++)
-//                {
-//                    
-//                     Imagepro = [[UIImageView alloc] initWithFrame:CGRectMake(Xpostion, Ypostion, Xwidth, Yheight)];
-//                    image_newSymbolstatus=[[UIImageView alloc]initWithFrame:CGRectMake((Imagepro.frame.origin.x+Imagepro.frame.size.width)-16, YpostionNewSymbol, WpostionNewSymbol, HpostionNewSymbol)];
-//                    
-//                    
-//                    image_newSymbolstatus.contentMode=UIViewContentModeScaleAspectFill;
-//                    
-//                    image_newSymbolstatus.userInteractionEnabled=YES;
-//                    
-//                     [image_newSymbolstatus setTag:i];
-//                    [image_newSymbolstatus setImage:[UIImage imageNamed:@"new.png"]];
-//                    Imagepro.contentMode=UIViewContentModeScaleAspectFill;
-//                    
-//                    Imagepro.userInteractionEnabled=YES;
-//                    
-//                    [Imagepro setTag:i];
-//                    
-//                    
-//                    UITapGestureRecognizer * ImageTap =[[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                                               action:@selector(ImageTapped_profile:)];
-//                    [Imagepro addGestureRecognizer:ImageTap];
-//                    
-//                    
-//                    Imagepro.clipsToBounds=YES;
-//                    Imagepro.layer.cornerRadius=9.0f;
-//                    
-//                 
-//                    [cell_recordvid.myscrollView addSubview:Imagepro];
-//                       [cell_recordvid.myscrollView addSubview:image_newSymbolstatus];
-//                    
-//                    Imagepro.backgroundColor=[UIColor redColor];
-//                    //                name = "Er Sachin Mokashi";
-//                    //                profileimage = "https://graph.facebook.com/1280357812049167/picture?type=large";
-//                    //                recorddate = "2017-04-05 06:55:53";
-//                    //                "registration_status" = ACTIVE;
-//                    //                useridvideo = 20170307091520wFL3;
-//                    //                videourl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C20170404122329IEXZ-thumbnail.jpg";
-//                    
-//                    
-//                    NSURL * url=[[Array_showrecordvid objectAtIndex:i]valueForKey:@"thumbnailurl"];
-//                    
-//                    
-//                    
-//                    [Imagepro sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]options:SDWebImageRefreshCached];
-//                    
-//                    
-//                    if ([[[Array_showrecordvid objectAtIndex:i]valueForKey:@"newstatus"] isEqualToString:@"yes"])
-//                    {
-//                        image_newSymbolstatus.hidden=NO;
-//                    }
-//                    else
-//                    {
-//                       image_newSymbolstatus.hidden=YES;
-//                    }
-//                    
-//                    
-//                    Xpostion+=Xwidth+20;
-////                    XpostionNewSymbol+=WpostionNewSymbol;
-//                    
-//                    ScrollContentSize+=Xwidth;
-//                    cell_recordvid.myscrollView.contentSize=CGSizeMake(Xpostion, 88);
-//                }
-//                
-//                XpostionNewSymbol=40;
-//                YpostionNewSymbol=0;
-//                WpostionNewSymbol=20;
-//                HpostionNewSymbol=20;
-//                
-//                Xpostion=12;
-//                Ypostion=8;
-//                Xwidth=60;
-//                Yheight=60;
-//                ScrollContentSize=0;
-//                Xpostion_label=12;
-//                Ypostion_label=67;
-//                Xwidth_label=60;
-//                Yheight_label=20;
-//                
-//            }
-//            
-//            
-//            //            if (Array_Challengers==0)
-//            //            {
-//            //                cell_one.Label_Noresult.hidden=NO;
-//            //            }
-//            //            else
-//            //            {
-//            //                cell_one.Label_Noresult.hidden=YES;
-//            //            }
-//            
-//            return cell_recordvid;
-//            
-//            
-//        }
             break;
         case 3:
         {
@@ -2740,7 +2617,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"useridsender"]])
                 {
-                    NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
+                    NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"]];
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
@@ -2776,7 +2653,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 }
                 else
                 {
-                    NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
+                    NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"]];
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
 //                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
@@ -2826,7 +2703,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 CGFloat imgheight=[[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"imageheight"] floatValue];
                 
                 //Chat_UserImage.backgroundColor=[UIColor clearColor];
-                NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"imageurl"];
+                NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"imageurl"]];
                 [Chat_UserImage setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 Chat_UserImage.clipsToBounds=YES;
                 Chat_UserImage.layer.cornerRadius=9.0f;
@@ -2841,7 +2718,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"useridsender"]])
                 {
                     
-                    NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
+                    NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"]];
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     [Chat_UserImage setFrame:CGRectMake(52,4,imgwidth,imgheight)];
@@ -2859,7 +2736,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 {
                     
                     
-                    NSURL * url=[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"];
+                    NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"]];
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
@@ -2970,7 +2847,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
 
               
                     
-                NSURL * url=[[Array_showrecordvid objectAtIndex:indexPath.row]valueForKey:@"thumbnailurl"];
+                NSURL * url=[NSURL URLWithString:[[Array_showrecordvid objectAtIndex:indexPath.row]valueForKey:@"thumbnailurl"]];
                     
                     [cell_Vediolist.Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
