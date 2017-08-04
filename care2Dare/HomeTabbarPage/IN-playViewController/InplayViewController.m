@@ -534,7 +534,27 @@
                     
                 }
                 
-                 [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+                [cell_Public.activityIndicator1 setHidden:NO];
+                [cell_Public.activityIndicator1 startAnimating];
+                
+                [cell_Public.Image_Profile setImageWithURLRequest:imageRequest
+                                                   placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     [cell_Public.activityIndicator1 setHidden:YES];
+                     [cell_Public.activityIndicator1 stopAnimating];
+                     
+                     cell_Public.Image_Profile.image = image;
+                 }
+                                                            failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                 {
+                     [cell_Public.activityIndicator1 setHidden:YES];
+                     [cell_Public.activityIndicator1 stopAnimating];
+                 }];
+
+                
+//                 [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
@@ -657,9 +677,29 @@
                     
                     
                 }
-             
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+                [cell_Private.activityIndicator1 setHidden:NO];
+                [cell_Private.activityIndicator1 startAnimating];
                 
-                  [cell_Private.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                [cell_Private.Image_Profile setImageWithURLRequest:imageRequest
+                                                 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     [cell_Private.activityIndicator1 setHidden:YES];
+                     [cell_Private.activityIndicator1 stopAnimating];
+                     
+                     cell_Private.Image_Profile.image = image;
+                 }
+                                                          failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                 {
+                     [cell_Private.activityIndicator1 setHidden:YES];
+                     [cell_Private.activityIndicator1 stopAnimating];
+                 }];
+                
+                
+
+                
+                 // [cell_Private.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                 
                 UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
                 NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];

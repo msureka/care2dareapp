@@ -21,5 +21,6 @@
 @property(strong,nonatomic)IBOutlet UIView * View_record;
 @property(strong,nonatomic)IBOutlet UILabel * label_record;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_record;
+@property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator1;
 
 @end

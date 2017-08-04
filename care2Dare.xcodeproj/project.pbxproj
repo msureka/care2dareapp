@@ -471,7 +471,6 @@
 		D73AEB4B1F2C618500105F4A /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73AEB171F2C618500105F4A /* FirebaseAuth.framework */; };
 		D73AEB4C1F2C618500105F4A /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73AEB181F2C618500105F4A /* GTMSessionFetcher.framework */; };
 		D73AEB4D1F2C618500105F4A /* batch-upload in Resources */ = {isa = PBXBuildFile; fileRef = D73AEB1A1F2C618500105F4A /* batch-upload */; };
-		D73AEB4E1F2C618500105F4A /* dump_syms in Resources */ = {isa = PBXBuildFile; fileRef = D73AEB1B1F2C618500105F4A /* dump_syms */; };
 		D73AEB4F1F2C618500105F4A /* extract-keys in Resources */ = {isa = PBXBuildFile; fileRef = D73AEB1C1F2C618500105F4A /* extract-keys */; };
 		D73AEB501F2C618500105F4A /* FirebaseCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73AEB1D1F2C618500105F4A /* FirebaseCrash.framework */; };
 		D73AEB511F2C618500105F4A /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73AEB1E1F2C618500105F4A /* Protobuf.framework */; };
@@ -2925,7 +2924,6 @@
 				9AA9B50F1E6FDD0900C6EF37 /* PlegeIncomingTableViewCell.xib in Resources */,
 				9A54BD181EB4964A00F976F3 /* Play Filled-100.png in Resources */,
 				9A19B4121E6EDA3100262BC1 /* blueplus.png in Resources */,
-				D73AEB4E1F2C618500105F4A /* dump_syms in Resources */,
 				9A0605CF1E6D6D4200FF4229 /* PublicTableViewCell.xib in Resources */,
 				9AED22291E6A8C6A0004A8D0 /* watch1@3x.png in Resources */,
 				9A25E6001EE674FC0010FBF7 /* donateblue@3x.png in Resources */,

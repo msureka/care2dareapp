@@ -18,6 +18,7 @@
 @property(strong,nonatomic)IBOutlet UILabel * Label_Backer;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Raised;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Mypleges;
+@property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator1;
 
 @property(strong,nonatomic)IBOutlet UIView * View_record;
 @property(strong,nonatomic)IBOutlet UILabel * label_record;

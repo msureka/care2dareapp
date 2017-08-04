@@ -421,7 +421,7 @@
                 
                 
                 
-                NSURL * url=[[Array_Challengers objectAtIndex:i]valueForKey:@"challengersprofilepic"];
+                NSURL * url=[NSURL URLWithString:[[Array_Challengers objectAtIndex:i]valueForKey:@"challengersprofilepic"]];
               
                     
                     
@@ -536,7 +536,7 @@
         cell_Four.label_RaisedAmt.text=[NSString stringWithFormat:@"%@%@",@"$",[dict valueForKey:@"totalpledge"]];
             
             
-            NSURL * url=[dict valueForKey:@"backersprofilepic"];
+            NSURL * url=[NSURL URLWithString:[dict valueForKey:@"backersprofilepic"]];
             [cell_Four.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
             
