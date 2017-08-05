@@ -926,7 +926,7 @@
     // minimum date date picker
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setYear:-12];
+    [comps setYear:-120];
     NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currDate options:0];
     
     [datePicker setMaximumDate:currDate];

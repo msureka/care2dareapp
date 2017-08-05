@@ -259,7 +259,7 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
    
         Labelname.text=name;
     
-     NSURL * url=[dict_Sub valueForKey:@"profilepic"];
+     NSURL * url=[NSURL URLWithString:[dict_Sub valueForKey:@"profilepic"]];
     if (!Proimage_View)
         Proimage_View = (UIImageView*)[cell viewWithTag:2];
     

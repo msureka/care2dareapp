@@ -972,7 +972,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
     if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"accepted"])
             {
               Str_Notitype=@"Accepted";
-                blue_color=[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0];
+                blue_color=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0];
             }
             else
             {
@@ -1157,7 +1157,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"accepted"])
                 {
                     Str_Notitype=@"Accepted";
-                    blue_color=[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1.0];
+                    blue_color=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1.0];
                 }
                 else
                 {

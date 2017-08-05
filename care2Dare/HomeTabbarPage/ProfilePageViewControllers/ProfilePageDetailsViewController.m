@@ -733,7 +733,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
         
         
         Button_Dareyou=[[UIButton alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,38)];
-        [Button_Dareyou setTitle:@"I DARE YOU" forState:UIControlStateNormal];
+        [Button_Dareyou setTitle:@"DARE ME" forState:UIControlStateNormal];
         Button_Dareyou.backgroundColor=[UIColor clearColor];
         Button_Dareyou.tag=section;
         Button_Dareyou.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
