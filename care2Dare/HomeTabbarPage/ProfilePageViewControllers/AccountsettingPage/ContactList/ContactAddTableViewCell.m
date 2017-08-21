@@ -12,8 +12,8 @@
 @synthesize image_profile_img;
 - (void)awakeFromNib {
     [super awakeFromNib];
-    image_profile_img.clipsToBounds=YES;
-    image_profile_img.layer.cornerRadius=image_profile_img.frame.size.height/2;
+//    image_profile_img.clipsToBounds=YES;
+//    image_profile_img.layer.cornerRadius=image_profile_img.frame.size.height/2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

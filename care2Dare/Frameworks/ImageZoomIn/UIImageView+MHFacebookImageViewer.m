@@ -24,7 +24,7 @@ static char kImageBrowserKey;
 #pragma mark - Initializer for UIImageView
 - (void) setupImageViewer
 {
- 
+   
     [self setupImageViewerWithCompletionOnOpen:nil onClose:nil];
   
     

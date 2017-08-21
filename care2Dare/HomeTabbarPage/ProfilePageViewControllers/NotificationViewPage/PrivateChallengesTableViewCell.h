@@ -19,4 +19,7 @@
 
 @property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton1;
 @property(nonatomic,weak)IBOutlet UIImageView * image_Playbutton2;
+
+@property(nonatomic,weak)IBOutlet UILabel * Lable_ActionDate;
+
 @end

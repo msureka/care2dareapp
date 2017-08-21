@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AccptTwoTableViewCell.h"
 #import "AccImgVidTableViewCell.h"
+#import "ThreeeDescTitleTableViewCell.h"
 @interface AcceptContributeDetailViewController : UIViewController
 <UIActionSheetDelegate>
 @property(nonatomic,weak)IBOutlet UILabel * Raised_amount;
@@ -27,6 +28,7 @@
 @property(nonatomic,weak)IBOutlet UIView * view_Topheader;
 @property(nonatomic,strong)AccImgVidTableViewCell * cell_OneImageVid;
 @property(nonatomic,strong)AccptTwoTableViewCell* cell_TwoDetails;
+@property(nonatomic,strong)ThreeeDescTitleTableViewCell *cell_ThreeDetails;
 
 
 @property(nonatomic,strong)NSMutableArray * AllArrayData;

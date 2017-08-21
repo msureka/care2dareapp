@@ -22,7 +22,7 @@
 #import "SDAVAssetExportSession.h"
 #import "WatchVedioScrollViewController.h"
 
-#define FONT_SIZE 15.0f
+#define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 
 #define CELL_CONTENT_MARGIN 0.0f
@@ -200,7 +200,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     
     
     //    CGRect previousRect = CGRectZero;
-    self.BlackViewOne.frame = CGRectMake(0, 55, btw,87);
+    self.BlackViewOne.frame = CGRectMake(0, 55, self.view.frame.size.width,87);
     self.textOne.frame = CGRectMake(xx, yy,ww,36);
     ViewTextViewOne.frame = CGRectMake(xx, yy, ww,36);
     
@@ -891,7 +891,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     textOne.text=nil;
     _ImageGalButton.enabled=YES;
     _placeholderLabel.hidden=NO;
-    self.BlackViewOne.frame = CGRectMake(0, 55, btw,87);
+    self.BlackViewOne.frame = CGRectMake(0, 55, self.view.frame.size.width,87);
     self.textOne.frame = CGRectMake(xx, yy, ww,36);
     ViewTextViewOne.frame = CGRectMake(xx, yy, ww,36);
     self.sendButton.enabled=NO;
@@ -2105,6 +2105,8 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         }
     else if (countchallengersDetails11==1)
         {
+            
+        
         [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((self.view.frame.size.width/2)-(cell_TwoDetails.ProgressBar_Total_View.frame.size.width-25), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
             
             
@@ -2171,10 +2173,35 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         cell_TwoDetails.label_Moretxt.hidden=NO;
                         NSInteger totalchallengess=[[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]integerValue]-2;
                         cell_TwoDetails.label_Mores.text=[NSString stringWithFormat:@"%@%ld",@"+",(long)totalchallengess];
+                        CGFloat Ximagepostion,HegihtImagepostion,XpostionDistance;
+                        if (self.view.frame.size.width==320)
+                        {
+                            Ximagepostion=4;
+                            HegihtImagepostion=45;
+                            XpostionDistance=7;
+                            
+                            
+                        }
+                        else
+                        {
+                            if (self.view.frame.size.width==375)
+                            {
+                                Ximagepostion=20;
+                                HegihtImagepostion=cell_TwoDetails.image_FristProfile.frame.size.height;
+                                XpostionDistance=10;
+                            }
+                            else
+                            {
+                                Ximagepostion=40;
+                                HegihtImagepostion=cell_TwoDetails.image_FristProfile.frame.size.height;
+                                XpostionDistance=15;
+                            }
+                            
+                           
+                        }
+                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(Ximagepostion, cell_TwoDetails.image_FristProfile.frame.origin.y, HegihtImagepostion,HegihtImagepostion)];
                         
-                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(8, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
-                        
-                        [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
+                        [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+XpostionDistance), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
                         
                            [cell_TwoDetails.Image_Private_Public setFrame:CGRectMake(cell_TwoDetails.ProgressBar_Total_View.frame.origin.x, cell_TwoDetails.Image_Private_Public.frame.origin.y, cell_TwoDetails.Image_Private_Public.frame.size.width, cell_TwoDetails.Image_Private_Public.frame.size.height)];
                         
@@ -2185,21 +2212,32 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         
                         
                         
-                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, cell_TwoDetails.image_SecProfile.frame.size.height, cell_TwoDetails.image_SecProfile.frame.size.height)];
+                        [cell_TwoDetails.image_SecProfile setFrame:CGRectMake((cell_TwoDetails.ProgressBar_Total_View.frame.origin.x+cell_TwoDetails.ProgressBar_Total_View.frame.size.width+10), cell_TwoDetails.image_SecProfile.frame.origin.y, HegihtImagepostion, HegihtImagepostion)];
                         
-                        [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile1.frame.origin.y, cell_TwoDetails.image_SecProfile1.frame.size.height, cell_TwoDetails.image_SecProfile1.frame.size.height)];
+                        [cell_TwoDetails.image_SecProfile1 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile.frame.origin.x+cell_TwoDetails.image_SecProfile.frame.size.width/2)+XpostionDistance, cell_TwoDetails.image_SecProfile1.frame.origin.y, HegihtImagepostion, HegihtImagepostion)];
                         
-                        [cell_TwoDetails.image_SecProfile2 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile1.frame.origin.x+cell_TwoDetails.image_SecProfile1.frame.size.width/2)+10, cell_TwoDetails.image_SecProfile2.frame.origin.y, cell_TwoDetails.image_SecProfile2.frame.size.height, cell_TwoDetails.image_SecProfile2.frame.size.height)];
+                        [cell_TwoDetails.image_SecProfile2 setFrame:CGRectMake((cell_TwoDetails.image_SecProfile1.frame.origin.x+cell_TwoDetails.image_SecProfile1.frame.size.width/2)+XpostionDistance, cell_TwoDetails.image_SecProfile2.frame.origin.y, HegihtImagepostion, HegihtImagepostion)];
                         
                         [cell_TwoDetails.label_Mores setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.origin.y, cell_TwoDetails.label_Mores.frame.size.width, cell_TwoDetails.label_Mores.frame.size.height)];
                         
                         [cell_TwoDetails.label_Moretxt setFrame:CGRectMake(self.view.frame.size.width-cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.origin.y, cell_TwoDetails.label_Moretxt.frame.size.width, cell_TwoDetails.label_Moretxt.frame.size.height)];
                         
-                        
+                     // jghjhjjjhj
+
                     }
                     else
                     {
-                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(38, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
+                        CGFloat Ximagepostion;
+                        if (self.view.frame.size.width==320)
+                        {
+                             Ximagepostion=12;
+                        }
+                        else
+                        {
+                            Ximagepostion=38;
+                        }
+                        
+                        [cell_TwoDetails.image_FristProfile setFrame:CGRectMake(Ximagepostion, cell_TwoDetails.image_FristProfile.frame.origin.y, cell_TwoDetails.image_FristProfile.frame.size.height, cell_TwoDetails.image_FristProfile.frame.size.height)];
                         
                         [cell_TwoDetails.ProgressBar_Total_View setFrame:CGRectMake((cell_TwoDetails.image_FristProfile.frame.origin.x)+(cell_TwoDetails.image_FristProfile.frame.size.width+10), cell_TwoDetails.ProgressBar_Total_View.frame.origin.y, cell_TwoDetails.ProgressBar_Total_View.frame.size.width, cell_TwoDetails.ProgressBar_Total_View.frame.size.height)];
                         
@@ -2225,15 +2263,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                         cell_TwoDetails.label_Moretxt.hidden=YES;
                     }
                 }
-//                    if ([str_falgUiprogressView isEqualToString:@"yes"])
-//                    {
-//                    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
-//                    cell_TwoDetails.ProgressBar_Total.transform = transform;
-//                    cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
-//                    cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
+
                     str_falgUiprogressView=@"no";
-                    //}
-               // }
+             
                 
                 
                 UITapGestureRecognizer *image_SecProfileTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image_SecProfile_ActionDetails:)];
@@ -2247,38 +2279,36 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                    [cell_TwoDetails.image_SecProfile setImageWithURL:urlSec placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 
                 
-                
-//                if ([[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]]isEqualToString:@""])
-//                {
-//                    cell_TwoDetails.label_Mores.hidden=YES;
-//                    cell_TwoDetails.label_Moretxt.hidden=YES;
-//                }
-//                else
-//                {
-//                cell_TwoDetails.label_Mores.text=[NSString stringWithFormat:@"%@%@",@"+",[[AllArrayData objectAtIndex:0]valueForKey:@"challengerdetails1"]];
-//                }
+
               
                  cell_TwoDetails.label_Desc.text=[[AllArrayData objectAtIndex:0]valueForKey:@"title"];
                 
                 if ([str_LabelCoordinates isEqualToString:@"no"])
                 {
                     str_LabelCoordinates=@"yes";
-                    Cell_DescLabelX=cell_TwoDetails.textview.frame.origin.x;
-                    Cell_DescLabelY=cell_TwoDetails.textview.frame.origin.y;
-                    Cell_DescLabelW=cell_TwoDetails.textview.frame.size.width;
-                    Cell_DescLabelH=cell_TwoDetails.textview.frame.size.height;
+                    
                     
                     TextView_ViewX=cell_TwoDetails.textview_View.frame.origin.x;
                     TextView_ViewY=cell_TwoDetails.textview_View.frame.origin.y;
-                    TextView_ViewW=cell_TwoDetails.textview_View.frame.size.width;
+                    TextView_ViewW=self.view.frame.size.width-((cell_TwoDetails.textview_View.frame.origin.x)*2);
                     TextView_ViewH=cell_TwoDetails.textview_View.frame.size.height;
+                    
+                    
+                    Cell_DescLabelX=cell_TwoDetails.textview.frame.origin.x;
+                    Cell_DescLabelY=cell_TwoDetails.textview.frame.origin.y;
+                    Cell_DescLabelW=TextView_ViewW;
+                    Cell_DescLabelH=cell_TwoDetails.textview.frame.size.height;
+                    
                     
                      NSLog(@"Dynamic label heightc====%f",Cell_DescLabelX);
                        NSLog(@"Dynamic label heightc====%f",Cell_DescLabelY);
                        NSLog(@"Dynamic label heightc====%f",Cell_DescLabelW);
                        NSLog(@"Dynamic label heightc====%f",Cell_DescLabelH);
-                    
+//                    [cell_TwoDetails.textview_View setFrame:CGRectMake(TextView_ViewX, TextView_ViewY, TextView_ViewW, TextView_ViewH)];
+//                    
+//                    [cell_TwoDetails.textview setFrame:CGRectMake(Cell_DescLabelX, Cell_DescLabelY, Cell_DescLabelW, TextView_ViewH)];
                 }
+                
                 NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
                 
                 
@@ -2297,7 +2327,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [cell_TwoDetails.textview setText:text];
                 cell_TwoDetails.textview.tag=indexPath.row;
                 cell_TwoDetails.textview_View.tag=indexPath.row;
-                CGFloat fixedWidth = cell_TwoDetails.textview.frame.size.width;
+                CGFloat fixedWidth = self.view.frame.size.width-((cell_TwoDetails.textview_View.frame.origin.x)*2);
                 CGSize newSize = [cell_TwoDetails.textview sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
             //  cell_TwoDetails.label_Desc.backgroundColor=[UIColor clearColor];
         NSInteger rHeight = size.height/24;
@@ -2368,10 +2398,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [cell_TwoDetails.ProgressBar_Total setProgress:[per floatValue]];
 
                 
-//                CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.5f);
-//                cell_TwoDetails.ProgressBar_Total.transform = transform;
-//                cell_TwoDetails.ProgressBar_Total.clipsToBounds = YES;
-//                cell_TwoDetails.ProgressBar_Total.layer.cornerRadius = 2;
+
             }
             else if (indexPath.row==1)
             {
@@ -2420,11 +2447,21 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 }
     
             
-           
+            cell_TwoDetails.image_FristProfile.clipsToBounds=YES;
+            cell_TwoDetails.image_FristProfile.layer.cornerRadius=cell_TwoDetails.image_FristProfile.frame.size.height/2;
+            
+            cell_TwoDetails.image_SecProfile.clipsToBounds=YES;
+            cell_TwoDetails.image_SecProfile.layer.cornerRadius=cell_TwoDetails.image_SecProfile.frame.size.height/2;
+            
+            cell_TwoDetails.image_SecProfile1.clipsToBounds=YES;
+            cell_TwoDetails.image_SecProfile1.layer.cornerRadius=cell_TwoDetails.image_SecProfile1.frame.size.height/2;
+            
+            cell_TwoDetails.image_SecProfile2.clipsToBounds=YES;
+            cell_TwoDetails.image_SecProfile2.layer.cornerRadius=cell_TwoDetails.image_SecProfile2.frame.size.height/2;
             
             
                 return cell_TwoDetails;
-                
+            
             }
     
     
@@ -2480,7 +2517,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             {
             
             UILabel *label = nil;
-            UILabel *label1 = nil;
+          
             
             UIImageView * desc_Imagepro=nil;
             UIImageView * Chat_ImageRight=nil;
@@ -2497,20 +2534,10 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 cell_ThreeComments = [[CommentsTableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellthree] ;
                 
-                label1 = [[UILabel alloc] initWithFrame:CGRectZero];
-                [label1 setLineBreakMode:UILineBreakModeWordWrap];
-                //        [label1 setMinimumFontSize:FONT_SIZE];
-                [label1 setNumberOfLines:0];
-                //        [label1 setFont:[UIFont systemFontOfSize:FONT_SIZE]];
-                [label1 setTag:1];
-                // [[label layer] setBorderWidth:2.0f];
-                [label1 setBackgroundColor:[UIColor clearColor]];
+              
                 
                 
                 
-                
-                
-                [[cell_ThreeComments contentView] addSubview:label1];
                 
                 label = [[UILabel alloc] initWithFrame:CGRectZero];
                 [label setLineBreakMode:UILineBreakModeWordWrap];
@@ -2520,9 +2547,6 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 [label setTag:5];
                 // [[label layer] setBorderWidth:2.0f];
                 [label setBackgroundColor:[UIColor clearColor]];
-                
-                
-                
                 
                 
                 [[cell_ThreeComments contentView] addSubview:label];
@@ -2563,9 +2587,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
             if (!label)
                 label = (UILabel*)[cell_ThreeComments viewWithTag:1];
             
-            if (!label1)
-                label1 = (UILabel*)[cell_ThreeComments viewWithTag:2];
-            
+          
             
             //                NSTextAlignmentLeft      = 0,
             //                NSTextAlignmentCenter    = 1,
@@ -2606,13 +2628,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 label.numberOfLines = 0;
                 label.attributedText = attrText;
                 
-                   [label setText:text];
+                  // [label setText:text];
                  label.textAlignment=NSTextAlignmentLeft;
-//                label.clipsToBounds=YES;
-//                label.layer.cornerRadius=9.0f;
-                //label1.backgroundColor=[UIColor colorWithRed:13/255.0 green:146/255.0 blue:220/255.0 alpha:0.8];
-                label1.clipsToBounds=YES;
-                label1.layer.cornerRadius=9.0f;
+
+                label.clipsToBounds=YES;
+                label.layer.cornerRadius=9.0f;
                
                 
                 if ([[defaults valueForKey:@"userid"] isEqualToString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"useridsender"]])
@@ -2621,23 +2641,22 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
                     
-                 //   label.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
-                    label1.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
-                    label.backgroundColor=[UIColor clearColor];
+            
+                    label.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:0.7];
+
                     label.textColor=[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
                     if (size.width <=self.view.frame.size.width-132)
                     {
                         
-                [label1 setFrame:CGRectMake(50,0, size.width+20, MAX(size.height, 30.0f)+8)];
-                        [label setFrame:CGRectMake(60,0, size.width, MAX(size.height, 30.0f)+8)];
+                [label setFrame:CGRectMake(50,0, size.width+20, MAX(size.height, 30.0f)+8)];
                         
                         
                     }
                     
                     else
                     {
-            [label1 setFrame:CGRectMake(50,0, self.view.frame.size.width-120, MAX(size.height, 30.0f)+8)];
-            [label setFrame:CGRectMake(55,0, self.view.frame.size.width-140,MAX(size.height, 30.0f)+8)];
+
+            [label setFrame:CGRectMake(50,0, self.view.frame.size.width-140,MAX(size.height, 30.0f)+8)];
                         
                         
                     }
@@ -2656,36 +2675,32 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                     NSURL * url=[NSURL URLWithString:[[Array_Comment1 objectAtIndex:indexPath.row]valueForKey:@"profileimage"]];
                     [desc_Imagepro setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
                     
-//                    label.backgroundColor=[UIColor colorWithRed:79/255.0 green:76/255.0 blue:227/255.0 alpha:0.2];
-                    label1.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:0.2];
-                    label.backgroundColor=[UIColor clearColor];
+
+                    label.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:0.2];
+                  
                     label.textColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
                 
                     if (size.width <=self.view.frame.size.width-132)
                     {
                         
                         
-                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+68),0, size.width, MAX(size.height, 30.0f)+8)];
-                         [label1 setFrame:CGRectMake(label.frame.origin.x-10,label.frame.origin.y, label.frame.size.width+20,label.frame.size.height)];
+                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+70),0, size.width+20, MAX(size.height, 30.0f)+8)];
+
                     }
                     
                     else
                     {
                         
-                        
-                        
-                        [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+68),0, self.view.frame.size.width-140, MAX(size.height, 30.0f)+8)];
-                         [label1 setFrame:CGRectMake(label.frame.origin.x-10,label.frame.origin.y, label.frame.size.width+20,label.frame.size.height)];
-                        
-                        
+             [label setFrame:CGRectMake(self.view.frame.size.width-(size.width+70),0, self.view.frame.size.width-140, MAX(size.height, 30.0f)+8)];
+
                     }
                     Chat_ImageRight.backgroundColor=[UIColor clearColor];
-                    [Chat_ImageRight setFrame:CGRectMake(label.frame.size.width+label.frame.origin.x-2,label1.frame.size.height-27, 16,16)];
+                    [Chat_ImageRight setFrame:CGRectMake(label.frame.size.width+label.frame.origin.x-2,label.frame.size.height-27, 16,16)];
                     
                     
                     [Chat_ImageRight setImage:[UIImage imageNamed:@"Chat_arrow_right.png"]];
                     
-                    [desc_Imagepro setFrame:CGRectMake(self.view.frame.size.width-48,label.frame.origin.y+(label.frame.size.height-32),32,32)];
+                    [desc_Imagepro setFrame:CGRectMake(self.view.frame.size.width-40,label.frame.origin.y+(label.frame.size.height-32),32,32)];
                     desc_Imagepro.clipsToBounds=YES;
                     desc_Imagepro.layer.cornerRadius=desc_Imagepro.frame.size.height/2;
                 }
@@ -2842,8 +2857,11 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
                 
                 UITapGestureRecognizer * ImageTapLiuke =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_profileLikeVedio:)];
                 [cell_Vediolist.ImageRight_Likes addGestureRecognizer:ImageTapLiuke];
+                cell_Vediolist.Image_VedioShare.tag=indexPath.row;
+                cell_Vediolist.Image_VedioShare.userInteractionEnabled=YES;
                 
-               
+                UITapGestureRecognizer * ImageTapvedioshare =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageTapped_Vedioshare:)];
+                [cell_Vediolist.Image_VedioShare addGestureRecognizer:ImageTapvedioshare];
 
               
                     
@@ -3006,7 +3024,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         [cell_TwoDetails.textview_Dummey setText:text];
         
         
-        CGFloat fixedWidth = cell_TwoDetails.textview_Dummey.frame.size.width;
+        CGFloat fixedWidth =self.view.frame.size.width-((cell_TwoDetails.textview_View.frame.origin.x)*2); //cell_TwoDetails.textview_Dummey.frame.size.width;
         CGSize newSize = [cell_TwoDetails.textview_Dummey sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
         CGRect newFrame = cell_TwoDetails.textview_Dummey.frame;
         newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
@@ -3022,9 +3040,9 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
         else
         {
           
-    if ((long)rHeight==1)
+      if ((long)rHeight==1)
      {
-       return 148;
+       return 148+cell_TwoDetails.textview_Dummey.frame.size.height-38;
         }
        else
          {
@@ -3131,6 +3149,11 @@ if (section==1)
     
     
     Button_Contribute=[[UIButton alloc]initWithFrame:CGRectMake(50,0, self.view.frame.size.width-100,38)];
+    
+    
+    Button_Contribute.titleLabel.numberOfLines = 1;
+    Button_Contribute.titleLabel.minimumFontSize = 16;
+    Button_Contribute.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
     {
@@ -3622,7 +3645,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         if ( [flag1 isEqualToString:@"yes" ])
         {
             
-            self.BlackViewOne.frame = CGRectMake(0, bty - textView.contentSize.height+26, btw,bth+textView.contentSize.height);
+            self.BlackViewOne.frame = CGRectMake(0, bty - textView.contentSize.height+26, self.view.frame.size.width,bth+textView.contentSize.height);
             ViewTextViewOne.frame = CGRectMake(xx, yy, ww,textOne.frame.size.height+2);
           
            // Tableview_ContriBute.frame = CGRectMake(0,yt, tw, th-(textView.contentSize.height+182));
@@ -3645,7 +3668,7 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
         
         
         
-        self.BlackViewOne.frame = CGRectMake(0, bty - textView.contentSize.height+33, btw,bth+textView.contentSize.height);
+        self.BlackViewOne.frame = CGRectMake(0, bty - textView.contentSize.height+33, self.view.frame.size.width,bth+textView.contentSize.height);
         
         self.textOne.frame = CGRectMake(xx, yy, ww,textView.contentSize.height+10);
         ViewTextViewOne.frame = CGRectMake(xx, yy, ww,textView.contentSize.height);
@@ -3895,6 +3918,22 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     
     
 }
+-(void)ImageTapped_Vedioshare:(UIGestureRecognizer *)reconizer
+{
+    UIImageView *imageView = (UIImageView *)reconizer.view;
+   
+    
+    NSString * texttoshare=[NSString stringWithFormat:@"%@%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"name"],@" has posted a new challenge video. Download the app now - http://www.care2dareapp.com or View the challenge video here: "];
+    
+    NSURL * urltoshare=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[Array_showrecordvid objectAtIndex:(long)imageView.tag] valueForKey:@"videourl"]]];
+    NSArray *activityItems1=@[texttoshare,urltoshare];
+    NSArray *activityItems =@[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks];
+    UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems1 applicationActivities:nil];
+    activityViewControntroller.excludedActivityTypes = activityItems;
+    //  [self.view addSubview:activityViewControntroller];
+    [self presentViewController:activityViewControntroller animated:YES completion:nil];
+}
+
 -(void)ImageTapped_profileLikeVedio:(UIGestureRecognizer *)reconizer
 {
     
@@ -4282,17 +4321,17 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                                                      
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-                                                     if ([ResultString isEqualToString:@"done"])
+                        if ([ResultString isEqualToString:@"done"])
                                                      {
-                                                         
-                                                         
-                                                         
-                                                         UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Deleted" message:@"Your challenge has been successfully deleted!"preferredStyle:UIAlertControllerStyleAlert];
-                                                         
-                                                         UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                                             style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                                                                                     {
-                                                    [self ButtonBack_Action:nil];
+                            UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"Deleted" message:@"Your challenge has been successfully deleted!"preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                    {
+                                        
+                        [defaults setObject:@"yes" forKey:@"ExpView_Update"];
+                                [defaults synchronize];
+                                        [self ButtonBack_Action:nil];
+                                        
+                                        
                                                                                      }];
                                                          
                                                          [alert addAction:yesButton];

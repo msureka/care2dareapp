@@ -66,13 +66,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/ExpolreViewController/ContributDetailPage/ContributeDaetailPageViewController.m"
-            timestampString = "523446073.070919"
+            filePath = "care2Dare/Frameworks/ImageZoomIn/UIImageView+MHFacebookImageViewer.m"
+            timestampString = "524833264.30334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2345"
-            endingLineNumber = "2345"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-setupImageViewerWithDatasource:onOpen:onClose:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/Frameworks/ImageZoomIn/UIImageView+MHFacebookImageViewer.m"
+            timestampString = "524833266.616088"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-setupImageViewerWithDatasource:initialIndex:onOpen:onClose:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,28 +99,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/ExpolreViewController/ContributDetailPage/ContributeDaetailPageViewController.m"
-            timestampString = "523446073.070919"
+            timestampString = "525010400.902591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2348"
-            endingLineNumber = "2348"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/ExpolreViewController/ContributDetailPage/ContributeDaetailPageViewController.m"
-            timestampString = "523446073.070919"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2349"
-            endingLineNumber = "2349"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "4377"
+            endingLineNumber = "4377"
+            landmarkName = "-FlagVedioCommunication"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

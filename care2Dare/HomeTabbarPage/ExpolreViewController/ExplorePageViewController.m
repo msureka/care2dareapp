@@ -51,7 +51,7 @@
 {
     [super viewDidLoad];
    
-   
+     defaults=[[NSUserDefaults alloc]init];
     
     viewDidLoadCalled = YES;
     Tablesinglereload=YES;
@@ -75,7 +75,7 @@
     flag_profile=@"no";
 str_tablereload=@"no";
     
-    defaults=[[NSUserDefaults alloc]init];
+  
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
@@ -1137,7 +1137,9 @@ str_tablereload=@"no";
                     
                     cell_WorldExp.Image_Profile3.hidden=YES;
                     cell_WorldExp.Image_PalyBuutton3.hidden=YES;
-                    
+                    cell_WorldExp.activityIndicator1.hidden=NO;
+                    cell_WorldExp.activityIndicator2.hidden=NO;
+                    cell_WorldExp.activityIndicator3.hidden=NO;
                     cell_WorldExp.label_JsonResult.hidden=NO;
                     
                 }
@@ -1158,11 +1160,17 @@ str_tablereload=@"no";
                     
                     cell_WorldExp.label_JsonResult.hidden=YES;
 
+                    CGFloat Image_Heiht=((self.view.frame.size.width-2)/3);
                     
                     
+                    [cell_WorldExp.Image_Profile setFrame:CGRectMake(0, 1, Image_Heiht, Image_Heiht)];
+                    [cell_WorldExp.Image_Profile2 setFrame:CGRectMake(cell_WorldExp.Image_Profile.frame.origin.x+Image_Heiht+1, 1, Image_Heiht, Image_Heiht)];
                     
+                    [cell_WorldExp.Image_Profile3 setFrame:CGRectMake(cell_WorldExp.Image_Profile2.frame.origin.x+Image_Heiht+1, 1, Image_Heiht, Image_Heiht)];
                     
-                    
+                    cell_WorldExp.activityIndicator1.center=cell_WorldExp.Image_Profile.center;
+                    cell_WorldExp.activityIndicator2.center=cell_WorldExp.Image_Profile2.center;
+                    cell_WorldExp.activityIndicator3.center=cell_WorldExp.Image_Profile3.center;
                 
                 self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView];
@@ -1626,7 +1634,7 @@ str_tablereload=@"no";
                     cell_FriendExp.label_JsonResult.hidden=YES;;
                     
                 
-                    
+                    [cell_FriendExp.Image_Profile setFrame:CGRectMake(cell_FriendExp.Image_Profile.frame.origin.x, cell_FriendExp.Image_Profile.frame.origin.y, cell_FriendExp.Image_Profile.frame.size.width, cell_FriendExp.Image_Profile.frame.size.width)];
                     
                     
                 NSDictionary * dic_worldexp=[Array_FriendExp objectAtIndex:indexPath.row];
@@ -1643,6 +1651,10 @@ str_tablereload=@"no";
                 {
                     [cell_FriendExp.Label_Titile setFrame:CGRectMake(cell_FriendExp.Label_Titile.frame.origin.x, cell_FriendExp.Label_Titile.frame.origin.y, cell_FriendExp.Label_Titile.frame.size.width, cell_FriendExp.Label_Titile.frame.size.height/2)];
                 }
+               else
+            {
+                    [cell_FriendExp.Label_Titile setFrame:CGRectMake(cell_FriendExp.Label_Titile.frame.origin.x, cell_FriendExp.Label_Titile.frame.origin.y, cell_FriendExp.Label_Titile.frame.size.width, cell_FriendExp.Label_Titile.frame.size.height)];
+                    }
                 
                 
                 
@@ -1762,7 +1774,7 @@ str_tablereload=@"no";
             cell_Favorite.Label_Raised.hidden=NO;
             cell_Favorite.label_JsonResult.hidden=YES;
         
-          
+         [cell_Favorite.Image_Profile setFrame:CGRectMake(cell_Favorite.Image_Profile.frame.origin.x, cell_Favorite.Image_Profile.frame.origin.y, cell_Favorite.Image_Profile.frame.size.width, cell_Favorite.Image_Profile.frame.size.width)];
             
         NSDictionary * dic_worldexp=[Array_Faourite objectAtIndex:indexPath.row];
         cell_Favorite.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
@@ -1862,8 +1874,8 @@ str_tablereload=@"no";
   
         if ([cellChecking isEqualToString:@"WorldExp"])
         {
-            
-            return 125;
+           
+            return self.view.frame.size.width/3;
             
         }
         if ([cellChecking isEqualToString:@"FriendExp"])

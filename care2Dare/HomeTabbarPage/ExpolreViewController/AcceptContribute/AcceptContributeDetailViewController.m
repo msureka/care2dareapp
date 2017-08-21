@@ -23,6 +23,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AFNetworking.h"
+#import "ThreeeDescTitleTableViewCell.h"
 #define FONT_SIZE 16.0f
 #define CELL_CONTENT_WIDTH self.view.frame.size.width-138
 #define CELL_CONTENT_MARGIN 0.0f
@@ -48,7 +49,7 @@
 @end
 
 @implementation AcceptContributeDetailViewController
-@synthesize cell_TwoDetails,cell_OneImageVid,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,Tableview_ContriBute;
+@synthesize cell_TwoDetails,cell_OneImageVid,Raised_amount,Button_back,Image_TotalLikes,Button_TotalPoints,AllArrayData,view_Topheader,Tableview_ContriBute,cell_ThreeDetails;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -164,7 +165,7 @@
     }
     if (section==2)
     {
-        return Array_Comment1.count;
+        return 1;
     }
     
     return 0;
@@ -237,6 +238,10 @@
         {
             cell_TwoDetails = (AccptTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:celltwo forIndexPath:indexPath];
             
+            
+            [ cell_TwoDetails.image_Profile setFrame:CGRectMake( cell_TwoDetails.image_Profile.frame.origin.x,  cell_TwoDetails.image_Profile.frame.origin.y,  cell_TwoDetails.image_Profile.frame.size.width,  cell_TwoDetails.image_Profile.frame.size.width)];
+            cell_TwoDetails.image_Profile.clipsToBounds=YES;
+            cell_TwoDetails.image_Profile.layer.cornerRadius= cell_TwoDetails.image_Profile.frame.size.width/2;
             NSURL *urlFirst=[NSURL URLWithString:[[AllArrayData objectAtIndex:0] valueForKey:@"usersprofilepic"]];
             
             cell_TwoDetails.label_name.text=[[AllArrayData objectAtIndex:0] valueForKey:@"usersname"];
@@ -268,37 +273,7 @@
 
             
             
-    cell_TwoDetails.label_DescTitle.text=[[AllArrayData objectAtIndex:0] valueForKey:@"title"];
-            
-        
-            NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
-            
-            
-            CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-            
-            CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-            
-            CGFloat height = MAX(size.height, 30.0f);
-            NSLog(@"Dynamic label height====%f",height);
-            cell_TwoDetails.label_DescTitle.numberOfLines=0;
-            cell_TwoDetails.label_DescTitle.lineBreakMode=UILineBreakModeWordWrap;
-            
-            
-            NSInteger rHeight = size.height/FONT_SIZE;
-            NSLog(@"No of lines: %ld",(long)rHeight);
-            if(height <=30)
-            {
-        [cell_TwoDetails.label_DescTitle setFrame:CGRectMake(cell_TwoDetails.label_DescTitle.frame.origin.x,cell_TwoDetails.label_DescTitle.frame.origin.y, cell_TwoDetails.label_DescTitle.frame.size.width,size.height+8)];
-            }
-            else if(height <=39)
-            {
-              [cell_TwoDetails.label_DescTitle setFrame:CGRectMake(cell_TwoDetails.label_DescTitle.frame.origin.x,cell_TwoDetails.label_DescTitle.frame.origin.y, cell_TwoDetails.label_DescTitle.frame.size.width,size.height*2)];
-            }
-            else
-            {
-            [cell_TwoDetails.label_DescTitle setFrame:CGRectMake(cell_TwoDetails.label_DescTitle.frame.origin.x,cell_TwoDetails.label_DescTitle.frame.origin.y, cell_TwoDetails.label_DescTitle.frame.size.width,size.height+70)];
-            }
-              
+    
             if ([[[AllArrayData objectAtIndex:0] valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
             {
                 cell_TwoDetails.Label_privatePub.text=@"Public";
@@ -311,33 +286,7 @@
             }
             
             
-//            accepted = "";
-//            backamount = 0;
-//            backers = 0;
-//            challengeid = C20170310084424DAXU;
-//            challengerdetails = "Dhdhd + 1 more";
-//            challengerdetails1 = "+ 1 more";
-//            challengersname = Dhdhd;
-//            challengersprofilepic = "http://www.care2dareapp.com/app/profileimages/default.jpg";
-//            challengersuserid = 20170306090142zNLf;
-//            challengetype = PUBLIC;
-//            completed = "";
-//            createdate = "2017-03-10 08:44:24";
-//            createtime = 0s;
-//            createtime1 = "Time up!";
-//            creatoruserid = 20170306070111mGtl;
-//            daysleft = 0;
-//            enddate = "2017-03-10 09:55:24";
-//            favourite = FALSE;
-//            mediathumbnailurl = "";
-//            mediatype = IMAGE;
-//            mediaurl = "http://www.care2dareapp.com/app/challengemedia/C20170310084424DAXU.jpg";
-//            noofchallengers = 3;
-//            payperchallenger = 0;
-//            recorded = "";
-//            title = test1;
-//            usersname = "Mohit Sureka";
-//            usersprofilepic = "https://graph.facebook.com/10154323404982724/picture?type=large";
+
             
             return cell_TwoDetails;
             
@@ -345,8 +294,37 @@
             
             
             break;
-        
+        case 2:
+        {
+       cell_ThreeDetails = (ThreeeDescTitleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CellD" forIndexPath:indexPath];
             
+           
+            NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
+            
+            
+           
+            
+            
+            CGSize constraint = CGSizeMake(345 - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+            
+            CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+            
+            CGFloat height = MAX(size.height, 30.0f);
+            NSLog(@"Dynamic label height====%f",height);
+            NSInteger rHeight = size.height/24;
+            [cell_ThreeDetails.label_DescTitle setText:text];
+            
+            CGFloat fixedWidth =self.view.frame.size.width-((cell_ThreeDetails.label_DescTitle.frame.origin.x)*2); //cell_TwoDetails.textview_Dummey.frame.size.width;
+            CGSize newSize = [cell_ThreeDetails.label_DescTitle sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+            CGRect newFrame = cell_ThreeDetails.label_DescTitle.frame;
+            newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+            [cell_ThreeDetails.label_DescTitle setFrame:(newFrame)];
+            
+           
+                        return cell_ThreeDetails;
+            
+        }
+            break;
     }
     return nil;
     
@@ -355,7 +333,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 2;
+    return 3;
     
 }
 
@@ -369,26 +347,53 @@
     }
     if (indexPath.section==1)
     {
+//        NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
+//        
+//        
+//        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+//        
+//        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+//        
+//        CGFloat height = MAX(size.height, 30.0f);
+//        NSLog(@"Dynamic label height====%f",height);
+//        if(height <=30)
+//        {
+//            return 225+size.height+12;
+//        }
+//        else
+//        {
+//            return 225+size.height+42;
+//        }
+        return 188;
+    }
+    if (indexPath.section==2)
+    {
         NSString *text =[[AllArrayData objectAtIndex:0]valueForKey:@"title"];;
         
         
-        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
         
-        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        
+        
+        CGSize constraint = CGSizeMake(345 - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+        
+        CGSize size = [text sizeWithFont:[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
         
         CGFloat height = MAX(size.height, 30.0f);
         NSLog(@"Dynamic label height====%f",height);
-        if(height <=30)
-        {
-            return 225+size.height+12;
-        }
-        else
-        {
-            return 225+size.height+42;
-        }
+        NSInteger rHeight = size.height/24;
+        [cell_ThreeDetails.label_DescTitle setText:text];
+        
+        CGFloat fixedWidth =self.view.frame.size.width-((cell_ThreeDetails.label_DescTitle.frame.origin.x)*2); //cell_TwoDetails.textview_Dummey.frame.size.width;
+        CGSize newSize = [cell_ThreeDetails.label_DescTitle sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell_ThreeDetails.label_DescTitle.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        [cell_ThreeDetails.label_DescTitle setFrame:(newFrame)];
+      
+        return cell_ThreeDetails.label_DescTitle.frame.size.height+10;
+        
         
     }
-    
+
     
     
     return 0;

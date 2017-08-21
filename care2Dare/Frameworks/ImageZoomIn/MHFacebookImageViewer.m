@@ -81,6 +81,7 @@ static const CGFloat kMinImageScale = 1.0f;
 @synthesize panGesture = _panGesture;
 
 - (void) loadAllRequiredViews{
+   
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     CGRect frame = [UIScreen mainScreen].bounds;
     __scrollView = [[UIScrollView alloc]initWithFrame:frame];
@@ -143,7 +144,7 @@ static const CGFloat kMinImageScale = 1.0f;
         __imageView.userInteractionEnabled = YES;
         [self addPanGestureToView:__imageView];
         [self addMultipleGesture];
-
+ 
 }
 
 #pragma mark - Add Pan Gesture

@@ -37,7 +37,7 @@
      UILabel * Label_confirm11;
      UILabel * Label_confirm;
     UIView * transperentViewIndicator,*whiteView1,* transperentViewIndicator11,*whiteView111;
-    
+    CGFloat keyboardheight;
     UIActivityIndicatorView * indicatorAlert;
     float sum;
     int count;
@@ -93,7 +93,7 @@
     _Label_totalAmount.hidden=YES;
     
     
-    
+   
     
     
     // Do any additional setup after loading the view.
@@ -405,6 +405,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 - (void)LabelTap_DonateTapped:(UITapGestureRecognizer *)recognizer
 {
+    
+    
+    
+    
     challengetypeValDonate=@"DONATE";
     Label_Raise_DonateTextheading.text=@"Donation to each challenger";
     
@@ -577,7 +581,8 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
         if (isShowing) {
             self.tabBarBottomSpace.constant = CGRectGetHeight(keyboardRect);
-            [self.startScreenScrollView setContentSize:CGSizeMake(self.startScreenScrollView.frame.size.width,self.startScreenScrollView.frame.size.height+230)];
+            keyboardheight= CGRectGetHeight(keyboardRect);
+            [self.startScreenScrollView setContentSize:CGSizeMake(self.startScreenScrollView.frame.size.width,30+self.startScreenScrollView.frame.size.height+keyboardheight)];
             self.startScreenScrollView.scrollEnabled=YES;
             
             NSLog(@"Scroll view height11==%f",self.startScreenScrollView.frame.size.height);
@@ -587,7 +592,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         } else
         {
             self.startScreenScrollView.scrollEnabled=YES;
-            [self.startScreenScrollView setContentSize:CGSizeMake(self.startScreenScrollView.frame.size.width,self.startScreenScrollView.frame.size.height-250)];
+            [self.startScreenScrollView setContentSize:CGSizeMake(self.startScreenScrollView.frame.size.width,self.startScreenScrollView.frame.size.height-keyboardheight)];
             self.tabBarBottomSpace.constant = 0.0f;
             NSLog(@"Scroll view height22==%f",self.startScreenScrollView.frame.size.height);
             NSLog(@"Scroll view xxx22==%f",self.startScreenScrollView.frame.origin.x);
@@ -1198,9 +1203,19 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 -(void)ButtonCreateChallengesActions
 {
-    
+    NSString * Str_message;
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies." preferredStyle:UIAlertControllerStyleAlert];
+    if ([challengetypeValDonate isEqualToString:@"DONATE"])
+    {
+        Str_message=[NSString stringWithFormat:@"%@%@%.f",@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
+       
+    }
+    else
+    {
+     Str_message=@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.";
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:Str_message preferredStyle:UIAlertControllerStyleAlert];
     
     
     
@@ -1241,17 +1256,28 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 {
-    [self.startScreenScrollView setContentOffset:CGPointMake(0,(textField.frame.origin.y-250)-(textField.frame.size.height)) animated:YES];
-}
-- (IBAction)Textfield_Amount_Action:(id)sender
-{
-    //    [self.startScreenScrollView setContentOffset:CGPointMake(0,_Button_Create.frame.origin.y-(_Button_Create.frame.size.height*2)) animated:YES];
-    [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-250)-(_Textfield_Amount.frame.size.height)) animated:YES];
     
     if ([challengetypeValDonate isEqualToString:@"DONATE"])
     {
         
+        [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-215)-(_Textfield_Amount.frame.size.height)) animated:YES];
+    }
+    else
+    {
+     [self.startScreenScrollView setContentOffset:CGPointMake(0,(textField.frame.origin.y-225)-(textField.frame.size.height)) animated:YES];
+    }
+   
+}
+- (IBAction)Textfield_Amount_Action:(id)sender
+{
+   
+   
     
+    if ([challengetypeValDonate isEqualToString:@"DONATE"])
+    {
+        
+     [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-215)-(_Textfield_Amount.frame.size.height)) animated:YES];
+        
     _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
 //    CGFloat calculate=[_Textfield_Amount.text floatValue]*(Array_Names.count+1);
     
@@ -1267,6 +1293,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
     else
     {
+        
+       [self.startScreenScrollView setContentOffset:CGPointMake(0,(_Textfield_Amount.frame.origin.y-225)-(_Textfield_Amount.frame.size.height)) animated:YES];
+        
         _Label_totalAmount.text=[NSString stringWithFormat:@"%@%@",@"total: $ ",_Textfield_Amount.text];
        
             _Label_totalAmount.hidden=YES;

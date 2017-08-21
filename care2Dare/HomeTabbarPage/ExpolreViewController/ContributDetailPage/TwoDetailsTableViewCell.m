@@ -12,18 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _image_FristProfile.clipsToBounds=YES;
-    _image_FristProfile.layer.cornerRadius=_image_FristProfile.frame.size.height/2;
     
-    _image_SecProfile.clipsToBounds=YES;
-    _image_SecProfile.layer.cornerRadius=_image_SecProfile.frame.size.height/2;
-    
-    _image_SecProfile1.clipsToBounds=YES;
-    _image_SecProfile1.layer.cornerRadius=_image_SecProfile1.frame.size.height/2;
-    
-    _image_SecProfile2.clipsToBounds=YES;
-    _image_SecProfile2.layer.cornerRadius=_image_SecProfile2.frame.size.height/2;
-
     
     _image_ProfileComment.clipsToBounds=YES;
     _image_ProfileComment.layer.cornerRadius=_image_ProfileComment.frame.size.height/2;

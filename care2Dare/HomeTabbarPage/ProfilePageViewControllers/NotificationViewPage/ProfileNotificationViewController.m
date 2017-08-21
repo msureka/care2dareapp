@@ -36,7 +36,7 @@
 
 @implementation ProfileNotificationViewController
 
-@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution;
+@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution,indicators;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -301,12 +301,12 @@ flag_challenge=@"no";
                 NSLog(@"Array_AllData ResultString %@",ResultString_Challenges);
                                                      
                                                      
-                                                     
+                   
                     if (Array_AllData.count !=0)
                         {
                                                        
-        Array_Public=[[NSMutableArray alloc]init];
-        Array_Private=[[NSMutableArray alloc]init];
+                            Array_Public=[[NSMutableArray alloc]init];
+                            Array_Private=[[NSMutableArray alloc]init];
                 for (int i=0; i<Array_AllData.count; i++)
                         {
             if ([[[Array_AllData objectAtIndex:i]valueForKey:@"challengetype"]isEqualToString:@"PUBLIC"])
@@ -323,6 +323,8 @@ flag_challenge=@"no";
                     Array_Private1=[Array_Private mutableCopy];
                 
                        cell_PublicNoti.Lable_JsonResult.hidden=YES;
+                            indicators.hidden=YES;
+                            [indicators stopAnimating];
                             
                             flag_challenge=@"yes";
                           
@@ -332,8 +334,11 @@ flag_challenge=@"no";
                     }
                 else
                   {
+                      [Array_Public removeAllObjects];
+                      [Array_Private removeAllObjects];
                       cell_PublicNoti.Lable_JsonResult.hidden=NO;
-                    
+                      indicators.hidden=YES;
+                      [indicators stopAnimating];
                 }
                                                     
                                                      
@@ -346,6 +351,8 @@ flag_challenge=@"no";
                                     
                        [Tableview_Notif reloadData];
                   cell_PublicNoti.Lable_JsonResult.hidden=NO;
+                                    indicators.hidden=YES;
+                                    [indicators stopAnimating];
                      
                                                          
                     }
@@ -358,14 +365,16 @@ flag_challenge=@"no";
                                                  else
                                                  {
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                     
+                                                     indicators.hidden=YES;
+                                                     [indicators stopAnimating];
                                                  }
                                                  
                                                  
                                              }
                                              else if(error)
                                              {
-                                                 
+                                                 indicators.hidden=YES;
+                                                 [indicators stopAnimating];
                                                  NSLog(@"error login2.......%@",error.description);
                                              }
                                              
@@ -850,20 +859,27 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                 cell_PublicNoti.image_Redmsg.hidden=YES;
                 cell_PublicNoti.image_profile.hidden=YES;
                 cell_PublicNoti.image_profile2.hidden=YES;
+                cell_PublicNoti.image_Playbutton1.hidden=YES;
+                
+                cell_PublicNoti.image_Playbutton2.hidden=YES;
+                cell_PublicNoti.Lable_ActionDate.hidden=YES;
                 
             }
             else
             {
-           
+            cell_PublicNoti.image_Playbutton1.hidden=NO;
+                
+            cell_PublicNoti.image_Playbutton2.hidden=NO;
                 cell_PublicNoti.Label_Name.hidden=NO;
                 cell_PublicNoti.image_Redmsg.hidden=NO;
                 cell_PublicNoti.image_profile.hidden=NO;
                 cell_PublicNoti.image_profile2.hidden=NO;
                 cell_PublicNoti.Lable_JsonResult.hidden=YES;
+                cell_PublicNoti.Lable_ActionDate.hidden=NO;
             NSDictionary * dic_Values=[Array_Public objectAtIndex:indexPath.row];
             
             
- 
+ cell_PublicNoti.Lable_ActionDate.text=[dic_Values valueForKey:@"actiondate"];
             
             if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
             {
@@ -1063,7 +1079,7 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 cell_PrivateNoti.image_Redmsg.hidden=YES;
             }
             
-            
+            cell_PrivateNoti.Lable_ActionDate.text=[dic_Values valueForKey:@"actiondate"];
 
             
             NSURL *url,*url1;
@@ -1264,6 +1280,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 cell_PlegeIncoNoti.image_Redmsg.hidden=YES;
                 cell_PlegeIncoNoti.image_profile.hidden=YES;
                 cell_PlegeIncoNoti.image_profile2.hidden=YES;
+                cell_PlegeIncoNoti.Lable_ActionDate.hidden=YES;
                 
             }
             else
@@ -1273,6 +1290,8 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 cell_PlegeIncoNoti.image_Redmsg.hidden=NO;
                 cell_PlegeIncoNoti.image_profile.hidden=NO;
                 cell_PlegeIncoNoti.image_profile2.hidden=NO;
+                cell_PlegeIncoNoti.Lable_ActionDate.hidden=NO;
+
                 cell_PlegeIncoNoti.Lable_JsonResult.hidden=YES;
             
             
@@ -1288,7 +1307,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             }
 
             
-            
+                cell_PlegeIncoNoti.Lable_ActionDate.text=[dic_Values valueForKey:@"actiondate"];
             
             
             NSURL *url,*url1;
@@ -1393,7 +1412,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 cell_PlegeOutNoti.image_Redmsg.hidden=YES;
             }
 
-            
+             cell_PlegeOutNoti.Lable_ActionDate.text=[dic_Values valueForKey:@"actiondate"];
             NSURL *url,*url1;
             url=[NSURL URLWithString:[dic_Values valueForKey:@"challengeurl"]];
             url1=[NSURL URLWithString:[dic_Values valueForKey:@"byprofileimageurl"]];
@@ -1476,15 +1495,20 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         
         
     }
-//    byname = "Er Sachin Mokashi";
-//    byprofileimageurl = "https://graph.facebook.com/1280357812049167/picture?type=large";
-//    byuserid = 20170307091520wFL3;
-//    challengeid = C201704041224052UE9;
-//    msgread = no;
-//    videothumbnailurl = "http://www.care2dareapp.com/app/recordedmedia/R20170307091520wFL3C201704041224052UE9-thumbnail.jpg";
+    NSLog(@"Frame height width==%f",cell_VedioNoti.image_profile.frame.size.width);
+    NSLog(@"Frame height width==%f",cell_VedioNoti.image_profile.frame.size.height);
+    cell_VedioNoti.image_profile.clipsToBounds=YES;
+    cell_VedioNoti.image_profile2.clipsToBounds=YES;
+    
+//    [cell_VedioNoti.image_profile setFrame:CGRectMake(cell_VedioNoti.image_profile.frame.origin.x, cell_VedioNoti.image_profile.frame.origin.y, cell_VedioNoti.image_profile.frame.size.height, cell_VedioNoti.image_profile.frame.size.height)];
+    
+    [cell_VedioNoti.image_profile2 setFrame:CGRectMake(cell_VedioNoti.image_profile2.frame.origin.x, cell_VedioNoti.image_profile2.frame.origin.y, cell_VedioNoti.image_profile2.frame.size.width, cell_VedioNoti.image_profile2.frame.size.width)];
 //
+    cell_VedioNoti.image_profile.layer.cornerRadius=cell_VedioNoti.image_profile.frame.size.width/2;
+    cell_VedioNoti.image_profile2.layer.cornerRadius=9.0f;
     
-    
+    NSLog(@"Frame height width11==%f",cell_VedioNoti.image_profile.frame.size.width);
+    NSLog(@"Frame height width11==%f",cell_VedioNoti.image_profile.frame.size.height);
     
     if (Array_AllData_Videos.count-1==indexPath.row)
     {
@@ -1508,16 +1532,22 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         cell_VedioNoti.image_Redmsg.hidden=YES;
         cell_VedioNoti.image_profile.hidden=YES;
         cell_VedioNoti.image_profile2.hidden=YES;
+         cell_VedioNoti.Lable_ActionDate.hidden=YES;
+        cell_VedioNoti.image_PlayButton.hidden=YES;
         
     }
     else
     {
+       
+        
         
         cell_VedioNoti.Label_Name.hidden=NO;
         cell_VedioNoti.image_Redmsg.hidden=NO;
         cell_VedioNoti.image_profile.hidden=NO;
         cell_VedioNoti.image_profile2.hidden=NO;
+         cell_VedioNoti.Lable_ActionDate.hidden=NO;
         cell_VedioNoti.Lable_JsonResult.hidden=YES;
+        cell_VedioNoti.image_PlayButton.hidden=NO;
     
     NSDictionary * dic_Values=[Array_AllData_Videos objectAtIndex:indexPath.row];
     if ([[dic_Values valueForKey:@"msgread"]isEqualToString:@"no"])
@@ -1528,24 +1558,21 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
       cell_VedioNoti.image_Redmsg.hidden=YES;
     }
-  
+    cell_VedioNoti.Lable_ActionDate.text=[dic_Values valueForKey:@"actiondate"];
     
     NSURL *url,*url1;
     url=[NSURL URLWithString:[dic_Values valueForKey:@"videothumbnailurl"]];
     url1=[NSURL URLWithString:[dic_Values valueForKey:@"byprofileimageurl"]];
     
-    cell_VedioNoti.image_profile.clipsToBounds=YES;
-    cell_VedioNoti.image_profile2.clipsToBounds=YES;
     
     
     [cell_VedioNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
     [cell_VedioNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
     
-    cell_VedioNoti.image_profile.layer.cornerRadius=cell_VedioNoti.image_profile.frame.size.height/2;
-    cell_VedioNoti.image_profile2.layer.cornerRadius=9.0f;
     
     
     
+        
     
     UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:18.0];
     NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
@@ -1598,6 +1625,7 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 {
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"] ||[CheckedTabbedButtons isEqualToString:@"Contribution"])
     {
+        
       return 2;
     }
     
@@ -1817,6 +1845,10 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         
 if (indexPath.section==0)
     {
+        
+        
+        if (Array_Public.count!=0)
+        {
     didselectDic=[Array_Public  objectAtIndex:indexPath.row];
        cell_PublicNoti = [Tableview_Notif cellForRowAtIndexPath:indexPath];
     if (![[didselectDic valueForKey:@"accepted"]isEqualToString:@"no"])
@@ -1852,10 +1884,14 @@ if (indexPath.section==0)
                 set2.AllArrayData =Array_new;
                 [self.navigationController pushViewController:set2 animated:YES];
             }
-        
+    }
         }
         if (indexPath.section==1)
         {
+            
+            if (Array_Private.count!=0)
+            {
+            
         didselectDic=[Array_Private  objectAtIndex:indexPath.row];
             cell_PrivateNoti = [Tableview_Notif cellForRowAtIndexPath:indexPath];
     if (![[didselectDic valueForKey:@"accepted"]isEqualToString:@"no"])
@@ -1898,6 +1934,8 @@ if (indexPath.section==0)
             
       
             }
+            
+        }
         }
         
         
@@ -1911,6 +1949,9 @@ if (indexPath.section==0)
         
         if (indexPath.section==0)
         {
+            
+            if (Array_IcomingPlg.count!=0)
+            {
          didselectDic=[Array_IcomingPlg  objectAtIndex:indexPath.row];
        
 //[Array_OutgoingPlg
@@ -1927,10 +1968,14 @@ if (indexPath.section==0)
             set.Str_ChallengecompleteType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challenge_status"]];
             
             set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"contributiontype"]];
-            
+                [self.navigationController pushViewController:set animated:YES];
+            }
         }
         if (indexPath.section==1)
         {
+            
+            if (Array_OutgoingPlg.count!=0)
+            {
             didselectDic=[Array_OutgoingPlg  objectAtIndex:indexPath.row];
             
             set.Str_Channel_Id=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challengeid"]];
@@ -1941,14 +1986,17 @@ if (indexPath.section==0)
             
             set.Str_ChallengecompleteType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"challenge_status"]];
             
-            set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"contributiontype"]];
+            set.Str_DonateRaisedType=[NSString stringWithFormat:@"%@",[didselectDic valueForKey:@"contributiontype"]];[self.navigationController pushViewController:set animated:YES];
+        }
         }
         
-        [self.navigationController pushViewController:set animated:YES];
     }
     
     if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
+        if (Array_AllData_Videos.count !=0)
+        {
+            
         
         
         str_ChallengeidVal=[NSString stringWithFormat:@"%@",[[Array_AllData_Videos objectAtIndex:indexPath.row] valueForKey:@"challengeid"]];
@@ -1964,6 +2012,7 @@ if (indexPath.section==0)
         [movieController.moviePlayer play];
         // movieController.moviePlayer.shouldAutoplay =YES;
         [self ClienserverComm_watchView];
+        }
     }
     
 }

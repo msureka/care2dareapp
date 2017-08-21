@@ -46,25 +46,25 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
 
     
-    item0.selectedImage = [[UIImage imageNamed:@"explore.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item0.image = [[UIImage imageNamed:@"explore1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.selectedImage = [[UIImage imageNamed:@"Explore29.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item0.image = [[UIImage imageNamed:@"Exploretab29.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
    
     
-    item3.selectedImage = [[UIImage imageNamed:@"activitytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item3.image = [[UIImage imageNamed:@"activitytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.selectedImage = [[UIImage imageNamed:@"Activity29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item3.image = [[UIImage imageNamed:@"Activitytab29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
-    item2.selectedImage = [[UIImage imageNamed:@"create.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item2.image = [[UIImage imageNamed:@"create.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item2.selectedImage = [[UIImage imageNamed:@"Create40.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item2.image = [[UIImage imageNamed:@"Create40.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     
-    item1.selectedImage = [[UIImage imageNamed:@"inplaytab.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item1.image = [[UIImage imageNamed:@"inplaytab1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.selectedImage = [[UIImage imageNamed:@"Inplay29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item1.image = [[UIImage imageNamed:@"Inplaytab29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
-    item4.selectedImage = [[UIImage imageNamed:@"profile.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    item4.image = [[UIImage imageNamed:@"profile1.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item4.selectedImage = [[UIImage imageNamed:@"Profile29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    item4.image = [[UIImage imageNamed:@"Profiletab29.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
   
     
 

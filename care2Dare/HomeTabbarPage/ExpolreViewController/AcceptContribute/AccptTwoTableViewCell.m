@@ -12,8 +12,7 @@
 @synthesize image_Profile;
 - (void)awakeFromNib {
     [super awakeFromNib];
-    image_Profile.clipsToBounds=YES;
-    image_Profile.layer.cornerRadius=image_Profile.frame.size.height/2;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

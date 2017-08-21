@@ -36,6 +36,8 @@
 @property(nonatomic,weak)IBOutlet UIImageView * ImageRed_Contribution;
 @property(nonatomic,weak)IBOutlet UIImageView * ImageRed_Videos;
 
+@property(nonatomic,weak)IBOutlet UIActivityIndicatorView * indicators;
+
 -(IBAction)ButtonChallenges_Action:(id)sender;
 -(IBAction)ButtonContribution_Action:(id)sender;
 -(IBAction)ButtonVedio_Action:(id)sender;

@@ -165,9 +165,15 @@
             cell_req = (FriendsReqTableViewCell*)[tableView dequeueReusableCellWithIdentifier:mycellid2 forIndexPath:indexPath];
             
             
+            [cell_req.image_profile setFrame:CGRectMake(cell_req.image_profile.frame.origin.x, cell_req.image_profile.frame.origin.y, cell_req.image_profile.frame.size.width, cell_req.image_profile.frame.size.width)];
+            
+            cell_req.image_profile.clipsToBounds=YES;
+            cell_req.image_profile.layer.cornerRadius=cell_req.image_profile.frame.size.height/2;
+            
+            
             NSURL *url=[NSURL URLWithString:[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendprofilepic"]];
             
-            [cell_req.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"]];
+            [cell_req.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
         cell_req.Label_Name.text=[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
       NSString *textfname=[[Array_NewReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
@@ -249,8 +255,12 @@
             NSURL *url=[NSURL URLWithString:[[Array_AddReq objectAtIndex:indexPath.row] valueForKey:@"friendprofilepic"]];
             
              cell_addreq.Image_GrayMinus.tag=indexPath.row;
+            [cell_addreq.image_profile setFrame:CGRectMake(cell_addreq.image_profile.frame.origin.x, cell_addreq.image_profile.frame.origin.y, cell_addreq.image_profile.frame.size.width, cell_addreq.image_profile.frame.size.width)];
             
-            [cell_addreq.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.png"]];
+    cell_addreq.image_profile.clipsToBounds=YES;
+            cell_addreq.image_profile.layer.cornerRadius=cell_addreq.image_profile.frame.size.height/2;
+            
+            [cell_addreq.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
             
             cell_addreq.Label_Name.text=[[Array_AddReq objectAtIndex:indexPath.row] valueForKey:@"friendname"];
             

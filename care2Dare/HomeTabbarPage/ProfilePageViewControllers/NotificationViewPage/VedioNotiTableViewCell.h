@@ -16,6 +16,8 @@
 @property(nonatomic,weak)IBOutlet UILabel * Label_Name;
 
 @property(nonatomic,weak)IBOutlet UIImageView * image_Redmsg;
-
+@property(nonatomic,weak)IBOutlet UIImageView * image_PlayButton;
 @property(nonatomic,weak)IBOutlet UILabel * Lable_JsonResult;
+
+@property(nonatomic,weak)IBOutlet UILabel * Lable_ActionDate;
 @end

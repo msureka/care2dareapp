@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView * ImageRight_Likes;
 @property (weak, nonatomic) IBOutlet UIImageView * ImageRight_FriendStatus;
+@property(strong,nonatomic)IBOutlet UIImageView * Image_VedioShare;
 
 @property(strong,nonatomic)IBOutlet UILabel * Label_likes;
 @property(strong,nonatomic)IBOutlet UILabel * Label_subscribe;

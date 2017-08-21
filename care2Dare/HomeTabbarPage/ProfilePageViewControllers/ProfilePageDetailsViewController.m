@@ -530,9 +530,10 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
         {
             cell_Profile = (profilePageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:mycellid2 forIndexPath:indexPath];
             
+            [cell_Profile.Image_ProfileImg setFrame:CGRectMake(cell_Profile.Image_ProfileImg.frame.origin.x, cell_Profile.Image_ProfileImg.frame.origin.y, cell_Profile.Image_ProfileImg.frame.size.width, cell_Profile.Image_ProfileImg.frame.size.width)];
             
             cell_Profile.Image_ProfileImg.clipsToBounds=YES;
-            cell_Profile.Image_ProfileImg.layer.cornerRadius=cell_Profile.Image_ProfileImg.frame.size.height/2;
+            cell_Profile.Image_ProfileImg.layer.cornerRadius=cell_Profile.Image_ProfileImg.frame.size.width/2;
             
            
         //cell_Profile.Image_ProfileImg.image=Images_data.image;
@@ -637,14 +638,58 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                     
                     NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                    
+                    
+                    [cell_Public.activityIndicator1 setHidden:NO];
+                    [cell_Public.activityIndicator1 startAnimating];
+                     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+                    [cell_Public.Image_Profile setImageWithURLRequest:imageRequest
+                                                       placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                                success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                     {
+                         [cell_Public.activityIndicator1 setHidden:YES];
+                         [cell_Public.activityIndicator1 stopAnimating];
+                         
+                         cell_Public.Image_Profile.image = image;
+                     }
+                                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                     {
+                         [cell_Public.activityIndicator1 setHidden:YES];
+                         [cell_Public.activityIndicator1 stopAnimating];
+                     }];
+                    
+                    
+                  //  [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                 }
                 else
                 {
                     
                     NSURL *url=[NSURL URLWithString:[dic_worldexp valueForKey:@"mediathumbnailurl"]];
                     
-                    [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                    
+                    
+                    
+                    
+                    [cell_Public.activityIndicator1 setHidden:NO];
+                    [cell_Public.activityIndicator1 startAnimating];
+                    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+                    [cell_Public.Image_Profile setImageWithURLRequest:imageRequest
+                                                     placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]
+                                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                     {
+                         [cell_Public.activityIndicator1 setHidden:YES];
+                         [cell_Public.activityIndicator1 stopAnimating];
+                         
+                         cell_Public.Image_Profile.image = image;
+                     }
+                                                              failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                     {
+                         [cell_Public.activityIndicator1 setHidden:YES];
+                         [cell_Public.activityIndicator1 stopAnimating];
+                     }];
+
+                    
+                //    [cell_Public.Image_Profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
                     cell_Public.Image_PalyBuutton.hidden=NO;
                     
                     

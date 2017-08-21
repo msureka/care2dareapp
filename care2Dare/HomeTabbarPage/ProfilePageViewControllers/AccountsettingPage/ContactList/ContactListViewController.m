@@ -54,7 +54,15 @@
     indcator.hidden=NO;
     [_tableview_contact setHidden:YES];
     store = [[CNContactStore alloc] init];
-    [self contactListData];
+    int64_t delayInSeconds = 0.2;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        
+        [self contactListData];
+    });
+
+    
 }
 
 -(IBAction)Button_Back:(id)sender
@@ -298,6 +306,9 @@
                 
                 
             }
+            [cell_contactAdd.image_profile_img setFrame:CGRectMake(cell_contactAdd.image_profile_img.frame.origin.x,cell_contactAdd.image_profile_img.frame.origin.y,cell_contactAdd.image_profile_img.frame.size.width, cell_contactAdd.image_profile_img.frame.size.width)];
+            cell_contactAdd.image_profile_img.clipsToBounds=YES;
+            cell_contactAdd.image_profile_img.layer.cornerRadius=cell_contactAdd.image_profile_img.frame.size.width/2;
             
             NSDictionary * dictVal=[ArryMerge_twitterlistSection0 objectAtIndex:indexPath.row];
             NSLog(@"Sachin error==%@",dictVal);
