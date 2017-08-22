@@ -109,7 +109,7 @@ flag_challenge=@"no";
         _ImageRed_Videos.hidden=NO;
     }
     
-   
+   [Tableview_Notif setContentOffset:CGPointMake(0, 44)];
  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
     
     [self ClienserverCommAll];
@@ -1495,6 +1495,8 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
         
         
     }
+    
+    
     NSLog(@"Frame height width==%f",cell_VedioNoti.image_profile.frame.size.width);
     NSLog(@"Frame height width==%f",cell_VedioNoti.image_profile.frame.size.height);
     cell_VedioNoti.image_profile.clipsToBounds=YES;
@@ -1502,13 +1504,15 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     
 //    [cell_VedioNoti.image_profile setFrame:CGRectMake(cell_VedioNoti.image_profile.frame.origin.x, cell_VedioNoti.image_profile.frame.origin.y, cell_VedioNoti.image_profile.frame.size.height, cell_VedioNoti.image_profile.frame.size.height)];
     
-    [cell_VedioNoti.image_profile2 setFrame:CGRectMake(cell_VedioNoti.image_profile2.frame.origin.x, cell_VedioNoti.image_profile2.frame.origin.y, cell_VedioNoti.image_profile2.frame.size.width, cell_VedioNoti.image_profile2.frame.size.width)];
+//    [cell_VedioNoti.image_profile2 setFrame:CGRectMake(cell_VedioNoti.image_profile2.frame.origin.x, cell_VedioNoti.image_profile2.frame.origin.y, cell_VedioNoti.image_profile2.frame.size.width, cell_VedioNoti.image_profile2.frame.size.width)];
 //
     cell_VedioNoti.image_profile.layer.cornerRadius=cell_VedioNoti.image_profile.frame.size.width/2;
     cell_VedioNoti.image_profile2.layer.cornerRadius=9.0f;
     
     NSLog(@"Frame height width11==%f",cell_VedioNoti.image_profile.frame.size.width);
     NSLog(@"Frame height width11==%f",cell_VedioNoti.image_profile.frame.size.height);
+    cell_VedioNoti.image_PlayButton.center=cell_VedioNoti.image_profile2.center;
+    
     
     if (Array_AllData_Videos.count-1==indexPath.row)
     {

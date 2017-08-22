@@ -130,7 +130,7 @@ str_tablereload=@"no";
                                                                                 action:@selector(ViewTap51Tapped:)];
     [transparancyTuchView addGestureRecognizer:ViewTap51];
     
- 
+ [Tableview_Explore setContentOffset:CGPointMake(0, 44)];
    // [Tableview_Explore reloadData];
     
     [Tableview_Explore addPullToRefreshWithActionHandler:^{
@@ -1171,6 +1171,10 @@ str_tablereload=@"no";
                     cell_WorldExp.activityIndicator1.center=cell_WorldExp.Image_Profile.center;
                     cell_WorldExp.activityIndicator2.center=cell_WorldExp.Image_Profile2.center;
                     cell_WorldExp.activityIndicator3.center=cell_WorldExp.Image_Profile3.center;
+                    
+                    cell_WorldExp.Image_PalyBuutton.center=cell_WorldExp.Image_Profile.center;
+                    cell_WorldExp.Image_PalyBuutton2.center=cell_WorldExp.Image_Profile2.center;
+                    cell_WorldExp.Image_PalyBuutton3.center=cell_WorldExp.Image_Profile3.center;
                 
                 self.pieView = [[MDPieView alloc]initWithFrame:CGRectMake((cell_WorldExp.Image_Profile.frame.size.width+cell_WorldExp.Image_Profile.frame.origin.x)-26, (cell_WorldExp.Image_Profile.frame.size.height+cell_WorldExp.Image_Profile.frame.origin.y)-26, 22, 22) andPercent:self.percent andColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
                 [cell_WorldExp addSubview:self.pieView];

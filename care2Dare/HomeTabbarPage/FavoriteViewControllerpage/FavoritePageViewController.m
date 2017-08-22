@@ -622,6 +622,8 @@ self.refreshControl.tintColor = [UIColor blackColor];
         bootomBorder_Cell.frame = CGRectMake(0, cell_Favorite.frame.size.height-1, cell_Favorite.frame.size.width, 1);
         [cell_Favorite.layer addSublayer:bootomBorder_Cell];
 
+        
+//        [cell_Favorite.Image_PalyBuutton setFrame:CGRectMake(cell_Favorite.Image_PalyBuutton.frame.origin.x, cell_Favorite.Image_PalyBuutton.frame.origin.y, cell_Favorite.Image_PalyBuutton.frame.size.width, cell_Favorite.Image_PalyBuutton.frame.size.width)];
         NSDictionary * dic_worldexp=[Array_Faourite objectAtIndex:indexPath.row];
         cell_Favorite.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
         cell_Favorite.Label_Backer.text=[NSString stringWithFormat:@"%@",[dic_worldexp valueForKey:@"backers"]];
@@ -669,7 +671,7 @@ self.refreshControl.tintColor = [UIColor blackColor];
             
             
         }
-        
+       
         
         
         UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];

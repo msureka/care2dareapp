@@ -459,7 +459,7 @@
                 NSDictionary * dic_worldexp=[Array_Public objectAtIndex:indexPath.row];
                 
                  [cell_Public.View_record setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.5f]];
-              
+                [cell_Public.Image_PalyBuutton setFrame:CGRectMake(cell_Public.Image_PalyBuutton.frame.origin.x, cell_Public.Image_PalyBuutton.frame.origin.y, cell_Public.Image_PalyBuutton.frame.size.width, cell_Public.Image_PalyBuutton.frame.size.width)];
                 if ([[dic_worldexp valueForKey:@"showrecordingleft"]isEqualToString:@"yes"])
                 {
                      cell_Public.View_record.hidden=NO;
@@ -599,6 +599,9 @@
                 [cell_Private.layer addSublayer:Bottomborder_Cell2];
                 
                 NSDictionary * dic_worldexp=[Array_Private objectAtIndex:indexPath.row];
+                
+                 [cell_Private.Image_PalyBuutton setFrame:CGRectMake(cell_Private.Image_PalyBuutton.frame.origin.x, cell_Private.Image_PalyBuutton.frame.origin.y, cell_Private.Image_PalyBuutton.frame.size.width, cell_Private.Image_PalyBuutton.frame.size.width)];
+                
                 
                 if ([[dic_worldexp valueForKey:@"accepted"]isEqualToString:@"yes"])
                 {

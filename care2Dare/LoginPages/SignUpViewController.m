@@ -27,6 +27,7 @@
     NSUserDefaults * defaults;
     NSString *emailFb,*DobFb,*nameFb,*genderfb,*profile_picFb,*Fbid,*regTypeVal,*EmailValidTxt,*Str_fb_friend_id,*Str_fb_friend_id_Count;
     NSMutableArray *fb_friend_id;
+    UIDatePicker *datePicker;
 }
 @property (weak, nonatomic) IBOutlet FRHyperLabel *termLabel;
 @end
@@ -411,7 +412,12 @@
     NSString *passwordVal =textfield_password.text;
     
     NSString *Dob= @"dateofbirth";
-    NSString *DobVal =textfield_Dob.text;
+        
+        NSDateFormatter *showdf = [[NSDateFormatter alloc]init];
+        [showdf setDateFormat:@"yyyy-MM-dd"];
+        
+  NSString *DobVal = [NSString stringWithFormat:@"%@",
+                            [showdf stringFromDate:datePicker.date]];;
     
     NSString *city= @"city";
     NSString *cityVal =[defaults valueForKey:@"Cityname"];;
@@ -911,7 +917,7 @@
 {
    
     
-    UIDatePicker *datePicker=[[UIDatePicker alloc]init];
+    datePicker=[[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDate;
     
     

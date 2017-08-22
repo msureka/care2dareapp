@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,35 +21,58 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="375" height="79"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sachin Mokashi" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh3-cO-tN9">
-                        <frame key="frameInset" minX="76" minY="10" width="223" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sachin Mokashi" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rh3-cO-tN9">
+                        <rect key="frame" x="76" y="10" width="223" height="26"/>
                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-5v-Uyc">
-                        <frame key="frameInset" minX="8" minY="10" width="60" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-5v-Uyc">
+                        <rect key="frame" x="8" y="10" width="60" height="60"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="oZr-3d-RaR"/>
+                        </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-Fq-vrP">
-                        <frame key="frameInset" minX="4" minY="4" width="12" height="12"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="4" y="0.0" width="12" height="14"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blueplus.png" translatesAutoresizingMaskIntoConstraints="NO" id="7TE-xu-Zrx">
-                        <frame key="frameInset" minX="307" minY="10" width="60" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueplus.png" translatesAutoresizingMaskIntoConstraints="NO" id="7TE-xu-Zrx">
+                        <rect key="frame" x="307" y="10" width="60" height="60"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="yKH-Ah-QyJ"/>
+                        </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ActionDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMy-VB-JtH">
+                        <rect key="frame" x="76" y="55" width="230" height="18"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="14"/>
+                        <color key="textColor" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5iP-JT-PVg"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="bottom" secondItem="7TE-xu-Zrx" secondAttribute="bottom" id="8MZ-9F-jsP"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A1I-6O-kko"/>
+                    <constraint firstItem="Rh3-cO-tN9" firstAttribute="leading" secondItem="Gt6-5v-Uyc" secondAttribute="trailing" constant="8" symbolic="YES" id="FnC-Zk-XpC"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="bbu-r5-XEb"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="h2S-a7-z2B"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="jCW-VL-qUi"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ruW-Kz-ftz"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="leading" secondItem="Rh3-cO-tN9" secondAttribute="trailing" constant="8" symbolic="YES" id="vso-de-CV9"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Label_Name" destination="Rh3-cO-tN9" id="2cy-nF-6mk"/>
+                <outlet property="Lable_ActionDate" destination="hMy-VB-JtH" id="ySf-sw-dme"/>
                 <outlet property="image_Redmsg" destination="DAT-Fq-vrP" id="lDe-jF-Jb9"/>
                 <outlet property="image_profile" destination="Gt6-5v-Uyc" id="sfy-Ic-Kd4"/>
                 <outlet property="image_profile2" destination="7TE-xu-Zrx" id="jrj-fT-qyb"/>

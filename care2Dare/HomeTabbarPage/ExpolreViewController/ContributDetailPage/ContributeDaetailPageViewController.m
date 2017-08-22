@@ -1924,7 +1924,7 @@ RaisedContributeViewController * set=[self.storyboard instantiateViewControllerW
 //               [cell_OneImageVid.Image_Favourite setImage:[UIImage imageNamed:@"challenge_favourite.png"]];
 //            }
            
-       
+            cell_OneImageVid.image_playButton.center=cell_OneImageVid.center;
       
             UITapGestureRecognizer *FavouriteTapped =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ThreeDotsTapped_Action:)];
             [cell_OneImageVid.Image_Favourite addGestureRecognizer:FavouriteTapped];
