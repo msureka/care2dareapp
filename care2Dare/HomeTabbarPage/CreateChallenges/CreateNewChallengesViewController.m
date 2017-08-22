@@ -1514,7 +1514,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
              BackroundImg.image=FrameImage;
              
             
-             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 0.7);
              
              
              ImageNSdataThumb = [Base64 encode:imageDataThumb];

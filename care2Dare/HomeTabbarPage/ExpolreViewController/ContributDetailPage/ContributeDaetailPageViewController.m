@@ -1391,7 +1391,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
              
              
              
-             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 1.0);
+             imageDataThumb = UIImageJPEGRepresentation(FrameImage, 0.7);
              
              
              ImageNSdataThumb = [Base64 encode:imageDataThumb];

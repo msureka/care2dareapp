@@ -168,7 +168,7 @@ flag_challenge=@"no";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [Tableview_Notif setContentOffset:CGPointMake(0, 44)];
+  //  [Tableview_Notif setContentOffset:CGPointMake(0, 44)];
     if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
     {
         [self ClienserverCommAll];

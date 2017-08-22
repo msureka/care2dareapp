@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultImg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1mx-Tk-r74">
@@ -31,7 +31,7 @@
                             <constraint firstAttribute="width" constant="60" id="gCG-Mc-gCd"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="HXm-bL-VQp">
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="HXm-bL-VQp">
                         <rect key="frame" x="4" y="0.0" width="12" height="13"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
@@ -75,7 +75,9 @@
                     <constraint firstItem="ove-IK-ESm" firstAttribute="leading" secondItem="HXm-bL-VQp" secondAttribute="trailing" constant="8" symbolic="YES" id="9Bd-n1-DhU"/>
                     <constraint firstItem="ove-IK-ESm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="CAS-Qk-W9q"/>
                     <constraint firstItem="7UE-D2-hvy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="H8r-qW-dfl"/>
+                    <constraint firstItem="HXm-bL-VQp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="LmS-Yk-aFp"/>
                     <constraint firstItem="ove-IK-ESm" firstAttribute="trailing" secondItem="7UE-D2-hvy" secondAttribute="trailing" id="MvF-jq-tXB"/>
+                    <constraint firstItem="HXm-bL-VQp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OsK-7N-Mrp"/>
                     <constraint firstItem="6ru-Jp-OiZ" firstAttribute="leading" secondItem="1mx-Tk-r74" secondAttribute="trailing" constant="6" id="PPd-FD-i21"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7UE-D2-hvy" secondAttribute="trailing" constant="17" id="QH7-U8-bK5"/>
                     <constraint firstItem="7UE-D2-hvy" firstAttribute="leading" secondItem="6ru-Jp-OiZ" secondAttribute="trailing" constant="27" id="Y80-Rc-5Kv"/>
@@ -88,6 +90,7 @@
                     <constraint firstItem="3bB-m8-V6p" firstAttribute="leading" secondItem="6ru-Jp-OiZ" secondAttribute="trailing" constant="8" symbolic="YES" id="nS1-so-dg8"/>
                     <constraint firstItem="1mx-Tk-r74" firstAttribute="top" secondItem="6ru-Jp-OiZ" secondAttribute="top" id="oIB-UQ-TZF"/>
                     <constraint firstItem="ove-IK-ESm" firstAttribute="centerY" secondItem="7UE-D2-hvy" secondAttribute="centerY" id="rs5-Qh-Whu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HXm-bL-VQp" secondAttribute="bottom" constant="58.5" id="xTy-OZ-lBK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
