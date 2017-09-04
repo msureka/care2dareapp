@@ -29,7 +29,7 @@
 
 @interface ContributeDaetailPageViewController ()<NSURLSessionDelegate>
 {
-    UIView *sectionView,*transperentViewIndicator,*whiteView1,*transperentViewIndicatorcc,*whiteView1cc;
+    UIView *sectionView,*transperentViewIndicator,*whiteView1,*transperentViewIndicatorcc,*whiteView1cc,*transparancyTuchView;
 ;
     CALayer *Bottomborder_Cell2;
     UIButton *Button_Contribute,*Button_FavouriteTap,*Image_Share;;
@@ -406,7 +406,22 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     
     
     
+    transparancyTuchView=[[UIView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height)];
+    transparancyTuchView.backgroundColor=[UIColor whiteColor];
+    [transparancyTuchView setAlpha:0.5];
     
+    
+    
+    UIActivityIndicatorView *indicatorAlert1 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicatorAlert1.frame=CGRectMake(transparancyTuchView.frame.size.width/2,transparancyTuchView.frame.size.height/2, 20, 20);
+    [indicatorAlert1 startAnimating];
+    [indicatorAlert1 setColor:[UIColor blackColor]];
+    //  indicatorAlert.center=transparancyTuchView.center;
+    [transparancyTuchView addSubview:indicatorAlert1];
+    
+    [self.view addSubview:transparancyTuchView];
+    
+    transparancyTuchView.hidden=YES;
     
    
    
@@ -3132,9 +3147,9 @@ if (section==1)
 {
     
     sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,38)];
-    [sectionView setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
    
-    
+   
+    [sectionView setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
     
     
     
@@ -3155,47 +3170,79 @@ if (section==1)
     Button_Contribute.titleLabel.minimumFontSize = 16;
     Button_Contribute.titleLabel.adjustsFontSizeToFitWidth = YES;
     
+    
+    Button_Contribute.tag=section;
+    Button_Contribute.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
+    
+    
+    
+    
+    
+    
+    
+    Image_Share=[[UIButton alloc]initWithFrame:CGRectMake((Button_Contribute.frame.origin.x+Button_Contribute.frame.size.width),0,50,38)];
+    Image_Share.backgroundColor=[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1];
+    [Image_Share setImage:[UIImage imageNamed:@"sharebutton.png"]forState:UIControlStateNormal];;
+    //    Image_Share.contentMode=UIViewContentModeScaleAspectFit;
+    Image_Share.tag=section;
+    Image_Share.backgroundColor=[UIColor clearColor];
+    Image_Share.userInteractionEnabled=YES;
+    
+    [Image_Share addTarget:self action:@selector(Share_Action:)
+          forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [sectionView addSubview:Button_Contribute];
+    [sectionView addSubview:Image_Share];
+    [sectionView addSubview:Button_FavouriteTap];
+    
+    
+    
+    
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
     {
         
         if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
         {
+            
+            
+            
+            
             [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
-            //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
+            if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+            {
+                
+                [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                            forControlEvents:UIControlEventTouchUpInside];
+                
+            }
+            else
+            {
             
             [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
                         forControlEvents:UIControlEventTouchUpInside];
+            }
         }
         else
         {
             
             [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
             Button_Contribute.backgroundColor=[UIColor clearColor];
-            
+            if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+            {
+                
+                [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                            forControlEvents:UIControlEventTouchUpInside];
+                
+            }
+            else
+            {
             [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
                         forControlEvents:UIControlEventTouchUpInside];
-            
-            
+            }
             
         }
-        
-//        if ([[defaults valueForKey:@"userid"] isEqualToString:[[AllArrayData objectAtIndex:0]valueForKey:@"userid1"]])
-//        {
-//            [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
-//            //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
-//            
-//            [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
-//                        forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        else
-//        {
-//        [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
-//        Button_Contribute.backgroundColor=[UIColor clearColor];
-//        
-//        [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
-//                    forControlEvents:UIControlEventTouchUpInside];
-//        }
-    }
+        }
     else
     {
     if ([[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"yes"] || [[[AllArrayData objectAtIndex:0]valueForKey:@"accepted"] isEqualToString:@"no"])
@@ -3205,17 +3252,36 @@ if (section==1)
             
             [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
             Button_Contribute.backgroundColor=[UIColor clearColor];
-            
+            if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+            {
+                
+                [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                            forControlEvents:UIControlEventTouchUpInside];
+                
+            }
+            else
+            {
             [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
                         forControlEvents:UIControlEventTouchUpInside];
+            }
         }
         else
         {
+            
         [Button_Contribute setTitle:@"RECORD CHALLENGE" forState:UIControlStateNormal];
 //        Button_Contribute.backgroundColor=[UIColor colorWithRed:234/255.0 green:36/255.0 blue:39/255.0 alpha:1];
-        
+            if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+            {
+                
+                [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                            forControlEvents:UIControlEventTouchUpInside];
+                
+            }
+            else
+            {
         [Button_Contribute addTarget:self action:@selector(Contribute_RecordedChallenge:)
                     forControlEvents:UIControlEventTouchUpInside];
+            }
         }
     }
     else
@@ -3224,37 +3290,58 @@ if (section==1)
         [Button_Contribute setTitle:@"DONATE" forState:UIControlStateNormal];
         Button_Contribute.backgroundColor=[UIColor clearColor];
         
+        if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+        {
+           
+            [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                        forControlEvents:UIControlEventTouchUpInside];
+           
+        }
+        else
+        {
         [Button_Contribute addTarget:self action:@selector(Contribute_MoneyAction:)
                     forControlEvents:UIControlEventTouchUpInside];
-        
+        }
        
     
     }
     }
-    Button_Contribute.tag=section;
-    Button_Contribute.titleLabel.font=[UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:24.0];
-   
-    
-   
     
     
+    if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+    {
+        [Button_Contribute setTitle:@"MARK COMPLETED" forState:UIControlStateNormal];
+        Button_Contribute.backgroundColor=[UIColor clearColor];;
+        [Button_Contribute addTarget:self action:@selector(Contribute_Marked:)
+                    forControlEvents:UIControlEventTouchUpInside];
+        Button_Contribute.enabled=YES;
+    }
+    else if ([[[AllArrayData objectAtIndex:0] valueForKey:@"showinreview"]isEqualToString:@"yes"])
+    {
+        [Button_Contribute setTitle:@"UNDER REVIEW" forState:UIControlStateNormal];
+        Button_Contribute.backgroundColor=[UIColor clearColor];;
+         [sectionView setBackgroundColor:[UIColor lightGrayColor]];
+        Button_Contribute.enabled=NO;
+    }
+    else  if ([[[AllArrayData objectAtIndex:0]valueForKey:@"challenge_status"] isEqualToString:@"COMPLETE"] )
+        
+    {
+        Button_Contribute.backgroundColor=[UIColor clearColor];;
+        [sectionView setBackgroundColor:[UIColor lightGrayColor]];
+        Button_Contribute.enabled=NO;
+        Button_Contribute.alpha=0.8f;
+        Button_FavouriteTap.hidden=YES;
+        Image_Share.hidden=YES;
+        [Button_Contribute setTitle:@"CHALLENGE OVER" forState:UIControlStateNormal];
+    }
     
-    
-    Image_Share=[[UIButton alloc]initWithFrame:CGRectMake((Button_Contribute.frame.origin.x+Button_Contribute.frame.size.width),0,50,38)];
-     Image_Share.backgroundColor=[UIColor colorWithRed:20/255.0 green:245/255.0 blue:115/255.0 alpha:1];
-    [Image_Share setImage:[UIImage imageNamed:@"sharebutton.png"]forState:UIControlStateNormal];;
-//    Image_Share.contentMode=UIViewContentModeScaleAspectFit;
-     Image_Share.tag=section;
-    Image_Share.backgroundColor=[UIColor clearColor];
-    Image_Share.userInteractionEnabled=YES;
-    
-    [Image_Share addTarget:self action:@selector(Share_Action:)
-                forControlEvents:UIControlEventTouchUpInside];
+    else
+    {
+      Button_Contribute.enabled=YES;
+    }
 
     
-    [sectionView addSubview:Button_Contribute];
-    [sectionView addSubview:Image_Share];
-    [sectionView addSubview:Button_FavouriteTap];
+    
     
     
     
@@ -3270,16 +3357,7 @@ if (section==1)
     
     sectionView.tag=section;
 
-    if ([[[AllArrayData objectAtIndex:0]valueForKey:@"challenge_status"] isEqualToString:@"COMPLETE"] )
-    
-    {
-          Button_Contribute.enabled=NO;
-        Button_Contribute.alpha=0.8f;
-        Button_FavouriteTap.hidden=YES;
-        Image_Share.hidden=YES;
-       [Button_Contribute setTitle:@"CHALLENGE OVER" forState:UIControlStateNormal];
-    }
-    
+   
     
     
     }
@@ -3379,6 +3457,34 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     NSLog(@"percentage  of dattataa==%f",progress);
     Label_confirm1.text=[NSString stringWithFormat:@"%.f%@",progress,@" %"];
 }
+-(void)Contribute_Marked:(UIButton *)sender
+{
+    UIAlertController * alert=[UIAlertController
+                               
+                               alertControllerWithTitle:@"Challenge completed?" message:@"Are you sure the Challenge has been completed?"preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Yes"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    transparancyTuchView.hidden=NO;
+                                    [self Communication_challengeMarked];
+                                    
+                                }];
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"No"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   
+                                   
+                               }];
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 -(void)Contribute_MoneyAction:(UIButton *)sender
 {
 ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ContributeMoneyViewController"];
@@ -3387,9 +3493,6 @@ ContributeMoneyViewController * set=[self.storyboard instantiateViewControllerWi
     set.challengerID=[[AllArrayData objectAtIndex:0]valueForKey:@"challengeid"];
     [self.navigationController pushViewController:set animated:YES];
 }
-
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -4601,6 +4704,151 @@ NSURL *urlVedio = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArr
                                              else if(error)
                                              {
                                                  
+                                                 NSLog(@"error login2.......%@",error.description);
+                                             }
+                                         }];
+        [dataTask resume];
+    }
+    
+}
+-(void)Communication_challengeMarked
+{
+    [self.view endEditing:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable)
+    {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Internet" message:@"Please make sure you have internet connectivity in order to access Care2dare." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       exit(0);
+                                   }];
+        
+        [alertController addAction:actionOk];
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }
+    else
+    {
+        
+        
+        NSString *userid1= @"userid";
+        NSString *useridVal1 =[defaults valueForKey:@"userid"];
+        
+      
+        NSString *challengeid= @"challengeid";
+        NSString *challengeidVal=[[AllArrayData valueForKey:@"challengeid"]objectAtIndex:0];
+       
+        
+        NSString *reqStringFUll=[NSString stringWithFormat:@"%@=%@&%@=%@",userid1,useridVal1,challengeid,challengeidVal];
+        
+        
+        
+        
+        
+#pragma mark - swipe sesion
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+        
+        NSURL *url;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"markcomplete"];;
+        url =[NSURL URLWithString:urlStrLivecount];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        [request setHTTPMethod:@"POST"];//Web API Method
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        request.HTTPBody = [reqStringFUll dataUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        
+        NSURLSessionDataTask *dataTask =[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+                                         {
+                                             if(data)
+                                             {
+                                                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                 NSInteger statusCode = httpResponse.statusCode;
+                                                 if(statusCode == 200)
+                                                 {
+                                                     
+                                                     //    SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
+                                                     
+                            NSString * ResultString=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                                     
+                                                     
+                        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                                                     
+                    ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+                                                     
+                                                     
+                                NSLog(@"Array_WorldExp ResultString %@",ResultString);
+                                        if ([ResultString isEqualToString:@"markcompleteerror"])
+                                        {
+                                            transparancyTuchView.hidden=YES;
+                                            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Could not complete the challenge.Please try again." preferredStyle:UIAlertControllerStyleAlert];
+                                            
+                                            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                               style:UIAlertActionStyleDefault
+                                                                                             handler:^(UIAlertAction *action)
+                                                            {
+                                                                         
+                                                            }];
+                                            
+                            [alertController addAction:actionOk];
+                            [self presentViewController:alertController animated:YES completion:nil];
+                                        }
+                                                     
+                    if ([ResultString isEqualToString:@"markcompleted"])
+                                                     {
+                                                         transparancyTuchView.hidden=YES;
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                                     }
+
+                                    if ([ResultString isEqualToString:@"alreadymarked"])
+                                    {
+                                        transparancyTuchView.hidden=YES;
+                                        
+                                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops" message:@"This challenge has already been marked completed and is currently under review by the support team." preferredStyle:UIAlertControllerStyleAlert];
+                                        
+                                        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                           style:UIAlertActionStyleDefault
+                                                                                         handler:^(UIAlertAction *action)
+                                                                   {
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                                                   }];
+                                        
+                                        [alertController addAction:actionOk];
+                                        [self presentViewController:alertController animated:YES completion:nil];
+                           
+                                    }
+                                     
+                                         
+                                                     
+                                                 }
+                                                 
+                                                 else
+                                                 {
+                                                     NSLog(@" error login1 ---%ld",(long)statusCode);
+                                                  transparancyTuchView.hidden=YES;
+                                                 }
+                                                 
+                                                 
+                                             }
+                                             else if(error)
+                                             {
+                                                 transparancyTuchView.hidden=YES;
                                                  NSLog(@"error login2.......%@",error.description);
                                              }
                                          }];

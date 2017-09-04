@@ -964,8 +964,31 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             
             
         }
+    else if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"markcomplete"])
+    {
+      cell_PublicNoti.Label_Name.text = @"This challenge has been completed";
+        
+        if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+        {
+            cell_PublicNoti.image_Playbutton1.hidden=NO;
+            cell_PublicNoti.image_Playbutton2.hidden=YES;
+        }
         else
         {
+            cell_PublicNoti.image_Playbutton1.hidden=YES;
+            cell_PublicNoti.image_Playbutton2.hidden=YES;
+        }
+        
+        [cell_PublicNoti.image_profile setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+        [cell_PublicNoti.image_profile2 setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+        cell_PublicNoti.image_profile.layer.cornerRadius=9.0f;
+        cell_PublicNoti.image_profile2.layer.cornerRadius=cell_PublicNoti.image_profile2.frame.size.height/2;
+        
+        
+        
+    }
+    else
+    {
             if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
             {
                 cell_PublicNoti.image_Playbutton1.hidden=YES;
@@ -1148,6 +1171,26 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 
                 
                 
+            }
+            else if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"markcomplete"])
+            {
+                cell_PrivateNoti.Label_Name.text = @"This challenge has been completed";
+                if ([[dic_Values valueForKey:@"mediatype"]isEqualToString:@"VIDEO"])
+                {
+                    cell_PrivateNoti.image_Playbutton2.hidden=NO;
+                    cell_PrivateNoti.image_Playbutton1.hidden=YES;
+                }
+                else
+                {
+                    cell_PrivateNoti.image_Playbutton2.hidden=YES;
+                    cell_PrivateNoti.image_Playbutton1.hidden=YES;
+                }
+                
+                [cell_PrivateNoti.image_profile setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
+                [cell_PrivateNoti.image_profile2 setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+                
+                cell_PrivateNoti.image_profile.layer.cornerRadius=cell_PrivateNoti.image_profile.frame.size.height/2;
+                cell_PrivateNoti.image_profile2.layer.cornerRadius=9.0f;
             }
             else
             {

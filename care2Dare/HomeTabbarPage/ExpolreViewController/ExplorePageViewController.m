@@ -468,7 +468,7 @@ str_tablereload=@"no";
         NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration] delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
         
         NSURL *url;
-        NSString *  urlStrLivecount=[urlplist valueForKey:@"explore_world1"];;
+        NSString *  urlStrLivecount=[urlplist valueForKey:@"explore_world"];;
         url =[NSURL URLWithString:urlStrLivecount];
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

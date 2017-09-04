@@ -19,7 +19,8 @@
 @property(strong,nonatomic)IBOutlet UILabel * Label_Raised;
 @property(strong,nonatomic)IBOutlet UILabel * Label_Mypleges;
 @property(weak,nonatomic)IBOutlet UIActivityIndicatorView * activityIndicator1;
-
+@property (weak, nonatomic) IBOutlet UILabel *label_recordchallenge;
+@property(strong,nonatomic)IBOutlet UILabel * label_BlueStrip;
 @property(strong,nonatomic)IBOutlet UIView * View_record;
 @property(strong,nonatomic)IBOutlet UILabel * label_record;
 @property(strong,nonatomic)IBOutlet UIImageView * Image_record;

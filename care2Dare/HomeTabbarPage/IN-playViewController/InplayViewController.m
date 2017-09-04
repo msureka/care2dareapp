@@ -17,7 +17,7 @@
 #import "AcceptContributeDetailViewController.h"
 @interface InplayViewController ()
 {
-    
+
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
     UIImage *chosenImage;
     NSString *cellChecking,*Str_Frends,*str_challenges,*Str_name,*Str_profileurl,*SelectGallery;
@@ -358,7 +358,7 @@
                                                          }
                                                          if (Array_Private.count!=0 && Array_Public.count==0)
                                                          {
-                                                             [self ViewTapTapped_Private:nil];
+                //[self ViewTapTapped_Private:nil];
                                                              
                                                          }
                
@@ -460,11 +460,46 @@
                 
                  [cell_Public.View_record setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.5f]];
                 [cell_Public.Image_PalyBuutton setFrame:CGRectMake(cell_Public.Image_PalyBuutton.frame.origin.x, cell_Public.Image_PalyBuutton.frame.origin.y, cell_Public.Image_PalyBuutton.frame.size.width, cell_Public.Image_PalyBuutton.frame.size.width)];
+               
+                
+                
+               
+                
+                
+                
                 if ([[dic_worldexp valueForKey:@"showrecordingleft"]isEqualToString:@"yes"])
                 {
                      cell_Public.View_record.hidden=NO;
                     cell_Public.label_record.text=[dic_worldexp valueForKey:@"recordingtimeleft"];
+                    
+                    cell_Public.Label_recordchallenge.text=@"LEFT TO RECORD CHALLENGE";
+                    
+                    cell_Public.Image_record.hidden=NO;
+                    
+                     cell_Public.label_BlueStrip.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255.0 alpha:1];
                 }
+                else if ([[dic_worldexp valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+                {
+                    cell_Public.View_record.hidden=NO;
+                    cell_Public.label_record.text=@"";
+                    cell_Public.Label_recordchallenge.text=@"MARK COMPLETED";
+                    cell_Public.Image_record.hidden=YES;
+                    
+                   cell_Public.label_BlueStrip.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255.0 alpha:1];
+                    cell_Public.Label_recordchallenge.center=cell_Public.label_BlueStrip.center;
+                    cell_Public.Label_recordchallenge.textAlignment=NSTextAlignmentCenter;
+                }
+            else if ([[dic_worldexp valueForKey:@"showinreview"]isEqualToString:@"yes"])
+                {
+                    cell_Public.View_record.hidden=NO;
+                    cell_Public.label_record.text=@"";
+                     cell_Public.Label_recordchallenge.text=@"UNDER REVIEW";
+                    cell_Public.Image_record.hidden=YES;
+                    cell_Public.label_BlueStrip.backgroundColor=[UIColor lightGrayColor];
+                    cell_Public.Label_recordchallenge.center=cell_Public.label_BlueStrip.center;
+                    cell_Public.Label_recordchallenge.textAlignment=NSTextAlignmentCenter;
+                }
+
                 else
                 {
                   cell_Public.View_record.hidden=YES;
@@ -619,16 +654,37 @@
                 {
                     cell_Private.View_record.hidden=NO;
                     cell_Private.label_record.text=[dic_worldexp valueForKey:@"recordingtimeleft"];
+                    cell_Private.label_recordchallenge.text=@"LEFT TO RECORD CHALLENGE";
+                     cell_Private.Image_record.hidden=NO;
+                     cell_Private.label_BlueStrip.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255.0 alpha:1];
+                }
+                else if ([[dic_worldexp valueForKey:@"showmarkcomplete"]isEqualToString:@"yes"])
+                {
+                    cell_Private.View_record.hidden=NO;
+                    cell_Private.label_record.text=@"";
+                    cell_Private.label_recordchallenge.text=@"MARK COMPLETED";
+                    cell_Private.Image_record.hidden=YES;
+                    cell_Private.label_BlueStrip.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255.0 alpha:1];
+                    
+                    cell_Private.label_recordchallenge.center=cell_Private.label_BlueStrip.center;
+                    cell_Private.label_recordchallenge.textAlignment=NSTextAlignmentCenter;
+                }
+                else if ([[dic_worldexp valueForKey:@"showinreview"]isEqualToString:@"yes"])
+                {
+                    cell_Private.View_record.hidden=NO;
+                    cell_Private.label_record.text=@"";
+                    cell_Private.label_recordchallenge.text=@"UNDER REVIEW";
+                    cell_Private.Image_record.hidden=YES;
+                    cell_Private.label_BlueStrip.backgroundColor=[UIColor lightGrayColor];
+                    
+                    cell_Private.label_recordchallenge.center=cell_Private.label_BlueStrip.center;
+                    cell_Private.label_recordchallenge.textAlignment=NSTextAlignmentCenter;
                 }
                 else
                 {
                     cell_Private.View_record.hidden=YES;
                 }
 
-                
-                
-                
-                
                 cell_Private.Label_Raised.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"backamount"]];
                 
                  cell_Private.Label_Mypleges.text=[NSString stringWithFormat:@"%@%@",@"$",[dic_worldexp valueForKey:@"mypledge"]];

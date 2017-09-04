@@ -312,7 +312,8 @@
     [self.view addSubview:transperentViewIndicator11];
     
     transperentViewIndicator11.hidden=YES;
-    
+   
+
     
     }
 -(void)UploadinView_Close:(UIButton *)sender
@@ -660,7 +661,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     self.Button_Gallery.hidden=YES;
     self.Button_Videos.hidden=YES;
     self.Button_Cammera.hidden=YES;
-    BackroundImg.hidden=YES;
+//    BackroundImg.hidden=YES;
     [self startCameraControllerFromViewController: self
                                     usingDelegate: self];
 }
@@ -1207,12 +1208,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
     if ([challengetypeValDonate isEqualToString:@"DONATE"])
     {
-        Str_message=[NSString stringWithFormat:@"%@%@%.f",@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
+        Str_message=[NSString stringWithFormat:@"%@%@%.f",@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
        
     }
     else
     {
-     Str_message=@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 50/50 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.";
+     Str_message=@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.";
     }
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:Str_message preferredStyle:UIAlertControllerStyleAlert];
@@ -1523,8 +1524,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
              encodedImageThumb = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)ImageNSdataThumb,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
              
               [pcker1.view hideActivityViewWithAfterDelay:1];
-             
-            [self dismissViewControllerAnimated:YES completion:NULL];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self dismissViewControllerAnimated:YES completion:NULL];
+             });
+          
              
              
          }
@@ -1645,7 +1648,22 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
         NSLog(@"FrameImage height size==%f",FrameImage.size.height);
         NSLog(@"FrameImage width %fze==%f",FrameImage.size.width);
-        
+        if (_Textview_Desc.text.length !=0 && FrameImage !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
+        {
+            
+            _Button_Create.enabled=YES;
+            
+            
+            [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            
+            _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+        }
+        else
+        {
+            _Button_Create.enabled=NO;
+            [_Button_Create setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            _Button_Create.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+        }
         
         
         if (FrameImage.size.height > FrameImage.size.width)
@@ -1658,10 +1676,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             Vedio_Height=@540;
             Vedio_Width=@960;
         }
+//        
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+        pcker1=[[UIImagePickerController alloc]init];
+             pcker1=picker;
+//        });
         
-        
-        
-        pcker1=picker;
+       
         [self RecordingVediosImagepicker];
         
         
@@ -1785,23 +1806,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
         [picker dismissViewControllerAnimated:YES completion:NULL];
         
-        
+        if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
+        {
+            
+            _Button_Create.enabled=YES;
+            [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
+        }
+        else
+        {
+            _Button_Create.enabled=NO;
+            [_Button_Create setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            _Button_Create.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
+        }
         //[self viewImgCrop];
         // [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
     }
-    if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
-    {
-        
-        _Button_Create.enabled=YES;
-        [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _Button_Create.backgroundColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1];
-    }
-    else
-    {
-        _Button_Create.enabled=NO;
-           [_Button_Create setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        _Button_Create.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
-    }
+    
 
 }
 
@@ -1874,7 +1895,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         {
             
             strinRetake=@"Image";
-            encodedImage=@"";
+           // encodedImage=@"";
             [self GalleryButton:self];
         }
         //}
@@ -1904,7 +1925,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         else  if (buttonIndex== 2)
         {
             strinRetake=@"Image";
-            encodedImage=@"";
+          // encodedImage=@"";
             
             [self ButtonCammera_Action:self];
         }
@@ -1940,7 +1961,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         else  if (buttonIndex== 2)
         {
             strinRetake=@"Image";
-            encodedImage=@"";
+            //encodedImage=@"";
             [self ButtonVideo_Action:self];
         }
     }

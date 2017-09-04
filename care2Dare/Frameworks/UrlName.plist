@@ -10,10 +10,8 @@
 	<string>http://www.care2dareapp.com/app/createchallenge.php</string>
 	<key>explore_world</key>
 	<string>http://www.care2dareapp.com/app/explore_world.php</string>
-	<key>explore_world1</key>
-	<string>http://www.care2dareapp.com/app/explore_world1.php</string>
 	<key>profile_explore</key>
-	<string>http://www.care2dareapp.com/app/profile_explore.php</string>
+	<string>http://www.care2dareapp.com/app/profile_explore1.php</string>
 	<key>contribute</key>
 	<string>http://www.care2dareapp.com/app/contribute.php</string>
 	<key>favourite-add</key>
@@ -86,5 +84,7 @@
 	<string>http://www.care2dareapp.com/app/showcompleted.php</string>
 	<key>savesettings</key>
 	<string>http://www.care2dareapp.com/app/savesettings.php</string>
+	<key>markcomplete</key>
+	<string>http://www.care2dareapp.com/app/markcomplete.php</string>
 </dict>
 </plist>
