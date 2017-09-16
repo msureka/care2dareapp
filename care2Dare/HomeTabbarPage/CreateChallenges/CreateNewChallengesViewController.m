@@ -30,7 +30,7 @@
     NSDictionary *urlplist;
     
     UIGestureRecognizer * TabGestureDetailView, *tapGestureText,*BackImageGesture,*RecordVedioTabGesture;
-    NSNumber *Vedio_Height,*Vedio_Width;;
+    NSNumber *Vedio_Height,*Vedio_Width,*BitrateValue;
     UIImage *chosenImage;
     NSData *imageData,*imageDataThumb;
     UILabel * Label_confirm1;
@@ -313,7 +313,7 @@
     
     transperentViewIndicator11.hidden=YES;
    
-
+ BitrateValue=@750000;
     
     }
 -(void)UploadinView_Close:(UIButton *)sender
@@ -1204,55 +1204,174 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 -(void)ButtonCreateChallengesActions
 {
-    NSString * Str_message;
+    //NSString * Str_message;
 
     if ([challengetypeValDonate isEqualToString:@"DONATE"])
     {
-        Str_message=[NSString stringWithFormat:@"%@%@%.f",@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
-       
-    }
-    else
-    {
-     Str_message=@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.";
-    }
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:Str_message preferredStyle:UIAlertControllerStyleAlert];
-    
-    
-    
-     NSArray *viewArray = [[[[[[[[[[[[alert view] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews];
-    
-    UILabel *alertTitle = viewArray[0];
-    alertTitle.textAlignment = NSTextAlignmentCenter;
-  
-    
-    UILabel *alertMessage = viewArray[1];
-    alertMessage.textAlignment = NSTextAlignmentLeft;
-    
-    viewArray=nil;
-    alertMessage=nil;
-    
-   
+//        Str_message=[NSString stringWithFormat:@"%@%@%.f",@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
+      
+        
+        
+        
+        
+        NSString * messeageRed=[NSString stringWithFormat:@"%@",@"\n\nHere's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies."];
+        NSString * messagePayVal=[NSString stringWithFormat:@"%@%.f%@",@"\n\nAre you sure you wish to donate $",[_Textfield_Amount.text floatValue]*(Array_Names.count),@"?"];
+        
+        UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+        NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+        NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"Challenge for Charity campaign details" attributes: arialDict];
+        
+        UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:14.0];
+        NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+        NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:messeageRed attributes:verdanaDict];
+        
+        UIFont *name3 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+        NSDictionary *verdanaDict2 = [NSDictionary dictionaryWithObject:name3 forKey:NSFontAttributeName];
+        NSMutableAttributedString *vAttrString2 = [[NSMutableAttributedString alloc]initWithString:messagePayVal attributes:verdanaDict2];
+        
+        [aAttrString appendAttributedString:vAttrString];
+        [aAttrString appendAttributedString:vAttrString2];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert setValue:aAttrString forKey:@"attributedTitle"];
+        
+        NSArray *viewArray = [[[[[[[[[[[[alert view] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews];
+        
+        UILabel *alertTitle = viewArray[0];
+        alertTitle.textAlignment = NSTextAlignmentCenter;
+        
+        
+        UILabel *alertMessage = viewArray[1];
+        alertMessage.textAlignment = NSTextAlignmentLeft;
+        
+        viewArray=nil;
+        alertMessage=nil;
+        
+        
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                    {
-    
+                                       
                                    }];
-    
+        
         UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
                                                             style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                     {
                                         [self createChallengesComm];
                                     }];
-    
+        
         [alert addAction:actionOk];
-    
+        
         [alert addAction:actionOk1];
-    
-    
-  
-    
+        
+        
+        
+        
         [self presentViewController:alert animated:YES completion:nil];
+        
+        
+        
+        
+    }
+    else
+    {
+//     Str_message=@"Here's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies.";
+        
+        
+        
+        
+        NSString * messeageRed=[NSString stringWithFormat:@"%@",@"\n\nHere's how your Challenge campaign works: \n\n1. Supporters donate using a PayPal account or a credit/debit card. Donations are made to a Fund, who delivers these funds to your chosen charities on a monthly basis. \n\n2. To earn the donations made to your challenge campaign, you will have to perform the challenge set by uploading a relevant video response within the time limit or up to 48 hours later.\n\n3. Donations will be split 25/75 between you and your chosen charities. \n\n By continuing, you agree to deductions of 7.9% +US$0.30 from each donation to Payment Gateway fee's and Care2dare processing policies."];
+        
+        
+        UIFont *name1 = [UIFont fontWithName:@"SanFranciscoDisplay-Bold" size:14.0];
+        NSDictionary *arialDict = [NSDictionary dictionaryWithObject:name1 forKey:NSFontAttributeName];
+        NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"Challenge for Charity campaign details" attributes: arialDict];
+        
+        UIFont *name2 = [UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:14.0];
+        NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:name2 forKey:NSFontAttributeName];
+        NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:messeageRed attributes:verdanaDict];
+        
+        
+        
+        [aAttrString appendAttributedString:vAttrString];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert setValue:aAttrString forKey:@"attributedTitle"];
+        
+        NSArray *viewArray = [[[[[[[[[[[[alert view] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews];
+        
+        UILabel *alertTitle = viewArray[0];
+        alertTitle.textAlignment = NSTextAlignmentCenter;
+        
+        
+        UILabel *alertMessage = viewArray[1];
+        alertMessage.textAlignment = NSTextAlignmentLeft;
+        
+        viewArray=nil;
+        alertMessage=nil;
+        
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                   {
+                                       
+                                   }];
+        
+        UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
+                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                    {
+                                        [self createChallengesComm];
+                                    }];
+        
+        [alert addAction:actionOk];
+        
+        [alert addAction:actionOk1];
+        
+        
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+    
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Challenge for Charity campaign details" message:Str_message preferredStyle:UIAlertControllerStyleAlert];
+//    
+//    
+//    
+//     NSArray *viewArray = [[[[[[[[[[[[alert view] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews] firstObject] subviews];
+//    
+//    UILabel *alertTitle = viewArray[0];
+//    alertTitle.textAlignment = NSTextAlignmentCenter;
+//  
+//    
+//    UILabel *alertMessage = viewArray[1];
+//    alertMessage.textAlignment = NSTextAlignmentLeft;
+//    
+//    viewArray=nil;
+//    alertMessage=nil;
+//    
+//   
+//        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Go Back"
+//                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//                                   {
+//    
+//                                   }];
+//    
+//        UIAlertAction *actionOk1 = [UIAlertAction actionWithTitle:@"Continue"
+//                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//                                    {
+//                                        [self createChallengesComm];
+//                                    }];
+//    
+//        [alert addAction:actionOk];
+//    
+//        [alert addAction:actionOk1];
+//    
+//    
+//  
+//    
+//        [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
@@ -1405,7 +1524,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
   cameraUI.videoMaximumDuration = 60.0f;
  
     cameraUI.allowsEditing = NO;
-    
+     cameraUI.allowsEditing=false;
     cameraUI.delegate = delegate;
 //    self.videoTimer =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeValue) userInfo:nil repeats:YES];
 //    remainingCounts = 60;
@@ -1468,7 +1587,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     AVVideoHeightKey: Vedio_Height,  //set your resolution height here
     AVVideoCompressionPropertiesKey: @
         {
-        AVVideoAverageBitRateKey: @2000000, // Give your bitrate here for lower size give low values
+        AVVideoAverageBitRateKey:BitrateValue,// @2000000, // Give your bitrate here for lower size give low values
         AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
         },
     };
@@ -1491,7 +1610,20 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
              
              // [self.videoURL path]
              NSLog(@"data size path==%d",videoSize);
-             
+             if (videoSize >=5)
+             {
+                 if (videoSize<=7)
+                 {
+                     BitrateValue=@430000;
+                 }
+                 else
+                 {
+                     BitrateValue=@300000;
+                 }
+                 [self RecordingVediosImagepicker];
+             }
+             else
+             {
              imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
              // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
              
@@ -1528,7 +1660,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                  [self dismissViewControllerAnimated:YES completion:NULL];
              });
           
-             
+             }
              
          }
          else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)

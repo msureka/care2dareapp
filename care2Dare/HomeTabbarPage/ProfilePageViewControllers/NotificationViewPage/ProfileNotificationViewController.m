@@ -84,6 +84,9 @@
 flag_challenge=@"no";
     flag_Contribute=@"no";
     flag_Vedio=@"no";
+    NSLog(@"challengecount budge==%@",[defaults valueForKey:@"challengecount"]);
+     NSLog(@"contributioncount budge==%@",[defaults valueForKey:@"contributioncount"]);
+     NSLog(@"videocount budge==%@",[defaults valueForKey:@"videocount"]);
     if ([[defaults valueForKey:@"challengecount"] isEqualToString:@"0"])
     {
         _ImageRed_Challenges.hidden=YES;

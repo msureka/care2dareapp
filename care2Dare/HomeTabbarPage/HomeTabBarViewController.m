@@ -112,16 +112,21 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 //    [[UITabBar appearance] setAlpha:1];
     
    
-//    if ([[defautls valueForKey:@"letsChat"] isEqualToString:@"yes"] || [[defautls valueForKey:@"letsChatAd"] isEqualToString:@"yes"])
-//    {
-//   
-//        self.selectedIndex=2;
-//    }
-//    else
-//    {
+    if ([[defaults valueForKey:@"tabindex"] isEqualToString:@"4"])
+    {
+        [defaults setObject:@"0" forKey:@"tabindex"];
+        self.selectedIndex=4;
+    }
+    else if ([[defaults valueForKey:@"tabindex"] isEqualToString:@"3"])
+    {
+        [defaults setObject:@"0" forKey:@"tabindex"];
+        self.selectedIndex=3;
+        
+    }
+    else
+    {
         self.selectedIndex=0;
-//    }
-    
+    }
     [defaults setObject:@"0" forKey:@"tabchk"];
     [defaults synchronize];
     
@@ -214,7 +219,8 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
                                                      
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatedBudge" object:self userInfo:nil];
-            NSString *Str_budgeCount,*str_challengecount,*str_contributioncount,*str_videocount;
+                                                     
+            NSString *Str_budgeCount,*str_challengecount,*str_contributioncount,*str_videocount,*Str_friendreq;
                                                      
             Str_budgeCount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"totalcount"]];
                                                      
@@ -224,63 +230,146 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                                                      
      str_videocount=[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"videocount"]];
                                                      
-                                                     
-    if (![Str_budgeCount isEqualToString:@""] && ![Str_budgeCount isEqualToString:@"0"] )
-                    {
-       
-   //             item4.badgeValue=Str_budgeCount;
-                item3.badgeValue=Str_budgeCount;
-                [defaults setObject:Str_budgeCount forKey:@"budge"];
-                [defaults synchronize];
-
-                  }
-                    else
+Str_friendreq =[NSString stringWithFormat:@"%@",[[Array_Notifications objectAtIndex:0]valueForKey:@"friendreqs"]];
+            if (![Str_friendreq isEqualToString:@""] && ![Str_friendreq isEqualToString:@"0"] )
                 {
-        [defaults setObject:@"0" forKey:@"budge"];
+                                                         
+//                    item4.badgeValue=Str_budgeCount;
+                    item4.badgeValue=Str_friendreq;
+                    [defaults setObject:Str_friendreq forKey:@"friendreqs"];
                    
-                    [defaults synchronize];
-  //      item4.badgeValue=nil;
-        item3.badgeValue=nil;
-                                        
-                }
-            if (![str_challengecount isEqualToString:@""] && ![str_challengecount isEqualToString:@"0"] )
-                    {
                                                          
-   
-                [defaults setObject:str_challengecount forKey:@"challengecount"];
-                [defaults synchronize];
+             }
+            else
+            {
+                [defaults setObject:@"0" forKey:@"friendreqs"];
+                item4.badgeValue=nil;
+                
+                
+                
+            }
+                                                     
+                        
+                if (![Str_budgeCount isEqualToString:@""] && ![Str_budgeCount isEqualToString:@"0"] )
+                        {
                                                          
-                        }
+                       //             item4.badgeValue=Str_budgeCount;
+                        item3.badgeValue=Str_budgeCount;
+                [defaults setObject:Str_budgeCount forKey:@"budge"];
+                   
+                                                         
+                    }
                 else
                 {
-                [defaults setObject:@"0" forKey:@"challengecount"];
-                [defaults synchronize];
-                  }
-              if (![str_contributioncount isEqualToString:@""] && ![str_contributioncount isEqualToString:@"0"] )
-                  {
-               
-             [defaults setObject:str_contributioncount forKey:@"contributioncount"];
-              [defaults synchronize];
-                                                         
-               }
-               else
-               {
-             [defaults setObject:@"0" forKey:@"contributioncount"];
-              [defaults synchronize];
-              }
-              
-       if (![str_videocount isEqualToString:@""] && ![str_videocount isEqualToString:@"0"] )
-       {
-                                                         
-     [defaults setObject:str_videocount forKey:@"videocount"];
-     [defaults synchronize];
-       }
-       else
-         {
-          [defaults setObject:@"0" forKey:@"videocount"];
-        [defaults synchronize];
-            }
-        
+                   
+                    [defaults setObject:@"0" forKey:@"budge"];
+                    item3.badgeValue=nil;
+                    
+                    
+                    
+                }
+
+                
+                    if (![str_challengecount isEqualToString:@""] && ![str_challengecount isEqualToString:@"0"] )
+                    {
+                        
+                        
+                        [defaults setObject:str_challengecount forKey:@"challengecount"];
+                        
+                        
+                    }
+                    else
+                    {
+                     
+                        [defaults setObject:@"0" forKey:@"challengecount"];
+                
+                    }
+
+                     if (![str_contributioncount isEqualToString:@""] && ![str_contributioncount isEqualToString:@"0"] )
+                    {
+                       
+                        [defaults setObject:str_contributioncount forKey:@"contributioncount"];
+                        
+                        
+                    }
+                     else
+                     {
+                        
+                         [defaults setObject:@"0" forKey:@"contributioncount"];
+                         
+                     }
+
+                    if (![str_videocount isEqualToString:@""] && ![str_videocount isEqualToString:@"0"] )
+                    {
+                      
+                        [defaults setObject:str_videocount forKey:@"videocount"];
+                        
+                    }
+                    else
+                    {
+                        [defaults setObject:@"0" forKey:@"videocount"];
+                        
+                        
+                    }
+
+            [defaults synchronize];
+                                                     
+//    if (![Str_budgeCount isEqualToString:@""] && ![Str_budgeCount isEqualToString:@"0"] )
+//                    {
+//
+//   //             item4.badgeValue=Str_budgeCount;
+//                item3.badgeValue=Str_budgeCount;
+//                [defaults setObject:Str_budgeCount forKey:@"budge"];
+//                [defaults synchronize];
+//
+//                  }
+//                    else
+//                {
+//        [defaults setObject:@"0" forKey:@"budge"];
+//
+//                    [defaults synchronize];
+//  //      item4.badgeValue=nil;
+//        item3.badgeValue=nil;
+//                                        
+//                }
+//            if (![str_challengecount isEqualToString:@""] && ![str_challengecount isEqualToString:@"0"] )
+//                    {
+//                                                         
+//   
+//                [defaults setObject:str_challengecount forKey:@"challengecount"];
+//                [defaults synchronize];
+//                                                         
+//                        }
+//                else
+//                {
+//                [defaults setObject:@"0" forKey:@"challengecount"];
+//                [defaults synchronize];
+//                  }
+//              if (![str_contributioncount isEqualToString:@""] && ![str_contributioncount isEqualToString:@"0"] )
+//                  {
+//               
+//             [defaults setObject:str_contributioncount forKey:@"contributioncount"];
+//              [defaults synchronize];
+//                                                         
+//               }
+//               else
+//               {
+//             [defaults setObject:@"0" forKey:@"contributioncount"];
+//              [defaults synchronize];
+//              }
+//              
+//       if (![str_videocount isEqualToString:@""] && ![str_videocount isEqualToString:@"0"] )
+//       {
+//                                                         
+//     [defaults setObject:str_videocount forKey:@"videocount"];
+//     [defaults synchronize];
+//       }
+//       else
+//         {
+//          [defaults setObject:@"0" forKey:@"videocount"];
+//        [defaults synchronize];
+//            }
+//        
                                                  }
                                                  
                                                  else
@@ -361,5 +450,60 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     [defaults synchronize];
 
 }
-
+//- (void)application:(UIApplication *)application
+//
+//didReceiveRemoteNotification:(NSDictionary *)userInfo
+//
+//fetchCompletionHandler:
+//
+//(void (^)(UIBackgroundFetchResult))completionHandler {
+//    
+//    // Handle your message. With swizzling enabled, no need to indicate
+//    
+//    // that a message was received.
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    if (application.applicationState == UIApplicationStateActive)
+//    {
+//        NSLog(@"active app running");
+//    }
+//    else
+//    {
+//        NSLog(@"Inactive app Notrunning");
+////        if ([[userInfo valueForKey:@"type"] isEqualToString:@"friends"])
+////        {
+////            [defaults setObject:@"4" forKey:@"tabindex"];
+////            //        [defaults setObject:@"friends" forKey:@"pushviewtab"];
+////        }
+////        else if ([[userInfo valueForKey:@"type"] isEqualToString:@"challenges"])
+////        {
+////            [defaults setObject:@"3" forKey:@"tabindex"];
+////            [defaults setObject:@"challenges" forKey:@"pushviewtab"];
+////        }
+////        else if ( [[userInfo valueForKey:@"type"] isEqualToString:@"contribute"])
+////        {
+////            [defaults setObject:@"3" forKey:@"tabindex"];
+////            [defaults setObject:@"contribute" forKey:@"pushviewtab"];
+////        }
+////        else if ([[userInfo valueForKey:@"type"] isEqualToString:@"videos"])
+////        {
+////            [defaults setObject:@"3" forKey:@"tabindex"];
+////            [defaults setObject:@"videos" forKey:@"pushviewtab"];
+////        }
+////        else
+////        {
+////            [defaults setObject:@"0" forKey:@"tabindex"];
+////            [defaults setObject:@"" forKey:@"pushviewtab"];
+////        }
+//    }
+//        [defaults synchronize];
+//        
+//       
+//    
+//}
 @end

@@ -58,7 +58,7 @@
     CGFloat Xpostion, Ypostion, Xwidth, Yheight, ScrollContentSize,Xpostion_label, Ypostion_label, Xwidth_label, Yheight_label,Cell_DescLabelX,Cell_DescLabelY,Cell_DescLabelW,Cell_DescLabelH,TextView_ViewX,TextView_ViewY,TextView_ViewW,TextView_ViewH,keyboradHeight;
     CGRect scrollFrame;
     
-    NSNumber *Vedio_Height,*Vedio_Width;
+    NSNumber *Vedio_Height,*Vedio_Width,*BitrateValue;
     UIImage *FrameImage;
     UIImagePickerController * picker1;
     NSString *index_friendReq,*str_ChallengeidVal,*videoid1,*str_Userid2val1;;
@@ -423,7 +423,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     
     transparancyTuchView.hidden=YES;
     
-   
+    BitrateValue=@750000;
    
     
     
@@ -1322,7 +1322,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     cameraUI.videoMaximumDuration = 60.0f;
     
     cameraUI.allowsEditing = YES;
-    
+    cameraUI.allowsEditing = false;
     cameraUI.delegate = delegate;
    // cameraUI.view.frame=CGRectMake(5, 5, 310, 280);
   //  [self.view addSubview:cameraUI.view];
@@ -1355,7 +1355,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     AVVideoHeightKey: Vedio_Height,  //set your resolution height here
     AVVideoCompressionPropertiesKey: @
         {
-        AVVideoAverageBitRateKey: @750000, // Give your bitrate here for lower size give low values
+        AVVideoAverageBitRateKey:BitrateValue,// @750000, // Give your bitrate here for lower size give low values
         AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
         },
     };
@@ -1378,7 +1378,20 @@ Str_Tapped_Comments_Vedio=@"Vedio";
              
              // [self.videoURL path]
              NSLog(@"data size path==%d",videoSize);
-             
+             if (videoSize >=5)
+             {
+                 if (videoSize<=7)
+                 {
+                     BitrateValue=@430000;
+                 }
+                 else
+                 {
+                     BitrateValue=@300000;
+                 }
+                 [self RecordingVediosImagepicker];
+             }
+             else
+             {
              
              imageData=[NSData dataWithContentsOfFile:[outputVideoUrl path]];
              // ImageNSdata = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -1420,7 +1433,7 @@ Str_Tapped_Comments_Vedio=@"Vedio";
                  [self Communication_RecordVid];
              }
              
-             
+             }
              
          }
          else if (compressionEncoder.status == AVAssetExportSessionStatusCancelled)

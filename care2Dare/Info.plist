@@ -94,8 +94,6 @@
 	<string>Permission to use the Camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Permission to access Contacts</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>You need to Allow Location Permission to use Care2Dare</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Permission for Microphone for recording Audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>

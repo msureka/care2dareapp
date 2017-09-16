@@ -39,7 +39,8 @@
 
 @implementation ProfilepageViewController
 @synthesize view_Topheader,cell_Profile,cell_donate,cell_complete,cell_Profileimages;
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
       borderBottom_topheder = [CALayer layer];
@@ -99,9 +100,19 @@
 [self ClientserverCommprofile];
     [self Communication_totalraisedcount];
      [self Communication_showcompletedRaised];
- 
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UpdatedBudge" object:nil];
+}
+- (void)Refresh_UpdatedBudge
+{
+   
+   [self ClientserverCommprofile];  
+    
+    
+}
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -130,6 +141,7 @@
   
     [self ClientserverCommprofile];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refresh_UpdatedBudge) name:@"UpdatedBudge" object:nil];
     [_Tableview_Profile reloadData];
 }
 
