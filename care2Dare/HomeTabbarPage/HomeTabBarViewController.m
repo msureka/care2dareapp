@@ -4,7 +4,7 @@
 //
 //  Created by Spiel's Macmini on 3/4/17.
 //  Copyright © 2017 Spiel's Macmini. All rights reserved.
-//
+//F
 
 #import "HomeTabBarViewController.h"
 #import "Reachability.h"
@@ -72,7 +72,7 @@ urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     item0.title=@"EXPLORE";
     item3.title=@"ACTIVITY";
     item2.title=@"";
-    item1.title=@"IN-PLAY";
+    item1.title=@"CHALLENGES";
     item4.title=@"PROFILE";
     
     [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:

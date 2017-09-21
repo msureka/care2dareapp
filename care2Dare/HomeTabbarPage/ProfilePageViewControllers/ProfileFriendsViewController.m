@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "AFNetworking.h"
+#import "UIView+RNActivityView.h"
 @interface ProfileFriendsViewController ()<UITextFieldDelegate>
 {
     UIView *sectionView;
@@ -439,7 +440,7 @@
 
 -(void)ClientserverCommFriends
 {
-    [self.view endEditing:YES];
+    
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -565,16 +566,18 @@ style:UIAlertActionStyleDefault handler:nil];
        [Tableview_Friends reloadData];
                                                          
                 }
-                                                     
+                [self.view hideActivityViewWithAfterDelay:0];
                 }
             else
             {
+                 [self.view hideActivityViewWithAfterDelay:0];
         NSLog(@" error login1 ---%ld",(long)statusCode);
                                                      
                     }
                 }
         else if(error)
             {
+                 [self.view hideActivityViewWithAfterDelay:0];
           NSLog(@"error login2.......%@",error.description);
             }
        }];
@@ -590,7 +593,29 @@ UIGestureRecognizer *recognizer = (UIGestureRecognizer*)sender;
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
     useridval2=[[Array_NewReq objectAtIndex:imageView.tag]valueForKey:@"frienduserid"];
     string_Actiontype=@"DELETE";
-    [self ClientserverCommFriends];
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:@"Are you sure you want to deny this friend request?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Yes"
+                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                   [self.view showActivityViewWithLabel:@"Removing..."];
+                                 [self ClientserverCommFriends];
+                               }];
+    UIAlertAction *actioncancel = [UIAlertAction actionWithTitle:@"No"
+                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                   
+                               }];
+    
+    [alertController addAction:actionOk];
+    [alertController addAction:actioncancel];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
 }
 -(void)Image_BlueMinusTapped_action:(UIGestureRecognizer *)sender
 {
@@ -598,7 +623,7 @@ UIGestureRecognizer *recognizer = (UIGestureRecognizer*)sender;
     UIImageView *imageView = (UIImageView *)recognizer.view;
     
     NSLog(@"indextuches1Friendss==:==%ld", (long)imageView.tag);
-
+ [self.view showActivityViewWithLabel:@"Accepting..."];
     useridval2=[[Array_NewReq objectAtIndex:imageView.tag]valueForKey:@"frienduserid"];
     string_Actiontype=@"ACCEPT";
    [self ClientserverCommFriends];
@@ -612,7 +637,28 @@ UIGestureRecognizer *recognizer = (UIGestureRecognizer*)sender;
 
      useridval2=[[Array_AddReq objectAtIndex:imageView.tag]valueForKey:@"frienduserid"];
     string_Actiontype=@"DELETE";
-   [self ClientserverCommFriends];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Confirm" message:@"Are you sure you want to unfriend your friend?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Yes"
+                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                    [self.view showActivityViewWithLabel:@"Removing..."];
+                                 [self ClientserverCommFriends];
+                               }];
+    UIAlertAction *actioncancel = [UIAlertAction actionWithTitle:@"No"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                   {
+                                       
+                                   }];
+    
+    [alertController addAction:actionOk];
+    [alertController addAction:actioncancel];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+   
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -567,49 +567,20 @@ str_tablereload=@"no";
                         
                          modvalues=(Array_WorldExp.count%3);
                         NSLog(@"Modddvalues==%ld",(long)modvalues);
-//                        if(Array_WorldExp1.count==3)
-//                        {
-                        
-                      //  }
+
                          if ([str_tablereload isEqualToString:@"no"])
                          {
                              str_tablereload=@"yes";
-                             [Tableview_Explore reloadData];
+                           
                              
                          }
-                        else
-                        {
-                       
-                        [Tableview_Explore reloadData];
-//                        
-//                        NSMutableArray *insertIndexPaths = [NSMutableArray array];
-//                        for (NSUInteger item = count; item < Array_WorldCount; item++) {
-//                            
-//                            [insertIndexPaths addObject:[NSIndexPath indexPathForRow:item
-//                                                                           inSection:0]];
-//                        }
-//                        
-//        [Tableview_Explore beginUpdates];
-//                            NSLog(@"inserindexpath==%@",insertIndexPaths);
-//       [Tableview_Explore insertRowsAtIndexPaths:insertIndexPaths
-//                                                withRowAnimation:UITableViewRowAnimationFade];
-//                        [Tableview_Explore endUpdates];
-//        NSIndexPath* indexPath = [NSIndexPath indexPathForRow: ([Tableview_Explore numberOfRowsInSection:([Tableview_Explore numberOfSections]-1)]-1) inSection: ([Tableview_Explore numberOfSections]-1)];
-//                        [Tableview_Explore scrollToRowAtIndexPath:indexPath
-//                                                atScrollPosition:UITableViewScrollPositionNone
-//                                                        animated:YES];
-//                        
-//                        NSIndexPath *selected = [Tableview_Explore indexPathForSelectedRow];
-//                        if (selected) {
-//                           [Tableview_Explore deselectRowAtIndexPath:selected animated:YES];
-//                       }
-//                            
-                        }
+                    
                        
                             }
                       
          
-               [Tableview_Explore setHidden:NO];
+                                                     [Tableview_Explore setHidden:NO];
+                                                     [Tableview_Explore reloadData];
                                                      [indicator setHidden:YES];
                                                      [indicator stopAnimating];
                                                      
@@ -1126,7 +1097,7 @@ str_tablereload=@"no";
                     
                     if ([ResultString_World isEqualToString:@"nochallenges"])
                     {
-                         cell_WorldExp.label_JsonResult.text=@"All the active challenges worldwide will be shown here.";
+                         cell_WorldExp.label_JsonResult.text=@"All active challenges worldwide will be shown here.";
                     }
                     
                     cell_WorldExp.Image_Profile.hidden=YES;
@@ -1141,6 +1112,12 @@ str_tablereload=@"no";
                     cell_WorldExp.activityIndicator2.hidden=NO;
                     cell_WorldExp.activityIndicator3.hidden=NO;
                     cell_WorldExp.label_JsonResult.hidden=NO;
+                    [cell_WorldExp.activityIndicator1 setHidden:YES];
+                    [cell_WorldExp.activityIndicator1 stopAnimating];
+                    [cell_WorldExp.activityIndicator2 setHidden:YES];
+                    [cell_WorldExp.activityIndicator2 stopAnimating];
+                    [cell_WorldExp.activityIndicator3 setHidden:YES];
+                    [cell_WorldExp.activityIndicator3 stopAnimating];
                     
                 }
                 else
@@ -1958,6 +1935,9 @@ str_tablereload=@"no";
     NSMutableArray * Array_new=[[NSMutableArray alloc]init];
     if ([cellChecking isEqualToString:@"FriendExp"])
     {
+        if (Array_FriendExp.count !=0)
+        {
+       
      didselectDic=[Array_FriendExp  objectAtIndex:indexPath.row];
 //        cell_FriendExp = [Tableview_Explore cellForRowAtIndexPath:indexPath];
 //         set.ProfileImgeData =cell_FriendExp.Image_Profile.image;
@@ -1979,12 +1959,13 @@ str_tablereload=@"no";
         }
         
         
-        
+        }
         NSLog(@"Array_new11=%@",Array_new);;
     }
     if ([cellChecking isEqualToString:@"Favourite"])
     {
-      
+        if (Array_Faourite.count !=0)
+        {
         didselectDic=[Array_Faourite  objectAtIndex:indexPath.row];
 //        cell_Favorite = [Tableview_Explore cellForRowAtIndexPath:indexPath];
         //  set.ProfileImgeData =cell_Favorite.Image_Profile.image;
@@ -2006,7 +1987,7 @@ str_tablereload=@"no";
         
     }
     
-    
+    }
     
     
     
