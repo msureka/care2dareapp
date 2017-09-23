@@ -529,7 +529,7 @@ str_tablereload=@"no";
                                                      }
                                                      
                                                      
-                                                     if ([ResultString_World isEqualToString:@"done"])
+                                    if ([ResultString_World isEqualToString:@"done"])
                                                      {
                                                          
                                                   
@@ -577,6 +577,16 @@ str_tablereload=@"no";
                     
                        
                             }
+                        if ([ResultString_World isEqualToString:@"nochallenges"])
+                        {
+                                                         
+                            [Array_WorldExp removeAllObjects];
+                            ViewVillAppear=NO;
+                                                         
+                                                         
+                            }
+                            
+                
                       
          
                                                      [Tableview_Explore setHidden:NO];
@@ -1086,7 +1096,11 @@ str_tablereload=@"no";
                     
                     
               }
-                
+                [cell_WorldExp.activityIndicator1 setHidden:YES];
+                [cell_WorldExp.activityIndicator1 stopAnimating];
+                [cell_WorldExp.activityIndicator2 setHidden:YES];
+                [cell_WorldExp.activityIndicator2 stopAnimating];
+                [cell_WorldExp.activityIndicator3 setHidden:YES];
                 if (Array_WorldExp.count==0)
                 {
                  

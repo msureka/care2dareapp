@@ -352,7 +352,7 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:16.0f];
-        Label1.text=@"Suggested friends";
+        Label1.text=@"Suggested";
         [sectionView addSubview:Label1];
         sectionView.tag=section;
         
