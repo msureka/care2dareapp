@@ -148,7 +148,15 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //            }
 //            else
 //            {
-    [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, (tableview_height-keyboardRect.size.height-contackPicker_height)+20)];
+            if (contackPicker_height==0)
+            {
+                 [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, (tableview_height-keyboardRect.size.height-contackPicker_height)-10)];
+            }
+            else
+            {
+                 [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, (tableview_height-keyboardRect.size.height-contackPicker_height)+20)];
+            }
+   
            // }
        
             
