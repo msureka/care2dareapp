@@ -12,6 +12,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import <Fabric/Fabric.h>
 #import "AFNetworking.h"
+#import "UIViewController+KeyboardAnimation.h"
 @interface TwitterListViewController ()
 {
     NSDictionary *urlplist;
@@ -24,7 +25,7 @@
     CALayer *Bottomborder_Cell2;
       NSMutableArray * Array_searchFriend1;
     NSArray * Array_Add,*array_invite;
-    
+     CGFloat tableview_height;
 }
 @end
 
@@ -49,13 +50,39 @@
     Lable_JSONResult.hidden=YES;
     array_Countval=0;
     searchbar.showsCancelButton=NO;
-    
+    tableview_height=tableview_twitter.frame.size.height;
    
     flagTwitterMergeArray=@"yes";
  
     
     [self twittercommunication];
     
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self subscribeToKeyboard];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self an_unsubscribeKeyboard];
+}
+- (void)subscribeToKeyboard
+{
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        if (isShowing)
+        {
+            
+            [tableview_twitter setFrame:CGRectMake(0, tableview_twitter.frame.origin.y, self.view.frame.size.width, tableview_height-keyboardRect.size.height)];
+            
+            
+        } else
+        {
+            
+            [tableview_twitter setFrame:CGRectMake(0, tableview_twitter.frame.origin.y, self.view.frame.size.width, tableview_height)];
+        }
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 - (void)twittercommunication
 {
@@ -766,5 +793,9 @@
 {
         searchbar.showsCancelButton=NO;
    [self.view endEditing:YES];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 @end

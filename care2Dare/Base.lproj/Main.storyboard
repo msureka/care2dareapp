@@ -4160,61 +4160,70 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCon" rowHeight="67" id="N7R-C8-YVn" customClass="ContactTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="67"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellCon" rowHeight="52" id="N7R-C8-YVn" customClass="ContactTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N7R-C8-YVn" id="q15-07-0UN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpi-WM-SJJ">
-                                                    <rect key="frame" x="11" y="3" width="279" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpi-WM-SJJ">
+                                                    <rect key="frame" x="11" y="4" width="279" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="fFo-Lv-A9r"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="16"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovF-03-zr2">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovF-03-zr2">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-jb-s8b">
-                                                    <rect key="frame" x="11" y="23" width="279" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-jb-s8b">
+                                                    <rect key="frame" x="11" y="25" width="279" height="20"/>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0q-iV-xu8">
-                                                    <rect key="frame" x="11" y="43" width="279" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="14"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fr-Y1-TZn">
-                                                    <rect key="frame" x="298" y="9" width="68" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fr-Y1-TZn">
+                                                    <rect key="frame" x="298" y="11" width="68" height="29"/>
                                                     <color key="backgroundColor" red="0.26274509800000001" green="0.73725490199999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="68" id="iMc-So-ssk"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SanFranciscoDisplay-Bold" family="San Francisco Display" pointSize="16"/>
                                                     <state key="normal" title="Invite">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0Fr-Y1-TZn" firstAttribute="leading" secondItem="ZzB-jb-s8b" secondAttribute="trailing" constant="8" symbolic="YES" id="1HG-wE-eSr"/>
+                                                <constraint firstItem="ZzB-jb-s8b" firstAttribute="top" secondItem="Vpi-WM-SJJ" secondAttribute="bottom" constant="1" id="1zl-vI-Ast"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0Fr-Y1-TZn" secondAttribute="bottom" constant="4" id="H9Q-aB-CrB"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZzB-jb-s8b" secondAttribute="bottom" constant="-1" id="RyP-45-WKr"/>
+                                                <constraint firstItem="Vpi-WM-SJJ" firstAttribute="leading" secondItem="q15-07-0UN" secondAttribute="leadingMargin" constant="3" id="THJ-IK-imL"/>
+                                                <constraint firstItem="ovF-03-zr2" firstAttribute="leading" secondItem="q15-07-0UN" secondAttribute="leading" id="iwl-RL-5NF"/>
+                                                <constraint firstItem="0Fr-Y1-TZn" firstAttribute="top" secondItem="ovF-03-zr2" secondAttribute="bottom" constant="10" id="jbv-i4-VK0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0Fr-Y1-TZn" secondAttribute="trailing" constant="1" id="rh2-uD-rgl"/>
+                                                <constraint firstItem="Vpi-WM-SJJ" firstAttribute="leading" secondItem="ZzB-jb-s8b" secondAttribute="leading" id="rwV-za-08b"/>
+                                                <constraint firstItem="0Fr-Y1-TZn" firstAttribute="leading" secondItem="Vpi-WM-SJJ" secondAttribute="trailing" constant="8" symbolic="YES" id="sWy-jY-WUM"/>
+                                                <constraint firstItem="ovF-03-zr2" firstAttribute="top" secondItem="q15-07-0UN" secondAttribute="top" id="v77-el-Z5t"/>
+                                                <constraint firstItem="0Fr-Y1-TZn" firstAttribute="centerY" secondItem="q15-07-0UN" secondAttribute="centerY" id="vJ3-NB-Syo"/>
+                                                <constraint firstItem="Vpi-WM-SJJ" firstAttribute="top" secondItem="ovF-03-zr2" secondAttribute="bottom" constant="3" id="wTM-Uq-UGS"/>
+                                                <constraint firstAttribute="trailing" secondItem="ovF-03-zr2" secondAttribute="trailing" id="wgp-OD-9Lc"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="button_invite" destination="0Fr-Y1-TZn" id="RZc-XP-2Md"/>
                                             <outlet property="label_one" destination="Vpi-WM-SJJ" id="Blt-gI-wzf"/>
-                                            <outlet property="label_three" destination="m0q-iV-xu8" id="IGH-IM-Jyy"/>
                                             <outlet property="label_two" destination="ZzB-jb-s8b" id="A0S-bn-GUd"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Celladd" rowHeight="44" id="Rit-eK-UNs" customClass="ContactAddTableViewCell">
-                                        <rect key="frame" x="0.0" y="95" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="80" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rit-eK-UNs" id="7Lh-t5-qTA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -4273,7 +4282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Yj-4Z-M3R" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-170" y="125"/>
+            <point key="canvasLocation" x="-170.40000000000001" y="124.58770614692655"/>
         </scene>
         <!--Twitter List View Controller-->
         <scene sceneID="0PP-pP-146">

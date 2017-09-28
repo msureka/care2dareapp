@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "LCNContactPickerView.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "UIViewController+KeyboardAnimation.h"
 @interface InviteSprintTagUserViewController ()<LCNContactPickerViewDelegate>
 
 {
@@ -25,7 +26,7 @@
     NSString *ResultString_getUser,*ResultString_getUser_send, *strInvite_users,*ResultString_Recomm_getUser,*ResultString_suggested;
     NSMutableDictionary * didselectDic;
     UIView *HeadingView,*sectionView;
-    
+    CGFloat tableview_height,contackPicker_height,Keyboard_height;
     UIButton *headerLabel1,*headerLabel2;
     UITableView * Table_ContactView;
     NSUserDefaults * defaults;
@@ -41,18 +42,19 @@
 
 @implementation InviteSprintTagUserViewController
 @synthesize selectedUserid,selectedNames,Array_InviteUserTags,Send_Button;
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardDidHideNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidShow:)
+//                                                 name:UIKeyboardDidShowNotification
+//                                               object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardDidHide:)
+//                                                 name:UIKeyboardDidHideNotification
+//                                               object:nil];
 
 
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataReceived1:) name:@"PassDataArrayBack" object:nil];
@@ -60,7 +62,7 @@
   defaults=[[NSUserDefaults alloc]init];
          Array_SearchData=[[NSMutableArray alloc]init];
 
-    Search_Array_Recoom=[[NSMutableArray alloc]init];
+//    Search_Array_Recoom=[[NSMutableArray alloc]init];
    Search_Array_Recoom=[[NSArray alloc]init];
      [[self navigationController] setNavigationBarHidden:YES animated:NO];
     selectedNames = [NSMutableArray arrayWithCapacity:Search_Array_Recoom.count];
@@ -81,8 +83,8 @@ string_Keyboardload=@"no";
   
     self.contactPickerView = [[LCNContactPickerView alloc] initWithFrame:CGRectMake(10,75, self.view.frame.size.width - 20, 0)];
     
-    Table_ContactView=[[UITableView alloc]initWithFrame:CGRectMake(0, 115, self.view.frame.size.width, self.view.frame.size.height-100)];
-   
+    Table_ContactView=[[UITableView alloc]initWithFrame:CGRectMake(0, 115, self.view.frame.size.width, self.view.frame.size.height-105)];
+    tableview_height=Table_ContactView.frame.size.height;
     Table_ContactView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:Table_ContactView];
  
@@ -107,6 +109,12 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
      Table_ContactView.hidden=YES;
     
      String_suggested=@"no";
+    
+    CALayer *border = [CALayer layer];
+    border.backgroundColor =[UIColor groupTableViewBackgroundColor].CGColor;
+    
+    border.frame = CGRectMake(0, 0,Table_ContactView.frame.size.width, 1);
+    [Table_ContactView.layer addSublayer:border];
     }
 - (void)keyboardDidShow: (NSNotification *) notif
 {
@@ -128,36 +136,38 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [super didReceiveMemoryWarning];
    
 }
-//- (void)subscribeToKeyboard
-//{
-//    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
-//        if (isShowing)
-//        {
+- (void)subscribeToKeyboard
+{
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        if (isShowing)
+        {
+            Keyboard_height=keyboardRect.size.height;
 //            if ([string_Keyboardload isEqualToString:@"no"])
 //            {
 //                string_Keyboardload=@"yes";
 //            }
 //            else
 //            {
-//    [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-350)];
-//            }
-//       
-//            
-//        } else
-//        {
-//        [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-100)];
-//     }
-//        [self.view layoutIfNeeded];
-//    } completion:nil];
-//}
+    [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, (tableview_height-keyboardRect.size.height-contackPicker_height)+20)];
+           // }
+       
+            
+        } else
+        {
+            Keyboard_height=0;
+        [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, (tableview_height+20)-contackPicker_height)];
+     }
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-   // [self subscribeToKeyboard];
+    [self subscribeToKeyboard];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    //[self an_unsubscribeKeyboard];
+    [self an_unsubscribeKeyboard];
 }
 
 #pragma mark - UITableViewDataSource
@@ -669,7 +679,7 @@ userInfo:theInfo];
 
 - (void)LCNContactPickerTextViewDidChange:(NSString *)textViewText
 {
-    [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-350)];
+//    [Table_ContactView setFrame:CGRectMake(0, Table_ContactView.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-350)];
     
     if (textViewText.length==0)
     {
@@ -786,7 +796,8 @@ userInfo:theInfo];
 - (void)LCNContactPickerDidResize:(LCNContactPickerView *)contactPickerView
 {
     NSLog(@">>>>>ResizeViewHeight:%f",contactPickerView.frame.size.height);
-    Table_ContactView.frame=CGRectMake(0, contactPickerView.frame.size.height+100, self.view.frame.size.width, self.view.frame.size.height-(contactPickerView.frame.size.height+100));
+    contackPicker_height=contactPickerView.frame.size.height;
+    Table_ContactView.frame=CGRectMake(0, contactPickerView.frame.size.height+84, self.view.frame.size.width, tableview_height-((contactPickerView.frame.size.height+Keyboard_height)-20));
     String_suggested=@"no";
     [Table_ContactView reloadData];
     

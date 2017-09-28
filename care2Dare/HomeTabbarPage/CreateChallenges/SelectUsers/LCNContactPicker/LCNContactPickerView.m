@@ -252,6 +252,7 @@ static const CGFloat kHorizontalPadding = 3;
             
             if ([self.delegate respondsToSelector:@selector(LCNContactPickerDidRemoveContact:)]) {
                 [self.delegate LCNContactPickerDidRemoveContact:contactView.model.contact];
+                //[self.delegate LCNContactPickerDidRemoveContact:[self.contactArray lastObject]];
             }
             
             if (i > 0) {
@@ -261,12 +262,15 @@ static const CGFloat kHorizontalPadding = 3;
                 self.lastAddedContactView = nil;
             }
             [self reSizingTextField];
+    
+            [self reSizeingFrame];
             break;
         }
         else{
             [deletedArray insertObject:self.contactViewArray[i] atIndex:0];
             [self.contactViewArray[i] removeFromSuperview];
-            [self.contactViewArray removeObjectAtIndex:i];            
+            [self.contactViewArray removeObjectAtIndex:i];
+         
         }
     }
     

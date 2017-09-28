@@ -453,7 +453,7 @@
                 
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_Public.frame.size.height-1, cell_Public.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_Public.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_Public.layer addSublayer:Bottomborder_Cell2];
                 
                 NSDictionary * dic_worldexp=[Array_Public objectAtIndex:indexPath.row];
@@ -630,7 +630,7 @@
                 
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_Private.frame.size.height-1, cell_Private.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_Private.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_Private.layer addSublayer:Bottomborder_Cell2];
                 
                 NSDictionary * dic_worldexp=[Array_Private objectAtIndex:indexPath.row];

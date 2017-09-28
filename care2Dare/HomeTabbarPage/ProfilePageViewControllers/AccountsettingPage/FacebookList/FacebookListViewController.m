@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "SBJsonParser.h"
 #import "AFNetworking.h"
+#import "UIViewController+KeyboardAnimation.h"
 @interface FacebookListViewController ()
 {
     NSDictionary *urlplist;
@@ -18,6 +19,7 @@
     CALayer *Bottomborder_Cell2;
     NSString *userId_prof;
     NSArray * Array_searchFriend;
+     CGFloat tableview_height;
 }
 @end
 
@@ -36,9 +38,35 @@
     [indicator startAnimating];
     Lable_JSONResult.hidden=YES;
     searchbar.showsCancelButton=NO;
-    
+    tableview_height=tableview_facebook.frame.size.height;
     
 
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self subscribeToKeyboard];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self an_unsubscribeKeyboard];
+}
+- (void)subscribeToKeyboard
+{
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        if (isShowing)
+        {
+            
+            [tableview_facebook setFrame:CGRectMake(0, tableview_facebook.frame.origin.y, self.view.frame.size.width, tableview_height-keyboardRect.size.height)];
+            
+            
+        } else
+        {
+            
+            [tableview_facebook setFrame:CGRectMake(0, tableview_facebook.frame.origin.y, self.view.frame.size.width, tableview_height)];
+        }
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 - (void)Facebookcommunication
 {
@@ -414,7 +442,10 @@
     searchbar.showsCancelButton=NO;
     [self.view endEditing:YES];
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //

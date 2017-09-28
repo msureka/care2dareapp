@@ -843,14 +843,14 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, cell_PublicNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PublicNoti.layer addSublayer:Bottomborder_Cell2];
             }
             else
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, cell_PublicNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PublicNoti.layer addSublayer:Bottomborder_Cell2];
             }
            
@@ -1081,14 +1081,14 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PrivateNoti.frame.size.height-1, cell_PrivateNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PrivateNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PrivateNoti.layer addSublayer:Bottomborder_Cell2];
             }
             else
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PrivateNoti.frame.size.height-1, cell_PrivateNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PrivateNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PrivateNoti.layer addSublayer:Bottomborder_Cell2];
             }
            
@@ -1305,14 +1305,14 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeIncoNoti.frame.size.height-1, cell_PublicNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeIncoNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PlegeIncoNoti.layer addSublayer:Bottomborder_Cell2];
             }
             else
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeIncoNoti.frame.size.height-1, cell_PublicNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeIncoNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PlegeIncoNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
@@ -1435,14 +1435,14 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeOutNoti.frame.size.height-1, cell_PlegeOutNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeOutNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PlegeOutNoti.layer addSublayer:Bottomborder_Cell2];
             }
             else
             {
                 Bottomborder_Cell2 = [CALayer layer];
                 Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeOutNoti.frame.size.height-1, cell_PlegeOutNoti.frame.size.width, 1);
+                Bottomborder_Cell2.frame = CGRectMake(0, cell_PlegeOutNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PlegeOutNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
@@ -1564,14 +1564,14 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
         Bottomborder_Cell2 = [CALayer layer];
         Bottomborder_Cell2.backgroundColor = [UIColor clearColor].CGColor;
-        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, cell_VedioNoti.frame.size.width, 1);
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, self.view.frame.size.width, 1);
         [cell_VedioNoti.layer addSublayer:Bottomborder_Cell2];
     }
     else
     {
         Bottomborder_Cell2 = [CALayer layer];
         Bottomborder_Cell2.backgroundColor = [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1.0].CGColor;
-        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, cell_VedioNoti.frame.size.width, 1);
+        Bottomborder_Cell2.frame = CGRectMake(0, cell_VedioNoti.frame.size.height-1, self.view.frame.size.width, 1);
         [cell_VedioNoti.layer addSublayer:Bottomborder_Cell2];
     }
     if ([ResultString_video isEqualToString:@"nonotifications"] || Array_AllData_Videos.count==0)

@@ -14,6 +14,8 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "UIView+RNActivityView.h"
+#import "UIViewController+KeyboardAnimation.h"
 @interface ContactListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSString * name,*phoneNumber,*emailAddress;
@@ -28,6 +30,7 @@
     UIView *sectionView;
     NSArray * Array_Add,*array_invite;
     NSMutableArray * Array_searchFriend1,*arrayCount;
+    CGFloat tableview_height;
 }
 @end
 
@@ -49,7 +52,7 @@
     borderBottom_SectionView1 = [CALayer layer];
     Bottomborder_Cell2 = [CALayer layer];
     searchbar.showsCancelButton=NO;
-
+    tableview_height=_tableview_contact.frame.size.height;
   //  [indcator startAnimating];
     indcator.hidden=NO;
     [_tableview_contact setHidden:YES];
@@ -64,7 +67,32 @@
 
     
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self subscribeToKeyboard];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self an_unsubscribeKeyboard];
+}
+- (void)subscribeToKeyboard
+{
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        if (isShowing)
+        {
+           
+            [_tableview_contact setFrame:CGRectMake(0, _tableview_contact.frame.origin.y, self.view.frame.size.width, tableview_height-keyboardRect.size.height)];
+           
+            
+        } else
+        {
+            
+            [_tableview_contact setFrame:CGRectMake(0, _tableview_contact.frame.origin.y, self.view.frame.size.width, tableview_height)];
+        }
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
 -(IBAction)Button_Back:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -259,21 +287,21 @@
     }
     if (indexPath.section==1)
     {
-        NSDictionary * dictVal=[ArryMerge_twitterlistSection1 objectAtIndex:indexPath.row];
-        
-        if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
-        {
-            return 47;
-        }
-        if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
-        {
-            return 47;
-        }
-        if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
-        {
-            return 67;
-        }
-        
+//        NSDictionary * dictVal=[ArryMerge_twitterlistSection1 objectAtIndex:indexPath.row];
+//        
+//        if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+//        {
+//            return 47;
+//        }
+//        if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+//        {
+//            return 47;
+//        }
+//        if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+//        {
+//            return 67;
+//        }
+         return 52;
     }
     
     return 0;
@@ -313,12 +341,25 @@
             NSDictionary * dictVal=[ArryMerge_twitterlistSection0 objectAtIndex:indexPath.row];
             NSLog(@"Sachin error==%@",dictVal);
             cell_contactAdd.Button_Add.tag=indexPath.row;
+            if ([[dictVal valueForKey:@"status"] isEqualToString:@"ADD"])
+            {
+                cell_contactAdd.Button_Add.enabled=YES;
+                [cell_contactAdd.Button_Add setTitle:@"Add" forState:UIControlStateNormal];
+                [cell_contactAdd.Button_Add setBackgroundColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1]];
+                 [cell_contactAdd.Button_Add addTarget:self action:@selector(AddUser:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else
+            {
+              cell_contactAdd.Button_Add.enabled=NO;
+            [cell_contactAdd.Button_Add setTitle:@"Added" forState:UIControlStateNormal];
+                 [cell_contactAdd.Button_Add setBackgroundColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1]];
+            }
             cell_contactAdd.label_fbname.text=[dictVal valueForKey:@"name"];
             NSURL * url=[NSURL URLWithString:[dictVal valueForKey:@"imageurl"]];
             [cell_contactAdd.image_profile_img setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"] ];
             
             [cell_contactAdd.image_profile_img setFrame:CGRectMake(cell_contactAdd.image_profile_img.frame.origin.x, cell_contactAdd.image_profile_img.frame.origin.y, cell_contactAdd.image_profile_img.frame.size.height, cell_contactAdd.image_profile_img.frame.size.height)];
-            [cell_contactAdd.Button_Add addTarget:self action:@selector(AddUser:) forControlEvents:UIControlEventTouchUpInside];
+           
             cell_contactAdd.Button_Add.clipsToBounds=YES;
             cell_contactAdd.Button_Add.layer.cornerRadius=7.0f;
             
@@ -366,12 +407,12 @@
                 cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
                 cell_contact.label_three.hidden=YES;
             }
-            if (![[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && ![[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
+            if ([[dictVal valueForKey:@"friendmobileno"] isEqualToString:@""] && [[dictVal valueForKey:@"friendemail"] isEqualToString:@""])
             {
                // [cell_contact.button_invite addTarget:self action:@selector(InviteUser:) forControlEvents:UIControlEventTouchUpInside];
-                cell_contact.label_two.text=[dictVal valueForKey:@"friendmobileno"];
-                cell_contact.label_three.text=[dictVal valueForKey:@"friendemail"];
-                cell_contact.label_three.hidden=NO;
+                cell_contact.label_two.text=@"";
+              //  cell_contact.label_three.text=[dictVal valueForKey:@"friendemail"];
+               // cell_contact.label_three.hidden=NO;
             }
             //cell_contact.label_two.text=[dictVal valueForKey:@"friendemail"];
             // cell_contact.label_three.text=[dictVal valueForKey:@"friendmobileno"];
@@ -1174,7 +1215,7 @@
                 [ArryMerge_twitterlistSection1 addObject:[Array_AllData objectAtIndex:i]];
     
                         }
-            else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"])
+            else if([[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADD"] ||[[[Array_AllData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"ADDED"] )
                         {
         [ArryMerge_twitterlistSection0 addObject:[Array_AllData objectAtIndex:i]];
                         }
@@ -1408,7 +1449,7 @@
 -(void)AddUser:(UIButton *)sender
 {
     
-    
+   
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable)
@@ -1435,7 +1476,7 @@
     }
     else
     {
-        
+      [self.view showActivityViewWithLabel:@"Requesting..."];
         
         NSString *userid1= @"userid1";
         NSString *useridval1= [defaults valueForKey:@"userid"];
@@ -1480,24 +1521,51 @@
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
                                                      
-                                                     if ([ResultString isEqualToString:@"requested"])
+                        if ([ResultString isEqualToString:@"requested"])
                                                      {
                                                          
-                                                         
-                                                         [self ContactCommunication];
+                    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+                NSDictionary *oldDict = (NSDictionary *)[ArryMerge_twitterlistSection0 objectAtIndex:(long)sender.tag];
+                [newDict addEntriesFromDictionary:oldDict];
+            
+                [newDict setValue:@"ADDED" forKey:@"status"];
+                [ArryMerge_twitterlistSection0 replaceObjectAtIndex:(long)sender.tag withObject:newDict];
+                              //  [self ContactCommunication];
+                NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:(long)sender.tag inSection:0];
+            NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
+        [_tableview_contact reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
                                                          
                                                      }
-                                                     
-                                                     
+        if ([ResultString isEqualToString:@"alreadyrequested"])
+                                                     {
+                                                         
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Already Requested" message:@"You have already sent a friend request to this user." preferredStyle:UIAlertControllerStyleAlert];
+                                                         
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+        style:UIAlertActionStyleDefault
+            handler:^(UIAlertAction *action)
+                        {
+                        }];
+                                                         
+            [alertController addAction:actionOk];
+                                                         
+         
+                
+            [self presentViewController:alertController animated:YES completion:nil];
+                                                         
+                                                     }
+                                                   
+                                                    [self.view hideActivityViewWithAfterDelay:0];
                                                  }
                                                  else
                                                  {
                                                      NSLog(@" error login1 ---%ld",(long)statusCode);
-                                                     
+                                                      [self.view hideActivityViewWithAfterDelay:0];
                                                  }
                                              }
                                              else if(error)
                                              {
+                                                  [self.view hideActivityViewWithAfterDelay:0];
                                                  NSLog(@"error login2.......%@",error.description);
                                              }
                                              
@@ -1616,6 +1684,10 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
