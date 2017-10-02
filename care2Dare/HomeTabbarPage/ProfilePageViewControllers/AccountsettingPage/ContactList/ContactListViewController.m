@@ -217,8 +217,25 @@
                     }
                     else
                     {
+                        
+                        
+                        fullName = [email stringByReplacingOccurrencesOfString:@"," withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"'" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@":" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"*" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"$" withString:@""];
+                        fullName = [email stringByReplacingOccurrencesOfString:@"#" withString:@""];
                         [Array_name addObject:fullName];
-                        [Array_Phone addObject:phonelabels];
+                        
+                        
+                        
+                        
+                        long long phonenumberss;
+                        phonenumberss=[phonelabels longLongValue];
+                        NSString *phonelabels1=[NSString stringWithFormat:@"%lld",phonenumberss];
+                        [Array_Phone addObject:phonelabels1];
                         [Array_Email addObject:@""];
                     }
                 }
@@ -235,6 +252,15 @@
                 }
                 else
                 {
+                     email = [email stringByReplacingOccurrencesOfString:@"," withString:@""];
+                     email = [email stringByReplacingOccurrencesOfString:@"'" withString:@""];
+                     email = [email stringByReplacingOccurrencesOfString:@":" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@"*" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@"$" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@"#" withString:@""];
+                    
                     [Array_name addObject:fullName];
                     [Array_Email addObject:email];
                     [Array_Phone addObject:@""];
