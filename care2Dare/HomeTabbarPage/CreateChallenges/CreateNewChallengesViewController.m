@@ -228,7 +228,7 @@
     _Button_Create.backgroundColor=[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1];
     
     _Textview_Desc.delegate=self;
-    _Textview_Desc.text = @"title goes here";
+    _Textview_Desc.text =@"Challenge description";//@"title goes here";
     self.startScreenScrollView.scrollEnabled=NO;
     _Textview_Desc.textColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     
@@ -438,6 +438,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 
 - (void)LabelTap_publicTapped:(UITapGestureRecognizer *)recognizer
 {
+    [self.view endEditing:YES];
     challengetypeVal=@"PUBLIC";
     [_Image_Public setImage:[UIImage imageNamed:@"blueworld.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"private.png"]];
@@ -446,6 +447,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 - (void)LabelTap_privateTapped:(UITapGestureRecognizer *)recognizer
 {
+    [self.view endEditing:YES];
     challengetypeVal=@"PRIVATE";
     [_Image_Public setImage:[UIImage imageNamed:@"profile_world.png"]];
     [_Image_Private setImage:[UIImage imageNamed:@"blueprivate.png"]];
@@ -1425,7 +1427,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length !=0 && encodedImage.length !=0 && ![textView.text isEqualToString:@"title goes here"])
+    if (textView.text.length !=0 && encodedImage.length !=0 && ![textView.text isEqualToString:@"Challenge description"])
     {
         
         _Button_Create.enabled=YES;
@@ -1445,7 +1447,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     
     
-    if ([textView.text isEqualToString:@"title goes here"])
+    if ([textView.text isEqualToString:@"Challenge description"])
     {
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; //optional
@@ -1455,7 +1457,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     }
     else
     {
-        if (textView.text.length !=0 && encodedImage.length !=0 && ![textView.text isEqualToString:@"title goes here"])
+        if (textView.text.length !=0 && encodedImage.length !=0 && ![textView.text isEqualToString:@"Challenge description"])
         {
           
             _Button_Create.enabled=YES;
@@ -1477,7 +1479,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"title goes here";
+        textView.text = @"Challenge description";
         textView.textColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1];
     }
     [textView resignFirstResponder];
@@ -1780,7 +1782,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
         NSLog(@"FrameImage height size==%f",FrameImage.size.height);
         NSLog(@"FrameImage width %fze==%f",FrameImage.size.width);
-        if (_Textview_Desc.text.length !=0 && FrameImage !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
+        if (_Textview_Desc.text.length !=0 && FrameImage !=0 && ![_Textview_Desc.text isEqualToString:@"Challenge description"])
         {
             
             _Button_Create.enabled=YES;
@@ -1938,7 +1940,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
         [picker dismissViewControllerAnimated:YES completion:NULL];
         
-        if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
+        if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"Challenge description"])
         {
             
             _Button_Create.enabled=YES;
@@ -2099,7 +2101,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     }
     
     
-    if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"title goes here"])
+    if (_Textview_Desc.text.length !=0 && encodedImage.length !=0 && ![_Textview_Desc.text isEqualToString:@"Challenge description"])
     {
    _Button_Create.enabled=YES;
          [_Button_Create setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

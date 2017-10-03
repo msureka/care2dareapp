@@ -19,6 +19,7 @@
 #import "AcceptContributeDetailViewController.h"
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
+#import "UIView+RNActivityView.h"
 @interface ProfilePageDetailsViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
@@ -464,7 +465,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                                                      ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                                                      
                                                      NSLog(@"Array_AllData %@",Array_Public);
-                                                     
+                                            [self.view hideActivityViewWithAfterDelay:0];
                                                      NSLog(@"Array_AllData ResultString %@",ResultString);
   if ([ResultString isEqualToString:@"requested"])
                     {
@@ -479,11 +480,13 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
                             else
                 {
             NSLog(@" error login1 ---%ld",(long)statusCode);
+                    [self.view hideActivityViewWithAfterDelay:0];
                                                      
                                 }
                                              }
                                              else if(error)
                                              {
+                                                 [self.view hideActivityViewWithAfterDelay:0];
                                                  NSLog(@"error login2.......%@",error.description);
                                              }
                                              
@@ -920,6 +923,7 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
 if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"])
     {
         Button_SetValues.enabled=YES;
+        [self.view showActivityViewWithLabel:@"Requesting..."];
         [self ClientserverCommunicatioAddfrnd];
         
     }

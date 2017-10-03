@@ -19,7 +19,7 @@
 @interface ContactListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSString * name,*phoneNumber,*emailAddress;
-    NSMutableArray * Array_name,*Array_Email,*Array_Phone,*Array_AllData,*contactlists;
+    NSMutableArray *Array_name, * Array_name_P,*Array_name_E,*Array_Email,*Array_Phone,*Array_AllData,*contactlists;
     NSMutableArray * Array_name1,*Array_Email1,*Array_Phone1;
     CNContactStore *store;
     NSDictionary *urlplist;
@@ -41,11 +41,12 @@
     defaults=[[NSUserDefaults alloc]init];
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
     urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    Array_name=[[NSMutableArray alloc]init];
+    Array_name_P=[[NSMutableArray alloc]init];
+    Array_name_E=[[NSMutableArray alloc]init];
     Array_Email=[[NSMutableArray alloc]init];
     Array_Phone=[[NSMutableArray alloc]init];
     contactlists=[[NSMutableArray alloc]init];
-    
+    Array_Phone1=[[NSMutableArray alloc]init];
     
     Array_searchFriend1=[[NSMutableArray alloc]init];
     borderBottom_SectionView0 = [CALayer layer];
@@ -62,11 +63,100 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         
-        [self contactListData];
+        [self contactListDatass];
     });
 
     
 }
+-(void)contactListDatass
+{
+CFErrorRef * error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+addressBook = ABAddressBookCreateWithOptions(NULL, error);
+ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                         {
+                                             if (granted)
+                                             {
+                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+                                                     CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
+                                                     
+                                                     for(int i = 0; i < numberOfPeople; i++){
+                                                         ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
+                                                         
+                                                         NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+                                                         NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+                                                         NSLog(@"Name:%@ %@", firstName, lastName);
+                                                         
+                                                         ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+                                                         
+                                                         NSMutableArray *numbers = [NSMutableArray array];
+                        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+                                                             NSString *phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+                                                             [numbers addObject:phoneNumber];
+                            if ([Array_Phone containsObject:phoneNumber])
+                            {
+                                
+                            }
+                            else
+                            {
+                                [Array_name_P addObject:[NSString stringWithFormat:@"%@%@%@",firstName,@" ",lastName]];
+                                [Array_Phone addObject:phoneNumber];
+                            }
+                            
+                          
+                                                         }
+                                          
+                                                         
+                                    ABMultiValueRef phoneNumbers1 = ABRecordCopyValue(person, kABPersonEmailProperty);
+                                                         
+                                                         NSMutableArray *numbers1 = [NSMutableArray array];
+                                                         for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers1); i++) {
+                                                             NSString *phoneNumber1 = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers1, i);
+                                                             [numbers1 addObject:phoneNumber1];
+                                                             [numbers addObject:phoneNumber1];
+                                                            
+                                                             if ([Array_Email containsObject:phoneNumber1])
+                                                             {
+                                                                 
+                                                             }
+                                                             else
+                                                             {
+                                                             [Array_name_E addObject:[NSString stringWithFormat:@"%@%@%@",firstName,@" ",lastName]];
+                                                             [Array_Email addObject:phoneNumber1];
+                                                             }
+                                                         }
+                                                         
+                                                         
+                                                         NSMutableDictionary *contact = [NSMutableDictionary dictionary];
+                                                         [contact setObject:[NSString stringWithFormat:@"%@%@%@",firstName,@" ",lastName] forKey:@"name"];
+                                                         [contact setObject:numbers forKey:@"numbers"];
+                                                         [contact setObject:numbers1 forKey:@"numbers1"];
+                                                         
+                            [Array_Phone1 addObject:contact];
+                                                     }
+                NSLog(@"Array phones11===%lu",(unsigned long)Array_Phone1.count);
+                        NSLog(@"Array Name_Phonenames===%lu",(unsigned long)Array_name_P.count);
+                        NSLog(@"Array Name_Phonenumbers===%lu",(unsigned long)Array_Phone.count);
+                        NSLog(@"Array Name_Phonenames===%@",Array_name_P);
+                        NSLog(@"Array Name_Phonenumbers===%@",Array_Phone);
+                                                 
+                    NSLog(@"Array EmailIDnames===%lu",(unsigned long)Array_name_E.count);
+                    NSLog(@"Array EmailIDnames===%lu",(unsigned long)Array_Email.count);
+                    NSLog(@"Array EmailIDnames===%@",Array_name_E);
+                    NSLog(@"Array EmailIDnames===%@",Array_Email);
+                                                     
+                      [self ContactCommunication];
+                                                     
+                NSLog(@"Array phones11===%@",Array_Phone1);
+
+                                                 });
+                                                 
+                                             }
+                                             
+                                         });
+    
+  }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self subscribeToKeyboard];
@@ -157,6 +247,8 @@
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(contactPerson, kABPersonEmailProperty);
         if(ABMultiValueGetCount(eMail) > 0)
         {
+            
+            email=@"";
             email=(__bridge NSString *)ABMultiValueCopyValueAtIndex(eMail, 0);
             
         }
@@ -198,7 +290,7 @@
         
         for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++)
         {
-            
+            phonelabels=@"";
             
             phonelabels = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, i);
             
@@ -219,14 +311,18 @@
                     {
                         
                         
-                        fullName = [email stringByReplacingOccurrencesOfString:@"," withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"'" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@":" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"/" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"*" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"&" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"$" withString:@""];
-                        fullName = [email stringByReplacingOccurrencesOfString:@"#" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"," withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"'" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@":" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"*" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"&" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"$" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"#" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@"%" withString:@""];
+                        fullName = [fullName stringByReplacingOccurrencesOfString:@";" withString:@""];
+//                        fullName = [fullName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                        
                         [Array_name addObject:fullName];
                         
                         
@@ -259,7 +355,9 @@
                     email = [email stringByReplacingOccurrencesOfString:@"*" withString:@""];
                     email = [email stringByReplacingOccurrencesOfString:@"&" withString:@""];
                     email = [email stringByReplacingOccurrencesOfString:@"$" withString:@""];
-                    email = [email stringByReplacingOccurrencesOfString:@"#" withString:@""];
+                   email = [email stringByReplacingOccurrencesOfString:@"%" withString:@""];
+                    email = [email stringByReplacingOccurrencesOfString:@";" withString:@""];
+//                     email = [email stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                     
                     [Array_name addObject:fullName];
                     [Array_Email addObject:email];
@@ -578,39 +676,60 @@
         
         NSString *userid= @"userid";
         NSString *useridVal =[defaults valueForKey:@"userid"];
-        NSString *namestr= @"name";
+        NSString *namestremail= @"nameemail";
+        
         NSString *emailstr= @"email";
+     
+        NSString *namestrmobile= @"namemobile";
+       
         NSString *mobilenumber= @"mobileno";
-        NSString *namestrval,*emailstrval,*mobilenumberval,*escapedMobileNoString,*escapedEmailString,*escapedNameString;
+       
         
-        NSCharacterSet *notAllowedCharsMobile = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890,"] invertedSet];
+        NSString *NameStringEmail= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_name_E  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
-        NSCharacterSet *notAllowedCharsEmail = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,-@._"] invertedSet];
+        NSString *EmailString=(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_Email  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
-        NSCharacterSet *notAllowedCharsName = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890, "] invertedSet];
+        NSString *NameStringPhonenumber=(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_name_P  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
         
-     
-        
-        namestrval =[Array_name componentsJoinedByString:@","];;
-        
-        emailstrval=[Array_Email componentsJoinedByString:@","];;
-        
-        mobilenumberval=[Array_Phone componentsJoinedByString:@","];
-        
-        escapedMobileNoString = [[mobilenumberval  componentsSeparatedByCharactersInSet:notAllowedCharsMobile] componentsJoinedByString:@""];
-        
-        escapedEmailString = [[emailstrval  componentsSeparatedByCharactersInSet:notAllowedCharsEmail] componentsJoinedByString:@""];
-        
-     
-        escapedNameString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_name  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+        NSString *MobileNoString=(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_Phone  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));;;
         
         
+        
+        
+//        NSString *namestrval,*emailstrval,*mobilenumberval,*escapedMobileNoString,*escapedEmailString,*escapedNameString;
+//        
+//        NSCharacterSet *notAllowedCharsMobile = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890,"] invertedSet];
+//        
+//        NSCharacterSet *notAllowedCharsEmail = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890,-@._"] invertedSet];
+//        
+//        NSCharacterSet *notAllowedCharsName = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890, "] invertedSet];
+//        
+//     
+//        
+//        namestrval =[Array_name componentsJoinedByString:@","];;
+//        
+//        emailstrval=[Array_Email componentsJoinedByString:@","];;
+//        
+//        mobilenumberval=[Array_Phone componentsJoinedByString:@","];
+//        
+//        escapedMobileNoString = [[mobilenumberval  componentsSeparatedByCharactersInSet:notAllowedCharsMobile] componentsJoinedByString:@""];
+//        
+//        escapedEmailString = [[emailstrval  componentsSeparatedByCharactersInSet:notAllowedCharsEmail] componentsJoinedByString:@""];
+//        
+//     
+//        escapedNameString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef)[Array_name  componentsJoinedByString:@","],NULL,(CFStringRef)@"!*\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+//        
+//        
         
         
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[urlplist valueForKey:@"invite_contacts"]]];
         [req setHTTPMethod:@"POST"];
         
-        NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,escapedNameString,emailstr,escapedEmailString,mobilenumber,escapedMobileNoString];
+//        NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestr,escapedNameString,emailstr,escapedEmailString,mobilenumber,escapedMobileNoString];
+         NSString *str=[NSString stringWithFormat:@"%@=%@&%@=%@&%@=%@&%@=%@&%@=%@",userid,useridVal,namestremail,NameStringEmail,emailstr,EmailString,namestrmobile,NameStringPhonenumber,mobilenumber,MobileNoString];
+        
+        
+        
         
         NSData *postData = [str dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
@@ -1220,7 +1339,7 @@
                                         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
     
                                                              NSLog(@"Array_AllData %@",Array_AllData);
-    
+    NSLog(@"Array_AllDatacounters %lu",(unsigned long)Array_AllData.count);
     
                                                              NSLog(@"Array_AllData ResultString %@",ResultString);
     
