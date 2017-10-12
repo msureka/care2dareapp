@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MainnavigationViewController : UINavigationController
-
+@property(strong,nullable)NSString * Str_checkView;
 @end

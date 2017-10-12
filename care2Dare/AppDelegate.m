@@ -143,13 +143,24 @@
         [Fabric with:@[[Twitter class]]];
 
      
+        static NSString* const hasRunAppOnceKey = @"hasRunAppOnceKey";
+        NSUserDefaults* defaults1 = [NSUserDefaults standardUserDefaults];
+        if ([defaults1 boolForKey:hasRunAppOnceKey] == NO)
+        {
+            // Some code you want to run on first use...
+            NSLog(@"Firsttimmmeee");
+            MainnavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainnavigationViewController"];
+            loginController.Str_checkView=@"tutorial";
+            self.window.rootViewController=loginController;
+    
+            //[defaults1 setBool:YES forKey:hasRunAppOnceKey];
+        }
+        else
+        {
             
-        
-            
-        
-    if ([[defaults valueForKey:@"LoginView"] isEqualToString:@"yes"])
+            if ([[defaults valueForKey:@"LoginView"] isEqualToString:@"yes"])
             {
-               
+                
                 TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
                 
                 self.window.rootViewController=loginController;
@@ -159,11 +170,15 @@
                 
                 
                 MainnavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainnavigationViewController"];
-            
+                loginController.Str_checkView=@"login";
                 self.window.rootViewController=loginController;
             }
-        
+            
 
+        }
+        
+            
+   
 
         
       

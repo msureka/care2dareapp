@@ -18,6 +18,7 @@
 #import "AcceptContributeDetailViewController.h"
 #import "MHFacebookImageViewer.h"
 #import "UIImageView+MHFacebookImageViewer.h"
+#import "HelpScreenViewController.h"
 @interface ProfilepageViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     CALayer *borderBottom_topheder,*borderBottom_Public,*borderBottom_Private;
@@ -694,6 +695,15 @@ AccountSettViewController * set=[self.storyboard instantiateViewControllerWithId
   [self.navigationController pushViewController:set animated:YES];
   
  //  [self performSegueWithIdentifier:@"sa" sender:self];
+}
+
+- (IBAction)Button_HelpProfile:(id)sender
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    HelpScreenViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"HelpScreenViewController"];
+       set.Str_CloseView=@"no";
+    [self presentViewController:set animated:YES completion:nil];
 }
 
 -(void)Communication_totalraisedcount

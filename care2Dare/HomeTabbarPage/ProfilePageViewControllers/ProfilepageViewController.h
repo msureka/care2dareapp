@@ -31,6 +31,7 @@
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 
 -(IBAction)SettingButton_Action:(id)sender;
+- (IBAction)Button_HelpProfile:(id)sender;
 
 
 

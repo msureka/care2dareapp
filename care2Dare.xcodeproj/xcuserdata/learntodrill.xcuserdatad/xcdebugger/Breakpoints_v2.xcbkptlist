@@ -19,11 +19,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/ProfilepageViewController.m"
-            timestampString = "527234571.798562"
+            timestampString = "529500671.431717"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1234"
-            endingLineNumber = "1234"
+            startingLineNumber = "1244"
+            endingLineNumber = "1244"
             landmarkName = "-savepictureCommunication"
             landmarkType = "7">
          </BreakpointContent>
@@ -35,11 +35,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/ProfilepageViewController.m"
-            timestampString = "527234571.798562"
+            timestampString = "529500671.431717"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1197"
-            endingLineNumber = "1197"
+            startingLineNumber = "1207"
+            endingLineNumber = "1207"
             landmarkName = "-savepictureCommunication"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,11 +51,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/ProfilePageViewControllers/ProfilepageViewController.m"
-            timestampString = "527234571.798562"
+            timestampString = "529500671.431717"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1126"
-            endingLineNumber = "1126"
+            startingLineNumber = "1136"
+            endingLineNumber = "1136"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "7">
          </BreakpointContent>
