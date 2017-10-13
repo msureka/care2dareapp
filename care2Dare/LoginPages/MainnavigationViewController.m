@@ -7,28 +7,16 @@
 //
 
 #import "MainnavigationViewController.h"
-#import "LoginPageViewController.h"
-#import "TutorialViewController.h"
+
 @interface MainnavigationViewController ()
 
 @end
 
 @implementation MainnavigationViewController
-@synthesize Str_checkView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if([Str_checkView isEqualToString:@"tutorial"])
-    {
-        TutorialViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialViewController"];
-        [self setViewControllers:@[loginController] animated:NO];
-    }
-    else
-    {
-        
-        LoginPageViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginPageViewController"];
-        [self setViewControllers:@[loginController] animated:NO];
-       
-    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

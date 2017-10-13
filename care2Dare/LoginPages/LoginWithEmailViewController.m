@@ -18,6 +18,7 @@
 #import "HomeTabBarViewController.h"
 #import "TabNavigationViewController.h"
 #import "Firebase.h"
+#import "TutorialViewController.h"
 #define Buttonlogincolor [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 @interface LoginWithEmailViewController ()
 {
@@ -509,19 +510,37 @@
                                                          
                                                          [defaults setObject:@"EMAIL" forKey:@"SettingLogin"];
                                                          [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
-                                                         [defaults setObject:@"yes" forKey:@"LoginView"];
-                                                         [defaults synchronize];
+                                                        
                                                          
                                                          
                                                          
                                                          
                                                          [self.view hideActivityViewWithAfterDelay:0];
-                                                         TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
+                                                         static NSString* const hasRunAppOnceKey = @"hasRunAppOnceKey";
+                                                         NSUserDefaults* defaults1 = [NSUserDefaults standardUserDefaults];
+                                                         if ([defaults1 boolForKey:hasRunAppOnceKey] == NO)
+                                                         {
+                                                             // Some code you want to run on first use...
+                                                              [defaults setObject:@"no" forKey:@"LoginView"];;
+                                                             TutorialViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialViewController"];
+                                                             //loginController.Str_checkView=@"tutorial";
+                                                             [self.navigationController pushViewController:loginController animated:YES];
+                                                             
+                                                             //[defaults1 setBool:YES forKey:hasRunAppOnceKey];
+                                                         }
+                                                         else
+                                                         {
+                                                       
+                            [defaults setObject:@"yes" forKey:@"LoginView"];
+                                                            
+                                                             
+                                                             TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
+                                                             
+                                                             
+                                                             [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+                                                         }
                                                          
-                                                         //                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                                         //                        HomeTabBarViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"HomeTabBarViewController"];
-                                                         [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
-                                                         
+                                                         [defaults synchronize];
                                                      }
                                                      
                                                      
@@ -1005,15 +1024,35 @@
                                                      [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"userid"]] forKey:@"userid"];
                                                      [defaults setObject:[NSString stringWithFormat:@"%@",[[array_login objectAtIndex:0]valueForKey:@"regtype"]] forKey:@"logintype"];
                                                      
-                                                     [defaults setObject:@"yes" forKey:@"LoginView"];
-                                                     [defaults synchronize];
+                                                    
                                                      
                                                      
-                                                     TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
-                                                     
-                                                     //                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                                     //                        HomeTabBarViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"HomeTabBarViewController"];
-                                                     [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+                                                     static NSString* const hasRunAppOnceKey = @"hasRunAppOnceKey";
+                                                     NSUserDefaults* defaults1 = [NSUserDefaults standardUserDefaults];
+                                                     if ([defaults1 boolForKey:hasRunAppOnceKey] == NO)
+                                                     {
+                                                         
+                                                          [defaults setObject:@"no" forKey:@"LoginView"];
+                                                         // Some code you want to run on first use...
+                                                         NSLog(@"Firsttimmmeee");
+                                                         TutorialViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialViewController"];
+                                                         //loginController.Str_checkView=@"tutorial";
+                                                         [self.navigationController pushViewController:loginController animated:YES];
+                                                         
+                                                         //[defaults1 setBool:YES forKey:hasRunAppOnceKey];
+                                                     }
+                                                     else
+                                                     {
+                                                         TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
+                                                         
+                                                         
+                                                         [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
+                                                         
+                                        [defaults setObject:@"yes" forKey:@"LoginView"];
+                                                         
+                                                         
+                                                     }
+                                                    [defaults synchronize];
                                                      
                                                  }
                                                  

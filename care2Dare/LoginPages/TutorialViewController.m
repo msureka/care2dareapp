@@ -16,6 +16,7 @@
 {
     int indexOfPage;
     UIScrollView *scrollView;
+   
 }
 @end
 
@@ -119,6 +120,9 @@
 }
 - (IBAction)Button_getstared_Action:(id)sender
 {
+    
+    
+    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     HelpScreenViewController * set=[mainStoryboard instantiateViewControllerWithIdentifier:@"HelpScreenViewController"];

@@ -710,6 +710,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
                 
                 UIAlertAction* yesButton = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                                             {
+                                        [self.view showActivityViewWithLabel:@"Loading"];
                                                 [self DeleteAccount];
                                                 
                                                 
@@ -741,7 +742,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     
     
     
-    //   [self.view showActivityViewWithLabel:@"Loading"];
+   
     
     NSString *userid= @"userid";
     NSString *useridval =[defaults valueForKey:@"userid"];

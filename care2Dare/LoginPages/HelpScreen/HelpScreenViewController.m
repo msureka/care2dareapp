@@ -13,6 +13,7 @@
 #import "HelpViewFour.h"
 #import "HelpViewFive.h"
 #import "LoginPageViewController.h"
+#import "TabNavigationViewController.h"
 @interface HelpScreenViewController ()
 {
     HelpViewOne *view1;
@@ -20,6 +21,7 @@
     HelpViewThree *view3;
     HelpViewFour *view4;
     HelpViewFive *view5;
+    NSUserDefaults * defaults;
 }
 @end
 
@@ -27,6 +29,7 @@
 @synthesize Str_CloseView;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    defaults=[[NSUserDefaults alloc]init];
     view1 = [[[NSBundle mainBundle] loadNibNamed:@"HelpViewOne" owner:self options:nil] objectAtIndex:0];
     view2 = [[[NSBundle mainBundle] loadNibNamed:@"HelpViewTwo" owner:self options:nil]objectAtIndex:0];;
     view3 = [[[NSBundle mainBundle] loadNibNamed:@"HelpViewThree" owner:self options:nil]objectAtIndex:0];
@@ -96,13 +99,18 @@
 }
 - (IBAction)Button_donefive_Action:(id)sender
 {
+    [defaults setObject:@"yes" forKey:@"LoginView"];
+    [defaults synchronize];
     if ([Str_CloseView isEqualToString:@"yes"])
     {
         static NSString* const hasRunAppOnceKey = @"hasRunAppOnceKey";
         NSUserDefaults* defaults1 = [NSUserDefaults standardUserDefaults];
         [defaults1 setBool:YES forKey:hasRunAppOnceKey];
-        LoginPageViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginPageViewController"];
-        [self.navigationController pushViewController:loginController animated:NO];
+        TabNavigationViewController *loginController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TabNavigationViewController"];
+        
+        //                        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //                        HomeTabBarViewController *   Home_add= [mainStoryboard instantiateViewControllerWithIdentifier:@"HomeTabBarViewController"];
+        [[UIApplication sharedApplication].keyWindow setRootViewController:loginController];
     }
     else
     {

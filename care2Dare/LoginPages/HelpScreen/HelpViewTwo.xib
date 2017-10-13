@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="next4.png" translatesAutoresizingMaskIntoConstraints="NO" id="F1Z-Lt-4Wb">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="next2.png" translatesAutoresizingMaskIntoConstraints="NO" id="F1Z-Lt-4Wb">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -33,6 +33,6 @@
         </view>
     </objects>
     <resources>
-        <image name="next4.png" width="781" height="1390"/>
+        <image name="next2.png" width="781" height="1390"/>
     </resources>
 </document>
