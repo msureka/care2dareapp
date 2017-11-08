@@ -49,6 +49,7 @@
     UIImagePickerController *cameraUI;
     UIButton *Button_close;
     int remainingCounts;
+    NSString *mediaTypeCheck;
     //NSTimer *videoTimer;
 }
 //@property (nonatomic, retain) NSTimer *videoTimer;
@@ -626,24 +627,37 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 -(IBAction)ButtonGallery_Action:(id)sender
 {
     SelectGallery=@"Gal";
-    
+    strCameraVedio=@"Gal";
+   // pick from image and veio from gallery.............
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        //[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+     
         picker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
         picker.allowsEditing = NO;
         
         [self presentViewController:picker animated:true completion:nil];
     }
-    
+
+// only vedio pick from gallery..............
+//    
+//    UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
+//    videoPicker.delegate = self; // ensure you set the delegate so when a video is chosen the right method can be called
+//    
+//    videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    // This code ensures only videos are shown to the end user
+//    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
+//    
+//    videoPicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+//    [self presentViewController:videoPicker animated:YES completion:nil];
 }
 -(IBAction)ButtonCammera_Action:(id)sender
 {
     SelectGallery=@"Cam";
-    strCameraVedio=@"cam";
+    strCameraVedio=@"Cam";
     self.Button_Gallery.hidden=YES;
     self.Button_Videos.hidden=YES;
     self.Button_Cammera.hidden=YES;
@@ -1558,6 +1572,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         picker.delegate = self;
         //[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         picker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
         picker.allowsEditing = NO;
         
         [self presentViewController:picker animated:true completion:nil];
@@ -1612,9 +1627,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
              
              // [self.videoURL path]
              NSLog(@"data size path==%d",videoSize);
-             if (videoSize >=5)
+             if (videoSize >5)
              {
-                 if (videoSize<=7)
+                 if (videoSize < 8)
                  {
                      BitrateValue=@430000;
                  }
@@ -1738,10 +1753,16 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    mediaTypeCheck = [info objectForKey:UIImagePickerControllerMediaType];
+   
+    
     [_Textview_Desc resignFirstResponder];
-    if ([strCameraVedio isEqualToString:@"Record"])
+    if ([mediaTypeCheck isEqualToString:@"public.movie"])
     {
         ;
+        self.Button_Gallery.hidden=YES;
+        self.Button_Videos.hidden=YES;
+        self.Button_Cammera.hidden=YES;
         BackroundImg.hidden=NO;
         Image_Play.hidden=NO;
         
@@ -1765,8 +1786,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
       
         NSLog(@"data size==%d",videoSize);
-        
-   
+        if (videoSize <=12)
+        {
+            
         AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:self.videoURL options:nil];
         
         
@@ -1821,12 +1843,43 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         
         
-        
+        }
+        else
+        {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Over Size" message:@"Please limit your media size to less than 12mb." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                      
+                                           
+                                           strinRetake=@"";
+                                           encodedImage=@"";
+                                           strCameraVedio=@"Cam";                                                                                                                                                                                                                                                                                                                                                                                                                                                  self.videoController=nil;
+                                           _videoController.view.hidden=YES;
+                                           BackroundImg.hidden=YES;
+                                           Image_Play.hidden=YES;
+                                           self.Button_Gallery.hidden=NO;
+                                           self.Button_Videos.hidden=NO;
+                                           self.Button_Cammera.hidden=NO;
+                                           
+                                           
+        [[self navigationController] dismissViewControllerAnimated:YES completion:nil];      
+                                           
+                                       }];
+            
+            [alertController addAction:actionOk];
+            [picker presentViewController:alertController animated:YES completion:nil];
+            
+            
+            
+        }
         
         
         
     }
-    else
+    else if ([mediaTypeCheck isEqualToString:@"public.image"])
     {
         
         self.Button_Gallery.hidden=YES;
@@ -1956,6 +2009,19 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         //[self viewImgCrop];
         // [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
     }
+    else
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Unknown file type" message:@"You can only upload images or videos. Please check the media type and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                   {
+                                      
+                                   }];
+        
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
     
 
 }
@@ -2010,10 +2076,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             self.Button_Gallery.hidden=NO;
             self.Button_Videos.hidden=NO;
             self.Button_Cammera.hidden=NO;
+            self.Image_Play.hidden=YES;
         }
         else  if (buttonIndex== 1)
         {
+            if ([mediaTypeCheck isEqualToString:@"public.movie"])
+            {
+                movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoURL];
+                
+                
+                [self presentMoviePlayerViewControllerAnimated:movieController];
+                [movieController.moviePlayer prepareToPlay];
+                [movieController.moviePlayer play];
+            }
+            else
+            {
             [self displayImage:BackroundImg withImage:chosenImage];
+            }
             //    [delegate performSelector:@selector(setupImageViewer1:)];
             //            [BackroundImg setImage:chosenImage];
             //            BackroundImg.contentMode = UIViewContentModeScaleAspectFill;
