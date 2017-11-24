@@ -486,6 +486,10 @@
 		D73967151F8F8115001C470D /* step4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D73967091F8F8115001C470D /* step4@2x.png */; };
 		D73967161F8F8115001C470D /* step4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D739670A1F8F8115001C470D /* step4@3x.png */; };
 		D739671C1F8F86C2001C470D /* HelpScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D739671B1F8F86C2001C470D /* HelpScreenViewController.m */; };
+		D73A6A101FC3FD3100A984C3 /* CreateFundriserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73A6A0F1FC3FD3100A984C3 /* CreateFundriserViewController.m */; };
+		D73A6A131FC3FD5100A984C3 /* CreateFundriserOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73A6A121FC3FD5100A984C3 /* CreateFundriserOneViewController.m */; };
+		D73A6A161FC3FD6000A984C3 /* CreateFundriserTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73A6A151FC3FD6000A984C3 /* CreateFundriserTwoViewController.m */; };
+		D73A6A191FC3FD6E00A984C3 /* CreateFundriserThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D73A6A181FC3FD6E00A984C3 /* CreateFundriserThreeViewController.m */; };
 		D73AEAFE1F2C611200105F4A /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D73AEAE61F2C611200105F4A /* AFHTTPClient.m */; };
 		D73AEAFF1F2C611200105F4A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D73AEAE81F2C611200105F4A /* AFHTTPRequestOperation.m */; };
 		D73AEB001F2C611200105F4A /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D73AEAEA1F2C611200105F4A /* AFImageRequestOperation.m */; };
@@ -500,9 +504,12 @@
 		D73AEB091F2C611200105F4A /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D73AEAFB1F2C611200105F4A /* MHFacebookImageViewer.m */; };
 		D73AEB0A1F2C611200105F4A /* UIImageView+MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D73AEAFD1F2C611200105F4A /* UIImageView+MHFacebookImageViewer.m */; };
 		D73AEB6D1F2C631000105F4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D73AEB6C1F2C631000105F4A /* GoogleService-Info.plist */; };
+		D7434A751FC552FA00295F61 /* Noteworthy.ttc in Resources */ = {isa = PBXBuildFile; fileRef = D7434A741FC552FA00295F61 /* Noteworthy.ttc */; };
+		D7434A781FC5606C00295F61 /* ShareCreatechallengeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7434A771FC5606C00295F61 /* ShareCreatechallengeViewController.m */; };
 		D75F4E391F4AC497002F2195 /* greyshare.png in Resources */ = {isa = PBXBuildFile; fileRef = D75F4E361F4AC497002F2195 /* greyshare.png */; };
 		D75F4E3A1F4AC497002F2195 /* greyshare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D75F4E371F4AC497002F2195 /* greyshare@2x.png */; };
 		D75F4E3B1F4AC497002F2195 /* greyshare@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D75F4E381F4AC497002F2195 /* greyshare@3x.png */; };
+		D797553F1FC4487B0068873C /* CreateChallengerTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D797553E1FC4487B0068873C /* CreateChallengerTwoViewController.m */; };
 		D7C3BA561F1CBECE00BC05C9 /* DonationHistroyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */; };
 		D7C3EB551F29F0350014C688 /* WatchVedioScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C3EB411F29F0350014C688 /* WatchVedioScrollViewController.m */; };
 		D7CBA8B11F4C07F100DF4BEC /* activitytab.png in Resources */ = {isa = PBXBuildFile; fileRef = D7CBA8961F4C07F100DF4BEC /* activitytab.png */; };
@@ -1185,6 +1192,14 @@
 		D739670A1F8F8115001C470D /* step4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step4@3x.png"; sourceTree = "<group>"; };
 		D739671A1F8F86C2001C470D /* HelpScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreenViewController.h; sourceTree = "<group>"; };
 		D739671B1F8F86C2001C470D /* HelpScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpScreenViewController.m; sourceTree = "<group>"; };
+		D73A6A0E1FC3FD3100A984C3 /* CreateFundriserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFundriserViewController.h; sourceTree = "<group>"; };
+		D73A6A0F1FC3FD3100A984C3 /* CreateFundriserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFundriserViewController.m; sourceTree = "<group>"; };
+		D73A6A111FC3FD5100A984C3 /* CreateFundriserOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFundriserOneViewController.h; sourceTree = "<group>"; };
+		D73A6A121FC3FD5100A984C3 /* CreateFundriserOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFundriserOneViewController.m; sourceTree = "<group>"; };
+		D73A6A141FC3FD6000A984C3 /* CreateFundriserTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFundriserTwoViewController.h; sourceTree = "<group>"; };
+		D73A6A151FC3FD6000A984C3 /* CreateFundriserTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFundriserTwoViewController.m; sourceTree = "<group>"; };
+		D73A6A171FC3FD6E00A984C3 /* CreateFundriserThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFundriserThreeViewController.h; sourceTree = "<group>"; };
+		D73A6A181FC3FD6E00A984C3 /* CreateFundriserThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFundriserThreeViewController.m; sourceTree = "<group>"; };
 		D73AEAE51F2C611200105F4A /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		D73AEAE61F2C611200105F4A /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		D73AEAE71F2C611200105F4A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -1211,9 +1226,14 @@
 		D73AEAFC1F2C611200105F4A /* UIImageView+MHFacebookImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MHFacebookImageViewer.h"; sourceTree = "<group>"; };
 		D73AEAFD1F2C611200105F4A /* UIImageView+MHFacebookImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MHFacebookImageViewer.m"; sourceTree = "<group>"; };
 		D73AEB6C1F2C631000105F4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D7434A741FC552FA00295F61 /* Noteworthy.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Noteworthy.ttc; sourceTree = "<group>"; };
+		D7434A761FC5606C00295F61 /* ShareCreatechallengeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareCreatechallengeViewController.h; sourceTree = "<group>"; };
+		D7434A771FC5606C00295F61 /* ShareCreatechallengeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCreatechallengeViewController.m; sourceTree = "<group>"; };
 		D75F4E361F4AC497002F2195 /* greyshare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyshare.png; sourceTree = "<group>"; };
 		D75F4E371F4AC497002F2195 /* greyshare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyshare@2x.png"; sourceTree = "<group>"; };
 		D75F4E381F4AC497002F2195 /* greyshare@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyshare@3x.png"; sourceTree = "<group>"; };
+		D797553D1FC4487B0068873C /* CreateChallengerTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChallengerTwoViewController.h; sourceTree = "<group>"; };
+		D797553E1FC4487B0068873C /* CreateChallengerTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChallengerTwoViewController.m; sourceTree = "<group>"; };
 		D7C3BA541F1CBECE00BC05C9 /* DonationHistroyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationHistroyViewController.h; sourceTree = "<group>"; };
 		D7C3BA551F1CBECE00BC05C9 /* DonationHistroyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationHistroyViewController.m; sourceTree = "<group>"; };
 		D7C3EB401F29F0350014C688 /* WatchVedioScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchVedioScrollViewController.h; sourceTree = "<group>"; };
@@ -2054,6 +2074,18 @@
 				9AA9B51D1E6FE82B00C6EF37 /* CreateNewChallengesViewController.m */,
 				9AA25EE11EB1EF3500B6DF45 /* SDAVAssetExportSession.h */,
 				9AA25EE21EB1EF3500B6DF45 /* SDAVAssetExportSession.m */,
+				D73A6A0E1FC3FD3100A984C3 /* CreateFundriserViewController.h */,
+				D73A6A0F1FC3FD3100A984C3 /* CreateFundriserViewController.m */,
+				D73A6A111FC3FD5100A984C3 /* CreateFundriserOneViewController.h */,
+				D73A6A121FC3FD5100A984C3 /* CreateFundriserOneViewController.m */,
+				D73A6A141FC3FD6000A984C3 /* CreateFundriserTwoViewController.h */,
+				D73A6A151FC3FD6000A984C3 /* CreateFundriserTwoViewController.m */,
+				D73A6A171FC3FD6E00A984C3 /* CreateFundriserThreeViewController.h */,
+				D73A6A181FC3FD6E00A984C3 /* CreateFundriserThreeViewController.m */,
+				D797553D1FC4487B0068873C /* CreateChallengerTwoViewController.h */,
+				D797553E1FC4487B0068873C /* CreateChallengerTwoViewController.m */,
+				D7434A761FC5606C00295F61 /* ShareCreatechallengeViewController.h */,
+				D7434A771FC5606C00295F61 /* ShareCreatechallengeViewController.m */,
 			);
 			path = CreateChallenges;
 			sourceTree = "<group>";
@@ -2165,6 +2197,7 @@
 		9ABB5D9C1E693EA300482105 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D7434A741FC552FA00295F61 /* Noteworthy.ttc */,
 				9ABB5D9D1E693EA300482105 /* SanFranciscoDisplay-Bold.otf */,
 				9ABB5D9E1E693EA300482105 /* SanFranciscoDisplay-Light.otf */,
 				9ABB5D9F1E693EA300482105 /* SanFranciscoDisplay-Medium.otf */,
@@ -3105,6 +3138,7 @@
 				D73966C01F8F7C6B001C470D /* next5@3x.png in Resources */,
 				D73967161F8F8115001C470D /* step4@3x.png in Resources */,
 				9A6E39FE1E7ABA6700B4AD5B /* raised_hand@2x.png in Resources */,
+				D7434A751FC552FA00295F61 /* Noteworthy.ttc in Resources */,
 				D7E49CBC1F0E141100D87218 /* icons8-Email Filled-100.png in Resources */,
 				9A0605B61E6D66D900FF4229 /* profile_world@2x.png in Resources */,
 				D739670F1F8F8115001C470D /* step2@2x.png in Resources */,
@@ -3395,6 +3429,7 @@
 				9AA66E0E1EC334E000DA5662 /* MDpieView1.m in Sources */,
 				9A0605CE1E6D6D4200FF4229 /* PublicTableViewCell.m in Sources */,
 				D7EE2F621F2B02CA00E2E219 /* SDImageCacheConfig.m in Sources */,
+				D73A6A131FC3FD5100A984C3 /* CreateFundriserOneViewController.m in Sources */,
 				D7C3EB551F29F0350014C688 /* WatchVedioScrollViewController.m in Sources */,
 				9A19B3B01E6E803000262BC1 /* AccountSettViewController.m in Sources */,
 				9AA9B5021E6FCAD600C6EF37 /* PrivateChallengesTableViewCell.m in Sources */,
@@ -3402,6 +3437,7 @@
 				D7EE2F7B1F2B041400E2E219 /* FLAnimatedImageView.m in Sources */,
 				D73966F11F8F7CAB001C470D /* HelpViewOne.m in Sources */,
 				9A2F08101ECC108600C46DF9 /* ContactListViewController.m in Sources */,
+				D797553F1FC4487B0068873C /* CreateChallengerTwoViewController.m in Sources */,
 				9ABB5DAA1E693EF500482105 /* LoginPageViewController.m in Sources */,
 				9AA645CF1E7BECAA00E49B65 /* RaisedoneTableViewCell.m in Sources */,
 				9AF84EFE1E8FAA6D0008408E /* AcceptContributeDetailViewController.m in Sources */,
@@ -3436,6 +3472,7 @@
 				9A25031F1ECC48B400402839 /* FacebookListViewController.m in Sources */,
 				D7EE2F681F2B02CA00E2E219 /* UIImage+MultiFormat.m in Sources */,
 				9AED228C1E6AE27B0004A8D0 /* SBJsonTokeniser.m in Sources */,
+				D7434A781FC5606C00295F61 /* ShareCreatechallengeViewController.m in Sources */,
 				9A2F08171ECC12E300C46DF9 /* ContactTableViewCell.m in Sources */,
 				9A19B4041E6ECA6400262BC1 /* MainnavigationViewController.m in Sources */,
 				9AA9B5091E6FDCE500C6EF37 /* PledgeOutoingTableViewCell.m in Sources */,
@@ -3469,6 +3506,7 @@
 				9AA645D21E7BECBF00E49B65 /* RaisedTwoTableViewCell.m in Sources */,
 				9AA9B51B1E6FE81400C6EF37 /* CreateChallengesPageViewController.m in Sources */,
 				9AA66E081EC3159800DA5662 /* MDPieView.m in Sources */,
+				D73A6A161FC3FD6000A984C3 /* CreateFundriserTwoViewController.m in Sources */,
 				D7EE2F701F2B02CA00E2E219 /* UIView+WebCache.m in Sources */,
 				D73AEAFE1F2C611200105F4A /* AFHTTPClient.m in Sources */,
 				9A64C87C1E7137E5008115FF /* LCNContactViewStyle.m in Sources */,
@@ -3483,6 +3521,7 @@
 				D73966FB1F8F7CAB001C470D /* IntroViewThree.m in Sources */,
 				D7E185B41F220D650001995E /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				D73AEB011F2C611200105F4A /* AFJSONRequestOperation.m in Sources */,
+				D73A6A191FC3FD6E00A984C3 /* CreateFundriserThreeViewController.m in Sources */,
 				9AED228B1E6AE27B0004A8D0 /* SBJsonStreamWriterState.m in Sources */,
 				D73966ED1F8F7CAB001C470D /* HelpViewFive.m in Sources */,
 				D73AEB051F2C611200105F4A /* AFXMLRequestOperation.m in Sources */,
@@ -3535,6 +3574,7 @@
 				9AED22871E6AE27B0004A8D0 /* SBJsonStreamParserAdapter.m in Sources */,
 				9A0605DF1E6D824300FF4229 /* FavoritePageViewController.m in Sources */,
 				9A822FD31ED5974D001149DC /* ChangePasswordViewController.m in Sources */,
+				D73A6A101FC3FD3100A984C3 /* CreateFundriserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

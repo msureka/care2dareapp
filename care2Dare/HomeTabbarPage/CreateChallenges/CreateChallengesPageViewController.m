@@ -7,6 +7,9 @@
 //
 
 #import "CreateChallengesPageViewController.h"
+
+#import "CreateFundriserViewController.h"
+
 #import "CreateNewChallengesViewController.h"
 #import "CreateChallengesViewController.h"
 @interface CreateChallengesPageViewController ()<UITabBarControllerDelegate,UITabBarDelegate>

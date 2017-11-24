@@ -40,7 +40,7 @@
     //    [self.view bringSubviewToFront:Button_Skip];
     
     PageControl.currentPage=0;
-   
+    
     indexOfPage=0;
     IntroViewOne *view1 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewOne" owner:self options:nil] objectAtIndex:0];
     IntroViewTwo *view2 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewTwo" owner:self options:nil]objectAtIndex:0];;
@@ -83,6 +83,65 @@
     [scrollView setShowsHorizontalScrollIndicator:NO];
     [scrollView setShowsVerticalScrollIndicator:NO];
 }
+//{
+//    [super viewDidLoad];
+//    
+//    scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    [self.view addSubview:scrollView];
+//    scrollView.delegate=self;
+//    scrollView.bounces=NO;
+//    [scrollView setShowsHorizontalScrollIndicator:NO];
+//    [scrollView setShowsVerticalScrollIndicator:NO];
+//    [self.view bringSubviewToFront:PageControl];
+//    [self.view bringSubviewToFront:Button_next2];
+//    [self.view bringSubviewToFront:Button_next1];
+//    scrollView.pagingEnabled=YES;
+//    //    [self.view bringSubviewToFront:Button_Skip];
+//    
+//    PageControl.currentPage=0;
+//   
+//    indexOfPage=0;
+//    IntroViewOne *view1 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewOne" owner:self options:nil] objectAtIndex:0];
+//    IntroViewTwo *view2 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewTwo" owner:self options:nil]objectAtIndex:0];;
+//    IntroViewThree *view3 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewThree" owner:self options:nil]objectAtIndex:0];
+//    IntroViewFour *view4 = [[[NSBundle mainBundle] loadNibNamed:@"IntroViewFour" owner:self options:nil]objectAtIndex:0];
+//    
+//    [view1 setFrame:CGRectMake(0, 0, self.view.frame.size.width, scrollView.frame.size.height)];
+//    [view2 setFrame:CGRectMake(0, 0, self.view.frame.size.width, scrollView.frame.size.height)];
+//    [view3 setFrame:CGRectMake(0, 0, self.view.frame.size.width, scrollView.frame.size.height)];
+//    [view4 setFrame:CGRectMake(0, 0, self.view.frame.size.width, scrollView.frame.size.height)];
+//    
+//    view4.Button_getstared.layer.cornerRadius=view4.Button_getstared.frame.size.height/2;
+//    [view4.Button_getstared addTarget:self action:@selector(Button_getstared_Action:) forControlEvents:UIControlEventTouchUpInside];
+//    CGRect frame;
+//    frame = view1.frame;
+//    frame.origin.x = 0;
+//    view1.frame = frame;
+//    
+//    frame = view2.frame;
+//    frame.origin.x = view1.frame.size.width + view1.frame.origin.x ;
+//    view2.frame = frame;
+//    
+//    frame = view3.frame;
+//    frame.origin.x = view2.frame.size.width + view2.frame.origin.x;
+//    view3.frame = frame;
+//    
+//    frame = view4.frame;
+//    frame.origin.x = view3.frame.size.width + view3.frame.origin.x;
+//    view4.frame = frame;
+//    
+//    [scrollView addSubview:view1];
+//    [scrollView addSubview:view2];
+//    [scrollView addSubview:view3];
+//    [scrollView addSubview:view4];
+//    // [self.view bringSubviewToFront:PageControl];
+//    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*4, scrollView.frame.size.height);
+//    //    UIImageView *verticalIndicator = ((UIImageView *)[scrollView.subviews objectAtIndex:0]);
+//    //    //set color to vertical indicator
+//    //    [verticalIndicator setHidden:YES];
+//    [scrollView setShowsHorizontalScrollIndicator:NO];
+//    [scrollView setShowsVerticalScrollIndicator:NO];
+//}
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
 {
     
