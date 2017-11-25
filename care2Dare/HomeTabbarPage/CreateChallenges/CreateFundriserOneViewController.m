@@ -47,7 +47,7 @@
 @end
 
 @implementation CreateFundriserOneViewController
-@synthesize Button_Dot3,Button_Dot2,Button_Dot1,Button_next,Label_placeholder,TextView_Description,BackroundImg,Button_Videos,Button_Cammera,Button_Gallery,Image_Play,Dict_values1,Label_Heding;
+@synthesize Button_Dot3,Button_Dot2,Button_Dot1,Button_next,Label_placeholder,TextView_Description,BackroundImg,Button_Videos,Button_Cammera,Button_Gallery,Image_Play,Dict_values1,Label_Heding,Button_nexttop;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,6 +60,9 @@
     Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
     Button_next.layer.borderWidth=1.0f;
     Button_next.enabled=NO;
+    
+     Button_nexttop.layer.cornerRadius=Button_nexttop.frame.size.height/2;
+    Button_nexttop.hidden=YES;
     TextView_Description.text=@"";
     if ([[Dict_values1 valueForKey:@"challengetype"] isEqualToString:@"RAISE"])
     {
@@ -156,22 +159,26 @@
     if (TextView_Description.text.length==0)
     {
         Label_placeholder.hidden=NO;
+       
         
     }
     else
     {
         Label_placeholder.hidden=YES;
+        
     }
     
     if (TextView_Description.text.length==0 || encodedImage.length==0)
     {
         Button_next.enabled=NO;
+         Button_nexttop.hidden=YES;
         [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
         Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
     }
     else
     {
          Button_next.enabled=YES;
+        Button_nexttop.hidden=NO;
         [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
         Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
     }
@@ -435,12 +442,14 @@
                      if (TextView_Description.text.length==0 || encodedImage.length==0)
                      {
                          Button_next.enabled=NO;
+                           Button_nexttop.hidden=YES;
                          [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
                          Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
                      }
                      else
                      {
                          Button_next.enabled=YES;
+                           Button_nexttop.hidden=NO;
                          [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
                          Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
                      }
@@ -747,12 +756,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         if (TextView_Description.text.length==0 || encodedImage.length==0)
         {
             Button_next.enabled=NO;
+              Button_nexttop.hidden=YES;
             [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
             Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
         }
         else
         {
             Button_next.enabled=YES;
+              Button_nexttop.hidden=NO;
             [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
             Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
         }
@@ -825,12 +836,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             if (TextView_Description.text.length==0 || encodedImage.length==0)
             {
                 Button_next.enabled=NO;
+                Button_nexttop.hidden=YES;
                 [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
             }
             else
             {
                 Button_next.enabled=YES;
+                Button_nexttop.hidden=NO;
                 [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
             }
@@ -877,12 +890,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             if (TextView_Description.text.length==0 || encodedImage.length==0)
             {
                 Button_next.enabled=NO;
+                  Button_nexttop.hidden=YES;
                 [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
             }
             else
             {
                 Button_next.enabled=YES;
+                  Button_nexttop.hidden=NO;
                 [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
             }
@@ -923,12 +938,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             if (TextView_Description.text.length==0 || encodedImage.length==0)
             {
                 Button_next.enabled=NO;
+                  Button_nexttop.hidden=YES;
                 [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1].CGColor;
             }
             else
             {
                 Button_next.enabled=YES;
+                  Button_nexttop.hidden=NO;
                 [Button_next setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
                 Button_next.layer.borderColor=[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1].CGColor;
             }

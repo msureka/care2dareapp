@@ -14,6 +14,7 @@
 #import "LCNContactPickerView.h"
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "ProfileFriendsViewController.h"
 @interface InviteSprintTagUserViewController ()<LCNContactPickerViewDelegate>
 
 {
@@ -77,7 +78,11 @@ string_Keyboardload=@"no";
     NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"UrlName" ofType:@"plist"];
   urlplist = [NSDictionary dictionaryWithContentsOfFile:plistPath];
    [self Communication_Invite_user];
-    [self Communication_SuggestedFriends];
+    
+    
+  [self Communication_SuggestedFriends];
+    
+    
     NSLog(@"Mewwwwww=%@",_Names_UserId);
    
   
@@ -370,7 +375,7 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         Label1.backgroundColor=[UIColor clearColor];
         Label1.textColor=[UIColor lightGrayColor];
         Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:16.0f];
-        Label1.text=@"Suggested";
+        Label1.text=@"Friends";
         [sectionView addSubview:Label1];
         sectionView.tag=section;
         
@@ -608,9 +613,41 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         ResultString_Recomm_getUser = [ResultString_Recomm_getUser stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         ResultString_Recomm_getUser = [ResultString_Recomm_getUser stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         
-        NSLog(@"Array_Reomm_GetUser== %@",Array_Reomm_GetUser);
-        NSLog(@"ResultString_Recomm_getUser %@",ResultString_Recomm_getUser);
+     
+        NSString * ResultString=[[NSString alloc]initWithData:webData_Recomm_GetUser encoding:NSUTF8StringEncoding];
         
+        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+        
+        if (Array_Reomm_GetUser.count !=0)
+        {
+            
+        }
+       
+        if ([ResultString isEqualToString:@"nofriends"])
+        {
+         
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No friends" message:@"You do not have any friends to challenge yet. You can create a fundraiser instead.\n\nDo you wish to Invite some friends now?" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                       {
+                                           ProfileFriendsViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileFriendsViewController"];
+                                           set.Str_newview=@"yes";
+                                           [self.navigationController pushViewController:set animated:YES];
+                                           
+               
+                                       }];
+            [alertController addAction:actionOk];
+            UIAlertAction *Inviteb = [UIAlertAction actionWithTitle:@"No"  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                      {
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
+                                      }];
+            [alertController addAction:Inviteb];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
+        }
         
       
         

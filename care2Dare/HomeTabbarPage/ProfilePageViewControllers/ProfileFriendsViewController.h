@@ -24,6 +24,7 @@
 @property(nonatomic,strong)FriendAddReqTableViewCell * cell_addreq;
 @property (nonatomic, retain) UIRefreshControl *refreshControl;
 @property(nonatomic,weak)NSString *Str_profiletypr;
+@property(nonatomic,weak)NSString *Str_newview;
 -(IBAction)ButtonBack_Action:(id)sender;
 -(IBAction)ButtonSearch_Action:(id)sender;
 @end

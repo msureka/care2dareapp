@@ -86,5 +86,13 @@
 	<string>http://www.care2dareapp.com/app/savesettings.php</string>
 	<key>markcomplete</key>
 	<string>http://www.care2dareapp.com/app/markcomplete.php</string>
+	<key>listallusers</key>
+	<string>http://www.care2dareapp.com/app/listallusers.php</string>
+	<key>New item - 2</key>
+	<string></string>
+	<key>New item - 3</key>
+	<string></string>
+	<key>New item - 4</key>
+	<string></string>
 </dict>
 </plist>

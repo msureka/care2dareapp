@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *Button_next;
 @property (weak, nonatomic) IBOutlet UILabel *Label_Heding;
 - (IBAction)Button_Next_Action:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *Button_nexttop;
 
 @property(nonatomic,weak)IBOutlet UIButton * Button_Dot1;
 @property(nonatomic,weak)IBOutlet UIButton * Button_Dot2;

@@ -417,7 +417,6 @@
 		D73962801F8F2B62001C470D /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D739625B1F8F2B62001C470D /* FirebaseAuth.framework */; };
 		D73962811F8F2B62001C470D /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D739625C1F8F2B62001C470D /* GTMSessionFetcher.framework */; };
 		D73962821F8F2B62001C470D /* batch-upload in Resources */ = {isa = PBXBuildFile; fileRef = D739625E1F8F2B62001C470D /* batch-upload */; };
-		D73962831F8F2B62001C470D /* dump_syms in Resources */ = {isa = PBXBuildFile; fileRef = D739625F1F8F2B62001C470D /* dump_syms */; };
 		D73962841F8F2B62001C470D /* extract-keys in Resources */ = {isa = PBXBuildFile; fileRef = D73962601F8F2B62001C470D /* extract-keys */; };
 		D73962851F8F2B62001C470D /* FirebaseCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73962611F8F2B62001C470D /* FirebaseCrash.framework */; };
 		D73962861F8F2B62001C470D /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73962621F8F2B62001C470D /* Protobuf.framework */; };
@@ -546,6 +545,7 @@
 		D7E49CB91F0E140600D87218 /* c2dlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */; };
 		D7E49CBA1F0E140600D87218 /* c2dlogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */; };
 		D7E49CBC1F0E141100D87218 /* icons8-Email Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */; };
+		D7E4F9381FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E4F9371FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.m */; };
 		D7EE2F5E1F2B02CA00E2E219 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EE2F351F2B02CA00E2E219 /* SDWebImageCompat.m */; };
 		D7EE2F5F1F2B02CA00E2E219 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EE2F381F2B02CA00E2E219 /* SDWebImageDownloader.m */; };
 		D7EE2F601F2B02CA00E2E219 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EE2F3A1F2B02CA00E2E219 /* SDWebImageDownloaderOperation.m */; };
@@ -1276,6 +1276,8 @@
 		D7E49CB61F0E140600D87218 /* c2dlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@2x.png"; sourceTree = "<group>"; };
 		D7E49CB71F0E140600D87218 /* c2dlogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "c2dlogo@3x.png"; sourceTree = "<group>"; };
 		D7E49CBB1F0E141100D87218 /* icons8-Email Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Email Filled-100.png"; sourceTree = "<group>"; };
+		D7E4F9361FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileFriendasAlluserTableViewCell.h; sourceTree = "<group>"; };
+		D7E4F9371FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileFriendasAlluserTableViewCell.m; sourceTree = "<group>"; };
 		D7EE2F341F2B02CA00E2E219 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
 		D7EE2F351F2B02CA00E2E219 /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
 		D7EE2F361F2B02CA00E2E219 /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
@@ -1459,6 +1461,8 @@
 				9AF310841EC07F09005CD485 /* FriendAddsuggTableViewCell.m */,
 				9A73CF631E6FBFDB00613682 /* ChallengesTableViewCell.h */,
 				9A73CF641E6FBFDB00613682 /* ChallengesTableViewCell.m */,
+				D7E4F9361FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.h */,
+				D7E4F9371FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.m */,
 			);
 			path = ProfilePageViewControllers;
 			sourceTree = "<group>";
@@ -3050,7 +3054,6 @@
 				D73966F61F8F7CAB001C470D /* HelpViewTwo.xib in Resources */,
 				9ABB5D711E69335600482105 /* LaunchScreen.storyboard in Resources */,
 				D73966C21F8F7C6B001C470D /* next1@2x.png in Resources */,
-				D73962831F8F2B62001C470D /* dump_syms in Resources */,
 				9A0605B11E6D66D900FF4229 /* profile_arrow@3x.png in Resources */,
 				D73AEB6D1F2C631000105F4A /* GoogleService-Info.plist in Resources */,
 				9AD690AA1EBDD47E00A7A774 /* sharebutton@2x.png in Resources */,
@@ -3558,6 +3561,7 @@
 				9A19B4231E6EDC4100262BC1 /* ProfileChallengesViewController.m in Sources */,
 				D73962901F8F2B62001C470D /* README.md in Sources */,
 				9A6E39C61E7A650D00B4AD5B /* TwoDetailsTableViewCell.m in Sources */,
+				D7E4F9381FC95EAC002B054D /* ProfileFriendasAlluserTableViewCell.m in Sources */,
 				9AED22851E6AE27B0004A8D0 /* SBJsonStreamParser.m in Sources */,
 				9A6E39C31E7A64ED00B4AD5B /* OneImageVedioTableViewCell.m in Sources */,
 				9AED22831E6AE27B0004A8D0 /* NSObject+SBJson.m in Sources */,
