@@ -419,38 +419,39 @@
                  if (IntBitcounts>=3)
                  {
                      IntBitcounts=1;
-                     strinRetake=@"";
-                     encodedImage=@"";
-                     strCameraVedio=@"Cam";                                                                                                                                                                                                                                                                                                                                                                                                                                                  self.videoController=nil;
-                     _videoController.view.hidden=YES;
-                     BackroundImg.hidden=YES;
-                     Image_Play.hidden=YES;
-                     self.Button_Gallery.hidden=NO;
-                     self.Button_Videos.hidden=NO;
-                     self.Button_Cammera.hidden=NO;
+                   
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+                         
+                         strinRetake=@"";
+                         encodedImage=@"";
+                         strCameraVedio=@"";                                                                                                                                                                                                                                                                                                                                                                                                                                                  self.videoController=nil;
+                         self.videoURL=nil;
+                         _videoController.view.hidden=YES;
+                         BackroundImg.hidden=YES;
+                         Image_Play.hidden=YES;
+                         self.Button_Gallery.hidden=NO;
+                         self.Button_Videos.hidden=NO;
+                         self.Button_Cammera.hidden=NO;
+                         
+                         
+                                             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Over Size" message:@"We could not process this video due to file size limit. Please choose another media and try again." preferredStyle:UIAlertControllerStyleAlert];
+                         
+                                                          UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                                                             style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                                                                     {
+                         
+                         
+                                                                                     }];
+                         
+                                                          [alertController addAction:actionOk];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                         
+                     });
                      
-                      [pcker1 dismissViewControllerAnimated:YES completion:NULL];
-                     
-                     
-                     
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Over Size" message:@"We could not process this video due to file size limit. Please choose another media and try again." preferredStyle:UIAlertControllerStyleAlert];
-                     
-                                 UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
-                                                                                    style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                                            {
-                     
-                     
-                                                               
-                     
-                     
-//                            [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
-                     
-                                                            }];
-                     
-                                 [alertController addAction:actionOk];
-                                 [self presentViewController:alertController animated:YES completion:nil];
-                     
-                     
+                   
+
+                
                      
                      
                      

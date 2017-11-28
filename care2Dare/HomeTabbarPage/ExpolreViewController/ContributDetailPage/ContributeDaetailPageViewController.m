@@ -3440,8 +3440,21 @@ return  sectionView;
 }
 -(IBAction)Share_Action:(id)sender
 {
-    NSString * texttoshare=[NSString stringWithFormat:@"%@%@",[[AllArrayData objectAtIndex:0] valueForKey:@"usersname"],@" has posted a new challenge. Download the app now - http://www.care2dareapp.com or View the challenge here: "];
+   // NSString * texttoshare=[NSString stringWithFormat:@"%@%@",[[AllArrayData objectAtIndex:0] valueForKey:@"usersname"],@" has posted a new challenge. Download the app now - http://www.care2dareapp.com or View the challenge here: "];
+    NSString *str_Challenge_Status;
+    if ([[[AllArrayData objectAtIndex:0] valueForKey:@"contributiontype"] isEqualToString:@"RAISE"])
+    {
+        str_Challenge_Status=@"fundraiser";
+    }
+    else
+    {
+        str_Challenge_Status=@"challenge";
+    }
    
+      NSString * texttoshare=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@",@"Hey,\n\nYour friend - ",[[AllArrayData objectAtIndex:0] valueForKey:@"usersname"],@" has posted a new ",str_Challenge_Status,@" on Care2Dare App!\n\nTitle: ",[[AllArrayData objectAtIndex:0]valueForKey:@"title"],@"\n\nMedia: ",[[AllArrayData objectAtIndex:0]valueForKey:@"mediaurl"],@"\n\nTo contribute to this ",str_Challenge_Status,@" download the app now - http://www.care2dareapp.com!\n\nThanks!"];
+    
+    
+    
     NSURL * urltoshare=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"mediaurl"]]];
     NSArray *activityItems1=@[texttoshare,urltoshare];
     NSArray *activityItems =@[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks];

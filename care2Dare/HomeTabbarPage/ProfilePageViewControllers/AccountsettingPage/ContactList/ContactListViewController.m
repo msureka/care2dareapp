@@ -1442,7 +1442,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
             [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
             
             [mailCont setSubject:@"Download Care2Dare"];
-            [mailCont setMessageBody:@"Hey, \n\n Care2Dare is a great app to Challenge your friends to a dare, or for raising money for completing a specific challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
+            [mailCont setMessageBody:@"Hey, \n\nDownload Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns.\n\nVisit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
             
             [self presentViewController:mailCont animated:YES completion:nil];
             
@@ -1464,7 +1464,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
             
             
             
-            messageController.body = @"Challenge your friends to a dare, or raise money for completing a challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
+            messageController.body = @"Download Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns.\n\nVisit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
             
             dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
                 [self presentViewController:messageController animated:YES completion:NULL];
@@ -1515,7 +1515,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
             [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:(long)actionSheet.tag]valueForKey:@"friendemail"]]];
             
             [mailCont setSubject:@"Download Care2Dare"];
-            [mailCont setMessageBody:@"Hey, \n\n Care2Dare is a great app to Challenge your friends to a dare, or for raising money for completing a specific challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
+            [mailCont setMessageBody:@"Hey, \n\nDownload Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns.\n\nVisit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause! \n\n Thanks!" isHTML:NO];
             
             [self presentViewController:mailCont animated:YES completion:nil];
             
@@ -1535,7 +1535,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
             
             
             
-            messageController.body = @"Challenge your friends to a dare, or raise money for completing a challenge! Use this money to donate it to your favourite Charity.\n\n Visit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
+            messageController.body = @"Download Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns.\n\nVisit http://www.care2dareapp.com to download it on your mobile phone and start contributing to the social cause!"; // Set initial text to example message
             
             dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
                 [self presentViewController:messageController animated:YES completion:NULL];
@@ -1567,7 +1567,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
         mailCont.mailComposeDelegate = self;
         [mailCont setToRecipients:[NSArray arrayWithObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendemail"]]];
         [mailCont setSubject:@"Download care2dare"];
-        [mailCont setMessageBody:@"Hey,\n\nChallenge your friends to a dare and help contribute to the society! \n\nVisit http://www.care2dare.com to download it on your mobile phone!\n\nThanks!" isHTML:NO];
+        [mailCont setMessageBody:@"Hey,\n\nDownload Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns. \n\nVisit http://www.care2dare.com to download it on your mobile phone!\n\nThanks!" isHTML:NO];
         [self presentViewController:mailCont animated:YES completion:nil];
         
     }
@@ -1584,7 +1584,7 @@ ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef
         [recipients addObject:[[ArryMerge_twitterlistSection1 objectAtIndex:sender.tag]valueForKey:@"friendmobileno"]]; // Append example phone number to array
         messageController.recipients = recipients; // Set the recipients of the message to the created array
         
-        messageController.body = @"Challenge your friends to a dare and help contribute to the society! Visit http://www.care2dare.com to download it on your mobile phone!"; // Set initial text to example message
+        messageController.body = @"Download Care2Dare to Raise money for charities. Challenge your friends to a dare, donate or raise money for campaigns.\n\nVisit http://www.care2dare.com to download it on your mobile phone!"; // Set initial text to example message
         
         dispatch_async(dispatch_get_main_queue(), ^{ // Present VC when possible
             [self presentViewController:messageController animated:YES completion:NULL];
