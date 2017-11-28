@@ -3455,8 +3455,8 @@ return  sectionView;
     
     
     
-    NSURL * urltoshare=[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[AllArrayData objectAtIndex:0] valueForKey:@"mediaurl"]]];
-    NSArray *activityItems1=@[texttoshare,urltoshare];
+    
+    NSArray *activityItems1=@[texttoshare];
     NSArray *activityItems =@[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList,UIActivityTypeOpenInIBooks];
     UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems1 applicationActivities:nil];
     activityViewControntroller.excludedActivityTypes = activityItems;
