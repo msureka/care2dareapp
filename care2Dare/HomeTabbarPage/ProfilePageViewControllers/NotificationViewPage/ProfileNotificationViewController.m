@@ -1301,6 +1301,11 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 
                 
             }
+            
+         
+            
+            
+            
             if (Array_IcomingPlg.count-1==indexPath.row)
             {
                 Bottomborder_Cell2 = [CALayer layer];
@@ -1316,7 +1321,8 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 [cell_PlegeIncoNoti.layer addSublayer:Bottomborder_Cell2];
             }
             
-          
+        
+            
             
             if ([ResultString_Contribute isEqualToString:@"nonotifications"] || Array_IcomingPlg.count==0)
             {
@@ -1430,7 +1436,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 
             }
 
-            
+            [cell_PlegeOutNoti.image_profile setFrame:CGRectMake(cell_PlegeOutNoti.image_profile.frame.origin.x, cell_PlegeOutNoti.image_profile.frame.origin.y, cell_PlegeOutNoti.image_profile.frame.size.height, cell_PlegeOutNoti.image_profile.frame.size.height)];
             if (Array_OutgoingPlg.count-1==indexPath.row)
             {
                 Bottomborder_Cell2 = [CALayer layer];

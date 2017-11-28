@@ -104,7 +104,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "4491"
             endingLineNumber = "4491"
-            landmarkName = "@implementation ContributeDaetailPageViewController"
+            landmarkName = "ContributeDaetailPageViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,6 +185,22 @@
             startingLineNumber = "369"
             endingLineNumber = "369"
             landmarkName = "-removeAllContact"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
+            timestampString = "533557151.419828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "-RecordingVediosImagepicker"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

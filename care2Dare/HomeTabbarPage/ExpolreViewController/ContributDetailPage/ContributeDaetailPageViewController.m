@@ -423,9 +423,8 @@ Str_Tapped_Comments_Vedio=@"Vedio";
     
     transparancyTuchView.hidden=YES;
     
-    BitrateValue=@750000;
+    BitrateValue=@700000;
    
-    
     
 }
 
