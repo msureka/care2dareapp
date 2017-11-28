@@ -419,32 +419,36 @@
                  if (IntBitcounts>=3)
                  {
                      IntBitcounts=1;
-                    
+                     strinRetake=@"";
+                     encodedImage=@"";
+                     strCameraVedio=@"Cam";                                                                                                                                                                                                                                                                                                                                                                                                                                                  self.videoController=nil;
+                     _videoController.view.hidden=YES;
+                     BackroundImg.hidden=YES;
+                     Image_Play.hidden=YES;
+                     self.Button_Gallery.hidden=NO;
+                     self.Button_Videos.hidden=NO;
+                     self.Button_Cammera.hidden=NO;
                      
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Over Size" message:@"Please limit your media size to less than 12mb." preferredStyle:UIAlertControllerStyleAlert];
+                      [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+                     
+                     
+                     
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Over Size" message:@"We could not process this video due to file size limit. Please choose another media and try again." preferredStyle:UIAlertControllerStyleAlert];
                      
                                  UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
                                                                                     style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                                             {
                      
                      
-                                                                strinRetake=@"";
-                                                                encodedImage=@"";
-                                                                strCameraVedio=@"Cam";                                                                                                                                                                                                                                                                                                                                                                                                                                                  self.videoController=nil;
-                                                                _videoController.view.hidden=YES;
-                                                                BackroundImg.hidden=YES;
-                                                                Image_Play.hidden=YES;
-                                                                self.Button_Gallery.hidden=NO;
-                                                                self.Button_Videos.hidden=NO;
-                                                                self.Button_Cammera.hidden=NO;
+                                                               
                      
-                      [pcker1 dismissViewControllerAnimated:YES completion:NULL];
+                     
 //                            [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
                      
                                                             }];
                      
                                  [alertController addAction:actionOk];
-                                 [pcker1 presentViewController:alertController animated:YES completion:nil];
+                                 [self presentViewController:alertController animated:YES completion:nil];
                      
                      
                      
