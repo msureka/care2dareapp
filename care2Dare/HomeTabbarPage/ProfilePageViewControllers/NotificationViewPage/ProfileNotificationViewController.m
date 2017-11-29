@@ -36,7 +36,7 @@
 
 @implementation ProfileNotificationViewController
 
-@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,cell_PlegeOutNoti,cell_PlegeIncoNoti,Lable_Titlenotif,Button_Back,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution,indicators;
+@synthesize cell_PublicNoti,cell_PrivateNoti,cell_VedioNoti,Lable_Titlenotif,Button_Back,Tableview_Notif,view_Topheader,Button_Videos,Button_Challenges,Button_Contribution,indicators;
 - (void)viewDidLoad {
     [super viewDidLoad];
     defaults=[[NSUserDefaults alloc]init];
@@ -853,6 +853,19 @@ if ([[[Array_AllData_contribution objectAtIndex:i]valueForKey:@"contributiontype
                 Bottomborder_Cell2.frame = CGRectMake(0, cell_PublicNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PublicNoti.layer addSublayer:Bottomborder_Cell2];
             }
+            
+            NSLog(@"Frame image sizes Height==%f",cell_PublicNoti.image_profile.frame.size.height);
+             NSLog(@"Frame image sizes width==%f",cell_PublicNoti.image_profile.frame.size.width);
+            
+            [cell_PublicNoti.image_profile setFrame:(CGRectMake(cell_PublicNoti.image_profile.frame.origin.x, cell_PublicNoti.image_profile.frame.origin.y, cell_PublicNoti.image_profile.frame.size.width, cell_PublicNoti.image_profile.frame.size.width))];
+            
+            [cell_PublicNoti.image_profile2 setFrame:(CGRectMake(cell_PublicNoti.image_profile2.frame.origin.x, cell_PublicNoti.image_profile2.frame.origin.y, cell_PublicNoti.image_profile2.frame.size.width, cell_PublicNoti.image_profile2.frame.size.width))];
+            
+            
+            
+            
+            
+            
            
             if ([ResultString_Challenges isEqualToString:@"nonotifications"] || Array_Public.count==0)
             {
@@ -1091,7 +1104,9 @@ if ([[dic_Values valueForKey:@"notificationtype"]isEqualToString:@"newchallenge"
                 Bottomborder_Cell2.frame = CGRectMake(0, cell_PrivateNoti.frame.size.height-1, self.view.frame.size.width, 1);
                 [cell_PrivateNoti.layer addSublayer:Bottomborder_Cell2];
             }
-           
+            [cell_PrivateNoti.image_profile setFrame:(CGRectMake(cell_PrivateNoti.image_profile.frame.origin.x, cell_PrivateNoti.image_profile.frame.origin.y, cell_PrivateNoti.image_profile.frame.size.width, cell_PrivateNoti.image_profile.frame.size.width))];
+            
+            [cell_PrivateNoti.image_profile2 setFrame:(CGRectMake(cell_PrivateNoti.image_profile2.frame.origin.x, cell_PrivateNoti.image_profile2.frame.origin.y, cell_PrivateNoti.image_profile2.frame.size.width, cell_PrivateNoti.image_profile2.frame.size.width))];
             
             NSDictionary * dic_Values=[Array_Private objectAtIndex:indexPath.row];
             
@@ -1291,7 +1306,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
         case 0:
         {
             
-            cell_PlegeIncoNoti = [[[NSBundle mainBundle]loadNibNamed:@"PlegeIncomingTableViewCell" owner:self options:nil] objectAtIndex:0];
+         PlegeIncomingTableViewCell *  cell_PlegeIncoNoti = [[[NSBundle mainBundle]loadNibNamed:@"PlegeIncomingTableViewCell" owner:self options:nil] objectAtIndex:0];
 
             
             if (cell_PlegeIncoNoti == nil)
@@ -1303,7 +1318,9 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             }
             
          
+            [cell_PlegeIncoNoti.image_profile setFrame:(CGRectMake(cell_PlegeIncoNoti.image_profile.frame.origin.x, cell_PlegeIncoNoti.image_profile.frame.origin.y, cell_PlegeIncoNoti.image_profile.frame.size.width, cell_PlegeIncoNoti.image_profile.frame.size.width))];
             
+            [cell_PlegeIncoNoti.image_profile2 setFrame:(CGRectMake(cell_PlegeIncoNoti.image_profile2.frame.origin.x, cell_PlegeIncoNoti.image_profile2.frame.origin.y, cell_PlegeIncoNoti.image_profile2.frame.size.width, cell_PlegeIncoNoti.image_profile2.frame.size.width))];
             
             
             if (Array_IcomingPlg.count-1==indexPath.row)
@@ -1426,7 +1443,7 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
             
         {
             
-            cell_PlegeOutNoti = [[[NSBundle mainBundle]loadNibNamed:@"PledgeOutoingTableViewCell" owner:self options:nil] objectAtIndex:0];
+          PledgeOutoingTableViewCell * cell_PlegeOutNoti = [[[NSBundle mainBundle]loadNibNamed:@"PledgeOutoingTableViewCell" owner:self options:nil] objectAtIndex:0];
             
             if (cell_PlegeOutNoti == nil)
             {
@@ -1436,7 +1453,11 @@ if([CheckedTabbedButtons isEqualToString:@"Contribution"])
                 
             }
 
-            [cell_PlegeOutNoti.image_profile setFrame:CGRectMake(cell_PlegeOutNoti.image_profile.frame.origin.x, cell_PlegeOutNoti.image_profile.frame.origin.y, cell_PlegeOutNoti.image_profile.frame.size.height, cell_PlegeOutNoti.image_profile.frame.size.height)];
+            [cell_PlegeOutNoti.image_profile setFrame:(CGRectMake(cell_PlegeOutNoti.image_profile.frame.origin.x, cell_PlegeOutNoti.image_profile.frame.origin.y, cell_PlegeOutNoti.image_profile.frame.size.width, cell_PlegeOutNoti.image_profile.frame.size.width))];
+            
+            [cell_PlegeOutNoti.image_profile2 setFrame:(CGRectMake(cell_PlegeOutNoti.image_profile2.frame.origin.x, cell_PlegeOutNoti.image_profile2.frame.origin.y, cell_PlegeOutNoti.image_profile2.frame.size.width, cell_PlegeOutNoti.image_profile2.frame.size.width))];
+            
+            
             if (Array_OutgoingPlg.count-1==indexPath.row)
             {
                 Bottomborder_Cell2 = [CALayer layer];
@@ -1865,19 +1886,19 @@ if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ([CheckedTabbedButtons isEqualToString:@"Challenges"])
+    if ([CheckedTabbedButtons isEqualToString:@"Challenges"] || [CheckedTabbedButtons isEqualToString:@"Contribution"]  || [CheckedTabbedButtons isEqualToString:@"Vedio"])
     {
       return 80;
-    }
-    if([CheckedTabbedButtons isEqualToString:@"Contribution"])
-    {
-        return 80;
-    }
-    
-    if ([CheckedTabbedButtons isEqualToString:@"Vedio"])
-    {
-
-    return 80;
+//    }
+//    if()
+//    {
+//        return 80;
+//    }
+//
+//    if ()
+//    {
+//
+//    return 80;
     }
     
     return 0;

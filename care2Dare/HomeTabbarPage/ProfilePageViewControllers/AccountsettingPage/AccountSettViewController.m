@@ -1422,7 +1422,7 @@ Array_Images=[[NSArray alloc]initWithObjects:@"setting_facebook.png",@"setting_t
     }
     else
     {
-        Str_Push_OnlyDare=@"yes";
+        Str_Push_OnlyDare=@"no";
     }
 }
 - (IBAction)Swich_PushNotification:(id)sender

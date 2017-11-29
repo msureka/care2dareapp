@@ -66,7 +66,7 @@
     [Button_Image_Private setImage:[UIImage imageNamed:@"private.png"] forState:UIControlStateNormal];
     [Button_Label_Public setTitleColor:[UIColor colorWithRed:67/255.0 green:188/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
     [Button_Label_Private setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];;
-challengetypeVal=@"";
+
     
     
     Label_Currentsdays.text=[NSString stringWithFormat:@"%.f%@%@",slider_Days.value,@" ",@"day"];

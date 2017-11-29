@@ -23,7 +23,7 @@
     NSMutableData *webData_Recomm_GetUser,*webData_suggested;
     NSMutableArray *Array_Reomm_GetUser,*Array_suggested;
     NSMutableArray *Array_SearchData;
-    NSArray *Search_Array_Recoom;
+    NSArray *Search_Array_Recoom,*Array_sugessted1,*Array_Reomm_GetUser1;
     NSString *ResultString_getUser,*ResultString_getUser_send, *strInvite_users,*ResultString_Recomm_getUser,*ResultString_suggested;
     NSMutableDictionary * didselectDic;
     UIView *HeadingView,*sectionView;
@@ -65,6 +65,8 @@
 
 //    Search_Array_Recoom=[[NSMutableArray alloc]init];
    Search_Array_Recoom=[[NSArray alloc]init];
+    Array_Reomm_GetUser1=[[NSArray alloc]init];
+    Array_sugessted1=[[NSArray alloc]init];
      [[self navigationController] setNavigationBarHidden:YES animated:NO];
     selectedNames = [NSMutableArray arrayWithCapacity:Search_Array_Recoom.count];
     selectedUserid= [NSMutableArray arrayWithCapacity:Search_Array_Recoom.count];
@@ -80,7 +82,7 @@ string_Keyboardload=@"no";
    [self Communication_Invite_user];
     
     
-  [self Communication_SuggestedFriends];
+//  [self Communication_SuggestedFriends];
     
     
     NSLog(@"Mewwwwww=%@",_Names_UserId);
@@ -187,29 +189,23 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 1;
+    return 2;
     
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (section==0)
-//    {
-        if ( [String_suggested isEqualToString:@"yes"])
-        {
-            return Array_SearchData.count;
-          
-        }
-        else
-        {
-         return Array_suggested.count;
-        }
-        
-   // }
-//    if (section==1)
-//    {
-//         return Array_SearchData.count;
-//    }
+   if (section==0)
+    {
+       
+            return Array_Reomm_GetUser.count;
+    }
+
+    if (section==1)
+    {
+       return Array_suggested.count;
+    }
+               
  return 0;
 }
 
@@ -224,12 +220,12 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
         static NSString *CellIdentifier = @"Cell";
-//    switch (indexPath.section)
-//    {
-//        
-//        
-//    case 0:
-//        {
+    switch (indexPath.section)
+    {
+    
+    
+    case 0:
+       {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UIImageView *Proimage_View=nil;
     UILabel *Labelname=nil;
@@ -262,17 +258,11 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        Labelname.text =@"vvdsdsdsfddfsdsddggdfgdfgdfggdgdfgfgdfgdfgdfgdfgdfgdfgdgdfgsfdsfdsf";
     
     NSMutableDictionary *dict_Sub;
-    if ( [String_suggested isEqualToString:@"yes"])
-    {
-         dict_Sub=[Array_SearchData objectAtIndex:indexPath.row];
-       
-    }
-    else
-    {
-        dict_Sub=[Array_suggested objectAtIndex:indexPath.row];
+    
+        dict_Sub=[Array_Reomm_GetUser objectAtIndex:indexPath.row];
 
   
-    }
+    
         NSString *name = [dict_Sub valueForKey:@"name"];
       NSString *nameTag = [dict_Sub valueForKey:@"userid"];
     if (!Labelname)
@@ -298,76 +288,95 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         }
 
         return cell;
-//        }
-//        break;
-//          
-//        case 1:
-//            {
-//                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//                UIImageView *Proimage_View=nil;
-//                UILabel *Labelname=nil;
-//                
-//                
-//                if (cell == nil) {
-//                    
-//                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
-//                    Proimage_View=[[UIImageView alloc]initWithFrame:CGRectZero];
-//                    Labelname=[[UILabel alloc]initWithFrame:CGRectZero];
-//                    [Proimage_View setTag:2];
-//                    [Labelname setTag:1];
-//                    
-//                    [[cell contentView] addSubview:Proimage_View];
-//                    [[cell contentView] addSubview:Labelname];
-//                    
-//                    
-//                    
-//                }
-//                
-//                [cell addSubview:Proimage_View];
-//                [cell addSubview:Labelname];
-//                Proimage_View.frame=CGRectMake(10, 8, 32, 32);
-//                Proimage_View.clipsToBounds=YES;
-//                Proimage_View.layer.cornerRadius=Proimage_View.frame.size.height/2;
-//                Labelname.frame=CGRectMake(50, 0, self.view.frame.size.width-67, 48);
-//                
-//                //        Proimage_View.backgroundColor=[UIColor greenColor];
-//                //        Labelname.text =@"vvdsdsdsfddfsdsddggdfgdfgdfggdgdfgfgdfgdfgdfgdfgdfgdfgdgdfgsfdsfdsf";
-//                
-//                NSString *name = [[Array_SearchData valueForKey:@"name"]objectAtIndex:indexPath.row];
-//                NSString *nameTag = [[Array_SearchData valueForKey:@"userid"]objectAtIndex:indexPath.row];
-//                if (!Labelname)
-//                    Labelname = (UILabel*)[cell viewWithTag:1];
-//                
-//                [Labelname setText:name];
-//                
-//                Labelname.text=name;
-//                NSMutableDictionary *dict_Sub=[Array_SearchData objectAtIndex:indexPath.row];
-//                NSURL * url=[dict_Sub valueForKey:@"profilepic"];
-//                if (!Proimage_View)
-//                    Proimage_View = (UIImageView*)[cell viewWithTag:2];
-//                
-//                [Proimage_View sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
-//                if ([self.selectedUserid containsObject:nameTag])
-//                {
-//                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//                    
-//                }
-//                else
-//                {
-//                    cell.accessoryType = UITableViewCellAccessoryNone;
-//                }
-//                NSLog(@"SEACH CELL  Array_SearchData=%@", Array_SearchData);
-//                NSLog(@"SEACH CELL  Array_SearchData=%@", [Array_SearchData objectAtIndex:indexPath.row]);
-//                return cell;
-//            }
-//            break;
-//    }
-//    
-//    return nil;
+        }
+    
+    
+        case 1:
+            {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UIImageView *Proimage_View=nil;
+    UILabel *Labelname=nil;
+    
+    
+    if (cell == nil) {
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
+        Proimage_View=[[UIImageView alloc]initWithFrame:CGRectZero];
+        Labelname=[[UILabel alloc]initWithFrame:CGRectZero];
+        [Proimage_View setTag:2];
+        [Labelname setTag:1];
+        
+        [[cell contentView] addSubview:Proimage_View];
+        [[cell contentView] addSubview:Labelname];
+        
+        
+        
+    }
+    cell.selectionStyle = UITableViewCellSeparatorStyleNone;
+    
+    [cell addSubview:Proimage_View];
+    [cell addSubview:Labelname];
+    Proimage_View.frame=CGRectMake(10, 8, 32, 32);
+    Proimage_View.clipsToBounds=YES;
+    Proimage_View.layer.cornerRadius=Proimage_View.frame.size.height/2;
+    Labelname.frame=CGRectMake(50, 0, self.view.frame.size.width-67, 48);
+    
+    //        Proimage_View.backgroundColor=[UIColor greenColor];
+    //        Labelname.text =@"vvdsdsdsfddfsdsddggdfgdfgdfggdgdfgfgdfgdfgdfgdfgdfgdfgdgdfgsfdsfdsf";
+    
+    NSMutableDictionary *dict_Sub;
+    
+        dict_Sub=[Array_suggested objectAtIndex:indexPath.row];
+   
+    NSString *name = [dict_Sub valueForKey:@"name"];
+    NSString *nameTag = [dict_Sub valueForKey:@"userid"];
+    if (!Labelname)
+        Labelname = (UILabel*)[cell viewWithTag:1];
+    
+    [Labelname setText:name];
+    
+    Labelname.text=name;
+    
+    NSURL * url=[NSURL URLWithString:[dict_Sub valueForKey:@"profilepic"]];
+    if (!Proimage_View)
+        Proimage_View = (UIImageView*)[cell viewWithTag:2];
+    
+    [Proimage_View setImageWithURL:url placeholderImage:[UIImage imageNamed:@"DefaultImg.jpg"]];
+    if ([self.selectedUserid containsObject:nameTag])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    return cell;
+            }
+        break;
+    
+
+              }
+    return nil;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
     if (section==0)
+    {
+        sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,35)];
+        [sectionView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+        UILabel * Label1=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, self.view.frame.size.width-40, sectionView.frame.size.height)];
+        Label1.backgroundColor=[UIColor clearColor];
+        Label1.textColor=[UIColor lightGrayColor];
+        Label1.font=[UIFont fontWithName:@"SanFranciscoDisplay-Medium" size:16.0f];
+        Label1.text=@"Friends";
+        [sectionView addSubview:Label1];
+        sectionView.tag=section;
+        
+    }
+    if (section==1)
     {
         sectionView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width,35)];
         [sectionView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
@@ -391,13 +400,8 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (section==0)
     {
         
-        if ( [String_suggested isEqualToString:@"yes"])
-        {
-            return 0;
-        }
-        else
-        {
-            if (Array_suggested.count==0)
+       
+            if (Array_Reomm_GetUser.count==0)
             {
                 return 0;
             }
@@ -408,20 +412,22 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
             
         }
         
-        
-        //        if (Array_SearchData.count==0)
-        //        {
-        //            return 0;
-        //        }
-        //        else
-        //        {
-        //         return 35;
-        //        }
+    if (section==1)
+    {
         
         
+        if (Array_suggested.count==0)
+        {
+            return 0;
+        }
+        else
+        {
+            return 35;
+        }
         
     }
-       return 0;
+        
+  return 0;
     
 }
 
@@ -435,12 +441,12 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSString *name2,*name1;
     
     NSDictionary *dict_Sub;
-    if ( [String_suggested isEqualToString:@"yes"])
+    if ( indexPath.section==0)
     {
-        dict_Sub=[Array_SearchData objectAtIndex:indexPath.row];
+        dict_Sub=[Array_Reomm_GetUser objectAtIndex:indexPath.row];
         
     }
-    else
+    else if ( indexPath.section==1)
     {
         dict_Sub=[Array_suggested objectAtIndex:indexPath.row];
         
@@ -603,13 +609,15 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     if (connection==Connection_Recomm_GetUser)
     {
-        
+         Array_suggested=[[NSMutableArray alloc]init];
+        Array_Reomm_GetUser=[[NSMutableArray alloc]init];
         SBJsonParser *objSBJsonParser = [[SBJsonParser alloc]init];
 
         ResultString_Recomm_getUser=[[NSString alloc]initWithData:webData_Recomm_GetUser encoding:NSUTF8StringEncoding];
-        Array_Reomm_GetUser= [objSBJsonParser objectWithData:webData_Recomm_GetUser];
-        Search_Array_Recoom= [objSBJsonParser objectWithData:webData_Recomm_GetUser];
-        [Array_SearchData addObjectsFromArray:Search_Array_Recoom];
+       Array_SearchData= [objSBJsonParser objectWithData:webData_Recomm_GetUser];
+    Search_Array_Recoom= [objSBJsonParser objectWithData:webData_Recomm_GetUser];
+        
+        //[Array_SearchData addObjectsFromArray:Search_Array_Recoom];
         ResultString_Recomm_getUser = [ResultString_Recomm_getUser stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         ResultString_Recomm_getUser = [ResultString_Recomm_getUser stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         
@@ -619,9 +627,24 @@ Table_ContactView.separatorStyle = UITableViewCellSeparatorStyleNone;
         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         ResultString = [ResultString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
         
-        if (Array_Reomm_GetUser.count !=0)
+        if (Array_SearchData.count !=0)
         {
+            for (int i=0; i<Array_SearchData.count; i++)
+            {
+                if ([[[Array_SearchData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"suggested"])
+                {
+                    [Array_suggested addObject:[Array_SearchData objectAtIndex:i]];
+                }
+                else
+                {
+                 [Array_Reomm_GetUser addObject:[Array_SearchData objectAtIndex:i]];
+                }
+            }
+            Array_sugessted1=[Array_suggested mutableCopy];
+            Array_Reomm_GetUser1=[Array_Reomm_GetUser mutableCopy];
+            [Table_ContactView reloadData];
             
+            Table_ContactView.hidden = NO;
         }
        
         if ([ResultString isEqualToString:@"nofriends"])
@@ -729,13 +752,26 @@ userInfo:theInfo];
     if (textViewText.length==0)
     {
         [Array_SearchData removeAllObjects];
-        
+        [Array_suggested removeAllObjects];
+        [Array_Reomm_GetUser removeAllObjects];
         
         [Array_SearchData addObjectsFromArray:Search_Array_Recoom];
         
         Table_ContactView.hidden = NO;
          String_suggested=@"no";
-        
+//        for (int i=0; i<Array_SearchData.count; i++)
+//        {
+//            if ([[[Array_SearchData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"suggested"])
+//            {
+//                [Array_suggested addObject:[Array_SearchData objectAtIndex:i]];
+//            }
+//            else
+//            {
+//                [Array_Reomm_GetUser addObject:[Array_SearchData objectAtIndex:i]];
+//            }
+//        }
+        [Array_Reomm_GetUser addObjectsFromArray:Array_Reomm_GetUser1];
+        [Array_suggested addObjectsFromArray:Array_sugessted1];
     }
     else
         
@@ -743,7 +779,8 @@ userInfo:theInfo];
        String_suggested=@"yes";
         
         [Array_SearchData removeAllObjects];
-        
+        [Array_suggested removeAllObjects];
+        [Array_Reomm_GetUser removeAllObjects];
         for (NSDictionary *book in Search_Array_Recoom)
         {
             NSString * string=[book objectForKey:@"name"];
@@ -759,6 +796,21 @@ userInfo:theInfo];
             }
             
         }
+        
+        
+        
+        for (int i=0; i<Array_SearchData.count; i++)
+        {
+            if ([[[Array_SearchData objectAtIndex:i]valueForKey:@"status"] isEqualToString:@"suggested"])
+            {
+                [Array_suggested addObject:[Array_SearchData objectAtIndex:i]];
+            }
+            else
+            {
+                [Array_Reomm_GetUser addObject:[Array_SearchData objectAtIndex:i]];
+            }
+        }
+        
          NSLog(@"Array_SearchDataSearch=======%@",Array_SearchData);
         Table_ContactView.hidden = NO;
     }

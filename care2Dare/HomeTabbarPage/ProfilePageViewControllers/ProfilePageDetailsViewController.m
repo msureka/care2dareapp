@@ -207,18 +207,21 @@ style:UIAlertActionStyleDefault
            user_name=[[Array_Profile objectAtIndex:0]valueForKey:@"name"];
     if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"])
            {
-               Button_SetValues.enabled=YES;
+              // Button_SetValues.enabled=YES;
+                Button_SetValues.userInteractionEnabled=YES;
                [Button_SetValues setImage:[UIImage imageNamed:@"addfriend.png"] forState:UIControlStateNormal];
            }
     if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"yes"])
            {
-                Button_SetValues.enabled=NO;
+               // Button_SetValues.enabled=NO;
+                Button_SetValues.userInteractionEnabled=NO;
                   [Button_SetValues setImage:[UIImage imageNamed:@"addfriend1.png"] forState:UIControlStateNormal];
                
            }
     if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"waiting"])
            {
-               Button_SetValues.enabled=NO;
+             //  Button_SetValues.enabled=NO;
+               Button_SetValues.userInteractionEnabled=NO;
                [Button_SetValues setImage:[UIImage imageNamed:@"friendrequested.png"] forState:UIControlStateNormal];
                
            }
@@ -922,15 +925,17 @@ if ([[[Array_Public1 objectAtIndex:i]valueForKey:@"userprofileaccepted"]isEqualT
     
 if ([[[Array_Profile objectAtIndex:0]valueForKey:@"friendstatus"] isEqualToString:@"no"])
     {
-        Button_SetValues.enabled=YES;
+       // fButton_SetValues.enabled=YES;
+          Button_SetValues.userInteractionEnabled=YES;
         [self.view showActivityViewWithLabel:@"Requesting..."];
         [self ClientserverCommunicatioAddfrnd];
         
     }
     else
     {
-        Button_SetValues.enabled=NO;
-        
+        //Button_SetValues.enabled=NO;
+          Button_SetValues.userInteractionEnabled=NO
+        ;
     }
 //    ProfileNotificationViewController * set=[self.storyboard instantiateViewControllerWithIdentifier:@"ProfileNotificationViewController"];
 //    [self.navigationController pushViewController:set animated:YES];

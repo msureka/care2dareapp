@@ -131,8 +131,8 @@
             _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
             _Label_totalAmount.hidden=NO;
     }
-    float totalamt=[_Textfield_Amount.text floatValue]*(Array_Names.count);
-    if (totalamt<=0)
+//    float totalamt=[_Textfield_Amount.text floatValue]*(Array_Names.count);
+    if (Array_Names.count ==0)
     {
         Button_next.enabled=NO;
         [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];
@@ -198,8 +198,8 @@
         _Label_totalAmount.text=[NSString stringWithFormat:@"%@%.f",@"total: $ ",[_Textfield_Amount.text floatValue]*(Array_Names.count)];
     
         _Label_totalAmount.hidden=NO;
-    float totalamt=[_Textfield_Amount.text floatValue]*(Array_Names.count);
-    if (totalamt<=0)
+   // float totalamt=[_Textfield_Amount.text floatValue]*(Array_Names.count);
+    if (Array_Names.count==0)
     {
         Button_next.enabled=NO;
         [Button_next setTitleColor:[UIColor colorWithRed:186/255.0 green:188/255.0 blue:190/255.0 alpha:1] forState:UIControlStateNormal];

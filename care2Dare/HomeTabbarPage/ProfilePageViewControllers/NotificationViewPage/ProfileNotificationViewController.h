@@ -22,8 +22,8 @@
 @property(nonatomic,strong)PublicChallengesTableViewCell * cell_PublicNoti;
 @property(nonatomic,strong)PrivateChallengesTableViewCell * cell_PrivateNoti;
 
-@property(nonatomic,strong)PlegeIncomingTableViewCell *cell_PlegeIncoNoti;
-@property(nonatomic,strong)PledgeOutoingTableViewCell *cell_PlegeOutNoti;
+//@property(nonatomic,strong)PlegeIncomingTableViewCell *cell_PlegeIncoNoti;
+//@property(nonatomic,strong)PledgeOutoingTableViewCell *cell_PlegeOutNoti;
 
 @property(nonatomic,strong)VedioNotiTableViewCell *cell_VedioNoti;
 

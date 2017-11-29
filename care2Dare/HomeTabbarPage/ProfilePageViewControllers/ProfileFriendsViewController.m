@@ -530,7 +530,8 @@ cell_alluser.image_Profile.layer.cornerRadius=cell_alluser.image_Profile.frame.s
         {
             cell_alluser.Button_Addfriend1.hidden=NO;
             cell_alluser.Button_Addfriend1.enabled=YES;
-            cell_alluser.Button_Addfriend2.enabled=YES;
+           // cell_alluser.Button_Addfriend2.enabled=YES;
+            cell_alluser.Button_Addfriend2.userInteractionEnabled=YES;
             [cell_alluser.Button_Addfriend1 setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             [cell_alluser.Button_Addfriend2 setImage:[UIImage imageNamed:@"addfriend.png"] forState:UIControlStateNormal];
                     
@@ -542,9 +543,10 @@ cell_alluser.image_Profile.layer.cornerRadius=cell_alluser.image_Profile.frame.s
                 else
                 {
                     cell_alluser.Button_Addfriend1.hidden=YES;
-                    cell_alluser.Button_Addfriend1.enabled=NO;
-                    cell_alluser.Button_Addfriend2.enabled=NO;
-                    
+                   cell_alluser.Button_Addfriend1.enabled=NO;
+                 //  cell_alluser.Button_Addfriend2.enabled=NO;
+                    cell_alluser.Button_Addfriend2.userInteractionEnabled=NO;
+                    cell_alluser.Button_Addfriend2.alpha=1.0f;
                    [cell_alluser.Button_Addfriend2 setImage:[UIImage imageNamed:@"friendrequested.png"] forState:UIControlStateNormal];
                 }
                 

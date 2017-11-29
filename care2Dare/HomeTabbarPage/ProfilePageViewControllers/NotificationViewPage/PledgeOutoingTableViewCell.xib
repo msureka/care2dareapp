@@ -25,49 +25,54 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sachin Mokashi" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rh3-cO-tN9">
-                        <rect key="frame" x="76" y="10" width="223" height="26"/>
+                        <rect key="frame" x="84" y="10" width="210" height="26"/>
                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="18"/>
                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-5v-Uyc">
-                        <rect key="frame" x="16" y="13" width="60" height="54"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10154143609282724.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-5v-Uyc">
+                        <rect key="frame" x="17" y="10" width="60" height="60"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="oZr-3d-RaR"/>
+                            <constraint firstAttribute="width" constant="60" id="aKa-kS-NCz"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-Fq-vrP">
-                        <rect key="frame" x="4" y="0.0" width="12" height="13"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueplus.png" translatesAutoresizingMaskIntoConstraints="NO" id="7TE-xu-Zrx">
-                        <rect key="frame" x="299" y="13" width="60" height="54"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="redcircle.png" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-Fq-vrP">
+                        <rect key="frame" x="4" y="4" width="12" height="12"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="yKH-Ah-QyJ"/>
+                            <constraint firstAttribute="width" constant="12" id="ly0-he-O4q"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ActionDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMy-VB-JtH">
-                        <rect key="frame" x="76" y="55" width="230" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ActionDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMy-VB-JtH">
+                        <rect key="frame" x="84" y="57" width="210" height="17"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="14"/>
                         <color key="textColor" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueplus.png" translatesAutoresizingMaskIntoConstraints="NO" id="7TE-xu-Zrx">
+                        <rect key="frame" x="300" y="10" width="60" height="60"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="KUZ-BM-bkq"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5iP-JT-PVg"/>
-                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="bottom" secondItem="7TE-xu-Zrx" secondAttribute="bottom" id="8MZ-9F-jsP"/>
-                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A1I-6O-kko"/>
-                    <constraint firstItem="Rh3-cO-tN9" firstAttribute="leading" secondItem="Gt6-5v-Uyc" secondAttribute="trailing" constant="8" symbolic="YES" id="FnC-Zk-XpC"/>
-                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="bbu-r5-XEb"/>
-                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="h2S-a7-z2B"/>
-                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="jCW-VL-qUi"/>
-                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ruW-Kz-ftz"/>
-                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="leading" secondItem="Rh3-cO-tN9" secondAttribute="trailing" constant="8" symbolic="YES" id="vso-de-CV9"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="3fJ-0f-iAg"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="4nu-Cz-kLM"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="leading" secondItem="Rh3-cO-tN9" secondAttribute="trailing" constant="6" id="95g-5B-20h"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FaI-2z-ThY"/>
+                    <constraint firstItem="hMy-VB-JtH" firstAttribute="leading" secondItem="Gt6-5v-Uyc" secondAttribute="trailing" constant="7" id="JrV-eN-CCc"/>
+                    <constraint firstAttribute="bottom" secondItem="hMy-VB-JtH" secondAttribute="bottom" constant="5.5" id="Q1r-aF-89j"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="bottom" secondItem="7TE-xu-Zrx" secondAttribute="bottom" id="VSW-Xi-ehM"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="leading" secondItem="DAT-Fq-vrP" secondAttribute="trailing" constant="1" id="a2b-qt-7Tr"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="top" secondItem="Rh3-cO-tN9" secondAttribute="top" id="dLA-d8-JBh"/>
+                    <constraint firstItem="Rh3-cO-tN9" firstAttribute="leading" secondItem="Gt6-5v-Uyc" secondAttribute="trailing" constant="7" id="dbB-5V-xUf"/>
+                    <constraint firstItem="7TE-xu-Zrx" firstAttribute="leading" secondItem="hMy-VB-JtH" secondAttribute="trailing" constant="6" id="fFz-IA-8Q3"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7TE-xu-Zrx" secondAttribute="trailing" constant="-1" id="jc1-RP-YNK"/>
+                    <constraint firstItem="Gt6-5v-Uyc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="obj-p7-V2f"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -77,7 +82,7 @@
                 <outlet property="image_profile" destination="Gt6-5v-Uyc" id="sfy-Ic-Kd4"/>
                 <outlet property="image_profile2" destination="7TE-xu-Zrx" id="jrj-fT-qyb"/>
             </connections>
-            <point key="canvasLocation" x="65.5" y="126"/>
+            <point key="canvasLocation" x="143.5" y="15"/>
         </tableViewCell>
     </objects>
     <resources>

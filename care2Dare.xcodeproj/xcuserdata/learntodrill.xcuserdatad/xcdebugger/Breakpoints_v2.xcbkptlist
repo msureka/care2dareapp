@@ -99,7 +99,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/ExpolreViewController/ContributDetailPage/ContributeDaetailPageViewController.m"
-            timestampString = "533566519.406902"
+            timestampString = "533566616.704221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "4503"
@@ -195,7 +195,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.407628"
+            timestampString = "533629771.726803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "583"
@@ -211,7 +211,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.407717"
+            timestampString = "533629771.727463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "551"
@@ -227,7 +227,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.407796"
+            timestampString = "533629771.727837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "891"
@@ -243,7 +243,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.40787"
+            timestampString = "533629771.728193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "914"
@@ -259,7 +259,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.407943"
+            timestampString = "533629771.728508"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "969"
@@ -275,7 +275,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408015"
+            timestampString = "533629771.728827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1017"
@@ -291,7 +291,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408087"
+            timestampString = "533629771.729136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "252"
@@ -307,7 +307,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408157"
+            timestampString = "533629771.729431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "319"
@@ -323,44 +323,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408226"
+            timestampString = "533629771.729743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1059"
             endingLineNumber = "1059"
             landmarkName = "-BackImageViewTap:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408293"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1080"
-            endingLineNumber = "1080"
-            landmarkName = "-displayImage:withImage:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "care2Dare/HomeTabbarPage/CreateChallenges/CreateFundriserOneViewController.m"
-            timestampString = "533566519.408361"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1087"
-            endingLineNumber = "1087"
-            landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
